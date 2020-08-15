@@ -25,7 +25,7 @@
                                     <el-form-item>
                                         <el-button type="primary"
                                                    style="width: 80%; margin: 15px 10% 0"
-                                                   @click="submitForm('categoryForm')">Create
+                                                   @click="submitCategory('categoryForm')">Create
                                         </el-button>
                                     </el-form-item>
                                 </el-form>
@@ -206,7 +206,7 @@
                                     <el-form-item>
                                         <el-button type="primary"
                                                    style="width: 80%; margin: 15px 10% 0"
-                                                   @click="submitForm('brandForm')">Create
+                                                   @click="submitBrand('brandForm')">Create
                                         </el-button>
                                     </el-form-item>
                                 </el-form>
@@ -270,150 +270,195 @@
 </template>
 
 <script>
-export default {
-    name: "setupComponent",
-    data() {
-        return {
-            labelPosition: 'top',
-            categorySelectOptions: [{
-                value: 'Category - 1',
-                label: 'Category - 1'
-            }, {
-                value: 'Category - 2',
-                label: 'Category - 2'
-            }, {
-                value: 'Category - 3',
-                label: 'Category - 3'
-            }],
-            categoryForm: {
-                name: '',
+    export default {
+        name: "setupComponent",
+        data() {
+            return {
+                labelPosition: 'top',
+                categorySelectOptions: [{
+                    value: 'Category - 1',
+                    label: 'Category - 1'
+                }, {
+                    value: 'Category - 2',
+                    label: 'Category - 2'
+                }, {
+                    value: 'Category - 3',
+                    label: 'Category - 3'
+                }],
+                categoryForm: {
+                    name: '',
+                },
+                subcategoryForm: {
+                    categorySelect: '',
+                    name: '',
+                },
+                brandForm: {
+                    name: '',
+                },
+                categoryRules: {
+                    name: [
+                        {required: true, message: 'Please input category name', trigger: 'blur'},
+                    ]
+                },
+                subcategoryRules: {
+                    categorySelect: [
+                        {required: true, message: 'Please select category', trigger: 'change'},
+                    ],
+                    name: [
+                        {required: true, message: 'Please input sub-category name', trigger: 'blur'},
+                    ]
+                },
+                brandRules: {
+                    name: [
+                        {required: true, message: 'Please input brand name', trigger: 'blur'},
+                    ]
+                },
+                /*Table Data's*/
+                categorytableData: [{
+                    sn: 1,
+                    categoryName: 'Tom',
+                }, {
+                    sn: 2,
+                    categoryName: 'Tom Cat',
+                }],
+                /*Table Data's*/
+                subcategorytableData: [{
+                    sn: 1,
+                    categoryName: 'Tom',
+                    subcategoryName: 'Subcat One'
+                }, {
+                    sn: 2,
+                    categoryName: 'Tom Cat',
+                    subcategoryName: 'Subcat Two'
+                }],
+                /*Table Data's*/
+                brandtableData: [{
+                    sn: 1,
+                    brandName: 'Tom'
+                }, {
+                    sn: 2,
+                    brandName: 'Tom Cat'
+                }],
+                categorySearch: '',
+                subcategorySearch: '',
+                brandSearch: '',
+            };
+        },
+        methods:{
+            submitCategory(categoryForm) {
+                this.$refs[categoryForm].validate((valid) => {
+                    if (valid) {
+
+
+                        let formdata = new FormData();
+                        formdata.append('category_name', this.categoryForm.name);
+
+
+                        axios.post('/api/postCategory', formdata, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
-            subcategoryForm: {
-                categorySelect: '',
-                name: '',
+
+            submitBrand(brandForm) {
+                this.$refs[brandForm].validate((valid) => {
+                    if (valid) {
+
+
+                        let formdata = new FormData();
+                        formdata.append('brand_name', this.brandForm.name);
+
+
+                        axios.post('/api/postbrand', formdata, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
-            brandForm: {
-                name: '',
+            handleEdit(index, row) {
+                console.log(index, row);
             },
-            categoryRules: {
-                name: [
-                    {required: true, message: 'Please input category name', trigger: 'blur'},
-                ]
-            },
-            subcategoryRules: {
-                categorySelect: [
-                    {required: true, message: 'Please select category', trigger: 'change'},
-                ],
-                name: [
-                    {required: true, message: 'Please input sub-category name', trigger: 'blur'},
-                ]
-            },
-            brandRules: {
-                name: [
-                    {required: true, message: 'Please input brand name', trigger: 'blur'},
-                ]
-            },
-            /*Table Data's*/
-            categorytableData: [{
-                sn: 1,
-                categoryName: 'Tom',
-            }, {
-                sn: 2,
-                categoryName: 'Tom Cat',
-            }],
-            /*Table Data's*/
-            subcategorytableData: [{
-                sn: 1,
-                categoryName: 'Tom',
-                subcategoryName: 'Subcat One'
-            }, {
-                sn: 2,
-                categoryName: 'Tom Cat',
-                subcategoryName: 'Subcat Two'
-            }],
-            /*Table Data's*/
-            brandtableData: [{
-                sn: 1,
-                brandName: 'Tom'
-            }, {
-                sn: 2,
-                brandName: 'Tom Cat'
-            }],
-            categorySearch: '',
-            subcategorySearch: '',
-            brandSearch: '',
-        };
-    },
-    methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
+            handleDelete(index, row) {
+                console.log(index, row);
+            }
+        },
+        mounted() {
+            $(document).ready(function () {
+                $(".categoryBtn").click(function () {
+                    $(".category-div").slideToggle("slow");
+                });
+                $(".subcategoryBtn").click(function () {
+                    $(".subcategory-div").slideToggle("slow");
+                });
+                $(".brandBtn").click(function () {
+                    $(".brand-div").slideToggle("slow");
+                });
+                $('.closeCategoryBtn').click(function () {
+                    $(".category-div").slideToggle("slow");
+                });
+                $('.clodeSubcategoryBtn').click(function () {
+                    $(".subcategory-div").slideToggle("slow");
+                });
+                $('.closeBrandBtn').click(function () {
+                    $(".brand-div").slideToggle("slow");
+                });
             });
-        },
-        handleEdit(index, row) {
-            console.log(index, row);
-        },
-        handleDelete(index, row) {
-            console.log(index, row);
         }
-    },
-    mounted() {
-        $(document).ready(function () {
-            $(".categoryBtn").click(function () {
-                $(".category-div").slideToggle("slow");
-            });
-            $(".subcategoryBtn").click(function () {
-                $(".subcategory-div").slideToggle("slow");
-            });
-            $(".brandBtn").click(function () {
-                $(".brand-div").slideToggle("slow");
-            });
-            $('.closeCategoryBtn').click(function () {
-                $(".category-div").slideToggle("slow");
-            });
-            $('.clodeSubcategoryBtn').click(function () {
-                $(".subcategory-div").slideToggle("slow");
-            });
-            $('.closeBrandBtn').click(function () {
-                $(".brand-div").slideToggle("slow");
-            });
-        });
     }
-}
 </script>
 
 <style scoped>
-.container-fluid .row {
-    margin-left: 0;
-    margin-right: 0;
-}
+    .container-fluid .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-.hidden {
-    display: none;
-}
+    .hidden {
+        display: none;
+    }
 
-.box-card-slide {
-    margin-top: 20px;
-    border: 1px solid #EBEEF5;
-    background-color: #FFF;
-    color: #303133;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-}
+    .box-card-slide {
+        margin-top: 20px;
+        border: 1px solid #EBEEF5;
+        background-color: #FFF;
+        color: #303133;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    }
 
-.box-card-slide .box-header {
-    padding: 18px 20px;
-    border-bottom: 1px solid #EBEEF5;
-    box-sizing: border-box;
-}
+    .box-card-slide .box-header {
+        padding: 18px 20px;
+        border-bottom: 1px solid #EBEEF5;
+        box-sizing: border-box;
+    }
 
-.box-card-slide .box-body {
-    padding: 20px;
-}
+    .box-card-slide .box-body {
+        padding: 20px;
+    }
 </style>
