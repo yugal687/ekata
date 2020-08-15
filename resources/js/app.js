@@ -26,7 +26,8 @@ Vue.use(ElementUI);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('admin-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
-Vue.component('add-product-component', require('./components/Admin/Add_Product/addProducrComponent.vue').default);
+Vue.component('add-product-component', require('./components/Admin/Add_Product/addProductComponent.vue').default);
+Vue.component('products-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

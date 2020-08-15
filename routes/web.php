@@ -22,6 +22,7 @@ Route::view('admin/userdashboard', 'admin.userdashboard');
 Route::view('admin/users', 'admin.users');
 Route::view('admin/setup/index', 'admin.setup.index');
 Route::view('admin/addproduct/index', 'admin.add_product.index');
+Route::view('admin/addproduct/products', 'admin.add_product.products');
 
 Auth::routes();
 

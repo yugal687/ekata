@@ -17,6 +17,15 @@
 
     @yield('style')
     <style>
+        .el-dialog {
+            position: relative;
+            margin: 0 auto 50px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.3);
+            box-sizing: border-box;
+            width: 70% !important;
+        }
+
         .content-wrapper{
             background-color: #fff;
             padding: 20px 0;
@@ -180,11 +189,28 @@
                                 <p> Setup </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/admin/addproduct/index" class="nav-link">
-                                <i class="fas fa-plus"></i>
-                                <p> Add Product </p>
+                        <li class="nav-item has-treeview">
+                            <a href="" class="nav-link">
+                                <i class="fab fa-product-hunt"></i>
+                                <p>
+                                    Products
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/admin/addproduct/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Products</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/addproduct/products" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Product Details</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         {{--<li class="nav-item has-treeview">
