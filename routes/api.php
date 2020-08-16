@@ -24,7 +24,13 @@ Route::post('/postCategory','Admin\CategoryController@createCategory');
 Route::post('/addsubcategory','Admin\CategoryController@createCategory');
 
 
+Route::post('/saveEditCategory','Admin\CategoryController@updateCategory');
+
+
 
 Route::get('/getCategories','Admin\CategoryController@getCategory');
+Route::get('/getSubCategories','Admin\CategoryController@getSubCategory');
 Route::get('/getBrand','Admin\BrandController@getBrand');
 
+Route::delete('/deleteCategory/{id}','Admin\CategoryController@deleteCategory');
+Route::delete('/deleteBrand/{id}','Admin\BrandController@deleteBrand');

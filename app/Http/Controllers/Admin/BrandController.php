@@ -28,4 +28,10 @@ class BrandController extends Controller
           'getBrand' => $getBrand
         ]);
     }
+    public function deleteBrand($id){
+        $deleteBrand = Brand::find($id)->delete();
+        return response()->json([
+           'message' => 'Brand Deleted!!!!'
+        ]);
+    }
 }

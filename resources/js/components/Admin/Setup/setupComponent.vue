@@ -66,13 +66,15 @@
                                             <el-button type="primary"
                                                        icon="el-icon-edit"
                                                        size="mini"
-                                                       @click="handleEdit(scope.$index, scope.row)"
+                                                       data-target=".bd-example-modal-lg"
+                                                       data-toggle="modal"
+                                                       @click="editCategory(scope.row.id)"
                                                        circle></el-button>
                                             <el-button
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="handleDelete(scope.$index, scope.row)"
+                                                @click="deleteCategory(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -81,6 +83,57 @@
                         </el-card>
                     </div>
                 </div>
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                Edit Category
+                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div v-if="edit" class="alert alert-success alert-dismissible fade show"
+                                             role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-for="ecategory in editcategory">
+
+                                        <el-form :model="categoryForm" :rules="categoryRules" ref="categoryForm"
+                                                 :label-position="labelPosition" class="demo-categoryForm">
+                                            <el-form-item label="Category Name" prop="name">
+                                                <el-input v-model="ecategory.category_name"
+                                                          style="width: 100%;">
+
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button type="primary"
+                                                           style="width: 80%; margin: 15px 10% 0"
+                                                           @click="saveEditCategory">Create
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
             <div class="col-md-4 col-sm-12">
@@ -106,6 +159,8 @@
                                             <el-option
                                                 v-for="item in getCategory"
                                                 :key="item.id"
+                                                data-target=".bd-subcategory-modal-lg"
+                                                data-toggle="modal"
                                                 :label="item.category_name"
                                                 :value="item.id">
                                             </el-option>
@@ -133,7 +188,7 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="getCategory.filter(data => !subcategorySearch || data.category_name.toLowerCase().includes(subcategorySearch.toLowerCase())
+                                    :data="getSubCategory.filter(data => !subcategorySearch || data.category_name.toLowerCase().includes(subcategorySearch.toLowerCase())
                                             || data.categoryName.toLowerCase().includes(subcategorySearch.toLowerCase()))"
                                     border
                                     max-height="470"
@@ -167,13 +222,15 @@
                                             <el-button type="primary"
                                                        icon="el-icon-edit"
                                                        size="mini"
-                                                       @click="handleEdit(scope.$index, scope.row)"
+                                                       data-target=".bd-subcategory-modal-lg"
+                                                       data-toggle="modal"
+                                                       @click="editSubCategory(scope.row.id)"
                                                        circle></el-button>
                                             <el-button
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="handleDelete(scope.$index, scope.row)"
+                                                @click="deleteCategory(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -182,6 +239,62 @@
                         </el-card>
                     </div>
                 </div>
+                <div class="modal fade bd-subcategory-modal-lg" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                Edit Sub-Category
+                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div v-if="edit" class="alert alert-success alert-dismissible fade show"
+                                             role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-for="esubcategory in editsubCategory">
+
+                                        <el-form :model="categoryForm" :rules="categoryRules" ref="categoryForm"
+                                                 :label-position="labelPosition" class="demo-categoryForm">
+                                            <el-form-item label="Category Name" prop="name">
+                                                <el-input v-model="esubcategory.category_name"
+                                                          style="width: 100%;">
+
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Category Name" prop="name">
+                                                <el-input v-model="esubcategory.parent_id"
+                                                          style="width: 100%;">
+
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button type="primary"
+                                                           style="width: 80%; margin: 15px 10% 0"
+                                                           @click="saveEditSubCategory">Create
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="row d-flex justify-content-center">
@@ -253,7 +366,7 @@
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="handleDelete(scope.$index, scope.row)"
+                                                @click="deleteBrand(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -274,9 +387,13 @@
         name: "setupComponent",
         data() {
             return {
+                edit: false,
+                editcategory:[],
+                editsubCategory:[],
                 labelPosition: 'top',
                 getCategory:[],
                 getBrand:[],
+                getSubCategory:[],
                 categorySelectOptions: [{
                     value: 'Category - 1',
                     label: 'Category - 1'
@@ -347,6 +464,38 @@
             };
         },
         methods:{
+            editCategory(id){
+                this.editcategory = this.getCategory.filter(getCategory=> getCategory.id == id);
+            },
+            editSubCategory(id){
+              this.editsubCategory = this.getSubCategory.filter(getSubCategory=>getSubCategory.id == id);
+            },
+            saveEditCategory(){
+              axios.post('/api/saveEditCategory',{
+                  editCategory:this.editcategory
+                }).then(response=>{
+                 alert(response.data.message);
+              });
+            },
+            saveEditSubCategory(){
+                axios.post('/api/saveEditCategory',{
+                    editCategory:this.editsubCategory
+                }).then(response=>{
+                    alert(response.data.message);
+                });
+            },
+            deleteCategory(id){
+                axios.delete('/api/deleteCategory/'+id)
+                    .then(response=>{
+                       alert(response.data.message);
+                    });
+            },
+            deleteBrand(id){
+              axios.delete('/api/deleteBrand/'+id)
+                  .then(response=>{
+                    alert(response.data.message);
+                  });
+            },
             submitSubCategory(){
                 let formdata = new FormData();
                 formdata.append('category_name',this.subcategoryForm.name);
@@ -430,6 +579,10 @@
             axios.get('/api/getCategories',{})
                 .then(response=>{
                    this.getCategory = response.data.getCategory;
+                });
+            axios.get('/api/getSubCategories',{})
+                .then(response=>{
+                    this.getSubCategory = response.data.getSubCategory;
                 });
             axios.get('/api/getBrand',{})
                 .then(response=>{

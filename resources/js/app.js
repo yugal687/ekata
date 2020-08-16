@@ -26,7 +26,7 @@ Vue.use(ElementUI);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('admin-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
-Vue.component('add-product-component', require('./components/Admin/Add_Product/addProductComponent.vue').default);
+Vue.component('add-product-component', require('./components/Admin/Add_Product/createproductComponent.vue').default);
 Vue.component('product-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
 
 /**

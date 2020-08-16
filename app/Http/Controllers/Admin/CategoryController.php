@@ -38,15 +38,33 @@ class CategoryController extends Controller
    */
 
     public function getCategory(){
-        $getCategory = Category::all();
+        $getCategory = Category::where('parent_id',NULL)->get();
         return response()->json([
            'getCategory' => $getCategory
         ]);
     }
     public function getSubCategory(){
-        $getSubCategory = Category::get()->where('parent_id','>','0');
+        $getSubCategory = Category::where('parent_id','>',0)->get();
         return response()->json([
             'getSubCategory' => $getSubCategory
         ]);
+    }
+    public function deleteCategory($id){
+     $deleteCategory = Category::find($id)->delete();
+     return response()->json([
+        'message' => 'Category Deleted !!!'
+     ]);
+    }
+    public function updateCategory(Request $request){
+//dd($request);
+$updatecategory = Category::findOrFail($request->editCategory[0]['id']);
+$updatecategory->category_name = $request->editCategory[0]['category_name'];
+$updatecategory->parent_id = $request->editCategory[0]['parent_id'];
+$updatecategory->save();
+
+return response()->json([
+   'message' => 'Category Updated'
+]);
+
     }
 }

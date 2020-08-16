@@ -41,7 +41,7 @@
                                                        v-model="productForm.subcategorySelect"
                                                        style="width: 100%">
                                                 <el-option
-                                                    v-for="item in getCategory"
+                                                    v-for="item in getSubCategory"
                                                     :key="item.id"
                                                     :label="item.category_name"
                                                     :value="item.id">
@@ -157,118 +157,123 @@
 </template>
 
 <script>
-export default {
-    name: "addProductComponent",
-    data() {
-        return {
-            getCategory:[],
-            getBrand:[],
-            dynamicTags: [],
-            inputVisible: false,
-            inputValue: '',
+    export default {
+        name: "createproductComponent",
+        data() {
+            return {
+                getCategory:[],
+                getSubCategory:[],
+                getBrand:[],
+                dynamicTags: [],
+                inputVisible: false,
+                inputValue: '',
 
-            labelPosition: 'top',
-            productForm: {
-                categorySelect: '',
-                subcategorySelect: '',
-                brandSelect: '',
-                imageSelect: '',
-                productName: '',
-                quantity: '',
-                costPrice: '',
-                sellingPrice: '',
-                additionalInformation: '',
-                type: [],
-            },
-            productRules: {
-                categorySelect: [
-                    {required: true, message: 'Please select category', trigger: 'change'}
-                ],
-                subcategorySelect: [
-                    {required: true, message: 'Please select subcategory', trigger: 'change'}
-                ],
-                brandSelect: [
-                    {required: true, message: 'Please select brand', trigger: 'change'}
-                ],
-                productName: [
-                    {required: true, message: 'Please input product name', trigger: 'blur'}
-                ],
-                quantity: [
-                    {required: true, message: 'Please input quantity', trigger: 'blur'}
-                ],
-                costPrice: [
-                    {required: true, message: 'Please input cost price', trigger: 'blur'}
-                ],
-                sellingPrice: [
-                    {required: true, message: 'Please input cost price', trigger: 'blur'},
-                ],
-                additionalInformation: [
-                    {required: true, message: 'Please input additional Information', trigger: 'blur'},
-                ]
-            }
-        }
-    },
-    mounted(){
-        axios.get('/api/getCategories',{})
-            .then(response=>{
-                this.getCategory = response.data.getCategory;
-            });
-        axios.get('/api/getBrand',{})
-            .then(response=>{
-                this.getBrand = response.data.getBrand;
-            });
-    },
-    methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
-                } else {
-                    console.log('error submit!!');
-                    return false;
+                labelPosition: 'top',
+                productForm: {
+                    categorySelect: '',
+                    subcategorySelect: '',
+                    brandSelect: '',
+                    imageSelect: '',
+                    productName: '',
+                    quantity: '',
+                    costPrice: '',
+                    sellingPrice: '',
+                    additionalInformation: '',
+                    type: [],
+                },
+                productRules: {
+                    categorySelect: [
+                        {required: true, message: 'Please select category', trigger: 'change'}
+                    ],
+                    subcategorySelect: [
+                        {required: true, message: 'Please select subcategory', trigger: 'change'}
+                    ],
+                    brandSelect: [
+                        {required: true, message: 'Please select brand', trigger: 'change'}
+                    ],
+                    productName: [
+                        {required: true, message: 'Please input product name', trigger: 'blur'}
+                    ],
+                    quantity: [
+                        {required: true, message: 'Please input quantity', trigger: 'blur'}
+                    ],
+                    costPrice: [
+                        {required: true, message: 'Please input cost price', trigger: 'blur'}
+                    ],
+                    sellingPrice: [
+                        {required: true, message: 'Please input cost price', trigger: 'blur'},
+                    ],
+                    additionalInformation: [
+                        {required: true, message: 'Please input additional Information', trigger: 'blur'},
+                    ]
                 }
-            });
-        },
-
-        handleClose(tag) {
-            this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-        },
-
-        showInput() {
-            this.inputVisible = true;
-            this.$nextTick(_ => {
-                this.$refs.saveTagInput.$refs.input.focus();
-            });
-        },
-
-        handleInputConfirm() {
-            let inputValue = this.inputValue;
-            if (inputValue) {
-                this.dynamicTags.push(inputValue);
             }
-            this.inputVisible = false;
-            this.inputValue = '';
+        },
+        mounted(){
+            axios.get('/api/getCategories',{})
+                .then(response=>{
+                    this.getCategory = response.data.getCategory;
+                });
+            axios.get('/api/getSubCategories',{})
+                .then(response=>{
+                    this.getSubCategory = response.data.getSubCategory;
+                });
+            axios.get('/api/getBrand',{})
+                .then(response=>{
+                    this.getBrand = response.data.getBrand;
+                });
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+
+            handleClose(tag) {
+                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+            },
+
+            showInput() {
+                this.inputVisible = true;
+                this.$nextTick(_ => {
+                    this.$refs.saveTagInput.$refs.input.focus();
+                });
+            },
+
+            handleInputConfirm() {
+                let inputValue = this.inputValue;
+                if (inputValue) {
+                    this.dynamicTags.push(inputValue);
+                }
+                this.inputVisible = false;
+                this.inputValue = '';
+            }
         }
     }
-}
 </script>
 
 <style scoped>
-.el-tag + .el-tag {
-    margin-left: 10px;
-}
+    .el-tag + .el-tag {
+        margin-left: 10px;
+    }
 
-.button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
+    .button-new-tag {
+        margin-left: 10px;
+        height: 32px;
+        line-height: 30px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 
-.input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-}
+    .input-new-tag {
+        width: 90px;
+        margin-left: 10px;
+        vertical-align: bottom;
+    }
 </style>
