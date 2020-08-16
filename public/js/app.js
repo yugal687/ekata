@@ -4118,6 +4118,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       labelPosition: 'top',
+      getCategory: [],
+      getBrand: [],
       categorySelectOptions: [{
         value: 'Category - 1',
         label: 'Category - 1'
@@ -4199,38 +4201,32 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    submitCategory: function submitCategory(categoryForm) {
+    submitSubCategory: function submitSubCategory() {
       var _this = this;
+
+      var formdata = new FormData();
+      formdata.append('category_name', this.subcategoryForm.name);
+      formdata.append('parent_id', this.subcategoryForm.categorySelect);
+      axios.post('/api/addsubcategory', formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        alert(response.data.message);
+      })["catch"](function (error) {
+        if (error.response.status == 422) {
+          _this.errors = error.response.data.errors;
+        }
+      });
+    },
+    submitCategory: function submitCategory(categoryForm) {
+      var _this2 = this;
 
       this.$refs[categoryForm].validate(function (valid) {
         if (valid) {
           var formdata = new FormData();
-          formdata.append('category_name', _this.categoryForm.name);
+          formdata.append('category_name', _this2.categoryForm.name);
           axios.post('/api/postCategory', formdata, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }).then(function (response) {
-            alert(response.data.message);
-          })["catch"](function (error) {
-            if (error.response.status == 422) {
-              _this.errors = error.response.data.errors;
-            }
-          });
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    submitBrand: function submitBrand(brandForm) {
-      var _this2 = this;
-
-      this.$refs[brandForm].validate(function (valid) {
-        if (valid) {
-          var formdata = new FormData();
-          formdata.append('brand_name', _this2.brandForm.name);
-          axios.post('/api/postbrand', formdata, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -4247,6 +4243,30 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    submitBrand: function submitBrand(brandForm) {
+      var _this3 = this;
+
+      this.$refs[brandForm].validate(function (valid) {
+        if (valid) {
+          var formdata = new FormData();
+          formdata.append('brand_name', _this3.brandForm.name);
+          axios.post('/api/postbrand', formdata, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            alert(response.data.message);
+          })["catch"](function (error) {
+            if (error.response.status == 422) {
+              _this3.errors = error.response.data.errors;
+            }
+          });
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
     handleEdit: function handleEdit(index, row) {
       console.log(index, row);
     },
@@ -4255,6 +4275,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this4 = this;
+
+    axios.get('/api/getCategories', {}).then(function (response) {
+      _this4.getCategory = response.data.getCategory;
+    });
+    axios.get('/api/getBrand', {}).then(function (response) {
+      _this4.getBrand = response.data.getBrand;
+    });
     $(document).ready(function () {
       $(".categoryBtn").click(function () {
         $(".category-div").slideToggle("slow");
@@ -101434,10 +101462,10 @@ var render = function() {
                         {
                           staticStyle: { width: "100%" },
                           attrs: {
-                            data: _vm.categorytableData.filter(function(data) {
+                            data: _vm.getCategory.filter(function(data) {
                               return (
                                 !_vm.categorySearch ||
-                                data.categoryName
+                                data.category_name
                                   .toLowerCase()
                                   .includes(_vm.categorySearch.toLowerCase())
                               )
@@ -101448,12 +101476,12 @@ var render = function() {
                         },
                         [
                           _c("el-table-column", {
-                            attrs: { prop: "sn", label: "S.N.", width: "50" }
+                            attrs: { type: "index", label: "S.N.", width: "50" }
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
                             attrs: {
-                              prop: "categoryName",
+                              prop: "category_name",
                               label: "Category Name",
                               width: "120"
                             }
@@ -101630,12 +101658,12 @@ var render = function() {
                                   expression: "subcategoryForm.categorySelect"
                                 }
                               },
-                              _vm._l(_vm.categorySelectOptions, function(item) {
+                              _vm._l(_vm.getCategory, function(item) {
                                 return _c("el-option", {
-                                  key: item.value,
+                                  key: item.id,
                                   attrs: {
-                                    label: item.label,
-                                    value: item.value
+                                    label: item.category_name,
+                                    value: item.id
                                   }
                                 })
                               }),
@@ -101676,11 +101704,7 @@ var render = function() {
                                   margin: "15px 10% 0"
                                 },
                                 attrs: { type: "primary" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.submitForm("subcategoryForm")
-                                  }
-                                }
+                                on: { click: _vm.submitSubCategory }
                               },
                               [
                                 _vm._v(
@@ -101720,12 +101744,10 @@ var render = function() {
                         {
                           staticStyle: { width: "100%" },
                           attrs: {
-                            data: _vm.subcategorytableData.filter(function(
-                              data
-                            ) {
+                            data: _vm.getCategory.filter(function(data) {
                               return (
                                 !_vm.subcategorySearch ||
-                                data.subcategoryName
+                                data.category_name
                                   .toLowerCase()
                                   .includes(
                                     _vm.subcategorySearch.toLowerCase()
@@ -101741,12 +101763,12 @@ var render = function() {
                         },
                         [
                           _c("el-table-column", {
-                            attrs: { prop: "sn", label: "S.N.", width: "50" }
+                            attrs: { type: "index", label: "S.N.", width: "50" }
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
                             attrs: {
-                              prop: "subcategoryName",
+                              prop: "category_name",
                               label: "Subcategory Name",
                               width: "120"
                             }
@@ -101754,7 +101776,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("el-table-column", {
                             attrs: {
-                              prop: "categoryName",
+                              prop: "parent_id",
                               label: "Category Name",
                               width: "120"
                             }
@@ -101972,10 +101994,10 @@ var render = function() {
                         {
                           staticStyle: { width: "100%" },
                           attrs: {
-                            data: _vm.brandtableData.filter(function(data) {
+                            data: _vm.getBrand.filter(function(data) {
                               return (
                                 !_vm.brandSearch ||
-                                data.brandName
+                                data.brand_name
                                   .toLowerCase()
                                   .includes(_vm.brandSearch.toLowerCase())
                               )
@@ -101986,12 +102008,12 @@ var render = function() {
                         },
                         [
                           _c("el-table-column", {
-                            attrs: { prop: "sn", label: "S.N.", width: "50" }
+                            attrs: { type: "index", label: "S.N.", width: "50" }
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
                             attrs: {
-                              prop: "brandName",
+                              prop: "brand_name",
                               label: "Brand Name",
                               width: "120"
                             }

@@ -38,17 +38,17 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="categorytableData.filter(data => !categorySearch || data.categoryName.toLowerCase().includes(categorySearch.toLowerCase()))"
+                                    :data="getCategory.filter(data => !categorySearch || data.category_name.toLowerCase().includes(categorySearch.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                        prop="sn"
+                                       type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="categoryName"
+                                        prop="category_name"
                                         label="Category Name"
                                         width="120">
                                     </el-table-column>
@@ -104,10 +104,10 @@
                                                    v-model="subcategoryForm.categorySelect"
                                                    style="width: 100%">
                                             <el-option
-                                                v-for="item in categorySelectOptions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
+                                                v-for="item in getCategory"
+                                                :key="item.id"
+                                                :label="item.category_name"
+                                                :value="item.id">
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
@@ -120,7 +120,7 @@
                                     <el-form-item>
                                         <el-button type="primary"
                                                    style="width: 80%; margin: 15px 10% 0"
-                                                   @click="submitForm('subcategoryForm')">Create
+                                                   @click="submitSubCategory">Create
                                         </el-button>
                                     </el-form-item>
                                 </el-form>
@@ -133,23 +133,23 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="subcategorytableData.filter(data => !subcategorySearch || data.subcategoryName.toLowerCase().includes(subcategorySearch.toLowerCase())
+                                    :data="getCategory.filter(data => !subcategorySearch || data.category_name.toLowerCase().includes(subcategorySearch.toLowerCase())
                                             || data.categoryName.toLowerCase().includes(subcategorySearch.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                        prop="sn"
+                                        type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="subcategoryName"
+                                        prop="category_name"
                                         label="Subcategory Name"
                                         width="120">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="categoryName"
+                                        prop="parent_id"
                                         label="Category Name"
                                         width="120">
                                     </el-table-column>
@@ -219,17 +219,17 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="brandtableData.filter(data => !brandSearch || data.brandName.toLowerCase().includes(brandSearch.toLowerCase()))"
+                                    :data="getBrand.filter(data => !brandSearch || data.brand_name.toLowerCase().includes(brandSearch.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                        prop="sn"
+                                        type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="brandName"
+                                        prop="brand_name"
                                         label="Brand Name"
                                         width="120">
                                     </el-table-column>
@@ -275,6 +275,8 @@
         data() {
             return {
                 labelPosition: 'top',
+                getCategory:[],
+                getBrand:[],
                 categorySelectOptions: [{
                     value: 'Category - 1',
                     label: 'Category - 1'
@@ -345,6 +347,23 @@
             };
         },
         methods:{
+            submitSubCategory(){
+                let formdata = new FormData();
+                formdata.append('category_name',this.subcategoryForm.name);
+                formdata.append('parent_id',this.subcategoryForm.categorySelect);
+              axios.post('/api/addsubcategory',formdata,{
+                  headers: {
+                      'Content-Type': 'multipart/form-data'
+                  }
+
+              }).then(response => {
+                  alert(response.data.message);
+              }).catch(error => {
+                  if (error.response.status == 422) {
+                      this.errors = error.response.data.errors;
+                  }
+              });
+            },
             submitCategory(categoryForm) {
                 this.$refs[categoryForm].validate((valid) => {
                     if (valid) {
@@ -408,6 +427,14 @@
             }
         },
         mounted() {
+            axios.get('/api/getCategories',{})
+                .then(response=>{
+                   this.getCategory = response.data.getCategory;
+                });
+            axios.get('/api/getBrand',{})
+                .then(response=>{
+                    this.getBrand = response.data.getBrand;
+                });
             $(document).ready(function () {
                 $(".categoryBtn").click(function () {
                     $(".category-div").slideToggle("slow");

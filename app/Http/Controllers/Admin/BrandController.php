@@ -22,4 +22,10 @@ class BrandController extends Controller
            'message' => 'Brand added sucessfully'
         ]);
     }
+    public function getBrand(){
+        $getBrand = Brand::all();
+        return response()->json([
+          'getBrand' => $getBrand
+        ]);
+    }
 }
