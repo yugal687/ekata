@@ -6,7 +6,7 @@
                     <el-form :model="productForm" :rules="productRules" ref="productForm"
                              :label-position="labelPosition" class="demo-productForm">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-sm-12">
                                 <el-form-item label="Select Image" prop="imageSelect">
                                     <el-upload
                                         class="upload-demo"
@@ -17,9 +17,9 @@
                                     </el-upload>
                                 </el-form-item>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-sm-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <el-form-item label="Select Category" prop="categorySelect">
                                             <el-select clearable placeholder="Select Category"
                                                        filterable
@@ -34,7 +34,7 @@
                                             </el-select>
                                         </el-form-item>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <el-form-item label="Select Sub-Category" prop="subcategorySelect">
                                             <el-select clearable placeholder="Select Sub-Category"
                                                        filterable
@@ -49,7 +49,7 @@
                                             </el-select>
                                         </el-form-item>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <el-form-item label="Select Brand" prop="brandSelect">
                                             <el-select clearable placeholder="Select Brand"
                                                        filterable
@@ -58,7 +58,7 @@
                                                 <el-option
                                                     v-for="item in brandSelectOptions"
                                                     :key="item.value"
-                                                    :label="item.label"
+                                                    :label="item.label"bb bbb
                                                     :value="item.value">
                                                 </el-option>
                                             </el-select>
