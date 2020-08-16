@@ -26,10 +26,10 @@
                                                        v-model="productForm.categorySelect"
                                                        style="width: 100%">
                                                 <el-option
-                                                    v-for="item in categorySelectOptions"
-                                                    :key="item.value"
-                                                    :label="item.label"
-                                                    :value="item.value">
+                                                    v-for="item in getCategory"
+                                                    :key="item.id"
+                                                    :label="item.category_name"
+                                                    :value="item.id">
                                                 </el-option>
                                             </el-select>
                                         </el-form-item>
@@ -41,10 +41,10 @@
                                                        v-model="productForm.subcategorySelect"
                                                        style="width: 100%">
                                                 <el-option
-                                                    v-for="item in subcategorySelectOptions"
-                                                    :key="item.value"
-                                                    :label="item.label"
-                                                    :value="item.value">
+                                                    v-for="item in getCategory"
+                                                    :key="item.id"
+                                                    :label="item.category_name"
+                                                    :value="item.id">
                                                 </el-option>
                                             </el-select>
                                         </el-form-item>
@@ -56,10 +56,10 @@
                                                        v-model="productForm.brandSelect"
                                                        style="width: 100%">
                                                 <el-option
-                                                    v-for="item in brandSelectOptions"
-                                                    :key="item.value"
-                                                    :label="item.label"bb bbb
-                                                    :value="item.value">
+                                                    v-for="item in getBrand"
+                                                    :key="item.id"
+                                                    :label="item.brand_name"
+                                                    :value="item.id">
                                                 </el-option>
                                             </el-select>
                                         </el-form-item>
@@ -158,35 +158,16 @@
 
 <script>
 export default {
-    name: "addProducrComponent",
+    name: "addProductComponent",
     data() {
         return {
+            getCategory:[],
+            getBrand:[],
             dynamicTags: [],
             inputVisible: false,
             inputValue: '',
 
             labelPosition: 'top',
-            categorySelectOptions: [{
-                value: 'Category - 1',
-                label: 'Category - 1'
-            }, {
-                value: 'Category - 2',
-                label: 'Category - 2'
-            }],
-            subcategorySelectOptions: [{
-                value: 'Sub-Category - 1',
-                label: 'Sub-Category - 1'
-            }, {
-                value: 'Sub-Category - 2',
-                label: 'Sub-Category - 2'
-            }],
-            brandSelectOptions: [{
-                value: 'Brand - 1',
-                label: 'Brand - 1'
-            }, {
-                value: 'Brand - 2',
-                label: 'Brand - 2'
-            }],
             productForm: {
                 categorySelect: '',
                 subcategorySelect: '',
@@ -226,6 +207,16 @@ export default {
                 ]
             }
         }
+    },
+    mounted(){
+        axios.get('/api/getCategories',{})
+            .then(response=>{
+                this.getCategory = response.data.getCategory;
+            });
+        axios.get('/api/getBrand',{})
+            .then(response=>{
+                this.getBrand = response.data.getBrand;
+            });
     },
     methods: {
         submitForm(formName) {

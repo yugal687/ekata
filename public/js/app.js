@@ -3544,9 +3544,9 @@ function mergeFn (a, b) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -3807,6 +3807,873 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    handleClose: function handleClose(tag) {
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+    },
+    showInput: function showInput() {
+      var _this = this;
+
+      this.inputVisible = true;
+      this.$nextTick(function (_) {
+        _this.$refs.saveTagInput.$refs.input.focus();
+      });
+    },
+    handleInputConfirm: function handleInputConfirm() {
+      var inputValue = this.inputValue;
+
+      if (inputValue) {
+        this.dynamicTags.push(inputValue);
+      }
+
+      this.inputVisible = false;
+      this.inputValue = '';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "productsComponent",
+  data: function data() {
+    return {
+      dialogVisible: false,
+      tableData: [{
+        sn: '1',
+        product_name: 'Product One',
+        category: 'Category One',
+        brand: 'Brand One',
+        quantity: '22',
+        cost_price: '$1234',
+        selling_price: '$12345'
+      }, {
+        sn: '2',
+        product_name: 'Product Two',
+        category: 'Category Two',
+        brand: 'Brand Two',
+        quantity: '22',
+        cost_price: '$1234',
+        selling_price: '$12345'
+      }, {
+        sn: '3',
+        product_name: 'Product Three',
+        category: 'Category Three',
+        brand: 'Brand Three',
+        quantity: '22',
+        cost_price: '$1234',
+        selling_price: '$12345'
+      }, {
+        sn: '4',
+        product_name: 'Product Four',
+        category: 'Category Four',
+        brand: 'Brand Four',
+        quantity: '22',
+        cost_price: '$1234',
+        selling_price: '$12345'
+      }, {
+        sn: '5',
+        product_name: 'Product Five',
+        category: 'Category Five',
+        brand: 'Brand Five',
+        quantity: '22',
+        cost_price: '$1234',
+        selling_price: '$12345'
+      }],
+      search: '',
+      dynamicTags: [],
+      inputVisible: false,
+      inputValue: '',
+      labelPosition: 'top',
+      categorySelectOptions: [{
+        value: 'Category - 1',
+        label: 'Category - 1'
+      }, {
+        value: 'Category - 2',
+        label: 'Category - 2'
+      }],
+      subcategorySelectOptions: [{
+        value: 'Sub-Category - 1',
+        label: 'Sub-Category - 1'
+      }, {
+        value: 'Sub-Category - 2',
+        label: 'Sub-Category - 2'
+      }],
+      brandSelectOptions: [{
+        value: 'Brand - 1',
+        label: 'Brand - 1'
+      }, {
+        value: 'Brand - 2',
+        label: 'Brand - 2'
+      }],
+      productForm: {
+        categorySelect: '',
+        subcategorySelect: '',
+        brandSelect: '',
+        imageSelect: '',
+        productName: '',
+        quantity: '',
+        costPrice: '',
+        sellingPrice: '',
+        additionalInformation: ''
+      },
+      productRules: {
+        categorySelect: [{
+          required: true,
+          message: 'Please select category',
+          trigger: 'change'
+        }],
+        subcategorySelect: [{
+          required: true,
+          message: 'Please select subcategory',
+          trigger: 'change'
+        }],
+        brandSelect: [{
+          required: true,
+          message: 'Please select brand',
+          trigger: 'change'
+        }],
+        productName: [{
+          required: true,
+          message: 'Please input product name',
+          trigger: 'blur'
+        }],
+        quantity: [{
+          required: true,
+          message: 'Please input quantity',
+          trigger: 'blur'
+        }],
+        costPrice: [{
+          required: true,
+          message: 'Please input cost price',
+          trigger: 'blur'
+        }],
+        sellingPrice: [{
+          required: true,
+          message: 'Please input cost price',
+          trigger: 'blur'
+        }],
+        additionalInformation: [{
+          required: true,
+          message: 'Please input additional Information',
+          trigger: 'blur'
+        }]
+      }
+    };
+  },
+  mounted: function mounted() {},
+  methods: {
+    openEditModal: function openEditModal() {
+      $(".productEditWrapper").slideToggle("slow");
+      $(".productDetailsWrapper").slideToggle("slow");
+      $(".detailsProductDetailsBtn").toggle("slow");
+      $(".editProductDetailsBtn").toggle("slow");
+    },
+    openDetailsModal: function openDetailsModal() {
+      $(".productEditWrapper").slideToggle("slow");
+      $(".productDetailsWrapper").slideToggle("slow");
+      $(".detailsProductDetailsBtn").toggle("slow");
+      $(".editProductDetailsBtn").toggle("slow");
+    },
+
+    /*Client Details---*/
+    handleEdit: function handleEdit(index, row) {
+      console.log(index, row);
+    },
+    handleDelete: function handleDelete(index, row) {
+      console.log(index, row);
+    },
+
+    /*Client Information Tab---*/
+    handleClick: function handleClick(tab, event) {
+      console.log(tab, event);
+    },
+
+    /*Edit Datas*/
+    submitForm: function submitForm(formName) {
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+
+    /*Tags*/
     handleClose: function handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
@@ -10583,9 +11450,9 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css&":
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css& ***!
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css& ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10595,7 +11462,26 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.el-tag + .el-tag[data-v-305d6db8] {\r\n    margin-left: 10px;\n}\n.button-new-tag[data-v-305d6db8] {\r\n    margin-left: 10px;\r\n    height: 32px;\r\n    line-height: 30px;\r\n    padding-top: 0;\r\n    padding-bottom: 0;\n}\n.input-new-tag[data-v-305d6db8] {\r\n    width: 90px;\r\n    margin-left: 10px;\r\n    vertical-align: bottom;\n}\r\n", ""]);
+exports.push([module.i, "\n.el-tag + .el-tag[data-v-17cdfe14] {\r\n    margin-left: 10px;\n}\n.button-new-tag[data-v-17cdfe14] {\r\n    margin-left: 10px;\r\n    height: 32px;\r\n    line-height: 30px;\r\n    padding-top: 0;\r\n    padding-bottom: 0;\n}\n.input-new-tag[data-v-17cdfe14] {\r\n    width: 90px;\r\n    margin-left: 10px;\r\n    vertical-align: bottom;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.hidden[data-v-cf064fc0] {\r\n    display: none;\n}\n.el-tag + .el-tag[data-v-cf064fc0] {\r\n    margin-left: 10px;\n}\n.button-new-tag[data-v-cf064fc0] {\r\n    margin-left: 10px;\r\n    height: 32px;\r\n    line-height: 30px;\r\n    padding-top: 0;\r\n    padding-bottom: 0;\n}\n.input-new-tag[data-v-cf064fc0] {\r\n    width: 90px;\r\n    margin-left: 10px;\r\n    vertical-align: bottom;\n}\n.clients-wrapper[data-v-cf064fc0] {\r\n    border: 1px solid #ebebeb;\r\n    border-radius: 5px;\r\n    transition: .2s;\r\n    margin: 20px;\r\n    padding: 20px;\n}\n.information-wrapper[data-v-cf064fc0] {\r\n    /*border: 1px solid #ebebeb;*/\r\n    /*border-radius: 5px;*/\r\n    /*transition: .2s;*/\r\n    margin: 10px;\r\n    /*padding: 10px;*/\n}\r\n\r\n/*th.gutter {\r\n    padding: 0 !important;\r\n}*/\n.clients-wrapper[data-v-cf064fc0]:hover {\r\n    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .6);\n}\n.clients-ques-ans h6[data-v-cf064fc0] {\r\n    font-size: 14px;\r\n    line-height: 15px;\r\n    font-weight: 700;\r\n    color: #606266;\n}\r\n", ""]);
 
 // exports
 
@@ -99975,15 +100861,45 @@ var index = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css&":
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css& ***!
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css& ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -100771,9 +101687,9 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true& ***!
   \****************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -100811,7 +101727,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c(
                       "div",
-                      { staticClass: "col-md-4" },
+                      { staticClass: "col-md-4 col-sm-12" },
                       [
                         _c(
                           "el-form-item",
@@ -100856,11 +101772,11 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-8" }, [
+                    _c("div", { staticClass: "col-md-8 col-sm-12" }, [
                       _c("div", { staticClass: "row" }, [
                         _c(
                           "div",
-                          { staticClass: "col-md-6" },
+                          { staticClass: "col-md-6 col-sm-12" },
                           [
                             _c(
                               "el-form-item",
@@ -100914,7 +101830,7 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "col-md-6" },
+                          { staticClass: "col-md-6 col-sm-12" },
                           [
                             _c(
                               "el-form-item",
@@ -100969,7 +101885,7 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "col-md-6" },
+                          { staticClass: "col-md-6 col-sm-12" },
                           [
                             _c(
                               "el-form-item",
@@ -101008,6 +101924,8 @@ var render = function() {
                                       key: item.value,
                                       attrs: {
                                         label: item.label,
+                                        bb: "",
+                                        bbb: "",
                                         value: item.value
                                       }
                                     })
@@ -101303,6 +102221,1197 @@ var render = function() {
           )
         ])
       ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {},
+    [
+      _c(
+        "div",
+        { staticClass: "clients-wrapper" },
+        [
+          _c(
+            "el-table",
+            {
+              staticStyle: { width: "100%" },
+              attrs: {
+                data: _vm.tableData.filter(function(data) {
+                  return (
+                    !_vm.search ||
+                    data.product_name
+                      .toLowerCase()
+                      .includes(_vm.search.toLowerCase()) ||
+                    data.category
+                      .toLowerCase()
+                      .includes(_vm.search.toLowerCase()) ||
+                    data.brand.toLowerCase().includes(_vm.search.toLowerCase())
+                  )
+                }),
+                "max-height": "600"
+              }
+            },
+            [
+              _c(
+                "el-table-column",
+                {
+                  scopedSlots: _vm._u([
+                    {
+                      key: "header",
+                      fn: function(scope) {
+                        return [
+                          _c("el-input", {
+                            attrs: {
+                              clearable: "",
+                              "prefix-icon": "el-icon-search",
+                              placeholder: "Type to search"
+                            },
+                            model: {
+                              value: _vm.search,
+                              callback: function($$v) {
+                                _vm.search = $$v
+                              },
+                              expression: "search"
+                            }
+                          })
+                        ]
+                      }
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "S.N.", prop: "sn" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "Product Name", prop: "product_name" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "Category", prop: "category" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "Brand", prop: "brand" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "Quantity", prop: "quantity" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "Cost Price", prop: "cost_price" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "Selling Price", prop: "selling_price" }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: {
+                  fixed: "right",
+                  width: "150",
+                  label: "Operations",
+                  prop: "operations"
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(scope) {
+                      return [
+                        _c("el-button", {
+                          attrs: {
+                            size: "mini",
+                            type: "success",
+                            icon: "el-icon-info",
+                            circle: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.dialogVisible = true
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("el-button", {
+                          attrs: {
+                            size: "mini",
+                            type: "primary",
+                            icon: "el-icon-edit",
+                            circle: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.dialogVisible = true
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("el-button", {
+                          attrs: {
+                            size: "mini",
+                            type: "danger",
+                            icon: "el-icon-delete",
+                            circle: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.handleDelete(scope.$index, scope.row)
+                            }
+                          }
+                        })
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: "Product Details", visible: _vm.dialogVisible },
+          on: {
+            "update:visible": function($event) {
+              _vm.dialogVisible = $event
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-4" },
+              [
+                _c("el-card", { attrs: { "body-style": { padding: "0px" } } }, [
+                  _c("img", {
+                    staticClass: "image",
+                    staticStyle: { width: "100%", height: "250px" },
+                    attrs: {
+                      src:
+                        "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticStyle: { padding: "14px" } }, [
+                    _c("h3", [_vm._v("Product Name")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "bottom clearfix" }, [
+                      _c("h5", [_vm._v(" $....")]),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticStyle: {
+                            "border-top": "1px solid #ebeef5",
+                            padding: "10px 0"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                fdtrfgvcjg kjdsjkfsd kjsdfsdfks skjdffnsdf skjdfnsdkf sjdjkfnsdf sodlfnsdlf\n                                slldkjnsds sdljnsld sldjns sodjfhns osdjfsldkfs\n                            "
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-8 pt-md-0 pt-sm-3 pt-3" },
+              [
+                _c(
+                  "el-card",
+                  { staticClass: "box-card", attrs: { shadow: "hover" } },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "clearfix",
+                        attrs: { slot: "header" },
+                        slot: "header"
+                      },
+                      [
+                        _c("span", [_vm._v("Product Information")]),
+                        _vm._v(" "),
+                        _c(
+                          "el-button",
+                          {
+                            staticClass: "editProductDetailsBtn",
+                            staticStyle: { float: "right", padding: "3px 0" },
+                            attrs: { type: "text" },
+                            on: { click: _vm.openEditModal }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Edit\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-button",
+                          {
+                            staticClass: "detailsProductDetailsBtn hidden",
+                            staticStyle: { float: "right", padding: "3px 0" },
+                            attrs: { type: "text" },
+                            on: { click: _vm.openDetailsModal }
+                          },
+                          [_vm._v("Details\n                        ")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "productDetailsWrapper" },
+                        [
+                          _c(
+                            "el-form",
+                            {
+                              ref: "productForm",
+                              staticClass: "demo-productForm",
+                              attrs: {
+                                model: _vm.productForm,
+                                rules: _vm.productRules,
+                                "label-position": _vm.labelPosition
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: { label: "Category", prop: "" }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: "Category Name"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Sub-Category",
+                                          prop: ""
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: "Sub-Category Name"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      { attrs: { label: "Brand", prop: "" } },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: "Brand Name"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      { attrs: { label: "Product", prop: "" } },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: "Product Name"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: { label: "Tags", prop: "tags" }
+                                      },
+                                      [
+                                        _vm._l(_vm.dynamicTags, function(tag) {
+                                          return _c(
+                                            "el-tag",
+                                            {
+                                              key: tag,
+                                              attrs: {
+                                                closable: "",
+                                                "disable-transitions": false
+                                              },
+                                              on: {
+                                                close: function($event) {
+                                                  return _vm.handleClose(tag)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                                " +
+                                                  _vm._s(tag) +
+                                                  "\n                                            "
+                                              )
+                                            ]
+                                          )
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.inputVisible
+                                          ? _c("el-input", {
+                                              ref: "saveTagInput",
+                                              staticClass: "input-new-tag",
+                                              attrs: { size: "mini" },
+                                              on: {
+                                                blur: _vm.handleInputConfirm
+                                              },
+                                              nativeOn: {
+                                                keyup: function($event) {
+                                                  if (
+                                                    !$event.type.indexOf(
+                                                      "key"
+                                                    ) &&
+                                                    _vm._k(
+                                                      $event.keyCode,
+                                                      "enter",
+                                                      13,
+                                                      $event.key,
+                                                      "Enter"
+                                                    )
+                                                  ) {
+                                                    return null
+                                                  }
+                                                  return _vm.handleInputConfirm(
+                                                    $event
+                                                  )
+                                                }
+                                              },
+                                              model: {
+                                                value: _vm.inputValue,
+                                                callback: function($$v) {
+                                                  _vm.inputValue = $$v
+                                                },
+                                                expression: "inputValue"
+                                              }
+                                            })
+                                          : _c(
+                                              "el-button",
+                                              {
+                                                staticClass: "button-new-tag",
+                                                attrs: { size: "small" },
+                                                on: { click: _vm.showInput }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "+ New Tag\n                                            "
+                                                )
+                                              ]
+                                            )
+                                      ],
+                                      2
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: { label: "Quantity", prop: "" }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: "Product Quantiy"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: { label: "Cost Price", prop: "" }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: "Cost Price"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Selling Price",
+                                          prop: ""
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: "Selling Price"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-12" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Additional Information",
+                                          prop: ""
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            type: "textarea",
+                                            disabled: "",
+                                            value:
+                                              "djalkandkfasbddfjfkasdblaskdjasmbd askdnalsmd"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "productEditWrapper hidden" },
+                        [
+                          _c(
+                            "el-form",
+                            {
+                              ref: "productForm",
+                              staticClass: "demo-productForm",
+                              attrs: {
+                                model: _vm.productForm,
+                                rules: _vm.productRules,
+                                "label-position": _vm.labelPosition
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-12" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Select Image",
+                                          prop: "imageSelect"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "el-upload",
+                                          {
+                                            ref: "upload",
+                                            staticClass: "upload-demo",
+                                            attrs: {
+                                              action:
+                                                "https://jsonplaceholder.typicode.com/posts/",
+                                              "auto-upload": false
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "el-button",
+                                              {
+                                                attrs: {
+                                                  slot: "trigger",
+                                                  size: "small",
+                                                  type: "primary"
+                                                },
+                                                slot: "trigger"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "select file\n                                                "
+                                                )
+                                              ]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Select Category",
+                                          prop: "categorySelect"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "el-select",
+                                          {
+                                            staticStyle: { width: "100%" },
+                                            attrs: {
+                                              clearable: "",
+                                              placeholder: "Select Category",
+                                              filterable: ""
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.productForm.categorySelect,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.productForm,
+                                                  "categorySelect",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "productForm.categorySelect"
+                                            }
+                                          },
+                                          _vm._l(
+                                            _vm.categorySelectOptions,
+                                            function(item) {
+                                              return _c("el-option", {
+                                                key: item.value,
+                                                attrs: {
+                                                  label: item.label,
+                                                  value: item.value
+                                                }
+                                              })
+                                            }
+                                          ),
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Select Sub-Category",
+                                          prop: "subcategorySelect"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "el-select",
+                                          {
+                                            staticStyle: { width: "100%" },
+                                            attrs: {
+                                              clearable: "",
+                                              placeholder:
+                                                "Select Sub-Category",
+                                              filterable: ""
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.productForm
+                                                  .subcategorySelect,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.productForm,
+                                                  "subcategorySelect",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "productForm.subcategorySelect"
+                                            }
+                                          },
+                                          _vm._l(
+                                            _vm.subcategorySelectOptions,
+                                            function(item) {
+                                              return _c("el-option", {
+                                                key: item.value,
+                                                attrs: {
+                                                  label: item.label,
+                                                  value: item.value
+                                                }
+                                              })
+                                            }
+                                          ),
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Select Brand",
+                                          prop: "brandSelect"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "el-select",
+                                          {
+                                            staticStyle: { width: "100%" },
+                                            attrs: {
+                                              clearable: "",
+                                              placeholder: "Select Brand",
+                                              filterable: ""
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.productForm.brandSelect,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.productForm,
+                                                  "brandSelect",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "productForm.brandSelect"
+                                            }
+                                          },
+                                          _vm._l(
+                                            _vm.brandSelectOptions,
+                                            function(item) {
+                                              return _c("el-option", {
+                                                key: item.value,
+                                                attrs: {
+                                                  label: item.label,
+                                                  bb: "",
+                                                  bbb: "",
+                                                  value: item.value
+                                                }
+                                              })
+                                            }
+                                          ),
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Product Name",
+                                          prop: "productName"
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            placeholder: "Place product name"
+                                          },
+                                          model: {
+                                            value: _vm.productForm.productName,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.productForm,
+                                                "productName",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "productForm.productName"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: { label: "Tags", prop: "tags" }
+                                      },
+                                      [
+                                        _vm._l(_vm.dynamicTags, function(tag) {
+                                          return _c(
+                                            "el-tag",
+                                            {
+                                              key: tag,
+                                              attrs: {
+                                                closable: "",
+                                                "disable-transitions": false
+                                              },
+                                              on: {
+                                                close: function($event) {
+                                                  return _vm.handleClose(tag)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                                " +
+                                                  _vm._s(tag) +
+                                                  "\n                                            "
+                                              )
+                                            ]
+                                          )
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.inputVisible
+                                          ? _c("el-input", {
+                                              ref: "saveTagInput",
+                                              staticClass: "input-new-tag",
+                                              attrs: { size: "mini" },
+                                              on: {
+                                                blur: _vm.handleInputConfirm
+                                              },
+                                              nativeOn: {
+                                                keyup: function($event) {
+                                                  if (
+                                                    !$event.type.indexOf(
+                                                      "key"
+                                                    ) &&
+                                                    _vm._k(
+                                                      $event.keyCode,
+                                                      "enter",
+                                                      13,
+                                                      $event.key,
+                                                      "Enter"
+                                                    )
+                                                  ) {
+                                                    return null
+                                                  }
+                                                  return _vm.handleInputConfirm(
+                                                    $event
+                                                  )
+                                                }
+                                              },
+                                              model: {
+                                                value: _vm.inputValue,
+                                                callback: function($$v) {
+                                                  _vm.inputValue = $$v
+                                                },
+                                                expression: "inputValue"
+                                              }
+                                            })
+                                          : _c(
+                                              "el-button",
+                                              {
+                                                staticClass: "button-new-tag",
+                                                attrs: { size: "small" },
+                                                on: { click: _vm.showInput }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "+ New Tag\n                                            "
+                                                )
+                                              ]
+                                            )
+                                      ],
+                                      2
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Quantity",
+                                          prop: "quantity"
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            placeholder: "Place quantity"
+                                          },
+                                          model: {
+                                            value: _vm.productForm.quantity,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.productForm,
+                                                "quantity",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "productForm.quantity"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Cost Price",
+                                          prop: "costPrice"
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            placeholder: "Place cost price"
+                                          },
+                                          model: {
+                                            value: _vm.productForm.costPrice,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.productForm,
+                                                "costPrice",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "productForm.costPrice"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-4" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Selling Price",
+                                          prop: "sellingPrice"
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            placeholder: "Place selling price"
+                                          },
+                                          model: {
+                                            value: _vm.productForm.sellingPrice,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.productForm,
+                                                "sellingPrice",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "productForm.sellingPrice"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-12" },
+                                  [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        attrs: {
+                                          label: "Additional Information",
+                                          prop: "additionalInformation"
+                                        }
+                                      },
+                                      [
+                                        _c("el-input", {
+                                          attrs: {
+                                            type: "textarea",
+                                            autosize: {
+                                              minRows: 3,
+                                              maxRows: 4
+                                            },
+                                            placeholder:
+                                              "Please input additional Information"
+                                          },
+                                          model: {
+                                            value:
+                                              _vm.productForm
+                                                .additionalInformation,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.productForm,
+                                                "additionalInformation",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "productForm.additionalInformation"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "row" },
+                                [
+                                  _c(
+                                    "el-form-item",
+                                    [
+                                      _c(
+                                        "el-button",
+                                        {
+                                          staticStyle: {
+                                            width: "100%",
+                                            margin: "15px 10% 0"
+                                          },
+                                          attrs: { type: "warning" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.submitForm(
+                                                "productForm"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            " Edit\n                                        "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ]
+                )
+              ],
+              1
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "information-wrapper" })
     ],
     1
   )
@@ -114356,7 +116465,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-setup-component', __webpack_require__(/*! ./components/Admin/Setup/setupComponent.vue */ "./resources/js/components/Admin/Setup/setupComponent.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('add-product-component', __webpack_require__(/*! ./components/Admin/Add_Product/addProducrComponent.vue */ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('add-product-component', __webpack_require__(/*! ./components/Admin/Add_Product/addProductComponent.vue */ "./resources/js/components/Admin/Add_Product/addProductComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('product-component', __webpack_require__(/*! ./components/Admin/Add_Product/productsComponent.vue */ "./resources/js/components/Admin/Add_Product/productsComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -114421,18 +116531,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue":
+/***/ "./resources/js/components/Admin/Add_Product/addProductComponent.vue":
 /*!***************************************************************************!*\
-  !*** ./resources/js/components/Admin/Add_Product/addProducrComponent.vue ***!
+  !*** ./resources/js/components/Admin/Add_Product/addProductComponent.vue ***!
   \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _addProducrComponent_vue_vue_type_template_id_305d6db8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true& */ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true&");
-/* harmony import */ var _addProducrComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addProducrComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _addProducrComponent_vue_vue_type_style_index_0_id_305d6db8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css& */ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css&");
+/* harmony import */ var _addProductComponent_vue_vue_type_template_id_17cdfe14_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true& */ "./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true&");
+/* harmony import */ var _addProductComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addProductComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _addProductComponent_vue_vue_type_style_index_0_id_17cdfe14_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css& */ "./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -114443,66 +116553,153 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _addProducrComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _addProducrComponent_vue_vue_type_template_id_305d6db8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _addProducrComponent_vue_vue_type_template_id_305d6db8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _addProductComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _addProductComponent_vue_vue_type_template_id_17cdfe14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _addProductComponent_vue_vue_type_template_id_17cdfe14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "305d6db8",
+  "17cdfe14",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/Add_Product/addProducrComponent.vue"
+component.options.__file = "resources/js/components/Admin/Add_Product/addProductComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProducrComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProductComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css&":
+/***/ "./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css&":
 /*!************************************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css& ***!
+  !*** ./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css& ***!
   \************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_style_index_0_id_305d6db8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=style&index=0&id=305d6db8&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_style_index_0_id_305d6db8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_style_index_0_id_305d6db8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_style_index_0_id_305d6db8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_style_index_0_id_305d6db8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_style_index_0_id_305d6db8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_style_index_0_id_17cdfe14_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=style&index=0&id=17cdfe14&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_style_index_0_id_17cdfe14_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_style_index_0_id_17cdfe14_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_style_index_0_id_17cdfe14_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_style_index_0_id_17cdfe14_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_style_index_0_id_17cdfe14_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true&":
+/***/ "./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true&":
 /*!**********************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true& ***!
+  !*** ./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true& ***!
   \**********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_template_id_305d6db8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProducrComponent.vue?vue&type=template&id=305d6db8&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_template_id_305d6db8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_template_id_17cdfe14_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/addProductComponent.vue?vue&type=template&id=17cdfe14&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_template_id_17cdfe14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addProducrComponent_vue_vue_type_template_id_305d6db8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addProductComponent_vue_vue_type_template_id_17cdfe14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Add_Product/productsComponent.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Admin/Add_Product/productsComponent.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _productsComponent_vue_vue_type_template_id_cf064fc0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true& */ "./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true&");
+/* harmony import */ var _productsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./productsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _productsComponent_vue_vue_type_style_index_0_id_cf064fc0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css& */ "./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _productsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _productsComponent_vue_vue_type_template_id_cf064fc0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _productsComponent_vue_vue_type_template_id_cf064fc0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "cf064fc0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Admin/Add_Product/productsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./productsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_style_index_0_id_cf064fc0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=style&index=0&id=cf064fc0&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_style_index_0_id_cf064fc0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_style_index_0_id_cf064fc0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_style_index_0_id_cf064fc0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_style_index_0_id_cf064fc0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_style_index_0_id_cf064fc0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true& ***!
+  \********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_template_id_cf064fc0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Add_Product/productsComponent.vue?vue&type=template&id=cf064fc0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_template_id_cf064fc0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_productsComponent_vue_vue_type_template_id_cf064fc0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
