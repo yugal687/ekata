@@ -1,0 +1,168 @@
+body {
+    background: white;
+}
+
+
+.cntus{
+    background-color: #f2ece4;
+
+    text-align: center;
+    padding: 15px 0;
+}
+
+.fa_color{
+    color: #FF8C00;
+}
+
+#fname{
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+#mail{
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#phone{
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#messagebox{
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    height: 7rem;
+    margin-bottom: 10px;
+}
+
+.flwus{
+    margin-top: 20px;
+}
+
+
+.card {
+    border-bottom-color: #FF8C00;
+    border-top-color: #FF8C00;
+    border-left-color: #FF8C00;
+    border-right-color: #FF8C00;
+    margin: 20px 0 ;
+    width: 80%;
+}
+
+.card_box{
+    padding: 20px 50px;
+}
+
+
+.enq{
+    background-color: #e39b30;
+    padding: 30px 0;
+    height: 27rem;
+}
+
+.horzline{
+    border-top: 1px solid #8c8b8b;
+    border-bottom: 1px solid #fff;
+    margin-top: -10px;
+}
+
+.style7{
+    border-top: 1px solid #8c8b8b;
+    border-bottom: 1px solid #fff;
+}
+
+#footer{
+    background-color: #0b0b0b;
+    color: darkgray;
+
+}
+
+.list{
+    margin: 5px 0 0 0;
+
+}
+
+#details{
+    padding-left: 30px;
+}
+
+.list-unstyled{
+    padding: 10px 0 0 0;
+    margin: 0 0 0 0;
+}
+
+#sndbtn{
+    text-align: center;
+}
+
+.profile img {
+    width: 68px;
+    height: 68px;
+    border-radius: 80%
+}
+
+.second {
+    border-left: 2px dotted lightgrey;
+    border-right: 2px dotted lightgrey
+}
+
+@media only screen {
+    .second {
+        border: none;
+        border-top: 2px dotted lightgrey;
+        margin-top: 25px
+    }
+
+    .third {
+        border-top: 2px dotted lightgrey;
+        margin-top: 25px
+    }
+
+    .icon {
+        margin-top: 20px;
+        top: 0
+    }
+}
+
+.fa-quote-left:before {
+    font-size: 7px;
+    color: orangered;
+    position: relative;
+    bottom: 5px
+}
+
+.intro {
+    font-size: 11px;
+    margin-left: 13px;
+    position: relative;
+    bottom: 8px
+}
+
+
+
+.company {
+    position: absolute;
+    bottom: -42px
+}
+
+.fa-amazon:before {
+    content: "\f270";
+    font-size: 23px
+}
+
+.icon {
+    margin-bottom: 15px;
+    position: relative;
+    bottom: 20px
+}
+
+.header {
+    padding-top: 35px;
+    padding-bottom: 50px
+}
+

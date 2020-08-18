@@ -79,7 +79,7 @@
                                             <a class="nav-link text-white" href="#"><b>Products</b></a>
                                         </li>
                                         <li class="nav-item ml-3">
-                                            <a class="nav-link text-white" href="#"><b>Contact Us</b></a>
+                                            <a class="nav-link text-white" href="/contact"><b>Contact Us</b></a>
                                         </li>
                                     </ul>
 
