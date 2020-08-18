@@ -195,6 +195,12 @@
                                 <p> Setup </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/admin/banner/bannerimage" class="nav-link">
+                                <i class="fas fa-images"></i>
+                                <p>Banner Image</p>
+                            </a>
+                        </li>
                         <li class="nav-item has-treeview">
                             <a href="" class="nav-link">
                                 <i class="fab fa-product-hunt"></i>

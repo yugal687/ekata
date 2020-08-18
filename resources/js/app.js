@@ -31,6 +31,7 @@ Vue.component('products-component', require('./components/Admin/Add_Product/prod
 Vue.component('add-discount-component', require('./components/Admin/Add_Product/addDiscountComponent.vue').default);
 Vue.component('order-details-component', require('./components/Admin/Order/orderDetailsComponent.vue').default);
 Vue.component('shipping-details-component', require('./components/Admin/Order/shippingDetailsComponent.vue').default);
+Vue.component('banner-image-component', require('./components/Admin/Banner_Image/bannerImageComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

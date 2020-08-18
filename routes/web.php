@@ -26,6 +26,7 @@ Route::view('admin/addproduct/products', 'admin.add_product.products');
 Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
 Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
 Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
+Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
 
 Auth::routes();
 
