@@ -28,6 +28,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('admin-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
 Vue.component('add-product-component', require('./components/Admin/Add_Product/addProductComponent.vue').default);
 Vue.component('products-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
+Vue.component('add-discount-component', require('./components/Admin/Add_Product/addDiscountComponent.vue').default);
+Vue.component('order-details-component', require('./components/Admin/Order/orderDetailsComponent.vue').default);
+Vue.component('shipping-details-component', require('./components/Admin/Order/shippingDetailsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

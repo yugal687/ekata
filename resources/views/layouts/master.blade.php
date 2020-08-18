@@ -14,38 +14,41 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
-
     @yield('style')
     <style>
         .el-dialog {
             position: relative;
             margin: 0 auto 50px;
             border-radius: 2px;
-            box-shadow: 0 1px 3px rgba(0,0,0,.3);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
             box-sizing: border-box;
-            width: 70% !important;
+            /*width: inherit;*/
         }
 
-        .content-wrapper{
+        .content-wrapper {
             background-color: #fff;
             padding: 20px 0;
         }
 
         .el-form--label-top .el-form-item__label {
-             padding: 0;
+            padding: 0;
         }
+
         label {
             margin-bottom: 0 !important;
         }
+
         /*form.el-form.demo-categoryForm.el-form--label-top {
             width: 90%;
         }*/
-        .el-form-item{
+        .el-form-item {
             margin-bottom: 10px !important;
         }
-        .el-button:focus{
+
+        .el-button:focus {
             outline: none;
         }
+
         /*.el-form-item:last-child {
             margin-bottom: 30px !important;
         }*/
@@ -127,7 +130,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="AdminLTE Logo"
+                     class="brand-image img-circle elevation-3"
                      style="opacity: .8">
                 <br/>
                 <span class="brand-text font-weight-light">Ekata Convenience Store</span>
@@ -138,7 +142,9 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRBNFUwQmH640OafdOvh-eIPRcB9ZeIBbYfew&usqp=CAU" class="img-circle elevation-2" alt="User Image">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRBNFUwQmH640OafdOvh-eIPRcB9ZeIBbYfew&usqp=CAU"
+                            class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Admin</a>
@@ -208,6 +214,35 @@
                                     <a href="/admin/addproduct/products" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Product Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/addproduct/discount" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Discount</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-project-diagram"></i>
+                                <p>
+                                    Orders
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/admin/order/orderdetails" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Order Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/order/shippingdetails" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Shipping Details</p>
                                     </a>
                                 </li>
                             </ul>
