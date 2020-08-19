@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('website/index');
 });
+Route::get('/contact', function () {
+    return view('website/contact');
+});
 
 Route::view('admin/dashboard', 'admin.dashboard');
 Route::view('admin/userdashboard', 'admin.userdashboard');
