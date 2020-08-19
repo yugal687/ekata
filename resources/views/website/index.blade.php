@@ -42,12 +42,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-<!-- website header -->
+<!-- website footer -->
 @include('layouts.website.footer')
-<!-- website header ends -->
+<!-- website footer ends -->
