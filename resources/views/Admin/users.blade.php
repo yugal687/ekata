@@ -24,7 +24,7 @@
                                             </ul>
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="../../dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">
+                                            <img src="https://cdn1.vectorstock.com/i/1000x1000/66/60/avatar-business-man-graphic-vector-9646660.jpg" style="height: 120px; width: 120px" alt="" class="img-circle img-fluid">
                                         </div>
                                     </div>
                                 </div>

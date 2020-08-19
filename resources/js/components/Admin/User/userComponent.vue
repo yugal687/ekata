@@ -1,0 +1,147 @@
+<template>
+    <div class="">
+        <main>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row my-3 mx-5"
+                         :data="userDetails.filter(data => !search || data.userName.toLowerCase().includes(search.toLowerCase()))">
+                        <el-input placeholder="Type to search" v-model="search"></el-input>
+                    </div>
+                    <div class="row">
+                        <div v-for="userDetail in userDetails" class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-header text-muted border-bottom-0">
+                                    User Profile
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <h2 class="lead"><b>{{ userDetail.userName }}</b></h2>
+                                            <!--<p class="text-muted text-sm"><b>Email: </b> {{ userDetail.email }} </p>-->
+                                            <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                <li class="small mt-2">
+                                                    <span class="fa-li">
+                                                        <i class="fas fa-lg fa-envelope"></i>
+                                                    </span>
+                                                    Email: {{ userDetail.email }}
+                                                </li>
+                                                <li class="small mt-2"><span class="fa-li">
+                                            <i class="fas fa-lg fa-phone"></i></span>
+                                                    Phone : {{ userDetail.phone }}
+                                                </li>
+                                                <li class="small mt-2"><span class="fa-li">
+                                            <i class="fas fa-lg fa-building"></i></span>
+                                                    Address: {{ userDetail.address }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-5 text-center">
+                                            <img
+                                                src="https://cdn1.vectorstock.com/i/1000x1000/66/60/avatar-business-man-graphic-vector-9646660.jpg"
+                                                style="height: 100px; width: 100px" alt="" class="img-circle img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-right">
+                                        <a href="#" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-user"></i> View Profile
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <nav aria-label="">
+                        <ul class="pagination justify-content-center m-0">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                            <li class="page-item"><a class="page-link" href="#">7</a></li>
+                            <li class="page-item"><a class="page-link" href="#">8</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "userComponent",
+    components: {},
+    data() {
+        return {
+            search: '',
+            userDetails: [{
+                email: 'name1@gmail.com',
+                userName: 'Name -1',
+                address: 'Demo Street 123, Demo City 04312, NJ',
+                phone: '+977-1234567890'
+            }, {
+                email: 'name2@gmail.com',
+                userName: 'Name -2',
+                address: 'Demo Street 123, Demo City 04312, NJ',
+                phone: '+977-1234567890'
+            }, {
+                email: 'name3@gmail.com',
+                userName: 'Name -3',
+                address: 'Demo Street 123, Demo City 04312, NJ',
+                phone: '+977-1234567890'
+            }]
+        };
+    }
+}
+</script>
+
+<style scoped>
+.time {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.lead {
+    font-size: 1.125rem;
+    font-weight: 300;
+}
+
+element.style {
+    height: 120px;
+    width: 120px;
+}
+</style>

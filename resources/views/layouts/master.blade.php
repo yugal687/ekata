@@ -180,8 +180,17 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        {{--<li class="nav-item">
                             <a href="/admin/users" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Users
+                                    <span class="right badge badge-danger">Latest</span>
+                                </p>
+                            </a>
+                        </li>--}}
+                        <li class="nav-item">
+                            <a href="/user/users" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Users
@@ -199,6 +208,14 @@
                             <a href="/admin/banner/bannerimage" class="nav-link">
                                 <i class="fas fa-images"></i>
                                 <p>Banner Image</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/cart/allusercartdetails" class="nav-link">
+                                <i class="fas fa-cart-plus"></i>
+                                <p>
+                                    Cart Products
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
@@ -253,6 +270,7 @@
                                 </li>
                             </ul>
                         </li>
+
 
                         {{--<li class="nav-item has-treeview">
                             <a href="" class="nav-link">
