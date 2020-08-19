@@ -22,6 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/postbrand','Admin\BrandController@createBrand');
 Route::post('/postCategory','Admin\CategoryController@createCategory');
 Route::post('/addsubcategory','Admin\CategoryController@createCategory');
+Route::post('/addProduct','Admin\ProductController@CreateProduct');
+
 
 
 Route::post('/saveEditCategory','Admin\CategoryController@updateCategory');

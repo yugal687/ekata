@@ -3711,10 +3711,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "createproductComponent",
   data: function data() {
     return {
+      files: [],
       getCategory: [],
       getSubCategory: [],
       getBrand: [],
@@ -3793,9 +3797,40 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitForm: function submitForm(formName) {
+      var _this2 = this;
+
       this.$refs[formName].validate(function (valid) {
+        var tag = _this2.dynamicTags;
+        console.log(tag);
+
         if (valid) {
-          alert('submit!');
+          var file = _this2.$refs.upload.uploadFiles;
+          console.log(file);
+          var formData = new FormData();
+          tag.forEach(function (v, k) {
+            formData.append("tag[".concat(k, "]"), v.raw);
+          });
+          file.forEach(function (v, k) {
+            formData.append("image[".concat(k, "]"), v.raw);
+          });
+          formData.append('category_id', _this2.productForm.categorySelect);
+          formData.append('brand_id', _this2.productForm.brandSelect);
+          formData.append('product_name', _this2.productForm.productName);
+          formData.append('price', _this2.productForm.costPrice);
+          formData.append('sale_price', _this2.productForm.sellingPrice);
+          formData.append('additional_information', _this2.productForm.additionalInformation);
+          formData.append('quantity', _this2.productForm.quantity);
+          axios.post('/api/addProduct', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            alert(response.data.message);
+          })["catch"](function (error) {
+            if (error.response.status == 422) {
+              _this2.errors = error.response.data.errors;
+            }
+          });
         } else {
           console.log('error submit!!');
           return false;
@@ -3806,11 +3841,11 @@ __webpack_require__.r(__webpack_exports__);
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
     showInput: function showInput() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.inputVisible = true;
       this.$nextTick(function (_) {
-        _this2.$refs.saveTagInput.$refs.input.focus();
+        _this3.$refs.saveTagInput.$refs.input.focus();
       });
     },
     handleInputConfirm: function handleInputConfirm() {
@@ -101893,9 +101928,10 @@ var render = function() {
                                 ref: "upload",
                                 staticClass: "upload-demo",
                                 attrs: {
-                                  action:
-                                    "https://jsonplaceholder.typicode.com/posts/",
-                                  "auto-upload": false
+                                  action: "",
+                                  "auto-upload": false,
+                                  "file-list": _vm.files,
+                                  multiple: ""
                                 }
                               },
                               [

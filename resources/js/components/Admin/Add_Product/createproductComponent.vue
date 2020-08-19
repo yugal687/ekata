@@ -9,10 +9,12 @@
                             <div class="col-md-4 col-sm-12">
                                 <el-form-item label="Select Image" prop="imageSelect">
                                     <el-upload
+                                        action=""
                                         class="upload-demo"
                                         ref="upload"
-                                        action="https://jsonplaceholder.typicode.com/posts/"
-                                        :auto-upload="false">
+                                        :auto-upload="false"
+                                        :file-list="files"
+                                        multiple>
                                         <el-button slot="trigger" size="small" type="primary">select file</el-button>
                                     </el-upload>
                                 </el-form-item>
@@ -30,6 +32,7 @@
                                                     :key="item.id"
                                                     :label="item.category_name"
                                                     :value="item.id">
+
                                                 </el-option>
                                             </el-select>
                                         </el-form-item>
@@ -161,9 +164,10 @@
         name: "createproductComponent",
         data() {
             return {
-                getCategory:[],
-                getSubCategory:[],
-                getBrand:[],
+                files: [],
+                getCategory: [],
+                getSubCategory: [],
+                getBrand: [],
                 dynamicTags: [],
                 inputVisible: false,
                 inputValue: '',
@@ -209,52 +213,94 @@
                 }
             }
         },
-        mounted(){
-            axios.get('/api/getCategories',{})
-                .then(response=>{
+        mounted() {
+            axios.get('/api/getCategories', {})
+                .then(response => {
                     this.getCategory = response.data.getCategory;
                 });
-            axios.get('/api/getSubCategories',{})
-                .then(response=>{
+            axios.get('/api/getSubCategories', {})
+                .then(response => {
                     this.getSubCategory = response.data.getSubCategory;
                 });
-            axios.get('/api/getBrand',{})
-                .then(response=>{
+            axios.get('/api/getBrand', {})
+                .then(response => {
                     this.getBrand = response.data.getBrand;
                 });
         },
         methods: {
             submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
+
+
+
+                    this.$refs[formName].validate((valid) => {
+                        let tag = this.dynamicTags;
+                        console.log(tag);
+                        if (valid) {
+
+                        let file = this.$refs.upload.uploadFiles;
+                        console.log(file);
+                        let formData = new FormData();
+                        tag.forEach((v, k) => {
+                            formData.append(`tag[${k}]`, v.raw);
+                        });
+                        file.forEach((v, k) => {
+                            formData.append(`image[${k}]`, v.raw);
+                        });
+
+                        formData.append('category_id', this.productForm.categorySelect);
+                        formData.append('brand_id', this.productForm.brandSelect);
+                        formData.append('product_name', this.productForm.productName);
+                        formData.append('price', this.productForm.costPrice);
+                        formData.append('sale_price', this.productForm.sellingPrice);
+                        formData.append('additional_information', this.productForm.additionalInformation);
+                        formData.append('quantity', this.productForm.quantity);
+
+                        axios.post('/api/addProduct', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
+                    }
+                else
+                    {
                         console.log('error submit!!');
                         return false;
                     }
-                });
-            },
-
-            handleClose(tag) {
-                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-            },
-
-            showInput() {
-                this.inputVisible = true;
-                this.$nextTick(_ => {
-                    this.$refs.saveTagInput.$refs.input.focus();
-                });
-            },
-
-            handleInputConfirm() {
-                let inputValue = this.inputValue;
-                if (inputValue) {
-                    this.dynamicTags.push(inputValue);
                 }
-                this.inputVisible = false;
-                this.inputValue = '';
-            }
+            );
+    },
+    handleClose(tag)
+    {
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+    }
+    ,
+
+    showInput()
+    {
+        this.inputVisible = true;
+        this.$nextTick(_ => {
+            this.$refs.saveTagInput.$refs.input.focus();
+        });
+    }
+    ,
+
+    handleInputConfirm()
+    {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+            this.dynamicTags.push(inputValue);
         }
+        this.inputVisible = false;
+        this.inputValue = '';
+    }
+    }
     }
 </script>
 
