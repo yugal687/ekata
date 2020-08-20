@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <el-form-item label="Selling Price" prop="sellingPrice">
                                     <el-input placeholder="Place selling price"
                                               v-model="productForm.sellingPrice"
@@ -105,28 +105,19 @@
                                     </el-input>
                                 </el-form-item>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <el-form-item label="Tags" prop="tags">
-                                    <el-tag
-                                        :key="tag"
-                                        v-for="tag in dynamicTags"
-                                        closable
-                                        :disable-transitions="false"
-                                        @close="handleClose(tag)">
-                                        {{ tag }}
-                                    </el-tag>
-                                    <el-input
-                                        class="input-new-tag"
-                                        v-if="inputVisible"
-                                        v-model="inputValue"
-                                        ref="saveTagInput"
-                                        size="mini"
-                                        @keyup.enter.native="handleInputConfirm"
-                                        @blur="handleInputConfirm"
-                                    >
-                                    </el-input>
-                                    <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag
-                                    </el-button>
+                                    <el-select
+                                        v-model="productForm.tagsSelect"
+                                        multiple
+                                        placeholder="Select Tags">
+                                        <el-option
+                                            v-for="item in options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                        </el-option>
+                                    </el-select>
                                 </el-form-item>
                             </div>
                         </div>
@@ -160,82 +151,98 @@
 </template>
 
 <script>
-    export default {
-        name: "createproductComponent",
-        data() {
-            return {
-                files: [],
-                getCategory: [],
-                getSubCategory: [],
-                getBrand: [],
-                dynamicTags: [],
-                inputVisible: false,
-                inputValue: '',
+export default {
+    name: "createproductComponent",
+    data() {
+        return {
+            options: [{
+                value: 'Option1',
+                label: 'Option1'
+            }, {
+                value: 'Option2',
+                label: 'Option2'
+            }, {
+                value: 'Option3',
+                label: 'Option3'
+            }, {
+                value: 'Option4',
+                label: 'Option4'
+            }, {
+                value: 'Option5',
+                label: 'Option5'
+            }],
+            files: [],
+            getCategory: [],
+            getSubCategory: [],
+            getBrand: [],
+            dynamicTags: [],
+            inputVisible: false,
+            inputValue: '',
 
-                labelPosition: 'top',
-                productForm: {
-                    categorySelect: '',
-                    subcategorySelect: '',
-                    brandSelect: '',
-                    imageSelect: '',
-                    productName: '',
-                    quantity: '',
-                    costPrice: '',
-                    sellingPrice: '',
-                    additionalInformation: '',
-                    type: [],
-                },
-                productRules: {
-                    categorySelect: [
-                        {required: true, message: 'Please select category', trigger: 'change'}
-                    ],
-                    subcategorySelect: [
-                        {required: true, message: 'Please select subcategory', trigger: 'change'}
-                    ],
-                    brandSelect: [
-                        {required: true, message: 'Please select brand', trigger: 'change'}
-                    ],
-                    productName: [
-                        {required: true, message: 'Please input product name', trigger: 'blur'}
-                    ],
-                    quantity: [
-                        {required: true, message: 'Please input quantity', trigger: 'blur'}
-                    ],
-                    costPrice: [
-                        {required: true, message: 'Please input cost price', trigger: 'blur'}
-                    ],
-                    sellingPrice: [
-                        {required: true, message: 'Please input cost price', trigger: 'blur'},
-                    ],
-                    additionalInformation: [
-                        {required: true, message: 'Please input additional Information', trigger: 'blur'},
-                    ]
-                }
+            labelPosition: 'top',
+            productForm: {
+                categorySelect: '',
+                subcategorySelect: '',
+                brandSelect: '',
+                imageSelect: '',
+                productName: '',
+                quantity: '',
+                costPrice: '',
+                sellingPrice: '',
+                tagsSelect: '',
+                additionalInformation: '',
+                type: [],
+            },
+            productRules: {
+                categorySelect: [
+                    {required: true, message: 'Please select category', trigger: 'change'}
+                ],
+                subcategorySelect: [
+                    {required: true, message: 'Please select subcategory', trigger: 'change'}
+                ],
+                brandSelect: [
+                    {required: true, message: 'Please select brand', trigger: 'change'}
+                ],
+                productName: [
+                    {required: true, message: 'Please input product name', trigger: 'blur'}
+                ],
+                quantity: [
+                    {required: true, message: 'Please input quantity', trigger: 'blur'}
+                ],
+                costPrice: [
+                    {required: true, message: 'Please input cost price', trigger: 'blur'}
+                ],
+                sellingPrice: [
+                    {required: true, message: 'Please input cost price', trigger: 'blur'},
+                ],
+                additionalInformation: [
+                    {required: true, message: 'Please input additional Information', trigger: 'blur'},
+                ]
             }
-        },
-        mounted() {
-            axios.get('/api/getCategories', {})
-                .then(response => {
-                    this.getCategory = response.data.getCategory;
-                });
-            axios.get('/api/getSubCategories', {})
-                .then(response => {
-                    this.getSubCategory = response.data.getSubCategory;
-                });
-            axios.get('/api/getBrand', {})
-                .then(response => {
-                    this.getBrand = response.data.getBrand;
-                });
-        },
-        methods: {
-            submitForm(formName) {
+        }
+    },
+    mounted() {
+        axios.get('/api/getCategories', {})
+            .then(response => {
+                this.getCategory = response.data.getCategory;
+            });
+        axios.get('/api/getSubCategories', {})
+            .then(response => {
+                this.getSubCategory = response.data.getSubCategory;
+            });
+        axios.get('/api/getBrand', {})
+            .then(response => {
+                this.getBrand = response.data.getBrand;
+            });
+    },
+    methods: {
+        submitForm(formName) {
 
 
-
-                    this.$refs[formName].validate((valid) => {
-                        let tag = this.dynamicTags;
-                        console.log(tag);
-                        if (valid) {
+            this.$refs[formName].validate((valid) => {
+                    let tag = this.dynamicTags;
+                    console.log(tag);
+                    if (valid) {
 
                         let file = this.$refs.upload.uploadFiles;
                         console.log(file);
@@ -267,59 +274,17 @@
                                 this.errors = error.response.data.errors;
                             }
                         });
-                    }
-                else
-                    {
+                    } else {
                         console.log('error submit!!');
                         return false;
                     }
                 }
             );
-    },
-    handleClose(tag)
-    {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-    }
-    ,
-
-    showInput()
-    {
-        this.inputVisible = true;
-        this.$nextTick(_ => {
-            this.$refs.saveTagInput.$refs.input.focus();
-        });
-    }
-    ,
-
-    handleInputConfirm()
-    {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-            this.dynamicTags.push(inputValue);
         }
-        this.inputVisible = false;
-        this.inputValue = '';
     }
-    }
-    }
+}
 </script>
 
 <style scoped>
-    .el-tag + .el-tag {
-        margin-left: 10px;
-    }
 
-    .button-new-tag {
-        margin-left: 10px;
-        height: 32px;
-        line-height: 30px;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .input-new-tag {
-        width: 90px;
-        margin-left: 10px;
-        vertical-align: bottom;
-    }
 </style>

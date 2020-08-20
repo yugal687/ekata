@@ -28,7 +28,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('admin-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
 Vue.component('add-product-component', require('./components/Admin/Add_Product/createproductComponent.vue').default);
 Vue.component('product-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
-Vue.component('add-product-component', require('./components/Admin/Add_Product/addProductComponent.vue').default);
+/*Vue.component('add-product-component', require('./components/Admin/Add_Product/addProductComponent.vue').default);*/
 Vue.component('products-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
 Vue.component('add-discount-component', require('./components/Admin/Add_Product/addDiscountComponent.vue').default);
 Vue.component('order-details-component', require('./components/Admin/Order/orderDetailsComponent.vue').default);

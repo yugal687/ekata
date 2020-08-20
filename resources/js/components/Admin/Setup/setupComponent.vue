@@ -1,9 +1,9 @@
 <template>
     <div class="">
         <div class="row">
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <div class="row d-flex justify-content-center">
-                    <el-button plain class="categoryBtn">Add Category</el-button>
+                    <div class="categoryBtn btn btn-primary">Add Category</div>
                 </div>
                 <div class="row box-card-slide category-div hidden" style="border-top: 3px solid blue">
                     <div class="box-header clearfix">
@@ -49,12 +49,10 @@
                                     </el-table-column>
                                     <el-table-column
                                         prop="category_name"
-                                        label="Category Name"
-                                        width="120">
+                                        label="Category Name">
                                     </el-table-column>
                                     <el-table-column
                                         fixed="right"
-                                        width="100"
                                         align="right">
                                         <template slot="header" slot-scope="scope">
                                             <el-input
@@ -136,9 +134,9 @@
 
 
             </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <div class="row d-flex justify-content-center">
-                    <el-button plain class="subcategoryBtn">Add Sub-Category</el-button>
+                    <div class="subcategoryBtn btn btn-success">Add Sub-Category</div>
                 </div>
                 <div class="row box-card-slide subcategory-div hidden" style="border-top: 3px solid green">
                     <div class="box-header clearfix">
@@ -200,17 +198,14 @@
                                     </el-table-column>
                                     <el-table-column
                                         prop="category_name"
-                                        label="Subcategory Name"
-                                        width="120">
+                                        label="Subcategory Name">
                                     </el-table-column>
                                     <el-table-column
                                         prop="parent_id"
-                                        label="Category Name"
-                                        width="120">
+                                        label="Category Name">
                                     </el-table-column>
                                     <el-table-column
                                         fixed="right"
-                                        width="100"
                                         align="right">
                                         <template slot="header" slot-scope="scope">
                                             <el-input
@@ -296,9 +291,12 @@
                 </div>
 
             </div>
-            <div class="col-md-4 col-sm-12">
+        </div>
+        <hr class="mt-4 mb-4"/>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
                 <div class="row d-flex justify-content-center">
-                    <el-button plain class="brandBtn">Add Brand</el-button>
+                    <div class="brandBtn btn btn-danger">Add Brand</div>
                 </div>
                 <div class="row box-card-slide brand-div hidden" style="border-top: 3px solid red">
                     <div class="box-header clearfix">
@@ -343,16 +341,92 @@
                                     </el-table-column>
                                     <el-table-column
                                         prop="brand_name"
-                                        label="Brand Name"
-                                        width="120">
+                                        label="Brand Name">
                                     </el-table-column>
                                     <el-table-column
                                         fixed="right"
-                                        width="100"
                                         align="right">
                                         <template slot="header" slot-scope="scope">
                                             <el-input
                                                 v-model="brandSearch"
+                                                size="mini"
+                                                placeholder="Type to search"/>
+                                        </template>
+                                        <template slot-scope="scope">
+                                            <el-button type="primary"
+                                                       icon="el-icon-edit"
+                                                       size="mini"
+                                                       @click="handleEdit(scope.$index, scope.row)"
+                                                       circle></el-button>
+                                            <el-button
+                                                size="mini"
+                                                type="danger"
+                                                icon="el-icon-delete"
+                                                @click="deleteBrand(scope.row.id)"
+                                                circle></el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </div>
+                        </el-card>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="row d-flex justify-content-center">
+                    <div class="tagBtn btn btn-warning">Add Tags</div>
+                </div>
+                <div class="row box-card-slide tag-div hidden" style="border-top: 3px solid yellow">
+                    <div class="box-header clearfix">
+                        <span>Add Tags</span>
+                        <el-button class="closeTagBtn" style="float: right; padding: 3px 0" type="text">Close
+                        </el-button>
+                    </div>
+                    <div class="box-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12">
+                                <el-form :model="tagForm" :rules="tagRules" ref="brandForm"
+                                         :label-position="labelPosition" class="demo-brandForm">
+                                    <el-form-item label="Tag Name" prop="name">
+                                        <el-input v-model="tagForm.name"
+                                                  style="width: 100%;">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary"
+                                                   style="width: 80%; margin: 15px 10% 0"
+                                                   @click="submitTag('tagForm')">Create
+                                        </el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <el-card class="box-card" shadow="hover">
+                            <div class="text item">
+                                <el-table
+                                    :data="tagTableData.filter(data => !tagSearch || data.tagName.toLowerCase().includes(tagSearch.toLowerCase()))"
+                                    border
+                                    max-height="470"
+                                    style="width: 100%">
+                                    <el-table-column
+                                        type="index"
+                                        label="S.N."
+                                        width="50">
+                                    </el-table-column>
+                                    <el-table-column
+                                        prop="tagName"
+                                        label="Tag Name">
+                                    </el-table-column>
+                                    <el-table-column
+                                        fixed="right"
+                                        align="right">
+                                        <template slot="header" slot-scope="scope">
+                                            <el-input
+                                                v-model="tagSearch"
                                                 size="mini"
                                                 placeholder="Type to search"/>
                                         </template>
@@ -414,6 +488,9 @@
                 brandForm: {
                     name: '',
                 },
+                tagForm: {
+                  name: '',
+                },
                 categoryRules: {
                     name: [
                         {required: true, message: 'Please input category name', trigger: 'blur'},
@@ -432,6 +509,12 @@
                         {required: true, message: 'Please input brand name', trigger: 'blur'},
                     ]
                 },
+                tagRules: {
+                    name: [
+                        {required: true, message: 'Please input tag name', trigger: 'blur'},
+                    ]
+                },
+
                 /*Table Data's*/
                 categorytableData: [{
                     sn: 1,
@@ -458,9 +541,18 @@
                     sn: 2,
                     brandName: 'Tom Cat'
                 }],
+                /*Table Datas*/
+                tagTableData: [{
+                    sn: 1,
+                    tagName: 'Tom'
+                },{
+                    sn: 2,
+                    tagName: 'Tom Cat'
+                }],
                 categorySearch: '',
                 subcategorySearch: '',
                 brandSearch: '',
+                tagSearch: '',
             };
         },
         methods:{
@@ -568,6 +660,18 @@
                     }
                 });
             },
+
+            submitTag(tagForm){
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+
             handleEdit(index, row) {
                 console.log(index, row);
             },
@@ -598,6 +702,9 @@
                 $(".brandBtn").click(function () {
                     $(".brand-div").slideToggle("slow");
                 });
+                $(".tagBtn").click(function () {
+                    $(".tag-div").slideToggle("slow");
+                });
                 $('.closeCategoryBtn').click(function () {
                     $(".category-div").slideToggle("slow");
                 });
@@ -606,6 +713,9 @@
                 });
                 $('.closeBrandBtn').click(function () {
                     $(".brand-div").slideToggle("slow");
+                });
+                $('.closeTagBtn').click(function () {
+                    $(".tag-div").slideToggle("slow");
                 });
             });
         }
