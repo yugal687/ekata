@@ -25,7 +25,7 @@
                                     <el-form-item>
                                         <el-button type="primary"
                                                    style="width: 80%; margin: 15px 10% 0"
-                                                   @click="submitForm('categoryForm')">Create
+                                                   @click="submitCategory('categoryForm')">Create
                                         </el-button>
                                     </el-form-item>
                                 </el-form>
@@ -38,17 +38,17 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="categorytableData.filter(data => !categorySearch || data.categoryName.toLowerCase().includes(categorySearch.toLowerCase()))"
+                                    :data="getCategory.filter(data => !categorySearch || data.category_name.toLowerCase().includes(categorySearch.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                        prop="sn"
+                                       type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="categoryName"
+                                        prop="category_name"
                                         label="Category Name"
                                         width="120">
                                     </el-table-column>
@@ -66,13 +66,15 @@
                                             <el-button type="primary"
                                                        icon="el-icon-edit"
                                                        size="mini"
-                                                       @click="handleEdit(scope.$index, scope.row)"
+                                                       data-target=".bd-example-modal-lg"
+                                                       data-toggle="modal"
+                                                       @click="editCategory(scope.row.id)"
                                                        circle></el-button>
                                             <el-button
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="handleDelete(scope.$index, scope.row)"
+                                                @click="deleteCategory(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -81,6 +83,57 @@
                         </el-card>
                     </div>
                 </div>
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                Edit Category
+                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div v-if="edit" class="alert alert-success alert-dismissible fade show"
+                                             role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-for="ecategory in editcategory">
+
+                                        <el-form :model="categoryForm" :rules="categoryRules" ref="categoryForm"
+                                                 :label-position="labelPosition" class="demo-categoryForm">
+                                            <el-form-item label="Category Name" prop="name">
+                                                <el-input v-model="ecategory.category_name"
+                                                          style="width: 100%;">
+
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button type="primary"
+                                                           style="width: 80%; margin: 15px 10% 0"
+                                                           @click="saveEditCategory">Create
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
             <div class="col-md-4 col-sm-12">
@@ -104,10 +157,12 @@
                                                    v-model="subcategoryForm.categorySelect"
                                                    style="width: 100%">
                                             <el-option
-                                                v-for="item in categorySelectOptions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
+                                                v-for="item in getCategory"
+                                                :key="item.id"
+                                                data-target=".bd-subcategory-modal-lg"
+                                                data-toggle="modal"
+                                                :label="item.category_name"
+                                                :value="item.id">
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
@@ -120,7 +175,7 @@
                                     <el-form-item>
                                         <el-button type="primary"
                                                    style="width: 80%; margin: 15px 10% 0"
-                                                   @click="submitForm('subcategoryForm')">Create
+                                                   @click="submitSubCategory">Create
                                         </el-button>
                                     </el-form-item>
                                 </el-form>
@@ -133,23 +188,23 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="subcategorytableData.filter(data => !subcategorySearch || data.subcategoryName.toLowerCase().includes(subcategorySearch.toLowerCase())
+                                    :data="getSubCategory.filter(data => !subcategorySearch || data.category_name.toLowerCase().includes(subcategorySearch.toLowerCase())
                                             || data.categoryName.toLowerCase().includes(subcategorySearch.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                        prop="sn"
+                                        type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="subcategoryName"
+                                        prop="category_name"
                                         label="Subcategory Name"
                                         width="120">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="categoryName"
+                                        prop="parent_id"
                                         label="Category Name"
                                         width="120">
                                     </el-table-column>
@@ -167,13 +222,15 @@
                                             <el-button type="primary"
                                                        icon="el-icon-edit"
                                                        size="mini"
-                                                       @click="handleEdit(scope.$index, scope.row)"
+                                                       data-target=".bd-subcategory-modal-lg"
+                                                       data-toggle="modal"
+                                                       @click="editSubCategory(scope.row.id)"
                                                        circle></el-button>
                                             <el-button
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="handleDelete(scope.$index, scope.row)"
+                                                @click="deleteCategory(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -182,6 +239,62 @@
                         </el-card>
                     </div>
                 </div>
+                <div class="modal fade bd-subcategory-modal-lg" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                Edit Sub-Category
+                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div v-if="edit" class="alert alert-success alert-dismissible fade show"
+                                             role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-for="esubcategory in editsubCategory">
+
+                                        <el-form :model="categoryForm" :rules="categoryRules" ref="categoryForm"
+                                                 :label-position="labelPosition" class="demo-categoryForm">
+                                            <el-form-item label="Category Name" prop="name">
+                                                <el-input v-model="esubcategory.category_name"
+                                                          style="width: 100%;">
+
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Category Name" prop="name">
+                                                <el-input v-model="esubcategory.parent_id"
+                                                          style="width: 100%;">
+
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button type="primary"
+                                                           style="width: 80%; margin: 15px 10% 0"
+                                                           @click="saveEditSubCategory">Create
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="row d-flex justify-content-center">
@@ -206,7 +319,7 @@
                                     <el-form-item>
                                         <el-button type="primary"
                                                    style="width: 80%; margin: 15px 10% 0"
-                                                   @click="submitForm('brandForm')">Create
+                                                   @click="submitBrand('brandForm')">Create
                                         </el-button>
                                     </el-form-item>
                                 </el-form>
@@ -219,17 +332,17 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="brandtableData.filter(data => !brandSearch || data.brandName.toLowerCase().includes(brandSearch.toLowerCase()))"
+                                    :data="getBrand.filter(data => !brandSearch || data.brand_name.toLowerCase().includes(brandSearch.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                        prop="sn"
+                                        type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="brandName"
+                                        prop="brand_name"
                                         label="Brand Name"
                                         width="120">
                                     </el-table-column>
@@ -253,7 +366,7 @@
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="handleDelete(scope.$index, scope.row)"
+                                                @click="deleteBrand(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -270,150 +383,262 @@
 </template>
 
 <script>
-export default {
-    name: "setupComponent",
-    data() {
-        return {
-            labelPosition: 'top',
-            categorySelectOptions: [{
-                value: 'Category - 1',
-                label: 'Category - 1'
-            }, {
-                value: 'Category - 2',
-                label: 'Category - 2'
-            }, {
-                value: 'Category - 3',
-                label: 'Category - 3'
-            }],
-            categoryForm: {
-                name: '',
+    export default {
+        name: "setupComponent",
+        data() {
+            return {
+                edit: false,
+                editcategory:[],
+                editsubCategory:[],
+                labelPosition: 'top',
+                getCategory:[],
+                getBrand:[],
+                getSubCategory:[],
+                categorySelectOptions: [{
+                    value: 'Category - 1',
+                    label: 'Category - 1'
+                }, {
+                    value: 'Category - 2',
+                    label: 'Category - 2'
+                }, {
+                    value: 'Category - 3',
+                    label: 'Category - 3'
+                }],
+                categoryForm: {
+                    name: '',
+                },
+                subcategoryForm: {
+                    categorySelect: '',
+                    name: '',
+                },
+                brandForm: {
+                    name: '',
+                },
+                categoryRules: {
+                    name: [
+                        {required: true, message: 'Please input category name', trigger: 'blur'},
+                    ]
+                },
+                subcategoryRules: {
+                    categorySelect: [
+                        {required: true, message: 'Please select category', trigger: 'change'},
+                    ],
+                    name: [
+                        {required: true, message: 'Please input sub-category name', trigger: 'blur'},
+                    ]
+                },
+                brandRules: {
+                    name: [
+                        {required: true, message: 'Please input brand name', trigger: 'blur'},
+                    ]
+                },
+                /*Table Data's*/
+                categorytableData: [{
+                    sn: 1,
+                    categoryName: 'Tom',
+                }, {
+                    sn: 2,
+                    categoryName: 'Tom Cat',
+                }],
+                /*Table Data's*/
+                subcategorytableData: [{
+                    sn: 1,
+                    categoryName: 'Tom',
+                    subcategoryName: 'Subcat One'
+                }, {
+                    sn: 2,
+                    categoryName: 'Tom Cat',
+                    subcategoryName: 'Subcat Two'
+                }],
+                /*Table Data's*/
+                brandtableData: [{
+                    sn: 1,
+                    brandName: 'Tom'
+                }, {
+                    sn: 2,
+                    brandName: 'Tom Cat'
+                }],
+                categorySearch: '',
+                subcategorySearch: '',
+                brandSearch: '',
+            };
+        },
+        methods:{
+            editCategory(id){
+                this.editcategory = this.getCategory.filter(getCategory=> getCategory.id == id);
             },
-            subcategoryForm: {
-                categorySelect: '',
-                name: '',
+            editSubCategory(id){
+              this.editsubCategory = this.getSubCategory.filter(getSubCategory=>getSubCategory.id == id);
             },
-            brandForm: {
-                name: '',
+            saveEditCategory(){
+              axios.post('/api/saveEditCategory',{
+                  editCategory:this.editcategory
+                }).then(response=>{
+                 alert(response.data.message);
+              });
             },
-            categoryRules: {
-                name: [
-                    {required: true, message: 'Please input category name', trigger: 'blur'},
-                ]
+            saveEditSubCategory(){
+                axios.post('/api/saveEditCategory',{
+                    editCategory:this.editsubCategory
+                }).then(response=>{
+                    alert(response.data.message);
+                });
             },
-            subcategoryRules: {
-                categorySelect: [
-                    {required: true, message: 'Please select category', trigger: 'change'},
-                ],
-                name: [
-                    {required: true, message: 'Please input sub-category name', trigger: 'blur'},
-                ]
+            deleteCategory(id){
+                axios.delete('/api/deleteCategory/'+id)
+                    .then(response=>{
+                       alert(response.data.message);
+                    });
             },
-            brandRules: {
-                name: [
-                    {required: true, message: 'Please input brand name', trigger: 'blur'},
-                ]
+            deleteBrand(id){
+              axios.delete('/api/deleteBrand/'+id)
+                  .then(response=>{
+                    alert(response.data.message);
+                  });
             },
-            /*Table Data's*/
-            categorytableData: [{
-                sn: 1,
-                categoryName: 'Tom',
-            }, {
-                sn: 2,
-                categoryName: 'Tom Cat',
-            }],
-            /*Table Data's*/
-            subcategorytableData: [{
-                sn: 1,
-                categoryName: 'Tom',
-                subcategoryName: 'Subcat One'
-            }, {
-                sn: 2,
-                categoryName: 'Tom Cat',
-                subcategoryName: 'Subcat Two'
-            }],
-            /*Table Data's*/
-            brandtableData: [{
-                sn: 1,
-                brandName: 'Tom'
-            }, {
-                sn: 2,
-                brandName: 'Tom Cat'
-            }],
-            categorySearch: '',
-            subcategorySearch: '',
-            brandSearch: '',
-        };
-    },
-    methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
+            submitSubCategory(){
+                let formdata = new FormData();
+                formdata.append('category_name',this.subcategoryForm.name);
+                formdata.append('parent_id',this.subcategoryForm.categorySelect);
+              axios.post('/api/addsubcategory',formdata,{
+                  headers: {
+                      'Content-Type': 'multipart/form-data'
+                  }
+
+              }).then(response => {
+                  alert(response.data.message);
+              }).catch(error => {
+                  if (error.response.status == 422) {
+                      this.errors = error.response.data.errors;
+                  }
+              });
+            },
+            submitCategory(categoryForm) {
+                this.$refs[categoryForm].validate((valid) => {
+                    if (valid) {
+
+
+                        let formdata = new FormData();
+                        formdata.append('category_name', this.categoryForm.name);
+
+
+                        axios.post('/api/postCategory', formdata, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+
+            submitBrand(brandForm) {
+                this.$refs[brandForm].validate((valid) => {
+                    if (valid) {
+
+
+                        let formdata = new FormData();
+                        formdata.append('brand_name', this.brandForm.name);
+
+
+                        axios.post('/api/postbrand', formdata, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            }
+        },
+        mounted() {
+            axios.get('/api/getCategories',{})
+                .then(response=>{
+                   this.getCategory = response.data.getCategory;
+                });
+            axios.get('/api/getSubCategories',{})
+                .then(response=>{
+                    this.getSubCategory = response.data.getSubCategory;
+                });
+            axios.get('/api/getBrand',{})
+                .then(response=>{
+                    this.getBrand = response.data.getBrand;
+                });
+            $(document).ready(function () {
+                $(".categoryBtn").click(function () {
+                    $(".category-div").slideToggle("slow");
+                });
+                $(".subcategoryBtn").click(function () {
+                    $(".subcategory-div").slideToggle("slow");
+                });
+                $(".brandBtn").click(function () {
+                    $(".brand-div").slideToggle("slow");
+                });
+                $('.closeCategoryBtn').click(function () {
+                    $(".category-div").slideToggle("slow");
+                });
+                $('.clodeSubcategoryBtn').click(function () {
+                    $(".subcategory-div").slideToggle("slow");
+                });
+                $('.closeBrandBtn').click(function () {
+                    $(".brand-div").slideToggle("slow");
+                });
             });
-        },
-        handleEdit(index, row) {
-            console.log(index, row);
-        },
-        handleDelete(index, row) {
-            console.log(index, row);
         }
-    },
-    mounted() {
-        $(document).ready(function () {
-            $(".categoryBtn").click(function () {
-                $(".category-div").slideToggle("slow");
-            });
-            $(".subcategoryBtn").click(function () {
-                $(".subcategory-div").slideToggle("slow");
-            });
-            $(".brandBtn").click(function () {
-                $(".brand-div").slideToggle("slow");
-            });
-            $('.closeCategoryBtn').click(function () {
-                $(".category-div").slideToggle("slow");
-            });
-            $('.clodeSubcategoryBtn').click(function () {
-                $(".subcategory-div").slideToggle("slow");
-            });
-            $('.closeBrandBtn').click(function () {
-                $(".brand-div").slideToggle("slow");
-            });
-        });
     }
-}
 </script>
 
 <style scoped>
-.container-fluid .row {
-    margin-left: 0;
-    margin-right: 0;
-}
+    .container-fluid .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-.hidden {
-    display: none;
-}
+    .hidden {
+        display: none;
+    }
 
-.box-card-slide {
-    margin-top: 20px;
-    border: 1px solid #EBEEF5;
-    background-color: #FFF;
-    color: #303133;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-}
+    .box-card-slide {
+        margin-top: 20px;
+        border: 1px solid #EBEEF5;
+        background-color: #FFF;
+        color: #303133;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    }
 
-.box-card-slide .box-header {
-    padding: 18px 20px;
-    border-bottom: 1px solid #EBEEF5;
-    box-sizing: border-box;
-}
+    .box-card-slide .box-header {
+        padding: 18px 20px;
+        border-bottom: 1px solid #EBEEF5;
+        box-sizing: border-box;
+    }
 
-.box-card-slide .box-body {
-    padding: 20px;
-}
+    .box-card-slide .box-body {
+        padding: 20px;
+    }
 </style>

@@ -25,8 +25,9 @@ Vue.use(ElementUI);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('user-component', require('./components/Admin/User/userComponent.vue').default);
 Vue.component('admin-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
+Vue.component('add-product-component', require('./components/Admin/Add_Product/createproductComponent.vue').default);
+Vue.component('product-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
 Vue.component('add-product-component', require('./components/Admin/Add_Product/addProductComponent.vue').default);
 Vue.component('products-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
 Vue.component('add-discount-component', require('./components/Admin/Add_Product/addDiscountComponent.vue').default);

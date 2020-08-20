@@ -3,8 +3,30 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    //
+    protected $fillable=[
+      'category_id',
+        'brand_id',
+        'product_name',
+        'price',
+        'sale_price',
+        'additional_information',
+        'quantity',
+        'discount'
+    ];
+    public function image(){
+        return $this->morphMany('DB::image','imagable');
+    }
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id');
+    }
+    public function brand(){
+        return $this->belongsTo(Brand::class,'brand_id');
+    }
+    public function tags(){
+        return $this->belongsToMany(Tag::class,'product_id');
+    }
 }

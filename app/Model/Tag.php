@@ -4,12 +4,12 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Tag extends Model
 {
     protected $fillable=[
-        'brand_name'
-        ];
+      'tags'
+    ];
     public function product(){
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 }

@@ -21,12 +21,10 @@ class CreateProductsTable extends Migration
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
             $table->string('product_name');
             $table->double('price');
-            $table->double('sale price')->nullable();
-            $table->float('tags');
+            $table->double('sale_price')->nullable();
             $table->string('additional_information');
             $table->integer('quantity');
-            $table->float('discount');
-            $table->string('image');
+            $table->float('discount')->nullable();
             $table->timestamps();
         });
     }
