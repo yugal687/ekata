@@ -44,12 +44,12 @@
                     <div class="col-md-10 m-0 p-0 ">
                         <div class="row m-0 p-0">
                             <div class="col-md-6 m-0 p-0"></div>
-                            <div class="col-md-6 bg-main-secondary rounded-left-front m-0 p-0">
+                            <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
                                 <div class="mx-4">
                                     <div class="input-group border-0 py-2 ">
-                                        <input type="text" class="form-control border-0 rounded-left-front" placeholder="Search items..." aria-label="Search items..." aria-describedby="basic-addon2">
-                                        <div class="input-group-append bg-main-secondary">
-                                            <span class="input-group-text bg-main-primary border-0 text-white rounded-right-front" id="basic-addon2">
+                                        <input type="text" class="form-control border-0 " placeholder="Search items..." aria-label="Search items..." aria-describedby="basic-addon2">
+                                        <div class="input-group-append bg-main-secondary ">
+                                            <span class="input-group-text bg-main-primary border-0 text-white .rounded-around" id="basic-addon2">
                                                 Search</span>
                                         </div>
                                     </div>
