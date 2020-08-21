@@ -1,7 +1,8 @@
 <!-- website header -->
-@include('layouts.website.header')
+@extends('layouts.website.header')
 <!-- website header ends -->
 
+@section('content')
 <section class="hero-section">
     <div class="row m-0 p-0">
         <!-- sidebar slider section starts here -->
@@ -81,7 +82,7 @@
     <div class="container-mine">
         <div class="row m-0 p-0 mt-5">
             <div class="col-md-12  mb-5  ">
-                <div class="top-title pb-1">
+                <div class="top-title">
                     <h3 class="font-weight-bold d-inline bg-main-primary px-3 pb-1 rounded-top-front new-arrival-tag text-white">NEW ARRIVALS</h3>
                 </div>
             </div>
@@ -132,9 +133,9 @@
                                 </dt>
                                 <dd class="col-sm-7 ">
                                     <!-- product description here -->
-                                    <h5 class="font-weight-normal ">Khukuri is one of the National weapen of Nepal. Etiam porta sem malesuada magna mollis euismod.
+                                    <h5 class="font-weight-normal ">Khukuri is one of the National weapen of Nepal. Etiam porta sem malesuada magna mollis euismod.</h5>
                                 </dd>
-                                </h5>
+
 
                                 <dt class="col-sm-5 font-weight-bold  ">
                                     <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
@@ -182,7 +183,6 @@
     </div>
 </section>
 <!-- general product slider ends here -->
-
 
 <!-- best selling section starts here -->
 <section id="best-selling-section">
@@ -237,7 +237,7 @@
     <div class="container-mine">
         <div class="row m-0 p-0 my-5">
             <div class="col-md-12 mt-5">
-                <div class="top-title pb-1">
+                <div class="top-title">
                     <h3 class="font-weight-bold d-inline bg-main-primary px-5 pb-1 rounded-top-front new-arrival-tag text-white">SPECIALS</h3>
                 </div>
             </div>
@@ -249,7 +249,7 @@
                 <!-- col-item-start -->
                 <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                     <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                        <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                        <img src="{{asset('images/Product_pngs/masala.png')}}" width="150" alt="">
                     </div>
                     <h5 class="best_price pt-3 font-weight-bold text-main-primary"><s>was $10.99</s></h5>
                     <h5 class="best_price font-weight-bold text-main-primary">$10.99</h5>
@@ -423,8 +423,8 @@
                                 <h6 class="text-center font-weight-bold ">OR</h6>
                             </div>
                             <div class="col-md-6 mt-2 text-center">
-                                <h6><u><a href="#" class="text-white">Signup with google</a></h6>
-                                <h6><a href="#" class="text-white">Signup with facebook</a></u></h6>
+                                <h6><a href="#" class="text-white">Signup with google</a></h6>
+                                <h6><a href="#" class="text-white">Signup with facebook</a></h6>
                             </div>
                         </div>
                     </div>
@@ -435,8 +435,4 @@
 </section>
 <!-- reviews and signup section ends here -->
 
-
-
-<!-- website header -->
-@include('layouts.website.footer')
-<!-- website footer ends -->
+@stop

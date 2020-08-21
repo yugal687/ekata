@@ -19,6 +19,12 @@ Route::get('/', function () {
 Route::get('/contact', function () {
     return view('website/contact');
 });
+Route::get('/category', function () {
+    return view('website/category');
+});
+Route::get('/maincategory', function () {
+    return view('website/mainCategory');
+});
 
 Route::view('admin/dashboard', 'admin.dashboard');
 Route::view('admin/userdashboard', 'admin.userdashboard');
