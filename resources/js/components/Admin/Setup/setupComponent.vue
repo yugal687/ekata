@@ -43,7 +43,7 @@
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                       type="index"
+                                        type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
@@ -356,7 +356,9 @@
                                             <el-button type="primary"
                                                        icon="el-icon-edit"
                                                        size="mini"
-                                                       @click="handleEdit(scope.$index, scope.row)"
+                                                       data-target=".bd-brand-modal-lg"
+                                                       data-toggle="modal"
+                                                       @click="editBrand(scope.row.id)"
                                                        circle></el-button>
                                             <el-button
                                                 size="mini"
@@ -369,8 +371,59 @@
                                 </el-table>
                             </div>
                         </el-card>
+
                     </div>
                 </div>
+                <div class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                Edit Brand
+                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div v-if="edit" class="alert alert-success alert-dismissible fade show"
+                                             role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-for="ebrand in editBrands">
+
+                                        <el-form :model="brandForm" :rules="brandRules"
+                                                 :label-position="labelPosition" class="demo-brandForm">
+                                            <el-form-item label="Brand Name" prop="name">
+                                                <el-input v-model="ebrand.brand_name"
+                                                          style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button type="primary"
+                                                           style="width: 80%; margin: 15px 10% 0"
+                                                           @click="saveEditBrand">Create
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="row d-flex justify-content-center">
@@ -395,7 +448,7 @@
                                     <el-form-item>
                                         <el-button type="primary"
                                                    style="width: 80%; margin: 15px 10% 0"
-                                                   @click="submitTag('tagForm')">Create
+                                                   @click="submitTag">Create
                                         </el-button>
                                     </el-form-item>
                                 </el-form>
@@ -408,7 +461,7 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="tagTableData.filter(data => !tagSearch || data.tagName.toLowerCase().includes(tagSearch.toLowerCase()))"
+                                    :data="tags.filter(data => !tagSearch || data.tags.toLowerCase().includes(tagSearch.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
@@ -418,7 +471,7 @@
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="tagName"
+                                        prop="tags"
                                         label="Tag Name">
                                     </el-table-column>
                                     <el-table-column
@@ -434,13 +487,15 @@
                                             <el-button type="primary"
                                                        icon="el-icon-edit"
                                                        size="mini"
-                                                       @click="handleEdit(scope.$index, scope.row)"
+                                                       data-target=".bd-tag-modal-lg"
+                                                       data-toggle="modal"
+                                                       @click="editTag(scope.row.id)"
                                                        circle></el-button>
                                             <el-button
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="deleteBrand(scope.row.id)"
+                                                @click="deleteTag(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -449,6 +504,53 @@
                         </el-card>
                     </div>
                 </div>
+                <div class="modal fade bd-tag-modal-lg" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                Edit Tag
+                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div v-if="edit" class="alert alert-success alert-dismissible fade show"
+                                             role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-for="etag in editTags">
+                                        <el-form :model="tagForm" :rules="tagRules"
+                                                 :label-position="labelPosition" class="demo-tagForm">
+                                            <el-form-item label="Tag Name" prop="name">
+                                                <el-input v-model="etag.tags"
+                                                          style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button type="primary"
+                                                           style="width: 80%; margin: 15px 10% 0"
+                                                           @click="saveEditTag">Create
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -462,7 +564,10 @@
         data() {
             return {
                 edit: false,
+                tags:[],
                 editcategory:[],
+                editTags:[],
+                editBrands:[],
                 editsubCategory:[],
                 labelPosition: 'top',
                 getCategory:[],
@@ -489,7 +594,7 @@
                     name: '',
                 },
                 tagForm: {
-                  name: '',
+                    name: '',
                 },
                 categoryRules: {
                     name: [
@@ -560,14 +665,20 @@
                 this.editcategory = this.getCategory.filter(getCategory=> getCategory.id == id);
             },
             editSubCategory(id){
-              this.editsubCategory = this.getSubCategory.filter(getSubCategory=>getSubCategory.id == id);
+                this.editsubCategory = this.getSubCategory.filter(getSubCategory=>getSubCategory.id == id);
+            },
+            editTag(id){
+                this.editTags = this.tags.filter(tags=>tags.id == id);
+            },
+            editBrand(id){
+              this.editBrands = this.getBrand.filter(getBrand=>getBrand.id == id);
             },
             saveEditCategory(){
-              axios.post('/api/saveEditCategory',{
-                  editCategory:this.editcategory
+                axios.post('/api/saveEditCategory',{
+                    editCategory:this.editcategory
                 }).then(response=>{
-                 alert(response.data.message);
-              });
+                    alert(response.data.message);
+                });
             },
             saveEditSubCategory(){
                 axios.post('/api/saveEditCategory',{
@@ -576,34 +687,54 @@
                     alert(response.data.message);
                 });
             },
+            saveEditBrand(){
+              axios.post('/api/saveEditBrand',{
+                  editBrand:this.editBrands
+              }).then(response=>{
+                 alert(response.data.message);
+              });
+            },
+            saveEditTag(){
+              axios.post('/api/saveEditTag',{
+                  editTag:this.editTags
+              }).then(response=>{
+                 alert(response.data.message);
+              });
+            },
             deleteCategory(id){
                 axios.delete('/api/deleteCategory/'+id)
                     .then(response=>{
-                       alert(response.data.message);
+                        alert(response.data.message);
                     });
             },
             deleteBrand(id){
-              axios.delete('/api/deleteBrand/'+id)
+                axios.delete('/api/deleteBrand/'+id)
+                    .then(response=>{
+                        alert(response.data.message);
+                    });
+            },
+            deleteTag(id){
+              axios.delete('/api/deleteTag/'+id)
                   .then(response=>{
-                    alert(response.data.message);
+                     alert(response.data.message);
                   });
             },
             submitSubCategory(){
                 let formdata = new FormData();
                 formdata.append('category_name',this.subcategoryForm.name);
                 formdata.append('parent_id',this.subcategoryForm.categorySelect);
-              axios.post('/api/addsubcategory',formdata,{
-                  headers: {
-                      'Content-Type': 'multipart/form-data'
-                  }
+                axios.post('/api/addsubcategory',formdata,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
 
-              }).then(response => {
-                  alert(response.data.message);
-              }).catch(error => {
-                  if (error.response.status == 422) {
-                      this.errors = error.response.data.errors;
-                  }
-              });
+                }).then(response => {
+                    alert(response.data.message);
+                }).catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                });
             },
             submitCategory(categoryForm) {
                 this.$refs[categoryForm].validate((valid) => {
@@ -634,10 +765,6 @@
             },
 
             submitBrand(brandForm) {
-                this.$refs[brandForm].validate((valid) => {
-                    if (valid) {
-
-
                         let formdata = new FormData();
                         formdata.append('brand_name', this.brandForm.name);
 
@@ -654,22 +781,23 @@
                                 this.errors = error.response.data.errors;
                             }
                         });
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
             },
 
             submitTag(tagForm){
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
+                        let formData = new FormData();
+                        formData.append('tags',this.tagForm.name);
+                        axios.post('/api/postTags',formData,{
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
             },
 
             handleEdit(index, row) {
@@ -682,7 +810,7 @@
         mounted() {
             axios.get('/api/getCategories',{})
                 .then(response=>{
-                   this.getCategory = response.data.getCategory;
+                    this.getCategory = response.data.getCategory;
                 });
             axios.get('/api/getSubCategories',{})
                 .then(response=>{
@@ -691,6 +819,10 @@
             axios.get('/api/getBrand',{})
                 .then(response=>{
                     this.getBrand = response.data.getBrand;
+                });
+            axios.get('/api/getTag',{})
+                .then(response=>{
+                    this.tags = response.data.tags;
                 });
             $(document).ready(function () {
                 $(".categoryBtn").click(function () {

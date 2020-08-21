@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Imagable;
 use App\Model\Product;
 use App\Model\Tag;
 use Illuminate\Http\Request;
@@ -41,18 +42,17 @@ class ProductController extends Controller
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('/uploads'), $originalName);
 
-                $saveimage = DB::table('imagable')->insert([
+                $saveimage = Product::first();
+                $saveimage->image()->create([
                     'name' => '/uploads/' . $originalName,
-                    'imagable_id' =>$saveProduct->id,
-                    'imagable_type' =>'aaaa'
                 ]);
 
             }
-            dd($request->tag);
-            foreach ($request['tag'] as $tag){
-                $savetags = Tag::create([
-                    'tags' => $tag,
-                    'product_id' =>$saveProduct->id
+           // dd($request->tag);
+            foreach ($request->tag as $tag){
+                $savetags = DB::table('products_tags')->insert([
+                    'product_id' => $saveProduct->id,
+                    'tag_id' => $tag
                 ]);
             }
 
@@ -62,7 +62,7 @@ class ProductController extends Controller
         ]);
     }
     public function getProduct(){
-        $getProduct = Product::with('category','brand','tags')->get();
+        $getProduct = Product::with('category','brand','tags','image')->get();
         return response()->json([
            'getProduct' => $getProduct
         ]);

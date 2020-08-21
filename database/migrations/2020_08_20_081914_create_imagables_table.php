@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrateImageTable extends Migration
+class CreateImagablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CrateImageTable extends Migration
      */
     public function up()
     {
-        Schema::create('imagable', function (Blueprint $table) {
+        Schema::create('imagables', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('imagable_id');
@@ -21,7 +21,6 @@ class CrateImageTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -29,6 +28,6 @@ class CrateImageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imagable');
+        Schema::dropIfExists('imagables');
     }
 }

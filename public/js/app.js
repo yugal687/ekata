@@ -4031,6 +4031,7 @@ __webpack_require__.r(__webpack_exports__);
         label: 'Option5'
       }],
       files: [],
+      tags: [],
       getCategory: [],
       getSubCategory: [],
       getBrand: [],
@@ -4107,26 +4108,28 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/api/getBrand', {}).then(function (response) {
       _this.getBrand = response.data.getBrand;
     });
+    axios.get('/api/getTag', {}).then(function (response) {
+      _this.tags = response.data.tags;
+    });
   },
   methods: {
     submitForm: function submitForm(formName) {
       var _this2 = this;
 
       this.$refs[formName].validate(function (valid) {
-        var tag = _this2.dynamicTags;
-        console.log(tag);
-
         if (valid) {
+          var tag = _this2.productForm.tagsSelect;
+          console.log(tag);
           var file = _this2.$refs.upload.uploadFiles;
           console.log(file);
           var formData = new FormData();
           tag.forEach(function (v, k) {
-            formData.append("tag[".concat(k, "]"), v.raw);
+            formData.append("tag[".concat(k, "]"), v);
           });
           file.forEach(function (v, k) {
             formData.append("image[".concat(k, "]"), v.raw);
           });
-          formData.append('category_id', _this2.productForm.categorySelect);
+          formData.append('category_id', _this2.productForm.subcategorySelect);
           formData.append('brand_id', _this2.productForm.brandSelect);
           formData.append('product_name', _this2.productForm.productName);
           formData.append('price', _this2.productForm.costPrice);
@@ -4835,47 +4838,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       dialogVisible: false,
-      tableData: [{
-        sn: '1',
-        product_name: 'Product One',
-        category: 'Category One',
-        brand: 'Brand One',
-        quantity: '22',
-        cost_price: '$1234',
-        selling_price: '$12345'
-      }, {
-        sn: '2',
-        product_name: 'Product Two',
-        category: 'Category Two',
-        brand: 'Brand Two',
-        quantity: '22',
-        cost_price: '$1234',
-        selling_price: '$12345'
-      }, {
-        sn: '3',
-        product_name: 'Product Three',
-        category: 'Category Three',
-        brand: 'Brand Three',
-        quantity: '22',
-        cost_price: '$1234',
-        selling_price: '$12345'
-      }, {
-        sn: '4',
-        product_name: 'Product Four',
-        category: 'Category Four',
-        brand: 'Brand Four',
-        quantity: '22',
-        cost_price: '$1234',
-        selling_price: '$12345'
-      }, {
-        sn: '5',
-        product_name: 'Product Five',
-        category: 'Category Five',
-        brand: 'Brand Five',
-        quantity: '22',
-        cost_price: '$1234',
-        selling_price: '$12345'
-      }],
+      getProduct: [],
       search: '',
       dynamicTags: [],
       inputVisible: false,
@@ -4957,7 +4920,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getProduct', {}).then(function (response) {
+      _this.getProduct = response.data.getProduct;
+    });
+  },
   methods: {
     openEditModal: function openEditModal() {
       $(".productEditWrapper").slideToggle("slow");
@@ -5002,11 +4971,11 @@ __webpack_require__.r(__webpack_exports__);
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
     showInput: function showInput() {
-      var _this = this;
+      var _this2 = this;
 
       this.inputVisible = true;
       this.$nextTick(function (_) {
-        _this.$refs.saveTagInput.$refs.input.focus();
+        _this2.$refs.saveTagInput.$refs.input.focus();
       });
     },
     handleInputConfirm: function handleInputConfirm() {
@@ -6061,12 +6030,117 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "setupComponent",
   data: function data() {
     return {
       edit: false,
+      tags: [],
       editcategory: [],
+      editTags: [],
+      editBrands: [],
       editsubCategory: [],
       labelPosition: 'top',
       getCategory: [],
@@ -6183,6 +6257,16 @@ __webpack_require__.r(__webpack_exports__);
         return getSubCategory.id == id;
       });
     },
+    editTag: function editTag(id) {
+      this.editTags = this.tags.filter(function (tags) {
+        return tags.id == id;
+      });
+    },
+    editBrand: function editBrand(id) {
+      this.editBrands = this.getBrand.filter(function (getBrand) {
+        return getBrand.id == id;
+      });
+    },
     saveEditCategory: function saveEditCategory() {
       axios.post('/api/saveEditCategory', {
         editCategory: this.editcategory
@@ -6197,6 +6281,20 @@ __webpack_require__.r(__webpack_exports__);
         alert(response.data.message);
       });
     },
+    saveEditBrand: function saveEditBrand() {
+      axios.post('/api/saveEditBrand', {
+        editBrand: this.editBrands
+      }).then(function (response) {
+        alert(response.data.message);
+      });
+    },
+    saveEditTag: function saveEditTag() {
+      axios.post('/api/saveEditTag', {
+        editTag: this.editTags
+      }).then(function (response) {
+        alert(response.data.message);
+      });
+    },
     deleteCategory: function deleteCategory(id) {
       axios["delete"]('/api/deleteCategory/' + id).then(function (response) {
         alert(response.data.message);
@@ -6204,6 +6302,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteBrand: function deleteBrand(id) {
       axios["delete"]('/api/deleteBrand/' + id).then(function (response) {
+        alert(response.data.message);
+      });
+    },
+    deleteTag: function deleteTag(id) {
+      axios["delete"]('/api/deleteTag/' + id).then(function (response) {
         alert(response.data.message);
       });
     },
@@ -6252,34 +6355,34 @@ __webpack_require__.r(__webpack_exports__);
     submitBrand: function submitBrand(brandForm) {
       var _this3 = this;
 
-      this.$refs[brandForm].validate(function (valid) {
-        if (valid) {
-          var formdata = new FormData();
-          formdata.append('brand_name', _this3.brandForm.name);
-          axios.post('/api/postbrand', formdata, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }).then(function (response) {
-            alert(response.data.message);
-          })["catch"](function (error) {
-            if (error.response.status == 422) {
-              _this3.errors = error.response.data.errors;
-            }
-          });
-        } else {
-          console.log('error submit!!');
-          return false;
+      var formdata = new FormData();
+      formdata.append('brand_name', this.brandForm.name);
+      axios.post('/api/postbrand', formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        alert(response.data.message);
+      })["catch"](function (error) {
+        if (error.response.status == 422) {
+          _this3.errors = error.response.data.errors;
         }
       });
     },
     submitTag: function submitTag(tagForm) {
-      this.$refs[formName].validate(function (valid) {
-        if (valid) {
-          alert('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
+      var _this4 = this;
+
+      var formData = new FormData();
+      formData.append('tags', this.tagForm.name);
+      axios.post('/api/postTags', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        alert(response.data.message);
+      })["catch"](function (error) {
+        if (error.response.status == 422) {
+          _this4.errors = error.response.data.errors;
         }
       });
     },
@@ -6291,16 +6394,19 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
     axios.get('/api/getCategories', {}).then(function (response) {
-      _this4.getCategory = response.data.getCategory;
+      _this5.getCategory = response.data.getCategory;
     });
     axios.get('/api/getSubCategories', {}).then(function (response) {
-      _this4.getSubCategory = response.data.getSubCategory;
+      _this5.getSubCategory = response.data.getSubCategory;
     });
     axios.get('/api/getBrand', {}).then(function (response) {
-      _this4.getBrand = response.data.getBrand;
+      _this5.getBrand = response.data.getBrand;
+    });
+    axios.get('/api/getTag', {}).then(function (response) {
+      _this5.tags = response.data.tags;
     });
     $(document).ready(function () {
       $(".categoryBtn").click(function () {
@@ -103782,13 +103888,10 @@ var render = function() {
                                   expression: "productForm.tagsSelect"
                                 }
                               },
-                              _vm._l(_vm.options, function(item) {
+                              _vm._l(_vm.tags, function(item) {
                                 return _c("el-option", {
-                                  key: item.value,
-                                  attrs: {
-                                    label: item.label,
-                                    value: item.value
-                                  }
+                                  key: item.id,
+                                  attrs: { label: item.tags, value: item.id }
                                 })
                               }),
                               1
@@ -103917,16 +104020,18 @@ var render = function() {
             {
               staticStyle: { width: "100%" },
               attrs: {
-                data: _vm.tableData.filter(function(data) {
+                data: _vm.getProduct.filter(function(data) {
                   return (
                     !_vm.search ||
                     data.product_name
                       .toLowerCase()
                       .includes(_vm.search.toLowerCase()) ||
-                    data.category
+                    data.category.category_name
                       .toLowerCase()
                       .includes(_vm.search.toLowerCase()) ||
-                    data.brand.toLowerCase().includes(_vm.search.toLowerCase())
+                    data.brand.brand_name
+                      .toLowerCase()
+                      .includes(_vm.search.toLowerCase())
                   )
                 }),
                 "max-height": "600"
@@ -103963,7 +104068,7 @@ var render = function() {
                 [
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "S.N.", prop: "sn" }
+                    attrs: { label: "S.N.", type: "index" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
@@ -103971,11 +104076,11 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "Category", prop: "category" }
+                    attrs: { label: "Category", prop: "category.category_name" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "Brand", prop: "brand" }
+                    attrs: { label: "Brand", prop: "brand.brand_name" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
@@ -103983,11 +104088,11 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "Cost Price", prop: "cost_price" }
+                    attrs: { label: "Cost Price", prop: "price" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "Selling Price", prop: "selling_price" }
+                    attrs: { label: "Selling Price", prop: "sale_price" }
                   })
                 ],
                 1
@@ -104042,7 +104147,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              return _vm.handleDelete(scope.$index, scope.row)
+                              return _vm.handleDelete(scope.row.id)
                             }
                           }
                         })
@@ -106803,14 +106908,13 @@ var render = function() {
                                         type: "primary",
                                         icon: "el-icon-edit",
                                         size: "mini",
+                                        "data-target": ".bd-brand-modal-lg",
+                                        "data-toggle": "modal",
                                         circle: ""
                                       },
                                       on: {
                                         click: function($event) {
-                                          return _vm.handleEdit(
-                                            scope.$index,
-                                            scope.row
-                                          )
+                                          return _vm.editBrand(scope.row.id)
                                         }
                                       }
                                     }),
@@ -106844,11 +106948,119 @@ var render = function() {
             ],
             1
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade bd-brand-modal-lg",
+            attrs: {
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myLargeModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog modal-sm" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(7),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _vm.edit
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "alert alert-success alert-dismissible fade show",
+                                attrs: { role: "alert" }
+                              },
+                              [_vm._m(8)]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.editBrands, function(ebrand) {
+                        return _c(
+                          "div",
+                          [
+                            _c(
+                              "el-form",
+                              {
+                                staticClass: "demo-brandForm",
+                                attrs: {
+                                  model: _vm.brandForm,
+                                  rules: _vm.brandRules,
+                                  "label-position": _vm.labelPosition
+                                }
+                              },
+                              [
+                                _c(
+                                  "el-form-item",
+                                  {
+                                    attrs: { label: "Brand Name", prop: "name" }
+                                  },
+                                  [
+                                    _c("el-input", {
+                                      staticStyle: { width: "100%" },
+                                      model: {
+                                        value: ebrand.brand_name,
+                                        callback: function($$v) {
+                                          _vm.$set(ebrand, "brand_name", $$v)
+                                        },
+                                        expression: "ebrand.brand_name"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "el-form-item",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        staticStyle: {
+                                          width: "80%",
+                                          margin: "15px 10% 0"
+                                        },
+                                        attrs: { type: "primary" },
+                                        on: { click: _vm.saveEditBrand }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Create\n                                            "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-        _vm._m(7),
+        _vm._m(9),
         _vm._v(" "),
         _c(
           "div",
@@ -106923,11 +107135,7 @@ var render = function() {
                                   margin: "15px 10% 0"
                                 },
                                 attrs: { type: "primary" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.submitTag("tagForm")
-                                  }
-                                }
+                                on: { click: _vm.submitTag }
                               },
                               [
                                 _vm._v(
@@ -106967,10 +107175,10 @@ var render = function() {
                         {
                           staticStyle: { width: "100%" },
                           attrs: {
-                            data: _vm.tagTableData.filter(function(data) {
+                            data: _vm.tags.filter(function(data) {
                               return (
                                 !_vm.tagSearch ||
-                                data.tagName
+                                data.tags
                                   .toLowerCase()
                                   .includes(_vm.tagSearch.toLowerCase())
                               )
@@ -106985,7 +107193,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
-                            attrs: { prop: "tagName", label: "Tag Name" }
+                            attrs: { prop: "tags", label: "Tag Name" }
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
@@ -107020,14 +107228,13 @@ var render = function() {
                                         type: "primary",
                                         icon: "el-icon-edit",
                                         size: "mini",
+                                        "data-target": ".bd-tag-modal-lg",
+                                        "data-toggle": "modal",
                                         circle: ""
                                       },
                                       on: {
                                         click: function($event) {
-                                          return _vm.handleEdit(
-                                            scope.$index,
-                                            scope.row
-                                          )
+                                          return _vm.editTag(scope.row.id)
                                         }
                                       }
                                     }),
@@ -107041,7 +107248,7 @@ var render = function() {
                                       },
                                       on: {
                                         click: function($event) {
-                                          return _vm.deleteBrand(scope.row.id)
+                                          return _vm.deleteTag(scope.row.id)
                                         }
                                       }
                                     })
@@ -107061,7 +107268,115 @@ var render = function() {
             ],
             1
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade bd-tag-modal-lg",
+            attrs: {
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myLargeModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog modal-sm" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(10),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _vm.edit
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "alert alert-success alert-dismissible fade show",
+                                attrs: { role: "alert" }
+                              },
+                              [_vm._m(11)]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.editTags, function(etag) {
+                        return _c(
+                          "div",
+                          [
+                            _c(
+                              "el-form",
+                              {
+                                staticClass: "demo-tagForm",
+                                attrs: {
+                                  model: _vm.tagForm,
+                                  rules: _vm.tagRules,
+                                  "label-position": _vm.labelPosition
+                                }
+                              },
+                              [
+                                _c(
+                                  "el-form-item",
+                                  {
+                                    attrs: { label: "Tag Name", prop: "name" }
+                                  },
+                                  [
+                                    _c("el-input", {
+                                      staticStyle: { width: "100%" },
+                                      model: {
+                                        value: etag.tags,
+                                        callback: function($$v) {
+                                          _vm.$set(etag, "tags", $$v)
+                                        },
+                                        expression: "etag.tags"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "el-form-item",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        staticStyle: {
+                                          width: "80%",
+                                          margin: "15px 10% 0"
+                                        },
+                                        attrs: { type: "primary" },
+                                        on: { click: _vm.saveEditTag }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Create\n                                            "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
       ])
     ])
   ])
@@ -107179,9 +107494,87 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header bg-info" }, [
+      _vm._v(
+        "\n                            Edit Brand\n                            "
+      ),
+      _c(
+        "button",
+        {
+          staticClass: "close text-danger",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row d-flex justify-content-center" }, [
       _c("div", { staticClass: "tagBtn btn btn-warning" }, [_vm._v("Add Tags")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header bg-info" }, [
+      _vm._v(
+        "\n                            Edit Tag\n                            "
+      ),
+      _c(
+        "button",
+        {
+          staticClass: "close text-danger",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true

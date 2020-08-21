@@ -34,4 +34,13 @@ class BrandController extends Controller
            'message' => 'Brand Deleted!!!!'
         ]);
     }
+    public function updateBrand(Request $request){
+        $saveEditBrand = Brand::findorFail($request->editBrand[0]['id']);
+        $saveEditBrand->brand_name = $request->editBrand[0]['brand_name'];
+        $saveEditBrand->save();
+
+        return response()->json([
+           'message' => 'Brand Updated !!!'
+        ]);
+    }
 }

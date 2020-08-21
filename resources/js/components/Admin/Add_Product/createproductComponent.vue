@@ -112,10 +112,10 @@
                                         multiple
                                         placeholder="Select Tags">
                                         <el-option
-                                            v-for="item in options"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
+                                            v-for="item in tags"
+                                            :key="item.id"
+                                            :label="item.tags"
+                                            :value="item.id">
                                         </el-option>
                                     </el-select>
                                 </el-form-item>
@@ -151,138 +151,143 @@
 </template>
 
 <script>
-export default {
-    name: "createproductComponent",
-    data() {
-        return {
-            options: [{
-                value: 'Option1',
-                label: 'Option1'
-            }, {
-                value: 'Option2',
-                label: 'Option2'
-            }, {
-                value: 'Option3',
-                label: 'Option3'
-            }, {
-                value: 'Option4',
-                label: 'Option4'
-            }, {
-                value: 'Option5',
-                label: 'Option5'
-            }],
-            files: [],
-            getCategory: [],
-            getSubCategory: [],
-            getBrand: [],
-            dynamicTags: [],
-            inputVisible: false,
-            inputValue: '',
+    export default {
+        name: "createproductComponent",
+        data() {
+            return {
+                options: [{
+                    value: 'Option1',
+                    label: 'Option1'
+                }, {
+                    value: 'Option2',
+                    label: 'Option2'
+                }, {
+                    value: 'Option3',
+                    label: 'Option3'
+                }, {
+                    value: 'Option4',
+                    label: 'Option4'
+                }, {
+                    value: 'Option5',
+                    label: 'Option5'
+                }],
+                files: [],
+                tags:[],
+                getCategory: [],
+                getSubCategory: [],
+                getBrand: [],
+                dynamicTags: [],
+                inputVisible: false,
+                inputValue: '',
 
-            labelPosition: 'top',
-            productForm: {
-                categorySelect: '',
-                subcategorySelect: '',
-                brandSelect: '',
-                imageSelect: '',
-                productName: '',
-                quantity: '',
-                costPrice: '',
-                sellingPrice: '',
-                tagsSelect: '',
-                additionalInformation: '',
-                type: [],
-            },
-            productRules: {
-                categorySelect: [
-                    {required: true, message: 'Please select category', trigger: 'change'}
-                ],
-                subcategorySelect: [
-                    {required: true, message: 'Please select subcategory', trigger: 'change'}
-                ],
-                brandSelect: [
-                    {required: true, message: 'Please select brand', trigger: 'change'}
-                ],
-                productName: [
-                    {required: true, message: 'Please input product name', trigger: 'blur'}
-                ],
-                quantity: [
-                    {required: true, message: 'Please input quantity', trigger: 'blur'}
-                ],
-                costPrice: [
-                    {required: true, message: 'Please input cost price', trigger: 'blur'}
-                ],
-                sellingPrice: [
-                    {required: true, message: 'Please input cost price', trigger: 'blur'},
-                ],
-                additionalInformation: [
-                    {required: true, message: 'Please input additional Information', trigger: 'blur'},
-                ]
+                labelPosition: 'top',
+                productForm: {
+                    categorySelect: '',
+                    subcategorySelect: '',
+                    brandSelect: '',
+                    imageSelect: '',
+                    productName: '',
+                    quantity: '',
+                    costPrice: '',
+                    sellingPrice: '',
+                    tagsSelect: '',
+                    additionalInformation: '',
+                    type: [],
+                },
+                productRules: {
+                    categorySelect: [
+                        {required: true, message: 'Please select category', trigger: 'change'}
+                    ],
+                    subcategorySelect: [
+                        {required: true, message: 'Please select subcategory', trigger: 'change'}
+                    ],
+                    brandSelect: [
+                        {required: true, message: 'Please select brand', trigger: 'change'}
+                    ],
+                    productName: [
+                        {required: true, message: 'Please input product name', trigger: 'blur'}
+                    ],
+                    quantity: [
+                        {required: true, message: 'Please input quantity', trigger: 'blur'}
+                    ],
+                    costPrice: [
+                        {required: true, message: 'Please input cost price', trigger: 'blur'}
+                    ],
+                    sellingPrice: [
+                        {required: true, message: 'Please input cost price', trigger: 'blur'},
+                    ],
+                    additionalInformation: [
+                        {required: true, message: 'Please input additional Information', trigger: 'blur'},
+                    ]
+                }
+            }
+        },
+        mounted() {
+            axios.get('/api/getCategories', {})
+                .then(response => {
+                    this.getCategory = response.data.getCategory;
+                });
+            axios.get('/api/getSubCategories', {})
+                .then(response => {
+                    this.getSubCategory = response.data.getSubCategory;
+                });
+            axios.get('/api/getBrand', {})
+                .then(response => {
+                    this.getBrand = response.data.getBrand;
+                });
+            axios.get('/api/getTag',{})
+                .then(response=>{
+                    this.tags = response.data.tags;
+                });
+        },
+        methods: {
+            submitForm(formName) {
+
+
+                this.$refs[formName].validate((valid) => {
+
+                        if (valid) {
+                            let tag = this.productForm.tagsSelect;
+                            console.log(tag);
+                            let file = this.$refs.upload.uploadFiles;
+                            console.log(file);
+                            let formData = new FormData();
+                            tag.forEach((v, k) => {
+                                formData.append(`tag[${k}]`, v);
+                            });
+                            file.forEach((v, k) => {
+                                formData.append(`image[${k}]`, v.raw);
+                            });
+
+                            formData.append('category_id', this.productForm.subcategorySelect);
+                            formData.append('brand_id', this.productForm.brandSelect);
+                            formData.append('product_name', this.productForm.productName);
+                            formData.append('price', this.productForm.costPrice);
+                            formData.append('sale_price', this.productForm.sellingPrice);
+                            formData.append('additional_information', this.productForm.additionalInformation);
+                            formData.append('quantity', this.productForm.quantity);
+
+                            axios.post('/api/addProduct', formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                }
+
+                            }).then(response => {
+                                alert(response.data.message);
+                            }).catch(error => {
+                                if (error.response.status == 422) {
+                                    this.errors = error.response.data.errors;
+                                }
+                            });
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    }
+                );
             }
         }
-    },
-    mounted() {
-        axios.get('/api/getCategories', {})
-            .then(response => {
-                this.getCategory = response.data.getCategory;
-            });
-        axios.get('/api/getSubCategories', {})
-            .then(response => {
-                this.getSubCategory = response.data.getSubCategory;
-            });
-        axios.get('/api/getBrand', {})
-            .then(response => {
-                this.getBrand = response.data.getBrand;
-            });
-    },
-    methods: {
-        submitForm(formName) {
-
-
-            this.$refs[formName].validate((valid) => {
-                    let tag = this.dynamicTags;
-                    console.log(tag);
-                    if (valid) {
-
-                        let file = this.$refs.upload.uploadFiles;
-                        console.log(file);
-                        let formData = new FormData();
-                        tag.forEach((v, k) => {
-                            formData.append(`tag[${k}]`, v.raw);
-                        });
-                        file.forEach((v, k) => {
-                            formData.append(`image[${k}]`, v.raw);
-                        });
-
-                        formData.append('category_id', this.productForm.categorySelect);
-                        formData.append('brand_id', this.productForm.brandSelect);
-                        formData.append('product_name', this.productForm.productName);
-                        formData.append('price', this.productForm.costPrice);
-                        formData.append('sale_price', this.productForm.sellingPrice);
-                        formData.append('additional_information', this.productForm.additionalInformation);
-                        formData.append('quantity', this.productForm.quantity);
-
-                        axios.post('/api/addProduct', formData, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-
-                        }).then(response => {
-                            alert(response.data.message);
-                        }).catch(error => {
-                            if (error.response.status == 422) {
-                                this.errors = error.response.data.errors;
-                            }
-                        });
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                }
-            );
-        }
     }
-}
 </script>
 
 <style scoped>

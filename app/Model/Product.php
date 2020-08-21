@@ -18,7 +18,7 @@ class Product extends Model
         'discount'
     ];
     public function image(){
-        return $this->morphMany('DB::image','imagable');
+        return $this->morphMany(Imagable::class,'imagable');
     }
     public function category(){
         return $this->belongsTo(Category::class,'category_id');
@@ -27,6 +27,6 @@ class Product extends Model
         return $this->belongsTo(Brand::class,'brand_id');
     }
     public function tags(){
-        return $this->belongsToMany(Tag::class,'product_id');
+        return $this->belongsToMany(Tag::class,'products_tags','product_id','tag_id');
     }
 }

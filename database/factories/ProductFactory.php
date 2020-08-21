@@ -9,10 +9,10 @@ $factory->define(Product::class, function (Faker $faker) {
     return [
         'category_id'=>1,
         'brand_id'=>1,
-        'product_name' => $faker->name(max(20)),
+        'product_name' => $faker->name(max[20]),
         'price'=> $faker->numberBetween(200, 390),
         'sale_price'=>$faker->numberBetween(2000, 3000),
-        'additional_information' => $faker->text(max(100)),
+        'additional_information' => $faker->text(),
         'quantity'=> $faker->numberBetween(10, 20),
         'discount'=> 0,
     ];

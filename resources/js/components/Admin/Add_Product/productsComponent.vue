@@ -3,9 +3,9 @@
         <!--Client Information Table-->
         <div class="clients-wrapper">
             <el-table
-                :data="tableData.filter(data => !search || data.product_name.toLowerCase().includes(search.toLowerCase()) ||
-                 data.category.toLowerCase().includes(search.toLowerCase()) ||
-                 data.brand.toLowerCase().includes(search.toLowerCase()))"
+                :data="getProduct.filter(data => !search || data.product_name.toLowerCase().includes(search.toLowerCase()) ||
+                 data.category.category_name.toLowerCase().includes(search.toLowerCase()) ||
+                 data.brand.brand_name.toLowerCase().includes(search.toLowerCase()))"
                 max-height="600"
                 style="width: 100%">
                 <el-table-column>
@@ -18,7 +18,7 @@
                     </template>
                     <el-table-column
                         label="S.N."
-                        prop="sn">
+                        type="index">
                     </el-table-column>
                     <el-table-column
                         label="Product Name"
@@ -26,11 +26,11 @@
                     </el-table-column>
                     <el-table-column
                         label="Category"
-                        prop="category">
+                        prop="category.category_name">
                     </el-table-column>
                     <el-table-column
                         label="Brand"
-                        prop="brand">
+                        prop="brand.brand_name">
                     </el-table-column>
                     <el-table-column
                         label="Quantity"
@@ -38,11 +38,11 @@
                     </el-table-column>
                     <el-table-column
                         label="Cost Price"
-                        prop="cost_price">
+                        prop="price">
                     </el-table-column>
                     <el-table-column
                         label="Selling Price"
-                        prop="selling_price"
+                        prop="sale_price"
                     >
                     </el-table-column>
 
@@ -68,7 +68,7 @@
                             size="mini"
                             type="danger"
                             icon="el-icon-delete" circle
-                            @click="handleDelete(scope.$index, scope.row)"></el-button>
+                            @click="handleDelete(scope.row.id)"></el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -670,47 +670,7 @@ export default {
     data() {
         return {
             dialogVisible: false,
-            tableData: [{
-                sn: '1',
-                product_name: 'Product One',
-                category: 'Category One',
-                brand: 'Brand One',
-                quantity: '22',
-                cost_price: '$1234',
-                selling_price: '$12345'
-            }, {
-                sn: '2',
-                product_name: 'Product Two',
-                category: 'Category Two',
-                brand: 'Brand Two',
-                quantity: '22',
-                cost_price: '$1234',
-                selling_price: '$12345'
-            }, {
-                sn: '3',
-                product_name: 'Product Three',
-                category: 'Category Three',
-                brand: 'Brand Three',
-                quantity: '22',
-                cost_price: '$1234',
-                selling_price: '$12345'
-            }, {
-                sn: '4',
-                product_name: 'Product Four',
-                category: 'Category Four',
-                brand: 'Brand Four',
-                quantity: '22',
-                cost_price: '$1234',
-                selling_price: '$12345'
-            }, {
-                sn: '5',
-                product_name: 'Product Five',
-                category: 'Category Five',
-                brand: 'Brand Five',
-                quantity: '22',
-                cost_price: '$1234',
-                selling_price: '$12345'
-            }],
+            getProduct:[],
             search: '',
             dynamicTags: [],
             inputVisible: false,
@@ -778,7 +738,10 @@ export default {
         }
     },
     mounted() {
-
+        axios.get('/api/getProduct',{})
+            .then(response=>{
+               this.getProduct = response.data.getProduct;
+            });
     },
     methods: {
         openEditModal() {
