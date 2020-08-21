@@ -36,6 +36,7 @@
             transform: translate(-50%, -50%);
             width: 100%;
         }
+
     </style>
 @stop
 
@@ -43,7 +44,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2 bg-danger">
+            <div class="col-md-2" style="background-color: #e9ecef">
                 <div class="row">
                     <div class="col-12 bg-main-secondary">
                         <div class="cate">
@@ -51,9 +52,12 @@
                         </div>
                     </div>
                 </div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aut cumque deserunt dolorum exercitationem
-                nihil quam quia, sit suscipit totam voluptas voluptatibus! Dolor dolores, laborum magni officiis
-                perspiciatis ratione rerum.
+                <div class="row">
+                    <div class="col-12">
+                        {{--Include Sidebar Here--}}
+                        @include('layouts.website.sidebar')
+                    </div>
+                </div>
             </div>
             <div class="col-md-10">
                 <div class="row">
