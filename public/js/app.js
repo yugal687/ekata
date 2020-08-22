@@ -3738,11 +3738,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addDiscountComponent",
   data: function data() {
     return {
       dialogVisible: false,
+      editData: [],
+      selectedProduct: [{
+        price: ''
+      }],
+      getDiscountedProduct: [],
+      discountamount: '',
+      getProduct: [],
       labelPosition: 'top',
       productSelectOptions: [{
         value: 'Product - 1',
@@ -3754,11 +3767,16 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Product - 3',
         label: 'Product - 3'
       }],
+      editDiscount: {
+        productSelect: '',
+        Price: '',
+        discount: '',
+        discountedPrice: ''
+      },
       discountForm: {
         productSelect: '',
         sellingPrice: '',
-        discountPercentage: '',
-        sellingPriceAfterDiscount: ''
+        discountPercentage: ''
       },
       discountFormRules: {
         productSelect: [{
@@ -3774,65 +3792,69 @@ __webpack_require__.r(__webpack_exports__);
       },
 
       /*Table Data's*/
-      discountTableData: [{
-        sn: 1,
-        productName: 'Product - 1',
-        previousSellingPrice: '1000',
-        discountPercentage: '10',
-        sellingPriceAfterDiscount: '900'
-      }, {
-        sn: 2,
-        productName: 'Product - 2',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 3,
-        productName: 'Product - 3',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 4,
-        productName: 'Product - 4',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 5,
-        productName: 'Product - 5',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 6,
-        productName: 'Product - 6',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }],
       search: ''
     };
   },
   methods: {
+    onChange: function onChange(event) {
+      var _this = this;
+
+      console.log(this.discountForm.productSelect);
+      this.selectedProduct = this.getProduct.filter(function (getProduct) {
+        return getProduct.id == _this.discountForm.productSelect;
+      });
+    },
     submitForm: function submitForm(formName) {
+      var _this2 = this;
+
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          var formData = new FormData();
+          formData.append('discount', _this2.discountForm.discountPercentage);
+          formData.append('sale_price', _this2.discountcalculate);
+          formData.append('id', _this2.discountForm.productSelect);
+          axios.post('/api/addDiscount', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            alert(response.data.message);
+          });
         } else {
           console.log('error submit!!');
           return false;
         }
       });
     },
-    handleEdit: function handleEdit(index, row) {
-      console.log(index, row);
+    handleEdit: function handleEdit(id) {
+      this.dialogVisible = true;
+      this.editData = this.getProduct.filter(function (getProduct) {
+        return getProduct.id == id;
+      });
     },
-    handleDelete: function handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete: function handleDelete(id) {
+      axios["delete"]('/api/deleteProduct/' + id).then(function (response) {
+        alert(response.data.message);
+      });
+    }
+  },
+  computed: {
+    discountcalculate: function discountcalculate() {
+      console.log(this.discountForm.sellingPrice);
+      this.discountamount = this.discountForm.discountPercentage * this.discountForm.sellingPrice / 100;
+      console.log(this.discountamount);
+      return this.discountForm.sellingPrice - this.discountamount;
     }
   },
   mounted: function mounted() {
+    var _this3 = this;
+
+    axios.get('/api/getDiscountedProduct', {}).then(function (response) {
+      _this3.getDiscountedProduct = response.data.getDiscountedProduct;
+    });
+    axios.get('/api/getProduct', {}).then(function (response) {
+      _this3.getProduct = response.data.getProduct;
+    });
     $(document).ready(function () {
       /*$('#qty, #price').on('input', function () {
           var qty = parseInt($('#qty').val());
@@ -4525,319 +4547,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "productsComponent",
   data: function data() {
     return {
       dialogVisible: false,
+      editProduct: [0],
       getProduct: [],
       search: '',
       dynamicTags: [],
@@ -4928,13 +4643,20 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    openEditModal: function openEditModal() {
+    openEditModal: function openEditModal(id) {
+      this.dialogVisible = true; // this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
+
       $(".productEditWrapper").slideToggle("slow");
       $(".productDetailsWrapper").slideToggle("slow");
       $(".detailsProductDetailsBtn").toggle("slow");
       $(".editProductDetailsBtn").toggle("slow");
     },
-    openDetailsModal: function openDetailsModal() {
+    openDetailsModal: function openDetailsModal(id) {
+      console.log(id);
+      this.editProduct = this.getProduct.filter(function (getProduct) {
+        return getProduct.id == id;
+      });
+      this.dialogVisible = true;
       $(".productEditWrapper").slideToggle("slow");
       $(".productDetailsWrapper").slideToggle("slow");
       $(".detailsProductDetailsBtn").toggle("slow");
@@ -4945,8 +4667,10 @@ __webpack_require__.r(__webpack_exports__);
     handleEdit: function handleEdit(index, row) {
       console.log(index, row);
     },
-    handleDelete: function handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete: function handleDelete(id) {
+      axios["delete"]('/api/deleteProduct/' + id).then(function (response) {
+        alert(response.data.message);
+      });
     },
 
     /*Client Information Tab---*/
@@ -5085,11 +4809,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "bannerImageComponent",
   data: function data() {
     return {
-      image: ['https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg', 'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg', 'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg', 'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg', 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg', 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg', 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'],
+      getBannerImage: [],
       dialogImageUrl: '',
       dialogVisible: false,
       disabled: false,
@@ -5098,6 +4823,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       bannerImageFormRules: {}
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getBannerImage', {}).then(function (response) {
+      _this.getBannerImage = response.data.getBannerImage;
+    });
   },
   methods: {
     handleRemove: function handleRemove(file, fileList) {
@@ -5108,9 +4840,27 @@ __webpack_require__.r(__webpack_exports__);
       this.dialogVisible = true;
     },
     saveImage: function saveImage(formName) {
+      var _this2 = this;
+
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          var file = _this2.$refs.upload.uploadFiles;
+          console.log(file);
+          var formData = new FormData();
+          file.forEach(function (v, k) {
+            formData.append("image[".concat(k, "]"), v.raw);
+          });
+          axios.post('/api/postBannerImage', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            alert(response.data.message);
+          })["catch"](function (error) {
+            if (error.response.status == 422) {
+              _this2.errors = error.response.data.errors;
+            }
+          });
         } else {
           console.log('error submit!!');
           return false;
@@ -5118,7 +4868,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     toggle: function toggle(id) {},
-    deleteImage: function deleteImage(id) {}
+    deleteImage: function deleteImage(id) {
+      axios["delete"]('/api/deleteBanner/' + id).then(function (response) {
+        alert(response.data.message);
+      });
+    }
   }
 });
 
@@ -103025,6 +102779,11 @@ var render = function() {
                                       placeholder: "Select Product",
                                       filterable: ""
                                     },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.onChange($event)
+                                      }
+                                    },
                                     model: {
                                       value: _vm.discountForm.productSelect,
                                       callback: function($$v) {
@@ -103037,14 +102796,12 @@ var render = function() {
                                       expression: "discountForm.productSelect"
                                     }
                                   },
-                                  _vm._l(_vm.productSelectOptions, function(
-                                    item
-                                  ) {
+                                  _vm._l(_vm.getProduct, function(item) {
                                     return _c("el-option", {
-                                      key: item.value,
+                                      key: item.id,
                                       attrs: {
-                                        label: item.label,
-                                        value: item.value
+                                        label: item.product_name,
+                                        value: item.id
                                       }
                                     })
                                   }),
@@ -103063,21 +102820,37 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("el-input", {
-                                  staticClass: "sellingPrice",
-                                  staticStyle: { width: "100%" },
-                                  model: {
-                                    value: _vm.discountForm.sellingPrice,
-                                    callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.discountForm,
-                                        "sellingPrice",
-                                        $$v
-                                      )
-                                    },
-                                    expression: "discountForm.sellingPrice"
-                                  }
-                                })
+                                _c(
+                                  "el-select",
+                                  {
+                                    attrs: { placeholder: "Select" },
+                                    model: {
+                                      value: _vm.discountForm.sellingPrice,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.discountForm,
+                                          "sellingPrice",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "discountForm.sellingPrice"
+                                    }
+                                  },
+                                  _vm._l(_vm.selectedProduct, function(
+                                    selectProdec
+                                  ) {
+                                    return _c("el-option", {
+                                      key: selectProdec.id,
+                                      staticClass: "sellingPrice",
+                                      staticStyle: { width: "100%" },
+                                      attrs: {
+                                        label: selectProdec.price,
+                                        value: selectProdec.price
+                                      }
+                                    })
+                                  }),
+                                  1
+                                )
                               ],
                               1
                             ),
@@ -103124,18 +102897,11 @@ var render = function() {
                                   staticClass: "sellingPriceAfterDiscount",
                                   staticStyle: { width: "100%" },
                                   model: {
-                                    value:
-                                      _vm.discountForm
-                                        .sellingPriceAfterDiscount,
+                                    value: _vm.discountcalculate,
                                     callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.discountForm,
-                                        "sellingPriceAfterDiscount",
-                                        $$v
-                                      )
+                                      _vm.discountcalculate = $$v
                                     },
-                                    expression:
-                                      "discountForm.sellingPriceAfterDiscount"
+                                    expression: "discountcalculate"
                                   }
                                 })
                               ],
@@ -103201,12 +102967,12 @@ var render = function() {
                           {
                             staticStyle: { width: "100%" },
                             attrs: {
-                              data: _vm.discountTableData.filter(function(
+                              data: _vm.getDiscountedProduct.filter(function(
                                 data
                               ) {
                                 return (
                                   !_vm.search ||
-                                  data.productName
+                                  data.product_name
                                     .toLowerCase()
                                     .includes(_vm.search.toLowerCase())
                                 )
@@ -103217,12 +102983,16 @@ var render = function() {
                           },
                           [
                             _c("el-table-column", {
-                              attrs: { prop: "sn", label: "S.N.", width: "50" }
+                              attrs: {
+                                type: "index",
+                                label: "S.N.",
+                                width: "50"
+                              }
                             }),
                             _vm._v(" "),
                             _c("el-table-column", {
                               attrs: {
-                                prop: "productName",
+                                prop: "product_name",
                                 label: "Product Name",
                                 width: "120"
                               }
@@ -103230,7 +103000,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("el-table-column", {
                               attrs: {
-                                prop: "previousSellingPrice",
+                                prop: "price",
                                 label: "Previous Selling Price",
                                 width: "120"
                               }
@@ -103238,7 +103008,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("el-table-column", {
                               attrs: {
-                                prop: "discountPercentage",
+                                prop: "discount",
                                 label: "Discount Percentage",
                                 width: "120"
                               }
@@ -103246,7 +103016,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("el-table-column", {
                               attrs: {
-                                prop: "sellingPriceAfterDiscount",
+                                prop: "sale_price",
                                 label: "Selling Price After Discount",
                                 width: "120"
                               }
@@ -103292,7 +103062,7 @@ var render = function() {
                                         },
                                         on: {
                                           click: function($event) {
-                                            _vm.dialogVisible = true
+                                            return _vm.handleEdit(scope.row.id)
                                           }
                                         }
                                       }),
@@ -103307,8 +103077,7 @@ var render = function() {
                                         on: {
                                           click: function($event) {
                                             return _vm.handleDelete(
-                                              scope.$index,
-                                              scope.row
+                                              scope.row.id
                                             )
                                           }
                                         }
@@ -103374,17 +103143,17 @@ var render = function() {
                         filterable: ""
                       },
                       model: {
-                        value: _vm.discountForm.productSelect,
+                        value: _vm.editData.product_name,
                         callback: function($$v) {
-                          _vm.$set(_vm.discountForm, "productSelect", $$v)
+                          _vm.$set(_vm.editData, "product_name", $$v)
                         },
-                        expression: "discountForm.productSelect"
+                        expression: "editData.product_name"
                       }
                     },
-                    _vm._l(_vm.productSelectOptions, function(item) {
+                    _vm._l(_vm.editData, function(item) {
                       return _c("el-option", {
-                        key: item.value,
-                        attrs: { label: item.label, value: item.value }
+                        key: item.id,
+                        attrs: { label: item.product_name, value: item.id }
                       })
                     }),
                     1
@@ -103401,11 +103170,11 @@ var render = function() {
                     staticClass: "sellingPrice",
                     staticStyle: { width: "100%" },
                     model: {
-                      value: _vm.discountForm.sellingPrice,
+                      value: _vm.editData.price,
                       callback: function($$v) {
-                        _vm.$set(_vm.discountForm, "sellingPrice", $$v)
+                        _vm.$set(_vm.editData, "price", $$v)
                       },
-                      expression: "discountForm.sellingPrice"
+                      expression: "editData.price"
                     }
                   })
                 ],
@@ -103421,17 +103190,27 @@ var render = function() {
                   }
                 },
                 [
-                  _c("el-input", {
-                    staticClass: "discountPercentage",
-                    staticStyle: { width: "100%" },
-                    model: {
-                      value: _vm.discountForm.discountPercentage,
-                      callback: function($$v) {
-                        _vm.$set(_vm.discountForm, "discountPercentage", $$v)
-                      },
-                      expression: "discountForm.discountPercentage"
-                    }
-                  })
+                  _c(
+                    "el-input",
+                    {
+                      staticClass: "discountPercentage",
+                      staticStyle: { width: "100%" },
+                      model: {
+                        value: _vm.editData.discount,
+                        callback: function($$v) {
+                          _vm.$set(_vm.editData, "discount", $$v)
+                        },
+                        expression: "editData.discount"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(_vm.editData.discount) +
+                          "\n                "
+                      )
+                    ]
+                  )
                 ],
                 1
               ),
@@ -103449,15 +103228,11 @@ var render = function() {
                     staticClass: "sellingPriceAfterDiscount",
                     staticStyle: { width: "100%" },
                     model: {
-                      value: _vm.discountForm.sellingPriceAfterDiscount,
+                      value: _vm.editData.sale_price,
                       callback: function($$v) {
-                        _vm.$set(
-                          _vm.discountForm,
-                          "sellingPriceAfterDiscount",
-                          $$v
-                        )
+                        _vm.$set(_vm.editData, "sale_price", $$v)
                       },
-                      expression: "discountForm.sellingPriceAfterDiscount"
+                      expression: "editData.sale_price"
                     }
                   })
                 ],
@@ -104119,7 +103894,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.dialogVisible = true
+                              return _vm.openDetailsModal(scope.row.id)
                             }
                           }
                         }),
@@ -104133,7 +103908,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.dialogVisible = true
+                              return _vm.openEditModal(scope.row.id)
                             }
                           }
                         }),
@@ -104244,7 +104019,11 @@ var render = function() {
                             staticClass: "editProductDetailsBtn",
                             staticStyle: { float: "right", padding: "3px 0" },
                             attrs: { type: "text" },
-                            on: { click: _vm.openEditModal }
+                            on: {
+                              click: function($event) {
+                                return _vm.openEditModal(_vm.scope.row.id)
+                              }
+                            }
                           },
                           [
                             _vm._v(
@@ -104259,7 +104038,11 @@ var render = function() {
                             staticClass: "detailsProductDetailsBtn hidden",
                             staticStyle: { float: "right", padding: "3px 0" },
                             attrs: { type: "text" },
-                            on: { click: _vm.openDetailsModal }
+                            on: {
+                              click: function($event) {
+                                return _vm.openDetailsModal(_vm.scope.row.id)
+                              }
+                            }
                           },
                           [_vm._v("Details\n                        ")]
                         )
@@ -104271,14 +104054,14 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "productDetailsWrapper" },
-                        [
-                          _c(
+                        _vm._l(_vm.editProduct, function(eProduct) {
+                          return _c(
                             "el-form",
                             {
-                              ref: "productForm",
+                              ref: "editProduct",
+                              refInFor: true,
                               staticClass: "demo-productForm",
                               attrs: {
-                                model: _vm.productForm,
                                 rules: _vm.productRules,
                                 "label-position": _vm.labelPosition
                               }
@@ -104299,7 +104082,7 @@ var render = function() {
                                           staticStyle: { width: "100%" },
                                           attrs: {
                                             disabled: "",
-                                            value: "Category Name"
+                                            value: eProduct.category_name
                                           }
                                         })
                                       ],
@@ -104348,7 +104131,7 @@ var render = function() {
                                           staticStyle: { width: "100%" },
                                           attrs: {
                                             disabled: "",
-                                            value: "Brand Name"
+                                            value: eProduct.brand_name
                                           }
                                         })
                                       ],
@@ -104366,13 +104149,18 @@ var render = function() {
                                   [
                                     _c(
                                       "el-form-item",
-                                      { attrs: { label: "Product", prop: "" } },
+                                      {
+                                        attrs: {
+                                          label: "Product",
+                                          prop: "product_name"
+                                        }
+                                      },
                                       [
                                         _c("el-input", {
                                           staticStyle: { width: "100%" },
                                           attrs: {
                                             disabled: "",
-                                            value: "Product Name"
+                                            value: eProduct.product_name
                                           }
                                         })
                                       ],
@@ -104392,83 +104180,15 @@ var render = function() {
                                         attrs: { label: "Tags", prop: "tags" }
                                       },
                                       [
-                                        _vm._l(_vm.dynamicTags, function(tag) {
-                                          return _c(
-                                            "el-tag",
-                                            {
-                                              key: tag,
-                                              attrs: {
-                                                closable: "",
-                                                "disable-transitions": false
-                                              },
-                                              on: {
-                                                close: function($event) {
-                                                  return _vm.handleClose(tag)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                " +
-                                                  _vm._s(tag) +
-                                                  "\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        }),
-                                        _vm._v(" "),
-                                        _vm.inputVisible
-                                          ? _c("el-input", {
-                                              ref: "saveTagInput",
-                                              staticClass: "input-new-tag",
-                                              attrs: { size: "mini" },
-                                              on: {
-                                                blur: _vm.handleInputConfirm
-                                              },
-                                              nativeOn: {
-                                                keyup: function($event) {
-                                                  if (
-                                                    !$event.type.indexOf(
-                                                      "key"
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  return _vm.handleInputConfirm(
-                                                    $event
-                                                  )
-                                                }
-                                              },
-                                              model: {
-                                                value: _vm.inputValue,
-                                                callback: function($$v) {
-                                                  _vm.inputValue = $$v
-                                                },
-                                                expression: "inputValue"
-                                              }
-                                            })
-                                          : _c(
-                                              "el-button",
-                                              {
-                                                staticClass: "button-new-tag",
-                                                attrs: { size: "small" },
-                                                on: { click: _vm.showInput }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "+ New Tag\n                                            "
-                                                )
-                                              ]
-                                            )
+                                        _c("el-input", {
+                                          staticStyle: { width: "100%" },
+                                          attrs: {
+                                            disabled: "",
+                                            value: eProduct.tag
+                                          }
+                                        })
                                       ],
-                                      2
+                                      1
                                     )
                                   ],
                                   1
@@ -104483,14 +104203,17 @@ var render = function() {
                                     _c(
                                       "el-form-item",
                                       {
-                                        attrs: { label: "Quantity", prop: "" }
+                                        attrs: {
+                                          label: "Quantity",
+                                          prop: "quantity"
+                                        }
                                       },
                                       [
                                         _c("el-input", {
                                           staticStyle: { width: "100%" },
                                           attrs: {
                                             disabled: "",
-                                            value: "Product Quantiy"
+                                            value: eProduct.quantity
                                           }
                                         })
                                       ],
@@ -104507,14 +104230,14 @@ var render = function() {
                                     _c(
                                       "el-form-item",
                                       {
-                                        attrs: { label: "Cost Price", prop: "" }
+                                        attrs: { label: "Price", prop: "price" }
                                       },
                                       [
                                         _c("el-input", {
                                           staticStyle: { width: "100%" },
                                           attrs: {
                                             disabled: "",
-                                            value: "Cost Price"
+                                            value: eProduct.price
                                           }
                                         })
                                       ],
@@ -104562,7 +104285,7 @@ var render = function() {
                                       {
                                         attrs: {
                                           label: "Additional Information",
-                                          prop: ""
+                                          prop: "additional_information"
                                         }
                                       },
                                       [
@@ -104572,7 +104295,7 @@ var render = function() {
                                             type: "textarea",
                                             disabled: "",
                                             value:
-                                              "djalkandkfasbddfjfkasdblaskdjasmbd askdnalsmd"
+                                              eProduct.additional_information
                                           }
                                         })
                                       ],
@@ -104584,7 +104307,7 @@ var render = function() {
                               ])
                             ]
                           )
-                        ],
+                        }),
                         1
                       ),
                       _vm._v(" "),
@@ -105175,9 +104898,7 @@ var render = function() {
             )
           ])
         ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "information-wrapper" })
+      )
     ],
     1
   )
@@ -105244,8 +104965,9 @@ var render = function() {
                               _c(
                                 "el-upload",
                                 {
+                                  ref: "upload",
                                   attrs: {
-                                    action: "#",
+                                    action: "",
                                     "list-type": "picture-card",
                                     "on-preview": _vm.handlePictureCardPreview,
                                     "on-remove": _vm.handleRemove,
@@ -105320,10 +105042,13 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "row" },
-                  _vm._l(_vm.image, function(images) {
+                  _vm._l(_vm.getBannerImage, function(images) {
                     return _c(
                       "div",
-                      { key: images, staticClass: "col-md-6 col-sm-12 mt-2" },
+                      {
+                        key: images.id,
+                        staticClass: "col-md-6 col-sm-12 mt-2"
+                      },
                       [
                         _c(
                           "div",
@@ -105331,14 +105056,7 @@ var render = function() {
                             staticClass: "demo-image__placeholder",
                             staticStyle: { position: "relative" }
                           },
-                          [
-                            _c("el-image", {
-                              attrs: {
-                                src: images,
-                                "preview-src-list": _vm.image
-                              }
-                            })
-                          ],
+                          [_c("el-image", { attrs: { src: images.image } })],
                           1
                         ),
                         _vm._v(" "),
@@ -120595,8 +120313,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -67,4 +67,27 @@ class ProductController extends Controller
            'getProduct' => $getProduct
         ]);
     }
+    public function addDiscount(Request $request){
+        //dd($request);
+        $saveDiscount = Product::findorFail($request->id)->update([
+            'discount' => $request->discount,
+            'sale_price' => $request->sale_price
+        ]);
+        return response()->json([
+           'message' => 'Discount added on Product!!!'
+        ]);
+
+    }
+    public function  getDiscountedProduct(){
+        $getDiscountedProduct = Product::where('discount' ,'>',0)->latest()->get();
+        return response()->json([
+           'getDiscountedProduct' =>$getDiscountedProduct
+        ]);
+    }
+    public function deleteProduct($id){
+        $deleteProduct = Product::findorFail($id)->delete();
+        return response()->json([
+           'message' => 'Product Deleted !!!'
+        ]);
+    }
 }
