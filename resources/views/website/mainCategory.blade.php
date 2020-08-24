@@ -76,8 +76,7 @@
                     <div class="row pb-3">
                         <div class="col-12">
                             <div class="overlayImage">
-                                <img
-                                    src="{{ asset('images/Catagory_Page/Chinese-dry-spices-and-condiments-1024x620.jpg') }}"
+                                <img src="{{ asset('images/Catagory_Page/Chinese-dry-spices-and-condiments-1024x620.jpg') }}"
                                     class="categoryBannerImage img-fluid" alt="">
                                 <div class="overlayBackground"></div>
                                 <div class="overlayText">Dry Goods</div>
@@ -95,8 +94,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                                    <div
-                                        class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
+                                    <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                                         <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" width="150" alt="">
                                     </div>
                                     <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>

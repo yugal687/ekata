@@ -4,331 +4,563 @@
 
 
 <link rel="stylesheet" href="{{ asset('css/cate-carousel.css')}} ">
-<link rel="stylesheet" href="{{ asset('css/ratestar.css')}} ">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+{{--<link rel="stylesheet" href="{{ asset('css/ratestar.css')}} ">--}}
 @section('style')
-<style>
-    /* sidebar owl-carousel vertical slider */
-    .hero-sidebar{
-        width: 100%;
-        height: 150vh;
-        position: relative;
-    }
-    .owl-carousel{
-        width: 135vh;
-        transform: rotate(90deg);
-        position: absolute;
-        left: -149%;
-        top: 44%;
-    }
-    .owl-carousel .item{
-        width: 100%;
-        height: 100px;
-        transform: rotate(-90deg);
-    }
+    <style>
+        /*Rate Stars*/
+        .rating {
+            font-size: 25px;
+            overflow: hidden;
+        }
 
-    div.owl-carousel .owl-nav .owl-prev{
-        display: none;
-    }
-    div.owl-carousel .owl-nav .owl-next{
-        text-align: center;
-        font-size:10px;
-        position: absolute;
-        color: #000000;
-        bottom: 33%;
-        right: -25px;
-    }
+        .rating input {
+            opacity: 0;
+            position: absolute;
+        }
 
-    .owl-carousel .item{
-        width: 100% ;
-    }
+        .rating a,
+        .rating label {
+            float: right;
+            color: #aaa;
+            text-decoration: none;
+            -webkit-transition: color .4s;
+            -moz-transition: color .4s;
+            -o-transition: color .4s;
+            transition: color .4s;
+        }
+
+        .rating label:hover ~ label,
+        .rating input:focus ~ label,
+        .rating label:hover,
+        .rating a:hover,
+        .rating a:hover ~ a,
+        .rating a:focus,
+        .rating a:focus ~ a {
+            color: #F0A500;
+            cursor: pointer;
+        }
+
+        .rating2 {
+            direction: rtl;
+        }
+
+        .rating2 a {
+            float: none
+        }
+
+        /*--------------*/
+
+        .single-item-share a{
+            color: #00000070;
+        }
+
+        #single-item-carousel {
+            height: 500px;
+            width: 100%;
+        }
+
+        #sync1 .item {
+            background: #ebebeb;
+            padding: 5% 30%;
+            margin: 5px;
+            color: #fff;
+            border-radius: 3px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #sync1 .item img {
+            width: 100%;
+            height: 320px;
+        }
+
+        #sync2 .item {
+            background: #c9c9c9;
+            padding: 5% 25%;
+            margin: 5px;
+            color: #fff;
+            border-radius: 3px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #sync2 .item img {
+            width: 100%;
+            height: 80px;
+        }
 
 
-    .carousel-item{
-        height: auto;
-    }
+        #sync2 .current .item {
+            background: #ebebeb;
+            border: 1px solid #CF7500;
+        }
 
-    .carousel-inner img {
-        width: 100%;
-        height: 100%;
-    }
+        .owl-theme .owl-nav {
+            /*default owl-theme theme reset .disabled:hover links */
+        }
 
-    #custCarousel .carousel-indicators {
-        position: static;
+        .owl-theme .owl-nav [class*="owl-"] {
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
 
-    }
+        .owl-theme .owl-nav [class*="owl-"].disabled:hover {
+            background-color: #d6d6d6;
+        }
 
-    #custCarousel .carousel-indicators>li {
-        width: 100px
-    }
+        #sync1.owl-theme {
+            position: relative;
+        }
 
-    #custCarousel .carousel-indicators li img {
-        display: block;
-        opacity: 0.5;
-        margin-top: 30px;
-    }
+        #sync1.owl-theme .owl-next,
+        #sync1.owl-theme .owl-prev {
+            width: 25px;
+            height: 60px;
+            margin-top: -30px;
+            position: absolute;
+            top: 50%;
+        }
 
-    #custCarousel .carousel-indicators li.active img {
-        opacity: 1
-    }
+        #sync1.owl-theme .owl-prev {
+            left: 0;
+        }
 
-    #custCarousel .carousel-indicators li:hover img {
-        opacity: 0.75
-    }
+        #sync1.owl-theme .owl-next {
+            right: 0;
+        }
 
-    .carousel-item img {
-        width: 80%
-    }
-</style>
+        .owl-carousel .owl-stage {
+            margin: 0 auto;
+        }
+
+    </style>
 @stop
 
 @section('content')
-<div class="container-fluid">
-    {{--<div class="row">
-
-
-        <div class="col-md-10 bg-cate-sec">
-
-        </div>
-
-    </div>--}}
-
-    <!--main row-->
-    <div class="row ">
-          {{--<!--accordion starts-->
-              <div class="col-md-2 container-mine-3 bg-cate-sec">
-
-
-              </div>
-        <!--accordian ends-->--}}
-        <div class="col-md-2" style="background-color: #e9ecef">
-            <div class="row">
-                <div class="col-12 bg-main-secondary">
-                    <div class="cate">
-                        <h3 class="text-center text-dark mt-2 font-weight-bold">CATEGORY</h3>
+    <div class="container-fluid">
+        <!--main row-->
+        <div class="row ">
+            <div class="col-md-2" style="background-color: #e9ecef">
+                <div class="row">
+                    <div class="col-12 bg-main-secondary">
+                        <div class="cate">
+                            <h3 class="text-center text-dark mt-2 font-weight-bold">CATEGORY</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{--Include Sidebar Here--}}
+                        @include('layouts.website.sidebar')
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    {{--Include Sidebar Here--}}
-                    @include('layouts.website.sidebar')
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-12" style="padding: 0;">
+                        <nav aria-label="breadcrumb" class="">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Category</a></li>
+                                <li class="breadcrumb-item"><a href="#">Dry Goods</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Rice</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <main class="p-5">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div id="single-item-carousel">
+                                <div id="sync1" class="owl-carousel owl-theme">
+                                    <div class="item">
+                                        <img src="{{ asset('images/category/basmati_rice/Basmati_rice.png') }}"
+                                             class="img-fluid" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src=" {{ asset('images/category/basmati_rice/Layer 5.png') }}"
+                                             class="img-fluid" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img
+                                            src="{{ asset('images/category/basmati_rice/raw-basmati-rice-500x500.png') }}"
+                                            class="img-fluid" alt="">
+                                    </div>
+                                </div>
 
-        <div class="col-md-10">
-           <div class="row">
-               <div class="col-md-7 mt-5 ml-5">
-                 <div id="custCarousel" class="carousel slide bg-cate-sec " data-ride="carousel" align="center">
-                    <!-- slides -->
-                     <div class="col-md-4 carousel-inner ">
-                          <div class="carousel-item active mt-3 mb-3">
-                              <img src="{{ asset('images/category/basmati_rice/Basmati_rice.png') }}">
-                          </div>
-                          <div class="carousel-item mt-3 mb-3">
-                              <img src="{{ asset('images/category/basmati_rice/Basmati_rice.png') }}">
-                          </div>
-                          <div class="carousel-item mt-3 mb-3">
-                              <img src="{{ asset('images/category/basmati_rice/Basmati_rice.png') }}">
-                          </div>
-                     </div>
-                     <a class="carousel-control-prev" href="#custCarousel" data-slide="prev"> <span class="carousel-control-prev-icon"></span> </a> <a class="carousel-control-next" href="#custCarousel" data-slide="next"> <span class="carousel-control-next-icon"></span> </a> <!-- Thumbnails -->
-                     <ol class="carousel-indicators list-inline">
-                         <li class="list-inline-item active">
-                             <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#custCarousel">
-                                 <img src="{{ asset('/images/category/basmati_rice/Basmati_rice.png') }}" >
-                             </a>
-                         </li>
-                         <li class="list-inline-item">
-                             <a id="carousel-selector-1" data-slide-to="1" data-target="#custCarousel">
-                                 <img src="{{ asset('/images/category/basmati_rice/Basmati_rice.png') }}" >
-                             </a>
-                         </li>
-                         <li class="list-inline-item">
-                             <a id="carousel-selector-2" data-slide-to="2" data-target="#custCarousel">
-                                 <img src="{{ asset('/images/category/basmati_rice/Basmati_rice.png') }}" >
-                             </a>
-                         </li>
-                     </ol>
-                     <!-- Left right -->
+                                <div id="sync2" class="owl-carousel owl-theme">
+                                    <div class="item">
+                                        <img src="{{ asset('images/category/basmati_rice/Basmati_rice.png') }}" alt="">
 
-
-                 </div>
-               </div>
-
-                <div class="col-md-4 mt-5 ml-2">
-
-                   <h4>Devaya Riz Basmati Rice </h4>
-                       <div class="rate">
-                        <input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="text">5 stars</label>
-                        <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="text">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="text">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="text">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="text">1 star</label>
-                       </div>
-
-                    <h6>Category: Dry Goods</h6>
-
-                </div>
-           </div>
-            <section id="special-section">
-                <div class="container pt-2">
-                    <div class="row  pt-3 my-5">
-                        <div class="col-md-3">
-                            <h6 class="text-center">Recently Viewed Items</h6>
+                                    </div>
+                                    <div class="item">
+                                        <img src=" {{ asset('images/category/basmati_rice/Layer 5.png') }}" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img
+                                            src="{{ asset('images/category/basmati_rice/raw-basmati-rice-500x500.png') }}"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-md-9">
-                            <hr style="border-top: 1px solid">
-                        </div>
-                        <!-- <div class="container"> -->
-                        <!-- <div class="special-content"> -->
-
-                        <!-- first row -->
-                        <div class="row m-0 p-0 mb-4">
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto bg-cate-sec">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                        <div class="col-md-4 pl-3">
+                            <div>
+                                <h4 class="font-weight-bold">Devaya Riz Basmati Rice </h4>
+                                <div class="rating rating2">
+                                    <a href="#5" title="Give 5 stars">★</a>
+                                    <a href="#4" title="Give 4 stars">★</a>
+                                    <a href="#3" title="Give 3 stars">★</a>
+                                    <a href="#2" title="Give 2 stars">★</a>
+                                    <a href="#1" title="Give 1 star">★</a>
                                 </div>
-
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- col-item-end -->
+                                <h6>Category: Dry Goods</h6>
+                                <h6>Avilibility: <span class="text-danger">In Stock</span></h6>
                             </div>
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                            <div class="pt-3">
+                                <h6>Price</h6>
+                                <h4 class="font-weight-bold text-danger">$15.99</h4>
+                            </div>
+                            <div class="pt-2">
+                                <h6>Size</h6>
+                                <div class="btn-group-sm" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-secondary">Left</button>
+                                    <button type="button" class="btn bg-main-primary text-white">Middle</button>
+                                    <button type="button" class="btn btn-secondary">Right</button>
                                 </div>
-
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- website footer -->
-                                <!-- col-item-end -->
                             </div>
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                                </div>
-
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- col-item-end -->
-                            </div>
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                                </div>
-
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- col-item-end -->
-                            </div>
-                            <div class="container mt-5">
+                            <div class="pt-3">
+                                <h6>Quantity</h6>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <h6 class="text-center">Recommended for you</h6>
+                                    <div class="col-8">
+                                        <div class="input-group input-group number-spinner">
+				                                <span class="input-group-prepend">
+					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
+                                                            <i class="fas fa-minus"></i>
+                                                        </button>
+                                                </span>
+                                            <input type="text" class="form-control text-center" value="1">
+                                            <span class="input-group-append">
+                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+				                                </span>
+                                        </div>
                                     </div>
+                                </div>
 
-                                    <div class="col-md-9">
-                                        <hr style="border-top: 1px solid">
+                            </div>
+                            <div class="pt-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <button type="button"
+                                                class="btn btn-large bg-main-primary border text-white px-5 mt-2 d-block">
+                                            Add to Cart
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                            <div class="pt-5 pl-5">
+                                <div class="row align-items-center">
+                                    <h6 class="single-item-share">
+                                        Share:
+                                        <span>
+                                            <a href="#">
+                                                <i class="fab fa-facebook-f fa-2x px-2"></i>
+                                            </a>
+                                        </span>
+                                        <span>
+                                            <a href="#">
+                                                <i class="fab fa-instagram fa-2x px-2"></i>
+                                            </a>
+                                        </span>
+                                        <span>
+                                            <a href="#">
+                                                <i class="fab fa-twitter fa-2x px-2"></i>
+                                            </a>
+                                        </span>
+                                    </h6>
                                 </div>
-
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- col-item-end -->
                             </div>
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                                </div>
 
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary bg-cate-sec rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- col-item-end -->
-                            </div>
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                                </div>
-
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- col-item-end -->
-                            </div>
-                            <!-- col-item-start -->
-                            <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                <div class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                                </div>
-
-                                <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                                <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                <button type="button" class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">Add to Cart</button>
-
-                                <!-- col-item-end -->
-                            </div>
                         </div>
-                        <!-- second row -->
                     </div>
-                </div>
-            </section>
-            <!-- special section ends here -->
+                    <section id="special-section">
+                        <div class="container mt-5 pt-2">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h4 class="text-center font-weight-bold">Recently Viewed Items</h4>
+                                </div>
+
+                                <div class="col-md-9">
+                                    <hr style="border-top: 1px solid">
+                                </div>
+                            </div>
+                            <!-- <div class="container"> -->
+                            <!-- <div class="special-content"> -->
+
+                            <!-- first row -->
+                            <div class="row m-0 p-0">
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto bg-cate-sec">
+                                        <img src="{{ asset('images/best_selling.png')}}" width="150" alt="">
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- col-item-end -->
+                                </div>
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
+                                        <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- website footer -->
+                                    <!-- col-item-end -->
+                                </div>
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
+                                        <img src="{{asset('images/best_selling.png')}}" class="img-fluid" width="150"
+                                             alt="">
+
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- col-item-end -->
+                                </div>
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
+                                        <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- col-item-end -->
+                                </div>
+                            </div>
+                            <!-- second row -->
+                            <div class="row">
+                                <div class="container mt-5">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h4 class="text-center font-weight-bold">Recommended for you</h4>
+                                        </div>
+
+                                        <div class="col-md-9">
+                                            <hr style="border-top: 1px solid">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
+                                        <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- col-item-end -->
+                                </div>
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
+                                        <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary bg-cate-sec rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- col-item-end -->
+                                </div>
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
+                                        <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- col-item-end -->
+                                </div>
+                                <!-- col-item-start -->
+                                <div
+                                    class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                    <div
+                                        class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
+                                        <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                                    </div>
+
+                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                                    <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                    <button type="button"
+                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
+
+                                    <!-- col-item-end -->
+                                </div>
+                            </div>
+                            <!-- second row -->
+                        </div>
+                    </section>
+                    <!-- special section ends here -->
+                </main>
+            </div>
 
         </div>
+        <!--main row ends-->
+
 
     </div>
-    <!--main row ends-->
-
-
-</div>
 @stop
-{{--@include('layouts.website.footer')--}}
 
+@section('scripts')
+    <script>
+        $(document).ready(function () {
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            var sync1 = $("#sync1");
+            var sync2 = $("#sync2");
+            var slidesPerPage = 4; //globaly define number of elements per page
+            var syncedSecondary = true;
+
+            sync1.owlCarousel({
+                items: 1,
+                slideSpeed: 2000,
+                nav: true,
+                autoplay: true,
+                dots: false,
+                loop: true,
+                responsiveRefreshRate: 200,
+                navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+            }).on('changed.owl.carousel', syncPosition);
+
+            sync2
+                .on('initialized.owl.carousel', function () {
+                    sync2.find(".owl-item").eq(0).addClass("current");
+                })
+                .owlCarousel({
+                    items: slidesPerPage,
+                    dots: false,
+                    nav: true,
+                    smartSpeed: 200,
+                    slideSpeed: 500,
+                    slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+                    responsiveRefreshRate: 100
+                }).on('changed.owl.carousel', syncPosition2);
+
+            function syncPosition(el) {
+                //if you set loop to false, you have to restore this next line
+                //var current = el.item.index;
+
+                //if you disable loop you have to comment this block
+                var count = el.item.count - 1;
+                var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+
+                if (current < 0) {
+                    current = count;
+                }
+                if (current > count) {
+                    current = 0;
+                }
+
+                //end block
+
+                sync2
+                    .find(".owl-item")
+                    .removeClass("current")
+                    .eq(current)
+                    .addClass("current");
+                var onscreen = sync2.find('.owl-item.active').length - 1;
+                var start = sync2.find('.owl-item.active').first().index();
+                var end = sync2.find('.owl-item.active').last().index();
+
+                if (current > end) {
+                    sync2.data('owl.carousel').to(current, 100, true);
+                }
+                if (current < start) {
+                    sync2.data('owl.carousel').to(current - onscreen, 100, true);
+                }
+            }
+
+            function syncPosition2(el) {
+                if (syncedSecondary) {
+                    var number = el.item.index;
+                    sync1.data('owl.carousel').to(number, 100, true);
+                }
+            }
+
+            sync2.on("click", ".owl-item", function (e) {
+                e.preventDefault();
+                var number = $(this).index();
+                sync1.data('owl.carousel').to(number, 300, true);
+            });
+        });
+    </script>
+@stop
