@@ -41,6 +41,7 @@
             width: 320px;
             height: 85%;
         }
+
         /*.modal.right .modal-content {
             height: 84%;
             overflow-y: auto;
@@ -48,6 +49,7 @@
         .modal.right .modal-content {
             flex-direction: row;
         }
+
         .modal.right .modal-body {
             padding: 15px 15px 80px;
         }
@@ -89,11 +91,13 @@
         .shopping-cart .shopping-cart-header .shopping-cart-total {
             float: right;
         }
+
         .shopping-cart .shopping-cart-items {
             padding: 20px;
             max-height: 300px;
             overflow-y: scroll;
         }
+
         .shopping-cart .shopping-cart-items li {
             list-style: none;
             border-bottom: 1px solid #00000040;
@@ -164,6 +168,34 @@
             clear: both;
         }
 
+        /*Navbar*/
+        @media (min-width: 992px) {
+            ul.navbar-nav.mr-auto {
+                margin-bottom: -8px;
+            }
+
+            nav.navbar ul li a.nav-link {
+                float: left;
+                display: block;
+                color: black;
+                text-align: center;
+                text-decoration: none;
+                border-bottom: 3px solid transparent;
+            }
+
+            nav.navbar ul li.active a.nav-link {
+                border-bottom: 3px solid #fff;
+            }
+
+            .navbar-expand-lg .navbar-nav .nav-link {
+                padding-bottom: 12px;
+            }
+
+            .nav-right.container-mine {
+                margin: 5px 60px;
+            }
+        }
+
 
     </style>
 
@@ -202,60 +234,59 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Bavigation MenuBar Starts Here-->
+                    <div id="topNavbar">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-main-primary">
+                            <a class="navbar-brand" href="#"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
 
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-main-primary px-0">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="container">
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#"><b>Home</b> <span class="sr-only">(current)</span></a>
+                                    <li class="nav-item active px-2">
+                                        <a class="nav-link text-white" href="/">Home <span
+                                                class="sr-only">(current)</span></a>
                                     </li>
-                                    <li class="nav-item ml-3">
-                                        <a class="nav-link text-white" href="#"><b>About Us</b></a>
+                                    <li class="nav-item px-2">
+                                        <a class="nav-link text-white" href="#">About Us</a>
                                     </li>
-                                    <li class="nav-item ml-3">
-                                        <a class="nav-link text-white" href="#"><b>Services</b></a>
+                                    <li class="nav-item px-2">
+                                        <a class="nav-link text-white" href="#">Services</a>
                                     </li>
-                                    <li class="nav-item ml-3">
-                                        <a class="nav-link text-white" href="#"><b>Products</b></a>
+                                    <li class="nav-item px-2">
+                                        <a class="nav-link text-white" href="#">Products</a>
                                     </li>
-                                    <li class="nav-item ml-3">
-                                        <a class="nav-link text-white" href="/contact"><b>Contact Us</b></a>
+                                    <li class="nav-item px-2">
+                                        <a class="nav-link text-white" href="/contact">Contact Us</a>
                                     </li>
                                 </ul>
-
+                                <div class="nav-right container-mine">
+                                    <a href="#" class="user">
+                                        <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
+                                             class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                                            <path fill-rule="evenodd"
+                                                  d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
+                                        <svg width="2em" height="2em" viewBox="0 0 16 16"
+                                             class="bi bi-cart4 text-white ml-2" fill="currentColor"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                                        </svg>
+                                        <div class="cart-count rounded bg-main-secondary text-white"> 1</div>
+                                    </a>
+                                </div>
                             </div>
-
-                            <div class="nav-right container-mine">
-                                <a href="#" class="user">
-                                    <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
-                                         class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                    </svg>
-                                </a>
-                                <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
-                                    <svg width="2em" height="2em" viewBox="0 0 16 16"
-                                         class="bi bi-cart4 text-white ml-2" fill="currentColor"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                                    </svg>
-                                    <div class="cart-count rounded bg-main-secondary text-white"> 1</div>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
+                        </nav>
+                    </div>
                     <!-- Bavigation MenuBar Ends Here-->
                 </div>
             </div>

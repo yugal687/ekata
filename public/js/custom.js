@@ -1,47 +1,34 @@
 $(document).ready(function () {
-    /*$("#vertical-carousel").owlCarousel({
-        /!*items: 5,*!/
-        loop: true,
-        mouseDrag: false,
-        touchDrag: false,
-        pullDrag: false,
-        rewind: true,
-        autoplay: true,
-        margin: 0,
-        nav: false,
-        dots: false,
-        responsive:{
-            0:{
-                items:5
-            },
-            600:{
-                items:5
-            },
-            1000:{
-                items:5
-            }
-        }
-    });*/
+    // Add active class to the current Nav
+    $('ul.navbar-nav li.nav-item a.nav-link').click(function (e) {
+        $('ul.navbar-nav li.active').removeClass('active');
+        var $parent = $(this).parent();
+        $parent.addClass('active');
+        /*e.preventDefault();*/
+    });
 
-    //slider for sidebar section
-    $('#testing-carousel').owlCarousel({
-        loop:true,
-        autoplay: false,
-        margin:10,
-        nav:true,
-        dots: false,
-        responsive:{
-            0:{
-                items:1
-            },
-            600:{
-                items:1
-            },
-            1000:{
-                items:1
-            }
-        }
-    })
+
+    /*Vertical Sidebar Carousel | Tiny Slider*/
+    /*------------------------*/
+    var slider = tns({
+        container: ".sidebar-vertical-carousel",
+        "items": 9,
+        "axis": "vertical",
+        "swipeAngle": false,
+        "speed": 400,
+        "mouseDrag": true,
+        slideBy: 1,
+        gutter: 12,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayButtonOutput: false,
+        controlsContainer: "#customize-controls",
+        /*rewind: true*/
+    });
+
+    /*Vertical Sidebar Carousel Ends*/
+
     /*$("#sidebar_carousel").owlCarousel({
         dots: false,
         loop: true,
