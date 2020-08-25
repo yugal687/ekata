@@ -1,6 +1,6 @@
-<div id="accordion" class="px-3 py-5">
+<div id="accordion" class="px-3 pt-4 pb-2">
     <ul>
-        <li class="">
+        <li class="main-li">
             <h3>
                 <span class="icon-dashboard"></span>Dry Goods
                 <i class="fas fa-angle-down pl-3"></i>
@@ -13,7 +13,7 @@
             </ul>
         </li>
         <!-- we will keep this LI open by default -->
-        <li>
+        <li class="main-li">
             <h3>
                 <span class="icon-tasks"></span>Noodles
                 <i class="fas fa-angle-down pl-3"></i>
@@ -24,7 +24,7 @@
                 <li><a href="#">Preeti</a></li>
             </ul>
         </li>
-        <li>
+        <li class="main-li">
             <h3>
                 <span class="icon-calendar"></span>Pickles
                 <i class="fas fa-angle-down pl-3"></i>
@@ -34,7 +34,7 @@
                 <li><a href="#">Gundruk Pickles</a></li>
             </ul>
         </li>
-        <li>
+        <li class="main-li">
             <h3>
                 <span class="icon-heart"></span>Electronics
                 <i class="fas fa-angle-down pl-3"></i>
@@ -48,3 +48,22 @@
         </li>
     </ul>
 </div>
+
+<main id="special-filters">
+    <div class="row">
+        <div class="mx-auto">
+            <p>
+                <a href="#">Clearance Items</a>
+            </p>
+            <p>
+                <a href="#">Special Items</a>
+            </p>
+            <p>
+                <a href="#">Best Selling Items</a>
+            </p>
+            <p>
+                <a href="#">New Arrival Items</a>
+            </p>
+        </div>
+    </div>
+</main>

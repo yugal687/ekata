@@ -187,6 +187,12 @@
                             </button>
                         </div>
                     </div>
+                    <div class="row mt-5">
+                        <div class="col-12 text-center">
+                            <button class="btn btn-large bg-main-primary text-white px-3 py-2">More Items
+                            </button>
+                        </div>
+                    </div>
                 </main>
             </div>
         </div>

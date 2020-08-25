@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background: #fff;
+}
 
 h1 {
     font-size: 2.2em;
@@ -24,9 +27,14 @@ h5 {
     font-size: 1.4em;
 }
 
+p{
+    font-size: 16px;
+}
+/*
 p {
     font-size: 1.2em;
 }
+*/
 
 a {
     text-decoration: none;
@@ -55,9 +63,9 @@ a:hover {
 
 .container-mine-2 {
     margin: 0 30px;
-    height: 132vh;
+    height: 140vh;
     background: rgb(255, 255, 255);
-    padding-top: 10px;
+    /*padding-top: 10px;*/
 }
 
 /* background color */
@@ -111,6 +119,9 @@ a:hover {
 .rounded-bottom-right {
     border-bottom-right-radius: 20px;
 }
+.rounded-bottom-left{
+    border-bottom-left-radius: 20px;
+}
 
 .rounded-left-front {
     border-top-left-radius: 20px;
@@ -143,11 +154,11 @@ a:hover {
 /* sidebar owl-carousel vertical slider */
 .hero-sidebar {
     width: 100%;
-    height: 150vh;
+    height: 165vh;
     position: relative;
 }
 
-.sidebar-carousel .owl-carousel {
+/*.sidebar-carousel .owl-carousel {
     width: 135vh;
     transform: rotate(90deg);
     position: absolute;
@@ -176,7 +187,7 @@ a:hover {
 
 .sidebar-carousel .owl-carousel .item {
     width: 100%;
-}
+}*/
 
 /* banner section */
 .banner-area {
@@ -242,10 +253,10 @@ a:hover {
   }
   #clearence_carousel .owl-nav button:focus {
       outline: none;
-  }  */
+  }*/
 
 #clearence_carousel .item {
-    height: 42vh;
+    height: 60vh;
 }
 
 /* new arrival section */
@@ -354,14 +365,21 @@ a:hover {
     font-size: 16px;
     width: 90%;
     padding: 5px 0 5px 20px;
-    border-top: 1px solid rgba(0, 0, 0, 0.25);
+    /*border-top: 1px solid rgba(0, 0, 0, 0.25);*/
 }
 /*
 #accordion ul li h3:nth-child(1) {
     border-top: none;
 }*/
-#accordion ul li h3:last-child {
-    /*border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;*/
+#accordion ul li.main-li {
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.25) !important;
+}
+#accordion ul li.main-li:first-child {
+    border-top: none !important;
+}
+#accordion ul li.main-li:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
 }
 
 #accordion ul li h3:hover {
@@ -375,8 +393,11 @@ a:hover {
     width: 100%;
     padding: 5px 0 5px 20px;
     border-radius: 10px;
-    border-top: 1px solid #CF7500;
+    /*border-top: 1px solid #CF7500;*/
 }
+/*#accordion ul li.activeHeading{
+    border-top: none !important;
+}*/
 
 /*links*/
 #accordion ul ul li a {
@@ -393,4 +414,54 @@ a:hover {
 }
 #accordion ul ul li.activeList a{
     background-color: #d1cdcc;
+}
+
+/*Special Filters*/
+#special-filters p{
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+#special-filters p a{
+    text-decoration: none;
+    color: #00000080;
+    border-bottom: 1px solid #00000080;
+}
+
+
+/*Footer CSS*/
+.footer-container {
+    margin: 0 60px;
+}
+.footer-container p {
+    margin-bottom: 0;
+}
+.large-icon-container .col-4.icon-border-right {
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+.footer-icons-large {
+    width: 80%;
+    height: 100px;
+}
+.footer-container ul li{
+    font-size: 15px;
+}
+.footer-container h6{
+    font-size: 12px;
+}
+#copyright-footer{
+    background-color: #0b0b0b;
+    color: darkgray;
+}
+.list-unstyled li.list{
+    margin-top: 5px;
+}
+/*Footer Lines CSS*/
+.horzline{
+    border-top: 2px solid #8c8b8b;
+}
+
+.style7{
+    border-top: 2px solid #8c8b8b;
 }
