@@ -25,6 +25,7 @@ Vue.use(ElementUI);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('user-component', require('./components/Admin/User/userComponent.vue').default);
 Vue.component('admin-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
 Vue.component('add-product-component', require('./components/Admin/Add_Product/createproductComponent.vue').default);
 Vue.component('product-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
@@ -35,6 +36,7 @@ Vue.component('order-details-component', require('./components/Admin/Order/order
 Vue.component('shipping-details-component', require('./components/Admin/Order/shippingDetailsComponent.vue').default);
 Vue.component('banner-image-component', require('./components/Admin/Banner_Image/bannerImageComponent.vue').default);
 Vue.component('all-users-cart-details-component', require('./components/Admin/Cart/allUserCartDetailsComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

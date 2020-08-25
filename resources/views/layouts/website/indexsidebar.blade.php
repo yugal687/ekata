@@ -125,10 +125,10 @@
 
             </ul>
             <div class="row controls rounded-bottom-front" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
-                <div class="col-6 prev" data-controls="prev" aria-controls="customize" tabindex="-1">
+                <div class="col-12 prev" data-controls="prev" aria-controls="customize" tabindex="-1">
                     <i class="fas fa-angle-up fa-5x"></i>
                 </div>
-                <div class="col-6 next" data-controls="next" aria-controls="customize" tabindex="-1">
+                <div class="col-12 next" data-controls="next" aria-controls="customize" tabindex="-1">
                     <i class="fas fa-angle-down fa-5x"></i>
                 </div>
             </div>

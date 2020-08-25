@@ -1,18 +1,22 @@
 $(document).ready(function () {
     // Add active class to the current Nav
-    $('ul.navbar-nav li.nav-item a.nav-link').click(function (e) {
-        $('ul.navbar-nav li.active').removeClass('active');
-        var $parent = $(this).parent();
-        $parent.addClass('active');
-        /*e.preventDefault();*/
+    var current_page_URL = location.href;
+    $( "a" ).each(function() {
+        if ($(this).attr("href") !== "#") {
+            var target_URL = $(this).prop("href");
+            if (target_URL == current_page_URL) {
+                $('nav a').parents('li, ul').removeClass('active');
+                $(this).parent('li').addClass('active');
+                return false;
+            }
+        }
     });
-
 
     /*Vertical Sidebar Carousel | Tiny Slider*/
     /*------------------------*/
     var slider = tns({
         container: ".sidebar-vertical-carousel",
-        "items": 9,
+        /*"items": 9,*/
         "axis": "vertical",
         "swipeAngle": false,
         "speed": 400,
@@ -24,6 +28,14 @@ $(document).ready(function () {
         autoplay: true,
         autoplayButtonOutput: false,
         controlsContainer: "#customize-controls",
+        "responsive": {
+            "0": {
+                "items": 5
+            },
+            "768": {
+                "items": 9
+            }
+        },
         /*rewind: true*/
     });
 

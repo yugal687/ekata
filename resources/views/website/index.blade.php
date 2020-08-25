@@ -7,6 +7,7 @@
         .card {
             box-shadow: none !important;
         }
+
         /*Banner Areas*/
         .banner-area img {
             width: 100%;
@@ -81,22 +82,25 @@
         #new_items.owl-theme .owl-nav [class*=owl-] {
             background: transparent;
         }
+
         /*Reviews and SignUp*/
-        .signup, .reviews{
+        .signup, .reviews {
             transform: translateY(-70px);
         }
 
 
         /*About Us Section*/
-        .about-us-img{
+        .about-us-img {
             width: 100%;
             height: 385px;
         }
-        .about-us-img img{
+
+        .about-us-img img {
             width: 100%;
             height: 385px;
         }
-        .circle-1, .circle-2, .circle-3, .circle-4{
+
+        .circle-1, .circle-2, .circle-3, .circle-4 {
             position: absolute;
             top: 15px;
             width: 35px;
@@ -105,39 +109,96 @@
             background-color: #fff;
             border: 2px solid #00000060;
         }
-        .circle-1, .circle-3{
+
+        .circle-1, .circle-3 {
             left: 30px;
         }
-        .circle-2, .circle-4{
+
+        .circle-2, .circle-4 {
             right: 30px;
         }
 
-        /*Vertical Sidebar Carousel*/
-        .vertical-sidebar-carousel{
-            background-color: #fff;
-            height: 148vh;
+        /*Reviews Ratings*/
+        .reviews-rating {
+            margin: -10px;
+            font-size: 40px;
             overflow: hidden;
         }
-        .vertical-sidebar-carousel .sidebar-vertical-carousel{
+
+        .reviews-rating input {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .reviews-rating a,
+        .reviews-rating label {
+            float: right;
+            color: #fff;
+            text-decoration: none;
+            -webkit-transition: color .4s;
+            -moz-transition: color .4s;
+            -o-transition: color .4s;
+            transition: color .4s;
+        }
+
+        .reviews-rating label:hover ~ label,
+        .reviews-rating input:focus ~ label,
+        .reviews-rating label:hover,
+        .reviews-rating a:hover,
+        .reviews-rating a:hover ~ a,
+        .reviews-rating a:focus,
+        .reviews-rating a:focus ~ a {
+            color: #F0A500;
+            cursor: pointer;
+        }
+
+        .reviews-rating {
+            direction: rtl;
+        }
+
+        .reviews-rating a {
+            float: none
+        }
+
+
+        /*Vertical Sidebar Carousel*/
+        .vertical-sidebar-carousel {
+            background-color: #fff;
+            height: 148vh;
+            /*overflow: hidden;*/
+        }
+
+        @media screen and (max-width: 767px) {
+            .vertical-sidebar-carousel {
+                background-color: #fff;
+                height: 92vh;
+                /*overflow: hidden;*/
+            }
+        }
+
+        .vertical-sidebar-carousel .sidebar-vertical-carousel {
             cursor: grab;
         }
-        .sidebar-vertical-carousel figure{
+
+        .sidebar-vertical-carousel figure {
             width: 70px;
             height: 70px;
             border-radius: 100%;
             margin-bottom: 0.3rem;
             background-color: #b1b1b1;
         }
-        .sidebar-vertical-carousel figure img{
-            width: 60px;
-            height: 60px;
-            border-radius: 100%;
-            margin: 5px;
+
+        .sidebar-vertical-carousel figure img {
+            width: 40px;
+            height: 40px;
+            margin: 15px;
         }
-        ul.controls li{
+
+        ul.controls li {
             list-style: none;
             display: inline-block;
         }
+
         .controls {
             margin: 0;
             padding: 0;
@@ -149,15 +210,68 @@
             display: flex;
             align-items: center;
         }
-        .controls .prev, .controls .next{
+
+        .controls .prev {
+            display: none;
+        }
+
+        .controls .prev, .controls .next {
             transition: background-color 600ms ease-in-out;
         }
-        .controls .prev:hover, .controls .next:hover{
+
+        .controls .prev:hover, .controls .next:hover {
             cursor: pointer;
-            background-color: #CF7500;
+            /*background-color: #CF7500;*/
         }
-        .controls .prev:focus, .controls .next:focus{
+
+        .controls .prev:focus, .controls .next:focus {
             outline: none;
+        }
+
+        /*Customer Reviews Slider*/
+        .customer-reviews-slider {
+            height: 330px;
+            overflow: hidden;
+        }
+        #customer-reviews-carousel.owl-theme .owl-dots {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        #customer-reviews-carousel.owl-theme .owl-dots .owl-dot span {
+            background: #fff;
+        }
+        #customer-reviews-carousel.owl-theme .owl-dots .owl-dot.active span {
+            background: #b1b1b1;
+        }
+        #customer-reviews-carousel .owl-item {
+            height: 220px;
+            top: 30px;
+        }
+        #customer-reviews-carousel.owl-theme .owl-nav {
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            justify-content: space-between;
+        }
+        #customer-reviews-carousel.owl-theme .owl-nav [class*=owl-] {
+            color: #FFF;
+            font-size: 14px;
+            margin: 0px 5px;
+            padding: 5px 20px;
+            background: transparent;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 3px;
+            border: 1px solid #fff;
+        }
+        img.review-images{
+            border-radius: 15px;
+            width: 100%;
+            height: 190px;
         }
 
     </style>
@@ -1333,18 +1447,74 @@
         <div class="section-bar bg-main-primary mt-5"></div>
         <div class="container-mine">
             <div class="row m-0 p-0 w-100">
-                <div class="col-md-7 ">
-                    <div class="reviews bg-main-primary rounded-top-front rounded-bottom-front py-4">
+                <div class="col-md-7">
+                    <div class="reviews bg-main-primary rounded-top-front rounded-bottom-front pt-4 pb-0">
                         <div class="circle-1"></div>
                         <div class="circle-2"></div>
-                        <h3 class="font-weight-bold text-center bg-main-primary mb-3 py-3 text-white" style="font-family: 'Times New Roman'">REVIEWS</h3>
+                        <h3 class="font-weight-bold text-center bg-main-primary mb-3 py-3 text-white"
+                            style="font-family: 'Times New Roman'">REVIEWS</h3>
                         <div class="row m-0 p-0 text-white" style="font-family: serif">
                             <div class="col-md-7">
-                                <h5 class="font-weight-bold">Give us your reviews</h5>
-                                <h2 class="font-weight-bold">4.5 * * * * *</h2>
+                                <div class="row mx-2">
+                                    <div class="col-12 text-center">
+                                        <h5 class="">Give us your reviews</h5>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <div class="reviews-rating">
+                                            <a href="#5" title="Give 5 stars">★</a>
+                                            <a href="#4" title="Give 4 stars">★</a>
+                                            <a href="#3" title="Give 3 stars">★</a>
+                                            <a href="#2" title="Give 2 stars">★</a>
+                                            <a href="#1" title="Give 1 star">★</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <textarea class="form-control" rows="7"
+                                                  placeholder="Your Feedback"></textarea>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <input class="btn border-white text-white mt-3 px-4" type="submit" value="Send">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-5">
-                                <h5 class="font-weight-bold">Customer reviews</h5>
+                                <div class="row pr-3">
+                                    <div class="col-12 text-center">
+                                        <h5 class="">Customer reviews</h5>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="customer-reviews-slider" style="">
+                                            <div id="customer-reviews-carousel" class="owl-carousel owl-theme">
+                                                <div class="item">
+
+                                                    <img class="review-images"
+                                                         src="https://da8yur8xq4co8.cloudfront.net/wp-content/uploads/2016/06/barismo.png"
+                                                         alt="">
+                                                </div>
+                                                <div class="item">
+                                                    <img class="review-images"
+                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRylqTFnRy7K55760Dhy9UjVee1FzSdsHwiwA&usqp=CAU"
+                                                         alt="">
+                                                </div>
+                                                <div class="item">
+                                                    <img class="review-images"
+                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSKp3eKXD4fFCVjCkJNwQkW8EK2BywlUTMz-Q&usqp=CAU"
+                                                         alt="">
+                                                </div>
+                                                <div class="item">
+                                                    <img class="review-images"
+                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP5qXEa1Y6iU3pNn6ovS-1ck56NJOJ-uS5gg&usqp=CAU"
+                                                         alt="">
+                                                </div>
+                                                <div class="item">
+                                                    <img class="review-images"
+                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP5qXEa1Y6iU3pNn6ovS-1ck56NJOJ-uS5gg&usqp=CAU"
+                                                         alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1353,7 +1523,8 @@
                     <div class="signup bg-main-secondary rounded-top-front rounded-bottom-front py-4">
                         <div class="circle-3"></div>
                         <div class="circle-4"></div>
-                        <h3 class="font-weight-bold text-center bg-main-secondary mb-3 pb-3 text-white" style="font-family: 'Times New Roman'">SIGNUP</h3>
+                        <h3 class="font-weight-bold text-center bg-main-secondary mb-3 pb-3 text-white"
+                            style="font-family: 'Times New Roman'">SIGNUP</h3>
                         <div class="container">
                             <div class="row m-0 p-0">
                                 <div class="col-md-6 pr-0">
@@ -1403,14 +1574,18 @@
                                     </p>
                                 </div>
                                 <div class="col-md-4 mt-2 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-sm bg-main-secondary border rounded text-white px-4">Sign up</button>
+                                    <button type="button"
+                                            class="btn btn-sm bg-main-secondary border rounded text-white px-4">Sign up
+                                    </button>
                                 </div>
                                 <div class="col-md-2 mt-3">
                                     <h6 class="text-center font-weight-bold ">OR</h6>
                                 </div>
                                 <div class="col-md-6 mt-2 text-center">
-                                    <h6><a href="#" class="text-white" style="text-decoration: underline">Signup with google</a></h6>
-                                    <h6><a href="#" class="text-white" style="text-decoration: underline">Signup with facebook</a></h6>
+                                    <h6><a href="#" class="text-white" style="text-decoration: underline">Signup with
+                                            google</a></h6>
+                                    <h6><a href="#" class="text-white" style="text-decoration: underline">Signup with
+                                            facebook</a></h6>
                                 </div>
                             </div>
                         </div>
@@ -1426,12 +1601,14 @@
             <div class="container py-5">
                 <div class="row py-4">
                     <div class="col-md-6 px-5 about-us-img">
-                        <img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" width="" height="" class="img-fluid" alt="">
+                        <img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" width=""
+                             height="" class="img-fluid" alt="">
                     </div>
                     <div class="col-md-6 px-5">
                         <div class="row text-center mt-2">
                             <div class="col-12">
-                                <h3 class="text-white font-weight-bold" style="font-family: 'Times New Roman'">ABOUT US</h3>
+                                <h3 class="text-white font-weight-bold" style="font-family: 'Times New Roman'">ABOUT
+                                    US</h3>
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -1466,6 +1643,20 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            /*Customer Reviews Carousel*/
+            $("#customer-reviews-carousel").owlCarousel({
+                items: 1,
+                autoplay: true,
+                loop: true,
+                margin: 20,
+                responsiveClass: true,
+                autoplayTimeout: 7000,
+                smartSpeed: 800,
+                nav: true,
+                navText: ["Previous","Next"],
+
+            });
+
             /*New Arrival Carousel*/
             /*-------------------*/
             var newArrivalItemDetails = $("#new_arrival_carousel_item");

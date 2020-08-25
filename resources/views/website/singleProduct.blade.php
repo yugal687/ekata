@@ -4,7 +4,6 @@
 
 
 <link rel="stylesheet" href="{{ asset('css/cate-carousel.css')}} ">
-{{--<link rel="stylesheet" href="{{ asset('css/ratestar.css')}} ">--}}
 @section('style')
     <style>
         /*Rate Stars*/
@@ -40,11 +39,11 @@
             cursor: pointer;
         }
 
-        .rating2 {
+        .rating {
             direction: rtl;
         }
 
-        .rating2 a {
+        .rating a {
             float: none
         }
 

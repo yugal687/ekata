@@ -173,18 +173,8 @@
             ul.navbar-nav.mr-auto {
                 margin-bottom: -8px;
             }
-
-            nav.navbar ul li a.nav-link {
-                float: left;
-                display: block;
-                color: black;
-                text-align: center;
-                text-decoration: none;
-                border-bottom: 3px solid transparent;
-            }
-
-            nav.navbar ul li.active a.nav-link {
-                border-bottom: 3px solid #fff;
+            #topNavbar nav .active{
+                border-bottom: 3px solid #fff !important;
             }
 
             .navbar-expand-lg .navbar-nav .nav-link {
@@ -193,6 +183,16 @@
 
             .nav-right.container-mine {
                 margin: 5px 60px;
+            }
+        }
+        @media (max-width: 991px){
+            #topNavbar nav .active{
+                border-bottom: 3px solid #fff !important;
+                font-weight: bold;
+                width: 30%
+            }
+            .nav-right.container-mine {
+                margin: 25px 60px 5px;
             }
         }
 
@@ -453,7 +453,7 @@
                     </div> <!--end shopping-cart-header -->
 
 
-                    <a href="#" class="button">Checkout</a>
+                    <a href="/billings" class="button">Checkout</a>
                 </div> <!--end shopping-cart -->
             </div> <!--end container -->
         </div><!-- modal-dialog -->
