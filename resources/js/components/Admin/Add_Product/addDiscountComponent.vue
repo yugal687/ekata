@@ -114,11 +114,6 @@
                                                 placeholder="Type to search"/>
                                         </template>
                                         <template slot-scope="scope">
-                                            <el-button type="primary"
-                                                       icon="el-icon-edit"
-                                                       size="mini"
-                                                       @click="handleEdit(scope.row.id)"
-                                                       circle></el-button>
                                             <el-button
                                                 size="mini"
                                                 type="danger"
@@ -134,58 +129,6 @@
                 </div>
             </div>
         </div>
-        <!--Edit Modal-->
-        <el-dialog title="Edit Discount Products"
-                   :visible.sync="dialogVisible"
-                    width= "30%">
-            <el-form :model="discountForm" :rules="discountFormRules" ref="discountForm"
-                     :label-position="labelPosition" class="demo-discountForm">
-                <el-form-item label="Select Category" prop="productSelect">
-                    <el-select clearable placeholder="Select Product"
-                               filterable
-                               v-model="editData.product_name"
-                               style="width: 100%">
-                        <el-option
-                            v-for="item in editData"
-                            :key="item.id"
-                            :label="item.product_name"
-                            :value="item.id">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="Selling Price" prop="sellingPrice">
-                    <el-input v-model="editData.price"
-                              class="sellingPrice"
-                              style="width: 100%;">
-
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="Discount Percentage" prop="discountPercentage">
-                    <el-input v-model="editData.discount"
-                              class="discountPercentage"
-                              style="width: 100%;">
-                            {{editData.discount}}
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="Selling Price After Discount" prop="sellingPriceAfterDiscount">
-                    <el-input v-model="editData.sale_price"
-                              class="sellingPriceAfterDiscount"
-                              style="width: 100%;">
-                    </el-input>
-                </el-form-item>
-                <!--<div class="row">
-                    Qty:<input type='number' name='qty' id='qty' value='' /> <br/>
-                    Price:<input type='number' name='price' id='price' /> <br/>
-                    Total:<input type='number' name='total' id='total' /> <br/>
-                </div>-->
-                <el-form-item>
-                    <el-button type="primary"
-                               style="width: 80%; margin: 15px 10% 0"
-                               @click="submitForm('discountForm')">Save
-                    </el-button>
-                </el-form-item>
-            </el-form>
-        </el-dialog>
     </div>
 </template>
 
@@ -261,12 +204,8 @@ export default {
                 }
             });
         },
-        handleEdit(id) {
-            this.dialogVisible = true;
-            this.editData = this.getProduct.filter(getProduct=>getProduct.id==id);
-        },
         handleDelete(id) {
-            axios.delete('/api/deleteProduct/'+id)
+            axios.patch('/api/deleteDiscount/'+id,{})
                 .then(response=>{
                    alert(response.data.message);
                 });
@@ -289,18 +228,6 @@ export default {
             .then(response=>{
                 this.getProduct = response.data.getProduct;
             });
-        $(document).ready(function () {
-            /*$('#qty, #price').on('input', function () {
-                var qty = parseInt($('#qty').val());
-                var price = parseFloat($('#price').val());
-                $('#total').val((qty * price ? qty * price : 0).toFixed(2));
-            });
-
-                var price = $('.sellingPrice').val();
-                alert(price);
-                var discount = $('.discountPercentage').val();
-                alert(discount);*/
-        });
     }
 
 }

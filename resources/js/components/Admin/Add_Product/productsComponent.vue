@@ -76,20 +76,19 @@
 
         <el-dialog title="Product Details"
                    :visible.sync="dialogVisible"
-                    width="70%">
+                   width="70%">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" v-if="editProduct.length > 0">
                     <el-card :body-style="{ padding: '0px' }">
                         <img style="width: 100%; height: 250px"
                              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
                              class="image">
                         <div style="padding: 14px;">
-                            <h3>Product Name</h3>
+                            <h3>{{editProduct[0].product_name}}</h3>
                             <div class="bottom clearfix">
-                                <h5> $....</h5>
+                                <h5> {{editProduct[0].category.category_name}}</h5>
                                 <p style="border-top: 1px solid #ebeef5; padding: 10px 0">
-                                    fdtrfgvcjg kjdsjkfsd kjsdfsdfks skjdffnsdf skjdfnsdkf sjdjkfnsdf sodlfnsdlf
-                                    slldkjnsds sdljnsld sldjns sodjfhns osdjfsldkfs
+                                    {{editProduct[0].additional_information}}
                                 </p>
                             </div>
                         </div>
@@ -113,29 +112,21 @@
                         <div class="text item">
                             <!--Product Details-->
                             <div class="productDetailsWrapper">
-                                <el-form :rules="productRules" ref="editProduct"
-                                       v-for="eProduct in editProduct"  :label-position="labelPosition" class="demo-productForm">
+                                <el-form :rules="productRules" ref="editProduct" v-if="editProduct.length > 0"
+                                         :label-position="labelPosition"    class="demo-productForm">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <el-form-item label="Category" prop="">
                                                 <el-input disabled
-                                                          :value="eProduct.category_name"
+                                                          :value="editProduct[0].category.category_name"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
                                         </div>
-                                        <div class="col-md-4">
-                                            <el-form-item label="Sub-Category" prop="">
-                                                <el-input disabled
-                                                          value="Sub-Category Name"
-                                                          style="width: 100%;">
-                                                </el-input>
-                                            </el-form-item>
-                                        </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <el-form-item label="Brand" prop="">
                                                 <el-input disabled
-                                                          :value="eProduct.brand_name"
+                                                          :value="editProduct[0].brand.brand_name"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
@@ -145,7 +136,7 @@
                                         <div class="col-md-6">
                                             <el-form-item label="Product" prop="product_name">
                                                 <el-input disabled
-                                                          :value="eProduct.product_name"
+                                                          :value="editProduct[0].product_name"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
@@ -153,33 +144,25 @@
                                         <div class="col-md-6">
                                             <el-form-item label="Tags" prop="tags">
                                                 <el-input disabled
-                                                          :value="eProduct.tag"
+                                                          :value="editProduct[0].tags[0].tags"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <el-form-item label="Quantity" prop="quantity">
                                                 <el-input disabled
-                                                          :value="eProduct.quantity"
+                                                          :value="editProduct[0].quantity"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <el-form-item label="Price" prop="price">
                                                 <el-input disabled
-                                                          :value="eProduct.price"
-                                                          style="width: 100%;">
-                                                </el-input>
-                                            </el-form-item>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <el-form-item label="Selling Price" prop="">
-                                                <el-input disabled
-                                                          value="Selling Price"
+                                                          :value="editProduct[0].price"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
@@ -190,7 +173,7 @@
                                             <el-form-item label="Additional Information" prop="additional_information">
                                                 <el-input type="textarea"
                                                           disabled
-                                                          :value="eProduct.additional_information"
+                                                          :value="editProduct[0].additional_information"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
@@ -201,7 +184,7 @@
                             <!--Product Edit-->
                             <div class="productEditWrapper hidden">
                                 <el-form :model="productForm" :rules="productRules" ref="productForm"
-                                         :label-position="labelPosition" class="demo-productForm">
+                                         :label-position="labelPosition" class="demo-productForm" v-if="editProduct.length > 0">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <el-form-item label="Select Image" prop="imageSelect">
@@ -217,47 +200,32 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <el-form-item label="Select Category" prop="categorySelect">
-                                                <el-select clearable placeholder="Select Category"
+                                        <div class="col-md-6">
+                                            <el-form-item label="Select Category">
+                                                <el-select clearable placeholder="SelectCategory"
                                                            filterable
-                                                           v-model="productForm.categorySelect"
+                                                           v-model="editProduct[0].category.category_name"
                                                            style="width: 100%">
                                                     <el-option
-                                                        v-for="item in categorySelectOptions"
-                                                        :key="item.value"
-                                                        :label="item.label"
-                                                        :value="item.value">
+                                                        v-for="item in getSubCategory"
+                                                        :key="item.id"
+                                                        :label="item.category_name"
+                                                        :value="item.id">
                                                     </el-option>
                                                 </el-select>
                                             </el-form-item>
                                         </div>
-                                        <div class="col-md-4">
-                                            <el-form-item label="Select Sub-Category" prop="subcategorySelect">
-                                                <el-select clearable placeholder="Select Sub-Category"
-                                                           filterable
-                                                           v-model="productForm.subcategorySelect"
-                                                           style="width: 100%">
-                                                    <el-option
-                                                        v-for="item in subcategorySelectOptions"
-                                                        :key="item.value"
-                                                        :label="item.label"
-                                                        :value="item.value">
-                                                    </el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <el-form-item label="Select Brand" prop="brandSelect">
+                                        <div class="col-md-6">
+                                            <el-form-item label="Select Brand">
                                                 <el-select clearable placeholder="Select Brand"
                                                            filterable
-                                                           v-model="productForm.brandSelect"
+                                                           v-model="editProduct[0].brand.brand_name"
                                                            style="width: 100%">
                                                     <el-option
-                                                        v-for="item in brandSelectOptions"
-                                                        :key="item.value"
-                                                        :label="item.label" bb bbb
-                                                        :value="item.value">
+                                                        v-for="item in getBrand"
+                                                        :key="item.id"
+                                                        :label="item.brand_name"
+                                                        :value="item.id">
                                                     </el-option>
                                                 </el-select>
                                             </el-form-item>
@@ -265,72 +233,53 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <el-form-item label="Product Name" prop="productName">
+                                            <el-form-item label="Product Name" >
                                                 <el-input placeholder="Place product name"
-                                                          v-model="productForm.productName"
+                                                          v-model="editProduct[0].product_name"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
                                         </div>
                                         <div class="col-md-6">
-                                            <el-form-item label="Tags" prop="tags">
-                                                <el-tag
-                                                    :key="tag"
-                                                    v-for="tag in dynamicTags"
-                                                    closable
-                                                    :disable-transitions="false"
-                                                    @close="handleClose(tag)">
-                                                    {{ tag }}
-                                                </el-tag>
-                                                <el-input
-                                                    class="input-new-tag"
-                                                    v-if="inputVisible"
-                                                    v-model="inputValue"
-                                                    ref="saveTagInput"
-                                                    size="mini"
-                                                    @keyup.enter.native="handleInputConfirm"
-                                                    @blur="handleInputConfirm"
-                                                >
-                                                </el-input>
-                                                <el-button v-else class="button-new-tag" size="small"
-                                                           @click="showInput">+ New Tag
-                                                </el-button>
+                                            <el-form-item label="Tags">
+                                                <el-select multiple
+                                                    v-model="inputTags"
+                                                           :value="editProduct[0].tags[0].tags"
+                                                    placeholder="Select Tags">
+                                                    <el-option
+                                                        v-for="item in tagslist"
+                                                        :key="item.id"
+                                                        :label="item.tags"
+                                                        :value="item.id">
+                                                    </el-option>
+                                                </el-select>
                                             </el-form-item>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <el-form-item label="Quantity" prop="quantity">
+                                        <div class="col-md-6">
+                                            <el-form-item label="Quantity" >
                                                 <el-input placeholder="Place quantity"
-                                                          v-model="productForm.quantity"
+                                                          v-model="editProduct[0].quantity"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
                                         </div>
-                                        <div class="col-md-4">
-                                            <el-form-item label="Cost Price" prop="costPrice">
+                                        <div class="col-md-6">
+                                            <el-form-item label="Cost Price" >
                                                 <el-input placeholder="Place cost price"
-                                                          v-model="productForm.costPrice"
+                                                          v-model="editProduct[0].price"
                                                           style="width: 100%;">
-                                                </el-input>
-                                            </el-form-item>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <el-form-item label="Selling Price" prop="sellingPrice">
-                                                <el-input placeholder="Place selling price"
-                                                          v-model="productForm.sellingPrice"
-                                                          style="width: 100%">
                                                 </el-input>
                                             </el-form-item>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <el-form-item label="Additional Information"
-                                                          prop="additionalInformation">
+                                            <el-form-item label="Additional Information">
                                                 <el-input
                                                     type="textarea"
-                                                    v-model="productForm.additionalInformation"
+                                                    v-model="editProduct[0].additional_information"
                                                     :autosize="{ minRows: 3, maxRows: 4}"
                                                     placeholder="Please input additional Information"
                                                 >
@@ -357,210 +306,241 @@
 </template>
 
 <script>
-export default {
-    name: "productsComponent",
-    data() {
-        return {
-            dialogVisible: false,
-            editProduct:[0],
-            getProduct:[],
-            search: '',
-            dynamicTags: [],
-            inputVisible: false,
-            inputValue: '',
+    export default {
+        name: "productsComponent",
+        data() {
+            return {
+                dialogVisible: false,
+                inputTags:[],
+                editProduct: [],
+                getProduct: [],
+                search: '',
+                dynamicTags: [],
+                inputVisible: false,
+                inputValue: '',
 
-            labelPosition: 'top',
-            categorySelectOptions: [{
-                value: 'Category - 1',
-                label: 'Category - 1'
-            }, {
-                value: 'Category - 2',
-                label: 'Category - 2'
-            }],
-            subcategorySelectOptions: [{
-                value: 'Sub-Category - 1',
-                label: 'Sub-Category - 1'
-            }, {
-                value: 'Sub-Category - 2',
-                label: 'Sub-Category - 2'
-            }],
-            brandSelectOptions: [{
-                value: 'Brand - 1',
-                label: 'Brand - 1'
-            }, {
-                value: 'Brand - 2',
-                label: 'Brand - 2'
-            }],
-            productForm: {
-                categorySelect: '',
-                subcategorySelect: '',
-                brandSelect: '',
-                imageSelect: '',
-                productName: '',
-                quantity: '',
-                costPrice: '',
-                sellingPrice: '',
-                additionalInformation: '',
-            },
-            productRules: {
-                categorySelect: [
-                    {required: true, message: 'Please select category', trigger: 'change'}
-                ],
-                subcategorySelect: [
-                    {required: true, message: 'Please select subcategory', trigger: 'change'}
-                ],
-                brandSelect: [
-                    {required: true, message: 'Please select brand', trigger: 'change'}
-                ],
-                productName: [
-                    {required: true, message: 'Please input product name', trigger: 'blur'}
-                ],
-                quantity: [
-                    {required: true, message: 'Please input quantity', trigger: 'blur'}
-                ],
-                costPrice: [
-                    {required: true, message: 'Please input cost price', trigger: 'blur'}
-                ],
-                sellingPrice: [
-                    {required: true, message: 'Please input cost price', trigger: 'blur'},
-                ],
-                additionalInformation: [
-                    {required: true, message: 'Please input additional Information', trigger: 'blur'},
-                ]
+                labelPosition: 'top',
+                categorySelectOptions: [{
+                    value: 'Category - 1',
+                    label: 'Category - 1'
+                }, {
+                    value: 'Category - 2',
+                    label: 'Category - 2'
+                }],
+                subcategorySelectOptions: [{
+                    value: 'Sub-Category - 1',
+                    label: 'Sub-Category - 1'
+                }, {
+                    value: 'Sub-Category - 2',
+                    label: 'Sub-Category - 2'
+                }],
+                brandSelectOptions: [{
+                    value: 'Brand - 1',
+                    label: 'Brand - 1'
+                }, {
+                    value: 'Brand - 2',
+                    label: 'Brand - 2'
+                }],
+                productForm: {
+                    categorySelect: '',
+                    subcategorySelect: '',
+                    brandSelect: '',
+                    imageSelect: '',
+                    productName: '',
+                    quantity: '',
+                    costPrice: '',
+                    sellingPrice: '',
+                    additionalInformation: '',
+                },
+                productRules: {
+                    categorySelect: [
+                        {required: true, message: 'Please select category', trigger: 'change'}
+                    ],
+                    subcategorySelect: [
+                        {required: true, message: 'Please select subcategory', trigger: 'change'}
+                    ],
+                    brandSelect: [
+                        {required: true, message: 'Please select brand', trigger: 'change'}
+                    ],
+                    productName: [
+                        {required: true, message: 'Please input product name', trigger: 'blur'}
+                    ],
+                    quantity: [
+                        {required: true, message: 'Please input quantity', trigger: 'blur'}
+                    ],
+                    costPrice: [
+                        {required: true, message: 'Please input cost price', trigger: 'blur'}
+                    ],
+                    sellingPrice: [
+                        {required: true, message: 'Please input cost price', trigger: 'blur'},
+                    ],
+                    additionalInformation: [
+                        {required: true, message: 'Please input additional Information', trigger: 'blur'},
+                    ]
+                },
+                getCategory:[],
+                getSubCategory:[],
+                getBrand:[],
+                tagslist:[]
             }
-        }
-    },
-    mounted() {
-        axios.get('/api/getProduct',{})
-            .then(response=>{
-               this.getProduct = response.data.getProduct;
-            });
-    },
-    methods: {
-        openEditModal(id) {
-            this.dialogVisible=true;
-           // this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
-            $(".productEditWrapper").slideToggle("slow");
-            $(".productDetailsWrapper").slideToggle("slow");
-            $(".detailsProductDetailsBtn").toggle("slow");
-            $(".editProductDetailsBtn").toggle("slow");
         },
-        openDetailsModal(id) {
-            console.log(id);
-            this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
-            this.dialogVisible=true;
-
-            $(".productEditWrapper").slideToggle("slow");
-            $(".productDetailsWrapper").slideToggle("slow");
-            $(".detailsProductDetailsBtn").toggle("slow");
-            $(".editProductDetailsBtn").toggle("slow");
-        },
-
-        /*Client Details---*/
-        handleEdit(index, row) {
-            console.log(index, row);
-        },
-        handleDelete(id) {
-            axios.delete('/api/deleteProduct/'+id)
+        mounted() {
+            axios.get('/api/getProduct', {})
+                .then(response => {
+                    this.getProduct = response.data.getProduct;
+                });
+            axios.get('/api/getCategories', {})
+                .then(response => {
+                    this.getCategory = response.data.getCategory;
+                });
+            axios.get('/api/getSubCategories', {})
+                .then(response => {
+                    this.getSubCategory = response.data.getSubCategory;
+                });
+            axios.get('/api/getBrand', {})
+                .then(response => {
+                    this.getBrand = response.data.getBrand;
+                });
+            axios.get('/api/getTag',{})
                 .then(response=>{
-                   alert(response.data.message);
+                    this.tagslist = response.data.tags;
                 });
         },
-        /*Client Information Tab---*/
-        handleClick(tab, event) {
-            console.log(tab, event);
-        },
+        methods: {
+            openEditModal(id) {
+                this.dialogVisible = true;
+                 this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
+                 console.log(this.editProduct[0].tags[0].tags)
+                $(".productEditWrapper").slideToggle("slow");
+                $(".productDetailsWrapper").slideToggle("slow");
+                $(".detailsProductDetailsBtn").toggle("slow");
+                $(".editProductDetailsBtn").toggle("slow");
+            },
+            openDetailsModal(id) {
+                this.dialogVisible = true;
+                this.editProduct = this.getProduct.filter(getProduct => getProduct.id == id);
+                $(".productEditWrapper").slideToggle("slow");
+                $(".productDetailsWrapper").slideToggle("slow");
+                $(".detailsProductDetailsBtn").toggle("slow");
+                $(".editProductDetailsBtn").toggle("slow");
+            },
 
-        /*Edit Datas*/
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
-                } else {
-                    console.log('error submit!!');
-                    return false;
+            /*Client Details---*/
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(id) {
+                axios.delete('/api/deleteProduct/' + id)
+                    .then(response => {
+                        alert(response.data.message);
+                    });
+            },
+            /*Client Information Tab---*/
+            handleClick(tab, event) {
+                console.log(tab, event);
+            },
+
+            /*Edit Datas*/
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let tag = this.inputTags;
+                        console.log(tag);
+                        let formData = new FormData();
+                        tag.forEach((v, k) => {
+                            formData.append(`tag[${k}]`, v);
+                        });
+                        formData.append('editedProduct',JSON.stringify(this.editProduct));
+                        axios.post('/api/editProduct',formData,{
+                          //  editedProduct : this.editProduct,
+                        }).then(response=>{
+                            alert(response.data.message);
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+
+            /*Tags*/
+            handleClose(tag) {
+                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+            },
+
+            showInput() {
+                this.inputVisible = true;
+                this.$nextTick(_ => {
+                    this.$refs.saveTagInput.$refs.input.focus();
+                });
+            },
+
+            handleInputConfirm() {
+                let inputValue = this.inputValue;
+                if (inputValue) {
+                    this.dynamicTags.push(inputValue);
                 }
-            });
-        },
-
-        /*Tags*/
-        handleClose(tag) {
-            this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-        },
-
-        showInput() {
-            this.inputVisible = true;
-            this.$nextTick(_ => {
-                this.$refs.saveTagInput.$refs.input.focus();
-            });
-        },
-
-        handleInputConfirm() {
-            let inputValue = this.inputValue;
-            if (inputValue) {
-                this.dynamicTags.push(inputValue);
+                this.inputVisible = false;
+                this.inputValue = '';
             }
-            this.inputVisible = false;
-            this.inputValue = '';
-        }
 
+        }
     }
-}
 </script>
 
 <style scoped>
-.hidden {
-    display: none;
-}
+    .hidden {
+        display: none;
+    }
 
 
-.el-tag + .el-tag {
-    margin-left: 10px;
-}
+    .el-tag + .el-tag {
+        margin-left: 10px;
+    }
 
-.button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
+    .button-new-tag {
+        margin-left: 10px;
+        height: 32px;
+        line-height: 30px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 
-.input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-}
+    .input-new-tag {
+        width: 90px;
+        margin-left: 10px;
+        vertical-align: bottom;
+    }
 
 
-.clients-wrapper {
-    border: 1px solid #ebebeb;
-    border-radius: 5px;
-    transition: .2s;
-    margin: 20px;
-    padding: 20px;
-}
+    .clients-wrapper {
+        border: 1px solid #ebebeb;
+        border-radius: 5px;
+        transition: .2s;
+        margin: 20px;
+        padding: 20px;
+    }
 
-.information-wrapper {
-    /*border: 1px solid #ebebeb;*/
-    /*border-radius: 5px;*/
-    /*transition: .2s;*/
-    margin: 10px;
-    /*padding: 10px;*/
-}
+    .information-wrapper {
+        /*border: 1px solid #ebebeb;*/
+        /*border-radius: 5px;*/
+        /*transition: .2s;*/
+        margin: 10px;
+        /*padding: 10px;*/
+    }
 
-/*th.gutter {
-    padding: 0 !important;
-}*/
+    /*th.gutter {
+        padding: 0 !important;
+    }*/
 
-.clients-wrapper:hover {
-    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .6);
-}
+    .clients-wrapper:hover {
+        box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .6);
+    }
 
-.clients-ques-ans h6 {
-    font-size: 14px;
-    line-height: 15px;
-    font-weight: 700;
-    color: #606266;
-}
+    .clients-ques-ans h6 {
+        font-size: 14px;
+        line-height: 15px;
+        font-weight: 700;
+        color: #606266;
+    }
 </style>

@@ -31,6 +31,8 @@ Route::post('/saveEditCategory','Admin\CategoryController@updateCategory');
 Route::post('/saveEditBrand','Admin\BrandController@updateBrand');
 Route::post('/saveEditTag','Tag\TagController@updateTag');
 Route::post('/addDiscount','Admin\ProductController@addDiscount');
+Route::post('/editProduct','Admin\ProductController@editProduct');
+Route::patch('/deleteDiscount/{id}','Admin\ProductController@deleteDiscount');
 
 
 

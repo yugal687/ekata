@@ -90,4 +90,36 @@ class ProductController extends Controller
            'message' => 'Product Deleted !!!'
         ]);
     }
+    public function deleteDiscount($id){
+        $deleteDiscount = Product::findorFail($id)->update([
+           'sale_price' => 0,
+           'discount' => 0
+        ]);
+        return response()->json([
+            'message' => 'Discount Deleted !!!'
+        ]);
+    }
+    public function editProduct(Request $request){
+        $editedProduct = json_decode($request->editedProduct);
+        //dd($editedProduct[0]->id);
+        //dd($request->tag);
+        $saveEditProduct =Product::findorFail($editedProduct[0]->id)->update([
+            'product_name' => $editedProduct[0]->product_name,
+            'quantity' => $editedProduct[0]->quantity,
+            'category_id' => $editedProduct[0]->category_id,
+            'brand_id' => $editedProduct[0]->brand_id,
+            'price' => $editedProduct[0]->price,
+            'additional_information' => $editedProduct[0]->additional_information,
+        ]);
+        $deletetag =DB::table('products_tags')->where('product_id',$editedProduct[0]->id)->delete();
+        foreach ($request->tag as $tag){
+            $savetags = DB::table('products_tags')->insert([
+                'product_id' => $editedProduct[0]->id,
+                'tag_id' => $tag
+            ]);
+        }
+        return response()->json([
+           'message' => 'Product Updated !!'
+        ]);
+    }
 }
