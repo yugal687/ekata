@@ -25,6 +25,9 @@ Route::get('/category', function () {
 Route::get('/maincategory', function () {
     return view('website/mainCategory');
 });
+Route::get('/singleproduct', function () {
+    return view('website/singleProduct');
+});
 
 Route::view('admin/dashboard', 'admin.dashboard');
 Route::view('admin/userdashboard', 'admin.userdashboard');
