@@ -18,10 +18,7 @@ Route::get('/userlogin', function () {
     return view('website/userlogin');
 });
 
-Route::get('/', function () {
-    return view('website/index');
-});
-
+Route::get('/', 'Website\ProductController@index');
 
 Route::get('/billings', function () {
     return view('website/billings');

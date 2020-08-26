@@ -278,6 +278,7 @@
 @stop
 
 @section('content')
+
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
@@ -304,7 +305,9 @@
                 <!-- banner section starts here -->
                 <div class="banner-area">
                     {{--<h3 class="text-center mt-5 border">---Hello Banner section ---</h3>--}}
-                    <img src="{{ asset('images/Homepage/Banner/Banner.png') }}" class="img-fluid" alt="">
+
+
+                    <img src="{{$bannerImage[0]->image}}" class="img-fluid" alt="">
                 </div>
                 <!-- banner section ends here -->
 
@@ -968,85 +971,25 @@
             <div class="container">
                 <div class="card-body bg-product-light rounded-bottom-front card-bdy">
                     <div id="new_items" class="owl-carousel owl-theme px-3">
+                        @foreach($latestProduct as $lastproduct)
                         <div class="item text-center d-flex justify-content-center align-items-center">
                             <div class="new_items_img">
                                 <div class="row m-4">
                                     <div
                                         class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/khukuri.png') }}"
+
+                                        <img src="{{ $lastproduct->image[0]->name }}"
                                              class="img-fluid p-2"
                                              alt="">
                                     </div>
                                     <div class="col-12 mt-3 mb-2">
-                                        <h6>Khukuri</h6>
+                                        <h6>{{$lastproduct->product_name}}</h6>
                                     </div>
                                 </div>
                             </div>
                             <br/>
                         </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/momo.png') }}" class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Steamer</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/cooker.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Pressure Cooker</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/ganesh.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Goodness</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/masala.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Masala</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -1308,134 +1251,21 @@
                 <div class="row m-0 p-0 mb-4">
                     <!-- col-item-start -->
                     <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        @foreach ($discountedProducts as $discountedProduct)
                         <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/Product_pngs/masala.png')}}" width="150" alt="">
+                            <img src="{{$discountedProduct->image[1]->image}}" width="150" alt="">
                         </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was {{$discountedProduct->price}}</s></h5>
+                        <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
+                        <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
                         </button>
-
+@endforeach
                         <!-- col-item-end -->
                     </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- website footer -->
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                </div>
+                   </div>
                 <!-- second row -->
             </div>
         </div>

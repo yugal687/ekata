@@ -33,6 +33,7 @@ Route::post('/saveEditTag','Tag\TagController@updateTag');
 Route::post('/addDiscount','Admin\ProductController@addDiscount');
 Route::post('/editProduct','Admin\ProductController@editProduct');
 Route::patch('/deleteDiscount/{id}','Admin\ProductController@deleteDiscount');
+Route::patch('/activeBanner/{id}','Admin\BannerImageController@setActive');
 
 
 

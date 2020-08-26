@@ -6,121 +6,12 @@
 
                 <li class="blocks-gallery-item">
 
-                    <figure class="mx-auto">
+                        @foreach($getCategory as $category)
+                        <figure class="mx-auto">
                         <img src="{{ asset('images/Homepage/Category_images/Layer 7 copy 2.png') }}" class="img-fluid" alt="">
                     </figure>
-                    <h6>Dry Goods</h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 28.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Noodles
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 29.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Masala
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 30.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Items
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 31.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Grocery
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 33.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Todo
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 34.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Taken
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 28.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Items
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 29.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Grocery
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 30.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Todo
-                    </h6>
-
-                </li>
-
-                <li class="blocks-gallery-item">
-
-                    <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 31.png') }}" class="img-fluid" alt="">
-                    </figure>
-                    <h6>
-                        Taken
-                    </h6>
-
+                    <h6>{{$category->category_name}}</h6>
+                            @endforeach
                 </li>
 
             </ul>

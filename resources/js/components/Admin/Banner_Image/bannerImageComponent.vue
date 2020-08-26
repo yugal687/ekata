@@ -50,15 +50,9 @@
                                     <el-button-group>
                                         <el-button type="success"
                                                    v-if=""
-                                                   @click="toggle(images.id)"
+                                                   @click="setActive(images.id)"
                                                    size="mini">
                                             <i class="fas fa-check"></i>
-                                        </el-button>
-                                        <el-button type="warning"
-                                                   v-if=""
-                                                   @click="toggle(images.id)"
-                                                   size="mini">
-                                            <i class="fas fa-times"></i>
                                         </el-button>
                                         <el-button type="danger"
                                                    size="mini"
@@ -140,8 +134,10 @@ export default {
                 }
             });
         },
-        toggle: function (id) {
-
+        setActive(id) {
+        axios.patch('/api/activeBanner/'+id).then(response=>{
+           alert(response.data.message);
+        });
         },
         deleteImage(id) {
             axios.delete('/api/deleteBanner/'+id)

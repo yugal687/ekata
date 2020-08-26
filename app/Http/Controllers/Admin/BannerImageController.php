@@ -20,12 +20,24 @@ class BannerImageController extends Controller
                 $image->move(public_path('/uploads'), $originalName);
                 $saveBanner = BannerImage::create([
                     'image' => '/uploads/' . $originalName,
+                    'active' => 0,
 
                 ]);
             }
         }
         return response()->json([
            'message' => 'Banner Image Saved!!!'
+        ]);
+    }
+    public function setActive($id){
+        $setPassive =BannerImage::where('active', '=','1')->update([
+           'active' => 0
+        ]);
+        $setActive = BannerImage::findorFail($id)->update([
+           'active' => 1
+        ]);
+        return response()->json([
+           'message' => 'Selected Image Is Active !!'
         ]);
     }
     public function getBannerImage(){

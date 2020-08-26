@@ -122,4 +122,6 @@ class ProductController extends Controller
            'message' => 'Product Updated !!'
         ]);
     }
+
+
 }
