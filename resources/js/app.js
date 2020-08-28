@@ -26,12 +26,18 @@ Vue.use(ElementUI);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('user-component', require('./components/Admin/User/userComponent.vue').default);
-Vue.component('admin-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
+Vue.component('customer-component', require('./components/Admin/Customer/customerComponent.vue').default);
+/*Setup*/
+Vue.component('category-subcategory-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
+Vue.component('brands-setup-component', require('./components/Admin/Setup/brandSetupComponent.vue').default);
+Vue.component('tags-setup-component', require('./components/Admin/Setup/tagsSetupComponent.vue').default);
+/*Products*/
 Vue.component('add-product-component', require('./components/Admin/Add_Product/createproductComponent.vue').default);
 Vue.component('product-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
 /*Vue.component('add-product-component', require('./components/Admin/Add_Product/addProductComponent.vue').default);*/
 Vue.component('products-component', require('./components/Admin/Add_Product/productsComponent.vue').default);
 Vue.component('add-discount-component', require('./components/Admin/Add_Product/addDiscountComponent.vue').default);
+/*Orders*/
 Vue.component('order-details-component', require('./components/Admin/Order/orderDetailsComponent.vue').default);
 Vue.component('shipping-details-component', require('./components/Admin/Order/shippingDetailsComponent.vue').default);
 Vue.component('banner-image-component', require('./components/Admin/Banner_Image/bannerImageComponent.vue').default);

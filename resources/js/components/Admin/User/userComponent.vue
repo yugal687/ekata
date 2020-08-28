@@ -1,13 +1,8 @@
 <template>
     <div class="">
         <main>
-
             <div class="card">
                 <div class="card-body">
-                    <div class="row my-3 mx-5"
-                         :data="userDetails.filter(data => !search || data.userName.toLowerCase().includes(search.toLowerCase()))">
-                        <el-input placeholder="Type to search" v-model="search"></el-input>
-                    </div>
                     <div class="row">
                         <div v-for="userDetail in userDetails" class="col-md-4">
                             <div class="card bg-light">
@@ -46,7 +41,7 @@
                                 <div class="card-footer">
                                     <div class="text-right">
                                         <a href="#" class="btn btn-sm btn-primary">
-                                            <i class="fas fa-user"></i> View Profile
+                                            <i class="fas fa-user"></i> Edit Profile
                                         </a>
                                     </div>
                                 </div>
@@ -55,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <!--<div class="card-footer">
                     <nav aria-label="">
                         <ul class="pagination justify-content-center m-0">
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -68,7 +63,7 @@
                             <li class="page-item"><a class="page-link" href="#">8</a></li>
                         </ul>
                     </nav>
-                </div>
+                </div>-->
             </div>
 
 

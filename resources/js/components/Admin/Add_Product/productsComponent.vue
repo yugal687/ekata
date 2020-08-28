@@ -76,7 +76,7 @@
 
         <el-dialog title="Product Details"
                    :visible.sync="dialogVisible"
-                    width="70%">
+                   width="70%">
             <div class="row">
                 <div class="col-md-4">
                     <el-card :body-style="{ padding: '0px' }">
