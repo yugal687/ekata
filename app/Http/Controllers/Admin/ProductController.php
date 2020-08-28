@@ -45,6 +45,7 @@ class ProductController extends Controller
                 $saveimage = Product::first();
                 $saveimage->image()->create([
                     'name' => '/uploads/' . $originalName,
+                    'imagable_id' =>$saveProduct->id
                 ]);
 
             }

@@ -15,12 +15,10 @@ class ProductController extends Controller
         $getProduct = Product::with(array('category', 'brand', 'tags', 'image' => function ($query) {
             return $query->take(1);
         }))->get();
-        //dd($getProduct);
         $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->latest()->get();
         $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->latest()->get();
         $bannerImage = BannerImage::where('active', 1)->get();
         $getcategory = Category::with('product')->get();
-//dd($latestProduct);
         return view('website.index',
             [
                 'getProduct' => $getProduct,
@@ -31,14 +29,31 @@ class ProductController extends Controller
 
             ]);
     }
-
-    public function getCategory()
-    {
-        $getcategory = Category::with('product')->where('parent_id','=','NULL')->get();
-        //dd($getcategory);
-        return view('layouts.website.indexsidebar',
+    public function showCategory(){
+        $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
+        return view('website.category',
             [
                 'getCategory' => $getcategory
+
+            ]);
+    }
+    public function showMainCategory($id){
+        $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
+        $getsingleCategory = Category::where('id',$id)->with('product','parent','children')->get();
+        //dd($getsingleCategory);
+        return view('website.mainCategory',
+            [
+                'getsingleCategory' => $getsingleCategory,
+                'getCategory' => $getcategory
+
+            ]);
+    }
+    public function SingleProductPage(){
+        $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
+        return view('website.singleProduct',
+            [
+                'getCategory' => $getcategory
+
             ]);
     }
 }

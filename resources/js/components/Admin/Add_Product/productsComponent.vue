@@ -77,8 +77,8 @@
         <el-dialog title="Product Details"
                    :visible.sync="dialogVisible"
                    width="70%">
-            <div class="row">
-                <div class="col-md-4" v-if="editProduct.length > 0">
+            <div class="row" v-if="editProduct.length > 0">
+                <div class="col-md-4">
                     <el-card :body-style="{ padding: '0px' }">
                         <img style="width: 100%; height: 250px"
                              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
@@ -99,12 +99,12 @@
                         <div slot="header" class="clearfix" style="">
                             <span>Product Information</span>
                             <el-button class="editProductDetailsBtn"
-                                       @click="openEditModal(scope.row.id)"
+                                       @click="openEditModal(editProduct[0].id)"
                                        style="float: right; padding: 3px 0" type="text">
                                 Edit
                             </el-button>
                             <el-button class="detailsProductDetailsBtn hidden"
-                                       @click="openDetailsModal(scope.row.id)"
+                                       @click="openDetailsModal(editProduct[0].id)"
                                        style="float: right; padding: 3px 0"
                                        type="text">Details
                             </el-button>

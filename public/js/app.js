@@ -103828,9 +103828,9 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "row" }, [
-            _vm.editProduct.length > 0
-              ? _c(
+          _vm.editProduct.length > 0
+            ? _c("div", { staticClass: "row" }, [
+                _c(
                   "div",
                   { staticClass: "col-md-4" },
                   [
@@ -103886,351 +103886,383 @@ var render = function() {
                     )
                   ],
                   1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-8 pt-md-0 pt-sm-3 pt-3" },
-              [
+                ),
+                _vm._v(" "),
                 _c(
-                  "el-card",
-                  { staticClass: "box-card", attrs: { shadow: "hover" } },
+                  "div",
+                  { staticClass: "col-md-8 pt-md-0 pt-sm-3 pt-3" },
                   [
                     _c(
-                      "div",
-                      {
-                        staticClass: "clearfix",
-                        attrs: { slot: "header" },
-                        slot: "header"
-                      },
+                      "el-card",
+                      { staticClass: "box-card", attrs: { shadow: "hover" } },
                       [
-                        _c("span", [_vm._v("Product Information")]),
-                        _vm._v(" "),
                         _c(
-                          "el-button",
+                          "div",
                           {
-                            staticClass: "editProductDetailsBtn",
-                            staticStyle: { float: "right", padding: "3px 0" },
-                            attrs: { type: "text" },
-                            on: {
-                              click: function($event) {
-                                return _vm.openEditModal(_vm.scope.row.id)
-                              }
-                            }
+                            staticClass: "clearfix",
+                            attrs: { slot: "header" },
+                            slot: "header"
                           },
                           [
-                            _vm._v(
-                              "\n                            Edit\n                        "
+                            _c("span", [_vm._v("Product Information")]),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                staticClass: "editProductDetailsBtn",
+                                staticStyle: {
+                                  float: "right",
+                                  padding: "3px 0"
+                                },
+                                attrs: { type: "text" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.openEditModal(
+                                      _vm.editProduct[0].id
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Edit\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                staticClass: "detailsProductDetailsBtn hidden",
+                                staticStyle: {
+                                  float: "right",
+                                  padding: "3px 0"
+                                },
+                                attrs: { type: "text" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.openDetailsModal(
+                                      _vm.editProduct[0].id
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Details\n                        ")]
                             )
-                          ]
+                          ],
+                          1
                         ),
                         _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            staticClass: "detailsProductDetailsBtn hidden",
-                            staticStyle: { float: "right", padding: "3px 0" },
-                            attrs: { type: "text" },
-                            on: {
-                              click: function($event) {
-                                return _vm.openDetailsModal(_vm.scope.row.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Details\n                        ")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text item" }, [
-                      _c(
-                        "div",
-                        { staticClass: "productDetailsWrapper" },
-                        [
-                          _vm.editProduct.length > 0
-                            ? _c(
-                                "el-form",
-                                {
-                                  ref: "editProduct",
-                                  staticClass: "demo-productForm",
-                                  attrs: {
-                                    rules: _vm.productRules,
-                                    "label-position": _vm.labelPosition
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
+                        _c("div", { staticClass: "text item" }, [
+                          _c(
+                            "div",
+                            { staticClass: "productDetailsWrapper" },
+                            [
+                              _vm.editProduct.length > 0
+                                ? _c(
+                                    "el-form",
+                                    {
+                                      ref: "editProduct",
+                                      staticClass: "demo-productForm",
+                                      attrs: {
+                                        rules: _vm.productRules,
+                                        "label-position": _vm.labelPosition
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row" }, [
                                         _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Category",
-                                              prop: ""
-                                            }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                disabled: "",
-                                                value:
-                                                  _vm.editProduct[0].category
-                                                    .category_name
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: { label: "Brand", prop: "" }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                disabled: "",
-                                                value:
-                                                  _vm.editProduct[0].brand
-                                                    .brand_name
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Product",
-                                              prop: "product_name"
-                                            }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                disabled: "",
-                                                value:
-                                                  _vm.editProduct[0]
-                                                    .product_name
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Tags",
-                                              prop: "tags"
-                                            }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                disabled: "",
-                                                value:
-                                                  _vm.editProduct[0].tags[0]
-                                                    .tags
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Quantity",
-                                              prop: "quantity"
-                                            }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                disabled: "",
-                                                value:
-                                                  _vm.editProduct[0].quantity
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Price",
-                                              prop: "price"
-                                            }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                disabled: "",
-                                                value: _vm.editProduct[0].price
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-12" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Additional Information",
-                                              prop: "additional_information"
-                                            }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                type: "textarea",
-                                                disabled: "",
-                                                value:
-                                                  _vm.editProduct[0]
-                                                    .additional_information
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ])
-                                ]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "productEditWrapper hidden" },
-                        [
-                          _vm.editProduct.length > 0
-                            ? _c(
-                                "el-form",
-                                {
-                                  ref: "productForm",
-                                  staticClass: "demo-productForm",
-                                  attrs: {
-                                    model: _vm.productForm,
-                                    rules: _vm.productRules,
-                                    "label-position": _vm.labelPosition
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-12" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Select Image",
-                                              prop: "imageSelect"
-                                            }
-                                          },
+                                          "div",
+                                          { staticClass: "col-md-6" },
                                           [
                                             _c(
-                                              "el-upload",
+                                              "el-form-item",
                                               {
-                                                ref: "upload",
-                                                staticClass: "upload-demo",
                                                 attrs: {
-                                                  action:
-                                                    "https://jsonplaceholder.typicode.com/posts/",
-                                                  "auto-upload": false
+                                                  label: "Category",
+                                                  prop: ""
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .category.category_name
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Brand",
+                                                  prop: ""
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0].brand
+                                                        .brand_name
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Product",
+                                                  prop: "product_name"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .product_name
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Tags",
+                                                  prop: "tags"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0].tags[0]
+                                                        .tags
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Quantity",
+                                                  prop: "quantity"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .quantity
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Price",
+                                                  prop: "price"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0].price
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-12" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label:
+                                                    "Additional Information",
+                                                  prop: "additional_information"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    type: "textarea",
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .additional_information
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "productEditWrapper hidden" },
+                            [
+                              _vm.editProduct.length > 0
+                                ? _c(
+                                    "el-form",
+                                    {
+                                      ref: "productForm",
+                                      staticClass: "demo-productForm",
+                                      attrs: {
+                                        model: _vm.productForm,
+                                        rules: _vm.productRules,
+                                        "label-position": _vm.labelPosition
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-12" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Select Image",
+                                                  prop: "imageSelect"
                                                 }
                                               },
                                               [
                                                 _c(
-                                                  "el-button",
+                                                  "el-upload",
                                                   {
+                                                    ref: "upload",
+                                                    staticClass: "upload-demo",
                                                     attrs: {
-                                                      slot: "trigger",
-                                                      size: "small",
-                                                      type: "primary"
-                                                    },
-                                                    slot: "trigger"
+                                                      action:
+                                                        "https://jsonplaceholder.typicode.com/posts/",
+                                                      "auto-upload": false
+                                                    }
                                                   },
                                                   [
-                                                    _vm._v(
-                                                      "select file\n                                                "
+                                                    _c(
+                                                      "el-button",
+                                                      {
+                                                        attrs: {
+                                                          slot: "trigger",
+                                                          size: "small",
+                                                          type: "primary"
+                                                        },
+                                                        slot: "trigger"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "select file\n                                                "
+                                                        )
+                                                      ]
                                                     )
-                                                  ]
+                                                  ],
+                                                  1
                                                 )
                                               ],
                                               1
@@ -104238,368 +104270,394 @@ var render = function() {
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
                                         _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: { label: "Select Category" }
-                                          },
+                                          "div",
+                                          { staticClass: "col-md-6" },
                                           [
                                             _c(
-                                              "el-select",
+                                              "el-form-item",
                                               {
-                                                staticStyle: { width: "100%" },
                                                 attrs: {
-                                                  clearable: "",
-                                                  placeholder: "SelectCategory",
-                                                  filterable: ""
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.editProduct[0].category
-                                                      .category_name,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editProduct[0]
-                                                        .category,
-                                                      "category_name",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "editProduct[0].category.category_name"
+                                                  label: "Select Category"
                                                 }
                                               },
-                                              _vm._l(
-                                                _vm.getSubCategory,
-                                                function(item) {
-                                                  return _c("el-option", {
-                                                    key: item.id,
+                                              [
+                                                _c(
+                                                  "el-select",
+                                                  {
+                                                    staticStyle: {
+                                                      width: "100%"
+                                                    },
                                                     attrs: {
-                                                      label: item.category_name,
-                                                      value: item.id
+                                                      clearable: "",
+                                                      placeholder:
+                                                        "SelectCategory",
+                                                      filterable: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.editProduct[0]
+                                                          .category
+                                                          .category_name,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.editProduct[0]
+                                                            .category,
+                                                          "category_name",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "editProduct[0].category.category_name"
                                                     }
-                                                  })
-                                                }
-                                              ),
+                                                  },
+                                                  _vm._l(
+                                                    _vm.getSubCategory,
+                                                    function(item) {
+                                                      return _c("el-option", {
+                                                        key: item.id,
+                                                        attrs: {
+                                                          label:
+                                                            item.category_name,
+                                                          value: item.id
+                                                        }
+                                                      })
+                                                    }
+                                                  ),
+                                                  1
+                                                )
+                                              ],
                                               1
                                             )
                                           ],
                                           1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
+                                        ),
+                                        _vm._v(" "),
                                         _c(
-                                          "el-form-item",
-                                          { attrs: { label: "Select Brand" } },
+                                          "div",
+                                          { staticClass: "col-md-6" },
                                           [
                                             _c(
-                                              "el-select",
+                                              "el-form-item",
                                               {
-                                                staticStyle: { width: "100%" },
-                                                attrs: {
-                                                  clearable: "",
-                                                  placeholder: "Select Brand",
-                                                  filterable: ""
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.editProduct[0].brand
-                                                      .brand_name,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editProduct[0].brand,
-                                                      "brand_name",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "editProduct[0].brand.brand_name"
-                                                }
+                                                attrs: { label: "Select Brand" }
                                               },
-                                              _vm._l(_vm.getBrand, function(
-                                                item
-                                              ) {
-                                                return _c("el-option", {
-                                                  key: item.id,
-                                                  attrs: {
-                                                    label: item.brand_name,
-                                                    value: item.id
-                                                  }
-                                                })
-                                              }),
+                                              [
+                                                _c(
+                                                  "el-select",
+                                                  {
+                                                    staticStyle: {
+                                                      width: "100%"
+                                                    },
+                                                    attrs: {
+                                                      clearable: "",
+                                                      placeholder:
+                                                        "Select Brand",
+                                                      filterable: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.editProduct[0].brand
+                                                          .brand_name,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.editProduct[0]
+                                                            .brand,
+                                                          "brand_name",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "editProduct[0].brand.brand_name"
+                                                    }
+                                                  },
+                                                  _vm._l(_vm.getBrand, function(
+                                                    item
+                                                  ) {
+                                                    return _c("el-option", {
+                                                      key: item.id,
+                                                      attrs: {
+                                                        label: item.brand_name,
+                                                        value: item.id
+                                                      }
+                                                    })
+                                                  }),
+                                                  1
+                                                )
+                                              ],
                                               1
                                             )
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
                                         _c(
-                                          "el-form-item",
-                                          { attrs: { label: "Product Name" } },
-                                          [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                placeholder:
-                                                  "Place product name"
-                                              },
-                                              model: {
-                                                value:
-                                                  _vm.editProduct[0]
-                                                    .product_name,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.editProduct[0],
-                                                    "product_name",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression:
-                                                  "editProduct[0].product_name"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          { attrs: { label: "Tags" } },
+                                          "div",
+                                          { staticClass: "col-md-6" },
                                           [
                                             _c(
-                                              "el-select",
+                                              "el-form-item",
                                               {
-                                                attrs: {
-                                                  multiple: "",
-                                                  value:
-                                                    _vm.editProduct[0].tags[0]
-                                                      .tags,
-                                                  placeholder: "Select Tags"
-                                                },
-                                                model: {
-                                                  value: _vm.inputTags,
-                                                  callback: function($$v) {
-                                                    _vm.inputTags = $$v
-                                                  },
-                                                  expression: "inputTags"
-                                                }
+                                                attrs: { label: "Product Name" }
                                               },
-                                              _vm._l(_vm.tagslist, function(
-                                                item
-                                              ) {
-                                                return _c("el-option", {
-                                                  key: item.id,
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
                                                   attrs: {
-                                                    label: item.tags,
-                                                    value: item.id
+                                                    placeholder:
+                                                      "Place product name"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .product_name,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "product_name",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].product_name"
                                                   }
                                                 })
-                                              }),
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              { attrs: { label: "Tags" } },
+                                              [
+                                                _c(
+                                                  "el-select",
+                                                  {
+                                                    attrs: {
+                                                      multiple: "",
+                                                      value:
+                                                        _vm.editProduct[0]
+                                                          .tags[0].tags,
+                                                      placeholder: "Select Tags"
+                                                    },
+                                                    model: {
+                                                      value: _vm.inputTags,
+                                                      callback: function($$v) {
+                                                        _vm.inputTags = $$v
+                                                      },
+                                                      expression: "inputTags"
+                                                    }
+                                                  },
+                                                  _vm._l(_vm.tagslist, function(
+                                                    item
+                                                  ) {
+                                                    return _c("el-option", {
+                                                      key: item.id,
+                                                      attrs: {
+                                                        label: item.tags,
+                                                        value: item.id
+                                                      }
+                                                    })
+                                                  }),
+                                                  1
+                                                )
+                                              ],
                                               1
                                             )
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
                                         _c(
-                                          "el-form-item",
-                                          { attrs: { label: "Quantity" } },
+                                          "div",
+                                          { staticClass: "col-md-6" },
                                           [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                placeholder: "Place quantity"
+                                            _c(
+                                              "el-form-item",
+                                              { attrs: { label: "Quantity" } },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Place quantity"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .quantity,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "quantity",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].quantity"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: { label: "Cost Price" }
                                               },
-                                              model: {
-                                                value:
-                                                  _vm.editProduct[0].quantity,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.editProduct[0],
-                                                    "quantity",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression:
-                                                  "editProduct[0].quantity"
-                                              }
-                                            })
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Place cost price"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0].price,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "price",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].price"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-6" },
-                                      [
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
                                         _c(
-                                          "el-form-item",
-                                          { attrs: { label: "Cost Price" } },
+                                          "div",
+                                          { staticClass: "col-md-12" },
                                           [
-                                            _c("el-input", {
-                                              staticStyle: { width: "100%" },
-                                              attrs: {
-                                                placeholder: "Place cost price"
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label:
+                                                    "Additional Information"
+                                                }
                                               },
-                                              model: {
-                                                value: _vm.editProduct[0].price,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.editProduct[0],
-                                                    "price",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression:
-                                                  "editProduct[0].price"
-                                              }
-                                            })
+                                              [
+                                                _c("el-input", {
+                                                  attrs: {
+                                                    type: "textarea",
+                                                    autosize: {
+                                                      minRows: 3,
+                                                      maxRows: 4
+                                                    },
+                                                    placeholder:
+                                                      "Please input additional Information"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .additional_information,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "additional_information",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].additional_information"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-12" },
-                                      [
-                                        _c(
-                                          "el-form-item",
-                                          {
-                                            attrs: {
-                                              label: "Additional Information"
-                                            }
-                                          },
-                                          [
-                                            _c("el-input", {
-                                              attrs: {
-                                                type: "textarea",
-                                                autosize: {
-                                                  minRows: 3,
-                                                  maxRows: 4
-                                                },
-                                                placeholder:
-                                                  "Please input additional Information"
-                                              },
-                                              model: {
-                                                value:
-                                                  _vm.editProduct[0]
-                                                    .additional_information,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.editProduct[0],
-                                                    "additional_information",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression:
-                                                  "editProduct[0].additional_information"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "row" },
-                                    [
+                                      ]),
+                                      _vm._v(" "),
                                       _c(
-                                        "el-form-item",
+                                        "div",
+                                        { staticClass: "row" },
                                         [
                                           _c(
-                                            "el-button",
-                                            {
-                                              staticStyle: {
-                                                width: "100%",
-                                                margin: "15px 10% 0"
-                                              },
-                                              attrs: { type: "warning" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.submitForm(
-                                                    "productForm"
-                                                  )
-                                                }
-                                              }
-                                            },
+                                            "el-form-item",
                                             [
-                                              _vm._v(
-                                                " Edit\n                                        "
+                                              _c(
+                                                "el-button",
+                                                {
+                                                  staticStyle: {
+                                                    width: "100%",
+                                                    margin: "15px 10% 0"
+                                                  },
+                                                  attrs: { type: "warning" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.submitForm(
+                                                        "productForm"
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    " Edit\n                                        "
+                                                  )
+                                                ]
                                               )
-                                            ]
+                                            ],
+                                            1
                                           )
                                         ],
                                         1
                                       )
-                                    ],
-                                    1
+                                    ]
                                   )
-                                ]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ])
-                  ]
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ])
+                      ]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            )
-          ])
+              ])
+            : _vm._e()
         ]
       )
     ],

@@ -42,150 +42,22 @@
                         </div>
                     </div>
                     <div class="row">
+                        @foreach($getCategory as $category)
+                            @foreach($category->product as $product)
                         <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
                             <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                                 <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" width="150" alt="">
                             </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
+                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">{{$product->price}}</h5>
+                            <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
                             <h5 class="best_weight py-0 text-dark">500 gm</h5>
                             <button type="button"
                                     class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                                 Add to Cart
                             </button>
                         </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/masala.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/betan_rice.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/dal.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Pickle.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/dal.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/tea.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/tumeric.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/masala.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/betan_rice.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/dal.png') }}" width="150" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$10.99</h5>
-                            <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
+                                @endforeach
+                       @endforeach
                     </div>
                     <div class="row mt-5">
                         <div class="col-12 text-center">
