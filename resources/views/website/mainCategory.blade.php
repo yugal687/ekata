@@ -73,6 +73,7 @@
                     </div>
                 </div>
                 <main class="p-5">
+                    @foreach($getsingleCategory as $singleCategory)
                     <div class="row pb-3">
                         <div class="col-12">
                             <div class="overlayImage">
@@ -80,12 +81,12 @@
                                     src="{{ asset('images/Catagory_Page/Chinese-dry-spices-and-condiments-1024x620.jpg') }}"
                                     class="categoryBannerImage img-fluid" alt="">
                                 <div class="overlayBackground"></div>
-                                <div class="overlayText">Dry Goods</div>
+                                <div class="overlayText">{{$singleCategory->category_name}}</div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        @foreach($getsingleCategory as $singleCategory)
+
                             @foreach($singleCategory->children as $subCategory)
                                 <div class="col-md-12 mt-5">
                                     <div class="top-title">
@@ -117,8 +118,9 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @endforeach
+
                     </div>
+                    @endforeach
                 </main>
 
             </div>

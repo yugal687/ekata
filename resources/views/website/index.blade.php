@@ -311,11 +311,10 @@
                     {{--<h3 class="text-center mt-5 border">---Hello Banner section ---</h3>--}}
 
 
-                    <img src="{{$bannerImage[0]->image}}" class="img-fluid" alt="">
                     <div id="banner-image-carousel" class="owl-carousel owl-theme">
-                        <div class="item"><img src="{{ asset('images/Homepage/Banner/Banner.png') }}" alt=""></div>
-                        <div class="item"><img src="{{ asset('images/biscuit.jpg') }}" alt=""></div>
-                        <div class="item"><img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" alt=""></div>
+                        @foreach($bannerImage as $image)
+                        <div class="item"><img src="{{$image->image}}" alt=""></div>
+                            @endforeach
                     </div>
                     {{--<img src="{{ asset('images/Homepage/Banner/Banner.png') }}" class="img-fluid" alt="">--}}
                 </div>
