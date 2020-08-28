@@ -13,6 +13,10 @@
             width: 100%;
             height: 82vh;
         }
+        #banner-image-carousel.owl-theme .owl-nav.disabled+.owl-dots {
+            margin-top: 0;
+            z-index: 200;
+        }
 
         /*Clearence Section Css*/
         #clearence_section .owl-theme {
@@ -308,6 +312,12 @@
 
 
                     <img src="{{$bannerImage[0]->image}}" class="img-fluid" alt="">
+                    <div id="banner-image-carousel" class="owl-carousel owl-theme">
+                        <div class="item"><img src="{{ asset('images/Homepage/Banner/Banner.png') }}" alt=""></div>
+                        <div class="item"><img src="{{ asset('images/biscuit.jpg') }}" alt=""></div>
+                        <div class="item"><img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" alt=""></div>
+                    </div>
+                    {{--<img src="{{ asset('images/Homepage/Banner/Banner.png') }}" class="img-fluid" alt="">--}}
                 </div>
                 <!-- banner section ends here -->
 
@@ -1242,6 +1252,21 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            /*Banner Image Carousel*/
+            $("#banner-image-carousel").owlCarousel({
+                items: 1,
+                dots: true,
+                navigation : false,
+                singleItem:true,
+                autoplay: true,
+                loop: true,
+                responsiveClass: true,
+                autoplayTimeout: 7000,
+                smartSpeed: 800,
+
+            });
+
+
             /*Customer Reviews Carousel*/
             $("#customer-reviews-carousel").owlCarousel({
                 items: 1,
