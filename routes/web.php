@@ -18,10 +18,7 @@ Route::get('/userlogin', function () {
     return view('website/userlogin');
 });
 
-Route::get('/', function () {
-    return view('website/index');
-});
-
+Route::get('/', 'Website\ProductController@index');
 
 Route::get('/billings', function () {
     return view('website/billings');
@@ -30,15 +27,12 @@ Route::get('/billings', function () {
 Route::get('/contact', function () {
     return view('website/contact');
 });
-Route::get('/category', function () {
-    return view('website/category');
-});
-Route::get('/maincategory', function () {
-    return view('website/mainCategory');
-});
-Route::get('/singleproduct', function () {
-    return view('website/singleProduct');
-});
+Route::get('/category','Website\ProductController@showCategory');
+Route::get('/maincategory/{id}', [
+    "uses" => 'Website\ProductController@showMainCategory',
+    "as" => 'maincategory']);
+
+Route::get('/singleproduct','Website\ProductController@SingleProductPage');
 
 Route::view('admin/dashboard', 'admin.dashboard');
 Route::view('user/users', 'admin.user.users');
