@@ -44,6 +44,8 @@ Route::view('admin/dashboard', 'admin.dashboard');
 Route::view('user/users', 'admin.user.users');
 Route::view('customer/customers', 'admin.customer.customers');
 /*Route::view('admin/users', 'admin.users');*/
+Route::view('admin/userregistration', 'admin.userregistration');
+Route::view('admin/usersignin', 'admin.usersignin');
 //Setup.....
 Route::view('admin/setup/index', 'admin.setup.index');
 Route::view('admin/setup/brands', 'admin.setup.brands');
