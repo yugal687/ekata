@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +15,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*login*/
+
+
 Route::get('/userlogin', function () {
     return view('website/userlogin');
 });
+Auth::routes();
 
-Route::get('/', function () {
-    return view('website/index');
+Route::get('/logout', function () {
+    Auth::logout();
+    return view('auth.login');
+});
+
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::view('admin/dashboard', 'admin.dashboard');
+    Route::view('admin/userdashboard', 'admin.userdashboard');
+    Route::view('user/users', 'admin.user.users');
+    Route::view('admin/users', 'admin.users');
+    Route::view('admin/setup/index', 'admin.setup.index');
+    Route::view('admin/addproduct/index', 'admin.add_product.index');
+    Route::view('admin/addproduct/products', 'admin.add_product.products');
+    Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
+    Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
+    Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
+    Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
+    Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
+
 });
 
 
@@ -40,19 +61,9 @@ Route::get('/singleproduct', function () {
     return view('website/singleProduct');
 });
 
-Route::view('admin/dashboard', 'admin.dashboard');
-Route::view('admin/userdashboard', 'admin.userdashboard');
-Route::view('user/users', 'admin.user.users');
-Route::view('admin/users', 'admin.users');
-Route::view('admin/setup/index', 'admin.setup.index');
-Route::view('admin/addproduct/index', 'admin.add_product.index');
-Route::view('admin/addproduct/products', 'admin.add_product.products');
-Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
-Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
-Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
-Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
-Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
 
-Auth::routes();
+Route::get('/', function () {
+    return view('website/index');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');

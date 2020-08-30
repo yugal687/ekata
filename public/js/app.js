@@ -3839,7 +3839,7 @@ __webpack_require__.r(__webpack_exports__);
           var price = parseFloat($('#price').val());
           $('#total').val((qty * price ? qty * price : 0).toFixed(2));
       });
-           var price = $('.sellingPrice').val();
+            var price = $('.sellingPrice').val();
           alert(price);
           var discount = $('.discountPercentage').val();
           alert(discount);*/
@@ -12850,7 +12850,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.text[data-v-06356278] {\n    font-size: 14px;\n}\n.item[data-v-06356278] {\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\n.clearfix[data-v-06356278]:after {\n    display: table;\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\n    clear: both\n}\n", ""]);
+exports.push([module.i, "\n.text[data-v-06356278] {\r\n    font-size: 14px;\n}\n.item[data-v-06356278] {\r\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\r\n.clearfix[data-v-06356278]:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\r\n    clear: both\n}\r\n", ""]);
 
 // exports
 
@@ -12869,7 +12869,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.hidden[data-v-cf064fc0] {\n    display: none;\n}\n.el-carousel__container[data-v-cf064fc0] {\n    position: relative;\n}\n.el-tag + .el-tag[data-v-cf064fc0] {\n    margin-left: 10px;\n}\n.button-new-tag[data-v-cf064fc0] {\n    margin-left: 10px;\n    height: 32px;\n    line-height: 30px;\n    padding-top: 0;\n    padding-bottom: 0;\n}\n.input-new-tag[data-v-cf064fc0] {\n    width: 90px;\n    margin-left: 10px;\n    vertical-align: bottom;\n}\n.clients-wrapper[data-v-cf064fc0] {\n    border: 1px solid #ebebeb;\n    border-radius: 5px;\n    transition: .2s;\n    margin: 20px;\n    padding: 20px;\n}\n.information-wrapper[data-v-cf064fc0] {\n    /*border: 1px solid #ebebeb;*/\n    /*border-radius: 5px;*/\n    /*transition: .2s;*/\n    margin: 10px;\n    /*padding: 10px;*/\n}\n\n/*th.gutter {\n    padding: 0 !important;\n}*/\n.clients-wrapper[data-v-cf064fc0]:hover {\n    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .6);\n}\n.clients-ques-ans h6[data-v-cf064fc0] {\n    font-size: 14px;\n    line-height: 15px;\n    font-weight: 700;\n    color: #606266;\n}\n", ""]);
+exports.push([module.i, "\n.hidden[data-v-cf064fc0] {\r\n    display: none;\n}\n.el-carousel__container[data-v-cf064fc0] {\r\n    position: relative;\n}\n.el-tag + .el-tag[data-v-cf064fc0] {\r\n    margin-left: 10px;\n}\n.button-new-tag[data-v-cf064fc0] {\r\n    margin-left: 10px;\r\n    height: 32px;\r\n    line-height: 30px;\r\n    padding-top: 0;\r\n    padding-bottom: 0;\n}\n.input-new-tag[data-v-cf064fc0] {\r\n    width: 90px;\r\n    margin-left: 10px;\r\n    vertical-align: bottom;\n}\n.clients-wrapper[data-v-cf064fc0] {\r\n    border: 1px solid #ebebeb;\r\n    border-radius: 5px;\r\n    transition: .2s;\r\n    margin: 20px;\r\n    padding: 20px;\n}\n.information-wrapper[data-v-cf064fc0] {\r\n    /*border: 1px solid #ebebeb;*/\r\n    /*border-radius: 5px;*/\r\n    /*transition: .2s;*/\r\n    margin: 10px;\r\n    /*padding: 10px;*/\n}\r\n\r\n/*th.gutter {\r\n    padding: 0 !important;\r\n}*/\n.clients-wrapper[data-v-cf064fc0]:hover {\r\n    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .6);\n}\n.clients-ques-ans h6[data-v-cf064fc0] {\r\n    font-size: 14px;\r\n    line-height: 15px;\r\n    font-weight: 700;\r\n    color: #606266;\n}\r\n", ""]);
 
 // exports
 
@@ -12907,7 +12907,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.time[data-v-48c7bd0e] {\n    font-size: 13px;\n    color: #999;\n}\n.bottom[data-v-48c7bd0e] {\n    margin-top: 13px;\n    line-height: 12px;\n}\n.button[data-v-48c7bd0e] {\n    padding: 0;\n    float: right;\n}\n.image[data-v-48c7bd0e] {\n    width: 100%;\n    display: block;\n}\n.clearfix[data-v-48c7bd0e]:before,\n.clearfix[data-v-48c7bd0e]:after {\n    display: table;\n    content: \"\";\n}\n.clearfix[data-v-48c7bd0e]:after {\n    clear: both\n}\n.lead[data-v-48c7bd0e] {\n    font-size: 1.125rem;\n    font-weight: 300;\n}\nelement.style[data-v-48c7bd0e] {\n    height: 120px;\n    width: 120px;\n}\n", ""]);
+exports.push([module.i, "\n.time[data-v-48c7bd0e] {\r\n    font-size: 13px;\r\n    color: #999;\n}\n.bottom[data-v-48c7bd0e] {\r\n    margin-top: 13px;\r\n    line-height: 12px;\n}\n.button[data-v-48c7bd0e] {\r\n    padding: 0;\r\n    float: right;\n}\n.image[data-v-48c7bd0e] {\r\n    width: 100%;\r\n    display: block;\n}\n.clearfix[data-v-48c7bd0e]:before,\r\n.clearfix[data-v-48c7bd0e]:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix[data-v-48c7bd0e]:after {\r\n    clear: both\n}\n.lead[data-v-48c7bd0e] {\r\n    font-size: 1.125rem;\r\n    font-weight: 300;\n}\nelement.style[data-v-48c7bd0e] {\r\n    height: 120px;\r\n    width: 120px;\n}\r\n", ""]);
 
 // exports
 
@@ -121127,8 +121127,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\laragon\Ekata_Convenience_Store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\Ekata_Convenience_Store\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -5,20 +5,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class DatabaseSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-        $this->call(RoleSeeder::class);
-        $this->call(UserSeeder::class);
-
-
+        DB::table('roles')->truncate();
+        DB::table('roles')->insert([
+            ['role' => 'admin'],
+            ['role' => 'user'],
+        ]);
     }
 }
