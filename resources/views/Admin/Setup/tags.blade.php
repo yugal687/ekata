@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container-fluid">
-        <category-subcategory-setup-component></category-subcategory-setup-component>
+        <tags-setup-component></tags-setup-component>
     </div>
 @stop

@@ -16,6 +16,31 @@
                             <div class="col-12">
                                 <el-form :model="categoryForm" :rules="categoryRules" ref="categoryForm"
                                          :label-position="labelPosition" class="demo-categoryForm">
+                                    <el-form-item label="Upload Header Image" prop="headerImage">
+                                        <el-upload
+                                            class="upload-demo"
+                                            action="https://jsonplaceholder.typicode.com/posts/"
+                                            :on-preview="handlePreviewHeader"
+                                            :on-remove="handleRemoveHeader"
+                                            :on-change="handleChangeHeader"
+                                            :auto-upload="false"
+                                            :file-list="fileListHeader">
+                                            <el-button size="" type="primary">Click to upload</el-button>
+                                            <span slot="tip" class="el-upload__tip">&nbsp; We prefer header image to be of high quality </span>
+                                        </el-upload>
+                                    </el-form-item>
+                                    <el-form-item label="Upload Thumbnail Image" prop="thumbnailImage">
+                                        <el-upload
+                                            class="upload-demo"
+                                            action="https://jsonplaceholder.typicode.com/posts/"
+                                            :on-preview="handlePreviewThumbnail"
+                                            :on-remove="handleRemoveThumbnail"
+                                            :on-change="handleChangeThumbnail"
+                                            :auto-upload="false"
+                                            :file-list="fileListThumbnail">
+                                            <el-button size="" type="primary">Click to upload</el-button>
+                                        </el-upload>
+                                    </el-form-item>
                                     <el-form-item label="Category Name" prop="name">
                                         <el-input v-model="categoryForm.name"
                                                   style="width: 100%;">
@@ -563,6 +588,12 @@
         name: "setupComponent",
         data() {
             return {
+                fileListHeader: [
+
+                ],
+                fileListThumbnail: [
+
+                ],
                 edit: false,
                 tags:[],
                 editcategory:[],
@@ -619,7 +650,6 @@
                         {required: true, message: 'Please input tag name', trigger: 'blur'},
                     ]
                 },
-
                 /*Table Data's*/
                 categorytableData: [{
                     sn: 1,
@@ -661,6 +691,25 @@
             };
         },
         methods:{
+            handleRemoveHeader(file, fileListHeader) {
+                console.log(file, fileListHeader);
+            },
+            handlePreviewHeader(file) {
+                console.log(file);
+            },
+            handleChangeHeader(file, fileListHeader) {
+                this.fileListHeader = fileListHeader.slice(-1);
+            },
+            handleRemoveThumbnail(file, fileListThumbnail) {
+                console.log(file, fileListThumbnail);
+            },
+            handlePreviewThumbnail(file) {
+                console.log(file);
+            },
+            handleChangeThumbnail(file, fileListThumbnail) {
+                this.fileListThumbnail = fileListThumbnail.slice(-1);
+            },
+            /*---------*/
             editCategory(id){
                 this.editcategory = this.getCategory.filter(getCategory=> getCategory.id == id);
             },

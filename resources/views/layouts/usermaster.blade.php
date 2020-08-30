@@ -71,7 +71,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/admin/dashboard" class="nav-link">Home</a>
+                    <a href="/userdashboard/userdashboard" class="nav-link">Home</a>
                 </li>
             </ul>
 
@@ -135,7 +135,7 @@
                             class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Admin</a>
+                        <a href="#" class="d-block">User</a>
                     </div>
                 </div>
 
@@ -155,140 +155,20 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/admin/dashboard" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Admin Dashboard</p>
-                                    </a>
-                                </li>
-                                {{--<li class="nav-item">
-                                    <a href="/admin/userdashboard" class="nav-link active">
+                                    <a href="/userdashboard/userdashboard" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User Dashboard</p>
                                     </a>
-                                </li>--}}
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/user/users" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Users
-                                    <span class="right badge badge-danger">Latest</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/customer/customers" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Customers
-                                    <span class="right badge badge-danger">Latest</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
-                                <i class="fas fa-tools"></i>
-                                <p>
-                                    Setup
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/setup/index" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p> Category / Subcategory </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/setup/brands" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p> Brand  </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/setup/tags" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p> Tags  </p>
-                                    </a>
                                 </li>
                             </ul>
                         </li>
-                        {{--<li class="nav-item">
-                            <a href="/admin/setup/index" class="nav-link">
-                                <i class="fas fa-tools"></i>
-                                <p> Setup </p>
-                            </a>
-                        </li>--}}
                         <li class="nav-item">
-                            <a href="/admin/banner/bannerimage" class="nav-link">
-                                <i class="fas fa-images"></i>
+                            <a href="/userdashboard/userprofile" class="nav-link">
+                                <i class="nav-icon fas fa-user-alt-slash"></i>
                                 <p>
-                                    Banner Image
+                                    User Profile
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/admin/cart/allusercartdetails" class="nav-link">
-                                <i class="fas fa-cart-plus"></i>
-                                <p>
-                                    Cart Products
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
-                                <i class="fab fa-product-hunt"></i>
-                                <p>
-                                    Products
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/addproduct/index" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Products</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/addproduct/products" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Product Details</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/addproduct/discount" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Discount</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
-                                <i class="fas fa-project-diagram"></i>
-                                <p>
-                                    Orders
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/order/orderdetails" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Order Details</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/order/shippingdetails" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Shipping Details</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
 
                     </ul>
