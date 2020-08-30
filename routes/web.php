@@ -48,8 +48,9 @@ Route::view('admin/setup/tags', 'admin.setup.tags');
 Route::view('admin/addproduct/index', 'admin.add_product.index');
 Route::view('admin/addproduct/products', 'admin.add_product.products');
 Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
+//Order
 Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
-Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
+//Banner Image
 Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
 Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
 

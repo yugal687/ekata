@@ -13,9 +13,14 @@
             width: 100%;
             height: 82vh;
         }
-        #banner-image-carousel.owl-theme .owl-nav.disabled+.owl-dots {
-            margin-top: 0;
+
+        #banner-image-carousel.owl-theme .owl-nav.disabled + .owl-dots {
+            margin-top: -20px;
             z-index: 200;
+        }
+
+        #banner-image-carousel.owl-carousel .owl-stage-outer {
+            z-index: -1;
         }
 
         /*Clearence Section Css*/
@@ -165,6 +170,47 @@
         }
 
 
+        @media screen and (max-width: 991px) {
+            .vertical-sidebar-carousel {
+                display: none;
+            }
+
+            .smindex-sidebar {
+                display: block;
+                background-color: #fff;
+                height: auto;
+            }
+
+            .smindex-sidebar .smindex-sidebar-carousel .categories {
+                box-shadow: 0 3px 8px 0 rgba(0, 18, 87, .14);
+                margin: 10px;
+                padding: 10px 0 5px 0;
+            }
+
+            .smindex-sidebar .tns-outer [aria-controls], .smindex-sidebar .tns-outer [data-action] {
+                background: transparent;
+                border: none;
+                font-size: 2rem;
+                margin: 0 1.5rem;
+                cursor: pointer;
+            }
+
+            .smindex-sidebar .tns-outer [aria-controls]:focus, .smindex-sidebar .tns-outer [data-action]:focus {
+                outline: none;
+            }
+
+        }
+
+        @media screen and (min-width: 992px) {
+            .smindex-sidebar {
+                display: none;
+            }
+
+            .vertical-sidebar-carousel {
+                display: block;
+            }
+        }
+
         /*Vertical Sidebar Carousel*/
         .vertical-sidebar-carousel {
             background-color: #fff;
@@ -211,7 +257,7 @@
             background: #F0A500;
             color: #000;
             width: 100%;
-            display: flex;
+            display: block !important;
             align-items: center;
         }
 
@@ -237,6 +283,7 @@
             height: 330px;
             overflow: hidden;
         }
+
         #customer-reviews-carousel.owl-theme .owl-dots {
             position: absolute;
             top: 0;
@@ -245,22 +292,27 @@
             text-align: center;
             -webkit-tap-highlight-color: transparent;
         }
+
         #customer-reviews-carousel.owl-theme .owl-dots .owl-dot span {
             background: #fff;
         }
+
         #customer-reviews-carousel.owl-theme .owl-dots .owl-dot.active span {
             background: #b1b1b1;
         }
+
         #customer-reviews-carousel .owl-item {
             height: 220px;
             top: 30px;
         }
+
         #customer-reviews-carousel.owl-theme .owl-nav {
             text-align: center;
             -webkit-tap-highlight-color: transparent;
             display: flex;
             justify-content: space-between;
         }
+
         #customer-reviews-carousel.owl-theme .owl-nav [class*=owl-] {
             color: #FFF;
             font-size: 14px;
@@ -272,7 +324,8 @@
             border-radius: 3px;
             border: 1px solid #fff;
         }
-        img.review-images{
+
+        img.review-images {
             border-radius: 15px;
             width: 100%;
             height: 190px;
@@ -286,7 +339,7 @@
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
-            <div class="col-md-2 bg-main-primary rounded-bottom-right mb-4">
+            <div class="col-lg-2 col-md-12 bg-main-primary rounded-bottom-right mb-4">
                 <div class="row">
                     <div class="col-12 bg-main-secondary">
                         <div class="cate">
@@ -298,6 +351,7 @@
                     <div class="col-12">
                         {{--Include Sidebar Here--}}
                         @include('layouts.website.indexsidebar')
+                        @include('layouts.website.smindexsidebar')
                     </div>
                 </div>
             </div>
@@ -305,16 +359,23 @@
             <!-- sidebar slider section ends here -->
 
 
-            <div class="col-md-10 m-0 p-0 ">
+            <div class="col-lg-10 col-md-12 m-0 p-0 ">
                 <!-- banner section starts here -->
                 <div class="banner-area">
                     {{--<h3 class="text-center mt-5 border">---Hello Banner section ---</h3>--}}
 
 
-                    <div id="banner-image-carousel" class="owl-carousel owl-theme">
+                    {{--<div id="banner-image-carousel" class="owl-carousel owl-theme">
                         @foreach($bannerImage as $image)
                         <div class="item"><img src="{{$image->image}}" alt=""></div>
                             @endforeach
+                    </div>--}}
+                    <div id="banner-image-carousel" class="owl-carousel owl-theme">
+                        <div class="item"><img src="{{ asset('images/Homepage/Banner/Banner.png') }}" alt=""></div>
+                        <div class="item"><img src="{{ asset('images/biscuit.jpg') }}" alt=""></div>
+                        <div class="item"><img
+                                src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" alt="">
+                        </div>
                     </div>
                     {{--<img src="{{ asset('images/Homepage/Banner/Banner.png') }}" class="img-fluid" alt="">--}}
                 </div>
@@ -749,23 +810,23 @@
                 <div class="card-body bg-product-light rounded-bottom-front card-bdy">
                     <div id="new_items" class="owl-carousel owl-theme px-3">
                         @foreach($latestProduct as $lastproduct)
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
+                            <div class="item text-center d-flex justify-content-center align-items-center">
+                                <div class="new_items_img">
+                                    <div class="row m-4">
+                                        <div
+                                            class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
 
-                                        <img src="{{ asset('images/Product_pngs/masala.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>{{$lastproduct->product_name}}</h6>
+                                            <img src="{{ asset('images/Product_pngs/masala.png') }}"
+                                                 class="img-fluid p-2"
+                                                 alt="">
+                                        </div>
+                                        <div class="col-12 mt-3 mb-2">
+                                            <h6>{{$lastproduct->product_name}}</h6>
+                                        </div>
                                     </div>
                                 </div>
+                                <br/>
                             </div>
-                            <br/>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -1027,23 +1088,25 @@
                 <!-- first row -->
                 <div class="row m-0 p-0 mb-4">
                     <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        @foreach ($discountedProducts as $discountedProduct)
+                    @foreach ($discountedProducts as $discountedProduct)
+                        <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
 
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="" width="150" alt="">
+
+                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
+                                <img src="" width="150" alt="">
+                            </div>
+                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">
+                                <s>was {{$discountedProduct->price}}</s></h5>
+                            <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
+                            <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                            <button type="button"
+                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                Add to Cart
+                            </button>
+                            <!-- col-item-end -->
                         </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was {{$discountedProduct->price}}</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
-                        <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-@endforeach
-                        <!-- col-item-end -->
-                    </div>
-                   </div>
+                    @endforeach
+                </div>
                 <!-- second row -->
             </div>
         </div>
@@ -1255,8 +1318,8 @@
             $("#banner-image-carousel").owlCarousel({
                 items: 1,
                 dots: true,
-                navigation : false,
-                singleItem:true,
+                navigation: false,
+                singleItem: true,
                 autoplay: true,
                 loop: true,
                 responsiveClass: true,
@@ -1276,7 +1339,7 @@
                 autoplayTimeout: 7000,
                 smartSpeed: 800,
                 nav: true,
-                navText: ["Previous","Next"],
+                navText: ["Previous", "Next"],
 
             });
 

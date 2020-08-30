@@ -267,28 +267,13 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
+                        <li class="nav-item">
+                            <a href="/admin/order/orderdetails" class="nav-link">
                                 <i class="fas fa-project-diagram"></i>
                                 <p>
-                                    Orders
-                                    <i class="fas fa-angle-left right"></i>
+                                    Orders Details
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/order/orderdetails" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Order Details</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/order/shippingdetails" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Shipping Details</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
 
                     </ul>

@@ -49,7 +49,7 @@
                             <template slot-scope="scope">
                                 <el-button type="primary"
                                            size="mini"
-                                           @click="dialogTableVisible  = true">Orders
+                                           @click="dialogTableVisible  = true">Details
                                 </el-button>
                                 <el-button
                                     size="mini"
@@ -70,6 +70,54 @@
                     <el-table-column property="price" label="Price"></el-table-column>
                     <el-table-column property="discount" label="Discount"></el-table-column>
                 </el-table>
+                <span slot="footer" class="dialog-footer">
+                    <div class="row" >
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">
+                                    Address
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{address}}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    City
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{city}}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    Postal Code
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{postalCode}}
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">
+                                    Optional Address
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{optionalAddress}}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    Email
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{email}}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    Contact
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{contact}}
+                                </dd>
+                                </dl>
+                        </div>
+                    </div>
+                </span>
             </el-dialog>
         </main>
     </div>
@@ -80,6 +128,12 @@ export default {
     name: "orderDetailsComponent",
     data() {
         return {
+            address: 'A description list is perfect for defining terms',
+            city: 'San Fransisco',
+            postalCode: '4325',
+            optionalAddress: 'A description list is perfect',
+            email: 'email@gmail.com',
+            contact: '1234567890',
             /*Table Data's*/
             orderDetailsTableData: [{
                 sn: 1,

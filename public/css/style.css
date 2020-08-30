@@ -395,11 +395,19 @@ a:hover {
     border-radius: 10px;
     /*border-top: 1px solid #CF7500;*/
 }
+#accordion ul li.activeHeading h3 a{
+    color: #fff;
+}
 /*#accordion ul li.activeHeading{
     border-top: none !important;
 }*/
 
 /*links*/
+#accordion ul li a{
+    color: #000;
+    font-size: 14px;
+    font-weight: normal;
+}
 #accordion ul ul li a {
     color: #000;
     text-decoration: none;

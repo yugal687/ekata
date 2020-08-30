@@ -668,13 +668,13 @@
             e.preventDefault();
         });
         /*Active Heading*/
-        $('#accordion li h3').click(function (e) {
+        $('#accordion li h3').click(function () {
 
             $('#accordion li.activeHeading').removeClass('activeHeading');
 
             var $parent = $(this).parent();
             $parent.addClass('activeHeading');
-            e.preventDefault();
+            /*e.preventDefault();*/
         });
     });
     $(document).on('click', '.number-spinner button', function () {

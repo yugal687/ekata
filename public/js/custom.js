@@ -13,6 +13,29 @@ $(document).ready(function () {
     });
 
     /*Vertical Sidebar Carousel | Tiny Slider*/
+    var slider = tns({
+        "container": ".smindex-sidebar-carousel",
+        "items": 3,
+        "slideBy": 1,
+        "mouseDrag": true,
+        "swipeAngle": false,
+        "speed": 400,
+        "loop": true,
+        "controls": true,
+        "controlsPosition": "bottom",
+        "controlsText": ["<i class='fas fa-angle-left'></i>", "<i class='fas fa-angle-right'></i>"],
+        "responsive": {
+            "0": {
+                "items": 3
+            },
+            "576": {
+                "items": 4
+            },
+            "768": {
+                "items": 6
+            }
+        },
+    });
     /*------------------------*/
     var slider = tns({
         container: ".sidebar-vertical-carousel",
