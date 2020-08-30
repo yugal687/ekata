@@ -27,12 +27,16 @@ Route::get('/billings', function () {
 Route::get('/contact', function () {
     return view('website/contact');
 });
-Route::get('/category','Website\ProductController@showCategory');
+Route::get('/category/{id}',[
+    "uses" => 'Website\ProductController@showCategory',
+    "as" => 'category']);
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
     "as" => 'maincategory']);
 
-Route::get('/singleproduct','Website\ProductController@SingleProductPage');
+Route::get('/singleproduct/{id}',[
+    'uses' => 'Website\ProductController@SingleProductPage',
+    'as' => 'singleproduct']);
 
 Route::view('admin/dashboard', 'admin.dashboard');
 Route::view('user/users', 'admin.user.users');

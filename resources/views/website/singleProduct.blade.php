@@ -170,6 +170,7 @@
                 </div>
                 <main class="p-5">
                     <div class="row">
+                        @foreach($singleProduct as $product)
                         <div class="col-md-8">
                             <div id="single-item-carousel">
                                 <div id="sync1" class="owl-carousel owl-theme">
@@ -207,7 +208,7 @@
 
                         <div class="col-md-4 pl-3">
                             <div>
-                                <h4 class="font-weight-bold">Devaya Riz Basmati Rice </h4>
+                                <h4 class="font-weight-bold">{{$product->product_name}} </h4>
                                 <div class="rating rating2">
                                     <a href="#5" title="Give 5 stars">★</a>
                                     <a href="#4" title="Give 4 stars">★</a>
@@ -215,12 +216,12 @@
                                     <a href="#2" title="Give 2 stars">★</a>
                                     <a href="#1" title="Give 1 star">★</a>
                                 </div>
-                                <h6>Category: Dry Goods</h6>
+                                <h6>Category: {{$product->category->category_name}}</h6>
                                 <h6>Avilibility: <span class="text-danger">In Stock</span></h6>
                             </div>
                             <div class="pt-3">
                                 <h6>Price</h6>
-                                <h4 class="font-weight-bold text-danger">$15.99</h4>
+                                <h4 class="font-weight-bold text-danger">{{$product->price}}</h4>
                             </div>
                             <div class="pt-2">
                                 <h6>Size</h6>
@@ -285,6 +286,7 @@
                             </div>
 
                         </div>
+                            @endforeach
                     </div>
                     <section id="special-section">
                         <div class="container mt-5 pt-2">

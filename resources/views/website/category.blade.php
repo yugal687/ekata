@@ -35,29 +35,32 @@
                     </div>
                 </div>
                 <main class="p-5">
+                    @foreach($getsingleCategory as $category)
                     <div class="row pb-3">
                         <div class="col-12">
-                            <img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}"
+                            <img src="{{ $category->parent->image }}"
                                  class="categoryBannerImage img-fluid" alt="">
                         </div>
                     </div>
                     <div class="row">
-                        @foreach($getCategory as $category)
+
                             @foreach($category->product as $product)
                         <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
+                            <a href="{{route('singleproduct',$product->id)}}">
                             <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                                 <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" width="150" alt="">
                             </div>
                             <h5 class="best_price pt-3 font-weight-bold text-main-danger">{{$product->price}}</h5>
                             <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
-                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                            <h5 class="best_weight py-0 text-dark">{{$product->brand->brand_name}}</h5>
                             <button type="button"
                                     class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                                 Add to Cart
                             </button>
+                            </a>
+
                         </div>
                                 @endforeach
-                       @endforeach
                     </div>
                     <div class="row mt-5">
                         <div class="col-12 text-center">
@@ -65,6 +68,8 @@
                             </button>
                         </div>
                     </div>
+                    @endforeach
+
                 </main>
             </div>
         </div>

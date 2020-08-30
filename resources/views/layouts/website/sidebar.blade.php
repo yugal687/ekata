@@ -11,7 +11,7 @@
             </h3>
             <ul>
                 @foreach($category->children as $subCategory)
-                <li class=""><a href="{{url('web/category/'.$subCategory->id)}}">{{$subCategory->category_name}}</a></li>
+                <li class=""><a href="{{route('category',$subCategory->id)}}">{{$subCategory->category_name}}</a></li>
                     @endforeach
             </ul>
                 @endforeach

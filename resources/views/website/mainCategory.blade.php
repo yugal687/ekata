@@ -74,18 +74,18 @@
                 </div>
                 <main class="p-5">
                     @foreach($getsingleCategory as $singleCategory)
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <div class="overlayImage">
-                                <img
-                                    src="{{ asset('images/Catagory_Page/Chinese-dry-spices-and-condiments-1024x620.jpg') }}"
-                                    class="categoryBannerImage img-fluid" alt="">
-                                <div class="overlayBackground"></div>
-                                <div class="overlayText">{{$singleCategory->category_name}}</div>
+                        <div class="row pb-3">
+                            <div class="col-12">
+                                <div class="overlayImage">
+                                    <img
+                                        src="{{ $singleCategory->image }}"
+                                        class="categoryBannerImage img-fluid" alt="">
+                                    <div class="overlayBackground"></div>
+                                    <div class="overlayText">{{$singleCategory->category_name}}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                        <div class="row">
 
                             @foreach($singleCategory->children as $subCategory)
                                 <div class="col-md-12 mt-5">
@@ -101,25 +101,27 @@
                                         @foreach($subCategory->product as $product)
                                             <div
                                                 class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                                                <div
-                                                    class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                    <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"
-                                                         width="150" alt="">
-                                                </div>
-                                                <h5 class="best_price pt-3 font-weight-bold text-main-danger">{{$product->price}}</h5>
-                                                <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
-                                                <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                <button type="button"
-                                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                                    Add to Cart
-                                                </button>
+                                                <a href="{{route('singleproduct',$product->id)}}">
+                                                    <div
+                                                        class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                        <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"
+                                                             width="150" alt="">
+                                                    </div>
+                                                    <h5 class="best_price pt-3 font-weight-bold text-main-danger">{{$product->price}}</h5>
+                                                    <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
+                                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                                    <button type="button"
+                                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                                        Add to Cart
+                                                    </button>
+                                                </a>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                             @endforeach
 
-                    </div>
+                        </div>
                     @endforeach
                 </main>
 

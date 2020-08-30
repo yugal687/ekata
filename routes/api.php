@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/postbrand','Admin\BrandController@createBrand');
 Route::post('/postCategory','Admin\CategoryController@createCategory');
-Route::post('/addsubcategory','Admin\CategoryController@createCategory');
+Route::post('/addsubcategory','Admin\CategoryController@createSubcategory');
 Route::post('/addProduct','Admin\ProductController@CreateProduct');
 Route::post('/postTags','Tag\TagController@saveTag');
 Route::post('/postBannerImage','Admin\BannerImageController@saveBannerImage');

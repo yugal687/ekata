@@ -769,6 +769,7 @@
                   });
             },
             submitSubCategory(){
+
                 let formdata = new FormData();
                 formdata.append('category_name',this.subcategoryForm.name);
                 formdata.append('parent_id',this.subcategoryForm.categorySelect);
@@ -787,14 +788,23 @@
             },
             submitCategory(categoryForm) {
                 this.$refs[categoryForm].validate((valid) => {
+                    console.log(this.fileListThumbnail);
                     if (valid) {
 
+                        let bannerCategory = this.fileListHeader;
+                        let thumbnailCategory = this.fileListThumbnail;
+                        let formData = new FormData();
+                        bannerCategory.forEach((v, k) => {
+                            formData.append(`bannerCategory[${k}]`, v.raw);
+                        });
+                        thumbnailCategory.forEach((v, k) => {
+                            formData.append(`thumbnailCategory[${k}]`, v.raw);
+                        });
 
-                        let formdata = new FormData();
-                        formdata.append('category_name', this.categoryForm.name);
+                        formData.append('category_name', this.categoryForm.name);
 
 
-                        axios.post('/api/postCategory', formdata, {
+                        axios.post('/api/postCategory', formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                             }

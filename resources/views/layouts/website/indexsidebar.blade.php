@@ -8,9 +8,9 @@
 
                         @foreach($getCategory as $category)
                         <figure class="mx-auto">
-                        <img src="{{ asset('images/Homepage/Category_images/Layer 7 copy 2.png') }}" class="img-fluid" alt="">
+                        <img src="{{ $category->image }}" class="img-fluid" alt="">
                     </figure>
-                    <h6>{{$category->category_name}}</h6>
+                    <h6><a href="{{route('maincategory',$category->id)}}">{{$category->category_name}}</a></h6>
                             @endforeach
                 </li>
 

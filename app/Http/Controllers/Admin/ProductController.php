@@ -20,7 +20,6 @@ class ProductController extends Controller
             'brand_id' => 'required',
             'product_name' => 'required',
             'price' => 'required',
-            'sale_price' => 'required',
             'additional_information' => 'required',
             'quantity' => 'required'
         ]);
@@ -35,6 +34,7 @@ class ProductController extends Controller
                 'additional_information' => $request->additional_information,
                 'quantity' => $request->quantity,
             ]);
+
             foreach ($request->file('image') as $image) {
 
 
@@ -42,19 +42,21 @@ class ProductController extends Controller
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('/uploads'), $originalName);
 
-                $saveimage = Product::first();
+                $saveimage = Product::orderBy('id', 'DESC')->first();
                 $saveimage->image()->create([
                     'name' => '/uploads/' . $originalName,
                     'imagable_id' =>$saveProduct->id
                 ]);
 
             }
-           // dd($request->tag);
-            foreach ($request->tag as $tag){
-                $savetags = DB::table('products_tags')->insert([
-                    'product_id' => $saveProduct->id,
-                    'tag_id' => $tag
-                ]);
+            if ($request->tag >0) {
+                // dd($request->tag);
+                foreach ($request->tag as $tag) {
+                    $savetags = DB::table('products_tags')->insert([
+                        'product_id' => $saveProduct->id,
+                        'tag_id' => $tag
+                    ]);
+                }
             }
 
         }

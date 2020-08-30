@@ -10,8 +10,12 @@ class Category extends Model
 
     protected $fillable=[
       'category_name',
+        'image',
         'parent_id'
     ];
+    public function image(){
+        return $this->morphMany(Imagable::class,'imagable');
+    }
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
