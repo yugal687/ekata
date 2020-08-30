@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckUser
 {
@@ -15,6 +16,9 @@ class CheckUser
      */
     public function handle($request, Closure $next)
     {
+            if(Auth::user()->id !== 2){
+                abort(403, 'UnAuthorized Action for this user');
+            }
         return $next($request);
     }
 }
