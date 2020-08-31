@@ -342,7 +342,7 @@
 @stop
 
 @section('content')
-
+    @include('layouts.website.smindexsidebar')
 
     <section class="hero-section">
         <div class="row m-0 p-0">

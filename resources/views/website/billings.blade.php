@@ -4,22 +4,21 @@
 
 @section('style')
     <style>
-        .billing-section {
-            height: 100%;
-            margin-bottom: 100px;
+        .testing-section{
+            margin-top: 50px;
+            margin-bottom: 50px;
         }
-
-        /*form styles*/
-        #msform {
+        /* Form fields */
+        #shipping-payment-form {
             text-align: center;
             position: relative;
             margin-top: 30px;
         }
 
-        #msform fieldset {
+        #shipping-payment-form #main-form {
             background: white;
             border: 0 none;
-            border-radius: 0px;
+            border-radius: 0;
             box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
             padding: 20px 30px;
             box-sizing: border-box;
@@ -29,13 +28,8 @@
             position: relative;
         }
 
-        /*Hide all except first fieldset*/
-        #msform fieldset:not(:first-of-type) {
-            display: none;
-        }
-
         /*inputs*/
-        #msform input, #msform textarea {
+        #shipping-payment-form input, #shipping-payment-form textarea {
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 0;
@@ -47,7 +41,7 @@
             font-size: 13px;
         }
 
-        #msform input:focus, #msform textarea:focus {
+        #shipping-payment-form input:focus, #shipping-payment-form textarea:focus {
             -moz-box-shadow: none !important;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
@@ -60,7 +54,7 @@
         }
 
         /*buttons*/
-        #msform .action-button {
+        #shipping-payment-form .action-button {
             width: 100px;
             background: #CF7500;
             font-weight: bold;
@@ -72,11 +66,11 @@
             margin: 10px 5px;
         }
 
-        #msform .action-button:hover, #msform .action-button:focus {
+        #shipping-payment-form .action-button:hover, #shipping-payment-form .action-button:focus {
             box-shadow: 0 0 0 2px white, 0 0 0 3px #CF7500;
         }
 
-        #msform .action-button-previous {
+        #shipping-payment-form .action-button-previous {
             width: 100px;
             background: #C5C5F1;
             font-weight: bold;
@@ -88,7 +82,7 @@
             margin: 10px 5px;
         }
 
-        #msform .action-button-previous:hover, #msform .action-button-previous:focus {
+        #shipping-payment-form .action-button-previous:hover, #shipping-payment-form .action-button-previous:focus {
             box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
         }
 
@@ -109,180 +103,184 @@
             margin-bottom: 20px;
         }
 
-        /*progressbar*/
-        #progressbar {
-            margin-bottom: 30px;
-            overflow: hidden;
-            /*CSS counters to number the steps*/
-            counter-reset: step;
+        /* Progress Bar */
+        .progress-wrap {
+            margin: auto;
+            display: table;
         }
 
-        #progressbar li {
-            list-style-type: none;
-            color: white;
-            text-transform: uppercase;
-            font-size: 9px;
-            width: 50%;
-            float: left;
-            position: relative;
-            letter-spacing: 1px;
-        }
-
-        #progressbar li:before {
-            content: counter(step);
-            counter-increment: step;
-            width: 24px;
-            height: 24px;
-            line-height: 26px;
-            display: block;
-            font-size: 12px;
-            color: #333;
-            background: white;
-            border-radius: 25px;
-            margin: 0 auto 10px auto;
-        }
-
-        /*progressbar connectors*/
-        #progressbar li:after {
-            content: '';
+        .line-progress-bar {
+            display: flex;
+            margin: auto;
             width: 100%;
-            height: 2px;
-            background: white;
+        }
+
+        .line {
+            height: 1px;
+            width: 250px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: rgb(217, 217, 217);
             position: absolute;
-            left: -50%;
-            top: 9px;
-            z-index: -1; /*put it behind the numbers*/
+            margin-top: 8px;
         }
 
-        #progressbar li:first-child:after {
-            /*connector not needed before the first step*/
-            content: none;
+        .progress-wrap div ul {
+            display: flex;
+            width: 250px;
+            list-style: none;
+            padding: 0;
+            margin: initial;
+            justify-content: space-between;
+            z-index: 1;
         }
 
-        /*marking active/completed steps green*/
-        /*The number of the step and the connector before it = green*/
-        #progressbar li.active:before, #progressbar li.active:after {
-            background: #CF7500;
-            color: white;
-        }
-
-
-        /* Not relevant to this form */
-        .dme_link {
-            margin-top: 30px;
+        .progressbar-dots {
+            display: inline-flex;
+            border: #949494 solid 4px;
+            background: #333333;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
             text-align: center;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #d4d4d4;
+            font-size: 20px;
+            margin-left: 0px;
+            color: #d4d4d4;
+            border: 0px solid rgb(217, 217, 217);
+            background: rgb(217, 217, 217);
         }
 
-        .dme_link a {
-            background: #FFF;
-            font-weight: bold;
-            color: #CF7500;
-            border: 0 none;
-            border-radius: 25px;
-            cursor: pointer;
-            padding: 5px 25px;
+        .progressbar-dots span {
             font-size: 12px;
+            line-height: 12px;
+            position: absolute;
+            margin-top: 60px;
+            /* width: 75px; */
+            float: left;
+            margin-left: -30px;
+            display: none;
         }
-        .dme_link a:hover, .dme_link a:focus {
-            background: #C5C5F1;
-            text-decoration: none;
+
+        .progressbar-dots.active {
+            color: #fff;
+            border: 5px solid rgb(38, 163, 134);
+            background: #82CCC8;
         }
-        .orders ul{
-            max-height: 400px;
+
+        /*  Tab */
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane:first-child {
+            display: block;
+        }
+
+        /*Orders*/
+        .orders ul {
+            max-height: 300px;
             overflow-y: scroll;
             overflow-x: hidden;
         }
-        .orders li{
+
+        .orders li {
             list-style: none;
         }
-        .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-            color: #fff;
-            background-color: #CF7500;
-        }
-
     </style>
 @stop
 
-
 @section('content')
-    <div class="container billing-section">
-        <div class="row">
-            <div class="col-md-12 pt-5">
-                <h1 class="text-center align-items-center justify-content-center" style="font-family:'Times New Roman'">Payment And Shipping</h1>
+    <div class="container testing-section" style="">
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <h1 class="text-center align-items-center justify-content-center" style="font-family:'Times New Roman'">
+                    Payment And Shipping</h1>
             </div>
         </div>
-
-        <div class="row pt-3">
+        <div class="row">
             <div class="col-md-7">
-                {{--<h2 class="font-weight-bold text-main-primary" style="font-family:'Times New Roman'">PAYMENT</h2>
-                <hr style="border: 1px solid">
-
-                <h4 style="font-family:'Times New Roman'">ENTER BILLING ADDRESS:</h4>
-
-                <div class="col-md-12 pt-2">
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="firstname" placeholder="* First Name">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="lastname" placeholder="* Last Name">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="address1" placeholder="* Address">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="address2" placeholder="* Optional Address ">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-8">
-                                <input type="text" class="form-control" id="address1" placeholder="* City">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <input type="value" class="form-control" id="address2" placeholder="* Postal Code ">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="email" class="form-control" id="address1" placeholder="* E-mail">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="value" class="form-control" id="address1" placeholder="* Phone No">
-                            </div>
-                        </div>
-                    </form>
-                </div>--}}
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="msform">
-                            <!-- progressbar -->
-                            <ul id="progressbar">
-                                <li class="active">Personal Details</li>
-                                <li>Payment Information</li>
-                                {{--<li>Account Setup</li>--}}
+                <form action="" id="shipping-payment-form">
+                    <div class="progress-wrap">
+                        <div class="line-progress-bar">
+                            <div class="line"></div>
+                            <ul class="checkout-bar">
+                                <li class="progressbar-dots active"><span>step 1</span></li>
+                                <li class="progressbar-dots"><span>step 2</span></li>
                             </ul>
-                            <!-- fieldsets -->
-                            <fieldset>
-                                <h2 class="fs-title">Billing Address</h2>
-                                <h3 class="fs-subtitle">Please Fill Up Billing Address</h3>
+                        </div>
+                    </div>
+
+                    <div class="tab-content mt-4" id="main-form">
+                        <div class="tab-pane" id="step1">
+                            <h2 class="fs-title">Billing / Shipping Address</h2>
+                            <h3 class="fs-subtitle">Please Fill Up Billing Address</h3>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="firstname"
+                                           placeholder="* First Name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="lastname" placeholder="* Last Name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="address1" placeholder="* Address">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="address2"
+                                           placeholder="* Optional Address ">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="address1" placeholder="* City">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="value" class="form-control" id="address2"
+                                           placeholder="* Postal Code ">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <input type="email" class="form-control" id="address1" placeholder="* E-mail">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <input type="value" class="form-control" id="address1" placeholder="* Phone No">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-1">
+                                    <input type="checkbox" id="toggleShippingAddress" class="form-check-input">
+                                </div>
+                                <div class="col-10 text-left">
+                                    <label class="form-check-label" for="toggleShippingAddress">Check if shipping
+                                        address is different than billing address</label>
+                                </div>
+                            </div>
+                            <div class="shipping-address-form mt-3">
+                                <h3 class="fs-subtitle">Please Fill Up Shipping Address</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <input type="text" class="form-control" id="firstname"
                                                placeholder="* First Name">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" id="lastname" placeholder="* Last Name">
+                                        <input type="text" class="form-control" id="lastname"
+                                               placeholder="* Last Name">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" id="address1" placeholder="* Address">
+                                        <input type="text" class="form-control" id="address1"
+                                               placeholder="* Address">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <input type="text" class="form-control" id="address2"
@@ -300,165 +298,217 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="email" class="form-control" id="address1" placeholder="* E-mail">
+                                        <input type="email" class="form-control" id="address1"
+                                               placeholder="* E-mail">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="value" class="form-control" id="address1" placeholder="* Phone No">
+                                        <input type="value" class="form-control" id="address1"
+                                               placeholder="* Phone No">
                                     </div>
                                 </div>
-                                <input type="button" name="next" class="next action-button" value="Next"/>
-                            </fieldset>
+                            </div>
 
-                            <fieldset>
-                                <h2 class="fs-title">Payment Information</h2>
-                                <h3 class="fs-subtitle">Please Fill Up Paymennt Information</h3>
+                            <input type="button" name="next" class="next action-button" value="Next"/>
+
+                            {{--<input type="button" name="next" class="next-btn next-btn1" value="Next"/>--}}
+
+                        </div>
+                        <div class="tab-pane" id="step2">
+                            <h2 class="fs-title">Payment Information</h2>
+                            <h3 class="fs-subtitle">Please Fill Up Paymennt Information</h3>
+                            <div class="row mb-3">
+                                <div class="col-12 text-left">
+                                    <button type="button" class="btn btn-primary" id="creditCard">Credit Card</button>
+                                    <button type="button" class="btn btn-secondary" id="paypal">Paypal</button>
+                                </div>
+                            </div>
+                            <div class="creditCard" id="">
                                 <div class="row">
                                     <div class="col-12">
-                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill"
-                                                   href="#pills-home" role="tab" aria-controls="pills-home"
-                                                   aria-selected="true">Credit Card</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill"
-                                                   href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                                   aria-selected="false">Paypal</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                                         aria-labelledby="pills-home-tab">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-12">
-                                                        <input type="number" class="form-control" id="cardNumber"
-                                                               placeholder="1234 5678 9012 3456">
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-6">
-                                                        <input type="date" class="form-control" id="expiryDate"
-                                                               placeholder="MM/YY">
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <input type="number" class="form-control" id="cvccvv"
-                                                               placeholder="CVC / CVV">
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-12">
-                                                        <input type="text" class="form-control" id="cardHolderName"
-                                                               placeholder="Card Holder Name">
-                                                    </div>
-                                                </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <input type="number" class="form-control" id="cardNumber"
+                                                       placeholder="1234 5678 9012 3456">
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                         aria-labelledby="pills-profile-tab">
-                                        <div class="row">
-                                            <div class="col-12">
-
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <input type="date" class="form-control" id="expiryDate"
+                                                       placeholder="MM/YY">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <input type="number" class="form-control" id="cvccvv"
+                                                       placeholder="CVC / CVV">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <input type="text" class="form-control" id="cardHolderName"
+                                                       placeholder="Card Holder Name">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <input type="button" name="previous" class="previous action-button-previous"
-                                       value="Previous"/>
-                                <input type="button" name="next" class="next action-button" value="Next"/>
-                            </fieldset>
+                            <div class="paypal">
+                                <div class="row">
+                                    <div class="col-12">
 
-                            {{--<fieldset>
-                                <h2 class="fs-title">Create your account</h2>
-                                <h3 class="fs-subtitle">Fill in your credentials</h3>
-                                <input type="text" name="email" placeholder="Email"/>
-                                <input type="password" name="pass" placeholder="Password"/>
-                                <input type="password" name="cpass" placeholder="Confirm Password"/>
-                                <input type="button" name="previous" class="previous action-button-previous"
-                                       value="Previous"/>
-                                <input type="submit" name="submit" class="submit action-button" value="Submit"/>
-                            </fieldset>--}}
-                        </form>
-                        <!-- link to designify.me code snippets -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="button" name="previous" class="prev action-button-previous"
+                                   value="Previous"/>
+                            {{--<input type="button" name="next" class="next action-button" value="Next"/>--}}
+                            <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
+                        </div>
                     </div>
-                </div>
 
+                </form>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-4 pt-5">
-                <h4 class="pt-5" style="font-family:'Times New Roman'; color: #00000070;">HELP? CONTACT US:12345678</h4>
-                <hr/>
-                <div class="row pt-2">
-                    <div class="col-md-9">
-                        <h6><strong>SUB-TOTAL</strong></h6>
-                    </div>
-                    <div class="col-md-3">
-                        <b>: $9.99</b>
-                    </div>
-                </div>
+            <div class="col-md-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 col-sm-12">
+                        <h4 class="pt-5" style="font-family:'Times New Roman'; color: #00000070;">HELP? CONTACT US:12345678</h4>
+                        <hr/>
+                        <div class="row pt-2">
+                            <div class="col-md-9">
+                                <h6><strong>SUB-TOTAL</strong></h6>
+                            </div>
+                            <div class="col-md-3">
+                                <b>: $9.99</b>
+                            </div>
+                        </div>
 
-                <div class="row pt-3">
-                    <div class="col-md-9">
-                        <h6><strong>DISCOUNT</strong></h6>
-                    </div>
-                    <div class="col-md-3">
-                        <b>: $0.99</b>
-                    </div>
-                </div>
-                <hr/>
-                <div class="row">
-                    <div class="col-md-9">
-                        <h6><strong>ESTIMATED TOTAL</strong></h6>
-                    </div>
-                    <div class="col-md-3">
-                        <b>: $9.00</b>
-                    </div>
-                </div>
+                        <div class="row pt-3">
+                            <div class="col-md-9">
+                                <h6><strong>DISCOUNT</strong></h6>
+                            </div>
+                            <div class="col-md-3">
+                                <b>: $0.99</b>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h6><strong>ESTIMATED TOTAL</strong></h6>
+                            </div>
+                            <div class="col-md-3">
+                                <b>: $9.00</b>
+                            </div>
+                        </div>
 
-                <button type="button" class="btn bg-main-primary btn-lg text-white mt-3">PAY NOW</button>
-
-                <div class="row mt-5 orders">
-                    <div class="col-md-12">
-                        <div>
-                            <h5><strong><u>Your Order Details</u></strong></h5>
-                            <ul class="px-3">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img style="width: 100%; height: auto" src="/images/noodle.jpg">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h5>Item Name</h5>
-                                            <h6>Quantity: 1</h6>
-                                            <h6>Price: $1</h6>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img style="width: 100%; height: auto" src="/images/noodle.jpg">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h5>Item Name</h5>
-                                            <h6>Quantity: 1</h6>
-                                            <h6>Price: $1</h6>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="row mt-5 orders">
+                            <div class="col-md-12">
+                                <div>
+                                    <h5><strong><u>Your Order Details</u></strong></h5>
+                                    <ul class="px-3">
+                                        <li class="my-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img style="width: 100%; height: auto" src="/images/noodle.jpg">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5>Item Name</h5>
+                                                    <h6>Quantity: 1</h6>
+                                                    <h6>Price: $1</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -466,89 +516,55 @@
 
 @section('scripts')
     <script>
+        $('.shipping-address-form').hide();
 
-        //jQuery time
-        var current_fs, next_fs, previous_fs; //fieldsets
-        var left, opacity, scale; //fieldset properties which we will animate
-        var animating; //flag to prevent quick multi-click glitches
+        $("#toggleShippingAddress").click(function () {
+            if ($(this).is(":checked")) {
+                $(".shipping-address-form").slideDown();
+            } else {
+                $(".shipping-address-form").slideUp();
+            }
+        });
+
+        /*Credit Card and Pay[ppal*/
+        $("#creditCard").click(function () {
+            $(".creditCard").show();
+            $(".paypal").hide();
+            $('#paypal').toggleClass('btn-secondary', 'btn-primary');
+            $('#creditCard').removeClass('btn-secondary');
+            $('#creditCard').addClass('btn-primary');
+        });
+        $("#paypal").click(function () {
+            $(".paypal").show();
+            $(".creditCard").hide();
+            $('#creditCard').toggleClass('btn-secondary', 'btn-primary');
+            $('#paypal').removeClass('btn-secondary');
+            $('#paypal').addClass('btn-primary');
+        });
+
 
         $(".next").click(function () {
-            if (animating) return false;
-            animating = true;
+            $(".tab-pane").hide();
+            $("#step2").fadeIn(1000);
+            $('.progressbar-dots').removeClass('active');
+            $('.progressbar-dots:nth-child(2)').addClass('active');
 
-            current_fs = $(this).parent();
-            next_fs = $(this).parent().next();
+        });
+        $(".prev").click(function () {
+            $(".tab-pane").hide();
+            $("#step1").fadeIn(1000);
+            $('.progressbar-dots').removeClass('active');
+            $('.progressbar-dots:nth-child(1)').addClass('active');
 
-            //activate next step on progressbar using the index of next_fs
-            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-            //show the next fieldset
-            next_fs.show();
-            //hide the current fieldset with style
-            current_fs.animate({opacity: 0}, {
-                step: function (now, mx) {
-                    //as the opacity of current_fs reduces to 0 - stored in "now"
-                    //1. scale current_fs down to 80%
-                    scale = 1 - (1 - now) * 0.2;
-                    //2. bring next_fs from the right(50%)
-                    left = (now * 50) + "%";
-                    //3. increase opacity of next_fs to 1 as it moves in
-                    opacity = 1 - now;
-                    current_fs.css({
-                        'transform': 'scale(' + scale + ')',
-                        'position': 'absolute'
-                    });
-                    next_fs.css({'left': left, 'opacity': opacity});
-                },
-                duration: 800,
-                complete: function () {
-                    current_fs.hide();
-                    animating = false;
-                },
-                //this comes from the custom easing plugin
-                easing: 'easeInOutBack'
-            });
         });
 
-        $(".previous").click(function () {
-            if (animating) return false;
-            animating = true;
-
-            current_fs = $(this).parent();
-            previous_fs = $(this).parent().prev();
-
-            //de-activate current step on progressbar
-            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-            //show the previous fieldset
-            previous_fs.show();
-            //hide the current fieldset with style
-            current_fs.animate({opacity: 0}, {
-                step: function (now, mx) {
-                    //as the opacity of current_fs reduces to 0 - stored in "now"
-                    //1. scale previous_fs from 80% to 100%
-                    scale = 0.8 + (1 - now) * 0.2;
-                    //2. take current_fs to the right(50%) - from 0%
-                    left = ((1 - now) * 50) + "%";
-                    //3. increase opacity of previous_fs to 1 as it moves in
-                    opacity = 1 - now;
-                    current_fs.css({'left': left});
-                    previous_fs.css({'transform': 'scale(' + scale + ')', 'opacity': opacity});
-                },
-                duration: 800,
-                complete: function () {
-                    current_fs.hide();
-                    animating = false;
-                },
-                //this comes from the custom easing plugin
-                easing: 'easeInOutBack'
-            });
-        });
-
-        $(".submit").click(function () {
+        $(".pay").click(function () {
+            $("#loader").show();
+            setTimeout(function () {
+                $("#booking-form").html("<h2>Your message was sent successfully. Thanks! We'll be in touch as soon as we can, which is usually like lightning (Unless we're sailing or eating tacos!).</h2>");
+            }, 1000);
             return false;
-        })
+        });
     </script>
 @stop
 
-<!--ends-->
