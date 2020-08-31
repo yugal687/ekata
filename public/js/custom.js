@@ -55,9 +55,13 @@ $(document).ready(function () {
             "0": {
                 "items": 5
             },
-            "768": {
+            "992": {
+                "items": 8
+            },
+            "1200":{
                 "items": 9
             }
+
         },
         /*rewind: true*/
     });
@@ -170,6 +174,10 @@ $(document).ready(function () {
             }
         }
     });
+
+
+
+
 
 
 });

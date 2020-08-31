@@ -52,7 +52,6 @@ Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
 Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
 //Banner Image
 Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
-Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
 
 //User Dashboard
 Route::view('userdashboard/userdashboard', 'user dashboard.userdashboard');

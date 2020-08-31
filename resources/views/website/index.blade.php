@@ -4,6 +4,21 @@
 
 @section('style')
     <style>
+        .ribbon-wrapper {
+            transform: rotate(270deg);
+            left: -2px;
+        }
+
+        .ribbon-wrapper .ribbon {
+            font-size: 16px;
+            font-family: cursive;
+            text-transform: lowercase !important;
+        }
+
+        #clearence_carousel .ribbon-wrapper {
+            margin-left: 15px;
+        }
+
         .card {
             box-shadow: none !important;
         }
@@ -214,16 +229,8 @@
         /*Vertical Sidebar Carousel*/
         .vertical-sidebar-carousel {
             background-color: #fff;
-            height: 148vh;
+            height: auto;
             /*overflow: hidden;*/
-        }
-
-        @media screen and (max-width: 767px) {
-            .vertical-sidebar-carousel {
-                background-color: #fff;
-                height: 92vh;
-                /*overflow: hidden;*/
-            }
         }
 
         .vertical-sidebar-carousel .sidebar-vertical-carousel {
@@ -336,6 +343,7 @@
 
 @section('content')
 
+
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
@@ -351,7 +359,6 @@
                     <div class="col-12">
                         {{--Include Sidebar Here--}}
                         @include('layouts.website.indexsidebar')
-                        @include('layouts.website.smindexsidebar')
                     </div>
                 </div>
             </div>
@@ -399,6 +406,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img src="{{asset('images/Product_pngs/masala.png')}}"
                                                                  width="150" alt="">
                                                         </div>
@@ -424,6 +436,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img
                                                                 src="{{ asset('images/category/basmati_rice/Basmati_rice.png')}}"
                                                                 width="150" alt="">
@@ -449,6 +466,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img src="{{ asset('images/Product_pngs/masala.png')}}"
                                                                  width="150" alt="">
                                                         </div>
@@ -474,6 +496,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img
                                                                 src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
                                                                 width="150" alt="">
@@ -499,6 +526,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img src="{{asset('images/Product_pngs/masala.png')}}"
                                                                  width="150" alt="">
                                                         </div>
@@ -524,6 +556,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img
                                                                 src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
                                                                 width="150" alt="">
@@ -549,6 +586,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img src="{{asset('images/Product_pngs/masala.png')}}"
                                                                  width="150" alt="">
                                                         </div>
@@ -574,6 +616,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img
                                                                 src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
                                                                 width="150" alt="">
@@ -599,6 +646,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img src="{{asset('images/Product_pngs/masala.png')}}"
                                                                  width="150" alt="">
                                                         </div>
@@ -624,6 +676,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img
                                                                 src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
                                                                 width="150" alt="">
@@ -649,6 +706,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img src="{{asset('images/Product_pngs/masala.png')}}"
                                                                  width="150" alt="">
                                                         </div>
@@ -674,6 +736,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img
                                                                 src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
                                                                 width="150" alt="">
@@ -699,6 +766,11 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-main-secondary">
+                                                                    clearance
+                                                                </div>
+                                                            </div>
                                                             <img src="{{asset('images/Product_pngs/masala.png')}}"
                                                                  width="150" alt="">
                                                         </div>
@@ -1084,30 +1156,33 @@
                 </div>
                 <!-- <div class="container"> -->
                 <!-- <div class="special-content"> -->
-
-                <!-- first row -->
-                <div class="row m-0 p-0 mb-4">
-                    <!-- col-item-start -->
+                <div class="row align-items-center mt-4">
                     @foreach ($discountedProducts as $discountedProduct)
-                        <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-
-
-                            <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="" width="150" alt="">
+                    <div class="col-md-3 col-sm-6" style="">
+                        <div class="row d-flex justify-content-center text-center">
+                            <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
+                                <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
+                                    <div class="ribbon bg-main-secondary">
+                                        ...... % off
+                                    </div>
+                                </div>
+                                <div class="img-div bg-product-medium rounded-top-front rounded-bottom-front mx-auto">
+                                    <img src="{{asset('images/best_selling.png')}}" class="img-fluid" alt="">
+                                </div>
+                                <h5 class="best_price pt-3 font-weight-bold text-main-danger">
+                                    <s>was {{$discountedProduct->price}}</s></h5>
+                                <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
+                                <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                <button type="button"
+                                        class="mx-auto btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                    Add to Cart
+                                </button>
                             </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                <s>was {{$discountedProduct->price}}</s></h5>
-                            <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
-                            <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                            <!-- col-item-end -->
                         </div>
+                    </div>
                     @endforeach
                 </div>
-                <!-- second row -->
+                <!-- first row -->
             </div>
         </div>
     </section>
@@ -1366,13 +1441,30 @@
                     newArrivalItems.find(".owl-item").eq(0).addClass("current");
                 })
                 .owlCarousel({
-                    items: slidesPerPage,
                     dots: false,
                     nav: true,
                     smartSpeed: 200,
                     slideSpeed: 500,
-                    slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+                    slideBy: 1, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
                     responsiveRefreshRate: 100,
+                    responsiveClass: true,
+                    responsive: {
+                        0: {
+                            items: 1,
+                            nav: true
+                        },
+                        576: {
+                            items: 2,
+                        },
+
+                        992: {
+                            items: 3,
+                        },
+
+                        1200: {
+                            items: 4,
+                        }
+                    },
                     navText: ['<svg width="10%" height="10%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #b6b6b6;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="10%" height="10%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #b6b6b6;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
                 }).on('changed.owl.carousel', syncPosition2);
 

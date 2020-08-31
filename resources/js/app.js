@@ -40,7 +40,6 @@ Vue.component('add-discount-component', require('./components/Admin/Add_Product/
 /*Orders*/
 Vue.component('order-details-component', require('./components/Admin/Order/orderDetailsComponent.vue').default);
 Vue.component('banner-image-component', require('./components/Admin/Banner_Image/bannerImageComponent.vue').default);
-Vue.component('all-users-cart-details-component', require('./components/Admin/Cart/allUserCartDetailsComponent.vue').default);
 
 
 /**

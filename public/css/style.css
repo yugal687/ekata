@@ -60,7 +60,16 @@ a:hover {
 .container-mine {
     margin: 0 60px;
 }
-
+@media screen and (max-width: 767px){
+    .container-mine{
+        margin: 0 30px;
+    }
+}
+@media screen and (max-width: 575px){
+    .container-mine{
+        margin: 0 16px;
+    }
+}
 .container-mine-2 {
     margin: 0 30px;
     height: 140vh;

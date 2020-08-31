@@ -230,14 +230,6 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/admin/cart/allusercartdetails" class="nav-link">
-                                <i class="fas fa-cart-plus"></i>
-                                <p>
-                                    Cart Products
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item has-treeview">
                             <a href="" class="nav-link">
                                 <i class="fab fa-product-hunt"></i>
