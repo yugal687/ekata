@@ -60,7 +60,16 @@ a:hover {
 .container-mine {
     margin: 0 60px;
 }
-
+@media screen and (max-width: 767px){
+    .container-mine{
+        margin: 0 30px;
+    }
+}
+@media screen and (max-width: 575px){
+    .container-mine{
+        margin: 0 16px;
+    }
+}
 .container-mine-2 {
     margin: 0 30px;
     height: 140vh;
@@ -395,11 +404,19 @@ a:hover {
     border-radius: 10px;
     /*border-top: 1px solid #CF7500;*/
 }
+#accordion ul li.activeHeading h3 a{
+    color: #fff;
+}
 /*#accordion ul li.activeHeading{
     border-top: none !important;
 }*/
 
 /*links*/
+#accordion ul li a{
+    color: #000;
+    font-size: 14px;
+    font-weight: normal;
+}
 #accordion ul ul li a {
     color: #000;
     text-decoration: none;

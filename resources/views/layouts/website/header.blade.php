@@ -169,6 +169,9 @@
         }
 
         /*Navbar*/
+        /*a.navbar-brand{
+            display: none;
+        }*/
         @media (min-width: 992px) {
             ul.navbar-nav.mr-auto {
                 margin-bottom: -8px;
@@ -522,7 +525,7 @@
                             <img src="{{ asset('images/Icons/fastdelivery.png') }}"
                                  class="img-fluid footer-icons-large p-2" style="opacity: 0.8;" alt="">
                         </div>
-                        <h6>Fast Deleviry</h6>
+                        <h6>Fast Delivery</h6>
                     </div>
                     <div class="col-4 text-center">
                         <div class="row d-flex justify-content-center">
@@ -534,7 +537,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 text-center">
                         <h4 class="font-weight-bold">Our Services</h4>
@@ -548,7 +551,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 text-center">
                         <h4 class="font-weight-bold">Opening Hours</h4>
@@ -564,7 +567,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 text-center">
                         <h4 class="font-weight-bold">Contact Us</h4>
