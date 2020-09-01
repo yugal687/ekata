@@ -30,7 +30,11 @@ Route::get('/contact', function () {
 Route::get('/aboutus', function () {
     return view('website/aboutus');
 });
+/*Route::get('/products', function () {
+    return view('website/products');
+});*/
 Route::get('/category','Website\ProductController@showCategory');
+Route::get('/products','Website\ProductController@showProducts');
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
     "as" => 'maincategory']);

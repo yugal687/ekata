@@ -304,7 +304,7 @@
                                         <a class="nav-link text-white" href="#">Services</a>
                                     </li>
                                     <li class="nav-item px-2">
-                                        <a class="nav-link text-white" href="#">Products</a>
+                                        <a class="nav-link text-white" href="/products">Products</a>
                                     </li>
                                     <li class="nav-item px-2">
                                         <a class="nav-link text-white" href="/contact">Contact Us</a>
@@ -675,14 +675,16 @@
         </div>
     </div>
 </footer>
+<div id="app">
 
+</div>
 
 <!-- Javascript Files
     ================================================== -->
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 {{-- Jquery Ui--}}
 <script
     src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
@@ -706,14 +708,14 @@
 @yield('scripts')
 
 <script>
-    $(window).scroll(function(){
+    /*$(window).scroll(function(){
         if ($(window).scrollTop() >= 400) {
             $('nav.navbar').addClass('sticky');
         }
         else {
             $('nav.navbar').removeClass('sticky');
         }
-    });
+    });*/
     /*jQuery time*/
     $(document).ready(function () {
         $("#accordion h3").click(function () {
@@ -773,6 +775,10 @@
         $("#toggle-smsidebar").click(function() {
             $(".smsidebar-menu").toggleClass("rightActive");
         });
+        $(".close-menu").click(function() {
+            $(".smsidebar-menu").addClass("rightActive");
+        });
+
     });
     /*Number Snipper Button*/
     $(document).on('click', '.number-spinner button', function () {

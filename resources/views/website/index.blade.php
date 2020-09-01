@@ -343,7 +343,6 @@
 
 @section('content')
     @include('layouts.website.smindexsidebar')
-
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
@@ -1372,10 +1371,10 @@
                             </p>
                         </div>
                         <div class="row mt-3 text-center d-flex justify-content-center">
-                            <button type="button"
+                            <a type="button" href="/aboutus"
                                     class="btn btn-white border text-white px-5 mt-2 d-block">
                                 Read More
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1515,6 +1514,63 @@
                 newArrivalItemDetails.data('owl.carousel').to(number, 300, true);
             });
             /*New Arribal Carousel Ends*/
+
+
+            /*Vertical Sidebar Carousel | Tiny Slider*/
+            var slider = tns({
+                "container": ".smindex-sidebar-carousel",
+                "items": 3,
+                "slideBy": 1,
+                "mouseDrag": true,
+                "swipeAngle": false,
+                "speed": 400,
+                "loop": true,
+                "controls": true,
+                "controlsPosition": "bottom",
+                "controlsText": ["<i class='fas fa-angle-left'></i>", "<i class='fas fa-angle-right'></i>"],
+                "responsive": {
+                    "0": {
+                        "items": 3
+                    },
+                    "576": {
+                        "items": 4
+                    },
+                    "768": {
+                        "items": 6
+                    }
+                },
+            });
+            /*------------------------*/
+            var slider = tns({
+                container: ".sidebar-vertical-carousel",
+                /*"items": 9,*/
+                "axis": "vertical",
+                "swipeAngle": false,
+                "speed": 400,
+                "mouseDrag": true,
+                slideBy: 1,
+                gutter: 12,
+                nav: false,
+                loop: true,
+                autoplay: true,
+                autoplayButtonOutput: false,
+                controlsContainer: "#customize-controls",
+                "responsive": {
+                    "0": {
+                        "items": 5
+                    },
+                    "992": {
+                        "items": 8
+                    },
+                    "1200":{
+                        "items": 9
+                    }
+
+                },
+                /*rewind: true*/
+            });
+
+            /*Vertical Sidebar Carousel Ends*/
         });
     </script>
 @stop

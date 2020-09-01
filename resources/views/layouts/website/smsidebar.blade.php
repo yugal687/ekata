@@ -1,6 +1,7 @@
 
 
 <nav class="smsidebar-menu rightActive sidebar-wrapper">
+        <i class="fas fa-times text-danger close-menu" style="font-size: 20px; position: absolute; top: 20px; left: 220px"></i>
         <div class="sidebar-menu pt-5">
             <ul class="pt-3">
                 @foreach($getCategory as $category)

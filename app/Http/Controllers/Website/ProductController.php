@@ -56,4 +56,12 @@ class ProductController extends Controller
 
             ]);
     }
+    public function showProducts(){
+        $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
+        return view('website.products',
+            [
+                'getCategory' => $getcategory
+
+            ]);
+    }
 }
