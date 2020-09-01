@@ -50,4 +50,3 @@ Route::delete('/deleteBrand/{id}','Admin\BrandController@deleteBrand');
 Route::delete('/deleteTag/{id}','Tag\TagController@deleteTag');
 Route::delete('/deleteBanner/{id}','Admin\BannerImageController@deleteBannerImage');
 Route::delete('/deleteProduct/{id}','Admin\ProductController@deleteProduct');
-

@@ -1037,7 +1037,7 @@
                     <!-- col-item-start -->
                     <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         @foreach ($discountedProducts as $discountedProduct)
-                            <a href="{{route('singleproduct',$discountedProduct->id)}}">
+                            <a href="{{route('singleproduct',$product->id)}}">
 
                                 <div
                                     class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">

@@ -255,7 +255,7 @@
                             <div class="pt-3">
                                 <div class="row">
                                     <div class="col-8">
-                                        <button type="button"
+                                        <button type="button" onclick="savetoLocalStorage({{$product}})"
                                                 class="btn btn-large bg-main-primary border text-white px-5 mt-2 d-block">
                                             Add to Cart
                                         </button>
@@ -484,6 +484,12 @@
 
 @section('scripts')
     <script>
+        function savetoLocalStorage(product) {
+            let savedata = JSON.stringify(product);
+            console.log(savedata);
+            localStorage.setItem("savedata",savedata);
+
+        }
         $(document).ready(function () {
 
             var sync1 = $("#sync1");

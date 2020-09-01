@@ -25,9 +25,6 @@ Route::get('/logout', function () {
     Auth::logout();
     return view('auth.login');
 });
-Route::get('/', 'Website\ProductController@index');
-
-
 
 Route::get('/category/{id}',[
     "uses" => 'Website\ProductController@showCategory',
@@ -64,7 +61,14 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 //User
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::view('user/userdashboard', 'User.userdashboard');
-    Route::view('user/userprofile', 'User.userprofile');
+    Route::get('user/userprofile', [
+      "uses" => 'User\UserController@singleUserDetail',
+        "as" => 'user/userdashboard'
+    ]);
+    Route::post('/updateUser/{id}',[
+        "uses" => 'User\UserController@updateUser',
+        "as" => 'updateUser'
+    ]);
 });
 
 
@@ -80,8 +84,6 @@ Route::get('/contact', function () {
 });
 
 
-Route::get('/', function () {
-    return view('website/index');
-});
+Route::get('/','Website\ProductController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');

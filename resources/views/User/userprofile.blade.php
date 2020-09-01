@@ -4,6 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
+
                 <!-- Profile Image -->
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
@@ -13,13 +14,13 @@
                                  alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center">Nina Mcintire</h3>
+                        <h3 class="profile-username text-center">{{$UserDetail->first_name}}</h3>
 
                         <div class=" mb-3">
                             <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
 
                             <p class="text-muted">
-                                name1@gmail.com
+                                {{$UserDetail->email}}
                             </p>
 
                             <hr>
@@ -27,14 +28,14 @@
                             <strong><i class="fas fa-phone mr-1"></i> Phone Number</strong>
 
                             <p class="text-muted">
-                                +977 - 12345678
+                               {{$UserDetail->contact_number}}
                             </p>
 
                             <hr>
 
                             <strong><i class="fas fa-building mr-1"></i> Address</strong>
                             <p class="text-muted">
-                                Demo Street 123, Demo City 04312, NJ
+                                {{$UserDetail->address}}
                             </p>
 
                             <hr>
@@ -73,28 +74,28 @@
                                             <label for="inputName" class="col-sm-12 col-form-label">First Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
-                                                       placeholder="First Name">
+                                                       placeholder="First Name" value="{{$UserDetail->first_name}}">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputName" class="col-sm-12 col-form-label">Last Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
-                                                       placeholder="Last Name">
+                                                       placeholder="Last Name" value="{{$UserDetail->last_name}}">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="inputEmail" class="col-sm-12 col-form-label">Email</label>
                                             <div class="col-sm-12">
                                                 <input type="email" class="form-control" id=""
-                                                       placeholder="Email">
+                                                       placeholder="Email" value="{{$UserDetail->email}}">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label for="inputName2" class="col-sm-12 col-form-label">Address</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
-                                                       placeholder="Address">
+                                                       placeholder="Address" value="{{$UserDetail->address}}">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4">
@@ -109,7 +110,7 @@
                                             <label for="inputSkills" class="col-sm-12 col-form-label">Phone Number</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
-                                                       placeholder="Phone Number">
+                                                       placeholder="Phone Number" value="{{$UserDetail->contact_number}}">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4">
@@ -121,7 +122,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <div class=" col-sm-12">
-                                                <button type="submit" class="btn btn-warning">Update</button>
+                                                <button type="submit" class="btn btn-warning" href="{{Route('updateUser',$UserDetail->id)}}">Update</button>
                                             </div>
                                         </div>
                                     </div>
