@@ -17,7 +17,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 
-    <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
+    {{--<link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
     <!-- owl carousel  -->
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
@@ -254,7 +254,7 @@
                                                 class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item px-2">
-                                        <a class="nav-link text-white" href="#">About Us</a>
+                                        <a class="nav-link text-white" href="/aboutus">About Us</a>
                                     </li>
                                     <li class="nav-item px-2">
                                         <a class="nav-link text-white" href="#">Services</a>
@@ -573,9 +573,19 @@
                         <h4 class="font-weight-bold">Contact Us</h4>
                     </div>
                     <ul class="list-unstyled mt-4">
-                        <li class="list">0420446000 042000000</li>
-                        <li class="list">abcdekata@gmail.com</li>
-                        <li class="list">soft tech road, preston</li>
+                        <li class="list">
+                            <a href="tel:0420446000 042000000">0420446000 042000000</a>
+                        </li>
+                        <li class="list">
+                            <a href="mailto:abcdekata@gmail.com">abcdekata@gmail.com</a>
+                        </li>
+                        <li class="list">
+                            <address>
+                                <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678" target="_blank">
+                                    1600 Pennsylvania Avenue NW Washington, DC 20500
+                                </a>
+                            </address>
+                        </li>
                         <li class="list">VIC 3072</li>
                     </ul>
                 </div>
@@ -611,12 +621,12 @@
     <div class="container-fluid">
         <div class="row pt-2" id="copyright-footer">
             <div class="col-md-9">
-                <p><i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2020. All rights reserved. Designed by
-                    Soft tech
-                    Multimedia.</p>
+                <p><i class="fa fa-copyright" aria-hidden="true"></i>
+                    Copyright 2020. All rights reserved. Designed by <a href="#"> Soft tech Multimedia.</a>
+                </p>
             </div>
             <div class="col-md-3">
-                <p><i class="fa fa-copyright" aria-hidden="true"></i><u>Terms of use</u> | <u>Privacy Policy</u></p>
+                <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy Policy</a></p>
             </div>
         </div>
     </div>
@@ -625,6 +635,8 @@
 
 <!-- Javascript Files
     ================================================== -->
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 {{-- Jquery Ui--}}

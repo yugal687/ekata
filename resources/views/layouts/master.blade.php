@@ -267,6 +267,24 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item has-treeview">
+                            <a href="" class="nav-link">
+                                <i class="fab fa-weebly"></i>
+                                <p>
+                                    Website Update
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/admin/websiteupdate/websiteinfo" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Website Info </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                     </ul>
                 </nav>
@@ -281,10 +299,11 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
+            <strong><i class="fa fa-copyright" aria-hidden="true"></i>
+                    Copyright 2020. All rights reserved. Designed by <a href="#"> Soft tech Multimedia.</a>
+            </strong>
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.0.3
+                <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy Policy</a></p>
             </div>
         </footer>
         <!-- /.control-sidebar -->

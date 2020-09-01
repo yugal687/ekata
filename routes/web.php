@@ -29,6 +29,9 @@ Route::get('/logout', function () {
 Route::get('/category/{id}',[
     "uses" => 'Website\ProductController@showCategory',
     "as" => 'category']);
+Route::get('/aboutus', function () {
+    return view('website/aboutus');
+});
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
     "as" => 'maincategory']);
@@ -48,6 +51,15 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('admin/setup/brands', 'admin.setup.brands');
     Route::view('admin/setup/tags', 'admin.setup.tags');
 //Product
+Route::view('admin/addproduct/index', 'admin.add_product.index');
+Route::view('admin/addproduct/products', 'admin.add_product.products');
+Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
+//Order
+Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
+//Banner Image
+Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
+//Website Info
+Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
     Route::view('admin/addproduct/index', 'admin.add_product.index');
     Route::view('admin/addproduct/products', 'admin.add_product.products');
     Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
