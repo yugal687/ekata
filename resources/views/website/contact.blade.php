@@ -36,6 +36,13 @@
         .enquiry-section {
             background-color: #CF7500;
         }
+
+        h6 a, address a{
+            text-decoration: none;
+            font-size: 15px;
+            color: #212529;
+        }
+
     </style>
 @stop
 
@@ -45,7 +52,7 @@
             <div class="">
                 <h1>Contact Us</h1>
                 <p>Ekata Convinence Store sit amet, consectetur adipiscing</p>
-                <button class="btn bg-main-primary text-white px-3 py-1" type="submit">Call Us</button>
+                <a type="button" class="btn bg-main-primary text-white px-3 py-1" href="tel:12345678">Call Us</a>
             </div>
         </div>
         <div class="container card_box">
@@ -58,9 +65,9 @@
                                     <i class="fas fa-phone-alt fa-4x fa-color"></i>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <h4 class="font-weight-bold pb-4">PHONE</h4>
-                                    <h6>12345678</h6>
-                                    <h6>987654321</h6>
+                                    <h4 class="font-weight-bold pb-3">PHONE</h4>
+                                    <h6><a href="tel:12345678">Contact Num</a></h6>
+                                    <h6><a href="tel:12345678">Opt Contact Num</a></h6>
                                 </div>
                             </div>
                         </div>
@@ -74,9 +81,9 @@
                                     <i class="far fa-envelope fa-4x fa-color"></i>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <h4 class="font-weight-bold pb-4">EMAIL</h4>
-                                    <h6>melcleaning@gmail.com</h6>
-                                    <h6>abcdcleaning@gmail.com</h6>
+                                    <h4 class="font-weight-bold pb-3">EMAIL</h4>
+                                    <h6><a href="mailto:melcleaning@gmail.com">email</a></h6>
+                                    <h6><a href="mailto:melcleaning@gmail.com">opt email</a></h6>
                                 </div>
                             </div>
                         </div>
@@ -90,9 +97,14 @@
                                     <i class="fas fa-map-marker-alt fa-4x fa-color"></i>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <h4 class="font-weight-bold pb-4">LOCATION</h4>
-                                    <h6>365 MURRAY ROAD, PRESTON</h6>
-                                    <h6>VIC 3072</h6>
+                                    <h4 class="font-weight-bold pb-3">LOCATION</h4>
+                                    <address>
+                                        <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678" target="_blank">
+                                            1600 Pennsylvania Avenue NW Washington, DC 20500
+                                        </a>
+                                    </address>
+                                    {{--<h6>365 MURRAY ROAD, PRESTON</h6>
+                                    <h6>VIC 3072</h6>--}}
                                 </div>
                             </div>
                         </div>

@@ -40,7 +40,12 @@ Vue.component('add-discount-component', require('./components/Admin/Add_Product/
 /*Orders*/
 Vue.component('order-details-component', require('./components/Admin/Order/orderDetailsComponent.vue').default);
 Vue.component('banner-image-component', require('./components/Admin/Banner_Image/bannerImageComponent.vue').default);
+/*Website_Update*/
+Vue.component('website-info-component', require('./components/Admin/Website Update/websiteInfoComponent.vue').default);
 
+
+/*Website Pages*/
+Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

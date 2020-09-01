@@ -464,6 +464,9 @@ a:hover {
 .footer-container ul li{
     font-size: 15px;
 }
+.footer-container ul li a{
+    color: #212529;
+}
 .footer-container h6{
     font-size: 12px;
 }
