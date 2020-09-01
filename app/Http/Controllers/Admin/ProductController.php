@@ -20,7 +20,6 @@ class ProductController extends Controller
             'brand_id' => 'required',
             'product_name' => 'required',
             'price' => 'required',
-            'sale_price' => 'required',
             'additional_information' => 'required',
             'quantity' => 'required'
         ]);
@@ -35,6 +34,7 @@ class ProductController extends Controller
                 'additional_information' => $request->additional_information,
                 'quantity' => $request->quantity,
             ]);
+
             foreach ($request->file('image') as $image) {
 
 
@@ -42,18 +42,21 @@ class ProductController extends Controller
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('/uploads'), $originalName);
 
-                $saveimage = Product::first();
+                $saveimage = Product::orderBy('id', 'DESC')->first();
                 $saveimage->image()->create([
                     'name' => '/uploads/' . $originalName,
+                    'imagable_id' =>$saveProduct->id
                 ]);
 
             }
-           // dd($request->tag);
-            foreach ($request->tag as $tag){
-                $savetags = DB::table('products_tags')->insert([
-                    'product_id' => $saveProduct->id,
-                    'tag_id' => $tag
-                ]);
+            if ($request->tag >0) {
+                // dd($request->tag);
+                foreach ($request->tag as $tag) {
+                    $savetags = DB::table('products_tags')->insert([
+                        'product_id' => $saveProduct->id,
+                        'tag_id' => $tag
+                    ]);
+                }
             }
 
         }
@@ -67,4 +70,61 @@ class ProductController extends Controller
            'getProduct' => $getProduct
         ]);
     }
+    public function addDiscount(Request $request){
+        //dd($request);
+        $saveDiscount = Product::findorFail($request->id)->update([
+            'discount' => $request->discount,
+            'sale_price' => $request->sale_price
+        ]);
+        return response()->json([
+           'message' => 'Discount added on Product!!!'
+        ]);
+
+    }
+    public function  getDiscountedProduct(){
+        $getDiscountedProduct = Product::where('discount' ,'>',0)->latest()->get();
+        return response()->json([
+           'getDiscountedProduct' =>$getDiscountedProduct
+        ]);
+    }
+    public function deleteProduct($id){
+        $deleteProduct = Product::findorFail($id)->delete();
+        return response()->json([
+           'message' => 'Product Deleted !!!'
+        ]);
+    }
+    public function deleteDiscount($id){
+        $deleteDiscount = Product::findorFail($id)->update([
+           'sale_price' => 0,
+           'discount' => 0
+        ]);
+        return response()->json([
+            'message' => 'Discount Deleted !!!'
+        ]);
+    }
+    public function editProduct(Request $request){
+        $editedProduct = json_decode($request->editedProduct);
+        //dd($editedProduct[0]->id);
+        //dd($request->tag);
+        $saveEditProduct =Product::findorFail($editedProduct[0]->id)->update([
+            'product_name' => $editedProduct[0]->product_name,
+            'quantity' => $editedProduct[0]->quantity,
+            'category_id' => $editedProduct[0]->category_id,
+            'brand_id' => $editedProduct[0]->brand_id,
+            'price' => $editedProduct[0]->price,
+            'additional_information' => $editedProduct[0]->additional_information,
+        ]);
+        $deletetag =DB::table('products_tags')->where('product_id',$editedProduct[0]->id)->delete();
+        foreach ($request->tag as $tag){
+            $savetags = DB::table('products_tags')->insert([
+                'product_id' => $editedProduct[0]->id,
+                'tag_id' => $tag
+            ]);
+        }
+        return response()->json([
+           'message' => 'Product Updated !!'
+        ]);
+    }
+
+
 }

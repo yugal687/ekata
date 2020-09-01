@@ -3687,62 +3687,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addDiscountComponent",
   data: function data() {
     return {
       dialogVisible: false,
+      editData: [],
+      selectedProduct: [{
+        price: ''
+      }],
+      getDiscountedProduct: [],
+      discountamount: '',
+      getProduct: [],
       labelPosition: 'top',
       productSelectOptions: [{
         value: 'Product - 1',
@@ -3754,11 +3710,16 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Product - 3',
         label: 'Product - 3'
       }],
+      editDiscount: {
+        productSelect: '',
+        Price: '',
+        discount: '',
+        discountedPrice: ''
+      },
       discountForm: {
         productSelect: '',
         sellingPrice: '',
-        discountPercentage: '',
-        sellingPriceAfterDiscount: ''
+        discountPercentage: ''
       },
       discountFormRules: {
         productSelect: [{
@@ -3774,75 +3735,62 @@ __webpack_require__.r(__webpack_exports__);
       },
 
       /*Table Data's*/
-      discountTableData: [{
-        sn: 1,
-        productName: 'Product - 1',
-        previousSellingPrice: '1000',
-        discountPercentage: '10',
-        sellingPriceAfterDiscount: '900'
-      }, {
-        sn: 2,
-        productName: 'Product - 2',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 3,
-        productName: 'Product - 3',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 4,
-        productName: 'Product - 4',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 5,
-        productName: 'Product - 5',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }, {
-        sn: 6,
-        productName: 'Product - 6',
-        previousSellingPrice: '2000',
-        discountPercentage: '20',
-        sellingPriceAfterDiscount: '1600'
-      }],
       search: ''
     };
   },
   methods: {
+    onChange: function onChange(event) {
+      var _this = this;
+
+      console.log(this.discountForm.productSelect);
+      this.selectedProduct = this.getProduct.filter(function (getProduct) {
+        return getProduct.id == _this.discountForm.productSelect;
+      });
+    },
     submitForm: function submitForm(formName) {
+      var _this2 = this;
+
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          var formData = new FormData();
+          formData.append('discount', _this2.discountForm.discountPercentage);
+          formData.append('sale_price', _this2.discountcalculate);
+          formData.append('id', _this2.discountForm.productSelect);
+          axios.post('/api/addDiscount', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            alert(response.data.message);
+          });
         } else {
           console.log('error submit!!');
           return false;
         }
       });
     },
-    handleEdit: function handleEdit(index, row) {
-      console.log(index, row);
-    },
-    handleDelete: function handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete: function handleDelete(id) {
+      axios.patch('/api/deleteDiscount/' + id, {}).then(function (response) {
+        alert(response.data.message);
+      });
+    }
+  },
+  computed: {
+    discountcalculate: function discountcalculate() {
+      console.log(this.discountForm.sellingPrice);
+      this.discountamount = this.discountForm.discountPercentage * this.discountForm.sellingPrice / 100;
+      console.log(this.discountamount);
+      return this.discountForm.sellingPrice - this.discountamount;
     }
   },
   mounted: function mounted() {
-    $(document).ready(function () {
-      /*$('#qty, #price').on('input', function () {
-          var qty = parseInt($('#qty').val());
-          var price = parseFloat($('#price').val());
-          $('#total').val((qty * price ? qty * price : 0).toFixed(2));
-      });
-            var price = $('.sellingPrice').val();
-          alert(price);
-          var discount = $('.discountPercentage').val();
-          alert(discount);*/
+    var _this3 = this;
+
+    axios.get('/api/getDiscountedProduct', {}).then(function (response) {
+      _this3.getDiscountedProduct = response.data.getDiscountedProduct;
+    });
+    axios.get('/api/getProduct', {}).then(function (response) {
+      _this3.getProduct = response.data.getProduct;
     });
   }
 });
@@ -3858,14 +3806,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4047,7 +3987,6 @@ __webpack_require__.r(__webpack_exports__);
         productName: '',
         quantity: '',
         costPrice: '',
-        sellingPrice: '',
         tagsSelect: '',
         additionalInformation: '',
         type: []
@@ -4080,12 +4019,7 @@ __webpack_require__.r(__webpack_exports__);
         }],
         costPrice: [{
           required: true,
-          message: 'Please input cost price',
-          trigger: 'blur'
-        }],
-        sellingPrice: [{
-          required: true,
-          message: 'Please input cost price',
+          message: 'Please input price',
           trigger: 'blur'
         }],
         additionalInformation: [{
@@ -4133,7 +4067,6 @@ __webpack_require__.r(__webpack_exports__);
           formData.append('brand_id', _this2.productForm.brandSelect);
           formData.append('product_name', _this2.productForm.productName);
           formData.append('price', _this2.productForm.costPrice);
-          formData.append('sale_price', _this2.productForm.sellingPrice);
           formData.append('additional_information', _this2.productForm.additionalInformation);
           formData.append('quantity', _this2.productForm.quantity);
           axios.post('/api/addProduct', formData, {
@@ -4474,379 +4407,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "productsComponent",
   data: function data() {
     return {
-      image: ['https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg', 'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg', 'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg', 'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg', 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg', 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg', 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'],
       dialogVisible: false,
+      inputTags: [],
+      editProduct: [],
       getProduct: [],
       search: '',
       dynamicTags: [],
@@ -4926,7 +4493,11 @@ __webpack_require__.r(__webpack_exports__);
           message: 'Please input additional Information',
           trigger: 'blur'
         }]
-      }
+      },
+      getCategory: [],
+      getSubCategory: [],
+      getBrand: [],
+      tagslist: []
     };
   },
   mounted: function mounted() {
@@ -4935,15 +4506,36 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/api/getProduct', {}).then(function (response) {
       _this.getProduct = response.data.getProduct;
     });
+    axios.get('/api/getCategories', {}).then(function (response) {
+      _this.getCategory = response.data.getCategory;
+    });
+    axios.get('/api/getSubCategories', {}).then(function (response) {
+      _this.getSubCategory = response.data.getSubCategory;
+    });
+    axios.get('/api/getBrand', {}).then(function (response) {
+      _this.getBrand = response.data.getBrand;
+    });
+    axios.get('/api/getTag', {}).then(function (response) {
+      _this.tagslist = response.data.tags;
+    });
   },
   methods: {
-    openEditModal: function openEditModal() {
+    openEditModal: function openEditModal(id) {
+      this.dialogVisible = true;
+      this.editProduct = this.getProduct.filter(function (getProduct) {
+        return getProduct.id == id;
+      });
+      console.log(this.editProduct[0].tags[0].tags);
       $(".productEditWrapper").slideToggle("slow");
       $(".productDetailsWrapper").slideToggle("slow");
       $(".detailsProductDetailsBtn").toggle("slow");
       $(".editProductDetailsBtn").toggle("slow");
     },
-    openDetailsModal: function openDetailsModal() {
+    openDetailsModal: function openDetailsModal(id) {
+      this.dialogVisible = true;
+      this.editProduct = this.getProduct.filter(function (getProduct) {
+        return getProduct.id == id;
+      });
       $(".productEditWrapper").slideToggle("slow");
       $(".productDetailsWrapper").slideToggle("slow");
       $(".detailsProductDetailsBtn").toggle("slow");
@@ -4954,8 +4546,10 @@ __webpack_require__.r(__webpack_exports__);
     handleEdit: function handleEdit(index, row) {
       console.log(index, row);
     },
-    handleDelete: function handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete: function handleDelete(id) {
+      axios["delete"]('/api/deleteProduct/' + id).then(function (response) {
+        alert(response.data.message);
+      });
     },
 
     /*Client Information Tab---*/
@@ -4965,9 +4559,21 @@ __webpack_require__.r(__webpack_exports__);
 
     /*Edit Datas*/
     submitForm: function submitForm(formName) {
+      var _this2 = this;
+
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          var tag = _this2.inputTags;
+          console.log(tag);
+          var formData = new FormData();
+          tag.forEach(function (v, k) {
+            formData.append("tag[".concat(k, "]"), v);
+          });
+          formData.append('editedProduct', JSON.stringify(_this2.editProduct));
+          axios.post('/api/editProduct', formData, {//  editedProduct : this.editProduct,
+          }).then(function (response) {
+            alert(response.data.message);
+          });
         } else {
           console.log('error submit!!');
           return false;
@@ -4980,11 +4586,11 @@ __webpack_require__.r(__webpack_exports__);
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
     showInput: function showInput() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.inputVisible = true;
       this.$nextTick(function (_) {
-        _this2.$refs.saveTagInput.$refs.input.focus();
+        _this3.$refs.saveTagInput.$refs.input.focus();
       });
     },
     handleInputConfirm: function handleInputConfirm() {
@@ -5089,16 +4695,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "bannerImageComponent",
   data: function data() {
     return {
-      image: ['https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg', 'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg', 'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg', 'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg', 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg', 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg', 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'],
+      getBannerImage: [],
       dialogImageUrl: '',
       dialogVisible: false,
       disabled: false,
@@ -5107,6 +4708,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       bannerImageFormRules: {}
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getBannerImage', {}).then(function (response) {
+      _this.getBannerImage = response.data.getBannerImage;
+    });
   },
   methods: {
     handleRemove: function handleRemove(file, fileList) {
@@ -5117,17 +4725,43 @@ __webpack_require__.r(__webpack_exports__);
       this.dialogVisible = true;
     },
     saveImage: function saveImage(formName) {
+      var _this2 = this;
+
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          var file = _this2.$refs.upload.uploadFiles;
+          console.log(file);
+          var formData = new FormData();
+          file.forEach(function (v, k) {
+            formData.append("image[".concat(k, "]"), v.raw);
+          });
+          axios.post('/api/postBannerImage', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            alert(response.data.message);
+          })["catch"](function (error) {
+            if (error.response.status == 422) {
+              _this2.errors = error.response.data.errors;
+            }
+          });
         } else {
           console.log('error submit!!');
           return false;
         }
       });
     },
-    toggle: function toggle(id) {},
-    deleteImage: function deleteImage(id) {}
+    setActive: function setActive(id) {
+      axios.patch('/api/activeBanner/' + id).then(function (response) {
+        alert(response.data.message);
+      });
+    },
+    deleteImage: function deleteImage(id) {
+      axios["delete"]('/api/deleteBanner/' + id).then(function (response) {
+        alert(response.data.message);
+      });
+    }
   }
 });
 
@@ -5908,6 +5542,13 @@ __webpack_require__.r(__webpack_exports__);
       brandSearch: ''
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getBrand', {}).then(function (response) {
+      _this.getBrand = response.data.getBrand;
+    });
+  },
   methods: {
     editBrand: function editBrand(id) {
       this.editBrands = this.getBrand.filter(function (getBrand) {
@@ -5927,7 +5568,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitBrand: function submitBrand(brandForm) {
-      var _this = this;
+      var _this2 = this;
 
       var formdata = new FormData();
       formdata.append('brand_name', this.brandForm.name);
@@ -5939,7 +5580,7 @@ __webpack_require__.r(__webpack_exports__);
         alert(response.data.message);
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this.errors = error.response.data.errors;
+          _this2.errors = error.response.data.errors;
         }
       });
     },
@@ -6770,10 +6411,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$refs[categoryForm].validate(function (valid) {
+        console.log(_this2.fileListThumbnail);
+
         if (valid) {
-          var formdata = new FormData();
-          formdata.append('category_name', _this2.categoryForm.name);
-          axios.post('/api/postCategory', formdata, {
+          var bannerCategory = _this2.fileListHeader;
+          var thumbnailCategory = _this2.fileListThumbnail;
+          var formData = new FormData();
+          bannerCategory.forEach(function (v, k) {
+            formData.append("bannerCategory[".concat(k, "]"), v.raw);
+          });
+          thumbnailCategory.forEach(function (v, k) {
+            formData.append("thumbnailCategory[".concat(k, "]"), v.raw);
+          });
+          formData.append('category_name', _this2.categoryForm.name);
+          axios.post('/api/postCategory', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -7057,6 +6708,13 @@ __webpack_require__.r(__webpack_exports__);
       tagSearch: ''
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getTag', {}).then(function (response) {
+      _this.tags = response.data.tags;
+    });
+  },
   methods: {
     editTag: function editTag(id) {
       this.editTags = this.tags.filter(function (tags) {
@@ -7076,7 +6734,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitTag: function submitTag(tagForm) {
-      var _this = this;
+      var _this2 = this;
 
       var formData = new FormData();
       formData.append('tags', this.tagForm.name);
@@ -7088,7 +6746,7 @@ __webpack_require__.r(__webpack_exports__);
         alert(response.data.message);
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this.errors = error.response.data.errors;
+          _this2.errors = error.response.data.errors;
         }
       });
     },
@@ -13500,7 +13158,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.text[data-v-06356278] {\r\n    font-size: 14px;\n}\n.item[data-v-06356278] {\r\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\r\n.clearfix[data-v-06356278]:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\r\n    clear: both\n}\r\n", ""]);
+exports.push([module.i, "\n.text[data-v-06356278] {\n    font-size: 14px;\n}\n.item[data-v-06356278] {\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\n.clearfix[data-v-06356278]:after {\n    display: table;\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\n    clear: both\n}\n", ""]);
 
 // exports
 
@@ -13519,7 +13177,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.hidden[data-v-cf064fc0] {\r\n    display: none;\n}\n.el-carousel__container[data-v-cf064fc0] {\r\n    position: relative;\n}\n.el-tag + .el-tag[data-v-cf064fc0] {\r\n    margin-left: 10px;\n}\n.button-new-tag[data-v-cf064fc0] {\r\n    margin-left: 10px;\r\n    height: 32px;\r\n    line-height: 30px;\r\n    padding-top: 0;\r\n    padding-bottom: 0;\n}\n.input-new-tag[data-v-cf064fc0] {\r\n    width: 90px;\r\n    margin-left: 10px;\r\n    vertical-align: bottom;\n}\n.clients-wrapper[data-v-cf064fc0] {\r\n    border: 1px solid #ebebeb;\r\n    border-radius: 5px;\r\n    transition: .2s;\r\n    margin: 20px;\r\n    padding: 20px;\n}\n.information-wrapper[data-v-cf064fc0] {\r\n    /*border: 1px solid #ebebeb;*/\r\n    /*border-radius: 5px;*/\r\n    /*transition: .2s;*/\r\n    margin: 10px;\r\n    /*padding: 10px;*/\n}\r\n\r\n/*th.gutter {\r\n    padding: 0 !important;\r\n}*/\n.clients-wrapper[data-v-cf064fc0]:hover {\r\n    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .6);\n}\n.clients-ques-ans h6[data-v-cf064fc0] {\r\n    font-size: 14px;\r\n    line-height: 15px;\r\n    font-weight: 700;\r\n    color: #606266;\n}\r\n", ""]);
+exports.push([module.i, "\n.hidden[data-v-cf064fc0] {\n    display: none;\n}\n.el-tag + .el-tag[data-v-cf064fc0] {\n    margin-left: 10px;\n}\n.button-new-tag[data-v-cf064fc0] {\n    margin-left: 10px;\n    height: 32px;\n    line-height: 30px;\n    padding-top: 0;\n    padding-bottom: 0;\n}\n.input-new-tag[data-v-cf064fc0] {\n    width: 90px;\n    margin-left: 10px;\n    vertical-align: bottom;\n}\n.clients-wrapper[data-v-cf064fc0] {\n    border: 1px solid #ebebeb;\n    border-radius: 5px;\n    transition: .2s;\n    margin: 20px;\n    padding: 20px;\n}\n.information-wrapper[data-v-cf064fc0] {\n    /*border: 1px solid #ebebeb;*/\n    /*border-radius: 5px;*/\n    /*transition: .2s;*/\n    margin: 10px;\n    /*padding: 10px;*/\n}\n\n/*th.gutter {\n    padding: 0 !important;\n}*/\n.clients-wrapper[data-v-cf064fc0]:hover {\n    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .6);\n}\n.clients-ques-ans h6[data-v-cf064fc0] {\n    font-size: 14px;\n    line-height: 15px;\n    font-weight: 700;\n    color: #606266;\n}\n", ""]);
 
 // exports
 
@@ -103887,207 +103545,209 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {},
-    [
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-4" },
-          [
-            _c("el-card", { staticClass: "box-card" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "clearfix",
-                  attrs: { slot: "header" },
-                  slot: "header"
-                },
-                [_c("span", [_vm._v("Add Discount")])]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "text item" }, [
+  return _c("div", {}, [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-4" },
+        [
+          _c("el-card", { staticClass: "box-card" }, [
+            _c(
+              "div",
+              {
+                staticClass: "clearfix",
+                attrs: { slot: "header" },
+                slot: "header"
+              },
+              [_c("span", [_vm._v("Add Discount")])]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "text item" }, [
+              _c("div", { staticClass: "row d-flex justify-content-center" }, [
                 _c(
                   "div",
-                  { staticClass: "row d-flex justify-content-center" },
+                  { staticClass: "col-12" },
                   [
                     _c(
-                      "div",
-                      { staticClass: "col-12" },
+                      "el-form",
+                      {
+                        ref: "discountForm",
+                        staticClass: "demo-discountForm",
+                        attrs: {
+                          model: _vm.discountForm,
+                          rules: _vm.discountFormRules,
+                          "label-position": _vm.labelPosition
+                        }
+                      },
                       [
                         _c(
-                          "el-form",
+                          "el-form-item",
                           {
-                            ref: "discountForm",
-                            staticClass: "demo-discountForm",
                             attrs: {
-                              model: _vm.discountForm,
-                              rules: _vm.discountFormRules,
-                              "label-position": _vm.labelPosition
+                              label: "Select Category",
+                              prop: "productSelect"
                             }
                           },
                           [
                             _c(
-                              "el-form-item",
+                              "el-select",
                               {
+                                staticStyle: { width: "100%" },
                                 attrs: {
-                                  label: "Select Category",
-                                  prop: "productSelect"
-                                }
-                              },
-                              [
-                                _c(
-                                  "el-select",
-                                  {
-                                    staticStyle: { width: "100%" },
-                                    attrs: {
-                                      clearable: "",
-                                      placeholder: "Select Product",
-                                      filterable: ""
-                                    },
-                                    model: {
-                                      value: _vm.discountForm.productSelect,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.discountForm,
-                                          "productSelect",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "discountForm.productSelect"
-                                    }
+                                  clearable: "",
+                                  placeholder: "Select Product",
+                                  filterable: ""
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.onChange($event)
+                                  }
+                                },
+                                model: {
+                                  value: _vm.discountForm.productSelect,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.discountForm,
+                                      "productSelect",
+                                      $$v
+                                    )
                                   },
-                                  _vm._l(_vm.productSelectOptions, function(
-                                    item
-                                  ) {
-                                    return _c("el-option", {
-                                      key: item.value,
-                                      attrs: {
-                                        label: item.label,
-                                        value: item.value
-                                      }
-                                    })
-                                  }),
-                                  1
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "el-form-item",
-                              {
-                                attrs: {
-                                  label: "Selling Price",
-                                  prop: "sellingPrice"
+                                  expression: "discountForm.productSelect"
                                 }
                               },
-                              [
-                                _c("el-input", {
+                              _vm._l(_vm.getProduct, function(item) {
+                                return _c("el-option", {
+                                  key: item.id,
+                                  attrs: {
+                                    label: item.product_name,
+                                    value: item.id
+                                  }
+                                })
+                              }),
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-form-item",
+                          {
+                            attrs: {
+                              label: "Selling Price",
+                              prop: "sellingPrice"
+                            }
+                          },
+                          [
+                            _c(
+                              "el-select",
+                              {
+                                attrs: { placeholder: "Select" },
+                                model: {
+                                  value: _vm.discountForm.sellingPrice,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.discountForm,
+                                      "sellingPrice",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "discountForm.sellingPrice"
+                                }
+                              },
+                              _vm._l(_vm.selectedProduct, function(
+                                selectProdec
+                              ) {
+                                return _c("el-option", {
+                                  key: selectProdec.id,
                                   staticClass: "sellingPrice",
                                   staticStyle: { width: "100%" },
-                                  model: {
-                                    value: _vm.discountForm.sellingPrice,
-                                    callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.discountForm,
-                                        "sellingPrice",
-                                        $$v
-                                      )
-                                    },
-                                    expression: "discountForm.sellingPrice"
+                                  attrs: {
+                                    label: selectProdec.price,
+                                    value: selectProdec.price
                                   }
                                 })
-                              ],
+                              }),
                               1
-                            ),
-                            _vm._v(" "),
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-form-item",
+                          {
+                            attrs: {
+                              label: "Discount Percentage",
+                              prop: "discountPercentage"
+                            }
+                          },
+                          [
+                            _c("el-input", {
+                              staticClass: "discountPercentage",
+                              staticStyle: { width: "100%" },
+                              model: {
+                                value: _vm.discountForm.discountPercentage,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.discountForm,
+                                    "discountPercentage",
+                                    $$v
+                                  )
+                                },
+                                expression: "discountForm.discountPercentage"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-form-item",
+                          {
+                            attrs: {
+                              label: "Selling Price After Discount",
+                              prop: "sellingPriceAfterDiscount"
+                            }
+                          },
+                          [
+                            _c("el-input", {
+                              staticClass: "sellingPriceAfterDiscount",
+                              staticStyle: { width: "100%" },
+                              model: {
+                                value: _vm.discountcalculate,
+                                callback: function($$v) {
+                                  _vm.discountcalculate = $$v
+                                },
+                                expression: "discountcalculate"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-form-item",
+                          [
                             _c(
-                              "el-form-item",
+                              "el-button",
                               {
-                                attrs: {
-                                  label: "Discount Percentage",
-                                  prop: "discountPercentage"
+                                staticStyle: {
+                                  width: "80%",
+                                  margin: "15px 10% 0"
+                                },
+                                attrs: { type: "primary" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.submitForm("discountForm")
+                                  }
                                 }
                               },
                               [
-                                _c("el-input", {
-                                  staticClass: "discountPercentage",
-                                  staticStyle: { width: "100%" },
-                                  model: {
-                                    value: _vm.discountForm.discountPercentage,
-                                    callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.discountForm,
-                                        "discountPercentage",
-                                        $$v
-                                      )
-                                    },
-                                    expression:
-                                      "discountForm.discountPercentage"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "el-form-item",
-                              {
-                                attrs: {
-                                  label: "Selling Price After Discount",
-                                  prop: "sellingPriceAfterDiscount"
-                                }
-                              },
-                              [
-                                _c("el-input", {
-                                  staticClass: "sellingPriceAfterDiscount",
-                                  staticStyle: { width: "100%" },
-                                  model: {
-                                    value:
-                                      _vm.discountForm
-                                        .sellingPriceAfterDiscount,
-                                    callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.discountForm,
-                                        "sellingPriceAfterDiscount",
-                                        $$v
-                                      )
-                                    },
-                                    expression:
-                                      "discountForm.sellingPriceAfterDiscount"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "el-form-item",
-                              [
-                                _c(
-                                  "el-button",
-                                  {
-                                    staticStyle: {
-                                      width: "80%",
-                                      margin: "15px 10% 0"
-                                    },
-                                    attrs: { type: "primary" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.submitForm("discountForm")
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Save\n                                    "
-                                    )
-                                  ]
+                                _vm._v(
+                                  "Save\n                                    "
                                 )
-                              ],
-                              1
+                              ]
                             )
                           ],
                           1
@@ -104095,324 +103755,150 @@ var render = function() {
                       ],
                       1
                     )
-                  ]
+                  ],
+                  1
                 )
               ])
             ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-md-12" },
-              [
-                _c(
-                  "el-card",
-                  { staticClass: "box-card", attrs: { shadow: "hover" } },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "text item" },
-                      [
-                        _c(
-                          "el-table",
-                          {
-                            staticStyle: { width: "100%" },
-                            attrs: {
-                              data: _vm.discountTableData.filter(function(
-                                data
-                              ) {
-                                return (
-                                  !_vm.search ||
-                                  data.productName
-                                    .toLowerCase()
-                                    .includes(_vm.search.toLowerCase())
-                                )
-                              }),
-                              border: "",
-                              "max-height": "470"
-                            }
-                          },
-                          [
-                            _c("el-table-column", {
-                              attrs: { prop: "sn", label: "S.N.", width: "50" }
-                            }),
-                            _vm._v(" "),
-                            _c("el-table-column", {
-                              attrs: {
-                                prop: "productName",
-                                label: "Product Name",
-                                width: "120"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("el-table-column", {
-                              attrs: {
-                                prop: "previousSellingPrice",
-                                label: "Previous Selling Price",
-                                width: "120"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("el-table-column", {
-                              attrs: {
-                                prop: "discountPercentage",
-                                label: "Discount Percentage",
-                                width: "120"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("el-table-column", {
-                              attrs: {
-                                prop: "sellingPriceAfterDiscount",
-                                label: "Selling Price After Discount",
-                                width: "120"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("el-table-column", {
-                              attrs: {
-                                fixed: "right",
-                                width: "140",
-                                align: "right"
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "header",
-                                  fn: function(scope) {
-                                    return [
-                                      _c("el-input", {
-                                        attrs: {
-                                          size: "mini",
-                                          placeholder: "Type to search"
-                                        },
-                                        model: {
-                                          value: _vm.search,
-                                          callback: function($$v) {
-                                            _vm.search = $$v
-                                          },
-                                          expression: "search"
-                                        }
-                                      })
-                                    ]
-                                  }
-                                },
-                                {
-                                  key: "default",
-                                  fn: function(scope) {
-                                    return [
-                                      _c("el-button", {
-                                        attrs: {
-                                          type: "primary",
-                                          icon: "el-icon-edit",
-                                          size: "mini",
-                                          circle: ""
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.dialogVisible = true
-                                          }
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("el-button", {
-                                        attrs: {
-                                          size: "mini",
-                                          type: "danger",
-                                          icon: "el-icon-delete",
-                                          circle: ""
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.handleDelete(
-                                              scope.$index,
-                                              scope.row
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]
-                                  }
-                                }
-                              ])
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              ],
-              1
-            )
           ])
-        ])
-      ]),
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c(
-        "el-dialog",
-        {
-          attrs: {
-            title: "Edit Discount Products",
-            visible: _vm.dialogVisible,
-            width: "30%"
-          },
-          on: {
-            "update:visible": function($event) {
-              _vm.dialogVisible = $event
-            }
-          }
-        },
-        [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "row" }, [
           _c(
-            "el-form",
-            {
-              ref: "discountForm",
-              staticClass: "demo-discountForm",
-              attrs: {
-                model: _vm.discountForm,
-                rules: _vm.discountFormRules,
-                "label-position": _vm.labelPosition
-              }
-            },
+            "div",
+            { staticClass: "col-md-12" },
             [
               _c(
-                "el-form-item",
-                { attrs: { label: "Select Category", prop: "productSelect" } },
+                "el-card",
+                { staticClass: "box-card", attrs: { shadow: "hover" } },
                 [
                   _c(
-                    "el-select",
-                    {
-                      staticStyle: { width: "100%" },
-                      attrs: {
-                        clearable: "",
-                        placeholder: "Select Product",
-                        filterable: ""
-                      },
-                      model: {
-                        value: _vm.discountForm.productSelect,
-                        callback: function($$v) {
-                          _vm.$set(_vm.discountForm, "productSelect", $$v)
+                    "div",
+                    { staticClass: "text item" },
+                    [
+                      _c(
+                        "el-table",
+                        {
+                          staticStyle: { width: "100%" },
+                          attrs: {
+                            data: _vm.getDiscountedProduct.filter(function(
+                              data
+                            ) {
+                              return (
+                                !_vm.search ||
+                                data.product_name
+                                  .toLowerCase()
+                                  .includes(_vm.search.toLowerCase())
+                              )
+                            }),
+                            border: "",
+                            "max-height": "470"
+                          }
                         },
-                        expression: "discountForm.productSelect"
-                      }
-                    },
-                    _vm._l(_vm.productSelectOptions, function(item) {
-                      return _c("el-option", {
-                        key: item.value,
-                        attrs: { label: item.label, value: item.value }
-                      })
-                    }),
+                        [
+                          _c("el-table-column", {
+                            attrs: { type: "index", label: "S.N.", width: "50" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "product_name",
+                              label: "Product Name",
+                              width: "120"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "price",
+                              label: "Previous Selling Price",
+                              width: "120"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "discount",
+                              label: "Discount Percentage",
+                              width: "120"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              prop: "sale_price",
+                              label: "Selling Price After Discount",
+                              width: "120"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
+                            attrs: {
+                              fixed: "right",
+                              width: "140",
+                              align: "right"
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "header",
+                                fn: function(scope) {
+                                  return [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "mini",
+                                        placeholder: "Type to search"
+                                      },
+                                      model: {
+                                        value: _vm.search,
+                                        callback: function($$v) {
+                                          _vm.search = $$v
+                                        },
+                                        expression: "search"
+                                      }
+                                    })
+                                  ]
+                                }
+                              },
+                              {
+                                key: "default",
+                                fn: function(scope) {
+                                  return [
+                                    _c("el-button", {
+                                      attrs: {
+                                        size: "mini",
+                                        type: "danger",
+                                        icon: "el-icon-delete",
+                                        circle: ""
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.handleDelete(scope.row.id)
+                                        }
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
                     1
                   )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-form-item",
-                { attrs: { label: "Selling Price", prop: "sellingPrice" } },
-                [
-                  _c("el-input", {
-                    staticClass: "sellingPrice",
-                    staticStyle: { width: "100%" },
-                    model: {
-                      value: _vm.discountForm.sellingPrice,
-                      callback: function($$v) {
-                        _vm.$set(_vm.discountForm, "sellingPrice", $$v)
-                      },
-                      expression: "discountForm.sellingPrice"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-form-item",
-                {
-                  attrs: {
-                    label: "Discount Percentage",
-                    prop: "discountPercentage"
-                  }
-                },
-                [
-                  _c("el-input", {
-                    staticClass: "discountPercentage",
-                    staticStyle: { width: "100%" },
-                    model: {
-                      value: _vm.discountForm.discountPercentage,
-                      callback: function($$v) {
-                        _vm.$set(_vm.discountForm, "discountPercentage", $$v)
-                      },
-                      expression: "discountForm.discountPercentage"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-form-item",
-                {
-                  attrs: {
-                    label: "Selling Price After Discount",
-                    prop: "sellingPriceAfterDiscount"
-                  }
-                },
-                [
-                  _c("el-input", {
-                    staticClass: "sellingPriceAfterDiscount",
-                    staticStyle: { width: "100%" },
-                    model: {
-                      value: _vm.discountForm.sellingPriceAfterDiscount,
-                      callback: function($$v) {
-                        _vm.$set(
-                          _vm.discountForm,
-                          "sellingPriceAfterDiscount",
-                          $$v
-                        )
-                      },
-                      expression: "discountForm.sellingPriceAfterDiscount"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-form-item",
-                [
-                  _c(
-                    "el-button",
-                    {
-                      staticStyle: { width: "80%", margin: "15px 10% 0" },
-                      attrs: { type: "primary" },
-                      on: {
-                        click: function($event) {
-                          return _vm.submitForm("discountForm")
-                        }
-                      }
-                    },
-                    [_vm._v("Save\n                ")]
-                  )
-                ],
-                1
+                ]
               )
             ],
             1
           )
-        ],
-        1
-      )
-    ],
-    1
-  )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -104703,7 +104189,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-3" },
+                      { staticClass: "col-md-6" },
                       [
                         _c(
                           "el-form-item",
@@ -104725,32 +104211,6 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-3" },
-                      [
-                        _c(
-                          "el-form-item",
-                          { attrs: { label: "Cost Price", prop: "costPrice" } },
-                          [
-                            _c("el-input", {
-                              staticStyle: { width: "100%" },
-                              attrs: { placeholder: "Place cost price" },
-                              model: {
-                                value: _vm.productForm.costPrice,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.productForm, "costPrice", $$v)
-                                },
-                                expression: "productForm.costPrice"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
                     )
                   ]),
                   _vm._v(" "),
@@ -104761,22 +104221,17 @@ var render = function() {
                       [
                         _c(
                           "el-form-item",
-                          {
-                            attrs: {
-                              label: "Selling Price",
-                              prop: "sellingPrice"
-                            }
-                          },
+                          { attrs: { label: "Price", prop: "sellingPrice" } },
                           [
                             _c("el-input", {
                               staticStyle: { width: "100%" },
-                              attrs: { placeholder: "Place selling price" },
+                              attrs: { placeholder: "Place price" },
                               model: {
-                                value: _vm.productForm.sellingPrice,
+                                value: _vm.productForm.costPrice,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.productForm, "sellingPrice", $$v)
+                                  _vm.$set(_vm.productForm, "costPrice", $$v)
                                 },
-                                expression: "productForm.sellingPrice"
+                                expression: "productForm.costPrice"
                               }
                             })
                           ],
@@ -105040,7 +104495,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.dialogVisible = true
+                              return _vm.openDetailsModal(scope.row.id)
                             }
                           }
                         }),
@@ -105054,7 +104509,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.dialogVisible = true
+                              return _vm.openEditModal(scope.row.id)
                             }
                           }
                         }),
@@ -105099,1031 +104554,838 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-md-4" },
-              [
+          _vm.editProduct.length > 0
+            ? _c("div", { staticClass: "row" }, [
                 _c(
-                  "el-card",
-                  { attrs: { "body-style": { padding: "0px" } } },
+                  "div",
+                  { staticClass: "col-md-4" },
                   [
                     _c(
-                      "el-carousel",
-                      {
-                        attrs: {
-                          "indicator-position": "outside",
-                          trigger: "click",
-                          height: "200px",
-                          interval: 5000,
-                          arrow: "always"
-                        }
-                      },
-                      _vm._l(_vm.image, function(images) {
-                        return _c(
-                          "el-carousel-item",
-                          { key: images },
-                          [
-                            _c("el-image", {
-                              attrs: {
-                                src: images,
-                                "preview-src-list": _vm.image
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      }),
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticStyle: { padding: "14px" } }, [
-                      _c("h3", [_vm._v("Product Name")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "bottom clearfix" }, [
-                        _c("h5", [_vm._v(" $....")]),
+                      "el-card",
+                      { attrs: { "body-style": { padding: "0px" } } },
+                      [
+                        _c("img", {
+                          staticClass: "image",
+                          staticStyle: { width: "100%", height: "250px" },
+                          attrs: {
+                            src:
+                              "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                          }
+                        }),
                         _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticStyle: {
-                              "border-top": "1px solid #ebeef5",
-                              padding: "10px 0"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                fdtrfgvcjg kjdsjkfsd kjsdfsdfks skjdffnsdf skjdfnsdkf sjdjkfnsdf sodlfnsdlf\n                                slldkjnsds sdljnsld sldjns sodjfhns osdjfsldkfs\n                            "
+                        _c("div", { staticStyle: { padding: "14px" } }, [
+                          _c("h3", [
+                            _vm._v(_vm._s(_vm.editProduct[0].product_name))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "bottom clearfix" }, [
+                            _c("h5", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.editProduct[0].category.category_name
+                                  )
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              {
+                                staticStyle: {
+                                  "border-top": "1px solid #ebeef5",
+                                  padding: "10px 0"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.editProduct[0].additional_information
+                                    ) +
+                                    "\n                            "
+                                )
+                              ]
                             )
-                          ]
-                        )
-                      ])
-                    ])
+                          ])
+                        ])
+                      ]
+                    )
                   ],
                   1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-8 pt-md-0 pt-sm-3 pt-3" },
-              [
+                ),
+                _vm._v(" "),
                 _c(
-                  "el-card",
-                  { staticClass: "box-card", attrs: { shadow: "hover" } },
+                  "div",
+                  { staticClass: "col-md-8 pt-md-0 pt-sm-3 pt-3" },
                   [
                     _c(
-                      "div",
-                      {
-                        staticClass: "clearfix",
-                        attrs: { slot: "header" },
-                        slot: "header"
-                      },
+                      "el-card",
+                      { staticClass: "box-card", attrs: { shadow: "hover" } },
                       [
-                        _c("span", [_vm._v("Product Information")]),
-                        _vm._v(" "),
                         _c(
-                          "el-button",
+                          "div",
                           {
-                            staticClass: "editProductDetailsBtn",
-                            staticStyle: { float: "right", padding: "3px 0" },
-                            attrs: { type: "text" },
-                            on: { click: _vm.openEditModal }
+                            staticClass: "clearfix",
+                            attrs: { slot: "header" },
+                            slot: "header"
                           },
                           [
-                            _vm._v(
-                              "\n                            Edit\n                        "
+                            _c("span", [_vm._v("Product Information")]),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                staticClass: "editProductDetailsBtn",
+                                staticStyle: {
+                                  float: "right",
+                                  padding: "3px 0"
+                                },
+                                attrs: { type: "text" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.openEditModal(
+                                      _vm.editProduct[0].id
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Edit\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                staticClass: "detailsProductDetailsBtn hidden",
+                                staticStyle: {
+                                  float: "right",
+                                  padding: "3px 0"
+                                },
+                                attrs: { type: "text" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.openDetailsModal(
+                                      _vm.editProduct[0].id
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Details\n                        ")]
                             )
-                          ]
+                          ],
+                          1
                         ),
                         _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            staticClass: "detailsProductDetailsBtn hidden",
-                            staticStyle: { float: "right", padding: "3px 0" },
-                            attrs: { type: "text" },
-                            on: { click: _vm.openDetailsModal }
-                          },
-                          [_vm._v("Details\n                        ")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text item" }, [
-                      _c(
-                        "div",
-                        { staticClass: "productDetailsWrapper" },
-                        [
+                        _c("div", { staticClass: "text item" }, [
                           _c(
-                            "el-form",
-                            {
-                              ref: "productForm",
-                              staticClass: "demo-productForm",
-                              attrs: {
-                                model: _vm.productForm,
-                                rules: _vm.productRules,
-                                "label-position": _vm.labelPosition
-                              }
-                            },
+                            "div",
+                            { staticClass: "productDetailsWrapper" },
                             [
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: { label: "Category", prop: "" }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            disabled: "",
-                                            value: "Category Name"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Sub-Category",
-                                          prop: ""
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            disabled: "",
-                                            value: "Sub-Category Name"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      { attrs: { label: "Brand", prop: "" } },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            disabled: "",
-                                            value: "Brand Name"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-6" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      { attrs: { label: "Product", prop: "" } },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            disabled: "",
-                                            value: "Product Name"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-6" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: { label: "Tags", prop: "tags" }
-                                      },
-                                      [
-                                        _vm._l(_vm.dynamicTags, function(tag) {
-                                          return _c(
-                                            "el-tag",
-                                            {
-                                              key: tag,
-                                              attrs: {
-                                                closable: "",
-                                                "disable-transitions": false
-                                              },
-                                              on: {
-                                                close: function($event) {
-                                                  return _vm.handleClose(tag)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                " +
-                                                  _vm._s(tag) +
-                                                  "\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        }),
-                                        _vm._v(" "),
-                                        _vm.inputVisible
-                                          ? _c("el-input", {
-                                              ref: "saveTagInput",
-                                              staticClass: "input-new-tag",
-                                              attrs: { size: "mini" },
-                                              on: {
-                                                blur: _vm.handleInputConfirm
-                                              },
-                                              nativeOn: {
-                                                keyup: function($event) {
-                                                  if (
-                                                    !$event.type.indexOf(
-                                                      "key"
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  return _vm.handleInputConfirm(
-                                                    $event
-                                                  )
-                                                }
-                                              },
-                                              model: {
-                                                value: _vm.inputValue,
-                                                callback: function($$v) {
-                                                  _vm.inputValue = $$v
-                                                },
-                                                expression: "inputValue"
-                                              }
-                                            })
-                                          : _c(
-                                              "el-button",
-                                              {
-                                                staticClass: "button-new-tag",
-                                                attrs: { size: "small" },
-                                                on: { click: _vm.showInput }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "+ New Tag\n                                            "
-                                                )
-                                              ]
-                                            )
-                                      ],
-                                      2
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: { label: "Quantity", prop: "" }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            disabled: "",
-                                            value: "Product Quantiy"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: { label: "Cost Price", prop: "" }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            disabled: "",
-                                            value: "Cost Price"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Selling Price",
-                                          prop: ""
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            disabled: "",
-                                            value: "Selling Price"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-12" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Additional Information",
-                                          prop: ""
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            type: "textarea",
-                                            disabled: "",
-                                            value:
-                                              "djalkandkfasbddfjfkasdblaskdjasmbd askdnalsmd"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "productEditWrapper hidden" },
-                        [
-                          _c(
-                            "el-form",
-                            {
-                              ref: "productForm",
-                              staticClass: "demo-productForm",
-                              attrs: {
-                                model: _vm.productForm,
-                                rules: _vm.productRules,
-                                "label-position": _vm.labelPosition
-                              }
-                            },
-                            [
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-12" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Select Image",
-                                          prop: "imageSelect"
-                                        }
-                                      },
-                                      [
+                              _vm.editProduct.length > 0
+                                ? _c(
+                                    "el-form",
+                                    {
+                                      ref: "editProduct",
+                                      staticClass: "demo-productForm",
+                                      attrs: {
+                                        rules: _vm.productRules,
+                                        "label-position": _vm.labelPosition
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row" }, [
                                         _c(
-                                          "el-upload",
-                                          {
-                                            ref: "upload",
-                                            staticClass: "upload-demo",
-                                            attrs: {
-                                              action:
-                                                "https://jsonplaceholder.typicode.com/posts/",
-                                              "auto-upload": false
-                                            }
-                                          },
+                                          "div",
+                                          { staticClass: "col-md-6" },
                                           [
                                             _c(
-                                              "el-button",
+                                              "el-form-item",
                                               {
                                                 attrs: {
-                                                  slot: "trigger",
-                                                  size: "small",
-                                                  type: "primary"
-                                                },
-                                                slot: "trigger"
+                                                  label: "Category",
+                                                  prop: ""
+                                                }
                                               },
                                               [
-                                                _vm._v(
-                                                  "select file\n                                                "
-                                                )
-                                              ]
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .category.category_name
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Brand",
+                                                  prop: ""
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0].brand
+                                                        .brand_name
+                                                  }
+                                                })
+                                              ],
+                                              1
                                             )
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Select Category",
-                                          prop: "categorySelect"
-                                        }
-                                      },
-                                      [
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
                                         _c(
-                                          "el-select",
-                                          {
-                                            staticStyle: { width: "100%" },
-                                            attrs: {
-                                              clearable: "",
-                                              placeholder: "Select Category",
-                                              filterable: ""
-                                            },
-                                            model: {
-                                              value:
-                                                _vm.productForm.categorySelect,
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.productForm,
-                                                  "categorySelect",
-                                                  $$v
-                                                )
-                                              },
-                                              expression:
-                                                "productForm.categorySelect"
-                                            }
-                                          },
-                                          _vm._l(
-                                            _vm.categorySelectOptions,
-                                            function(item) {
-                                              return _c("el-option", {
-                                                key: item.value,
-                                                attrs: {
-                                                  label: item.label,
-                                                  value: item.value
-                                                }
-                                              })
-                                            }
-                                          ),
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Select Sub-Category",
-                                          prop: "subcategorySelect"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "el-select",
-                                          {
-                                            staticStyle: { width: "100%" },
-                                            attrs: {
-                                              clearable: "",
-                                              placeholder:
-                                                "Select Sub-Category",
-                                              filterable: ""
-                                            },
-                                            model: {
-                                              value:
-                                                _vm.productForm
-                                                  .subcategorySelect,
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.productForm,
-                                                  "subcategorySelect",
-                                                  $$v
-                                                )
-                                              },
-                                              expression:
-                                                "productForm.subcategorySelect"
-                                            }
-                                          },
-                                          _vm._l(
-                                            _vm.subcategorySelectOptions,
-                                            function(item) {
-                                              return _c("el-option", {
-                                                key: item.value,
-                                                attrs: {
-                                                  label: item.label,
-                                                  value: item.value
-                                                }
-                                              })
-                                            }
-                                          ),
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Select Brand",
-                                          prop: "brandSelect"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "el-select",
-                                          {
-                                            staticStyle: { width: "100%" },
-                                            attrs: {
-                                              clearable: "",
-                                              placeholder: "Select Brand",
-                                              filterable: ""
-                                            },
-                                            model: {
-                                              value:
-                                                _vm.productForm.brandSelect,
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.productForm,
-                                                  "brandSelect",
-                                                  $$v
-                                                )
-                                              },
-                                              expression:
-                                                "productForm.brandSelect"
-                                            }
-                                          },
-                                          _vm._l(
-                                            _vm.brandSelectOptions,
-                                            function(item) {
-                                              return _c("el-option", {
-                                                key: item.value,
-                                                attrs: {
-                                                  label: item.label,
-                                                  bb: "",
-                                                  bbb: "",
-                                                  value: item.value
-                                                }
-                                              })
-                                            }
-                                          ),
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-6" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Product Name",
-                                          prop: "productName"
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            placeholder: "Place product name"
-                                          },
-                                          model: {
-                                            value: _vm.productForm.productName,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.productForm,
-                                                "productName",
-                                                $$v
-                                              )
-                                            },
-                                            expression:
-                                              "productForm.productName"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-6" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: { label: "Tags", prop: "tags" }
-                                      },
-                                      [
-                                        _vm._l(_vm.dynamicTags, function(tag) {
-                                          return _c(
-                                            "el-tag",
-                                            {
-                                              key: tag,
-                                              attrs: {
-                                                closable: "",
-                                                "disable-transitions": false
-                                              },
-                                              on: {
-                                                close: function($event) {
-                                                  return _vm.handleClose(tag)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                " +
-                                                  _vm._s(tag) +
-                                                  "\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        }),
-                                        _vm._v(" "),
-                                        _vm.inputVisible
-                                          ? _c("el-input", {
-                                              ref: "saveTagInput",
-                                              staticClass: "input-new-tag",
-                                              attrs: { size: "mini" },
-                                              on: {
-                                                blur: _vm.handleInputConfirm
-                                              },
-                                              nativeOn: {
-                                                keyup: function($event) {
-                                                  if (
-                                                    !$event.type.indexOf(
-                                                      "key"
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  return _vm.handleInputConfirm(
-                                                    $event
-                                                  )
-                                                }
-                                              },
-                                              model: {
-                                                value: _vm.inputValue,
-                                                callback: function($$v) {
-                                                  _vm.inputValue = $$v
-                                                },
-                                                expression: "inputValue"
-                                              }
-                                            })
-                                          : _c(
-                                              "el-button",
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
                                               {
-                                                staticClass: "button-new-tag",
-                                                attrs: { size: "small" },
-                                                on: { click: _vm.showInput }
+                                                attrs: {
+                                                  label: "Product",
+                                                  prop: "product_name"
+                                                }
                                               },
                                               [
-                                                _vm._v(
-                                                  "+ New Tag\n                                            "
-                                                )
-                                              ]
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .product_name
+                                                  }
+                                                })
+                                              ],
+                                              1
                                             )
-                                      ],
-                                      2
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Quantity",
-                                          prop: "quantity"
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            placeholder: "Place quantity"
-                                          },
-                                          model: {
-                                            value: _vm.productForm.quantity,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.productForm,
-                                                "quantity",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "productForm.quantity"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Cost Price",
-                                          prop: "costPrice"
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            placeholder: "Place cost price"
-                                          },
-                                          model: {
-                                            value: _vm.productForm.costPrice,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.productForm,
-                                                "costPrice",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "productForm.costPrice"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-4" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Selling Price",
-                                          prop: "sellingPrice"
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          staticStyle: { width: "100%" },
-                                          attrs: {
-                                            placeholder: "Place selling price"
-                                          },
-                                          model: {
-                                            value: _vm.productForm.sellingPrice,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.productForm,
-                                                "sellingPrice",
-                                                $$v
-                                              )
-                                            },
-                                            expression:
-                                              "productForm.sellingPrice"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-md-12" },
-                                  [
-                                    _c(
-                                      "el-form-item",
-                                      {
-                                        attrs: {
-                                          label: "Additional Information",
-                                          prop: "additionalInformation"
-                                        }
-                                      },
-                                      [
-                                        _c("el-input", {
-                                          attrs: {
-                                            type: "textarea",
-                                            autosize: {
-                                              minRows: 3,
-                                              maxRows: 4
-                                            },
-                                            placeholder:
-                                              "Please input additional Information"
-                                          },
-                                          model: {
-                                            value:
-                                              _vm.productForm
-                                                .additionalInformation,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.productForm,
-                                                "additionalInformation",
-                                                $$v
-                                              )
-                                            },
-                                            expression:
-                                              "productForm.additionalInformation"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "row" },
-                                [
-                                  _c(
-                                    "el-form-item",
-                                    [
-                                      _c(
-                                        "el-button",
-                                        {
-                                          staticStyle: {
-                                            width: "100%",
-                                            margin: "15px 10% 0"
-                                          },
-                                          attrs: { type: "warning" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.submitForm(
-                                                "productForm"
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            " Edit\n                                        "
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Tags",
+                                                  prop: "tags"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0].tags[0]
+                                                        .tags
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Quantity",
+                                                  prop: "quantity"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .quantity
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Price",
+                                                  prop: "price"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0].price
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-12" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label:
+                                                    "Additional Information",
+                                                  prop: "additional_information"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    type: "textarea",
+                                                    disabled: "",
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .additional_information
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ])
+                                    ]
                                   )
-                                ],
-                                1
-                              )
-                            ]
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "productEditWrapper hidden" },
+                            [
+                              _vm.editProduct.length > 0
+                                ? _c(
+                                    "el-form",
+                                    {
+                                      ref: "productForm",
+                                      staticClass: "demo-productForm",
+                                      attrs: {
+                                        model: _vm.productForm,
+                                        rules: _vm.productRules,
+                                        "label-position": _vm.labelPosition
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-12" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Select Image",
+                                                  prop: "imageSelect"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "el-upload",
+                                                  {
+                                                    ref: "upload",
+                                                    staticClass: "upload-demo",
+                                                    attrs: {
+                                                      action:
+                                                        "https://jsonplaceholder.typicode.com/posts/",
+                                                      "auto-upload": false
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "el-button",
+                                                      {
+                                                        attrs: {
+                                                          slot: "trigger",
+                                                          size: "small",
+                                                          type: "primary"
+                                                        },
+                                                        slot: "trigger"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "select file\n                                                "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Select Category"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "el-select",
+                                                  {
+                                                    staticStyle: {
+                                                      width: "100%"
+                                                    },
+                                                    attrs: {
+                                                      clearable: "",
+                                                      placeholder:
+                                                        "SelectCategory",
+                                                      filterable: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.editProduct[0]
+                                                          .category
+                                                          .category_name,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.editProduct[0]
+                                                            .category,
+                                                          "category_name",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "editProduct[0].category.category_name"
+                                                    }
+                                                  },
+                                                  _vm._l(
+                                                    _vm.getSubCategory,
+                                                    function(item) {
+                                                      return _c("el-option", {
+                                                        key: item.id,
+                                                        attrs: {
+                                                          label:
+                                                            item.category_name,
+                                                          value: item.id
+                                                        }
+                                                      })
+                                                    }
+                                                  ),
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: { label: "Select Brand" }
+                                              },
+                                              [
+                                                _c(
+                                                  "el-select",
+                                                  {
+                                                    staticStyle: {
+                                                      width: "100%"
+                                                    },
+                                                    attrs: {
+                                                      clearable: "",
+                                                      placeholder:
+                                                        "Select Brand",
+                                                      filterable: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.editProduct[0].brand
+                                                          .brand_name,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.editProduct[0]
+                                                            .brand,
+                                                          "brand_name",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "editProduct[0].brand.brand_name"
+                                                    }
+                                                  },
+                                                  _vm._l(_vm.getBrand, function(
+                                                    item
+                                                  ) {
+                                                    return _c("el-option", {
+                                                      key: item.id,
+                                                      attrs: {
+                                                        label: item.brand_name,
+                                                        value: item.id
+                                                      }
+                                                    })
+                                                  }),
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: { label: "Product Name" }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Place product name"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .product_name,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "product_name",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].product_name"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              { attrs: { label: "Tags" } },
+                                              [
+                                                _c(
+                                                  "el-select",
+                                                  {
+                                                    attrs: {
+                                                      multiple: "",
+                                                      value:
+                                                        _vm.editProduct[0]
+                                                          .tags[0].tags,
+                                                      placeholder: "Select Tags"
+                                                    },
+                                                    model: {
+                                                      value: _vm.inputTags,
+                                                      callback: function($$v) {
+                                                        _vm.inputTags = $$v
+                                                      },
+                                                      expression: "inputTags"
+                                                    }
+                                                  },
+                                                  _vm._l(_vm.tagslist, function(
+                                                    item
+                                                  ) {
+                                                    return _c("el-option", {
+                                                      key: item.id,
+                                                      attrs: {
+                                                        label: item.tags,
+                                                        value: item.id
+                                                      }
+                                                    })
+                                                  }),
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              { attrs: { label: "Quantity" } },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Place quantity"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .quantity,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "quantity",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].quantity"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: { label: "Cost Price" }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  staticStyle: {
+                                                    width: "100%"
+                                                  },
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Place cost price"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0].price,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "price",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].price"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-12" },
+                                          [
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label:
+                                                    "Additional Information"
+                                                }
+                                              },
+                                              [
+                                                _c("el-input", {
+                                                  attrs: {
+                                                    type: "textarea",
+                                                    autosize: {
+                                                      minRows: 3,
+                                                      maxRows: 4
+                                                    },
+                                                    placeholder:
+                                                      "Please input additional Information"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editProduct[0]
+                                                        .additional_information,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editProduct[0],
+                                                        "additional_information",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editProduct[0].additional_information"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "row" },
+                                        [
+                                          _c(
+                                            "el-form-item",
+                                            [
+                                              _c(
+                                                "el-button",
+                                                {
+                                                  staticStyle: {
+                                                    width: "100%",
+                                                    margin: "15px 10% 0"
+                                                  },
+                                                  attrs: { type: "warning" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.submitForm(
+                                                        "productForm"
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    " Edit\n                                        "
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
-                    ])
-                  ]
+                        ])
+                      ]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            )
-          ])
+              ])
+            : _vm._e()
         ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "information-wrapper" })
+      )
     ],
     1
   )
@@ -106190,8 +105452,9 @@ var render = function() {
                               _c(
                                 "el-upload",
                                 {
+                                  ref: "upload",
                                   attrs: {
-                                    action: "#",
+                                    action: "",
                                     "list-type": "picture-card",
                                     "on-preview": _vm.handlePictureCardPreview,
                                     "on-remove": _vm.handleRemove,
@@ -106266,10 +105529,13 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "row" },
-                  _vm._l(_vm.image, function(images) {
+                  _vm._l(_vm.getBannerImage, function(images) {
                     return _c(
                       "div",
-                      { key: images, staticClass: "col-md-6 col-sm-12 mt-2" },
+                      {
+                        key: images.id,
+                        staticClass: "col-md-6 col-sm-12 mt-2"
+                      },
                       [
                         _c(
                           "div",
@@ -106277,14 +105543,7 @@ var render = function() {
                             staticClass: "demo-image__placeholder",
                             staticStyle: { position: "relative" }
                           },
-                          [
-                            _c("el-image", {
-                              attrs: {
-                                src: images,
-                                "preview-src-list": _vm.image
-                              }
-                            })
-                          ],
+                          [_c("el-image", { attrs: { src: images.image } })],
                           1
                         ),
                         _vm._v(" "),
@@ -106308,24 +105567,11 @@ var render = function() {
                                     attrs: { type: "success", size: "mini" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.toggle(images.id)
+                                        return _vm.setActive(images.id)
                                       }
                                     }
                                   },
                                   [_c("i", { staticClass: "fas fa-check" })]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "el-button",
-                                  {
-                                    attrs: { type: "warning", size: "mini" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.toggle(images.id)
-                                      }
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fas fa-times" })]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -123112,8 +122358,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\Ekata_Convenience_Store\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\Ekata_Convenience_Store\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

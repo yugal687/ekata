@@ -167,6 +167,12 @@ export default {
             tagSearch: '',
         }
     },
+    mounted(){
+        axios.get('/api/getTag',{})
+            .then(response=>{
+                this.tags = response.data.tags;
+            });
+    },
     methods: {
         editTag(id) {
             this.editTags = this.tags.filter(tags => tags.id == id);

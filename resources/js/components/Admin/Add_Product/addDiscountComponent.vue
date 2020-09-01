@@ -16,21 +16,27 @@
                                         <el-select clearable placeholder="Select Product"
                                                    filterable
                                                    v-model="discountForm.productSelect"
+                                                   @change="onChange($event)"
                                                    style="width: 100%">
                                             <el-option
-                                                v-for="item in productSelectOptions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
+                                                v-for="item in getProduct"
+                                                :key="item.id"
+                                                :label="item.product_name"
+                                                :value="item.id">
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
                                     <el-form-item label="Selling Price" prop="sellingPrice">
-                                        <el-input v-model="discountForm.sellingPrice"
-                                                  class="sellingPrice"
-                                                  style="width: 100%;">
-
-                                        </el-input>
+                                        <el-select v-model="discountForm.sellingPrice" placeholder="Select">
+                                            <el-option
+                                                v-for="selectProdec in selectedProduct"
+                                                :label="selectProdec.price"
+                                                :key="selectProdec.id"
+                                                :value="selectProdec.price"
+                                                class="sellingPrice"
+                                                style="width: 100%;">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                     <el-form-item label="Discount Percentage" prop="discountPercentage">
                                         <el-input v-model="discountForm.discountPercentage"
@@ -40,7 +46,7 @@
                                         </el-input>
                                     </el-form-item>
                                     <el-form-item label="Selling Price After Discount" prop="sellingPriceAfterDiscount">
-                                        <el-input v-model="discountForm.sellingPriceAfterDiscount"
+                                        <el-input v-model="discountcalculate"
                                                   class="sellingPriceAfterDiscount"
                                                   style="width: 100%;">
                                         </el-input>
@@ -68,32 +74,32 @@
                         <el-card class="box-card" shadow="hover">
                             <div class="text item">
                                 <el-table
-                                    :data="discountTableData.filter(data => !search || data.productName.toLowerCase().includes(search.toLowerCase()))"
+                                    :data="getDiscountedProduct.filter(data => !search || data.product_name.toLowerCase().includes(search.toLowerCase()))"
                                     border
                                     max-height="470"
                                     style="width: 100%">
                                     <el-table-column
-                                        prop="sn"
+                                        type="index"
                                         label="S.N."
                                         width="50">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="productName"
+                                        prop="product_name"
                                         label="Product Name"
                                         width="120">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="previousSellingPrice"
+                                        prop="price"
                                         label="Previous Selling Price"
                                         width="120">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="discountPercentage"
+                                        prop="discount"
                                         label="Discount Percentage"
                                         width="120">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="sellingPriceAfterDiscount"
+                                        prop="sale_price"
                                         label="Selling Price After Discount"
                                         width="120">
                                     </el-table-column>
@@ -108,16 +114,11 @@
                                                 placeholder="Type to search"/>
                                         </template>
                                         <template slot-scope="scope">
-                                            <el-button type="primary"
-                                                       icon="el-icon-edit"
-                                                       size="mini"
-                                                       @click="dialogVisible  = true"
-                                                       circle></el-button>
                                             <el-button
                                                 size="mini"
                                                 type="danger"
                                                 icon="el-icon-delete"
-                                                @click="handleDelete(scope.$index, scope.row)"
+                                                @click="handleDelete(scope.row.id)"
                                                 circle></el-button>
                                         </template>
                                     </el-table-column>
@@ -128,58 +129,6 @@
                 </div>
             </div>
         </div>
-        <!--Edit Modal-->
-        <el-dialog title="Edit Discount Products"
-                   :visible.sync="dialogVisible"
-                    width= "30%">
-            <el-form :model="discountForm" :rules="discountFormRules" ref="discountForm"
-                     :label-position="labelPosition" class="demo-discountForm">
-                <el-form-item label="Select Category" prop="productSelect">
-                    <el-select clearable placeholder="Select Product"
-                               filterable
-                               v-model="discountForm.productSelect"
-                               style="width: 100%">
-                        <el-option
-                            v-for="item in productSelectOptions"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="Selling Price" prop="sellingPrice">
-                    <el-input v-model="discountForm.sellingPrice"
-                              class="sellingPrice"
-                              style="width: 100%;">
-
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="Discount Percentage" prop="discountPercentage">
-                    <el-input v-model="discountForm.discountPercentage"
-                              class="discountPercentage"
-                              style="width: 100%;">
-
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="Selling Price After Discount" prop="sellingPriceAfterDiscount">
-                    <el-input v-model="discountForm.sellingPriceAfterDiscount"
-                              class="sellingPriceAfterDiscount"
-                              style="width: 100%;">
-                    </el-input>
-                </el-form-item>
-                <!--<div class="row">
-                    Qty:<input type='number' name='qty' id='qty' value='' /> <br/>
-                    Price:<input type='number' name='price' id='price' /> <br/>
-                    Total:<input type='number' name='total' id='total' /> <br/>
-                </div>-->
-                <el-form-item>
-                    <el-button type="primary"
-                               style="width: 80%; margin: 15px 10% 0"
-                               @click="submitForm('discountForm')">Save
-                    </el-button>
-                </el-form-item>
-            </el-form>
-        </el-dialog>
     </div>
 </template>
 
@@ -189,6 +138,12 @@ export default {
     data() {
         return {
             dialogVisible : false,
+            editData:[],
+            selectedProduct:[{
+            price:''}],
+            getDiscountedProduct:[],
+            discountamount:'',
+            getProduct:[],
             labelPosition: 'top',
             productSelectOptions: [{
                 value: 'Product - 1',
@@ -200,11 +155,16 @@ export default {
                 value: 'Product - 3',
                 label: 'Product - 3'
             }],
+            editDiscount:{
+                productSelect:'',
+                Price:'',
+                discount:'',
+                discountedPrice:'',
+            },
             discountForm: {
                 productSelect: '',
                 sellingPrice: '',
                 discountPercentage: '',
-                sellingPriceAfterDiscount: '',
             },
             discountFormRules: {
                 productSelect: [
@@ -215,77 +175,59 @@ export default {
                 ],
             },
             /*Table Data's*/
-            discountTableData: [{
-                sn: 1,
-                productName: 'Product - 1',
-                previousSellingPrice: '1000',
-                discountPercentage: '10',
-                sellingPriceAfterDiscount: '900'
-            }, {
-                sn: 2,
-                productName: 'Product - 2',
-                previousSellingPrice: '2000',
-                discountPercentage: '20',
-                sellingPriceAfterDiscount: '1600'
-            }, {
-                sn: 3,
-                productName: 'Product - 3',
-                previousSellingPrice: '2000',
-                discountPercentage: '20',
-                sellingPriceAfterDiscount: '1600'
-            }, {
-                sn: 4,
-                productName: 'Product - 4',
-                previousSellingPrice: '2000',
-                discountPercentage: '20',
-                sellingPriceAfterDiscount: '1600'
-            }, {
-                sn: 5,
-                productName: 'Product - 5',
-                previousSellingPrice: '2000',
-                discountPercentage: '20',
-                sellingPriceAfterDiscount: '1600'
-            }, {
-                sn: 6,
-                productName: 'Product - 6',
-                previousSellingPrice: '2000',
-                discountPercentage: '20',
-                sellingPriceAfterDiscount: '1600'
-            }],
             search: ''
         }
     },
     methods: {
+
+        onChange(event){
+            console.log(this.discountForm.productSelect);
+          this.selectedProduct = this.getProduct.filter(getProduct=>getProduct.id ==this.discountForm.productSelect);
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    let formData = new FormData();
+                    formData.append('discount', this.discountForm.discountPercentage);
+                    formData.append('sale_price',this.discountcalculate);
+                    formData.append('id',this.discountForm.productSelect);
+                    axios.post('/api/addDiscount',formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }).then(response=>{
+                       alert(response.data.message);
+                    });
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
         },
-        handleEdit(index, row) {
-            console.log(index, row);
-        },
-        handleDelete(index, row) {
-            console.log(index, row);
+        handleDelete(id) {
+            axios.patch('/api/deleteDiscount/'+id,{})
+                .then(response=>{
+                   alert(response.data.message);
+                });
         }
     },
+    computed: {
+        discountcalculate(){
+            console.log(this.discountForm.sellingPrice);
+        this.discountamount = (this.discountForm.discountPercentage * this.discountForm.sellingPrice)/100;
+        console.log(this.discountamount);
+      return (this.discountForm.sellingPrice - this.discountamount);
+}
+    },
     mounted() {
-        $(document).ready(function () {
-            /*$('#qty, #price').on('input', function () {
-                var qty = parseInt($('#qty').val());
-                var price = parseFloat($('#price').val());
-                $('#total').val((qty * price ? qty * price : 0).toFixed(2));
+        axios.get('/api/getDiscountedProduct',{})
+            .then(response=>{
+               this.getDiscountedProduct = response.data.getDiscountedProduct;
             });
-
-                var price = $('.sellingPrice').val();
-                alert(price);
-                var discount = $('.discountPercentage').val();
-                alert(discount);*/
-        });
+        axios.get('/api/getProduct',{})
+            .then(response=>{
+                this.getProduct = response.data.getProduct;
+            });
     }
 
 }

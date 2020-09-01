@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,28 +26,16 @@ Route::get('/logout', function () {
     return view('auth.login');
 });
 
+Route::get('/category/{id}',[
+    "uses" => 'Website\ProductController@showCategory',
+    "as" => 'category']);
+Route::get('/maincategory/{id}', [
+    "uses" => 'Website\ProductController@showMainCategory',
+    "as" => 'maincategory']);
 
-Route::get('/', function () {
-    return view('website/index');
-});
-
-
-Route::get('/billings', function () {
-    return view('website/billings');
-});
-
-Route::get('/contact', function () {
-    return view('website/contact');
-});
-Route::get('/category', function () {
-    return view('website/category');
-});
-Route::get('/maincategory', function () {
-    return view('website/mainCategory');
-});
-Route::get('/singleproduct', function () {
-    return view('website/singleProduct');
-});
+Route::get('/singleproduct/{id}',[
+    'uses' => 'Website\ProductController@SingleProductPage',
+    'as' => 'singleproduct']);
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('admin/dashboard', 'admin.dashboard');
     Route::view('user/users', 'admin.user.users');
@@ -74,7 +61,14 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 //User
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::view('user/userdashboard', 'User.userdashboard');
-    Route::view('user/userprofile', 'User.userprofile');
+    Route::get('user/userprofile', [
+      "uses" => 'User\UserController@singleUserDetail',
+        "as" => 'user/userdashboard'
+    ]);
+    Route::post('/updateUser/{id}',[
+        "uses" => 'User\UserController@updateUser',
+        "as" => 'updateUser'
+    ]);
 });
 
 
@@ -88,19 +82,8 @@ Route::get('/billings', function () {
 Route::get('/contact', function () {
     return view('website/contact');
 });
-Route::get('/category', function () {
-    return view('website/category');
-});
-Route::get('/maincategory', function () {
-    return view('website/mainCategory');
-});
-Route::get('/singleproduct', function () {
-    return view('website/singleProduct');
-});
 
 
-Route::get('/', function () {
-    return view('website/index');
-});
+Route::get('/','Website\ProductController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');

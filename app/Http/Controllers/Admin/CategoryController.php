@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\CategoryBanner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -14,28 +16,52 @@ class CategoryController extends Controller
            'category_name' =>'required'
         ]);
         if ($validate){
-            $savecategory = Category::create([
-               'category_name' => $request->category_name,
-                'parent_id' => $request->parent_id
-            ]);
+            foreach ($request->file('bannerCategory') as $bannerCategory) {
+
+
+                $baseName = Str::random(20);
+                $originalName = $baseName . '.' . $bannerCategory->getClientOriginalExtension();
+                $bannerCategory->move(public_path('/uploads'), $originalName);
+                $savecategory = Category::create([
+                    'category_name' => $request->category_name,
+                    'image' => '/uploads/' . $originalName,
+                    'parent_id' => $request->parent_id
+                ]);
+            }
+
+            foreach ($request->file('thumbnailCategory') as $thumbnailCategory) {
+
+
+                $baseName = Str::random(20);
+                $originalName = $baseName . '.' . $thumbnailCategory->getClientOriginalExtension();
+                $thumbnailCategory->move(public_path('/uploads'), $originalName);
+
+                $saveimage = Category::orderBy('id', 'DESC')->first();
+                $saveimage->image()->create([
+                    'name' => '/uploads/' . $originalName,
+                ]);
+            }
         }
         return response()->json([
            'message' => 'Category added sucessfully'
         ]);
     }
 
-   /* public function createSubcategory(Request $request){
+    public function createSubcategory(Request $request){
         $validate = $request->validate([
             'category_name' =>'required'
         ]);
         if ($validate){
             $addsubcategory = Category::create([
                'category_name' =>$request->category_name,
+                'parent_id' => $request->parent_id
 
             ]);
         }
+        return response()->json([
+           'message' => 'SubCategory Added Sucessfully !!!'
+        ]);
     }
-   */
 
     public function getCategory(){
         $getCategory = Category::where('parent_id',NULL)->get();

@@ -13,7 +13,8 @@
             width: 100%;
             height: 82vh;
         }
-        #banner-image-carousel.owl-theme .owl-nav.disabled+.owl-dots {
+
+        #banner-image-carousel.owl-theme .owl-nav.disabled + .owl-dots {
             margin-top: 0;
             z-index: 200;
         }
@@ -237,6 +238,7 @@
             height: 330px;
             overflow: hidden;
         }
+
         #customer-reviews-carousel.owl-theme .owl-dots {
             position: absolute;
             top: 0;
@@ -245,22 +247,27 @@
             text-align: center;
             -webkit-tap-highlight-color: transparent;
         }
+
         #customer-reviews-carousel.owl-theme .owl-dots .owl-dot span {
             background: #fff;
         }
+
         #customer-reviews-carousel.owl-theme .owl-dots .owl-dot.active span {
             background: #b1b1b1;
         }
+
         #customer-reviews-carousel .owl-item {
             height: 220px;
             top: 30px;
         }
+
         #customer-reviews-carousel.owl-theme .owl-nav {
             text-align: center;
             -webkit-tap-highlight-color: transparent;
             display: flex;
             justify-content: space-between;
         }
+
         #customer-reviews-carousel.owl-theme .owl-nav [class*=owl-] {
             color: #FFF;
             font-size: 14px;
@@ -272,7 +279,8 @@
             border-radius: 3px;
             border: 1px solid #fff;
         }
-        img.review-images{
+
+        img.review-images {
             border-radius: 15px;
             width: 100%;
             height: 190px;
@@ -282,6 +290,7 @@
 @stop
 
 @section('content')
+
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
@@ -307,10 +316,13 @@
             <div class="col-md-10 m-0 p-0 ">
                 <!-- banner section starts here -->
                 <div class="banner-area">
+                    {{--<h3 class="text-center mt-5 border">---Hello Banner section ---</h3>--}}
+
+
                     <div id="banner-image-carousel" class="owl-carousel owl-theme">
-                        <div class="item"><img src="{{ asset('images/Homepage/Banner/Banner.png') }}" alt=""></div>
-                        <div class="item"><img src="{{ asset('images/biscuit.jpg') }}" alt=""></div>
-                        <div class="item"><img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" alt=""></div>
+                        @foreach($bannerImage as $image)
+                            <div class="item"><img src="{{$image->image}}" alt=""></div>
+                        @endforeach
                     </div>
                     {{--<img src="{{ asset('images/Homepage/Banner/Banner.png') }}" class="img-fluid" alt="">--}}
                 </div>
@@ -738,323 +750,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="row m-0 p-0 my-4">
-                            <div
-                                class="col-md-6 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                <img src="{{ asset('images/Product_pngs/momo.png') }}" class="img-fluid p-3"
-                                     alt="">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="container h-100 d-flex justify-content-center align-items-center">
-                                    <dl class="row pr-5">
-                                        <dt class="col-sm-5 ">
-                                            <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product name here -->
-                                            <h5 class="font-weight-normal">Steamer</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product category here -->
-                                            <h5 class="font-weight-normal">Accessories</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7 ">
-                                            <!-- product description here -->
-                                            <h5 class="font-weight-normal ">Khukuri is one of the National weapen of
-                                                Nepal.
-                                                Etiam porta sem malesuada magna mollis euismod.</h5>
-                                        </dd>
-
-
-                                        <dt class="col-sm-5 font-weight-bold  ">
-                                            <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product price here -->
-                                            <h5 class="font-weight-bold text-main-secondary">$ 359.99</h5>
-                                        </dd>
-
-                                        <div class="col-sm-12">
-                                            <button type="button"
-                                                    class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="row m-0 p-0 my-4">
-                            <div
-                                class="col-md-6 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                <img src="{{ asset('images/Product_pngs/cooker.png') }}" class="img-fluid p-3"
-                                     alt="">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="container h-100 d-flex justify-content-center align-items-center">
-                                    <dl class="row pr-5">
-                                        <dt class="col-sm-5 ">
-                                            <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product name here -->
-                                            <h5 class="font-weight-normal">Pressure Cooker</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product category here -->
-                                            <h5 class="font-weight-normal">Accessories</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7 ">
-                                            <!-- product description here -->
-                                            <h5 class="font-weight-normal ">Khukuri is one of the National weapen of
-                                                Nepal.
-                                                Etiam porta sem malesuada magna mollis euismod.</h5>
-                                        </dd>
-
-
-                                        <dt class="col-sm-5 font-weight-bold  ">
-                                            <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product price here -->
-                                            <h5 class="font-weight-bold text-main-secondary">$ 359.99</h5>
-                                        </dd>
-
-                                        <div class="col-sm-12">
-                                            <button type="button"
-                                                    class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="row m-0 p-0 my-4">
-                            <div
-                                class="col-md-6 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                <img src="{{ asset('images/Product_pngs/ganesh.png') }}" class="img-fluid p-3"
-                                     alt="">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="container h-100 d-flex justify-content-center align-items-center">
-                                    <dl class="row pr-5">
-                                        <dt class="col-sm-5 ">
-                                            <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product name here -->
-                                            <h5 class="font-weight-normal">Goodness</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product category here -->
-                                            <h5 class="font-weight-normal">Accessories</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7 ">
-                                            <!-- product description here -->
-                                            <h5 class="font-weight-normal ">Khukuri is one of the National weapen of
-                                                Nepal.
-                                                Etiam porta sem malesuada magna mollis euismod.</h5>
-                                        </dd>
-
-
-                                        <dt class="col-sm-5 font-weight-bold  ">
-                                            <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product price here -->
-                                            <h5 class="font-weight-bold text-main-secondary">$ 359.99</h5>
-                                        </dd>
-
-                                        <div class="col-sm-12">
-                                            <button type="button"
-                                                    class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="row m-0 p-0 my-4">
-                            <div
-                                class="col-md-6 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                <img src="{{ asset('images/Product_pngs/masala.png') }}" class="img-fluid p-3"
-                                     alt="">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="container h-100 d-flex justify-content-center align-items-center">
-                                    <dl class="row pr-5">
-                                        <dt class="col-sm-5 ">
-                                            <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product name here -->
-                                            <h5 class="font-weight-normal">Masala</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product category here -->
-                                            <h5 class="font-weight-normal">Accessories</h5>
-                                        </dd>
-
-                                        <dt class="col-sm-5 font-weight-bold ">
-                                            <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7 ">
-                                            <!-- product description here -->
-                                            <h5 class="font-weight-normal ">Khukuri is one of the National weapen of
-                                                Nepal.
-                                                Etiam porta sem malesuada magna mollis euismod.</h5>
-                                        </dd>
-
-
-                                        <dt class="col-sm-5 font-weight-bold  ">
-                                            <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                        </dt>
-                                        <dd class="col-sm-7">
-                                            <!-- product price here -->
-                                            <h5 class="font-weight-bold text-main-secondary">$ 359.99</h5>
-                                        </dd>
-
-                                        <div class="col-sm-12">
-                                            <button type="button"
-                                                    class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <section id="general-slider" class="bg-product-light mt-5">
             <div class="container">
                 <div class="card-body bg-product-light rounded-bottom-front card-bdy">
                     <div id="new_items" class="owl-carousel owl-theme px-3">
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/khukuri.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Khukuri</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/momo.png') }}" class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Steamer</h6>
+                        @foreach($latestProduct as $lastproduct)
+                            <div class="item text-center d-flex justify-content-center align-items-center">
+                                <div class="new_items_img">
+                                    <div class="row m-4">
+                                        <div
+                                            class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
+
+                                            <img src="{{ asset('images/Product_pngs/masala.png') }}"
+                                                 class="img-fluid p-2"
+                                                 alt="">
+                                        </div>
+                                        <div class="col-12 mt-3 mb-2">
+                                            <h6>{{$lastproduct->product_name}}</h6>
+                                        </div>
                                     </div>
                                 </div>
+                                <br/>
                             </div>
-                            <br/>
-                        </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/cooker.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Pressure Cooker</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/ganesh.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Goodness</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
-                        <div class="item text-center d-flex justify-content-center align-items-center">
-                            <div class="new_items_img">
-                                <div class="row m-4">
-                                    <div
-                                        class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
-                                        <img src="{{ asset('images/Product_pngs/masala.png') }}"
-                                             class="img-fluid p-2"
-                                             alt="">
-                                    </div>
-                                    <div class="col-12 mt-3 mb-2">
-                                        <h6>Masala</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -1316,132 +1036,24 @@
                 <div class="row m-0 p-0 mb-4">
                     <!-- col-item-start -->
                     <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/Product_pngs/masala.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
+                        @foreach ($discountedProducts as $discountedProduct)
+                            <a href="{{route('singleproduct',$product->id)}}">
 
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- website footer -->
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
-                    </div>
-                    <!-- col-item-start -->
-                    <div class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 font-weight-bold text-main-danger"><s>was $10.99</s></h5>
-                        <h5 class="best_price font-weight-bold text-main-danger">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                        <!-- col-item-end -->
+                                <div
+                                    class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
+                                    <img src="" width="150" alt="">
+                                </div>
+                                <h5 class="best_price pt-3 font-weight-bold text-main-danger">
+                                    <s>was {{$discountedProduct->price}}</s></h5>
+                                <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
+                                <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                <button type="button"
+                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                    Add to Cart
+                                </button>
+                            </a>
+                    @endforeach
+                    <!-- col-item-end -->
                     </div>
                 </div>
                 <!-- second row -->
@@ -1655,8 +1267,8 @@
             $("#banner-image-carousel").owlCarousel({
                 items: 1,
                 dots: true,
-                navigation : false,
-                singleItem:true,
+                navigation: false,
+                singleItem: true,
                 autoplay: true,
                 loop: true,
                 responsiveClass: true,
@@ -1676,7 +1288,7 @@
                 autoplayTimeout: 7000,
                 smartSpeed: 800,
                 nav: true,
-                navText: ["Previous","Next"],
+                navText: ["Previous", "Next"],
 
             });
 

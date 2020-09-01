@@ -170,6 +170,12 @@ export default {
             brandSearch: '',
         }
     },
+    mounted(){
+        axios.get('/api/getBrand',{})
+            .then(response=>{
+                this.getBrand = response.data.getBrand;
+            });
+    },
     methods: {
         editBrand(id) {
             this.editBrands = this.getBrand.filter(getBrand => getBrand.id == id);
