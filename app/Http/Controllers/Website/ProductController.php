@@ -19,14 +19,16 @@ class ProductController extends Controller
         $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->latest()->get();
         $bannerImage = BannerImage::where('active', 1)->get();
         $getcategory = Category::where('parent_id','=',NULL)->with('product')->get();
+        $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
+
         return view('website.index',
             [
                 'getProduct' => $getProduct,
                 'discountedProducts' => $discountedProducts,
                 'latestProduct' => $latestProduct,
                 'bannerImage' => $bannerImage,
-                'getCategory' => $getcategory
-
+                'getCategory' => $getcategory,
+                'bestSelling' =>$bestSelling
             ]);
     }
     public function showCategory($id){
@@ -63,8 +65,10 @@ class ProductController extends Controller
     }
     public function showProducts(){
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
+        $getproduct = Product::inRandomOrder()->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
         return view('website.products',
             [
+                'getproduct' => $getproduct,
                 'getCategory' => $getcategory
 
             ]);

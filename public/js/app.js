@@ -4695,6 +4695,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "bannerImageComponent",
   data: function data() {
@@ -4754,6 +4760,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     setActive: function setActive(id) {
       axios.patch('/api/activeBanner/' + id).then(function (response) {
+        alert(response.data.message);
+      });
+    },
+    setInActive: function setInActive(id) {
+      axios.patch('/api/inactiveBanner/' + id).then(function (response) {
         alert(response.data.message);
       });
     },
@@ -5081,55 +5092,7 @@ __webpack_require__.r(__webpack_exports__);
       contact: '1234567890',
 
       /*Table Data's*/
-      orderDetailsTableData: [{
-        sn: 1,
-        date: '2020-12-23',
-        orderNumber: '2121',
-        userId: '123-12',
-        buyerName: 'Teddy',
-        totalPrice: '9000',
-        status: 'Pending'
-      }, {
-        sn: 2,
-        date: '2020-12-23',
-        orderNumber: '121',
-        userId: '123-1',
-        buyerName: 'Tom',
-        totalPrice: '5000',
-        status: 'Pending'
-      }, {
-        sn: 3,
-        date: '2019-12-23',
-        orderNumber: '121',
-        userId: '123',
-        buyerName: 'Teddy',
-        totalPrice: '4000',
-        status: 'Pending'
-      }, {
-        sn: 4,
-        date: '2017-12-23',
-        orderNumber: '212',
-        userId: '12',
-        buyerName: 'Jerry',
-        totalPrice: '90000',
-        status: 'Pending'
-      }, {
-        sn: 5,
-        date: '2018-12-23',
-        orderNumber: '111',
-        userId: '123-12',
-        buyerName: 'John',
-        totalPrice: '2000',
-        status: 'Pending'
-      }, {
-        sn: 6,
-        date: '2020-12-24',
-        orderNumber: '1090',
-        userId: '123-12',
-        buyerName: 'Tommy',
-        totalPrice: '3000',
-        status: 'Pending'
-      }],
+      orderDetailsTableData: [],
       multipleSelection: [],
       search: '',
       dialogTableVisible: false,
@@ -5155,6 +5118,13 @@ __webpack_require__.r(__webpack_exports__);
         discount: '34'
       }]
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('api/getOrderDetail', {}).then(function (response) {
+      _this.orderDetailsTableData = response.data.order;
+    });
   },
   methods: {
     orderDelivered: function orderDelivered(row) {}
@@ -106218,6 +106188,19 @@ var render = function() {
                                 _c(
                                   "el-button",
                                   {
+                                    attrs: { type: "success", size: "mini" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setInActive(images.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-check" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "el-button",
+                                  {
                                     attrs: { type: "danger", size: "mini" },
                                     on: {
                                       click: function($event) {
@@ -106466,7 +106449,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "sn", label: "S.N.", width: "60" }
+                    attrs: { type: "index", label: "S.N.", width: "60" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
@@ -106474,19 +106457,19 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "orderNumber", label: "Order Number" }
+                    attrs: { prop: "order.order_number", label: "Order Number" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "userId", label: "User Id" }
+                    attrs: { prop: "user.id", label: "User Id" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "buyerName", label: "User Name" }
+                    attrs: { prop: "user.first_name", label: "User Name" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "totalPrice", label: "Total Price" }
+                    attrs: { prop: "order.total_price", label: "Total Price" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {

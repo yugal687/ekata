@@ -22,6 +22,7 @@ class CreateOrderDetailsTable extends Migration
             $table->double('price');
             $table->integer('quantity');
             $table->float('discount');
+            $table->string('order_status')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->string('date');

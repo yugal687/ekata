@@ -65,12 +65,7 @@ Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
 //Website Info
 Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
 Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
-    Route::view('admin/addproduct/index', 'admin.add_product.index');
-    Route::view('admin/addproduct/products', 'admin.add_product.products');
-    Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
-    Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
     Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
-    Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
     Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
 
 });

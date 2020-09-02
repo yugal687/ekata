@@ -377,11 +377,9 @@
                             @endforeach
                     </div>--}}
                     <div id="banner-image-carousel" class="owl-carousel owl-theme">
-                        <div class="item"><img src="{{ asset('images/Homepage/Banner/Banner.png') }}" alt=""></div>
-                        <div class="item"><img src="{{ asset('images/biscuit.jpg') }}" alt=""></div>
-                        <div class="item"><img
-                                src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" alt="">
-                        </div>
+                        @foreach($bannerImage as $images)
+                            <div class="item"><img src="{{ $images->image }}" alt=""></div>
+                        @endforeach
                     </div>
                     {{--<img src="{{ asset('images/Homepage/Banner/Banner.png') }}" class="img-fluid" alt="">--}}
                 </div>
@@ -399,396 +397,40 @@
                                     <div class="card-body bg-product-light rounded-bottom-front card-bdy ">
                                         <div id="clearence_carousel"
                                              class="owl-carousel owl-carousel owl-theme px-3  py-2">
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
+                                            @foreach ($discountedProducts as $discountedProduct)
+
+                                                <div
+                                                    class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
+                                                    <div class="row">
+
+                                                        <div class="col-12">
+                                                            <div
+                                                                class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                                <div class="ribbon-wrapper ribbon-lg">
+                                                                    <div class="ribbon bg-main-secondary">
+                                                                        clearance
+                                                                    </div>
                                                                 </div>
+                                                                <img src="{{$discountedProduct->image[0]->name}}"
+                                                                     width="150" alt="">
                                                             </div>
-                                                            <img src="{{asset('images/Product_pngs/masala.png')}}"
-                                                                 width="150" alt="">
                                                         </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
+                                                        <div class="col-12">
+                                                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">
+                                                                <s>${{$discountedProduct->price}}</s></h5>
+                                                            <h5 class="best_price font-weight-bold text-main-primary">
+                                                                ${{$discountedProduct->sale_price}}</h5>
+                                                            <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                                            <h5 class="best_weight py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
+                                                            <button type="button"
+                                                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
+                                                                Add to Cart
+                                                            </button>
+                                                        </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img
-                                                                src="{{ asset('images/category/basmati_rice/Basmati_rice.png')}}"
-                                                                width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img src="{{ asset('images/Product_pngs/masala.png')}}"
-                                                                 width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img
-                                                                src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
-                                                                width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img src="{{asset('images/Product_pngs/masala.png')}}"
-                                                                 width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img
-                                                                src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
-                                                                width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img src="{{asset('images/Product_pngs/masala.png')}}"
-                                                                 width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img
-                                                                src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
-                                                                width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img src="{{asset('images/Product_pngs/masala.png')}}"
-                                                                 width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img
-                                                                src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
-                                                                width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img src="{{asset('images/Product_pngs/masala.png')}}"
-                                                                 width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img
-                                                                src="{{asset('images/category/basmati_rice/Basmati_rice.png')}}"
-                                                                width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div
-                                                            class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                            <div class="ribbon-wrapper ribbon-lg">
-                                                                <div class="ribbon bg-main-secondary">
-                                                                    clearance
-                                                                </div>
-                                                            </div>
-                                                            <img src="{{asset('images/Product_pngs/masala.png')}}"
-                                                                 width="150" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                            <s>was $10.99</s></h5>
-                                                        <h5 class="best_price font-weight-bold text-main-primary">
-                                                            $10.99</h5>
-                                                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                                                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                                        <button type="button"
-                                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                            Add to Cart
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -1098,45 +740,21 @@
                             <h6 class="font-weight-bold pt-0">Best of all time</h6>
                         </div>
                     </div>
+                    @foreach($bestSelling as $best)
                     <div class="col-md-3 d-flex flex-column justify-centent-center align-items-center ">
                         <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
+                            <img src="{{$best->image[0]->name}}" width="150" alt="">
                         </div>
-                        <h5 class="best_price pt-3 pb-2 font-weight-bold text-white ">$10.99</h5>
-                        <h5 class="best_name py-0 text-white ">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-white ">500 gm</h5>
+                        <h5 class="best_price pt-3 pb-2 font-weight-bold text-white ">${{$best->price}}</h5>
+                        <h5 class="best_name py-0 text-white ">{{$best->product_name}}</h5>
+                        <h5 class="best_weight py-0 text-white ">{{$best->brand->brand_name}}</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
                         </button>
 
                     </div>
-                    <div class="col-md-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 pb-2 font-weight-bold text-white">$10.99</h5>
-                        <h5 class="best_name py-0  text-white">Hello Product</h5>
-                        <h5 class="best_weight py-0  text-white">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                    </div>
-                    <div class="col-md-3 d-flex flex-column justify-centent-center align-items-center">
-                        <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                            <img src="{{asset('images/best_selling.png')}}" width="150" alt="">
-                        </div>
-                        <h5 class="best_price pt-3 pb-2 font-weight-bold text-white">$10.99</h5>
-                        <h5 class="best_name py-0  text-white">Hello Product</h5>
-                        <h5 class="best_weight py-0  text-white">500 gm</h5>
-                        <button type="button"
-                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                            Add to Cart
-                        </button>
-
-                    </div>
+                        @endforeach
                 </div>
             </div>
         </div>
@@ -1157,28 +775,29 @@
                 <!-- <div class="special-content"> -->
                 <div class="row align-items-center mt-4">
                     @foreach ($discountedProducts as $discountedProduct)
-                    <div class="col-md-3 col-sm-6" style="">
-                        <div class="row d-flex justify-content-center text-center">
-                            <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
-                                <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
-                                    <div class="ribbon bg-main-secondary">
-                                        ...... % off
+                        <div class="col-md-3 col-sm-6" style="">
+                            <div class="row d-flex justify-content-center text-center">
+                                <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
+                                    <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
+                                        <div class="ribbon bg-main-secondary">
+                                            {{$discountedProduct->discount}}%off
+                                        </div>
                                     </div>
+                                    <div
+                                        class="img-div bg-product-medium rounded-top-front rounded-bottom-front mx-auto">
+                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
+                                    </div>
+                                    <h5 class="best_price pt-3 font-weight-bold text-main-danger">
+                                        <s>was {{$discountedProduct->price}}</s></h5>
+                                    <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
+                                    <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                    <button type="button"
+                                            class="mx-auto btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        Add to Cart
+                                    </button>
                                 </div>
-                                <div class="img-div bg-product-medium rounded-top-front rounded-bottom-front mx-auto">
-                                    <img src="{{asset('images/best_selling.png')}}" class="img-fluid" alt="">
-                                </div>
-                                <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                    <s>was {{$discountedProduct->price}}</s></h5>
-                                <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
-                                <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
-                                <button type="button"
-                                        class="mx-auto btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                    Add to Cart
-                                </button>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
                 <!-- first row -->
@@ -1372,7 +991,7 @@
                         </div>
                         <div class="row mt-3 text-center d-flex justify-content-center">
                             <a type="button" href="/aboutus"
-                                    class="btn btn-white border text-white px-5 mt-2 d-block">
+                               class="btn btn-white border text-white px-5 mt-2 d-block">
                                 Read More
                             </a>
                         </div>
@@ -1562,7 +1181,7 @@
                     "992": {
                         "items": 8
                     },
-                    "1200":{
+                    "1200": {
                         "items": 9
                     }
 

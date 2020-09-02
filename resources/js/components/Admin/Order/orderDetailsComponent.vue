@@ -16,7 +16,7 @@
                             width="55">
                         </el-table-column>
                         <el-table-column
-                            prop="sn"
+                            type="index"
                             label="S.N."
                             width="60">
                         </el-table-column>
@@ -25,19 +25,19 @@
                             label="Date">
                         </el-table-column>
                         <el-table-column
-                            prop="orderNumber"
+                            prop="order.order_number"
                             label="Order Number">
                         </el-table-column>
                         <el-table-column
-                            prop="userId"
+                            prop="user.id"
                             label="User Id">
                         </el-table-column>
                         <el-table-column
-                            prop="buyerName"
+                            prop="user.first_name"
                             label="User Name">
                         </el-table-column>
                         <el-table-column
-                            prop="totalPrice"
+                            prop="order.total_price"
                             label="Total Price">
                         </el-table-column>
                         <el-table-column
@@ -150,55 +150,7 @@ export default {
             email: 'email@gmail.com',
             contact: '1234567890',
             /*Table Data's*/
-            orderDetailsTableData: [{
-                sn: 1,
-                date: '2020-12-23',
-                orderNumber: '2121',
-                userId: '123-12',
-                buyerName: 'Teddy',
-                totalPrice: '9000',
-                status: 'Pending'
-            }, {
-                sn: 2,
-                date: '2020-12-23',
-                orderNumber: '121',
-                userId: '123-1',
-                buyerName: 'Tom',
-                totalPrice: '5000',
-                status: 'Pending'
-            }, {
-                sn: 3,
-                date: '2019-12-23',
-                orderNumber: '121',
-                userId: '123',
-                buyerName: 'Teddy',
-                totalPrice: '4000',
-                status: 'Pending'
-            }, {
-                sn: 4,
-                date: '2017-12-23',
-                orderNumber: '212',
-                userId: '12',
-                buyerName: 'Jerry',
-                totalPrice: '90000',
-                status: 'Pending'
-            }, {
-                sn: 5,
-                date: '2018-12-23',
-                orderNumber: '111',
-                userId: '123-12',
-                buyerName: 'John',
-                totalPrice: '2000',
-                status: 'Pending'
-            }, {
-                sn: 6,
-                date: '2020-12-24',
-                orderNumber: '1090',
-                userId: '123-12',
-                buyerName: 'Tommy',
-                totalPrice: '3000',
-                status: 'Pending'
-            }],
+            orderDetailsTableData: [],
             multipleSelection: [],
             search: '',
             dialogTableVisible: false,
@@ -225,9 +177,14 @@ export default {
             }],
         }
     },
+    mounted(){
+      axios.get('api/getOrderDetail',{}).then(response=>{
+         this.orderDetailsTableData = response.data.order
+      });
+    },
     methods: {
         orderDelivered(row) {
-            
+
         }
     }
 }

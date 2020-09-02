@@ -35,6 +35,7 @@ Route::post('/addDiscount','Admin\ProductController@addDiscount');
 Route::post('/editProduct','Admin\ProductController@editProduct');
 Route::patch('/deleteDiscount/{id}','Admin\ProductController@deleteDiscount');
 Route::patch('/activeBanner/{id}','Admin\BannerImageController@setActive');
+Route::patch('/inactiveBanner/{id}','Admin\BannerImageController@setInActive');
 Route::patch('/saveEditWebsiteDetail','Website\WebsiteDetailController@updateWebsiteDetail');
 
 
@@ -47,6 +48,7 @@ Route::get('/getProduct','Admin\ProductController@getProduct');
 Route::get('/getBannerImage','Admin\BannerImageController@getBannerImage');
 Route::get('/getDiscountedProduct','Admin\ProductController@getDiscountedProduct');
 Route::get('/getWebsiteDetail','Website\WebsiteDetailController@getWebsiteDetail');
+Route::get('/getOrderDetail','Order\OrderController@getOrder');
 
 Route::delete('/deleteCategory/{id}','Admin\CategoryController@deleteCategory');
 Route::delete('/deleteBrand/{id}','Admin\BrandController@deleteBrand');
