@@ -283,6 +283,12 @@
                                         <p> Website Info </p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="/admin/websiteupdate/enquiries" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Customer Enquiries </p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 

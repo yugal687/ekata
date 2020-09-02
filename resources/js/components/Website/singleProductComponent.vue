@@ -121,7 +121,7 @@
                 <div class="row m-0 p-0">
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto bg-cate-sec">
                             <img src="images/Homepage/Best_selling.png" alt="">
@@ -129,7 +129,6 @@
 
                         <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
                         <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
@@ -139,7 +138,7 @@
                     </div>
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
                             <img src="images/Homepage/Best_selling.png" alt="">
@@ -147,7 +146,6 @@
 
                         <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
                         <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
@@ -158,7 +156,7 @@
                     </div>
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
                             <img src="images/Homepage/Best_selling.png" class="img-fluid"
@@ -168,7 +166,6 @@
 
                         <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
                         <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
@@ -178,7 +175,7 @@
                     </div>
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
                             <img src="images/Homepage/Best_selling.png" alt="">
@@ -186,7 +183,6 @@
 
                         <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
                         <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
@@ -212,15 +208,14 @@
 
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
                             <img src="images/Homepage/Best_selling.png" alt="">
                         </div>
 
-                        <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                        <h5 class="best_price font-weight-bold mt-3 text-main-primary">$ 10.99</h5>
                         <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
@@ -230,7 +225,7 @@
                     </div>
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
                             <img src="images/Homepage/Best_selling.png" alt="">
@@ -238,7 +233,6 @@
 
                         <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
                         <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary bg-cate-sec rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
@@ -248,14 +242,13 @@
                     </div>
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
                             <img src="images/Homepage/Best_selling.png" alt="">
                         </div>
 
                         <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
-                        <h5 class="best_name py-0 text-dark">Hello Product</h5>
                         <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
@@ -266,15 +259,14 @@
                     </div>
                     <!-- col-item-start -->
                     <div
-                        class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                        class="col-md-3 col-sm-6 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                         <div
                             class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
                             <img src="images/Homepage/Best_selling.png" alt="">
                         </div>
 
-                        <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
+                        <h5 class="best_price font-weight-bold mt-3 text-main-primary">$ 10.99</h5>
                         <h5 class="best_name py-0 text-dark">Hello Product</h5>
-                        <h5 class="best_weight py-0 text-dark">500 gm</h5>
                         <button type="button"
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart

@@ -29,11 +29,7 @@
     @yield('style')
 
     <style>
-        /*******************************
-* MODAL AS LEFT/RIGHT SIDEBAR
-* Add "left" or "right" in modal parent div, after class="modal".
-* Get free snippets on bootpen.com
-*******************************/
+        /****************/
         .modal.right .modal-dialog {
             position: fixed;
             top: 16%;
@@ -41,7 +37,6 @@
             width: 320px;
             height: 85%;
         }
-
         /*.modal.right .modal-content {
             height: 84%;
             overflow-y: auto;
@@ -123,7 +118,7 @@
             color: #abb0be;
         }
 
-        .shopping-cart:after {
+        /*.shopping-cart:after {
             bottom: 100%;
             left: 80%;
             border: solid transparent;
@@ -135,7 +130,7 @@
             border-bottom-color: white;
             border-width: 8px;
             margin-left: -8px;
-        }
+        }*/
 
         .cart-icon {
             color: #F0A500;
@@ -187,6 +182,9 @@
             .nav-right.container-mine {
                 margin: 5px 60px;
             }
+            .sm-user-checkout{
+                display: none;
+            }
         }
         @media (max-width: 991px){
             #topNavbar nav .active{
@@ -197,8 +195,24 @@
             .nav-right.container-mine {
                 margin: 25px 60px 5px;
             }
+            .navbar{
+                transition: slide-down 2s ease-in-out;
+            }
+            .sticky {
+                position: fixed;
+                top: -5px;
+                width: 100%;
+                z-index: 10002;
+            }
+            .sm-user-checkout {
+                top: 10px;
+                position: absolute;
+                right: 140px;
+            }
+            .lg-user-checkout{
+                display: none;
+            }
         }
-
 
     </style>
 
@@ -206,11 +220,12 @@
 
 <body>
 <header>
+
     <div class="body-inner">
         <div id="top-bar" class="top-bar">
 
             <div class="row m-0 p-0">
-                <div class="col-md-2 m-0 p-0 bg-main-primary rounded-right-top">
+                <div class="col-lg-2 col-md-12 m-0 p-0 bg-main-primary rounded-right-top">
                     <div class="container-mine">
                         <div class="text-center">
                             <h3 class=" text-white font-weight-bold pl-2 mt-4">Logo
@@ -219,7 +234,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-10 m-0 p-0 ">
+                <div class="col-lg-10 col-md-12 m-0 p-0 ">
                     <div class="row m-0 p-0">
                         <div class="col-md-6 m-0 p-0"></div>
                         <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
@@ -240,12 +255,36 @@
                     <!-- Bavigation MenuBar Starts Here-->
                     <div id="topNavbar">
                         <nav class="navbar navbar-expand-lg navbar-dark bg-main-primary">
-                            <a class="navbar-brand" href="#"></a>
+                            <a class="navbar-brand" href="#">
+                            </a>
+                            <div class="sm-user-checkout">
+                                <a href="#" class="user">
+                                    <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
+                                         class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
+                                    <svg width="2em" height="2em" viewBox="0 0 16 16"
+                                         class="bi bi-cart4 text-white ml-2" fill="currentColor"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                                    </svg>
+                                    <div class="cart-count rounded bg-main-secondary text-white"> 1</div>
+                                </a>
+                            </div>
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                     aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
+
+
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
@@ -260,13 +299,13 @@
                                         <a class="nav-link text-white" href="#">Services</a>
                                     </li>
                                     <li class="nav-item px-2">
-                                        <a class="nav-link text-white" href="#">Products</a>
+                                        <a class="nav-link text-white" href="/products">Products</a>
                                     </li>
                                     <li class="nav-item px-2">
                                         <a class="nav-link text-white" href="/contact">Contact Us</a>
                                     </li>
                                 </ul>
-                                <div class="nav-right container-mine">
+                                <div class="nav-right container-mine lg-user-checkout">
                                     <a href="#" class="user">
                                         <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
                                              class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
@@ -299,168 +338,9 @@
     </div>
 
     <!-- Cart Modal -->
-    <div class="modal right fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="shopping-cart">
-                    <div class="shopping-cart-header">
-                        <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--end shopping-cart-header -->
-
-                    <ul class="shopping-cart-items">
-                        <li class="clearfix">
-                            <div class="row pb-2 align-items-center">
-                                <div class="col-4" style="overflow: hidden">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                                         class="img-fluid" width="80px" height="100px"
-                                         alt=""/>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <span class="item-name">Sony DSC-RX100M III</span>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <span class="item-price font-weight-bold">$849.99</span>
-                                    </div>
-                                    {{--<div class="row">
-                                        <span class="item-quantity">Quantity:</span>
-                                    </div>--}}
-                                    <div class="row pr-4">
-                                        <div class="col-xs-3 col-xs-offset-3">
-                                            <div class="input-group input-group-sm number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <a href="#" class="">
-                                        <button class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="clearfix">
-                            <div class="row pb-2 align-items-center">
-                                <div class="col-4" style="overflow: hidden">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                                         class="img-fluid" width="80px" height="100px"
-                                         alt=""/>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <span class="item-name">Sony DSC-RX100M III</span>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <span class="item-price font-weight-bold">$849.99</span>
-                                    </div>
-                                    {{--<div class="row">
-                                        <span class="item-quantity">Quantity:</span>
-                                    </div>--}}
-                                    <div class="row pr-4">
-                                        <div class="col-xs-3 col-xs-offset-3">
-                                            <div class="input-group input-group-sm number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <a href="#" class="">
-                                        <button class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="clearfix">
-                            <div class="row pb-2 align-items-center">
-                                <div class="col-4" style="overflow: hidden">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                                         class="img-fluid" width="80px" height="100px"
-                                         alt=""/>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <span class="item-name">Sony DSC-RX100M III</span>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <span class="item-price font-weight-bold">$849.99</span>
-                                    </div>
-                                    {{--<div class="row">
-                                        <span class="item-quantity">Quantity:</span>
-                                    </div>--}}
-                                    <div class="row pr-4">
-                                        <div class="col-xs-3 col-xs-offset-3">
-                                            <div class="input-group input-group-sm number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <a href="#" class="">
-                                        <button class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="row">
-                        <div class="col-12 text-right">
-                            <span class="lighter-text">Total:</span>
-                            <span class="main-color-text font-weight-bold">$2,229.97</span>
-                        </div>
-                    </div> <!--end shopping-cart-header -->
-
-
-                    <a href="/billings" class="button">Checkout</a>
-                </div> <!--end shopping-cart -->
-            </div> <!--end container -->
-        </div><!-- modal-dialog -->
-    </div><!-- modal -->
+    <div id="app">
+        <cart-items-component></cart-items-component>
+    </div>
 
 
     <!---Cart Modal Ends---->
@@ -505,7 +385,7 @@
 
     <div class="footer-container">
         <div class="row" id="details">
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <h4 class="col-12 text-center font-weight-bold">
                     Ekata Store
                 </h4>
@@ -632,13 +512,12 @@
     </div>
 </footer>
 
-
 <!-- Javascript Files
     ================================================== -->
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 {{-- Jquery Ui--}}
 <script
     src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
@@ -662,6 +541,14 @@
 @yield('scripts')
 
 <script>
+    /*$(window).scroll(function(){
+        if ($(window).scrollTop() >= 400) {
+            $('nav.navbar').addClass('sticky');
+        }
+        else {
+            $('nav.navbar').removeClass('sticky');
+        }
+    });*/
     /*jQuery time*/
     $(document).ready(function () {
         $("#accordion h3").click(function () {
@@ -683,15 +570,52 @@
             e.preventDefault();
         });
         /*Active Heading*/
-        $('#accordion li h3').click(function (e) {
+        $('#accordion li h3').click(function () {
 
             $('#accordion li.activeHeading').removeClass('activeHeading');
 
             var $parent = $(this).parent();
             $parent.addClass('activeHeading');
+            /*e.preventDefault();*/
+        });
+
+        ///Sm SIdebar
+        /*Sm-sidebar-scripts*/
+        $(".sidebar-dropdown a").click(function() {
+            $(".sidebar-submenu").slideUp(200);
+            if (
+                $(this)
+                    .parent()
+                    .hasClass("active")
+            ) {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this)
+                    .parent()
+                    .removeClass("active");
+            } else {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this)
+                    .next(".sidebar-submenu")
+                    .slideDown(200);
+                $(this)
+                    .parent()
+                    .addClass("active");
+            }
+        });
+        $(".sidebar-dropdown > a i").click(function(e) {
             e.preventDefault();
         });
+        $("#toggle-smsidebar").click(function() {
+            $(".smsidebar-menu").toggleClass("rightActive");
+        });
+        $(".close-menu").click(function() {
+            $(".smsidebar-menu").addClass("rightActive");
+        });
+        // When the user clicks anywhere outside of the modal, close it
+
+
     });
+    /*Number Snipper Button*/
     $(document).on('click', '.number-spinner button', function () {
         var btn = $(this),
             oldValue = btn.closest('.number-spinner').find('input').val().trim(),

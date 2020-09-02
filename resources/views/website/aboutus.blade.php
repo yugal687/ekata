@@ -35,7 +35,7 @@
         </div>
         <div class="container my-5">
             <div class="row d-flex align-items-center">
-                <div class="col-md-7 px-5">
+                <div class="col-md-7 col-sm-12 px-2 px-sm-3 px-lg-5">
                     <h3 class="font-weight-bold mb-3" style="font-family: 'SansSerif'">The journey of Ekata Convenience
                         Store</h3>
                     <p class="text-justify">

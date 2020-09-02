@@ -12,62 +12,6 @@ $(document).ready(function () {
         }
     });
 
-    /*Vertical Sidebar Carousel | Tiny Slider*/
-    var slider = tns({
-        "container": ".smindex-sidebar-carousel",
-        "items": 3,
-        "slideBy": 1,
-        "mouseDrag": true,
-        "swipeAngle": false,
-        "speed": 400,
-        "loop": true,
-        "controls": true,
-        "controlsPosition": "bottom",
-        "controlsText": ["<i class='fas fa-angle-left'></i>", "<i class='fas fa-angle-right'></i>"],
-        "responsive": {
-            "0": {
-                "items": 3
-            },
-            "576": {
-                "items": 4
-            },
-            "768": {
-                "items": 6
-            }
-        },
-    });
-    /*------------------------*/
-    var slider = tns({
-        container: ".sidebar-vertical-carousel",
-        /*"items": 9,*/
-        "axis": "vertical",
-        "swipeAngle": false,
-        "speed": 400,
-        "mouseDrag": true,
-        slideBy: 1,
-        gutter: 12,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayButtonOutput: false,
-        controlsContainer: "#customize-controls",
-        "responsive": {
-            "0": {
-                "items": 5
-            },
-            "992": {
-                "items": 8
-            },
-            "1200":{
-                "items": 9
-            }
-
-        },
-        /*rewind: true*/
-    });
-
-    /*Vertical Sidebar Carousel Ends*/
-
     /*$("#sidebar_carousel").owlCarousel({
         dots: false,
         loop: true,
