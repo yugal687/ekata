@@ -61,6 +61,7 @@ Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
 Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
 //Website Info
 Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
+Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
 
 //User Dashboard
 Route::view('userdashboard/userdashboard', 'user dashboard.userdashboard');

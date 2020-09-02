@@ -21,7 +21,3 @@
     <!-- sidebar-menu  -->
 
 </nav>
-
-<script>
-
-</script>

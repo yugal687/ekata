@@ -42,6 +42,8 @@ Vue.component('order-details-component', require('./components/Admin/Order/order
 Vue.component('banner-image-component', require('./components/Admin/Banner_Image/bannerImageComponent.vue').default);
 /*Website_Update*/
 Vue.component('website-info-component', require('./components/Admin/Website Update/websiteInfoComponent.vue').default);
+Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
+Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
 
 
 /*Website Pages*/
