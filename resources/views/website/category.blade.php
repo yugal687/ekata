@@ -1,16 +1,20 @@
 <!--Website Header-->
 @extends('layouts.website.header')
+<link href="{{ asset('css/smsidebarstyle.css')}}" rel="stylesheet"/>
 <!--Website Header Ends-->
 
-
 @section('content')
+    @include('layouts.website.smsidebar')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" style="background-color: #e9ecef">
+            <div class="col-lg-2 col-md-12" style="background-color: #e9ecef">
                 <div class="row">
                     <div class="col-12 bg-main-secondary">
                         <div class="cate">
-                            <h3 class="text-center text-dark mt-2 font-weight-bold">CATEGORY</h3>
+                            <h3 class="text-center text-dark mt-2 font-weight-bold">
+                                CATEGORY
+                                <span id="toggle-smsidebar" class="float-right mr-2"><i class="fas fa-bars text-white"></i></span>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -21,21 +25,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-lg-10 col-md-12">
+                @foreach($getsingleCategory as $category)
                 <div class="row">
                     <div class="col-12" style="padding: 0;">
                         <nav aria-label="breadcrumb" class="">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Category</a></li>
-                                <li class="breadcrumb-item"><a href="#">Dry Goods</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Rice</li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('category',$category->parent->id)}}">{{$category->parent->category_name}}</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('maincategory',$category->id)}}">{{$category->category_name}}</a></li>
                             </ol>
                         </nav>
                     </div>
                 </div>
+                <main class="p-1 p-sm-3 p-md-4 p-lg-5">
                 <main class="p-5">
-                    @foreach($getsingleCategory as $category)
                     <div class="row pb-3">
                         <div class="col-12">
                             <img src="{{ $category->parent->image }}"
@@ -68,18 +72,19 @@
                             </button>
                         </div>
                     </div>
-                    @endforeach
 
                 </main>
+                </main>
+                    @endforeach
             </div>
         </div>
     </div>
 @stop
 
 
-@section('footer')
-    <!--Extend Footer-->
-    @extends('layouts.website.footer')
-    <!--Footer Ends-->
 
+@section('scripts')
+    <script>
+
+    </script>
 @stop

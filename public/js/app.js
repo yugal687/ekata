@@ -3950,14 +3950,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "createproductComponent",
   data: function data() {
@@ -3995,7 +3987,6 @@ __webpack_require__.r(__webpack_exports__);
         productName: '',
         quantity: '',
         costPrice: '',
-        sellingPrice: '',
         tagsSelect: '',
         additionalInformation: '',
         type: []
@@ -4028,12 +4019,7 @@ __webpack_require__.r(__webpack_exports__);
         }],
         costPrice: [{
           required: true,
-          message: 'Please input cost price',
-          trigger: 'blur'
-        }],
-        sellingPrice: [{
-          required: true,
-          message: 'Please input cost price',
+          message: 'Please input price',
           trigger: 'blur'
         }],
         additionalInformation: [{
@@ -4081,7 +4067,6 @@ __webpack_require__.r(__webpack_exports__);
           formData.append('brand_id', _this2.productForm.brandSelect);
           formData.append('product_name', _this2.productForm.productName);
           formData.append('price', _this2.productForm.costPrice);
-          formData.append('sale_price', _this2.productForm.sellingPrice);
           formData.append('additional_information', _this2.productForm.additionalInformation);
           formData.append('quantity', _this2.productForm.quantity);
           axios.post('/api/addProduct', formData, {
@@ -5361,6 +5346,13 @@ __webpack_require__.r(__webpack_exports__);
       brandSearch: ''
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getBrand', {}).then(function (response) {
+      _this.getBrand = response.data.getBrand;
+    });
+  },
   methods: {
     editBrand: function editBrand(id) {
       this.editBrands = this.getBrand.filter(function (getBrand) {
@@ -5380,7 +5372,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitBrand: function submitBrand(brandForm) {
-      var _this = this;
+      var _this2 = this;
 
       var formdata = new FormData();
       formdata.append('brand_name', this.brandForm.name);
@@ -5392,7 +5384,7 @@ __webpack_require__.r(__webpack_exports__);
         alert(response.data.message);
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this.errors = error.response.data.errors;
+          _this2.errors = error.response.data.errors;
         }
       });
     },
@@ -6223,10 +6215,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$refs[categoryForm].validate(function (valid) {
+        console.log(_this2.fileListThumbnail);
+
         if (valid) {
-          var formdata = new FormData();
-          formdata.append('category_name', _this2.categoryForm.name);
-          axios.post('/api/postCategory', formdata, {
+          var bannerCategory = _this2.fileListHeader;
+          var thumbnailCategory = _this2.fileListThumbnail;
+          var formData = new FormData();
+          bannerCategory.forEach(function (v, k) {
+            formData.append("bannerCategory[".concat(k, "]"), v.raw);
+          });
+          thumbnailCategory.forEach(function (v, k) {
+            formData.append("thumbnailCategory[".concat(k, "]"), v.raw);
+          });
+          formData.append('category_name', _this2.categoryForm.name);
+          axios.post('/api/postCategory', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -6510,6 +6512,13 @@ __webpack_require__.r(__webpack_exports__);
       tagSearch: ''
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getTag', {}).then(function (response) {
+      _this.tags = response.data.tags;
+    });
+  },
   methods: {
     editTag: function editTag(id) {
       this.editTags = this.tags.filter(function (tags) {
@@ -6529,7 +6538,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitTag: function submitTag(tagForm) {
-      var _this = this;
+      var _this2 = this;
 
       var formData = new FormData();
       formData.append('tags', this.tagForm.name);
@@ -6541,7 +6550,7 @@ __webpack_require__.r(__webpack_exports__);
         alert(response.data.message);
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this.errors = error.response.data.errors;
+          _this2.errors = error.response.data.errors;
         }
       });
     },
@@ -6774,6 +6783,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "websiteInfoComponent",
   data: function data() {
@@ -6784,7 +6809,8 @@ __webpack_require__.r(__webpack_exports__);
         contactNumber: '',
         address: '',
         optionalEmail: '',
-        optionalContactNumber: ''
+        optionalContactNumber: '',
+        information: ''
       },
       type: [],
       websiteInfoRules: {
@@ -6808,18 +6834,40 @@ __webpack_require__.r(__webpack_exports__);
           trigger: 'blur'
         }]
       },
-      email: 'email@gmail.com',
-      optionalEmail: 'email@gmail.com',
-      contactNumber: '1234567890',
-      optionalContactNumber: '1234567890',
-      address: 'A description list is perfect for defining terms'
+      WebsiteDetail: []
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getWebsiteDetail', {}).then(function (response) {
+      _this.WebsiteDetail = response.data.WebsiteDetail;
+    });
+  },
   methods: {
-    submitForm: function submitForm(formName) {
-      this.$refs[formName].validate(function (valid) {
+    submitForm: function submitForm(websiteInfoForm) {
+      var _this2 = this;
+
+      this.$refs[websiteInfoForm].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          var formData = new FormData();
+          formData.append('email', _this2.websiteInfoForm.email);
+          formData.append('contact_number', _this2.websiteInfoForm.contactNumber);
+          formData.append('address', _this2.websiteInfoForm.address);
+          formData.append('additional_information', _this2.websiteInfoForm.information);
+          formData.append('optional_email', _this2.websiteInfoForm.optionalEmail);
+          formData.append('optional_contact', _this2.websiteInfoForm.optionalContactNumber);
+          axios.post('/api/postWebsiteDetail', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            alert(response.data.message);
+          })["catch"](function (error) {
+            if (error.response.status == 422) {
+              _this2.errors = error.response.data.errors;
+            }
+          });
         } else {
           console.log('error submit!!');
           return false;
@@ -13426,7 +13474,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.text[data-v-06356278] {\r\n    font-size: 14px;\n}\n.item[data-v-06356278] {\r\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\r\n.clearfix[data-v-06356278]:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\r\n    clear: both\n}\r\n", ""]);
+exports.push([module.i, "\n.text[data-v-06356278] {\n    font-size: 14px;\n}\n.item[data-v-06356278] {\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\n.clearfix[data-v-06356278]:after {\n    display: table;\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\n    clear: both\n}\n", ""]);
 
 // exports
 
@@ -13521,7 +13569,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.time[data-v-48c7bd0e] {\n    font-size: 13px;\n    color: #999;\n}\n.bottom[data-v-48c7bd0e] {\n    margin-top: 13px;\n    line-height: 12px;\n}\n.button[data-v-48c7bd0e] {\n    padding: 0;\n    float: right;\n}\n.image[data-v-48c7bd0e] {\n    width: 100%;\n    display: block;\n}\n.clearfix[data-v-48c7bd0e]:before,\n.clearfix[data-v-48c7bd0e]:after {\n    display: table;\n    content: \"\";\n}\n.clearfix[data-v-48c7bd0e]:after {\n    clear: both\n}\n.lead[data-v-48c7bd0e] {\n    font-size: 1.125rem;\n    font-weight: 300;\n}\nelement.style[data-v-48c7bd0e] {\n    height: 120px;\n    width: 120px;\n}\n", ""]);
+exports.push([module.i, "\n.time[data-v-48c7bd0e] {\r\n    font-size: 13px;\r\n    color: #999;\n}\n.bottom[data-v-48c7bd0e] {\r\n    margin-top: 13px;\r\n    line-height: 12px;\n}\n.button[data-v-48c7bd0e] {\r\n    padding: 0;\r\n    float: right;\n}\n.image[data-v-48c7bd0e] {\r\n    width: 100%;\r\n    display: block;\n}\n.clearfix[data-v-48c7bd0e]:before,\r\n.clearfix[data-v-48c7bd0e]:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix[data-v-48c7bd0e]:after {\r\n    clear: both\n}\n.lead[data-v-48c7bd0e] {\r\n    font-size: 1.125rem;\r\n    font-weight: 300;\n}\nelement.style[data-v-48c7bd0e] {\r\n    height: 120px;\r\n    width: 120px;\n}\r\n", ""]);
 
 // exports
 
@@ -104457,7 +104505,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-3" },
+                      { staticClass: "col-md-6" },
                       [
                         _c(
                           "el-form-item",
@@ -104479,32 +104527,6 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-3" },
-                      [
-                        _c(
-                          "el-form-item",
-                          { attrs: { label: "Cost Price", prop: "costPrice" } },
-                          [
-                            _c("el-input", {
-                              staticStyle: { width: "100%" },
-                              attrs: { placeholder: "Place cost price" },
-                              model: {
-                                value: _vm.productForm.costPrice,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.productForm, "costPrice", $$v)
-                                },
-                                expression: "productForm.costPrice"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
                     )
                   ]),
                   _vm._v(" "),
@@ -104515,22 +104537,17 @@ var render = function() {
                       [
                         _c(
                           "el-form-item",
-                          {
-                            attrs: {
-                              label: "Selling Price",
-                              prop: "sellingPrice"
-                            }
-                          },
+                          { attrs: { label: "Price", prop: "sellingPrice" } },
                           [
                             _c("el-input", {
                               staticStyle: { width: "100%" },
-                              attrs: { placeholder: "Place selling price" },
+                              attrs: { placeholder: "Place price" },
                               model: {
-                                value: _vm.productForm.sellingPrice,
+                                value: _vm.productForm.costPrice,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.productForm, "sellingPrice", $$v)
+                                  _vm.$set(_vm.productForm, "costPrice", $$v)
                                 },
-                                expression: "productForm.sellingPrice"
+                                expression: "productForm.costPrice"
                               }
                             })
                           ],
@@ -109310,16 +109327,48 @@ var render = function() {
                                     model: {
                                       value:
                                         _vm.websiteInfoForm
-                                          .optioanlContactNumber,
+                                          .optionalContactNumber,
                                       callback: function($$v) {
                                         _vm.$set(
                                           _vm.websiteInfoForm,
-                                          "optioanlContactNumber",
+                                          "optionalContactNumber",
                                           $$v
                                         )
                                       },
                                       expression:
-                                        "websiteInfoForm.optioanlContactNumber"
+                                        "websiteInfoForm.optionalContactNumber"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Additional Information",
+                                    prop: "additionalInformation"
+                                  }
+                                },
+                                [
+                                  _c("el-input", {
+                                    attrs: {
+                                      type: "textarea",
+                                      autosize: { minRows: 3, maxRows: 4 },
+                                      placeholder:
+                                        "Please input additional Information"
+                                    },
+                                    model: {
+                                      value: _vm.websiteInfoForm.information,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.websiteInfoForm,
+                                          "information",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "websiteInfoForm.information"
                                     }
                                   })
                                 ],
@@ -109377,79 +109426,98 @@ var render = function() {
                   _c("span", [_vm._v("Website Information")])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "text" }, [
-                  _c("dl", { staticClass: "row" }, [
-                    _c("dt", { staticClass: "col-sm-5" }, [
-                      _vm._v(
-                        "\n                                    Email\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dd", { staticClass: "col-sm-7" }, [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(_vm.email) +
-                          "\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dt", { staticClass: "col-sm-5" }, [
-                      _vm._v(
-                        "\n                                    Contact Number\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dd", { staticClass: "col-sm-7" }, [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(_vm.contactNumber) +
-                          "\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dt", { staticClass: "col-sm-5" }, [
-                      _vm._v(
-                        "\n                                    Address\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dd", { staticClass: "col-sm-7" }, [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(_vm.address) +
-                          "\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dt", { staticClass: "col-sm-5" }, [
-                      _vm._v(
-                        "\n                                    Optional Email\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dd", { staticClass: "col-sm-7" }, [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(_vm.optionalEmail) +
-                          "\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dt", { staticClass: "col-sm-5" }, [
-                      _vm._v(
-                        "\n                                    Optional Contact Number\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("dd", { staticClass: "col-sm-7" }, [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(_vm.optionalContactNumber) +
-                          "\n                                "
-                      )
+                _c(
+                  "div",
+                  { staticClass: "text" },
+                  _vm._l(_vm.WebsiteDetail, function(details) {
+                    return _c("dl", { staticClass: "row" }, [
+                      _c("dt", { staticClass: "col-sm-5" }, [
+                        _vm._v(
+                          "\n                                    Email\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dd", { staticClass: "col-sm-7" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(details.email) +
+                            "\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dt", { staticClass: "col-sm-5" }, [
+                        _vm._v(
+                          "\n                                    Contact Number\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dd", { staticClass: "col-sm-7" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(details.contact_number) +
+                            "\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dt", { staticClass: "col-sm-5" }, [
+                        _vm._v(
+                          "\n                                    Address\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dd", { staticClass: "col-sm-7" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(details.address) +
+                            "\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dt", { staticClass: "col-sm-5" }, [
+                        _vm._v(
+                          "\n                                    Optional Email\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dd", { staticClass: "col-sm-7" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(details.optional_email) +
+                            "\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dt", { staticClass: "col-sm-5" }, [
+                        _vm._v(
+                          "\n                                    Optional Contact Number\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dd", { staticClass: "col-sm-7" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(details.optional_contact) +
+                            "\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dt", { staticClass: "col-sm-5" }, [
+                        _vm._v(
+                          "\n                                    Addtional Information\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("dd", { staticClass: "col-sm-7" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(details.additional_information) +
+                            "\n                                "
+                        )
+                      ])
                     ])
-                  ])
-                ])
+                  }),
+                  0
+                )
               ])
             ],
             1
@@ -123532,8 +123600,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

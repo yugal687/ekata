@@ -91,9 +91,7 @@ Route::get('/billings', function () {
     return view('website/billings');
 });
 
-Route::get('/contact', function () {
-    return view('website/contact');
-});
+Route::get('/contact','Website\WebsiteDetailController@showDetails');
 
 
 Route::get('/','Website\ProductController@index');

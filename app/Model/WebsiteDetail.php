@@ -10,6 +10,8 @@ class WebsiteDetail extends Model
       'email',
       'contact_number',
         'address',
-        'additional_information'
+        'additional_information',
+        'optional_contact',
+        'optional_email'
     ];
 }

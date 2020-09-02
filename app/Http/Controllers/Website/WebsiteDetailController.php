@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class WebsiteDetailController extends Controller
 {
     public function saveWebsitedetail(Request $request){
+        //dd($request);
         $validate = $request->validate([
             'email' => 'required',
             'contact_number' => 'required',
@@ -19,6 +20,8 @@ class WebsiteDetailController extends Controller
                 'email' => $request->email,
                 'contact_number' => $request->contact_number,
                 'address' => $request->address,
+                'optional_email' => $request->optional_email,
+                'optional_contact' =>$request->optional_contact,
                 'additional_information' => $request->additional_information
             ]);
         }
@@ -49,6 +52,13 @@ class WebsiteDetailController extends Controller
         ]);
         return response()->json([
            'message' => 'Website Detail updated Sucessfully !!!'
+        ]);
+    }
+
+    public function showDetails(){
+        $websiteDetails =WebsiteDetail::all();
+        return view('website.contact',[
+           'orderDetails' =>  $websiteDetails
         ]);
     }
 }

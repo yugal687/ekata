@@ -132,6 +132,7 @@
                 <div id="app">
                     <single-product-component></single-product-component>
                 </div>
+                @endforeach
                 {{----}}
             </div>
 
