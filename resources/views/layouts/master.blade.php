@@ -140,7 +140,7 @@
                 </div>
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+                <nav class="mt-2 mb-5">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
@@ -281,6 +281,18 @@
                                     <a href="/admin/websiteupdate/websiteinfo" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p> Website Info </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/websiteupdate/reviewscarousel" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Reviews Carousel </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/websiteupdate/customersfeedback" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Customers Feedback </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

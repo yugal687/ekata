@@ -43,7 +43,8 @@ Vue.component('banner-image-component', require('./components/Admin/Banner_Image
 /*Website_Update*/
 Vue.component('website-info-component', require('./components/Admin/Website Update/websiteInfoComponent.vue').default);
 Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
-Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
+Vue.component('reviews-carousel-component', require('./components/Admin/Website Update/reviewsCarouselComponent.vue').default);
+Vue.component('customers-feedback-component', require('./components/Admin/Website Update/customersFeedbackComponent.vue').default);
 
 
 /*Website Pages*/

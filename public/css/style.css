@@ -485,3 +485,8 @@ a:hover {
 .style7{
     border-top: 2px solid #8c8b8b;
 }
+
+/*Owl Carousel Iteration Problem*/
+.owl-carousel {
+    touch-action: manipulation;
+}

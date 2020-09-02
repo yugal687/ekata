@@ -342,7 +342,6 @@
 @stop
 
 @section('content')
-    @include('layouts.website.smindexsidebar')
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
@@ -358,6 +357,7 @@
                     <div class="col-12">
                         {{--Include Sidebar Here--}}
                         @include('layouts.website.indexsidebar')
+                        @include('layouts.website.smindexsidebar')
                     </div>
                 </div>
             </div>
@@ -1206,11 +1206,11 @@
                                     </div>
                                     <div class="col-12 text-center">
                                         <div class="reviews-rating">
-                                            <a href="#5" title="Give 5 stars">★</a>
-                                            <a href="#4" title="Give 4 stars">★</a>
-                                            <a href="#3" title="Give 3 stars">★</a>
-                                            <a href="#2" title="Give 2 stars">★</a>
-                                            <a href="#1" title="Give 1 star">★</a>
+                                            <a href="#5" title="Give 5 stars" data-value="5">★</a>
+                                            <a href="#4" title="Give 4 stars" data-value="4">★</a>
+                                            <a href="#3" title="Give 3 stars"  data-value="3">★</a>
+                                            <a href="#2" title="Give 2 stars"  data-value="2">★</a>
+                                            <a href="#1" title="Give 1 star"  data-value="1">★</a>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-3">
@@ -1388,6 +1388,10 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            /*$("a").click(function(){
+                val = $(this).data('value') // would be 5
+               alert(val);
+            });*/
             /*Banner Image Carousel*/
             $("#banner-image-carousel").owlCarousel({
                 items: 1,
@@ -1521,7 +1525,8 @@
                 "container": ".smindex-sidebar-carousel",
                 "items": 3,
                 "slideBy": 1,
-                "mouseDrag": true,
+                mouseDrag: true,
+                preventScrollOnTouch: 'force',
                 "swipeAngle": false,
                 "speed": 400,
                 "loop": true,
@@ -1547,7 +1552,8 @@
                 "axis": "vertical",
                 "swipeAngle": false,
                 "speed": 400,
-                "mouseDrag": true,
+                mouseDrag: true,
+                preventScrollOnTouch: 'force',
                 slideBy: 1,
                 gutter: 12,
                 nav: false,
