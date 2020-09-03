@@ -11,18 +11,13 @@ window.Vue = require('vue');
 import Vue from 'vue';
 
 import ElementUI from 'element-ui';
+
 Vue.use(ElementUI);
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import Vuex from 'vuex';
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.use(Vuex);
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('user-component', require('./components/Admin/User/userComponent.vue').default);
@@ -39,17 +34,23 @@ Vue.component('products-component', require('./components/Admin/Add_Product/prod
 Vue.component('add-discount-component', require('./components/Admin/Add_Product/addDiscountComponent.vue').default);
 /*Orders*/
 Vue.component('order-details-component', require('./components/Admin/Order/orderDetailsComponent.vue').default);
-Vue.component('shipping-details-component', require('./components/Admin/Order/shippingDetailsComponent.vue').default);
 Vue.component('banner-image-component', require('./components/Admin/Banner_Image/bannerImageComponent.vue').default);
-Vue.component('all-users-cart-details-component', require('./components/Admin/Cart/allUserCartDetailsComponent.vue').default);
+/*Website_Update*/
+Vue.component('website-info-component', require('./components/Admin/Website Update/websiteInfoComponent.vue').default);
 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+/*Website Pages*/
+Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);
+
+
+import storeData from './store/store';
+
+const store = new Vuex.store(
+    storeData
+);
+
 
 const app = new Vue({
     el: '#app',
+    store,
 });

@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <shipping-details-component></shipping-details-component>
+        <website-info-component></website-info-component>
     </div>
 @stop
+

@@ -12,6 +12,10 @@
                         max-height="470"
                         style="width: 100%">
                         <el-table-column
+                            type="selection"
+                            width="55">
+                        </el-table-column>
+                        <el-table-column
                             prop="sn"
                             label="S.N."
                             width="60">
@@ -37,6 +41,14 @@
                             label="Total Price">
                         </el-table-column>
                         <el-table-column
+                            label="Status">
+                            <template slot-scope="scope">
+                                <div slot="reference" class="name-wrapper">
+                                    <el-tag size="medium">{{ scope.row.status }}</el-tag>
+                                </div>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
                             fixed="right"
                             width="180"
                             align="right">
@@ -49,7 +61,7 @@
                             <template slot-scope="scope">
                                 <el-button type="primary"
                                            size="mini"
-                                           @click="dialogTableVisible  = true">Orders
+                                           @click="dialogTableVisible  = true">Details
                                 </el-button>
                                 <el-button
                                     size="mini"
@@ -59,6 +71,9 @@
                             </template>
                         </el-table-column>
                     </el-table>
+                </div>
+                <div class="my-3 px-4 float-right">
+                    <el-button type="success" size="medium" @click="orderDelivered()">Order Delivered</el-button>
                 </div>
             </el-card>
         </main>
@@ -70,6 +85,54 @@
                     <el-table-column property="price" label="Price"></el-table-column>
                     <el-table-column property="discount" label="Discount"></el-table-column>
                 </el-table>
+                <span slot="footer" class="dialog-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">
+                                    Address
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{ address }}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    City
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{ city }}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    Postal Code
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{ postalCode }}
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">
+                                    Optional Address
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{ optionalAddress }}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    Email
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{ email }}
+                                </dd>
+                                <dt class="col-sm-4">
+                                    Contact
+                                </dt>
+                                <dd class="col-sm-8">
+                                    {{ contact }}
+                                </dd>
+                                </dl>
+                        </div>
+                    </div>
+                </span>
             </el-dialog>
         </main>
     </div>
@@ -80,6 +143,12 @@ export default {
     name: "orderDetailsComponent",
     data() {
         return {
+            address: 'A description list is perfect for defining terms',
+            city: 'San Fransisco',
+            postalCode: '4325',
+            optionalAddress: 'A description list is perfect',
+            email: 'email@gmail.com',
+            contact: '1234567890',
             /*Table Data's*/
             orderDetailsTableData: [{
                 sn: 1,
@@ -87,43 +156,50 @@ export default {
                 orderNumber: '2121',
                 userId: '123-12',
                 buyerName: 'Teddy',
-                totalPrice: '9000'
+                totalPrice: '9000',
+                status: 'Pending'
             }, {
                 sn: 2,
                 date: '2020-12-23',
                 orderNumber: '121',
                 userId: '123-1',
                 buyerName: 'Tom',
-                totalPrice: '5000'
+                totalPrice: '5000',
+                status: 'Pending'
             }, {
                 sn: 3,
                 date: '2019-12-23',
                 orderNumber: '121',
                 userId: '123',
                 buyerName: 'Teddy',
-                totalPrice: '4000'
+                totalPrice: '4000',
+                status: 'Pending'
             }, {
                 sn: 4,
                 date: '2017-12-23',
                 orderNumber: '212',
                 userId: '12',
                 buyerName: 'Jerry',
-                totalPrice: '90000'
+                totalPrice: '90000',
+                status: 'Pending'
             }, {
                 sn: 5,
                 date: '2018-12-23',
                 orderNumber: '111',
                 userId: '123-12',
                 buyerName: 'John',
-                totalPrice: '2000'
+                totalPrice: '2000',
+                status: 'Pending'
             }, {
                 sn: 6,
                 date: '2020-12-24',
                 orderNumber: '1090',
                 userId: '123-12',
                 buyerName: 'Tommy',
-                totalPrice: '3000'
+                totalPrice: '3000',
+                status: 'Pending'
             }],
+            multipleSelection: [],
             search: '',
             dialogTableVisible: false,
             gridData: [{
@@ -147,6 +223,11 @@ export default {
                 price: '1234',
                 discount: '34'
             }],
+        }
+    },
+    methods: {
+        orderDelivered(row) {
+            
         }
     }
 }
