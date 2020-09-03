@@ -50,6 +50,8 @@ Vue.component('customers-feedback-component', require('./components/Admin/Websit
 /*Website Pages*/
 Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);
 Vue.component('cart-items-component', require('./components/Website/cartItemsComponent.vue').default);
+Vue.component('billing-component', require('./components/Website/billingsComponent.vue').default);
+Vue.component('header-navbar-component', require('./components/Website/headerNavbarComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

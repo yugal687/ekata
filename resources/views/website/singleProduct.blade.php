@@ -7,7 +7,7 @@
 {{--<link rel="stylesheet" href="{{ asset('css/cate-carousel.css')}} ">--}}
 @section('style')
     <style>
-        .single-item-share a{
+        .single-item-share a {
             color: #00000070;
         }
 
@@ -104,7 +104,8 @@
                         <div class="cate">
                             <h3 class="text-center text-dark mt-2 font-weight-bold">
                                 CATEGORY
-                                <span id="toggle-smsidebar" class="float-right mr-2"><i class="fas fa-bars text-white"></i></span>
+                                <span id="toggle-smsidebar" class="float-right mr-2"><i
+                                        class="fas fa-bars text-white"></i></span>
                             </h3>
                         </div>
                     </div>
@@ -133,9 +134,7 @@
 
 
                 {{--Vue Component--}}
-                <div id="app">
-                    <single-product-component></single-product-component>
-                </div>
+                <single-product-component></single-product-component>
                 {{----}}
             </div>
 
