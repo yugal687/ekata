@@ -56,3 +56,5 @@ Route::delete('/deleteTag/{id}','Tag\TagController@deleteTag');
 Route::delete('/deleteBanner/{id}','Admin\BannerImageController@deleteBannerImage');
 Route::delete('/deleteProduct/{id}','Admin\ProductController@deleteProduct');
 Route::delete('/deleteWebsiteDetail/{id}','Website\WebsiteDetailController@deleteWebsiteDetail');
+
+Route::get('/getUser','User\UserController@singleUserDetail');

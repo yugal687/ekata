@@ -178,7 +178,7 @@ export default {
         }
     },
     mounted(){
-      axios.get('api/getOrderDetail',{}).then(response=>{
+      axios.get('/api/getOrderDetail',{}).then(response=>{
          this.orderDetailsTableData = response.data.order
       });
     },

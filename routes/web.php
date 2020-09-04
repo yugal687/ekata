@@ -73,14 +73,8 @@ Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
 //User
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::view('user/userdashboard', 'User.userdashboard');
-    Route::get('user/userprofile', [
-      "uses" => 'User\UserController@singleUserDetail',
-        "as" => 'user/userdashboard'
-    ]);
-    Route::post('/updateUser/{id}',[
-        "uses" => 'User\UserController@updateUser',
-        "as" => 'updateUser'
-    ]);
+    Route::get('getUser','User\UserController@singleUserDetail');
+    Route::view('user/userprofile','User.userprofile');
 });
 
 

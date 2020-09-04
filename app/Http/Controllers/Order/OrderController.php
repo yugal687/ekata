@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderMail;
 use App\Model\Order;
 use App\Model\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -24,7 +26,7 @@ class OrderController extends Controller
                 $part = $fetchorder->order_number;
                 $saveOrder->order_number = $part + 1;
             } else {
-                $saveOrder->order_number = '001';
+                $saveOrder->order_number = '111';
             }
             $saveOrder->total_price = $request->total_price;
             $saveOrder->save();
@@ -36,9 +38,12 @@ class OrderController extends Controller
                 'quantity' => $request->quantity,
                 'discount' => $request->discount,
                 'order_status' => $request->order_status,
-                'user_id' => Auth::user()->id,
+                'user_id' => Auth::id(),
                 'date' => $request->date
             ]);
+
+            Mail::to(Auth::user()->email)->send(new OrderMail());
+            Mail::to('ajitsubedi2011@gmail.com') ->send(new OrderMail());
         }
     }
     public function getOrder(){

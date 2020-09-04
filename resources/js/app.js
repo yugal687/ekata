@@ -26,6 +26,7 @@ Vue.use(ElementUI);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('user-component', require('./components/Admin/User/userComponent.vue').default);
+Vue.component('user-profile-component', require('./components/Admin/User/userProfileComponent.vue').default);
 Vue.component('customer-component', require('./components/Admin/Customer/customerComponent.vue').default);
 /*Setup*/
 Vue.component('category-subcategory-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
