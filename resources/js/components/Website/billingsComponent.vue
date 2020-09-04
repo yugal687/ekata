@@ -154,6 +154,9 @@
                                                            placeholder="Card Holder Name">
                                                 </div>
                                             </div>
+                                            <div class="row mt-3">
+                                                <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,15 +164,14 @@
                                 <div class="paypal">
                                     <div class="row">
                                         <div class="col-12">
-
+                                            <div class="mt-3" id="paypal-button"></div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <input type="button" name="previous" class="prev action-button-previous"
+                                <input type="button" name="previous" class="prev action-button-previous mt-5"
                                        value="Previous"/>
                                 <!--<input type="button" name="next" class="next action-button" value="Next"/>-->
-                                <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
                             </div>
                         </div>
 
@@ -336,7 +338,7 @@
 
 <script>
     export default {
-        name: "billingsComponent"
+        name: "billingsComponent",
     }
 </script>
 

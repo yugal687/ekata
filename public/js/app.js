@@ -7605,6 +7605,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "billingsComponent"
 });
@@ -111619,6 +111621,17 @@ var staticRenderFns = [
                                     })
                                   ]
                                 )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row mt-3" }, [
+                                _c("input", {
+                                  staticClass: "pay action-button",
+                                  attrs: {
+                                    type: "button",
+                                    name: "pay",
+                                    value: "Pay Now"
+                                  }
+                                })
                               ])
                             ])
                           ])
@@ -111627,22 +111640,22 @@ var staticRenderFns = [
                       _vm._v(" "),
                       _c("div", { staticClass: "paypal" }, [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-12" })
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("div", {
+                              staticClass: "mt-3",
+                              attrs: { id: "paypal-button" }
+                            })
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
                       _c("input", {
-                        staticClass: "prev action-button-previous",
+                        staticClass: "prev action-button-previous mt-5",
                         attrs: {
                           type: "button",
                           name: "previous",
                           value: "Previous"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "pay action-button",
-                        attrs: { type: "button", name: "pay", value: "Pay Now" }
                       })
                     ]
                   )

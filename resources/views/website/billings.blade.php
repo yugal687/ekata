@@ -198,6 +198,7 @@
 @stop
 
 @section('scripts')
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
         $('.shipping-address-form').hide();
 
@@ -210,6 +211,7 @@
         });
 
         /*Credit Card and Pay[ppal*/
+        $(".paypal").hide();
         $("#creditCard").click(function () {
             $(".creditCard").show();
             $(".paypal").hide();
@@ -242,12 +244,48 @@
         });
 
         $(".pay").click(function () {
-            $("#loader").show();
-            setTimeout(function () {
-                $("#booking-form").html("<h2>Your message was sent successfully. Thanks! We'll be in touch as soon as we can, which is usually like lightning (Unless we're sailing or eating tacos!).</h2>");
-            }, 1000);
-            return false;
+
         });
+
+        // This function displays Smart Payment Buttons on your web page.
+        paypal.Button.render({
+            // Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'demo_sandbox_client_id',
+                production: 'demo_production_client_id'
+            },
+            // Customize button (optional)
+            locale: 'en_US',
+            style: {
+                size: 'medium',
+                color: 'gold',
+                shape: 'pill',
+            },
+
+            // Enable Pay Now checkout flow (optional)
+            commit: true,
+
+            // Set up a payment
+            payment: function(data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: '0.01',
+                            currency: 'AUD'
+                        }
+                    }]
+                });
+            },
+            // Execute the payment
+            onAuthorize: function(data, actions) {
+                return actions.payment.execute().then(function() {
+                    // Show a confirmation message to the buyer
+                    window.alert('Thank you for your purchase!');
+                });
+            }
+        }, '#paypal-button');
+
     </script>
 @stop
 
