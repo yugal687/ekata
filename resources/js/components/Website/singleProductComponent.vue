@@ -324,6 +324,7 @@
                 cart: [],
                 quantity: 1,
                 price: 0,
+                cartItemCount: 0,
             }
         },
         methods: {
@@ -348,37 +349,15 @@
                 return false;
             },
             addToCart() {
-                this.cart.push({
-                    'product_id': this.product[0].id,
-                    'quantity': this.quantity,
-                    'price': this.price
-                });
-
                 let cart = {
                     'product_id': this.product[0].id,
                     'quantity': this.quantity,
                     'price': this.price
                 };
-
                 let storedCart = JSON.parse(localStorage.getItem('cart'));
-//                this.cart = storedCart;
-                //console.log(storedCart);
-                if (storedCart) {
-                    let productId = this.product[0].id;
-                    let storedProduct = storedCart.find(cart => {
-                        return cart.product_id == productId;
-                    });
-                    if (!storedProduct) {
-                        return this.addNewProduct(storedCart, cart);
-                    }
-                    return this.updateProduct(storedCart, storedProduct, cart);
-                    //     console.log(storedProduct);
-                }
+                this.$store.commit('addToCart', cart, storedCart);
 
-                console.log(JSON.stringify(this.cart));
-                localStorage.setItem('cart', JSON.stringify(this.cart));
             },
-
             totalPrice() {
                 return this.price = this.quantity * this.product[0].price;
             },
@@ -405,12 +384,16 @@
                 this.totalPrice();
             },
 
+            getLocalStorageItem() {
+                return JSON.parse(localStorage.getItem('cart'));
+            },
         },
+
         mounted() {
 // console.log(this.product);
             this.price = this.product[0].price;
+            this.$store.commit('setProduct', this.product);
         }
-
 
     }
 </script>

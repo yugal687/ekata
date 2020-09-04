@@ -17,8 +17,8 @@
     <!-- Bootstrap -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 
-    {{--<link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
-    <!-- owl carousel  -->
+{{--<link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
+<!-- owl carousel  -->
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
     <!---Tiny Slider--->
@@ -29,11 +29,7 @@
     @yield('style')
 
     <style>
-        /*******************************
-* MODAL AS LEFT/RIGHT SIDEBAR
-* Add "left" or "right" in modal parent div, after class="modal".
-* Get free snippets on bootpen.com
-*******************************/
+        /****************/
         .modal.right .modal-dialog {
             position: fixed;
             top: 16%;
@@ -176,7 +172,8 @@
             ul.navbar-nav.mr-auto {
                 margin-bottom: -8px;
             }
-            #topNavbar nav .active{
+
+            #topNavbar nav .active {
                 border-bottom: 3px solid #fff !important;
             }
 
@@ -187,34 +184,41 @@
             .nav-right.container-mine {
                 margin: 5px 60px;
             }
-            .sm-user-checkout{
+
+            .sm-user-checkout {
                 display: none;
             }
         }
-        @media (max-width: 991px){
-            #topNavbar nav .active{
+
+        @media (max-width: 991px) {
+            #topNavbar nav .active {
                 border-bottom: 3px solid #fff !important;
                 font-weight: bold;
                 width: 30%
             }
+
             .nav-right.container-mine {
                 margin: 25px 60px 5px;
             }
-            .navbar{
+
+            .navbar {
                 transition: slide-down 2s ease-in-out;
             }
+
             .sticky {
                 position: fixed;
                 top: -5px;
                 width: 100%;
                 z-index: 10002;
             }
+
             .sm-user-checkout {
                 top: 10px;
                 position: absolute;
                 right: 140px;
             }
-            .lg-user-checkout{
+
+            .lg-user-checkout {
                 display: none;
             }
         }
@@ -224,93 +228,46 @@
 </head>
 
 <body>
-<header>
+<div id="app">
+    <header>
 
-    <div class="body-inner">
-        <div id="top-bar" class="top-bar">
+        <div class="body-inner">
+            <div id="top-bar" class="top-bar">
 
-            <div class="row m-0 p-0">
-                <div class="col-lg-2 col-md-12 m-0 p-0 bg-main-primary rounded-right-top">
-                    <div class="container-mine">
-                        <div class="text-center">
-                            <h3 class=" text-white font-weight-bold pl-2 mt-4">Logo
-                                Here</h3>
+                <div class="row m-0 p-0">
+                    <div class="col-lg-2 col-md-12 m-0 p-0 bg-main-primary rounded-right-top">
+                        <div class="container-mine">
+                            <div class="text-center">
+                                <h3 class=" text-white font-weight-bold pl-2 mt-4">Logo
+                                    Here</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-10 col-md-12 m-0 p-0 ">
-                    <div class="row m-0 p-0">
-                        <div class="col-md-6 m-0 p-0"></div>
-                        <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
-                            <div class="mx-4">
-                                <div class="input-group border-0 py-2 ">
-                                    <input type="text" class="form-control border-0 " placeholder="Search items..."
-                                           aria-label="Search items..." aria-describedby="basic-addon2">
-                                    <div class="input-group-append bg-main-secondary ">
+                    <div class="col-lg-10 col-md-12 m-0 p-0 ">
+                        <div class="row m-0 p-0">
+                            <div class="col-md-6 m-0 p-0"></div>
+                            <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
+                                <div class="mx-4">
+                                    <div class="input-group border-0 py-2 ">
+                                        <input type="text" class="form-control border-0 " placeholder="Search items..."
+                                               aria-label="Search items..." aria-describedby="basic-addon2">
+                                        <div class="input-group-append bg-main-secondary ">
                                             <span
                                                 class="input-group-text bg-main-primary border-0 text-white .rounded-around"
                                                 id="basic-addon2">
                                                 Search</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Bavigation MenuBar Starts Here-->
-                    <div id="topNavbar">
-                        <nav class="navbar navbar-expand-lg navbar-dark bg-main-primary">
-                            <a class="navbar-brand" href="#">
-                            </a>
-                            <div class="sm-user-checkout">
-                                <a href="#" class="user">
-                                    <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
-                                         class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                    </svg>
+                        <!-- Bavigation MenuBar Starts Here-->
+                        <div id="topNavbar">
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-main-primary">
+                                <a class="navbar-brand" href="#">
                                 </a>
-                                <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
-                                    <svg width="2em" height="2em" viewBox="0 0 16 16"
-                                         class="bi bi-cart4 text-white ml-2" fill="currentColor"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                                    </svg>
-                                    <div class="cart-count rounded bg-main-secondary text-white"> 1</div>
-                                </a>
-                            </div>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-
-
-
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item active px-2">
-                                        <a class="nav-link text-white" href="/">Home <span
-                                                class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item px-2">
-                                        <a class="nav-link text-white" href="/aboutus">About Us</a>
-                                    </li>
-                                    <li class="nav-item px-2">
-                                        <a class="nav-link text-white" href="#">Services</a>
-                                    </li>
-                                    <li class="nav-item px-2">
-                                        <a class="nav-link text-white" href="#">Products</a>
-                                    </li>
-                                    <li class="nav-item px-2">
-                                        <a class="nav-link text-white" href="/contact">Contact Us</a>
-                                    </li>
-                                </ul>
-                                <div class="nav-right container-mine lg-user-checkout">
+                                <div class="sm-user-checkout">
                                     <a href="#" class="user">
                                         <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
                                              class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
@@ -331,186 +288,79 @@
                                         <div class="cart-count rounded bg-main-secondary text-white"> 1</div>
                                     </a>
                                 </div>
-                            </div>
-                        </nav>
-                    </div>
-                    <!-- Bavigation MenuBar Ends Here-->
-                </div>
-            </div>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
 
-        </div>
-        <!--/ Topbar end -->
-    </div>
 
-    <!-- Cart Modal -->
-    <div class="modal right fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="shopping-cart">
-                    <div class="shopping-cart-header">
-                        <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--end shopping-cart-header -->
-
-                    <ul class="shopping-cart-items">
-                        <li class="clearfix">
-                            <div class="row pb-2 align-items-center">
-                                <div class="col-4" style="overflow: hidden">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                                         class="img-fluid" width="80px" height="100px"
-                                         alt=""/>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <span class="item-name">Sony DSC-RX100M III</span>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <span class="item-price font-weight-bold">$849.99</span>
-                                    </div>
-                                    {{--<div class="row">
-                                        <span class="item-quantity">Quantity:</span>
-                                    </div>--}}
-                                    <div class="row pr-4">
-                                        <div class="col-xs-3 col-xs-offset-3">
-                                            <div class="input-group input-group-sm number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
-                                            </div>
-                                        </div>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item active px-2">
+                                            <a class="nav-link text-white" href="/">Home <span
+                                                    class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item px-2">
+                                            <a class="nav-link text-white" href="/aboutus">About Us</a>
+                                        </li>
+                                        <li class="nav-item px-2">
+                                            <a class="nav-link text-white" href="#">Services</a>
+                                        </li>
+                                        <li class="nav-item px-2">
+                                            <a class="nav-link text-white" href="#">Products</a>
+                                        </li>
+                                        <li class="nav-item px-2">
+                                            <a class="nav-link text-white" href="/contact">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                    <div class="nav-right container-mine lg-user-checkout">
+                                        <a href="#" class="user">
+                                            <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
+                                                 class="bi bi-person-bounding-box text-white mr-2 mt-1"
+                                                 fill="currentColor"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                      d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                                                <path fill-rule="evenodd"
+                                                      d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
+                                            <svg width="2em" height="2em" viewBox="0 0 16 16"
+                                                 class="bi bi-cart4 text-white ml-2" fill="currentColor"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                      d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                                            </svg>
+                                            <div class="cart-count rounded bg-main-secondary text-white"> 1</div>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="col-2">
-                                    <a href="#" class="">
-                                        <button class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="clearfix">
-                            <div class="row pb-2 align-items-center">
-                                <div class="col-4" style="overflow: hidden">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                                         class="img-fluid" width="80px" height="100px"
-                                         alt=""/>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <span class="item-name">Sony DSC-RX100M III</span>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <span class="item-price font-weight-bold">$849.99</span>
-                                    </div>
-                                    {{--<div class="row">
-                                        <span class="item-quantity">Quantity:</span>
-                                    </div>--}}
-                                    <div class="row pr-4">
-                                        <div class="col-xs-3 col-xs-offset-3">
-                                            <div class="input-group input-group-sm number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <a href="#" class="">
-                                        <button class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="clearfix">
-                            <div class="row pb-2 align-items-center">
-                                <div class="col-4" style="overflow: hidden">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                                         class="img-fluid" width="80px" height="100px"
-                                         alt=""/>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <span class="item-name">Sony DSC-RX100M III</span>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <span class="item-price font-weight-bold">$849.99</span>
-                                    </div>
-                                    {{--<div class="row">
-                                        <span class="item-quantity">Quantity:</span>
-                                    </div>--}}
-                                    <div class="row pr-4">
-                                        <div class="col-xs-3 col-xs-offset-3">
-                                            <div class="input-group input-group-sm number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <a href="#" class="">
-                                        <button class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="row">
-                        <div class="col-12 text-right">
-                            <span class="lighter-text">Total:</span>
-                            <span class="main-color-text font-weight-bold">$2,229.97</span>
+                            </nav>
                         </div>
-                    </div> <!--end shopping-cart-header -->
+                        <!-- Bavigation MenuBar Ends Here-->
+                    </div>
+                </div>
+
+            </div>
+            <!--/ Topbar end -->
+        </div>
+
+        <!-- Cart Modal -->
+        <div>
+            <cart-items-component>
+
+            </cart-items-component>
+        </div>
 
 
-                    <a href="/billings" class="button">Checkout</a>
-                </div> <!--end shopping-cart -->
-            </div> <!--end container -->
-        </div><!-- modal-dialog -->
-    </div><!-- modal -->
+        <!---Cart Modal Ends---->
+    </header>
 
+    @yield('content')
 
-    <!---Cart Modal Ends---->
-</header>
-
-@yield('content')
+</div>
 
 {{--Footer Section--}}
 <footer>
@@ -625,7 +475,8 @@
                         </li>
                         <li class="list">
                             <address>
-                                <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678" target="_blank">
+                                <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678"
+                                   target="_blank">
                                     1600 Pennsylvania Avenue NW Washington, DC 20500
                                 </a>
                             </address>
@@ -670,7 +521,8 @@
                 </p>
             </div>
             <div class="col-md-3">
-                <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy Policy</a></p>
+                <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy
+                        Policy</a></p>
             </div>
         </div>
     </div>
@@ -706,11 +558,10 @@
 @yield('scripts')
 
 <script>
-    $(window).scroll(function(){
+    $(window).scroll(function () {
         if ($(window).scrollTop() >= 400) {
             $('nav.navbar').addClass('sticky');
-        }
-        else {
+        } else {
             $('nav.navbar').removeClass('sticky');
         }
     });
@@ -743,10 +594,12 @@
             $parent.addClass('activeHeading');
             /*e.preventDefault();*/
         });
+        // When the user clicks anywhere outside of the modal, close it
+
 
         ///Sm SIdebar
         /*Sm-sidebar-scripts*/
-        $(".sidebar-dropdown a").click(function() {
+        $(".sidebar-dropdown a").click(function () {
             $(".sidebar-submenu").slideUp(200);
             if (
                 $(this)
@@ -767,10 +620,10 @@
                     .addClass("active");
             }
         });
-        $(".sidebar-dropdown > a i").click(function(e) {
+        $(".sidebar-dropdown > a i").click(function (e) {
             e.preventDefault();
         });
-        $("#toggle-smsidebar").click(function() {
+        $("#toggle-smsidebar").click(function () {
             $(".smsidebar-menu").toggleClass("rightActive");
         });
     });

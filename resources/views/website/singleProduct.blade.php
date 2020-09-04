@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/cate-carousel.css')}} ">
 @section('style')
     <style>
-        .single-item-share a{
+        .single-item-share a {
             color: #00000070;
         }
 
@@ -128,8 +128,10 @@
 
 
                 {{--Vue Component--}}
-                <div id="app">
-                    <single-product-component :product="{{$singleProduct}}"></single-product-component>
+                <div>
+                    <single-product-component :product="{{$singleProduct}}">
+
+                    </single-product-component>
                 </div>
                 {{----}}
             </div>

@@ -26,16 +26,17 @@ Route::get('/logout', function () {
     return view('auth.login');
 });
 
-Route::get('/category/{id}',[
+Route::get('/category/{id}', [
     "uses" => 'Website\ProductController@showCategory',
     "as" => 'category']);
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
     "as" => 'maincategory']);
 
-Route::get('/singleproduct/{id}',[
+Route::get('/singleproduct/{id}', [
     'uses' => 'Website\ProductController@SingleProductPage',
     'as' => 'singleproduct']);
+
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('admin/dashboard', 'admin.dashboard');
     Route::view('user/users', 'admin.user.users');
@@ -51,21 +52,22 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('admin/addproduct/index', 'admin.add_product.index');
     Route::view('admin/addproduct/products', 'admin.add_product.products');
     Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
+//Order
     Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
-    Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
+//Banner Image
     Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
-    Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
+//Website Info
+    Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
 
 });
-
 //User
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::view('user/userdashboard', 'User.userdashboard');
     Route::get('user/userprofile', [
-      "uses" => 'User\UserController@singleUserDetail',
+        "uses" => 'User\UserController@singleUserDetail',
         "as" => 'user/userdashboard'
     ]);
-    Route::post('/updateUser/{id}',[
+    Route::post('/updateUser/{id}', [
         "uses" => 'User\UserController@updateUser',
         "as" => 'updateUser'
     ]);
@@ -73,8 +75,6 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 
 
 Auth::routes();
-
-
 Route::get('/billings', function () {
     return view('website/billings');
 });
@@ -83,7 +83,7 @@ Route::get('/contact', function () {
     return view('website/contact');
 });
 
-
-Route::get('/','Website\ProductController@index');
+Route::get('/', 'Website\ProductController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
+

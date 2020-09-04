@@ -15,10 +15,12 @@
         <div class="col-md-9 register-right">
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home" aria-selected="true">Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#me" role="tab" aria-controls="profile" aria-selected="true">Hirer</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#me" role="tab" aria-controls="profile"
+                       aria-selected="true">Hirer</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -27,16 +29,16 @@
                     <div class="row register-form">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                <input type="text" class="form-control" placeholder="First Name *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email *" value="" />
+                                <input type="email" class="form-control" placeholder="Your Email *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password *" value="" />
+                                <input type="password" class="form-control" placeholder="Password *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
+                                <input type="password" class="form-control" placeholder="Confirm Password *" value=""/>
                             </div>
                             <div class="form-group">
                                 <div class="maxl">
@@ -53,54 +55,57 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                <input type="text" class="form-control" placeholder="Last Name *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control"
+                                       placeholder="Your Phone *" value=""/>
                             </div>
 
-                            <input type="submit" class="btnRegister" href="/index"  value="Register"/>
+                            <input type="submit" class="btnRegister" href="/index" value="Register"/>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade show" id="me" role="tabpanel" aria-labelledby="profile-tab">
-                    <h3  class="register-heading">Apply as a Hirer</h3>
+                    <h3 class="register-heading">Apply as a Hirer</h3>
                     <div class="row register-form">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                <input type="text" class="form-control" placeholder="First Name *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                <input type="text" class="form-control" placeholder="Last Name *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email *" value="" />
+                                <input type="email" class="form-control" placeholder="Email *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="text" maxlength="10" minlength="10" class="form-control" placeholder="Phone *" value="" />
+                                <input type="text" maxlength="10" minlength="10" class="form-control"
+                                       placeholder="Phone *" value=""/>
                             </div>
 
 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password *" value="" />
+                                <input type="password" class="form-control" placeholder="Password *" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+                                <input type="password" class="form-control" placeholder="Confirm Password *" value=""/>
                             </div>
                             <div class="form-group">
                                 <select class="form-control">
-                                    <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
+                                    <option class="hidden" selected disabled>Please select your Sequrity Question
+                                    </option>
                                     <option>What is your Birthdate?</option>
                                     <option>What is Your old Phone Number</option>
                                     <option>What is your Pet Name?</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="`Answer *" value="" />
+                                <input type="text" class="form-control" placeholder="`Answer *" value=""/>
                             </div>
-                            <input type="submit" class="btnRegister"  value="Register"/>
+                            <input type="submit" class="btnRegister" value="Register"/>
                         </div>
                     </div>
                 </div>
