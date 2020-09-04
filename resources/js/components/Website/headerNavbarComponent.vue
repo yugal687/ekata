@@ -5,7 +5,7 @@
                 <a class="navbar-brand" href="#">
                 </a>
                 <div class="sm-user-checkout">
-                    <a href="#" class="user">
+                    <a href="" class="user" id="droptrigger-sm">
                         <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
                              class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -15,6 +15,14 @@
                                   d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                         </svg>
                     </a>
+                    <div class="dropcontent-sm">
+                        <ul class="list-group text-center">
+                            <li class="list-group-item"><a href="#">My Account</a></li>
+                            <li class="list-group-item"><a href="#">Logout</a></li>
+                            <li class="list-group-item"><a href="#">Sign In</a></li>
+                            <li class="list-group-item"><a href="#" class="btn btn-info">Register</a></li>
+                        </ul>
+                    </div>
                     <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
                         <svg width="2em" height="2em" viewBox="0 0 16 16"
                              class="bi bi-cart4 text-white ml-2" fill="currentColor"
@@ -53,7 +61,7 @@
                         </li>
                     </ul>
                     <div class="nav-right container-mine lg-user-checkout">
-                        <a href="#" class="user">
+                        <a href="#" class="user" id="droptrigger">
                             <svg width="1.7em" height="1.7em" viewBox="0 0 16 16"
                                  class="bi bi-person-bounding-box text-white mr-2 mt-1" fill="currentColor"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -63,6 +71,14 @@
                                       d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
                         </a>
+                        <div class="dropcontent">
+                            <ul class="list-group text-center">
+                                <li class="list-group-item"><a href="#">My Account</a></li>
+                                <li class="list-group-item"><a href="#">Logout</a></li>
+                                <li class="list-group-item"><a href="#">Sign In</a></li>
+                                <li class="list-group-item"><a href="#" class="btn btn-info">Register</a></li>
+                            </ul>
+                        </div>
                         <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
                             <svg width="2em" height="2em" viewBox="0 0 16 16"
                                  class="bi bi-cart4 text-white ml-2" fill="currentColor"
@@ -86,5 +102,28 @@
 </script>
 
 <style scoped>
+    .dropcontent {
+        visibility: hidden;
+        width: 142px;
+        position: absolute;
+        right: 50px;
+        top: 50px;
+        z-index: 10002;
+    }
+    .dropcontent-sm {
+        visibility: hidden;
+        width: 142px;
+        position: absolute;
+        right: -10px;
+        top: 35px;
+        z-index: 10002;
+    }
+    .dropcontent a, .dropcontent-sm a {
+        color: #2b2b2b;
+    }
+
+    .open {
+        visibility: visible;
+    }
 
 </style>

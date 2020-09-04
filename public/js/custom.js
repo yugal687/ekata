@@ -121,7 +121,11 @@ $(document).ready(function () {
 
 
 
+    $("#droptrigger, #droptrigger-sm").click(function(e) {
+        e.preventDefault();
+        $(".dropcontent, .dropcontent-sm").toggleClass("open", 1000);
 
+    });
 
 
 });
