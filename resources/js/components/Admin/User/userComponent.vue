@@ -2,6 +2,19 @@
     <div class="">
         <main>
             <div class="card">
+                <div class="card-header">
+                    <div class="row float-right pr-4">
+                        <a class="btn btn-primary mx-2" href="/admin/userregistration">
+                            <i class="fas fa-user-plus"></i> Add User
+                        </a>
+                        <a class="btn btn-primary mx-2" href="/admin/usersignin">
+                            <i class="fas fa-user"></i> User Sign In
+                        </a>
+                        <a class="btn btn-primary mx-2" href="/userlogin">
+                            <i class="fas fa-user"></i> User Sign Up | Sign In
+                        </a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div v-for="userDetail in userDetails" class="col-md-4">
@@ -50,20 +63,6 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="card-footer">
-                    <nav aria-label="">
-                        <ul class="pagination justify-content-center m-0">
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">7</a></li>
-                            <li class="page-item"><a class="page-link" href="#">8</a></li>
-                        </ul>
-                    </nav>
-                </div>-->
             </div>
 
 
@@ -72,71 +71,71 @@
 </template>
 
 <script>
-export default {
-    name: "userComponent",
-    components: {},
-    data() {
-        return {
-            search: '',
-            userDetails: [{
-                email: 'name1@gmail.com',
-                userName: 'Name -1',
-                address: 'Demo Street 123, Demo City 04312, NJ',
-                phone: '+977-1234567890'
-            }, {
-                email: 'name2@gmail.com',
-                userName: 'Name -2',
-                address: 'Demo Street 123, Demo City 04312, NJ',
-                phone: '+977-1234567890'
-            }, {
-                email: 'name3@gmail.com',
-                userName: 'Name -3',
-                address: 'Demo Street 123, Demo City 04312, NJ',
-                phone: '+977-1234567890'
-            }]
-        };
+    export default {
+        name: "userComponent",
+        components: {},
+        data() {
+            return {
+                search: '',
+                userDetails: [{
+                    email: 'name1@gmail.com',
+                    userName: 'Name -1',
+                    address: 'Demo Street 123, Demo City 04312, NJ',
+                    phone: '+977-1234567890'
+                }, {
+                    email: 'name2@gmail.com',
+                    userName: 'Name -2',
+                    address: 'Demo Street 123, Demo City 04312, NJ',
+                    phone: '+977-1234567890'
+                }, {
+                    email: 'name3@gmail.com',
+                    userName: 'Name -3',
+                    address: 'Demo Street 123, Demo City 04312, NJ',
+                    phone: '+977-1234567890'
+                }]
+            };
+        }
     }
-}
 </script>
 
 <style scoped>
-.time {
-    font-size: 13px;
-    color: #999;
-}
+    .time {
+        font-size: 13px;
+        color: #999;
+    }
 
-.bottom {
-    margin-top: 13px;
-    line-height: 12px;
-}
+    .bottom {
+        margin-top: 13px;
+        line-height: 12px;
+    }
 
-.button {
-    padding: 0;
-    float: right;
-}
+    .button {
+        padding: 0;
+        float: right;
+    }
 
-.image {
-    width: 100%;
-    display: block;
-}
+    .image {
+        width: 100%;
+        display: block;
+    }
 
-.clearfix:before,
-.clearfix:after {
-    display: table;
-    content: "";
-}
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
 
-.clearfix:after {
-    clear: both
-}
+    .clearfix:after {
+        clear: both
+    }
 
-.lead {
-    font-size: 1.125rem;
-    font-weight: 300;
-}
+    .lead {
+        font-size: 1.125rem;
+        font-weight: 300;
+    }
 
-element.style {
-    height: 120px;
-    width: 120px;
-}
+    element.style {
+        height: 120px;
+        width: 120px;
+    }
 </style>

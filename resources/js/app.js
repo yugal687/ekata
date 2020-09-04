@@ -44,12 +44,15 @@ Vue.component('banner-image-component', require('./components/Admin/Banner_Image
 /*Website_Update*/
 Vue.component('website-info-component', require('./components/Admin/Website Update/websiteInfoComponent.vue').default);
 Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
-Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
+Vue.component('reviews-carousel-component', require('./components/Admin/Website Update/reviewsCarouselComponent.vue').default);
+Vue.component('customers-feedback-component', require('./components/Admin/Website Update/customersFeedbackComponent.vue').default);
 
 
 /*Website Pages*/
 Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);
 Vue.component('cart-items-component', require('./components/Website/cartItemsComponent.vue').default);
+Vue.component('billing-component', require('./components/Website/billingsComponent.vue').default);
+Vue.component('header-navbar-component', require('./components/Website/headerNavbarComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

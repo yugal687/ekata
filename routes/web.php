@@ -25,10 +25,6 @@ Route::get('/logout', function () {
     Auth::logout();
     return view('auth.login');
 });
-
-Route::get('/category/{id}',[
-    "uses" => 'Website\ProductController@showCategory',
-    "as" => 'category']);
 Route::get('/aboutus', function () {
     return view('website/aboutus');
 });
@@ -65,6 +61,8 @@ Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
 //Website Info
 Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
 Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
+Route::view('admin/websiteupdate/customersfeedback', 'admin.website_update.customersFeedback');
+Route::view('admin/websiteupdate/reviewscarousel', 'admin.website_update.reviewsCarousel');
     Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
     Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
 
