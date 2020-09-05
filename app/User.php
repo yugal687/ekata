@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'first_name', 'last_name', 'address', 'contact_numner', 'role_id'
+        'email', 'password', 'first_name', 'last_name', 'address', 'contact_number', 'role_id','sub_urb','state','postal_code'
     ];
     public function order(){
         return $this->hasMany(OrderDetail::class);

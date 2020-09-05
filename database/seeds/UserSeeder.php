@@ -16,8 +16,10 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin123'),
                 'first_name' => 'admin',
                 'last_name' => 'admin',
-                'Gender' => 'male',
                 'address' => 'admin',
+                'sub_urb' =>'sub_urb',
+                'state' =>'state',
+                'postal_code' =>'postal_code',
                 'contact_number' => '012345678',
                 'role_id' => 1
             ],
@@ -26,7 +28,9 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin123'),
                 'first_name' => 'user',
                 'last_name' => 'user',
-                'Gender' => 'male',
+                'sub_urb' =>'sub_urb',
+            'state' =>'state',
+            'postal_code' =>'postal_code',
                 'address' => 'user',
                 'contact_number' => '012345678',
                 'role_id' => 2

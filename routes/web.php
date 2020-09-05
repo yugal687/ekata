@@ -97,3 +97,5 @@ Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');
 
 Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 
+Route::post('/registerUser','User\UserController@registeruser');
+
