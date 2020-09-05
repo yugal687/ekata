@@ -58,7 +58,7 @@
                                                    v-if=""
                                                    @click="setInActive(images.id)"
                                                    size="mini">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                         </el-button>
                                         <el-button type="danger"
                                                    size="mini"

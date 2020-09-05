@@ -849,32 +849,14 @@
                                     <div class="col-12 mt-3">
                                         <div class="customer-reviews-slider" style="">
                                             <div id="customer-reviews-carousel" class="owl-carousel owl-theme">
+                                                @foreach($reviewImage as $image)
                                                 <div class="item">
 
                                                     <img class="review-images"
-                                                         src="https://da8yur8xq4co8.cloudfront.net/wp-content/uploads/2016/06/barismo.png"
+                                                         src="{{$image->image}}"
                                                          alt="">
                                                 </div>
-                                                <div class="item">
-                                                    <img class="review-images"
-                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRylqTFnRy7K55760Dhy9UjVee1FzSdsHwiwA&usqp=CAU"
-                                                         alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="review-images"
-                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSKp3eKXD4fFCVjCkJNwQkW8EK2BywlUTMz-Q&usqp=CAU"
-                                                         alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="review-images"
-                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP5qXEa1Y6iU3pNn6ovS-1ck56NJOJ-uS5gg&usqp=CAU"
-                                                         alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="review-images"
-                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP5qXEa1Y6iU3pNn6ovS-1ck56NJOJ-uS5gg&usqp=CAU"
-                                                         alt="">
-                                                </div>
+                                                    @endforeach
                                             </div>
                                         </div>
                                     </div>

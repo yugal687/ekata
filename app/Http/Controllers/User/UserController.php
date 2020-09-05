@@ -11,16 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function singleUserDetail(){
-        if (Auth::user())
-        {
-            $userid = Auth::id();
-            $userDetail = User::where('id',$userid)->get();
+
+            $userDetail = Auth::user();
             //dd($userDetail);
             return response()->json([
-                'UserDetail' => $userDetail
+                'userDetail' => $userDetail
             ]);
-        }
-
     }
     public function updateUser(Request $request){
         $user = Auth::user();
@@ -32,10 +28,15 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->gender = $request->gender;
         $user->update();
+
     }
     public function recentOrder(){
-    $lastOrder = OrderDetail::where('user_id',Auth::id())->first();
-    return response()->json([
+    $lastOrder = OrderDetail::with('order','user','product')
+        ->where('user_id',Auth::id())
+        ->orderBy('id', 'DESC')
+        ->get();
+    //dd($lastOrder);
+    return view('User.userdashboard',[
        'recentOrder' => $lastOrder
     ]);
     }

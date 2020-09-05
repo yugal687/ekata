@@ -175,46 +175,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($recentOrder as $order)
+
                                 <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
+                                    <td><a href="pages/examples/invoice.html">{{$order->order->order_number}}</a></td>
+                                    <td>{{$order->product->product_name}}</td>
                                     <td><span class="badge badge-warning">Pending</span></td>
                                     <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">630778</div>
+                                        <div class="sparkbar" data-color="#00a65a" data-height="20">{{$order->product->price}}</div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">456,233</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">345,670</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">345,670</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">345,670</div>
-                                    </td>
-                                </tr>
+                                @endforeach
 
                                 </tbody>
                             </table>

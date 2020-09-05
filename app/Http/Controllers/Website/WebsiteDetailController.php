@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Model\BannerImage;
+use App\Model\ReviewImage;
 use App\Model\WebsiteDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class WebsiteDetailController extends Controller
 {
@@ -59,6 +62,54 @@ class WebsiteDetailController extends Controller
         $websiteDetails =WebsiteDetail::all();
         return view('website.contact',[
            'orderDetails' =>  $websiteDetails
+        ]);
+    }
+    public function saveReviewImage(Request $request){
+        $validate = $request->validate([
+            'image' => 'required'
+        ]);
+        if ($validate){
+            foreach ($request->file('image') as $image) {
+                $baseName = Str::random(20);
+                $originalName = $baseName . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('/uploads'), $originalName);
+                $saveBanner = ReviewImage::create([
+                    'image' => '/uploads/' . $originalName,
+                    'active' => 0,
+
+                ]);
+            }
+        }
+        return response()->json([
+            'message' => 'Review Image Saved!!!'
+        ]);
+    }
+    public function setActive($id){
+        $setActive = ReviewImage::findorFail($id)->update([
+            'active' => 1
+        ]);
+        return response()->json([
+            'message' => 'Selected Image Is Active !!'
+        ]);
+    }
+    public function setInActive($id){
+        $setActive = ReviewImage::findorFail($id)->update([
+            'active' => 0
+        ]);
+        return response()->json([
+            'message' => 'Selected Image Is InActive !!'
+        ]);
+    }
+    public function getReviewImage(){
+        $getReviewImage = ReviewImage::all();
+        return response()->json([
+            'getReviewImage' => $getReviewImage
+        ]);
+    }
+    public  function deleteReviewImage($id){
+        $deleteReview = ReviewImage::findorFail($id)->delete();
+        return response()->json([
+            'message' => 'Review Image Deleted !!!'
         ]);
     }
 }

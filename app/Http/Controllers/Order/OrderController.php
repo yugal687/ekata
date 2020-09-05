@@ -47,7 +47,7 @@ class OrderController extends Controller
         }
     }
     public function getOrder(){
-        $order = OrderDetail::with('order')->get();
+        $order = OrderDetail::with('order','user','product')->get();
 
         return response()->json([
            'order' => $order

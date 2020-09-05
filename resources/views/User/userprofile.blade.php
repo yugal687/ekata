@@ -1,5 +1,7 @@
 @extends('layouts.usermaster')
 
 @section('content')
-<user-profile-component></user-profile-component>    <!-- /.container-fluid -->
+    <div id="app">
+        <user-profile-component></user-profile-component>    <!-- /.container-fluid -->
+    </div>
 @stop

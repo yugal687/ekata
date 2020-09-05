@@ -185,10 +185,10 @@
             }
         },
         mounted(){
-            axios.get('/api/getUser',{}).then(response=>{
-               this.userDetail = response.data.UserDetail;
-               console.log(response.data.UserDetail);
-            });
+            axios.get('/api/getUser',{})
+                .then(response=>{
+                    this.userDetail = response.data.userDetail;
+                });
         },
         methods:{
 

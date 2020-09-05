@@ -40,7 +40,7 @@ Route::get('/singleproduct/{id}',[
     'uses' => 'Website\ProductController@SingleProductPage',
     'as' => 'singleproduct']);
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::view('admin/dashboard', 'admin.dashboard');
+    Route::get('admin/dashboard', 'Admin\DashboardController@dashboradData');
     Route::view('user/users', 'admin.user.users');
     Route::view('customer/customers', 'admin.customer.customers');
     /*Route::view('admin/users', 'admin.users');*/
@@ -70,8 +70,7 @@ Route::view('admin/websiteupdate/reviewscarousel', 'admin.website_update.reviews
 
 //User
 Route::group(['middleware' => ['auth', 'user']], function () {
-    Route::view('user/userdashboard', 'User.userdashboard');
-    Route::get('getUser','User\UserController@singleUserDetail');
+    Route::get('user/userdashboard', 'User\UserController@recentOrder');
     Route::view('user/userprofile','User.userprofile');
 });
 

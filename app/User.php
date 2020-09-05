@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\OrderDetail;
 use App\Model\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'email', 'password', 'first_name', 'last_name', 'address', 'contact_numner', 'role_id'
     ];
+    public function order(){
+        return $this->hasMany(OrderDetail::class);
+    }
 
     protected $hidden = [
         'password', 'remember_token',
