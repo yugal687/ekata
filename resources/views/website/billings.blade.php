@@ -4,10 +4,11 @@
 
 @section('style')
     <style>
-        .testing-section{
+        .testing-section {
             margin-top: 50px;
             margin-bottom: 50px;
         }
+
         /* Form fields */
         #shipping-payment-form {
             text-align: center;
@@ -55,14 +56,14 @@
 
         /*buttons*/
         #shipping-payment-form .action-button {
-            width: 100px;
+            width: auto;
             background: #CF7500;
             font-weight: bold;
             color: white;
             border: 0 none;
             border-radius: 25px;
             cursor: pointer;
-            padding: 10px 5px;
+            padding: 10px 20px;
             margin: 10px 5px;
         }
 
@@ -190,64 +191,121 @@
         .orders li {
             list-style: none;
         }
+
+
+        .modal-body {
+            padding: 0;
+        }
+
+        .modal-content, .modal-body, #login-card {
+            max-width: 350px;
+            border-radius: 25px;
+            margin: auto;
+        }
+
     </style>
 @stop
 
 @section('content')
-        <billing-component></billing-component>
+    <billing-component></billing-component>
 @stop
 
 @section('scripts')
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
-        $('.shipping-address-form').hide();
 
-        $("#toggleShippingAddress").click(function () {
-            if ($(this).is(":checked")) {
-                $(".shipping-address-form").slideDown();
-            } else {
-                $(".shipping-address-form").slideUp();
-            }
-        });
+        $(function () {
 
-        /*Credit Card and Pay[ppal*/
-        $("#creditCard").click(function () {
-            $(".creditCard").show();
+            $('.shipping-address-form').hide();
+
+            $("#toggleShippingAddress").click(function () {
+                if ($(this).is(":checked")) {
+                    $(".shipping-address-form").slideDown();
+                } else {
+                    $(".shipping-address-form").slideUp();
+                }
+            });
+
+            /*Credit Card and Pay[ppal*/
             $(".paypal").hide();
-            $('#paypal').toggleClass('btn-secondary', 'btn-primary');
-            $('#creditCard').removeClass('btn-secondary');
-            $('#creditCard').addClass('btn-primary');
-        });
-        $("#paypal").click(function () {
-            $(".paypal").show();
-            $(".creditCard").hide();
-            $('#creditCard').toggleClass('btn-secondary', 'btn-primary');
-            $('#paypal').removeClass('btn-secondary');
-            $('#paypal').addClass('btn-primary');
+            $("#creditCard").click(function () {
+                $(".creditCard").show();
+                $(".paypal").hide();
+                $('#paypal').toggleClass('btn-secondary', 'btn-primary');
+                $('#creditCard').removeClass('btn-secondary');
+                $('#creditCard').addClass('btn-primary');
+            });
+            $("#paypal").click(function () {
+                $(".paypal").show();
+                $(".creditCard").hide();
+                $('#creditCard').toggleClass('btn-secondary', 'btn-primary');
+                $('#paypal').removeClass('btn-secondary');
+                $('#paypal').addClass('btn-primary');
+            });
+
+            $(".next").click(function () {
+                $(".tab-pane").hide();
+                $("#step2").fadeIn(1000);
+                $('.progressbar-dots').removeClass('active');
+                $('.progressbar-dots:nth-child(2)').addClass('active');
+            });
+
+            $(".prev").click(function () {
+                $(".tab-pane").hide();
+                $("#step1").fadeIn(1000);
+                $('.progressbar-dots').removeClass('active');
+                $('.progressbar-dots:nth-child(1)').addClass('active');
+            });
+
+            $(".pay").click(function () {
+                $(".tab-pane").hide();
+                $("#step3").fadeIn(1000);
+                $('.progressbar-dots').removeClass('active');
+                $('.progressbar-dots:nth-child(3)').addClass('active');
+            });
+
+            // This function displays Smart Payment Buttons on your web page.
+            paypal.Button.render({
+                // Configure environment
+                env: 'sandbox',
+                client: {
+                    sandbox: 'demo_sandbox_client_id',
+                    production: 'demo_production_client_id'
+                },
+                // Customize button (optional)
+                locale: 'en_US',
+                style: {
+                    size: 'medium',
+                    color: 'gold',
+                    shape: 'pill',
+                },
+
+                // Enable Pay Now checkout flow (optional)
+                commit: true,
+
+                // Set up a payment
+                payment: function (data, actions) {
+                    return actions.payment.create({
+                        transactions: [{
+                            amount: {
+                                total: '0.01',
+                                currency: 'AUD'
+                            }
+                        }]
+                    });
+                },
+                // Execute the payment
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute().then(function () {
+                        // Show a confirmation message to the buyer
+                        window.alert('Thank you for your purchase!');
+                    });
+                }
+            }, '#paypal-button');
+
         });
 
 
-        $(".next").click(function () {
-            $(".tab-pane").hide();
-            $("#step2").fadeIn(1000);
-            $('.progressbar-dots').removeClass('active');
-            $('.progressbar-dots:nth-child(2)').addClass('active');
-
-        });
-        $(".prev").click(function () {
-            $(".tab-pane").hide();
-            $("#step1").fadeIn(1000);
-            $('.progressbar-dots').removeClass('active');
-            $('.progressbar-dots:nth-child(1)').addClass('active');
-
-        });
-
-        $(".pay").click(function () {
-            $("#loader").show();
-            setTimeout(function () {
-                $("#booking-form").html("<h2>Your message was sent successfully. Thanks! We'll be in touch as soon as we can, which is usually like lightning (Unless we're sailing or eating tacos!).</h2>");
-            }, 1000);
-            return false;
-        });
     </script>
 @stop
 

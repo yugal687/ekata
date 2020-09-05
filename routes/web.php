@@ -14,12 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*login*/
-Route::get('/userlogin', function () {
-    return view('website/userlogin');
+
+
+/*Route::view('/registration', 'admin.userregistration');*/
+Route::view('/usersignin', 'admin.usersignin');
+
+
+Route::get('/billings', function () {
+    return view('website/billings');
 });
-
-
-Auth::routes();
 
 Route::get('/logout', function () {
     Auth::logout();
@@ -31,6 +34,7 @@ Route::get('/aboutus', function () {
 /*Route::get('/products', function () {
     return view('website/products');
 });*/
+Route::get('/category','Website\ProductController@showCategory');
 Route::get('/products','Website\ProductController@showProducts');
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',

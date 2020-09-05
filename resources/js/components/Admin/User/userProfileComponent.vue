@@ -1,3 +1,6 @@
+@extends('layouts.usermaster')
+
+@section('content')
 <template>
     <div class="container-fluid">
         <div class="row">
@@ -90,30 +93,37 @@
                                                        placeholder="Email">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-8">
-                                            <label class="col-sm-12 col-form-label">Address</label>
+                                        <div class="form-group col-md-12">
+                                            <label for="inputContactNumber" class="col-sm-12 col-form-label">Contact Number</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="number" class="form-control" id=""
+                                                       placeholder="Contact Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-7">
+                                            <label for="inputName2" class="col-sm-12 col-form-label">Address</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" class="form-control" id=""
                                                        placeholder="Address">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label
-                                                   class="col-sm-12 col-form-label">City Name</label>
+                                        <div class="form-group col-md-5">
+                                            <label for="inputExperience"
+                                                   class="col-sm-12 col-form-label">Suburb</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
-                                                       placeholder="City Name">
+                                                <input type="text" class="form-control" id=""
+                                                       placeholder="Suburb">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-8">
-                                            <label class="col-sm-12 col-form-label">Phone Number</label>
+                                        <div class="form-group col-md-7">
+                                            <label for="inputSkills" class="col-sm-12 col-form-label">State</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
-                                                       placeholder="Phone Number">
+                                                <input type="text" class="form-control" id=""
+                                                       placeholder="State">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label class="col-sm-12 col-form-label">Postal Code</label>
+                                        <div class="form-group col-md-5">
+                                            <label for="inputSkills" class="col-sm-12 col-form-label">Postal Code</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control"
                                                        placeholder="Postal Code">
@@ -132,23 +142,23 @@
                                 <form class="form-horizontal">
                                     <div class="row d-flex justify-content-center">
                                         <div class="form-group col-md-8">
-                                            <label  class="col-sm-12 col-form-label">Current Password</label>
+                                            <label for="" class="col-sm-12 col-form-label">Current Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" class="form-control" id=""
                                                        placeholder="Current Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
-                                            <label class="col-sm-12 col-form-label">New Password</label>
+                                            <label for="" class="col-sm-12 col-form-label">New Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" class="form-control" id=""
                                                        placeholder="New Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
-                                            <label class="col-sm-12 col-form-label">Confirm Password</label>
+                                            <label for="" class="col-sm-12 col-form-label">Confirm Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" class="form-control" id=""
                                                        placeholder="Confirm Password">
                                             </div>
                                         </div>

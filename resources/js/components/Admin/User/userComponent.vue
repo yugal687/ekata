@@ -4,15 +4,12 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row float-right pr-4">
-                        <a class="btn btn-primary mx-2" href="/admin/userregistration">
+                        <a class="btn btn-primary mx-2" href="/register">
                             <i class="fas fa-user-plus"></i> Add User
                         </a>
-                        <a class="btn btn-primary mx-2" href="/admin/usersignin">
+                        <!--<a class="btn btn-primary mx-2" href="/login">
                             <i class="fas fa-user"></i> User Sign In
-                        </a>
-                        <a class="btn btn-primary mx-2" href="/userlogin">
-                            <i class="fas fa-user"></i> User Sign Up | Sign In
-                        </a>
+                        </a>-->
                     </div>
                 </div>
                 <div class="card-body">
