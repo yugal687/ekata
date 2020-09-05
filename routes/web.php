@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*login*/
-Route::get('/userlogin', function () {
-    return view('website/userlogin');
-});
 
 Route::get('/', 'Website\ProductController@index');
+
+/*Route::view('/registration', 'admin.userregistration');*/
+Route::view('/usersignin', 'admin.usersignin');
+
 
 Route::get('/billings', function () {
     return view('website/billings');
@@ -44,9 +45,6 @@ Route::get('/singleproduct','Website\ProductController@SingleProductPage');
 Route::view('admin/dashboard', 'admin.dashboard');
 Route::view('user/users', 'admin.user.users');
 Route::view('customer/customers', 'admin.customer.customers');
-/*Route::view('admin/users', 'admin.users');*/
-Route::view('admin/userregistration', 'admin.userregistration');
-Route::view('admin/usersignin', 'admin.usersignin');
 //Setup.....
 Route::view('admin/setup/index', 'admin.setup.index');
 Route::view('admin/setup/brands', 'admin.setup.brands');

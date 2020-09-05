@@ -90,29 +90,36 @@
                                                        placeholder="Email">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-8">
+                                        <div class="form-group col-md-12">
+                                            <label for="inputContactNumber" class="col-sm-12 col-form-label">Contact Number</label>
+                                            <div class="col-sm-12">
+                                                <input type="number" class="form-control" id=""
+                                                       placeholder="Contact Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-7">
                                             <label for="inputName2" class="col-sm-12 col-form-label">Address</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
                                                        placeholder="Address">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-5">
                                             <label for="inputExperience"
-                                                   class="col-sm-12 col-form-label">City Name</label>
+                                                   class="col-sm-12 col-form-label">Suburb</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
-                                                       placeholder="City Name">
+                                                       placeholder="Suburb">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-8">
-                                            <label for="inputSkills" class="col-sm-12 col-form-label">Phone Number</label>
+                                        <div class="form-group col-md-7">
+                                            <label for="inputSkills" class="col-sm-12 col-form-label">State</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
-                                                       placeholder="Phone Number">
+                                                       placeholder="State">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-5">
                                             <label for="inputSkills" class="col-sm-12 col-form-label">Postal Code</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id=""
