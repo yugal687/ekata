@@ -6925,51 +6925,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "customersFeedbackComponent",
   data: function data() {
     return {
-      tableData: [{
-        sn: 1,
-        userID: '123-122',
-        userName: 'tom',
-        rating: '1',
-        feedback: 'Lorem Ipsum to do the task'
-      }, {
-        sn: 2,
-        userID: '1222',
-        userName: 'teddy',
-        rating: '1',
-        feedback: 'Lorem Ipsum to do the task'
-      }, {
-        sn: 3,
-        userID: '12322',
-        userName: 'john',
-        rating: '3',
-        feedback: 'Lorem Ipsum to do the task'
-      }, {
-        sn: 4,
-        userID: '23-122',
-        userName: 'harish',
-        rating: '5',
-        feedback: 'Lorem Ipsum to do the task'
-      }, {
-        sn: 1,
-        userID: '123-122',
-        userName: 'akon',
-        rating: '1',
-        feedback: 'Lorem Ipsum to do the task'
-      }],
+      tableData: [],
       search: ''
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/fetchFeedback', {}).then(function (response) {
+      _this.tableData = response.data.feedback;
+    });
+  },
   methods: {
-    handleDelete: function handleDelete() {}
+    handleDelete: function handleDelete(id) {
+      axios["delete"]('/api/deleteFeedback/' + id).then(function (response) {
+        alert(response.data.message);
+        l;
+      });
+    }
   }
 });
 
@@ -110944,7 +110921,7 @@ var render = function() {
           _c("el-card", { staticClass: "box-card" }, [
             _c("div", { attrs: { slot: "header" }, slot: "header" }, [
               _vm._v(
-                "\r\n                    Customers Feedback\r\n                "
+                "\n                    Customers Feedback\n                "
               )
             ]),
             _vm._v(" "),
@@ -110974,23 +110951,19 @@ var render = function() {
                   },
                   [
                     _c("el-table-column", {
-                      attrs: { label: "S.N.", prop: "sn", width: "50" }
-                    }),
-                    _vm._v(" "),
-                    _c("el-table-column", {
-                      attrs: { label: "User ID", prop: "userID", width: "160" }
+                      attrs: { label: "S.N.", type: "index", width: "50" }
                     }),
                     _vm._v(" "),
                     _c("el-table-column", {
                       attrs: {
                         label: "User Name",
-                        prop: "userName",
+                        prop: "user.first_name",
                         width: "160"
                       }
                     }),
                     _vm._v(" "),
                     _c("el-table-column", {
-                      attrs: { label: "Rating", prop: "rating", width: "100" }
+                      attrs: { label: "Rating", prop: "star", width: "100" }
                     }),
                     _vm._v(" "),
                     _c("el-table-column", {
@@ -111030,16 +111003,13 @@ var render = function() {
                                   attrs: { size: "mini", type: "danger" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.handleDelete(
-                                        scope.$index,
-                                        scope.row
-                                      )
+                                      return _vm.handleDelete(scope.row.id)
                                     }
                                   }
                                 },
                                 [
                                   _vm._v(
-                                    "Delete\r\n                                "
+                                    "Delete\n                                "
                                   )
                                 ]
                               )

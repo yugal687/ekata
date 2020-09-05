@@ -94,3 +94,6 @@ Route::get('/','Website\ProductController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');
+
+Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
+

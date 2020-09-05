@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Feedback;
 use App\Model\OrderDetail;
 use App\Model\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -23,7 +24,9 @@ class User extends Authenticatable
     public function order(){
         return $this->hasMany(OrderDetail::class);
     }
-
+    public function feedback(){
+        return $this->hasMany(Feedback::class);
+    }
     protected $hidden = [
         'password', 'remember_token',
     ];

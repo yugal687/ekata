@@ -65,3 +65,7 @@ Route::delete('/deleteWebsiteDetail/{id}','Website\WebsiteDetailController@delet
 Route::get('/getUser','User\UserController@singleUserDetail');
 Route::get('/getEnquiries','Website\EnquiryController@fetchEnquiry');
 Route::delete('/deleteEnquiry/{id}','Website\EnquiryController@deleteEnquiry');
+
+Route::get('/fetchFeedback','Website\FeedbackController@fetchFeedback');
+Route::delete('/deleteFeedback/{id}','Website\FeedbackController@deleteFeedback');
+
