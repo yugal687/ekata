@@ -328,23 +328,6 @@
             }
         },
         methods: {
-            addNewProduct(storedCart, cart) {
-                storedCart.push(cart);
-                localStorage.setItem('cart', JSON.stringify(storedCart));
-            },
-
-            updateProduct(storedCart, storedProduct, cart) {
-                storedProduct.quantity = cart.quantity;
-                storedProduct.price = cart.price;
-                storedCart.forEach((val, key) => {
-                    if (val.product_id == storedProduct.product_id) {
-                        storedCart.splice(key, 1);
-                    }
-                });
-                storedCart.push(storedProduct);
-                localStorage.setItem('cart', JSON.stringify(storedCart));
-            },
-
             removeProduct() {
                 return false;
             },
@@ -352,11 +335,12 @@
                 let cart = {
                     'product_id': this.product[0].id,
                     'quantity': this.quantity,
-                    'price': this.price
+                    'price': this.price,
+                    'product_image': this.product[0].image[0].name,
+                    'product_name': this.product[0].product_name,
                 };
                 let storedCart = JSON.parse(localStorage.getItem('cart'));
-                this.$store.commit('addToCart', cart, storedCart);
-
+                this.$store.commit('addToCart', cart);
             },
             totalPrice() {
                 return this.price = this.quantity * this.product[0].price;

@@ -44,6 +44,8 @@ Vue.component('enquiries-component', require('./components/Admin/Website Update/
 /*Website Pages*/
 Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);
 Vue.component('cart-items-component', require('./components/Website/cartitemsComponent.vue').default);
+Vue.component('billing-component', require('./components/Website/billingsComponent.vue').default);
+Vue.component('header-navbar-component', require('./components/Website/headerNavbarComponent.vue').default);
 
 
 import storeData from './store/store';

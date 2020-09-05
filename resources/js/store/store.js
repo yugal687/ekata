@@ -3,6 +3,8 @@ let store = {
         product: [],
         cart: [],
         cartCount: 0,
+        storedLocalStorageProduct: [],
+        totalPrice: 0,
     },
 
     mutations: {
@@ -38,26 +40,46 @@ let store = {
             localStorage.setItem('cart', JSON.stringify(state.cart));
             this.dispatch('incrementCartItem');
         },
+        totalPrice(state) {
+            let product = this.commit('fetchStoredProduct');
+            if (state.storedLocalStorageProduct) {
+                return state.totalPrice = state.storedLocalStorageProduct.reduce((acc, val) => {
+                    return acc + val.price;
+                }, 0);
+            }
+            return false;
+
+        },
         incCartItem(state) {
             return state.cartCount++;
         },
-
+        decCartItem(state) {
+            return state.cartCount--;
+        },
+        fetchStoredProduct(state) {
+            state.storedLocalStorageProduct = JSON.parse(localStorage.getItem('cart'));
+        },
     },
+
+
     actions: {
         incrementCartItem(context) {
             context.commit('incCartItem');
-        }
+        },
 
+        fetchStoredProduct(context) {
+            context.commit('fetchStoredProduct')
+        },
+        totalPrice({commit}) {
+            return commit('totalPrice');
+        }
     },
 
     getters: {
         cartItemCount(state) {
             return state.cartCount = JSON.parse(localStorage.getItem('cart')).length;
-
         },
-
     },
-
 
 }
 
