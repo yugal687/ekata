@@ -31,6 +31,9 @@ Route::get('/contact', function () {
 Route::get('/aboutus', function () {
     return view('website/aboutus');
 });
+Route::get('/services', function () {
+    return view('website/services');
+});
 /*Route::get('/products', function () {
     return view('website/products');
 });*/
@@ -62,6 +65,9 @@ Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo
 Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
 Route::view('admin/websiteupdate/customersfeedback', 'admin.website_update.customersFeedback');
 Route::view('admin/websiteupdate/reviewscarousel', 'admin.website_update.reviewsCarousel');
+//Services
+Route::view('admin/services/', 'admin.services.service');
+
 
 //User Dashboard
 Route::view('userdashboard/userdashboard', 'user dashboard.userdashboard');
