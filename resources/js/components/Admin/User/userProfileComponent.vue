@@ -94,36 +94,36 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label for="inputContactNumber" class="col-sm-12 col-form-label">Contact Number</label>
+                                            <label class="col-sm-12 col-form-label">Contact Number</label>
                                             <div class="col-sm-12">
-                                                <input type="number" class="form-control" id=""
+                                                <input type="number" class="form-control"
                                                        placeholder="Contact Number">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-7">
-                                            <label for="inputName2" class="col-sm-12 col-form-label">Address</label>
+                                            <label class="col-sm-12 col-form-label">Address</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id=""
+                                                <input type="text" class="form-control"
                                                        placeholder="Address">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">
-                                            <label for="inputExperience"
+                                            <label
                                                    class="col-sm-12 col-form-label">Suburb</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id=""
+                                                <input type="text" class="form-control"
                                                        placeholder="Suburb">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-7">
-                                            <label for="inputSkills" class="col-sm-12 col-form-label">State</label>
+                                            <label class="col-sm-12 col-form-label">State</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id=""
+                                                <input type="text" class="form-control"
                                                        placeholder="State">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">
-                                            <label for="inputSkills" class="col-sm-12 col-form-label">Postal Code</label>
+                                            <label class="col-sm-12 col-form-label">Postal Code</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control"
                                                        placeholder="Postal Code">
@@ -142,23 +142,23 @@
                                 <form class="form-horizontal">
                                     <div class="row d-flex justify-content-center">
                                         <div class="form-group col-md-8">
-                                            <label for="" class="col-sm-12 col-form-label">Current Password</label>
+                                            <label class="col-sm-12 col-form-label">Current Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control" id=""
+                                                <input type="password" class="form-control"
                                                        placeholder="Current Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
-                                            <label for="" class="col-sm-12 col-form-label">New Password</label>
+                                            <label class="col-sm-12 col-form-label">New Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control" id=""
+                                                <input type="password" class="form-control"
                                                        placeholder="New Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
-                                            <label for="" class="col-sm-12 col-form-label">Confirm Password</label>
+                                            <label class="col-sm-12 col-form-label">Confirm Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control" id=""
+                                                <input type="password" class="form-control"
                                                        placeholder="Confirm Password">
                                             </div>
                                         </div>

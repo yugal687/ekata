@@ -6827,6 +6827,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "userProfileComponent",
   data: function data() {
@@ -7039,74 +7049,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "enquiriesComponent",
   data: function data() {
     return {
-      tableData: [{
-        sn: 1,
-        name: 'Tom Reddy',
-        email: 'tom2121@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '1234567890'
-      }, {
-        sn: 2,
-        name: 'John',
-        email: 'john@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '98765432'
-      }, {
-        sn: 3,
-        name: 'Morgan',
-        email: 'morgan@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '34567887687'
-      }, {
-        sn: 4,
-        name: 'Jessy',
-        email: 'jessy@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '12345678987654'
-      }, {
-        sn: 1,
-        name: 'Tom',
-        email: 'tom@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '1234567890'
-      }, {
-        sn: 2,
-        name: 'John',
-        email: 'john@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '98765432'
-      }, {
-        sn: 3,
-        name: 'Morgan',
-        email: 'morgan@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '34567887687'
-      }, {
-        sn: 4,
-        name: 'Jessy',
-        email: 'jessy@gmail.com',
-        enquiry: 'No. 189, Grove St, Los Angeles',
-        contactNumber: '12345678987654'
-      }],
+      tableData: [],
       search: ''
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/getEnquiries', {}).then(function (response) {
+      _this.tableData = response.data.enquiries;
+    });
+  },
   methods: {
-    handleReply: function handleReply() {},
-    handleEdit: function handleEdit() {}
+    handleDelete: function handleDelete(id) {
+      axios["delete"]('/api/deleteEnquiry/' + id).then(function (response) {
+        alert(response.data.message);
+      });
+    }
   }
 });
 
@@ -110778,7 +110741,23 @@ var staticRenderFns = [
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-8" }, [
+                    _c("div", { staticClass: "form-group col-md-12" }, [
+                      _c("label", { staticClass: "col-sm-12 col-form-label" }, [
+                        _vm._v("Contact Number")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-12" }, [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            placeholder: "Contact Number"
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-md-7" }, [
                       _c("label", { staticClass: "col-sm-12 col-form-label" }, [
                         _vm._v("Address")
                       ]),
@@ -110791,33 +110770,33 @@ var staticRenderFns = [
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-4" }, [
+                    _c("div", { staticClass: "form-group col-md-5" }, [
                       _c("label", { staticClass: "col-sm-12 col-form-label" }, [
-                        _vm._v("City Name")
+                        _vm._v("Suburb")
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-sm-12" }, [
                         _c("input", {
                           staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "City Name" }
+                          attrs: { type: "text", placeholder: "Suburb" }
                         })
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-8" }, [
+                    _c("div", { staticClass: "form-group col-md-7" }, [
                       _c("label", { staticClass: "col-sm-12 col-form-label" }, [
-                        _vm._v("Phone Number")
+                        _vm._v("State")
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-sm-12" }, [
                         _c("input", {
                           staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "Phone Number" }
+                          attrs: { type: "text", placeholder: "State" }
                         })
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-4" }, [
+                    _c("div", { staticClass: "form-group col-md-5" }, [
                       _c("label", { staticClass: "col-sm-12 col-form-label" }, [
                         _vm._v("Postal Code")
                       ]),
@@ -111146,7 +111125,7 @@ var render = function() {
                     },
                     [
                       _c("el-table-column", {
-                        attrs: { label: "S.N.", prop: "sn", width: "50" }
+                        attrs: { label: "S.N.", type: "index", width: "50" }
                       }),
                       _vm._v(" "),
                       _c("el-table-column", {
@@ -111164,13 +111143,13 @@ var render = function() {
                       _c("el-table-column", {
                         attrs: {
                           label: "Contact Number",
-                          prop: "contactNumber",
+                          prop: "number",
                           width: "200"
                         }
                       }),
                       _vm._v(" "),
                       _c("el-table-column", {
-                        attrs: { label: "Enquiry", prop: "enquiry" }
+                        attrs: { label: "Enquiry", prop: "description" }
                       }),
                       _vm._v(" "),
                       _c("el-table-column", {
@@ -111203,50 +111182,10 @@ var render = function() {
                                 _c(
                                   "el-button",
                                   {
-                                    attrs: {
-                                      size: "mini",
-                                      type: "primary",
-                                      icon: "fas fa-reply"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.handleReply(
-                                          scope.$index,
-                                          scope.row
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "text-white",
-                                        attrs: {
-                                          href:
-                                            "https://mail.google.com/mail/?view=cm&fs=1&to=someone@example.com",
-                                          target: "_blank"
-                                        }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                          Reply\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "el-button",
-                                  {
                                     attrs: { size: "mini", type: "danger" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.handleDelete(
-                                          scope.$index,
-                                          scope.row
-                                        )
+                                        return _vm.handleDelete(scope.row.id)
                                       }
                                     }
                                   },

@@ -92,3 +92,5 @@ Route::get('/contact','Website\WebsiteDetailController@showDetails');
 Route::get('/','Website\ProductController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');

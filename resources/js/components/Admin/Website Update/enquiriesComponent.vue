@@ -15,7 +15,7 @@
                             style="width: 100%">
                             <el-table-column
                                 label="S.N."
-                                prop="sn"
+                                type="index"
                                 width="50">
                             </el-table-column>
                             <el-table-column
@@ -30,12 +30,12 @@
                             </el-table-column>
                             <el-table-column
                                 label="Contact Number"
-                                prop="contactNumber"
+                                prop="number"
                                 width="200">
                             </el-table-column>
                             <el-table-column
                                 label="Enquiry"
-                                prop="enquiry">
+                                prop="description">
                             </el-table-column>
                             <el-table-column
                                 fixed="right"
@@ -50,17 +50,8 @@
                                 <template slot-scope="scope">
                                     <el-button
                                         size="mini"
-                                        type="primary"
-                                        icon="fas fa-reply"
-                                        @click="handleReply(scope.$index, scope.row)">
-                                        <a class="text-white" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=someone@example.com" target="_blank">
-                                            &nbsp; Reply
-                                        </a>
-                                    </el-button>
-                                    <el-button
-                                        size="mini"
                                         type="danger"
-                                        @click="handleDelete(scope.$index, scope.row)">Delete
+                                        @click="handleDelete(scope.row.id)">Delete
                                     </el-button>
                                 </template>
                             </el-table-column>
@@ -77,64 +68,20 @@
         name: "enquiriesComponent",
         data(){
             return{
-                tableData: [{
-                    sn: 1,
-                    name: 'Tom Reddy',
-                    email: 'tom2121@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '1234567890',
-                }, {
-                    sn: 2,
-                    name: 'John',
-                    email: 'john@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '98765432',
-                }, {
-                    sn: 3,
-                    name: 'Morgan',
-                    email: 'morgan@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '34567887687',
-                }, {
-                    sn: 4,
-                    name: 'Jessy',
-                    email: 'jessy@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '12345678987654',
-                },{
-                    sn: 1,
-                    name: 'Tom',
-                    email: 'tom@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '1234567890',
-                }, {
-                    sn: 2,
-                    name: 'John',
-                    email: 'john@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '98765432',
-                }, {
-                    sn: 3,
-                    name: 'Morgan',
-                    email: 'morgan@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '34567887687',
-                }, {
-                    sn: 4,
-                    name: 'Jessy',
-                    email: 'jessy@gmail.com',
-                    enquiry: 'No. 189, Grove St, Los Angeles',
-                    contactNumber: '12345678987654',
-                }],
+                tableData: [],
                 search: '',
             }
         },
+        mounted(){
+          axios.get('/api/getEnquiries',{}).then(response=>{
+             this.tableData = response.data.enquiries;
+          });
+        },
         methods: {
-            handleReply() {
-
-            },
-            handleEdit(){
-
+            handleDelete(id){
+                axios.delete('/api/deleteEnquiry/'+id).then(response=>{
+                   alert(response.data.message);
+                });
             }
         }
     }
