@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 /*login*/
 
 
-/*Route::view('/registration', 'admin.userregistration');*/
-Route::view('/usersignin', 'admin.usersignin');
+Route::view('/adminregister', 'auth.adminregistration');
+/*Route::view('/usersignin', 'admin.usersignin');*/
 
 
 Route::get('/logout', function () {
@@ -101,4 +101,6 @@ Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');
 Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 
 Route::post('/registerUser','User\UserController@registeruser');
+
+//Testing Route
 

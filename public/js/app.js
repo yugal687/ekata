@@ -5945,268 +5945,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "setupComponent",
   data: function data() {
@@ -6214,25 +5952,12 @@ __webpack_require__.r(__webpack_exports__);
       fileListHeader: [],
       fileListThumbnail: [],
       edit: false,
-      tags: [],
       editcategory: [],
-      editTags: [],
-      editBrands: [],
       editsubCategory: [],
       labelPosition: 'top',
       getCategory: [],
       getBrand: [],
       getSubCategory: [],
-      categorySelectOptions: [{
-        value: 'Category - 1',
-        label: 'Category - 1'
-      }, {
-        value: 'Category - 2',
-        label: 'Category - 2'
-      }, {
-        value: 'Category - 3',
-        label: 'Category - 3'
-      }],
       categoryForm: {
         name: ''
       },
@@ -6265,20 +5990,6 @@ __webpack_require__.r(__webpack_exports__);
           trigger: 'blur'
         }]
       },
-      brandRules: {
-        name: [{
-          required: true,
-          message: 'Please input brand name',
-          trigger: 'blur'
-        }]
-      },
-      tagRules: {
-        name: [{
-          required: true,
-          message: 'Please input tag name',
-          trigger: 'blur'
-        }]
-      },
 
       /*Table Data's*/
       categorytableData: [{
@@ -6299,28 +6010,8 @@ __webpack_require__.r(__webpack_exports__);
         categoryName: 'Tom Cat',
         subcategoryName: 'Subcat Two'
       }],
-
-      /*Table Data's*/
-      brandtableData: [{
-        sn: 1,
-        brandName: 'Tom'
-      }, {
-        sn: 2,
-        brandName: 'Tom Cat'
-      }],
-
-      /*Table Datas*/
-      tagTableData: [{
-        sn: 1,
-        tagName: 'Tom'
-      }, {
-        sn: 2,
-        tagName: 'Tom Cat'
-      }],
       categorySearch: '',
-      subcategorySearch: '',
-      brandSearch: '',
-      tagSearch: ''
+      subcategorySearch: ''
     };
   },
   methods: {
@@ -6354,103 +6045,78 @@ __webpack_require__.r(__webpack_exports__);
         return getSubCategory.id == id;
       });
     },
-    editTag: function editTag(id) {
-      this.editTags = this.tags.filter(function (tags) {
-        return tags.id == id;
-      });
-    },
-    editBrand: function editBrand(id) {
-      this.editBrands = this.getBrand.filter(function (getBrand) {
-        return getBrand.id == id;
-      });
-    },
     saveEditCategory: function saveEditCategory() {
+      var _this = this;
+
       axios.post('/api/saveEditCategory', {
         editCategory: this.editcategory
       }).then(function (response) {
-        alert(response.data.message);
+        _this.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
+        /*alert(response.data.message);*/
+
       });
     },
     saveEditSubCategory: function saveEditSubCategory() {
+      var _this2 = this;
+
       axios.post('/api/saveEditCategory', {
         editCategory: this.editsubCategory
       }).then(function (response) {
-        alert(response.data.message);
-      });
-    },
-    saveEditBrand: function saveEditBrand() {
-      axios.post('/api/saveEditBrand', {
-        editBrand: this.editBrands
-      }).then(function (response) {
-        alert(response.data.message);
-      });
-    },
-    saveEditTag: function saveEditTag() {
-      axios.post('/api/saveEditTag', {
-        editTag: this.editTags
-      }).then(function (response) {
-        alert(response.data.message);
+        _this2.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
+        /*alert(response.data.message);*/
+
       });
     },
     deleteCategory: function deleteCategory(id) {
+      var _this3 = this;
+
       axios["delete"]('/api/deleteCategory/' + id).then(function (response) {
-        alert(response.data.message);
-      });
-    },
-    deleteBrand: function deleteBrand(id) {
-      axios["delete"]('/api/deleteBrand/' + id).then(function (response) {
-        alert(response.data.message);
-      });
-    },
-    deleteTag: function deleteTag(id) {
-      axios["delete"]('/api/deleteTag/' + id).then(function (response) {
-        alert(response.data.message);
-      });
-    },
-    submitSubCategory: function submitSubCategory() {
-      var _this = this;
+        _this3.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
+        /*alert(response.data.message);*/
 
-      var formdata = new FormData();
-      formdata.append('category_name', this.subcategoryForm.name);
-      formdata.append('parent_id', this.subcategoryForm.categorySelect);
-      axios.post('/api/addsubcategory', formdata, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
-        alert(response.data.message);
-      })["catch"](function (error) {
-        if (error.response.status == 422) {
-          _this.errors = error.response.data.errors;
-        }
       });
     },
-    submitCategory: function submitCategory(categoryForm) {
-      var _this2 = this;
+    submitSubCategory: function submitSubCategory(subcategoryForm) {
+      var _this4 = this;
 
-      this.$refs[categoryForm].validate(function (valid) {
-        console.log(_this2.fileListThumbnail);
-
+      this.$refs[subcategoryForm].validate(function (valid) {
         if (valid) {
-          var bannerCategory = _this2.fileListHeader;
-          var thumbnailCategory = _this2.fileListThumbnail;
-          var formData = new FormData();
-          bannerCategory.forEach(function (v, k) {
-            formData.append("bannerCategory[".concat(k, "]"), v.raw);
-          });
-          thumbnailCategory.forEach(function (v, k) {
-            formData.append("thumbnailCategory[".concat(k, "]"), v.raw);
-          });
-          formData.append('category_name', _this2.categoryForm.name);
-          axios.post('/api/postCategory', formData, {
+          var formdata = new FormData();
+          formdata.append('category_name', _this4.subcategoryForm.name);
+          formdata.append('parent_id', _this4.subcategoryForm.categorySelect);
+          axios.post('/api/addsubcategory', formdata, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            alert(response.data.message);
+            _this4.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
+            /*alert(response.data.message);*/
+
           })["catch"](function (error) {
             if (error.response.status == 422) {
-              _this2.errors = error.response.data.errors;
+              _this4.$notify({
+                title: 'Error',
+                message: error.response.data.message,
+                type: 'error'
+              });
+              /*this.errors = error.response.data.errors;*/
+
             }
           });
         } else {
@@ -6459,61 +6125,61 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    submitBrand: function submitBrand(brandForm) {
-      var _this3 = this;
+    submitCategory: function submitCategory(categoryForm) {
+      var _this5 = this;
 
-      var formdata = new FormData();
-      formdata.append('brand_name', this.brandForm.name);
-      axios.post('/api/postbrand', formdata, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
-        alert(response.data.message);
-      })["catch"](function (error) {
-        if (error.response.status == 422) {
-          _this3.errors = error.response.data.errors;
+      this.$refs[categoryForm].validate(function (valid) {
+        console.log(_this5.fileListThumbnail);
+
+        if (valid) {
+          var bannerCategory = _this5.fileListHeader;
+          var thumbnailCategory = _this5.fileListThumbnail;
+          var formData = new FormData();
+          bannerCategory.forEach(function (v, k) {
+            formData.append("bannerCategory[".concat(k, "]"), v.raw);
+          });
+          thumbnailCategory.forEach(function (v, k) {
+            formData.append("thumbnailCategory[".concat(k, "]"), v.raw);
+          });
+          formData.append('category_name', _this5.categoryForm.name);
+          axios.post('/api/postCategory', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            _this5.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
+            /*alert(response.data.message);*/
+
+          })["catch"](function (error) {
+            if (error.response.status == 422) {
+              _this5.$notify({
+                title: 'Error',
+                message: error.response.data.message,
+                type: 'error'
+              });
+              /*this.errors = error.response.data.errors;*/
+
+            }
+          });
+        } else {
+          console.log('error submit!!');
+          return false;
         }
       });
-    },
-    submitTag: function submitTag(tagForm) {
-      var _this4 = this;
-
-      var formData = new FormData();
-      formData.append('tags', this.tagForm.name);
-      axios.post('/api/postTags', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
-        alert(response.data.message);
-      })["catch"](function (error) {
-        if (error.response.status == 422) {
-          _this4.errors = error.response.data.errors;
-        }
-      });
-    },
-    handleEdit: function handleEdit(index, row) {
-      console.log(index, row);
-    },
-    handleDelete: function handleDelete(index, row) {
-      console.log(index, row);
     }
   },
   mounted: function mounted() {
-    var _this5 = this;
+    var _this6 = this;
 
     axios.get('/api/getCategories', {}).then(function (response) {
-      _this5.getCategory = response.data.getCategory;
+      _this6.getCategory = response.data.getCategory;
     });
     axios.get('/api/getSubCategories', {}).then(function (response) {
-      _this5.getSubCategory = response.data.getSubCategory;
-    });
-    axios.get('/api/getBrand', {}).then(function (response) {
-      _this5.getBrand = response.data.getBrand;
-    });
-    axios.get('/api/getTag', {}).then(function (response) {
-      _this5.tags = response.data.tags;
+      _this6.getSubCategory = response.data.getSubCategory;
     });
     $(document).ready(function () {
       $(".categoryBtn").click(function () {
@@ -6522,23 +6188,11 @@ __webpack_require__.r(__webpack_exports__);
       $(".subcategoryBtn").click(function () {
         $(".subcategory-div").slideToggle("slow");
       });
-      $(".brandBtn").click(function () {
-        $(".brand-div").slideToggle("slow");
-      });
-      $(".tagBtn").click(function () {
-        $(".tag-div").slideToggle("slow");
-      });
       $('.closeCategoryBtn').click(function () {
         $(".category-div").slideToggle("slow");
       });
       $('.clodeSubcategoryBtn').click(function () {
         $(".subcategory-div").slideToggle("slow");
-      });
-      $('.closeBrandBtn').click(function () {
-        $(".brand-div").slideToggle("slow");
-      });
-      $('.closeTagBtn').click(function () {
-        $(".tag-div").slideToggle("slow");
       });
     });
   }
@@ -14924,7 +14578,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.text[data-v-06356278] {\n    font-size: 14px;\n}\n.item[data-v-06356278] {\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\n.clearfix[data-v-06356278]:after {\n    display: table;\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\n    clear: both\n}\n", ""]);
+exports.push([module.i, "\n.text[data-v-06356278] {\r\n    font-size: 14px;\n}\n.item[data-v-06356278] {\r\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\r\n.clearfix[data-v-06356278]:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\r\n    clear: both\n}\r\n", ""]);
 
 // exports
 
@@ -14962,7 +14616,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container-fluid .row[data-v-dde1964c] {\n    margin-left: 0;\n    margin-right: 0;\n}\n\n/*.hidden {\n    display: none;\n}*/\n.box-card-slide[data-v-dde1964c] {\n    border: 1px solid #EBEEF5;\n    background-color: #FFF;\n    color: #303133;\n    border-radius: 4px;\n    overflow: hidden;\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-dde1964c] {\n    padding: 18px 20px;\n    border-bottom: 1px solid #EBEEF5;\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-dde1964c] {\n    padding: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid .row[data-v-dde1964c] {\r\n    margin-left: 0;\r\n    margin-right: 0;\n}\r\n\r\n/*.hidden {\r\n    display: none;\r\n}*/\n.box-card-slide[data-v-dde1964c] {\r\n    border: 1px solid #EBEEF5;\r\n    background-color: #FFF;\r\n    color: #303133;\r\n    border-radius: 4px;\r\n    overflow: hidden;\r\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-dde1964c] {\r\n    padding: 18px 20px;\r\n    border-bottom: 1px solid #EBEEF5;\r\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-dde1964c] {\r\n    padding: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -15000,7 +14654,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container-fluid .row[data-v-2c46a6d6] {\n    margin-left: 0;\n    margin-right: 0;\n}\n.box-card-slide[data-v-2c46a6d6] {\n    border: 1px solid #EBEEF5;\n    background-color: #FFF;\n    color: #303133;\n    border-radius: 4px;\n    overflow: hidden;\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-2c46a6d6] {\n    padding: 18px 20px;\n    border-bottom: 1px solid #EBEEF5;\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-2c46a6d6] {\n    padding: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid .row[data-v-2c46a6d6] {\r\n    margin-left: 0;\r\n    margin-right: 0;\n}\n.box-card-slide[data-v-2c46a6d6] {\r\n    border: 1px solid #EBEEF5;\r\n    background-color: #FFF;\r\n    color: #303133;\r\n    border-radius: 4px;\r\n    overflow: hidden;\r\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-2c46a6d6] {\r\n    padding: 18px 20px;\r\n    border-bottom: 1px solid #EBEEF5;\r\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-2c46a6d6] {\r\n    padding: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -109364,7 +109018,6 @@ var render = function() {
                                 staticClass: "demo-categoryForm",
                                 attrs: {
                                   model: _vm.categoryForm,
-                                  rules: _vm.categoryRules,
                                   "label-position": _vm.labelPosition
                                 }
                               },
@@ -109560,7 +109213,13 @@ var render = function() {
                                   margin: "15px 10% 0"
                                 },
                                 attrs: { type: "primary" },
-                                on: { click: _vm.submitSubCategory }
+                                on: {
+                                  click: function($event) {
+                                    return _vm.submitSubCategory(
+                                      "subcategoryForm"
+                                    )
+                                  }
+                                }
                               },
                               [
                                 _vm._v(
@@ -109604,11 +109263,6 @@ var render = function() {
                               return (
                                 !_vm.subcategorySearch ||
                                 data.category_name
-                                  .toLowerCase()
-                                  .includes(
-                                    _vm.subcategorySearch.toLowerCase()
-                                  ) ||
-                                data.categoryName
                                   .toLowerCase()
                                   .includes(_vm.subcategorySearch.toLowerCase())
                               )
@@ -109759,7 +109413,6 @@ var render = function() {
                                 staticClass: "demo-categoryForm",
                                 attrs: {
                                   model: _vm.categoryForm,
-                                  rules: _vm.categoryRules,
                                   "label-position": _vm.labelPosition
                                 }
                               },
@@ -109856,654 +109509,6 @@ var render = function() {
           ]
         )
       ])
-    ]),
-    _vm._v(" "),
-    _c("hr", { staticClass: "mt-4 mb-4" }),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-        _vm._m(6),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "row box-card-slide brand-div hidden",
-            staticStyle: { "border-top": "3px solid red" }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "box-header clearfix" },
-              [
-                _c("span", [_vm._v("Add Brands")]),
-                _vm._v(" "),
-                _c(
-                  "el-button",
-                  {
-                    staticClass: "closeBrandBtn",
-                    staticStyle: { float: "right", padding: "3px 0" },
-                    attrs: { type: "text" }
-                  },
-                  [_vm._v("Close\n                    ")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "box-body" }, [
-              _c("div", { staticClass: "row d-flex justify-content-center" }, [
-                _c(
-                  "div",
-                  { staticClass: "col-12" },
-                  [
-                    _c(
-                      "el-form",
-                      {
-                        ref: "brandForm",
-                        staticClass: "demo-brandForm",
-                        attrs: {
-                          model: _vm.brandForm,
-                          rules: _vm.brandRules,
-                          "label-position": _vm.labelPosition
-                        }
-                      },
-                      [
-                        _c(
-                          "el-form-item",
-                          { attrs: { label: "Brand Name", prop: "name" } },
-                          [
-                            _c("el-input", {
-                              staticStyle: { width: "100%" },
-                              model: {
-                                value: _vm.brandForm.name,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.brandForm, "name", $$v)
-                                },
-                                expression: "brandForm.name"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "el-form-item",
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                staticStyle: {
-                                  width: "80%",
-                                  margin: "15px 10% 0"
-                                },
-                                attrs: { type: "primary" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.submitBrand("brandForm")
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "Create\n                                    "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "row mt-3" }, [
-          _c(
-            "div",
-            { staticClass: "col-12" },
-            [
-              _c(
-                "el-card",
-                { staticClass: "box-card", attrs: { shadow: "hover" } },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "text item" },
-                    [
-                      _c(
-                        "el-table",
-                        {
-                          staticStyle: { width: "100%" },
-                          attrs: {
-                            data: _vm.getBrand.filter(function(data) {
-                              return (
-                                !_vm.brandSearch ||
-                                data.brand_name
-                                  .toLowerCase()
-                                  .includes(_vm.brandSearch.toLowerCase())
-                              )
-                            }),
-                            border: "",
-                            "max-height": "470"
-                          }
-                        },
-                        [
-                          _c("el-table-column", {
-                            attrs: { type: "index", label: "S.N.", width: "50" }
-                          }),
-                          _vm._v(" "),
-                          _c("el-table-column", {
-                            attrs: { prop: "brand_name", label: "Brand Name" }
-                          }),
-                          _vm._v(" "),
-                          _c("el-table-column", {
-                            attrs: { fixed: "right", align: "right" },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "header",
-                                fn: function(scope) {
-                                  return [
-                                    _c("el-input", {
-                                      attrs: {
-                                        size: "mini",
-                                        placeholder: "Type to search"
-                                      },
-                                      model: {
-                                        value: _vm.brandSearch,
-                                        callback: function($$v) {
-                                          _vm.brandSearch = $$v
-                                        },
-                                        expression: "brandSearch"
-                                      }
-                                    })
-                                  ]
-                                }
-                              },
-                              {
-                                key: "default",
-                                fn: function(scope) {
-                                  return [
-                                    _c("el-button", {
-                                      attrs: {
-                                        type: "primary",
-                                        icon: "el-icon-edit",
-                                        size: "mini",
-                                        "data-target": ".bd-brand-modal-lg",
-                                        "data-toggle": "modal",
-                                        circle: ""
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.editBrand(scope.row.id)
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("el-button", {
-                                      attrs: {
-                                        size: "mini",
-                                        type: "danger",
-                                        icon: "el-icon-delete",
-                                        circle: ""
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deleteBrand(scope.row.id)
-                                        }
-                                      }
-                                    })
-                                  ]
-                                }
-                              }
-                            ])
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "modal fade bd-brand-modal-lg",
-            attrs: {
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "myLargeModalLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c("div", { staticClass: "modal-dialog modal-sm" }, [
-              _c("div", { staticClass: "modal-content" }, [
-                _vm._m(7),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c(
-                    "div",
-                    { staticClass: "row" },
-                    [
-                      _c("div", { staticClass: "col-md-12" }, [
-                        _vm.edit
-                          ? _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "alert alert-success alert-dismissible fade show",
-                                attrs: { role: "alert" }
-                              },
-                              [_vm._m(8)]
-                            )
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.editBrands, function(ebrand) {
-                        return _c(
-                          "div",
-                          [
-                            _c(
-                              "el-form",
-                              {
-                                staticClass: "demo-brandForm",
-                                attrs: {
-                                  model: _vm.brandForm,
-                                  rules: _vm.brandRules,
-                                  "label-position": _vm.labelPosition
-                                }
-                              },
-                              [
-                                _c(
-                                  "el-form-item",
-                                  {
-                                    attrs: { label: "Brand Name", prop: "name" }
-                                  },
-                                  [
-                                    _c("el-input", {
-                                      staticStyle: { width: "100%" },
-                                      model: {
-                                        value: ebrand.brand_name,
-                                        callback: function($$v) {
-                                          _vm.$set(ebrand, "brand_name", $$v)
-                                        },
-                                        expression: "ebrand.brand_name"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "el-form-item",
-                                  [
-                                    _c(
-                                      "el-button",
-                                      {
-                                        staticStyle: {
-                                          width: "80%",
-                                          margin: "15px 10% 0"
-                                        },
-                                        attrs: { type: "primary" },
-                                        on: { click: _vm.saveEditBrand }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "Create\n                                            "
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-        _vm._m(9),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "row box-card-slide tag-div hidden",
-            staticStyle: { "border-top": "3px solid yellow" }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "box-header clearfix" },
-              [
-                _c("span", [_vm._v("Add Tags")]),
-                _vm._v(" "),
-                _c(
-                  "el-button",
-                  {
-                    staticClass: "closeTagBtn",
-                    staticStyle: { float: "right", padding: "3px 0" },
-                    attrs: { type: "text" }
-                  },
-                  [_vm._v("Close\n                    ")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "box-body" }, [
-              _c("div", { staticClass: "row d-flex justify-content-center" }, [
-                _c(
-                  "div",
-                  { staticClass: "col-12" },
-                  [
-                    _c(
-                      "el-form",
-                      {
-                        ref: "brandForm",
-                        staticClass: "demo-brandForm",
-                        attrs: {
-                          model: _vm.tagForm,
-                          rules: _vm.tagRules,
-                          "label-position": _vm.labelPosition
-                        }
-                      },
-                      [
-                        _c(
-                          "el-form-item",
-                          { attrs: { label: "Tag Name", prop: "name" } },
-                          [
-                            _c("el-input", {
-                              staticStyle: { width: "100%" },
-                              model: {
-                                value: _vm.tagForm.name,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.tagForm, "name", $$v)
-                                },
-                                expression: "tagForm.name"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "el-form-item",
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                staticStyle: {
-                                  width: "80%",
-                                  margin: "15px 10% 0"
-                                },
-                                attrs: { type: "primary" },
-                                on: { click: _vm.submitTag }
-                              },
-                              [
-                                _vm._v(
-                                  "Create\n                                    "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "row mt-3" }, [
-          _c(
-            "div",
-            { staticClass: "col-12" },
-            [
-              _c(
-                "el-card",
-                { staticClass: "box-card", attrs: { shadow: "hover" } },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "text item" },
-                    [
-                      _c(
-                        "el-table",
-                        {
-                          staticStyle: { width: "100%" },
-                          attrs: {
-                            data: _vm.tags.filter(function(data) {
-                              return (
-                                !_vm.tagSearch ||
-                                data.tags
-                                  .toLowerCase()
-                                  .includes(_vm.tagSearch.toLowerCase())
-                              )
-                            }),
-                            border: "",
-                            "max-height": "470"
-                          }
-                        },
-                        [
-                          _c("el-table-column", {
-                            attrs: { type: "index", label: "S.N.", width: "50" }
-                          }),
-                          _vm._v(" "),
-                          _c("el-table-column", {
-                            attrs: { prop: "tags", label: "Tag Name" }
-                          }),
-                          _vm._v(" "),
-                          _c("el-table-column", {
-                            attrs: { fixed: "right", align: "right" },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "header",
-                                fn: function(scope) {
-                                  return [
-                                    _c("el-input", {
-                                      attrs: {
-                                        size: "mini",
-                                        placeholder: "Type to search"
-                                      },
-                                      model: {
-                                        value: _vm.tagSearch,
-                                        callback: function($$v) {
-                                          _vm.tagSearch = $$v
-                                        },
-                                        expression: "tagSearch"
-                                      }
-                                    })
-                                  ]
-                                }
-                              },
-                              {
-                                key: "default",
-                                fn: function(scope) {
-                                  return [
-                                    _c("el-button", {
-                                      attrs: {
-                                        type: "primary",
-                                        icon: "el-icon-edit",
-                                        size: "mini",
-                                        "data-target": ".bd-tag-modal-lg",
-                                        "data-toggle": "modal",
-                                        circle: ""
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.editTag(scope.row.id)
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("el-button", {
-                                      attrs: {
-                                        size: "mini",
-                                        type: "danger",
-                                        icon: "el-icon-delete",
-                                        circle: ""
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deleteTag(scope.row.id)
-                                        }
-                                      }
-                                    })
-                                  ]
-                                }
-                              }
-                            ])
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "modal fade bd-tag-modal-lg",
-            attrs: {
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "myLargeModalLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c("div", { staticClass: "modal-dialog modal-sm" }, [
-              _c("div", { staticClass: "modal-content" }, [
-                _vm._m(10),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c(
-                    "div",
-                    { staticClass: "row" },
-                    [
-                      _c("div", { staticClass: "col-md-12" }, [
-                        _vm.edit
-                          ? _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "alert alert-success alert-dismissible fade show",
-                                attrs: { role: "alert" }
-                              },
-                              [_vm._m(11)]
-                            )
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.editTags, function(etag) {
-                        return _c(
-                          "div",
-                          [
-                            _c(
-                              "el-form",
-                              {
-                                staticClass: "demo-tagForm",
-                                attrs: {
-                                  model: _vm.tagForm,
-                                  rules: _vm.tagRules,
-                                  "label-position": _vm.labelPosition
-                                }
-                              },
-                              [
-                                _c(
-                                  "el-form-item",
-                                  {
-                                    attrs: { label: "Tag Name", prop: "name" }
-                                  },
-                                  [
-                                    _c("el-input", {
-                                      staticStyle: { width: "100%" },
-                                      model: {
-                                        value: etag.tags,
-                                        callback: function($$v) {
-                                          _vm.$set(etag, "tags", $$v)
-                                        },
-                                        expression: "etag.tags"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "el-form-item",
-                                  [
-                                    _c(
-                                      "el-button",
-                                      {
-                                        staticStyle: {
-                                          width: "80%",
-                                          margin: "15px 10% 0"
-                                        },
-                                        attrs: { type: "primary" },
-                                        on: { click: _vm.saveEditTag }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "Create\n                                            "
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ])
     ])
   ])
 }
@@ -110574,102 +109579,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "modal-header bg-info" }, [
       _vm._v(
         "\n                            Edit Sub-Category\n                            "
-      ),
-      _c(
-        "button",
-        {
-          staticClass: "close text-danger",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "alert",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row d-flex justify-content-center" }, [
-      _c("div", { staticClass: "brandBtn btn btn-danger" }, [
-        _vm._v("Add Brand")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header bg-info" }, [
-      _vm._v(
-        "\n                            Edit Brand\n                            "
-      ),
-      _c(
-        "button",
-        {
-          staticClass: "close text-danger",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "alert",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row d-flex justify-content-center" }, [
-      _c("div", { staticClass: "tagBtn btn btn-warning" }, [_vm._v("Add Tags")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header bg-info" }, [
-      _vm._v(
-        "\n                            Edit Tag\n                            "
       ),
       _c(
         "button",
@@ -128761,8 +127670,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
