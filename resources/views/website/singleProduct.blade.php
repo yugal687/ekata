@@ -119,14 +119,15 @@
             </div>
 
             <div class="col-md-10">
+                @foreach($singleProduct as $product)
                 <div class="row">
                     <div class="col-12" style="padding: 0;">
                         <nav aria-label="breadcrumb" class="">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Category</a></li>
-                                <li class="breadcrumb-item"><a href="#">Dry Goods</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Rice</li>
+                                <li class="breadcrumb-item"><a href="{{route('maincategory',$product->category->parent->id)}}">{{$product->category->parent->category_name}}</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('category',$product->category->id)}}">{{$product->category->category_name}}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{$product->product_name}}</li>
                             </ol>
                         </nav>
                     </div>

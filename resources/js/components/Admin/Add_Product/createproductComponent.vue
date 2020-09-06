@@ -79,7 +79,7 @@
                                     </el-input>
                                 </el-form-item>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <el-form-item label="Quantity" prop="quantity">
                                     <el-input placeholder="Place quantity"
                                               v-model="productForm.quantity"
@@ -87,20 +87,12 @@
                                     </el-input>
                                 </el-form-item>
                             </div>
-                            <div class="col-md-3">
-                                <el-form-item label="Cost Price" prop="costPrice">
-                                    <el-input placeholder="Place cost price"
-                                              v-model="productForm.costPrice"
-                                              style="width: 100%;">
-                                    </el-input>
-                                </el-form-item>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <el-form-item label="Selling Price" prop="sellingPrice">
-                                    <el-input placeholder="Place selling price"
-                                              v-model="productForm.sellingPrice"
+                                <el-form-item label="Price" prop="sellingPrice">
+                                    <el-input placeholder="Place price"
+                                              v-model="productForm.costPrice"
                                               style="width: 100%">
                                     </el-input>
                                 </el-form-item>
@@ -189,7 +181,6 @@
                     productName: '',
                     quantity: '',
                     costPrice: '',
-                    sellingPrice: '',
                     tagsSelect: '',
                     additionalInformation: '',
                     type: [],
@@ -211,10 +202,7 @@
                         {required: true, message: 'Please input quantity', trigger: 'blur'}
                     ],
                     costPrice: [
-                        {required: true, message: 'Please input cost price', trigger: 'blur'}
-                    ],
-                    sellingPrice: [
-                        {required: true, message: 'Please input cost price', trigger: 'blur'},
+                        {required: true, message: 'Please input price', trigger: 'blur'},
                     ],
                     additionalInformation: [
                         {required: true, message: 'Please input additional Information', trigger: 'blur'},
@@ -263,7 +251,6 @@
                             formData.append('brand_id', this.productForm.brandSelect);
                             formData.append('product_name', this.productForm.productName);
                             formData.append('price', this.productForm.costPrice);
-                            formData.append('sale_price', this.productForm.sellingPrice);
                             formData.append('additional_information', this.productForm.additionalInformation);
                             formData.append('quantity', this.productForm.quantity);
 

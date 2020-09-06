@@ -8,7 +8,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{$countOrder}}</h3>
 
                         <p>New Orders</p>
                     </div>
@@ -38,7 +38,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>{{$countUser}}</h3>
 
                         <p>User Registrations</p>
                     </div>
@@ -91,80 +91,22 @@
                                     <th>Order ID</th>
                                     <th>Item</th>
                                     <th>Status</th>
-                                    <th>Popularity</th>
+                                    <th>User Name</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($latestOrder as $order)
                                 <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
+                                    <td><a href="pages/examples/invoice.html">{{$order->order->order_number}}</a></td>
+                                    <td>{{$order->product->product_name}}</td>
+                                    <td><span class="badge badge-success">{{$order->order_status}}</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            90,80,90,-70,61,-83,63
+                                            {{$order->user->first_name}} {{$order->user->last_name}}
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            90,80,-90,70,61,-83,68
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                    <td>iPhone 6 Plus</td>
-                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            90,-80,90,70,-61,83,63
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-info">Processing</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                            90,80,-90,70,-61,83,63
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            90,80,-90,70,61,-83,68
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                    <td>iPhone 6 Plus</td>
-                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            90,-80,90,70,-61,83,63
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            90,80,90,-70,61,-83,63
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -196,60 +138,21 @@
                     <!-- /.card-header -->
                     <div class="card-body p-0">
                         <ul class="products-list product-list-in-card pl-2 pr-2">
+                            @foreach($recentProduct as $product)
                             <li class="item">
                                 <div class="product-img">
-                                    <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+                                    <img src="{{$product->image[0]->name}}" alt="Product Image" class="img-size-50">
                                 </div>
                                 <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">Samsung TV
-                                        <span class="badge badge-warning float-right">$1800</span></a>
+                                    <a href="javascript:void(0)" class="product-title">{{$product->product_name}}
+                                        <span class="badge badge-warning float-right">{{$product->price}}</span></a>
                                     <span class="product-description">
-                        Samsung 32" 1080p 60Hz LED Smart HDTV.
+                       {{$product->additional_information}}
                       </span>
                                 </div>
                             </li>
+                            @endforeach
                             <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                                </div>
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">Bicycle
-                                        <span class="badge badge-info float-right">$700</span></a>
-                                    <span class="product-description">
-                        26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                      </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                                </div>
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">
-                                        Xbox One <span class="badge badge-danger float-right">
-                        $350
-                      </span>
-                                    </a>
-                                    <span class="product-description">
-                        Xbox One Console Bundle with Halo Master Chief Collection.
-                      </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                                </div>
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">PlayStation 4
-                                        <span class="badge badge-success float-right">$399</span></a>
-                                    <span class="product-description">
-                        PlayStation 4 500GB Console (PS4)
-                      </span>
-                                </div>
-                            </li>
                             <!-- /.item -->
                         </ul>
                     </div>

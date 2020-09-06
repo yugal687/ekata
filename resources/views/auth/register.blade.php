@@ -70,11 +70,12 @@
                 <div class="col-md-7" style="padding: 1rem 2rem 1rem 1rem;">
                     <p class="login-box-msg">Register a new user</p>
 
-                    <form action="" method="post">
+                    <form action="{{url("registerUser")}}" method="post">
+                        {{csrf_field()}}
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="First name">
+                                    <input type="text" class="form-control" name="first_name" placeholder="First name">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-user"></span>
@@ -84,7 +85,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Last name">
+                                    <input type="text" class="form-control" name="last_name" placeholder="Last name">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-user"></span>
@@ -96,7 +97,7 @@
                         <div class="form-row">
                             <div class="col-md-7">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Address">
+                                    <input type="text" class="form-control" name="address" placeholder="Address">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-building"></span>
@@ -106,7 +107,7 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Suburb">
+                                    <input type="text" class="form-control" name="sub_urb" placeholder="Suburb">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-road"></span>
@@ -118,7 +119,7 @@
                         <div class="form-row">
                             <div class="col-md-7">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="State">
+                                    <input type="text" class="form-control" name="state" placeholder="State">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fab fa-stripe-s"></span>
@@ -128,7 +129,7 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Postal Code">
+                                    <input type="text" class="form-control" name="postal_code" placeholder="Postal Code">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-mail-bulk"></span>
@@ -139,7 +140,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" class="form-control" name="email" placeholder="Email">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -147,7 +148,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="number" class="form-control" placeholder="Contact Number">
+                            <input type="number" class="form-control" name="contact_number" placeholder="Contact Number">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-phone"></span>
@@ -157,7 +158,7 @@
 
 
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -165,17 +166,18 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Retype password">
+                            <input type="password" class="form-control" id="confirm_password" placeholder="Retype password">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
                                 </div>
                             </div>
+                            <span id='message'></span>
                         </div>
                         <div class="text-center">
-                            <a href="#" class="btn btn-block bg-main-primary text-white">
+                            <button class="btn btn-block bg-main-primary text-white" type="submit">
                                 Register
-                            </a>
+                            </button>
                         </div>
                     </form>
 
@@ -191,4 +193,16 @@
 <!-- /.register-box -->
 
 </body>
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        $('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() == $('#confirm_password').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+    });
+</script>
+    @stop
 </html>

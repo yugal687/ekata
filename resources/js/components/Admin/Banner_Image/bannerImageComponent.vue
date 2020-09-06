@@ -54,6 +54,12 @@
                                                    size="mini">
                                             <i class="fas fa-check"></i>
                                         </el-button>
+                                        <el-button type="success"
+                                                   v-if=""
+                                                   @click="setInActive(images.id)"
+                                                   size="mini">
+                                            <i class="fas fa-times"></i>
+                                        </el-button>
                                         <el-button type="danger"
                                                    size="mini"
                                                    @click="deleteImage(images.id)">
@@ -138,6 +144,11 @@ export default {
         axios.patch('/api/activeBanner/'+id).then(response=>{
            alert(response.data.message);
         });
+        },
+        setInActive(id) {
+            axios.patch('/api/inactiveBanner/' + id).then(response => {
+                alert(response.data.message);
+            });
         },
         deleteImage(id) {
             axios.delete('/api/deleteBanner/'+id)

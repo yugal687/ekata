@@ -155,7 +155,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/userdashboard/userdashboard" class="nav-link">
+                                    <a href="/user/userdashboard" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User Dashboard</p>
                                     </a>
@@ -163,7 +163,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/userdashboard/userprofile" class="nav-link">
+                            <a href="/user/userprofile" class="nav-link">
                                 <i class="nav-icon fas fa-user-alt-slash"></i>
                                 <p>
                                     User Profile

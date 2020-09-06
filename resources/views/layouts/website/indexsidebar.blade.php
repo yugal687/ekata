@@ -3,21 +3,19 @@
         <div class="col-12 text-center">
 
             <ul class="sidebar-vertical-carousel">
-                @foreach( $getCategory as $category)
-                    <li class="blocks-gallery-item">
 
+                <li class="blocks-gallery-item">
+
+                        @foreach($getCategory as $category)
                         <figure class="mx-auto">
-                            <img src="{{ asset('images/Homepage/Category_images/Layer 7 copy 2.png') }}"
-                                 class="img-fluid" alt="">
-                        </figure>
-                        <h6>{{ $category -> category_name}}</h6>
-
-                    </li>
-                @endforeach
+                        <img src="{{ $category->image }}" class="img-fluid" alt="">
+                    </figure>
+                    <h6><a href="{{route('maincategory',$category->id)}}">{{$category->category_name}}</a></h6>
+                            @endforeach
+                </li>
 
             </ul>
-            <div class="row controls rounded-bottom-front" id="customize-controls" aria-label="Carousel Navigation"
-                 tabindex="0">
+            <div class="row controls rounded-bottom-front" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
                 <div class="col-12 prev" data-controls="prev" aria-controls="customize" tabindex="-1">
                     <i class="fas fa-angle-up fa-5x"></i>
                 </div>

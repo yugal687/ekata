@@ -15,19 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 /*login*/
 
-Route::get('/', 'Website\ProductController@index');
 
 /*Route::view('/registration', 'admin.userregistration');*/
 Route::view('/usersignin', 'admin.usersignin');
 
 
-Route::get('/billings', function () {
-    return view('website/billings');
+Route::get('/logout', function () {
+    Auth::logout();
+    return view('auth.login');
 });
 
-Route::get('/contact', function () {
-    return view('website/contact');
-});
 Route::get('/aboutus', function () {
     return view('website/aboutus');
 });
@@ -43,15 +40,20 @@ Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
     "as" => 'maincategory']);
 
-Route::get('/singleproduct','Website\ProductController@SingleProductPage');
-
-Route::view('admin/dashboard', 'admin.dashboard');
-Route::view('user/users', 'admin.user.users');
-Route::view('customer/customers', 'admin.customer.customers');
+Route::get('/singleproduct/{id}',[
+    'uses' => 'Website\ProductController@SingleProductPage',
+    'as' => 'singleproduct']);
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('admin/dashboard', 'Admin\DashboardController@dashboradData');
+    Route::view('user/users', 'admin.user.users');
+    Route::view('customer/customers', 'admin.customer.customers');
+    /*Route::view('admin/users', 'admin.users');*/
+    Route::view('admin/userregistration', 'admin.userregistration');
+    Route::view('admin/usersignin', 'admin.usersignin');
 //Setup.....
-Route::view('admin/setup/index', 'admin.setup.index');
-Route::view('admin/setup/brands', 'admin.setup.brands');
-Route::view('admin/setup/tags', 'admin.setup.tags');
+    Route::view('admin/setup/index', 'admin.setup.index');
+    Route::view('admin/setup/brands', 'admin.setup.brands');
+    Route::view('admin/setup/tags', 'admin.setup.tags');
 //Product
 Route::view('admin/addproduct/index', 'admin.add_product.index');
 Route::view('admin/addproduct/products', 'admin.add_product.products');
@@ -65,14 +67,38 @@ Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo
 Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
 Route::view('admin/websiteupdate/customersfeedback', 'admin.website_update.customersFeedback');
 Route::view('admin/websiteupdate/reviewscarousel', 'admin.website_update.reviewsCarousel');
+    Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
+    Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
+
+});
 //Services
 Route::view('admin/services/', 'admin.services.service');
 
 
-//User Dashboard
-Route::view('userdashboard/userdashboard', 'user dashboard.userdashboard');
-Route::view('userdashboard/userprofile', 'user dashboard.userprofile');
+//User
+Route::group(['middleware' => ['auth', 'user']], function () {
+    Route::get('user/userdashboard', 'User\UserController@recentOrder');
+    Route::view('user/userprofile','User.userprofile');
+});
+
 
 Auth::routes();
 
+
+Route::get('/billings', function () {
+    return view('website/billings');
+});
+
+Route::get('/contact','Website\WebsiteDetailController@showDetails');
+
+
+Route::get('/','Website\ProductController@index');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');
+
+Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
+
+Route::post('/registerUser','User\UserController@registeruser');
+

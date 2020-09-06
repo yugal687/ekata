@@ -66,32 +66,31 @@
                 </div>
             </div>
             <div class="col-lg-10 col-md-12">
+                @foreach($getsingleCategory as $singleCategory)
                 <div class="row">
                     <div class="col-12" style="padding: 0;">
                         <nav aria-label="breadcrumb" class="">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Category</a></li>
-                                <li class="breadcrumb-item"><a href="#">Dry Goods</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Rice</li>
+                                <li class="breadcrumb-item"><a href="{{route('maincategory',$singleCategory->id)}}">{{$singleCategory->category_name}}</a></li>
                             </ol>
                         </nav>
                     </div>
                 </div>
                 <main class="p-1 p-sm-3 p-md-4 p-lg-5">
-                    @foreach($getsingleCategory as $singleCategory)
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <div class="overlayImage">
-                                <img
-                                    src="{{ asset('images/Catagory_Page/Chinese-dry-spices-and-condiments-1024x620.jpg') }}"
-                                    class="categoryBannerImage img-fluid" alt="">
-                                <div class="overlayBackground"></div>
-                                <div class="overlayText">{{$singleCategory->category_name}}</div>
+
+                        <div class="row pb-3">
+                            <div class="col-12">
+                                <div class="overlayImage">
+                                    <img
+                                        src="{{ $singleCategory->image }}"
+                                        class="categoryBannerImage img-fluid" alt="">
+                                    <div class="overlayBackground"></div>
+                                    <div class="overlayText">{{$singleCategory->category_name}}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                        <div class="row">
 
                             @foreach($singleCategory->children as $subCategory)
                                 <div class="col-md-12 mt-5">
@@ -107,6 +106,8 @@
                                         @foreach($subCategory->product as $product)
                                             <div
                                                 class="col-md-3 col-sm-6 col-12 mt-5 d-flex flex-column justify-centent-center align-items-center">
+                                                <a href="{{route('singleproduct',$product->id)}}">
+
                                                 <div
                                                     class="img-div bg-product-medium py-4 px-4 rounded-top-front rounded-bottom-front mx-auto">
                                                     <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" class="img-fluid" alt="">
@@ -118,16 +119,17 @@
                                                         class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                                                     Add to Cart
                                                 </button>
+                                                </a>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                             @endforeach
 
-                    </div>
-                    @endforeach
-                </main>
+                        </div>
 
+                </main>
+                @endforeach
             </div>
         </div>
     </div>

@@ -1,7 +1,10 @@
 <div id="accordion" class="px-3 pt-4 pb-2">
+
     <ul>
-        @foreach($getCategory as $category)
+
+
             <li class="main-li">
+                @foreach($getCategory as $category)
                 <h3>
                     <span class="icon-dashboard"></span>
                     <a href="{{route('maincategory',$category->id)}}">{{$category->category_name}}</a>
@@ -9,14 +12,13 @@
                 </h3>
                 <ul>
                     @foreach($category->children as $subCategory)
-                        <li class=""><a
-                                href="{{url('web/category/'.$subCategory->id)}}">{{$subCategory->category_name}}</a>
-                        </li>
+                        <li class="">
+                            <a href="{{route('category',$subCategory->id)}}">
+                                {{$subCategory->category_name}}</a></li>
                     @endforeach
                 </ul>
-
+                @endforeach
             </li>
-        @endforeach
     <!-- we will keep this LI open by default -->
     </ul>
 </div>

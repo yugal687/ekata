@@ -162,7 +162,7 @@
                                 {{--<li class="nav-item">
                                     <a href="/admin/userdashboard" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>User Dashboard</p>
+                                        <p>User</p>
                                     </a>
                                 </li>--}}
                             </ul>

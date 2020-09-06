@@ -34,8 +34,18 @@
                                                 </el-input>
                                             </el-form-item>
                                             <el-form-item label="Contact Number" prop="optioanlContactNumber">
-                                                <el-input v-model="websiteInfoForm.optioanlContactNumber"
+                                                <el-input v-model="websiteInfoForm.optionalContactNumber"
                                                           style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Additional Information"
+                                                          prop="additionalInformation">
+                                                <el-input
+                                                    type="textarea"
+                                                    v-model="websiteInfoForm.information"
+                                                    :autosize="{ minRows: 3, maxRows: 4}"
+                                                    placeholder="Please input additional Information"
+                                                >
                                                 </el-input>
                                             </el-form-item>
                                             <el-form-item>
@@ -56,36 +66,42 @@
                                 <span>Website Information</span>
                             </div>
                             <div class="text">
-                                <dl class="row">
+                                <dl class="row" v-for="details in WebsiteDetail">
                                     <dt class="col-sm-5">
                                         Email
                                     </dt>
                                     <dd class="col-sm-7">
-                                        {{ email }}
+                                        {{ details.email }}
                                     </dd>
                                     <dt class="col-sm-5">
                                         Contact Number
                                     </dt>
                                     <dd class="col-sm-7">
-                                        {{ contactNumber }}
+                                        {{ details.contact_number }}
                                     </dd>
                                     <dt class="col-sm-5">
                                         Address
                                     </dt>
                                     <dd class="col-sm-7">
-                                        {{ address }}
+                                        {{ details.address }}
                                     </dd>
                                     <dt class="col-sm-5">
                                         Optional Email
                                     </dt>
                                     <dd class="col-sm-7">
-                                        {{ optionalEmail }}
+                                        {{ details.optional_email }}
                                     </dd>
                                     <dt class="col-sm-5">
                                         Optional Contact Number
                                     </dt>
                                     <dd class="col-sm-7">
-                                        {{ optionalContactNumber }}
+                                        {{ details.optional_contact }}
+                                    </dd>
+                                    <dt class="col-sm-5">
+                                        Addtional Information
+                                    </dt>
+                                    <dd class="col-sm-7">
+                                        {{ details.additional_information }}
                                     </dd>
                                 </dl>
                             </div>
@@ -109,6 +125,7 @@ name: "websiteInfoComponent",
                 address: '',
                 optionalEmail: '',
                 optionalContactNumber: '',
+                information: '',
             },
             type: [],
             websiteInfoRules: {
@@ -123,19 +140,38 @@ name: "websiteInfoComponent",
                     {required: true, message: 'Please input address', trigger: 'blur'},
                 ]
             },
-            email: 'email@gmail.com',
-            optionalEmail: 'email@gmail.com',
-            contactNumber: '1234567890',
-            optionalContactNumber: '1234567890',
-            address: 'A description list is perfect for defining terms',
-
+            WebsiteDetail:[],
         }
     },
+    mounted(){
+    axios.get('/api/getWebsiteDetail',{}).then(response=>{
+       this.WebsiteDetail = response.data.WebsiteDetail;
+    });
+    },
     methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
+        submitForm(websiteInfoForm) {
+            this.$refs[websiteInfoForm].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    let formData = new FormData();
+                    formData.append('email',this.websiteInfoForm.email);
+                    formData.append('contact_number',this.websiteInfoForm.contactNumber);
+                    formData.append('address',this.websiteInfoForm.address);
+                    formData.append('additional_information',this.websiteInfoForm.information);
+                    formData.append('optional_email',this.websiteInfoForm.optionalEmail);
+                    formData.append('optional_contact',this.websiteInfoForm.optionalContactNumber);
+
+                    axios.post('/api/postWebsiteDetail',formData, {
+                       headers: {
+                           'Content-Type': 'multipart/form-data'
+                       }
+
+                   }).then(response => {
+                       alert(response.data.message);
+                   }).catch(error => {
+                       if (error.response.status == 422) {
+                           this.errors = error.response.data.errors;
+                       }
+                   });
                 } else {
                     console.log('error submit!!');
                     return false;
