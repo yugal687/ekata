@@ -3761,7 +3761,11 @@ __webpack_require__.r(__webpack_exports__);
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            alert(response.data.message);
+            _this2.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
           });
         } else {
           console.log('error submit!!');
@@ -3770,8 +3774,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     handleDelete: function handleDelete(id) {
+      var _this3 = this;
+
       axios.patch('/api/deleteDiscount/' + id, {}).then(function (response) {
-        alert(response.data.message);
+        _this3.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     }
   },
@@ -3784,13 +3794,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     axios.get('/api/getDiscountedProduct', {}).then(function (response) {
-      _this3.getDiscountedProduct = response.data.getDiscountedProduct;
+      _this4.getDiscountedProduct = response.data.getDiscountedProduct;
     });
     axios.get('/api/getProduct', {}).then(function (response) {
-      _this3.getProduct = response.data.getProduct;
+      _this4.getProduct = response.data.getProduct;
     });
   }
 });
@@ -4074,7 +4084,11 @@ __webpack_require__.r(__webpack_exports__);
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            alert(response.data.message);
+            _this2.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
           })["catch"](function (error) {
             if (error.response.status == 422) {
               _this2.errors = error.response.data.errors;
@@ -4547,8 +4561,16 @@ __webpack_require__.r(__webpack_exports__);
       console.log(index, row);
     },
     handleDelete: function handleDelete(id) {
+      var _this2 = this;
+
       axios["delete"]('/api/deleteProduct/' + id).then(function (response) {
-        alert(response.data.message);
+        _this2.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
+        /*alert(response.data.message);*/
+
       });
     },
 
@@ -4559,20 +4581,24 @@ __webpack_require__.r(__webpack_exports__);
 
     /*Edit Datas*/
     submitForm: function submitForm(formName) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          var tag = _this2.inputTags;
+          var tag = _this3.inputTags;
           console.log(tag);
           var formData = new FormData();
           tag.forEach(function (v, k) {
             formData.append("tag[".concat(k, "]"), v);
           });
-          formData.append('editedProduct', JSON.stringify(_this2.editProduct));
+          formData.append('editedProduct', JSON.stringify(_this3.editProduct));
           axios.post('/api/editProduct', formData, {//  editedProduct : this.editProduct,
           }).then(function (response) {
-            alert(response.data.message);
+            _this3.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
           });
         } else {
           console.log('error submit!!');
@@ -4586,11 +4612,11 @@ __webpack_require__.r(__webpack_exports__);
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
     showInput: function showInput() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.inputVisible = true;
       this.$nextTick(function (_) {
-        _this3.$refs.saveTagInput.$refs.input.focus();
+        _this4.$refs.saveTagInput.$refs.input.focus();
       });
     },
     handleInputConfirm: function handleInputConfirm() {
@@ -4746,7 +4772,11 @@ __webpack_require__.r(__webpack_exports__);
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            alert(response.data.message);
+            _this2.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
           })["catch"](function (error) {
             if (error.response.status == 422) {
               _this2.errors = error.response.data.errors;
@@ -4759,18 +4789,36 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     setActive: function setActive(id) {
+      var _this3 = this;
+
       axios.patch('/api/activeBanner/' + id).then(function (response) {
-        alert(response.data.message);
+        _this3.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
       });
     },
     setInActive: function setInActive(id) {
+      var _this4 = this;
+
       axios.patch('/api/inactiveBanner/' + id).then(function (response) {
-        alert(response.data.message);
+        _this4.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
       });
     },
     deleteImage: function deleteImage(id) {
+      var _this5 = this;
+
       axios["delete"]('/api/deleteBanner/' + id).then(function (response) {
-        alert(response.data.message);
+        _this5.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     }
   }
@@ -5295,6 +5343,7 @@ __webpack_require__.r(__webpack_exports__);
       labelPosition: 'top',
       monthYear: '',
       dialogFormVisible: false,
+      summernote: '',
       serviceForm: {
         title: '',
         date: '',
@@ -5331,30 +5380,40 @@ __webpack_require__.r(__webpack_exports__);
       },
 
       /*Table Data's*/
-      tableData: [{
-        title: 'Title One',
-        postedMonth: '2020-02'
-      }, {
-        title: 'Title Two',
-        postedMonth: '2020-03'
-      }, {
-        title: 'Title Three',
-        postedMonth: '2020-03'
-      }, {
-        title: 'Title Four',
-        postedMonth: '2020-04'
-      }, {
-        title: 'Title Five',
-        postedMonth: '2020-04'
-      }],
+      tableData: [],
       search: ''
     };
   },
   methods: {
+    singleService: function singleService(id) {
+      this.serviceFormEdit = this.serviceForm.filter(function (serviceForm) {
+        return serviceForm.id == id;
+      });
+    },
     saveService: function saveService(formName) {
+      var _this = this;
+
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          var formData = new FormData();
+          formData.append('title', _this.serviceForm.title);
+          formData.append('date', _this.serviceForm.date);
+          formData.append('details', _this.summernote);
+          axios.post('/api/saveService', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            _this.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
+          })["catch"](function (error) {
+            if (error.response.status == 422) {
+              _this.errors = error.response.data.errors;
+            }
+          });
         } else {
           console.log('error submit!!');
           return false;
@@ -5362,17 +5421,44 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateService: function updateService(formName) {
+      var _this2 = this;
+
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          alert('submit!');
+          axios.patch('/api/saveEditService', {
+            editService: _this2.serviceFormEdit
+          }).then(function (response) {
+            _this2.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
+          });
         } else {
           console.log('error submit!!');
           return false;
         }
       });
+    },
+    deleteService: function deleteService(id) {
+      var _this3 = this;
+
+      axios["delete"]('/api/deleteService/' + id).then(function (response) {
+        _this3.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
+      });
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this4 = this;
+
+    axios.get('/api/getService', {}).then(function (response) {
+      _this4.tableData = response.data.service;
+    });
+  }
 });
 
 /***/ }),
@@ -5574,19 +5660,31 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     saveEditBrand: function saveEditBrand() {
+      var _this2 = this;
+
       axios.post('/api/saveEditBrand', {
         editBrand: this.editBrands
       }).then(function (response) {
-        alert(response.data.message);
+        _this2.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
       });
     },
     deleteBrand: function deleteBrand(id) {
+      var _this3 = this;
+
       axios["delete"]('/api/deleteBrand/' + id).then(function (response) {
-        alert(response.data.message);
+        _this3.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     },
     submitBrand: function submitBrand(brandForm) {
-      var _this2 = this;
+      var _this4 = this;
 
       var formdata = new FormData();
       formdata.append('brand_name', this.brandForm.name);
@@ -5595,10 +5693,14 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        alert(response.data.message);
+        _this4.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this2.errors = error.response.data.errors;
+          _this4.errors = error.response.data.errors;
         }
       });
     },
@@ -6394,19 +6496,31 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     saveEditTag: function saveEditTag() {
+      var _this2 = this;
+
       axios.post('/api/saveEditTag', {
         editTag: this.editTags
       }).then(function (response) {
-        alert(response.data.message);
+        _this2.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
       });
     },
     deleteTag: function deleteTag(id) {
+      var _this3 = this;
+
       axios["delete"]('/api/deleteTag/' + id).then(function (response) {
-        alert(response.data.message);
+        _this3.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     },
     submitTag: function submitTag(tagForm) {
-      var _this2 = this;
+      var _this4 = this;
 
       var formData = new FormData();
       formData.append('tags', this.tagForm.name);
@@ -6415,10 +6529,14 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        alert(response.data.message);
+        _this4.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this2.errors = error.response.data.errors;
+          _this4.errors = error.response.data.errors;
         }
       });
     },
@@ -6840,9 +6958,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleDelete: function handleDelete(id) {
+      var _this2 = this;
+
       axios["delete"]('/api/deleteFeedback/' + id).then(function (response) {
-        alert(response.data.message);
-        l;
+        _this2.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     }
   }
@@ -6941,8 +7064,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleDelete: function handleDelete(id) {
+      var _this2 = this;
+
       axios["delete"]('/api/deleteEnquiry/' + id).then(function (response) {
-        alert(response.data.message);
+        _this2.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     }
   }
@@ -7088,7 +7217,11 @@ __webpack_require__.r(__webpack_exports__);
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            alert(response.data.message);
+            _this2.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
           })["catch"](function (error) {
             if (error.response.status == 422) {
               _this2.errors = error.response.data.errors;
@@ -7101,18 +7234,36 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     setActive: function setActive(id) {
+      var _this3 = this;
+
       axios.patch('/api/activeReview/' + id).then(function (response) {
-        alert(response.data.message);
+        _this3.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'success'
+        });
       });
     },
     setInActive: function setInActive(id) {
+      var _this4 = this;
+
       axios.patch('/api/inactiveReview/' + id).then(function (response) {
-        alert(response.data.message);
+        _this4.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     },
     deleteImage: function deleteImage(id) {
+      var _this5 = this;
+
       axios["delete"]('/api/deleteReview/' + id).then(function (response) {
-        alert(response.data.message);
+        _this5.$notify({
+          title: 'Success',
+          message: response.data.message,
+          type: 'info'
+        });
       });
     }
   }
@@ -7307,10 +7458,18 @@ __webpack_require__.r(__webpack_exports__);
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            alert(response.data.message);
+            _this2.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
           })["catch"](function (error) {
             if (error.response.status == 422) {
-              _this2.errors = error.response.data.errors;
+              _this2.$notify({
+                title: 'Error',
+                message: error.response.data.errors,
+                type: 'error'
+              });
             }
           });
         } else {
@@ -14578,7 +14737,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.text[data-v-06356278] {\r\n    font-size: 14px;\n}\n.item[data-v-06356278] {\r\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\r\n.clearfix[data-v-06356278]:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\r\n    clear: both\n}\r\n", ""]);
+exports.push([module.i, "\n.text[data-v-06356278] {\n    font-size: 14px;\n}\n.item[data-v-06356278] {\n    margin-bottom: 18px;\n}\n.clearfix[data-v-06356278]:before,\n.clearfix[data-v-06356278]:after {\n    display: table;\n    content: \"\";\n}\n.clearfix[data-v-06356278]:after {\n    clear: both\n}\n", ""]);
 
 // exports
 
@@ -14616,7 +14775,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container-fluid .row[data-v-dde1964c] {\r\n    margin-left: 0;\r\n    margin-right: 0;\n}\r\n\r\n/*.hidden {\r\n    display: none;\r\n}*/\n.box-card-slide[data-v-dde1964c] {\r\n    border: 1px solid #EBEEF5;\r\n    background-color: #FFF;\r\n    color: #303133;\r\n    border-radius: 4px;\r\n    overflow: hidden;\r\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-dde1964c] {\r\n    padding: 18px 20px;\r\n    border-bottom: 1px solid #EBEEF5;\r\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-dde1964c] {\r\n    padding: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.container-fluid .row[data-v-dde1964c] {\n    margin-left: 0;\n    margin-right: 0;\n}\n\n/*.hidden {\n    display: none;\n}*/\n.box-card-slide[data-v-dde1964c] {\n    border: 1px solid #EBEEF5;\n    background-color: #FFF;\n    color: #303133;\n    border-radius: 4px;\n    overflow: hidden;\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-dde1964c] {\n    padding: 18px 20px;\n    border-bottom: 1px solid #EBEEF5;\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-dde1964c] {\n    padding: 20px;\n}\n", ""]);
 
 // exports
 
@@ -14654,7 +14813,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container-fluid .row[data-v-2c46a6d6] {\r\n    margin-left: 0;\r\n    margin-right: 0;\n}\n.box-card-slide[data-v-2c46a6d6] {\r\n    border: 1px solid #EBEEF5;\r\n    background-color: #FFF;\r\n    color: #303133;\r\n    border-radius: 4px;\r\n    overflow: hidden;\r\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-2c46a6d6] {\r\n    padding: 18px 20px;\r\n    border-bottom: 1px solid #EBEEF5;\r\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-2c46a6d6] {\r\n    padding: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.container-fluid .row[data-v-2c46a6d6] {\n    margin-left: 0;\n    margin-right: 0;\n}\n.box-card-slide[data-v-2c46a6d6] {\n    border: 1px solid #EBEEF5;\n    background-color: #FFF;\n    color: #303133;\n    border-radius: 4px;\n    overflow: hidden;\n    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n}\n.box-card-slide .box-header[data-v-2c46a6d6] {\n    padding: 18px 20px;\n    border-bottom: 1px solid #EBEEF5;\n    box-sizing: border-box;\n}\n.box-card-slide .box-body[data-v-2c46a6d6] {\n    padding: 20px;\n}\n", ""]);
 
 // exports
 
@@ -107962,7 +108121,7 @@ var render = function() {
                         data.title
                           .toLowerCase()
                           .includes(_vm.search.toLowerCase()) ||
-                        data.postedMonth.includes(_vm.search)
+                        data.date.includes(_vm.search)
                       )
                     }),
                     border: "",
@@ -107975,7 +108134,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "postedMonth", label: "Posted Time" }
+                    attrs: { prop: "date", label: "Posted Time" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
@@ -108013,6 +108172,11 @@ var render = function() {
                                   type: "button",
                                   "data-toggle": "modal",
                                   "data-target": "#serviceEditModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.singleService(scope.row.id)
+                                  }
                                 }
                               },
                               [_c("i", { staticClass: "fas fa-edit" })]
@@ -108026,10 +108190,7 @@ var render = function() {
                               },
                               on: {
                                 click: function($event) {
-                                  return _vm.handleDelete(
-                                    scope.$index,
-                                    scope.row
-                                  )
+                                  return _vm.deleteService(scope.row.id)
                                 }
                               }
                             })
@@ -109284,7 +109445,10 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
-                            attrs: { prop: "parent_id", label: "Category Name" }
+                            attrs: {
+                              prop: "parent.category_name",
+                              label: "Category Name"
+                            }
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
@@ -127670,8 +127834,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\New Projects\Ekata_Convenience_store\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ajits\PhpstormProjects\Ekata_Convenience_Store\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

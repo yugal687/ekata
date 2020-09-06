@@ -80,7 +80,11 @@
         methods: {
             handleDelete(id){
                 axios.delete('/api/deleteEnquiry/'+id).then(response=>{
-                   alert(response.data.message);
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'info'
+                    });
                 });
             }
         }

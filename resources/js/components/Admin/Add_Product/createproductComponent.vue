@@ -260,7 +260,11 @@
                                 }
 
                             }).then(response => {
-                                alert(response.data.message);
+                                this.$notify({
+                                    title: 'Success',
+                                    message: response.data.message,
+                                    type: 'success'
+                                });
                             }).catch(error => {
                                 if (error.response.status == 422) {
                                     this.errors = error.response.data.errors;

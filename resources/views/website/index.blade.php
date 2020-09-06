@@ -458,12 +458,16 @@
                 </div>
             </div>
             <div id="new_arrival_carousel_item" class="owl-carousel owl-theme m-0 p-0">
+                @foreach($latestProduct as $lastproduct)
+
                 <div class="item">
+
                     <div class="container">
                         <div class="row m-0 p-0 my-4">
+
                             <div
                                 class="col-md-6 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                <img src="{{ asset('images/Product_pngs/khukuri.png') }}" class="img-fluid p-3"
+                                <img src="{{$lastproduct->image[0]->name}}" class="img-fluid p-3"
                                      alt="">
                             </div>
                             <div class="col-md-6">
@@ -474,7 +478,7 @@
                                         </dt>
                                         <dd class="col-sm-7">
                                             <!-- product name here -->
-                                            <h5 class="font-weight-normal">Khukuri (Knife)</h5>
+                                            <h5 class="font-weight-normal">{{$lastproduct->product_name}}</h5>
                                         </dd>
 
                                         <dt class="col-sm-5 font-weight-bold ">
@@ -482,7 +486,7 @@
                                         </dt>
                                         <dd class="col-sm-7">
                                             <!-- product category here -->
-                                            <h5 class="font-weight-normal">Accessories</h5>
+                                            <h5 class="font-weight-normal">{{$lastproduct->category->category_name}}</h5>
                                         </dd>
 
                                         <dt class="col-sm-5 font-weight-bold ">
@@ -490,9 +494,7 @@
                                         </dt>
                                         <dd class="col-sm-7 ">
                                             <!-- product description here -->
-                                            <h5 class="font-weight-normal ">Khukuri is one of the National weapen of
-                                                Nepal.
-                                                Etiam porta sem malesuada magna mollis euismod.</h5>
+                                            <h5 class="font-weight-normal ">{{$lastproduct->additional_information}}</h5>
                                         </dd>
 
 
@@ -501,7 +503,7 @@
                                         </dt>
                                         <dd class="col-sm-7">
                                             <!-- product price here -->
-                                            <h5 class="font-weight-bold text-main-secondary">$ 359.99</h5>
+                                            <h5 class="font-weight-bold text-main-secondary">{{$lastproduct->price}}</h5>
                                         </dd>
 
                                         <div class="col-sm-12">
@@ -514,8 +516,12 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
+                @endforeach
+
             </div>
         </div>
         <section id="general-slider" class="bg-product-light mt-5">
@@ -529,7 +535,7 @@
                                         <div
                                             class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
 
-                                            <img src="{{ asset('images/Product_pngs/masala.png') }}"
+                                            <img src="{{$lastproduct->image[0]->name}}"
                                                  class="img-fluid p-2"
                                                  alt="">
                                         </div>

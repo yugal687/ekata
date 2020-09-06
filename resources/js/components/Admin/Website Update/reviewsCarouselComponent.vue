@@ -127,7 +127,11 @@
                             }
 
                         }).then(response => {
-                            alert(response.data.message);
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
                         }).catch(error => {
                             if (error.response.status == 422) {
                                 this.errors = error.response.data.errors;
@@ -141,18 +145,30 @@
             },
             setActive(id) {
                 axios.patch('/api/activeReview/'+id).then(response=>{
-                    alert(response.data.message);
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
                 });
             },
             setInActive(id) {
                 axios.patch('/api/inactiveReview/' + id).then(response => {
-                    alert(response.data.message);
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'info'
+                    });
                 });
             },
             deleteImage(id) {
                 axios.delete('/api/deleteReview/'+id)
                     .then(response=>{
-                        alert(response.data.message);
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
                     });
             },
         }

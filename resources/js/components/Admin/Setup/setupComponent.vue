@@ -225,7 +225,7 @@
                                         label="Subcategory Name">
                                     </el-table-column>
                                     <el-table-column
-                                        prop="parent_id"
+                                        prop="parent.category_name"
                                         label="Category Name">
                                     </el-table-column>
                                     <el-table-column

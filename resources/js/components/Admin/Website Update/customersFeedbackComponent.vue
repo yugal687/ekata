@@ -75,7 +75,11 @@
         methods: {
             handleDelete(id) {
                 axios.delete('/api/deleteFeedback/' + id).then(response => {
-                    alert(response.data.message);l
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'info'
+                    });
                 });
             }
         }

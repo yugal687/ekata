@@ -153,6 +153,7 @@
                 labelPosition: 'top',
                 monthYear: '',
                 dialogFormVisible: false,
+                summernote:'',
                 serviceForm: {
                     title: '',
                     date: '',
@@ -194,14 +195,18 @@
                         let formData = new FormData();
                         formData.append('title',this.serviceForm.title);
                         formData.append('date',this.serviceForm.date);
-                        formData.append('details',this.serviceForm.details);
+                        formData.append('details',this.summernote);
                         axios.post('/api/saveService',formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                             }
 
                         }).then(response => {
-                            alert(response.data.message);
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
                         }).catch(error => {
                             if (error.response.status == 422) {
                                 this.errors = error.response.data.errors;
@@ -219,7 +224,11 @@
                         axios.patch('/api/saveEditService', {
                             editService: this.serviceFormEdit
                         }).then(response => {
-                            alert(response.data.message);
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
                         });
                     } else {
                         console.log('error submit!!');
@@ -230,7 +239,11 @@
             deleteService(id) {
                 axios.delete('/api/deleteService/' + id)
                     .then(response => {
-                        alert(response.data.message);
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
                     });
             },
         },

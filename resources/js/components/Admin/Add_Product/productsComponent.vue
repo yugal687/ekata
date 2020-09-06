@@ -431,8 +431,13 @@
             },
             handleDelete(id) {
                 axios.delete('/api/deleteProduct/' + id)
-                    .then(response => {
-                        alert(response.data.message);
+                    .then(response=>{
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+                        /*alert(response.data.message);*/
                     });
             },
             /*Client Information Tab---*/
@@ -454,7 +459,11 @@
                         axios.post('/api/editProduct',formData,{
                           //  editedProduct : this.editProduct,
                         }).then(response=>{
-                            alert(response.data.message);
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
                         });
                     } else {
                         console.log('error submit!!');

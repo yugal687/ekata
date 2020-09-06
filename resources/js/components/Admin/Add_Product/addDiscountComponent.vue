@@ -196,7 +196,11 @@ export default {
                             'Content-Type': 'multipart/form-data'
                         }
                     }).then(response=>{
-                       alert(response.data.message);
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'success'
+                        });
                     });
                 } else {
                     console.log('error submit!!');
@@ -207,7 +211,11 @@ export default {
         handleDelete(id) {
             axios.patch('/api/deleteDiscount/'+id,{})
                 .then(response=>{
-                   alert(response.data.message);
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'info'
+                    });
                 });
         }
     },

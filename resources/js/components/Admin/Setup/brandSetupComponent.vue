@@ -184,13 +184,21 @@ export default {
             axios.post('/api/saveEditBrand', {
                 editBrand: this.editBrands
             }).then(response => {
-                alert(response.data.message);
+                this.$notify({
+                    title: 'Success',
+                    message: response.data.message,
+                    type: 'success'
+                });
             });
         },
         deleteBrand(id) {
             axios.delete('/api/deleteBrand/' + id)
                 .then(response => {
-                    alert(response.data.message);
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'info'
+                    });
                 });
         },
         submitBrand(brandForm) {
@@ -204,7 +212,11 @@ export default {
                 }
 
             }).then(response => {
-                alert(response.data.message);
+                this.$notify({
+                    title: 'Success',
+                    message: response.data.message,
+                    type: 'success'
+                });
             }).catch(error => {
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
