@@ -46,7 +46,7 @@
                 <el-card class="box-card">
                     <el-table
                         :data="tableData.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase())
-                    || data.postedMonth.includes(search))"
+                    || data.date.includes(search))"
                         border
                         max-height="470"
                         style="width: 100%">
@@ -55,7 +55,7 @@
                             label="Title">
                         </el-table-column>
                         <el-table-column
-                            prop="postedMonth"
+                            prop="date"
                             label="Posted Time">
                         </el-table-column>
                         <el-table-column
@@ -74,12 +74,12 @@
                                            icon="fas fa-edit"
                                            @click="dialogFormVisible = true">
                                 </el-button>-->
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#serviceEditModal"><i class="fas fa-edit"></i> </button>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#serviceEditModal" @click="singleService(scope.row.id)"><i class="fas fa-edit"></i> </button>
                                 <el-button
                                     size="mini"
                                     type="danger"
                                     icon="fas fa-trash"
-                                    @click="handleDelete(scope.$index, scope.row)">
+                                    @click="deleteService(scope.row.id)">
                                 </el-button>
                             </template>
                         </el-table-column>
@@ -180,30 +180,33 @@
                     ]
                 },
                 /*Table Data's*/
-                tableData: [{
-                    title: 'Title One',
-                    postedMonth: '2020-02'
-                }, {
-                    title: 'Title Two',
-                    postedMonth: '2020-03'
-                }, {
-                    title: 'Title Three',
-                    postedMonth: '2020-03'
-                }, {
-                    title: 'Title Four',
-                    postedMonth: '2020-04'
-                }, {
-                    title: 'Title Five',
-                    postedMonth: '2020-04'
-                }],
+                tableData: [],
                 search: '',
             }
         },
         methods: {
+            singleService(id){
+              this.serviceFormEdit = this.serviceForm.filter(serviceForm=>(serviceForm.id == id));
+            },
             saveService(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        let formData = new FormData();
+                        formData.append('title',this.serviceForm.title);
+                        formData.append('date',this.serviceForm.date);
+                        formData.append('details',this.serviceForm.details);
+                        axios.post('/api/saveService',formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -213,17 +216,30 @@
             updateService(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        axios.patch('/api/saveEditService', {
+                            editService: this.serviceFormEdit
+                        }).then(response => {
+                            alert(response.data.message);
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
-            }
+            },
+            deleteService(id) {
+                axios.delete('/api/deleteService/' + id)
+                    .then(response => {
+                        alert(response.data.message);
+                    });
+            },
         },
 
         mounted() {
-
+            axios.get('/api/getService', {})
+                .then(response => {
+                    this.tableData = response.data.service;
+                });
         }
     }
 </script>

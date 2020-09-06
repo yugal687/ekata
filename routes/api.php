@@ -69,3 +69,8 @@ Route::delete('/deleteEnquiry/{id}','Website\EnquiryController@deleteEnquiry');
 Route::get('/fetchFeedback','Website\FeedbackController@fetchFeedback');
 Route::delete('/deleteFeedback/{id}','Website\FeedbackController@deleteFeedback');
 
+/* Service Requests */
+Route::post('/saveService','Admin\ServiceController@addService');
+Route::get('/getService','Admin\ServiceController@fetchService');
+Route::delete('/deleteService/{id}','Admin\ServiceController@deleteService');
+Route::patch('/saveEditService','Admin\ServiceController@saveEditService');
