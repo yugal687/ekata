@@ -22,12 +22,10 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
- /*
     // protected $redirectTo = RouteServiceProvider::AdminHOME;
 
     public function redirectTo()
     {
-//        dd(Auth::user()->role->role);
         $role = Auth::user()->role->role;
         switch ($role) {
             case 'admin':
@@ -42,11 +40,7 @@ class LoginController extends Controller
         }
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public
     function __construct()
     {

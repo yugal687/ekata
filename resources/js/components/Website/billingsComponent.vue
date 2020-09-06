@@ -17,6 +17,7 @@
                                 <ul class="checkout-bar">
                                     <li class="progressbar-dots active"><span>step 1</span></li>
                                     <li class="progressbar-dots"><span>step 2</span></li>
+                                    <li class="progressbar-dots"><span>step 3</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -27,36 +28,55 @@
                                 <h3 class="fs-subtitle">Please Fill Up Billing Address</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* First Name">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.first_name"
+                                               placeholder="* First Name">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* Last Name">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.last_name"
+
+                                               placeholder="* Last Name">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* Address">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.address"
+
+                                               placeholder="* Address">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* Optional Address ">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.suburb"
+
+                                               placeholder="* Suburb">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-8">
-                                        <input type="text" class="form-control" placeholder="* City">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.state"
+
+                                               placeholder="* State">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <input type="value" class="form-control" placeholder="* Postal Code ">
+                                        <input type="value" class="form-control"
+                                               v-model="billingAddress.postal_code"
+
+                                               placeholder="* Postal Code ">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="email" class="form-control" placeholder="* E-mail">
+                                        <input type="email" class="form-control"
+                                               v-model="billingAddress.email"
+                                               placeholder="* E-mail">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="value" class="form-control" placeholder="* Phone No">
+                                        <input type="value" class="form-control" placeholder="* Contact Number">
                                     </div>
                                 </div>
 
@@ -73,55 +93,68 @@
                                     <h3 class="fs-subtitle">Please Fill Up Shipping Address</h3>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <input type="text" class="form-control" id="firstname"
+                                            <input type="text"
+                                                   v-model="shippingAddress.first_name"
+                                                   class="form-control" id="firstname"
                                                    placeholder="* First Name">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <input type="text" class="form-control" id="lastname"
+                                                   v-model="shippingAddress.last_name"
+
                                                    placeholder="* Last Name">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <input type="text" class="form-control"
+                                                   v-model="shippingAddress.address"
+
                                                    placeholder="* Address">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <input type="text" class="form-control"
-                                                   placeholder="* Optional Address ">
+                                                   v-model="shippingAddress.suburb"
+
+                                                   placeholder="* Suburb ">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
-                                            <input type="text" class="form-control" placeholder="* City">
+                                            <input type="text" class="form-control" placeholder="* State">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <input type="value" class="form-control"
+                                                   v-model="shippingAddress.state"
+
                                                    placeholder="* Postal Code ">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <input type="email" class="form-control"
+                                                   v-model="shippingAddress.email"
+
                                                    placeholder="* E-mail">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <input type="value" class="form-control"
-                                                   placeholder="* Phone No">
+                                                   v-model="shippingAddress.contact_number"
+                                                   placeholder="* Contact Number">
                                         </div>
                                     </div>
                                 </div>
 
-                                <input type="button" name="next" class="next action-button" value="Next"/>
+                                <input type="button" name="next" class="next action-button" value="Proceed to Payment"/>
 
                                 <!--<input type="button" name="next" class="next-btn next-btn1" value="Next"/>-->
 
                             </div>
                             <div class="tab-pane" id="step2">
                                 <h2 class="fs-title">Payment Information</h2>
-                                <h3 class="fs-subtitle">Please Fill Up Paymennt Information</h3>
+                                <h3 class="fs-subtitle">Please Fill Up Payment Information</h3>
                                 <div class="row mb-3">
                                     <div class="col-12 text-left">
                                         <button type="button" class="btn btn-primary" id="creditCard">Credit Card
@@ -154,6 +187,13 @@
                                                            placeholder="Card Holder Name">
                                                 </div>
                                             </div>
+                                            <div class="row mt-3">
+                                                <input type="button" name="pay" class="pay action-button"
+                                                       value="Pay Now"/>
+                                            </div>
+                                            <!-- <div class="row mt-3">
+                                                 <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
+                                             </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -161,15 +201,37 @@
                                 <div class="paypal">
                                     <div class="row">
                                         <div class="col-12">
+                                            <div class="mt-3" id="paypal-button">
+                                            </div>
+
+                                            <button type="button" @click="paypalCheckOut()" class="btn btn-warning">
+                                                Check Out with Paypal
+                                            </button>
+
 
                                         </div>
                                     </div>
                                 </div>
 
-                                <input type="button" name="previous" class="prev action-button-previous"
+                                <input type="button" name="previous" class="prev action-button-previous mt-5"
                                        value="Previous"/>
-                                <!--<input type="button" name="next" class="next action-button" value="Next"/>-->
                                 <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
+                                <!--<input type="button" name="next" class="next action-button" value="Next"/>-->
+                            </div>
+                            <div class="tab-pane" id="step3">
+                                <h4 style="font-size: 18px"><i class="fas fa-check-circle text-success"
+                                                               style="font-size: 22px"></i> Congratulations! Your order
+                                    was successfully placed</h4>
+                                <div class="order-items text-left mt-3 ml-5" style="border-bottom: 1px solid #2b2b2b40">
+                                    <b>Order ID is <span class="text-main-primary"> 123456 </span></b> <br/>
+                                    <b>Shipping Address</b><br/>
+                                    <p>Address------- <br/>
+                                        Suburb Name -----<br/>
+                                        State ------<br/>
+                                        Postal Code ------<br/>
+                                        Contact Number ------</p>
+                                </div>
+
                             </div>
                         </div>
 
@@ -256,33 +318,70 @@
         data() {
             return {
                 discountPrice: 0,
+                shippingAddress: {
+                    first_name: '',
+                    last_name: '',
+                    address: '',
+                    suburb: '',
+                    state: '',
+                    postal_code: '',
+                    email: '',
+                    contact_number: ''
+                },
+                billingAddress: {
+                    first_name: '',
+                    last_name: '',
+                    address: '',
+                    suburb: '',
+                    state: '',
+                    postal_code: '',
+                    email: '',
+                    contact_number: ''
+                },
+
             }
         },
-        methods: {}
-        ,
         mounted() {
             this.$store.dispatch('fetchStoredProduct');
             this.$store.dispatch('totalPrice');
-            console.log(this.$store.state.storedLocalStorageProduct)
-        },
-        methods() {
-            fetchUserDetails()
-            {
-                axios.get('/checkLogin', {}).then(resp => {
+            this.userDetails();
 
-                }).catch(err => {
+        },
+        methods: {
+            paypalCheckOut() {
+                axios.post('api/paypalCheckOut', {
+                    'orderItems': JSON.parse(localStorage.getItem('cart')),
+                    'totalPrice': this.$store.state.totalPrice,
+                    'shippingAddress': this.shippingAddress,
+                    'billingAddress': this.billingAddress,
+                }).then(resp => {
 
                 });
 
-            }
-
+            },
+            userDetails() {
+                axios.post('api/userBillingDetails').then(resp => {
+                    let userBillingAddress = resp.data.userBillingDetails;
+                    this.billingAddress.first_name = userBillingAddress.first_name;
+                    this.billingAddress.last_name = userBillingAddress.last_name;
+                    this.billingAddress.address = userBillingAddress.address;
+                    this.billingAddress.suburb = userBillingAddress.suburb;
+                    this.billingAddress.state = userBillingAddress.state;
+                    this.billingAddress.postal_code = userBillingAddress.postal_code;
+                    this.billingAddress.email = userBillingAddress.email;
+                    this.billingAddress.contact_number = userBillingAddress.contact_number;
+                }).catch(err => {
+                    console.log(err.resp.message)
+                });
+            },
         },
 
         computed: {
             granTotal() {
                 return this.$store.state.totalPrice;
             }
-        },
+        }
+        ,
 
     }
 </script>

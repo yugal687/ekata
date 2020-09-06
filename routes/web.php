@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,13 +72,27 @@ Route::group(['middleware' => ['auth', 'user']], function () {
         "uses" => 'User\UserController@updateUser',
         "as" => 'updateUser'
     ]);
+    Route::get('/billings', function () {
+        //make controller and paste the function
+        if (!Auth::user()) {
+            redirect('/login');
+        }
+        return view('website/billings');
+    });
+
+    Route::group(['prefix' => 'paypal'], function () {
+        Route::get('sucess', function () {
+            dd('success');
+        })->name('payment.success');
+        Route::get('cancel', function () {
+            dd('cancel');
+        })->name('payment.cancel');
+
+    });
+
+
 });
-
-
 Auth::routes();
-Route::get('/billings', function () {
-    return view('website/billings');
-});
 
 Route::get('/contact', function () {
     return view('website/contact');
