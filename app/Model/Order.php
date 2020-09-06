@@ -10,7 +10,19 @@ class Order extends Model
         'order_number',
         'total_price'
     ];
-    public function orderDetails(){
-        return $this->hasMany(OrderDetail::class);
+
+
+    public function items()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id');
     }
+
+
+    public static function saveOrderItems($order)
+    {
+
+    }
+
+
+    //
 }

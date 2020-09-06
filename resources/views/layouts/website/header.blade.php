@@ -17,8 +17,8 @@
     <!-- Bootstrap -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 
-    {{--<link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
-    <!-- owl carousel  -->
+{{--<link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
+<!-- owl carousel  -->
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
     <!---Tiny Slider--->
@@ -37,6 +37,7 @@
             width: 320px;
             height: 85%;
         }
+
         /*.modal.right .modal-content {
             height: 84%;
             overflow-y: auto;
@@ -171,7 +172,8 @@
             ul.navbar-nav.mr-auto {
                 margin-bottom: -8px;
             }
-            #topNavbar nav .active{
+
+            #topNavbar nav .active {
                 border-bottom: 3px solid #fff !important;
             }
 
@@ -182,34 +184,41 @@
             .nav-right.container-mine {
                 margin: 5px 60px;
             }
-            .sm-user-checkout{
+
+            .sm-user-checkout {
                 display: none;
             }
         }
-        @media (max-width: 991px){
-            #topNavbar nav .active{
+
+        @media (max-width: 991px) {
+            #topNavbar nav .active {
                 border-bottom: 3px solid #fff !important;
                 font-weight: bold;
                 width: 30%
             }
+
             .nav-right.container-mine {
                 margin: 25px 60px 5px;
             }
-            .navbar{
+
+            .navbar {
                 transition: slide-down 2s ease-in-out;
             }
+
             .sticky {
                 position: fixed;
                 top: -5px;
                 width: 100%;
                 z-index: 10002;
             }
+
             .sm-user-checkout {
                 top: 10px;
                 position: absolute;
                 right: 140px;
             }
-            .lg-user-checkout{
+
+            .lg-user-checkout {
                 display: none;
             }
         }
@@ -220,59 +229,63 @@
 
 <body>
 <div id="app">
-<header>
+    <header>
 
-    <div class="body-inner">
-        <div id="top-bar" class="top-bar">
+        <div class="body-inner">
+            <div id="top-bar" class="top-bar">
 
-            <div class="row m-0 p-0">
-                <div class="col-lg-2 col-md-12 m-0 p-0 bg-main-primary rounded-right-top">
-                    <div class="container-mine">
-                        <div class="text-center">
-                            <h3 class=" text-white font-weight-bold pl-2 mt-4">Logo
-                                Here</h3>
+                <div class="row m-0 p-0">
+                    <div class="col-lg-2 col-md-12 m-0 p-0 bg-main-primary rounded-right-top">
+                        <div class="container-mine">
+                            <div class="text-center">
+                                <h3 class=" text-white font-weight-bold pl-2 mt-4">Logo
+                                    Here</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-10 col-md-12 m-0 p-0 ">
-                    <div class="row m-0 p-0">
-                        <div class="col-md-6 m-0 p-0"></div>
-                        <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
-                            <div class="mx-4">
-                                <div class="input-group border-0 py-2 ">
-                                    <input type="text" class="form-control border-0 " placeholder="Search items..."
-                                           aria-label="Search items..." aria-describedby="basic-addon2">
-                                    <div class="input-group-append bg-main-secondary ">
+                    <div class="col-lg-10 col-md-12 m-0 p-0 ">
+                        <div class="row m-0 p-0">
+                            <div class="col-md-6 m-0 p-0"></div>
+                            <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
+                                <div class="mx-4">
+                                    <div class="input-group border-0 py-2 ">
+                                        <input type="text" class="form-control border-0 " placeholder="Search items..."
+                                               aria-label="Search items..." aria-describedby="basic-addon2">
+                                        <div class="input-group-append bg-main-secondary ">
                                             <span
                                                 class="input-group-text bg-main-primary border-0 text-white .rounded-around"
                                                 id="basic-addon2">
                                                 Search</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Bavigation MenuBar Starts Here-->
+                        <header-navbar-component></header-navbar-component>
+                        <!-- Bavigation MenuBar Ends Here-->
                     </div>
-                    <!-- Bavigation MenuBar Starts Here-->
-                    <header-navbar-component></header-navbar-component>
-                    <!-- Bavigation MenuBar Ends Here-->
                 </div>
+
             </div>
-
+            <!--/ Topbar end -->
         </div>
-        <!--/ Topbar end -->
-    </div>
 
-    <!-- Cart Modal -->
+        <!-- Cart Modal -->
+        <div>
+            <cart-items-component>
 
-        <cart-items-component></cart-items-component>
+            </cart-items-component>
+        </div>
 
 
+        <!---Cart Modal Ends---->
+    </header>
 
-    <!---Cart Modal Ends---->
-</header>
+    @yield('content')
 
-@yield('content')
+</div>
 
 {{--Footer Section--}}
 <footer>
@@ -387,7 +400,8 @@
                         </li>
                         <li class="list">
                             <address>
-                                <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678" target="_blank">
+                                <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678"
+                                   target="_blank">
                                     1600 Pennsylvania Avenue NW Washington, DC 20500
                                 </a>
                             </address>
@@ -432,18 +446,20 @@
                 </p>
             </div>
             <div class="col-md-3">
-                <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy Policy</a></p>
+                <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy
+                        Policy</a></p>
             </div>
         </div>
     </div>
 </footer>
-</div>
+
+
 <!-- Javascript Files
     ================================================== -->
 <!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 {{-- Jquery Ui--}}
 <script
     src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
@@ -470,8 +486,7 @@
     /*$(window).scroll(function(){
         if ($(window).scrollTop() >= 400) {
             $('nav.navbar').addClass('sticky');
-        }
-        else {
+        } else {
             $('nav.navbar').removeClass('sticky');
         }
     });*/
@@ -518,10 +533,12 @@
             $parent.addClass('activeHeading');
             /*e.preventDefault();*/
         });
+        // When the user clicks anywhere outside of the modal, close it
+
 
         ///Sm SIdebar
         /*Sm-sidebar-scripts*/
-        $(".sidebar-dropdown a").click(function() {
+        $(".sidebar-dropdown a").click(function () {
             $(".sidebar-submenu").slideUp(200);
             if (
                 $(this)
@@ -542,10 +559,10 @@
                     .addClass("active");
             }
         });
-        $(".sidebar-dropdown > a i").click(function(e) {
+        $(".sidebar-dropdown > a i").click(function (e) {
             e.preventDefault();
         });
-        $("#toggle-smsidebar").click(function() {
+        $("#toggle-smsidebar").click(function () {
             $(".smsidebar-menu").toggleClass("rightActive");
         });
         $(".close-menu").click(function() {

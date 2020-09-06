@@ -133,130 +133,123 @@
 </template>
 
 <script>
-export default {
-    name: "addDiscountComponent",
-    data() {
-        return {
-            dialogVisible : false,
-            editData:[],
-            selectedProduct:[{
-            price:''}],
-            getDiscountedProduct:[],
-            discountamount:'',
-            getProduct:[],
-            labelPosition: 'top',
-            productSelectOptions: [{
-                value: 'Product - 1',
-                label: 'Product - 1'
-            }, {
-                value: 'Product - 2',
-                label: 'Product - 2'
-            }, {
-                value: 'Product - 3',
-                label: 'Product - 3'
-            }],
-            editDiscount:{
-                productSelect:'',
-                Price:'',
-                discount:'',
-                discountedPrice:'',
-            },
-            discountForm: {
-                productSelect: '',
-                sellingPrice: '',
-                discountPercentage: '',
-            },
-            discountFormRules: {
-                productSelect: [
-                    {required: true, message: 'Please select product', trigger: 'change'},
-                ],
-                discountPercentage: [
-                    {required: true, message: 'Please place discount percentage', trigger: 'blur'},
-                ],
-            },
-            /*Table Data's*/
-            search: ''
-        }
-    },
-    methods: {
+    export default {
+        name: "addDiscountComponent",
+        data() {
+            return {
+                dialogVisible: false,
+                editData: [],
+                selectedProduct: [{
+                    price: ''
+                }],
+                getDiscountedProduct: [],
+                discountamount: '',
+                getProduct: [],
+                labelPosition: 'top',
+                productSelectOptions: [{
+                    value: 'Product - 1',
+                    label: 'Product - 1'
+                }, {
+                    value: 'Product - 2',
+                    label: 'Product - 2'
+                }, {
+                    value: 'Product - 3',
+                    label: 'Product - 3'
+                }],
+                editDiscount: {
+                    productSelect: '',
+                    Price: '',
+                    discount: '',
+                    discountedPrice: '',
+                },
+                discountForm: {
+                    productSelect: '',
+                    sellingPrice: '',
+                    discountPercentage: '',
+                },
+                discountFormRules: {
+                    productSelect: [
+                        {required: true, message: 'Please select product', trigger: 'change'},
+                    ],
+                    discountPercentage: [
+                        {required: true, message: 'Please place discount percentage', trigger: 'blur'},
+                    ],
+                },
+                /*Table Data's*/
+                search: ''
+            }
+        },
+        methods: {
 
-        onChange(event){
-            console.log(this.discountForm.productSelect);
-          this.selectedProduct = this.getProduct.filter(getProduct=>getProduct.id ==this.discountForm.productSelect);
-        },
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    let formData = new FormData();
-                    formData.append('discount', this.discountForm.discountPercentage);
-                    formData.append('sale_price',this.discountcalculate);
-                    formData.append('id',this.discountForm.productSelect);
-                    axios.post('/api/addDiscount',formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    }).then(response=>{
-                        this.$notify({
-                            title: 'Success',
-                            message: response.data.message,
-                            type: 'success'
+            onChange(event) {
+                console.log(this.discountForm.productSelect);
+                this.selectedProduct = this.getProduct.filter(getProduct => getProduct.id == this.discountForm.productSelect);
+            },
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let formData = new FormData();
+                        formData.append('discount', this.discountForm.discountPercentage);
+                        formData.append('sale_price', this.discountcalculate);
+                        formData.append('id', this.discountForm.productSelect);
+                        axios.post('/api/addDiscount', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }).then(response => {
+                            alert(response.data.message);
                         });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            handleDelete(id) {
+                axios.patch('/api/deleteDiscount/' + id, {})
+                    .then(response => {
+                        alert(response.data.message);
                     });
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
+            }
         },
-        handleDelete(id) {
-            axios.patch('/api/deleteDiscount/'+id,{})
-                .then(response=>{
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'info'
-                    });
+        computed: {
+            discountcalculate() {
+                console.log(this.discountForm.sellingPrice);
+                this.discountamount = (this.discountForm.discountPercentage * this.discountForm.sellingPrice) / 100;
+                console.log(this.discountamount);
+                return (this.discountForm.sellingPrice - this.discountamount);
+            }
+        },
+        mounted() {
+            axios.get('/api/getDiscountedProduct', {})
+                .then(response => {
+                    this.getDiscountedProduct = response.data.getDiscountedProduct;
+                });
+            axios.get('/api/getProduct', {})
+                .then(response => {
+                    this.getProduct = response.data.getProduct;
                 });
         }
-    },
-    computed: {
-        discountcalculate(){
-            console.log(this.discountForm.sellingPrice);
-        this.discountamount = (this.discountForm.discountPercentage * this.discountForm.sellingPrice)/100;
-        console.log(this.discountamount);
-      return (this.discountForm.sellingPrice - this.discountamount);
-}
-    },
-    mounted() {
-        axios.get('/api/getDiscountedProduct',{})
-            .then(response=>{
-               this.getDiscountedProduct = response.data.getDiscountedProduct;
-            });
-        axios.get('/api/getProduct',{})
-            .then(response=>{
-                this.getProduct = response.data.getProduct;
-            });
-    }
 
-}
+    }
 </script>
 
 <style scoped>
-.text {
-    font-size: 14px;
-}
+    .text {
+        font-size: 14px;
+    }
 
-.item {
-    margin-bottom: 18px;
-}
+    .item {
+        margin-bottom: 18px;
+    }
 
-.clearfix:before,
-.clearfix:after {
-    display: table;
-    content: "";
-}
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
 
-.clearfix:after {
-    clear: both
-}
+    .clearfix:after {
+        clear: both
+    }
 </style>

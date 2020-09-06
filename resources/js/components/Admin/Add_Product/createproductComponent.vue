@@ -230,10 +230,7 @@
         },
         methods: {
             submitForm(formName) {
-
-
                 this.$refs[formName].validate((valid) => {
-
                         if (valid) {
                             let tag = this.productForm.tagsSelect;
                             console.log(tag);

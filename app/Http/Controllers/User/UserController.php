@@ -56,5 +56,25 @@ class UserController extends Controller
     return view('User.userdashboard',[
        'recentOrder' => $lastOrder
     ]);
+    public function userBillingDetails()
+    {
+        if ($user = Auth::user()) {
+            $userDetails = [
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'address' => $user->address,
+                'suburb' => $user->suburb,
+                'state' => $user->state,
+                'postal_code' => $user->postal_code,
+                'email' => $user->email,
+                'contact_number' => $user->contact_number,
+            ];
+
+            return response()->json([
+                'userBillingDetails' => $userDetails,
+            ]);
+        }
+        return false;
     }
+
 }

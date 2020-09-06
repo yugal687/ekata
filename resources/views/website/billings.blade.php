@@ -242,7 +242,6 @@
                 $('#paypal').removeClass('btn-secondary');
                 $('#paypal').addClass('btn-primary');
             });
-
             $(".next").click(function () {
                 $(".tab-pane").hide();
                 $("#step2").fadeIn(1000);
@@ -289,7 +288,7 @@
                         transactions: [{
                             amount: {
                                 total: '0.01',
-                                currency: 'AUD'
+                                currency: 'AUD',
                             }
                         }]
                     });

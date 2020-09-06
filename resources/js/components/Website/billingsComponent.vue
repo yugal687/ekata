@@ -28,31 +28,50 @@
                                 <h3 class="fs-subtitle">Please Fill Up Billing Address</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* First Name">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.first_name"
+                                               placeholder="* First Name">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* Last Name">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.last_name"
+
+                                               placeholder="* Last Name">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* Address">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.address"
+
+                                               placeholder="* Address">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="* Suburb">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.suburb"
+
+                                               placeholder="* Suburb">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-8">
-                                        <input type="text" class="form-control" placeholder="* State">
+                                        <input type="text" class="form-control"
+                                               v-model="billingAddress.state"
+
+                                               placeholder="* State">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <input type="value" class="form-control" placeholder="* Postal Code ">
+                                        <input type="value" class="form-control"
+                                               v-model="billingAddress.postal_code"
+
+                                               placeholder="* Postal Code ">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="email" class="form-control" placeholder="* E-mail">
+                                        <input type="email" class="form-control"
+                                               v-model="billingAddress.email"
+                                               placeholder="* E-mail">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -74,21 +93,29 @@
                                     <h3 class="fs-subtitle">Please Fill Up Shipping Address</h3>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <input type="text" class="form-control" id="firstname"
+                                            <input type="text"
+                                                   v-model="shippingAddress.first_name"
+                                                   class="form-control" id="firstname"
                                                    placeholder="* First Name">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <input type="text" class="form-control" id="lastname"
+                                                   v-model="shippingAddress.last_name"
+
                                                    placeholder="* Last Name">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <input type="text" class="form-control"
+                                                   v-model="shippingAddress.address"
+
                                                    placeholder="* Address">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <input type="text" class="form-control"
+                                                   v-model="shippingAddress.suburb"
+
                                                    placeholder="* Suburb ">
                                         </div>
                                     </div>
@@ -98,18 +125,23 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <input type="value" class="form-control"
+                                                   v-model="shippingAddress.state"
+
                                                    placeholder="* Postal Code ">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <input type="email" class="form-control"
+                                                   v-model="shippingAddress.email"
+
                                                    placeholder="* E-mail">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <input type="value" class="form-control"
+                                                   v-model="shippingAddress.contact_number"
                                                    placeholder="* Contact Number">
                                         </div>
                                     </div>
@@ -133,7 +165,6 @@
                                 <div class="creditCard" id="">
                                     <div class="row">
                                         <div class="col-12">
-
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                     <input type="number" class="form-control" id="cardNumber"
@@ -156,6 +187,10 @@
                                                            placeholder="Card Holder Name">
                                                 </div>
                                             </div>
+                                            <div class="row mt-3">
+                                                <input type="button" name="pay" class="pay action-button"
+                                                       value="Pay Now"/>
+                                            </div>
                                             <!-- <div class="row mt-3">
                                                  <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
                                              </div>-->
@@ -166,7 +201,14 @@
                                 <div class="paypal">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="mt-3" id="paypal-button"></div>
+                                            <div class="mt-3" id="paypal-button">
+                                            </div>
+
+                                            <button type="button" @click="paypalCheckOut()" class="btn btn-warning">
+                                                Check Out with Paypal
+                                            </button>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -196,158 +238,76 @@
                     </form>
                 </div>
                 <div class="col-md-5">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-8 col-sm-12">
-                            <h4 class="pt-5" style="font-family:'Times New Roman'; color: #00000070;">
-                                PRODUCT DETAILS
-                            </h4>
-                            <hr/>
-                            <div class="row pt-2">
-                                <div class="col-md-6">
-                                    <h6><strong>SUB-TOTAL</strong></h6>
-                                </div>
-                                <div class="col-md-4">
-                                    <b>: $9.99</b>
-                                </div>
-                            </div>
-                            <div class="row pt-1">
-                                <div class="col-md-6">
-                                    <h6><strong>DISCOUNT</strong></h6>
-                                </div>
-                                <div class="col-md-4">
-                                    <b>: $0.99</b>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h6><strong>ESTIMATED TOTAL</strong></h6>
-                                </div>
-                                <div class="col-md-4">
-                                    <b>: $9.00</b>
-                                </div>
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-8 col-sm-12">
+                                    <h4 class="pt-5" style="font-family:'Times New Roman'; color: #00000070;">HELP?
+                                        CONTACT
+                                        US:12345678</h4>
+                                    <hr/>
+                                    <div class="row pt-2">
+                                        <div class="col-md-6">
+                                            <h6><strong>SUB-TOTAL</strong></h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>: {{$store.state.totalPrice}}</b>
+                                        </div>
+                                    </div>
 
-                            <div class="row mt-5 orders">
-                                <div class="col-md-12">
-                                    <div>
-                                        <h5><strong><u>Your Order Details</u></strong></h5>
-                                        <ul class="px-3">
-                                            <li class="my-3" >
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img style="width: 100%; height: auto"
-                                                             src="/images/noodle.jpg">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h5>Item Name</h5>
-                                                        <h6>Quantity: 1</h6>
-                                                        <h6>Price: $1</h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                    <div class="row pt-3">
+                                        <div class="col-md-6">
+                                            <h6><strong>DISCOUNT</strong></h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>: $0.99</b>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6><strong>ESTIMATED TOTAL</strong></h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>: {{granTotal}}</b>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-5 orders">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <h5><strong><u>Your Order Details</u></strong></h5>
+                                                <ul class="px-3">
+                                                    <li class="my-3"
+                                                        v-for="product in $store.state.storedLocalStorageProduct">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <!--   <img style="width: 100%; height: auto"
+                                                                        :src="product.image"
+                                                                        src="/images/noodle.jpg">-->
+                                                                <img style="width: 100%; height: auto"
+                                                                     src="/images/noodle.jpg">
+                                                            </div>
+
+
+                                                            <div class="col-md-8">
+                                                                <h5>{{product.product_name}}</h5>
+                                                                <h6>Quantity: {{product.quantity}}</h6>
+                                                                <h6>Price: {{product.price}}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
-
         </div>
     </div>
 </template>
@@ -355,18 +315,77 @@
 <script>
     export default {
         name: "billingsComponent",
+        data() {
+            return {
+                discountPrice: 0,
+                shippingAddress: {
+                    first_name: '',
+                    last_name: '',
+                    address: '',
+                    suburb: '',
+                    state: '',
+                    postal_code: '',
+                    email: '',
+                    contact_number: ''
+                },
+                billingAddress: {
+                    first_name: '',
+                    last_name: '',
+                    address: '',
+                    suburb: '',
+                    state: '',
+                    postal_code: '',
+                    email: '',
+                    contact_number: ''
+                },
+
+            }
+        },
+        mounted() {
+            this.$store.dispatch('fetchStoredProduct');
+            this.$store.dispatch('totalPrice');
+            this.userDetails();
+
+        },
+        methods: {
+            paypalCheckOut() {
+                axios.post('api/paypalCheckOut', {
+                    'orderItems': JSON.parse(localStorage.getItem('cart')),
+                    'totalPrice': this.$store.state.totalPrice,
+                    'shippingAddress': this.shippingAddress,
+                    'billingAddress': this.billingAddress,
+                }).then(resp => {
+
+                });
+
+            },
+            userDetails() {
+                axios.post('api/userBillingDetails').then(resp => {
+                    let userBillingAddress = resp.data.userBillingDetails;
+                    this.billingAddress.first_name = userBillingAddress.first_name;
+                    this.billingAddress.last_name = userBillingAddress.last_name;
+                    this.billingAddress.address = userBillingAddress.address;
+                    this.billingAddress.suburb = userBillingAddress.suburb;
+                    this.billingAddress.state = userBillingAddress.state;
+                    this.billingAddress.postal_code = userBillingAddress.postal_code;
+                    this.billingAddress.email = userBillingAddress.email;
+                    this.billingAddress.contact_number = userBillingAddress.contact_number;
+                }).catch(err => {
+                    console.log(err.resp.message)
+                });
+            },
+        },
+
+        computed: {
+            granTotal() {
+                return this.$store.state.totalPrice;
+            }
+        }
+        ,
+
     }
 </script>
 
 <style scoped>
-    .modal-body {
-        padding: 0;
-    }
-
-    .modal-content, .modal-body, #login-card {
-        max-width: 350px;
-        border-radius: 25px;
-        margin: auto;
-    }
 
 </style>

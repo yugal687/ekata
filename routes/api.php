@@ -74,3 +74,7 @@ Route::post('/saveService','Admin\ServiceController@addService');
 Route::get('/getService','Admin\ServiceController@fetchService');
 Route::delete('/deleteService/{id}','Admin\ServiceController@deleteService');
 Route::patch('/saveEditService','Admin\ServiceController@saveEditService');
+
+
+Route::post('/paypalCheckOut', 'Website\PaymentController@paypalCheckOut');
+Route::post('/userBillingDetails', 'User\UserController@userBillingDetails');

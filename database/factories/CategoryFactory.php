@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Category::class, function (Faker $faker) {
     return [
-        'category_name'=>$faker->text(max(10)),
+        'category_name'=>$faker->name(),
+        'parent_id'=>$faker->numberBetween(1, 10)
     ];
 });

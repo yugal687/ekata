@@ -14,6 +14,7 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 Vue.use(ElementUI, {locale});
 
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,9 +22,10 @@ Vue.use(ElementUI, {locale});
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+import Vuex from 'vuex';
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.use(Vuex);
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('user-component', require('./components/Admin/User/userComponent.vue').default);
@@ -53,16 +55,19 @@ Vue.component('services-component', require('./components/Admin/Services/service
 
 /*Website Pages*/
 Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);
-Vue.component('cart-items-component', require('./components/Website/cartItemsComponent.vue').default);
+ue.component('cart-items-component', require('./components/Website/cartitemsComponent.vue').default);
 Vue.component('billing-component', require('./components/Website/billingsComponent.vue').default);
 Vue.component('header-navbar-component', require('./components/Website/headerNavbarComponent.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
+import storeData from './store/store';
+
+const store = new Vuex.Store(
+    storeData
+);
+
 
 const app = new Vue({
     el: '#app',
+    store,
 });

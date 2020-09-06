@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,15 +35,18 @@ Route::get('/services', function () {
 /*Route::get('/products', function () {
     return view('website/products');
 });*/
-Route::get('/category','Website\ProductController@showCategory');
 Route::get('/products','Website\ProductController@showProducts');
+Route::get('/category/{id}', [
+    "uses" => 'Website\ProductController@showCategory',
+    "as" => 'category']);
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
     "as" => 'maincategory']);
 
-Route::get('/singleproduct/{id}',[
+Route::get('/singleproduct/{id}', [
     'uses' => 'Website\ProductController@SingleProductPage',
     'as' => 'singleproduct']);
+
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('admin/dashboard', 'Admin\DashboardController@dashboradData');
     Route::view('user/users', 'admin.user.users');
@@ -91,11 +95,56 @@ Auth::routes();
 Route::get('/billings', function () {
     return view('website/billings');
 });
+    Route::view('admin/addproduct/index', 'admin.add_product.index');
+    Route::view('admin/addproduct/products', 'admin.add_product.products');
+    Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
+//Order
+    Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
+//Banner Image
+    Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
+//Website Info
+    Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
+
+});
+//User
+Route::group(['middleware' => ['auth', 'user']], function () {
+    Route::view('user/userdashboard', 'User.userdashboard');
+    Route::get('user/userprofile', [
+        "uses" => 'User\UserController@singleUserDetail',
+        "as" => 'user/userdashboard'
+    ]);
+    Route::post('/updateUser/{id}', [
+        "uses" => 'User\UserController@updateUser',
+        "as" => 'updateUser'
+    ]);
+    Route::get('/billings', function () {
+        //make controller and paste the function
+        if (!Auth::user()) {
+            redirect('/login');
+        }
+        return view('website/billings');
+    });
 
 Route::get('/contact','Website\WebsiteDetailController@showDetails');
+    Route::group(['prefix' => 'paypal'], function () {
+        Route::get('sucess', function () {
+            dd('success');
+        })->name('payment.success');
+        Route::get('cancel', function () {
+            dd('cancel');
+        })->name('payment.cancel');
+
+    });
 
 
-Route::get('/','Website\ProductController@index');
+});
+Auth::routes();
+
+Route::get('/contact', function () {
+    return view('website/contact');
+});
+
+Route::get('/', 'Website\ProductController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -106,4 +155,5 @@ Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 Route::post('/registerUser','User\UserController@registeruser');
 
 //Testing Route
+
 
