@@ -16,18 +16,15 @@ use Illuminate\Support\Facades\Route;
 /*login*/
 
 
-/*Route::view('/registration', 'admin.userregistration');*/
-Route::view('/usersignin', 'admin.usersignin');
+Route::view('/adminregister', 'auth.adminregistration');
+/*Route::view('/usersignin', 'admin.usersignin');*/
 
-
-Route::get('/billings', function () {
-    return view('website/billings');
-});
 
 Route::get('/logout', function () {
     Auth::logout();
     return view('auth.login');
 });
+
 Route::get('/aboutus', function () {
     return view('website/aboutus');
 });
@@ -77,6 +74,9 @@ Route::view('admin/services/', 'admin.services.service');
     Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
 
 });
+//Services
+Route::view('admin/services/', 'admin.services.service');
+
 
 //User
 Route::group(['middleware' => ['auth', 'user']], function () {
@@ -104,4 +104,6 @@ Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');
 Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 
 Route::post('/registerUser','User\UserController@registeruser');
+
+//Testing Route
 
