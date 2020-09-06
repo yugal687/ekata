@@ -17,6 +17,8 @@ class PaymentController extends Controller
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             $data = [];
+
+            //map items into corresponding paypal api
             $data['items'] = array_map(function ($orderItems) {
                 return [
                     'name' => $orderItems['product_name'],
@@ -34,12 +36,8 @@ class PaymentController extends Controller
 
             $provider = new PayPalClient;
 
-            //        dd($data);
-
             //$provider = new PayPalClient();
-
             /*PayPal::setProvider();
-
             $response = $provider->setExpressCheckout($data);
             */
             //dd($response);
@@ -51,6 +49,16 @@ class PaymentController extends Controller
                 $request->billingAddress,
                 $request->shippingAddress,
                 $request->totalPrice);
+
+            //send maile here;///send mail  here
+            //Mail section starts here after succesfully order is saved;
+            //
+            //
+            //
+            //
+            //
+            //
+            //Maile Section ends
 
             return response()->json([
                 'msg' => 'sucessfully saved Order ',
