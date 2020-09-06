@@ -105,7 +105,6 @@ Route::get('/billings', function () {
 //Website Info
     Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
 
-});
 //User
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::view('user/userdashboard', 'User.userdashboard');

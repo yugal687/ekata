@@ -13,7 +13,6 @@ class OrderDetail extends Model
         'price',
         'quantity',
         'discount',
-        'order_status',
         'user_id',
         'date'
     ];

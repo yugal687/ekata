@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
-    public function saveFeedback(Request $request){
+    public function saveFeedback(Request $request)
+    {
         $saveFeedback = Feedback::create([
-            'user_id' =>Auth::user(),
+            'user_id' => Auth::user(),
             'star' => $request->rating,
             'feedback' => $request->feedback
         ]);
+        if ($saveFeedback) {
+            return redirect()->to('/');
+        }
     }
     public function fetchFeedback(){
         $feedback = Feedback::with('user')->get();

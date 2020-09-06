@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'order_number',
-        'total_price'
+        'total_price',
+        'shipping_address',
+        'sub_urb',
+        'state',
+        'order_status',
+        'postal_code'
     ];
 
 
