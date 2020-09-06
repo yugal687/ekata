@@ -6,6 +6,22 @@
 
 @section('style')
     <style>
+        .heading-title {
+            color: #252525;
+            font-size: 34px;
+            font-family: 'Poppins', SansSerif;
+            font-weight: 900;
+        }
+
+        .heading-description-main {
+            font-size: 18px;
+            font-family: "Source Code Pro";
+        }
+
+        .heading-description {
+            font-size: 20px;
+            font-family: "Source Code Pro";
+        }
         .contact-us {
             background-color: #e1e1e1;
             text-align: center;
@@ -28,7 +44,7 @@
         <div class="row py-5 d-flex justify-content-center text-center contact-us">
             <div class="container container-sm">
                 <h1 class="">Our Story</h1>
-                <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto autem
+                <p class="heading-description-main mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto autem
                     deserunt, dolor doloremque dolores, eveniet facilis fuga ipsam natus nostrum reiciendis saepe sequi
                     voluptas voluptatibus! Corporis eligendi quibusdam rem?</p>
             </div>
@@ -36,9 +52,9 @@
         <div class="container my-5">
             <div class="row d-flex align-items-center">
                 <div class="col-md-7 col-sm-12 px-2 px-sm-3 px-lg-5">
-                    <h3 class="font-weight-bold mb-3" style="font-family: 'SansSerif'">The journey of Ekata Convenience
+                    <h3 class="heading-title mb-3">The Journey of Ekata Convenience
                         Store</h3>
-                    <p class="text-justify">
+                    <p class="heading-description-main text-justify">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto exercitationem id nemo quis
                         repudiandae sapiente. Ad amet autem beatae doloribus eligendi ex impedit itaque officiis, quas
                         quisquam, sit tempora voluptates?

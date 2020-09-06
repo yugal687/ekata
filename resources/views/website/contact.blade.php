@@ -1,8 +1,6 @@
 <!-- website header -->
 @extends('layouts.website.header')
 <!-- website header ends -->
-{{--<link rel="stylesheet" href="{{ asset('css/cntbox.css') }}">--}}
-{{---------------------}}
 
 @section('style')
     <style>

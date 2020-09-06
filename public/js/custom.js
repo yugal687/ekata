@@ -1,46 +1,4 @@
 $(document).ready(function () {
-    // Add active class to the current Nav
-    var current_page_URL = location.href;
-    $( "a" ).each(function() {
-        if ($(this).attr("href") !== "#") {
-            var target_URL = $(this).prop("href");
-            if (target_URL == current_page_URL) {
-                $('nav a').parents('li, ul').removeClass('active');
-                $(this).parent('li').addClass('active');
-                return false;
-            }
-        }
-    });
-
-    /*$("#sidebar_carousel").owlCarousel({
-        dots: false,
-        loop: true,
-        mouseDrag: false,
-        touchDrag: false,
-        pullDrag: false,
-        rewind: true,
-        autoplay: true,
-        margin: 0,
-        nav: true,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 4,
-                nav: true
-            },
-            600: {
-                items: 5,
-            },
-
-            1000: {
-                items: 6,
-            },
-
-            1366: {
-                items: 8,
-            }
-        }
-    });*/
 
     //slider for clearence section
     $('#clearence_carousel').owlCarousel({

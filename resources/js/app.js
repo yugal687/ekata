@@ -11,7 +11,8 @@ window.Vue = require('vue');
 import Vue from 'vue';
 
 import ElementUI from 'element-ui';
-Vue.use(ElementUI);
+import locale from 'element-ui/lib/locale/lang/en'
+Vue.use(ElementUI, {locale});
 
 /**
  * The following block of code may be used to automatically register your
@@ -46,6 +47,8 @@ Vue.component('website-info-component', require('./components/Admin/Website Upda
 Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
 Vue.component('reviews-carousel-component', require('./components/Admin/Website Update/reviewsCarouselComponent.vue').default);
 Vue.component('customers-feedback-component', require('./components/Admin/Website Update/customersFeedbackComponent.vue').default);
+/*Services Pages*/
+Vue.component('services-component', require('./components/Admin/Services/serviceComponent.vue').default);
 
 
 /*Website Pages*/

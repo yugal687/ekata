@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ekata Convenience Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--JS-->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -284,6 +283,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="/admin/services/" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Services </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="/admin/websiteupdate/reviewscarousel" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p> Reviews Carousel </p>
@@ -328,6 +333,11 @@
     </div>
     <!-- ./wrapper -->
 </div>
+<!--JS-->
+<script src="{{ asset('js/app.js') }}"></script>
+{{--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--}}
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
     /*$.widget.bridge('uibutton', $.ui.button)*/
 </script>
