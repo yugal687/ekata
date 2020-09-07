@@ -14,33 +14,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*login*/
+//Register Route
 
 
+//
 Route::view('/adminregister', 'auth.adminregistration');
 /*Route::view('/usersignin', 'admin.usersignin');*/
 
-
+//Logout
 Route::get('/logout', function () {
     Auth::logout();
     return view('auth.login');
 });
-
+//About Us
 Route::get('/aboutus', function () {
     return view('website/aboutus');
 });
+//Services
 Route::get('/services', 'Website\ProductController@service');
 /*Route::get('/products', function () {
     return view('website/products');
 });*/
+//Product Page Url
 Route::get('/products','Website\ProductController@showProducts');
+//Sub Category Page Url
 Route::get('/category/{id}', [
     "uses" => 'Website\ProductController@showCategory',
     "as" => 'category']);
+//Category Page Url
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
     "as" => 'maincategory']);
-
+//SingleProduct Page Url
 Route::get('/singleproduct/{id}', [
     'uses' => 'Website\ProductController@SingleProductPage',
     'as' => 'singleproduct']);
@@ -80,12 +85,6 @@ Route::view('admin/services/', 'admin.services.service');
 Route::view('admin/services/', 'admin.services.service');
 
 
-//User
-Route::group(['middleware' => ['auth', 'user']], function () {
-    Route::get('user/userdashboard', 'User\UserController@recentOrder');
-    Route::view('user/userprofile','User.userprofile');
-});
-
 
 Auth::routes();
 
@@ -103,7 +102,7 @@ Route::get('/billings', function () {
 //Website Info
     Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
 
-//User
+//User Routes
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::view('user/userdashboard', 'User.userdashboard');
     Route::get('user/userprofile', [
@@ -122,7 +121,10 @@ Route::group(['middleware' => ['auth', 'user']], function () {
         return view('website/billings');
     });
 
+    //ContactPage
 Route::get('/contact','Website\WebsiteDetailController@showDetails');
+
+//Paypal
     Route::group(['prefix' => 'paypal'], function () {
         Route::get('sucess', function () {
             dd('success');
@@ -137,17 +139,15 @@ Route::get('/contact','Website\WebsiteDetailController@showDetails');
 });
 Auth::routes();
 
+//Website Page Url
 Route::get('/', 'Website\ProductController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+//Save Enquiry
 Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');
 
+//Save Feedback
 Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 
+//Save User/Admin Register
 Route::post('/registerUser','User\UserController@registeruser');
 Route::post('/registerAdmin','User\UserController@registerAdmin');
-
-//Testing Route
-
-
