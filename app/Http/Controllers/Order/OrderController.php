@@ -28,7 +28,7 @@ class OrderController extends Controller
             } else {
                 $saveOrder->order_number = '111';
             }
-            $saveOrder->shipping_address = $request->
+            $saveOrder->shipping_address = $request->shipping_address;
             $saveOrder->sub_urb =$request->sub_urb;
             $saveOrder->state = $request->state;
             $saveOrder->order_status = $request->order_status;

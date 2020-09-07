@@ -71,8 +71,8 @@
                 <div class="col-md-7" style="padding: 1rem 2rem 1rem 1rem;">
                     <p class="login-box-msg">Register a new admin user</p>
 
-                    <form action="" method="post">
-
+                    <form action="{{url("registerAdmin")}}" method="post">
+                        {{csrf_field()}}
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="input-group mb-3">

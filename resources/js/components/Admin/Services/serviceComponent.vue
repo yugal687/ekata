@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <el-form-item label="Service Description" prop="details">
-                                <el-input v-model="serviceForm.details"
+                                <el-input v-model="serviceForm.details" ref="summernote"
                                           id="summernote">
                                 </el-input>
                                 <!--<div  v-model="serviceForm.details"></div>-->
@@ -153,7 +153,6 @@
                 labelPosition: 'top',
                 monthYear: '',
                 dialogFormVisible: false,
-                summernote:'',
                 serviceForm: {
                     title: '',
                     date: '',
@@ -190,12 +189,13 @@
               this.serviceFormEdit = this.serviceForm.filter(serviceForm=>(serviceForm.id == id));
             },
             saveService(formName) {
+                console.log(this.$refs.summernote);
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let formData = new FormData();
                         formData.append('title',this.serviceForm.title);
                         formData.append('date',this.serviceForm.date);
-                        formData.append('details',this.summernote);
+                        formData.append('details',this.$refs.summernote);
                         axios.post('/api/saveService',formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'

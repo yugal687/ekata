@@ -29,9 +29,7 @@ Route::get('/logout', function () {
 Route::get('/aboutus', function () {
     return view('website/aboutus');
 });
-Route::get('/services', function () {
-    return view('website/services');
-});
+Route::get('/services', 'Website\ProductController@service');
 /*Route::get('/products', function () {
     return view('website/products');
 });*/
@@ -139,10 +137,6 @@ Route::get('/contact','Website\WebsiteDetailController@showDetails');
 });
 Auth::routes();
 
-Route::get('/contact', function () {
-    return view('website/contact');
-});
-
 Route::get('/', 'Website\ProductController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -152,6 +146,7 @@ Route::post('/saveEnquiry','Website\EnquiryController@saveEnquiry');
 Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 
 Route::post('/registerUser','User\UserController@registeruser');
+Route::post('/registerAdmin','User\UserController@registerAdmin');
 
 //Testing Route
 

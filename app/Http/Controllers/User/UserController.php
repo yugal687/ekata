@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function registerUser(Request $request){
-        $user = Role::where('id','=',2)->get();
-        $register = User::create([
+        $registerUser = User::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'address' => $request->input('address'),
@@ -26,6 +25,22 @@ class UserController extends Controller
             'password' => Hash::make($request->input('password')),
             'role_id' =>2
         ]);
+        return view('auth.login');
+    }
+    public function registerAdmin(Request $request){
+        $registerAdmin = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'address' => $request->input('address'),
+            'contact_number' => $request->input('contact_number'),
+            'sub_urb' => $request->input('sub_urb'),
+            'state' => $request->input('state'),
+            'postal_code' => $request->input('postal_code'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role_id' =>1
+        ]);
+        return view('auth.login');
     }
     public function singleUserDetail(){
 
@@ -47,15 +62,17 @@ class UserController extends Controller
         $user->update();
 
     }
-    public function recentOrder(){
-    $lastOrder = OrderDetail::with('order','user','product')
-        ->where('user_id',Auth::id())
-        ->orderBy('id', 'DESC')
-        ->get();
-    //dd($lastOrder);
-    return view('User.userdashboard',[
-       'recentOrder' => $lastOrder
-    ]);
+    public function recentOrder()
+    {
+        $lastOrder = OrderDetail::with('order', 'user', 'product')
+            ->where('user_id', Auth::id())
+            ->orderBy('id', 'DESC')
+            ->get();
+        //dd($lastOrder);
+        return view('User.userdashboard', [
+            'recentOrder' => $lastOrder
+        ]);
+    }
     public function userBillingDetails()
     {
         if ($user = Auth::user()) {

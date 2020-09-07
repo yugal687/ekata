@@ -16,7 +16,7 @@ class CheckUser
      */
     public function handle($request, Closure $next)
     {
-            if(Auth::user()->id !== 2){
+            if(Auth::user()->role_id !== 2){
                 abort(403, 'UnAuthorized Action for this user');
             }
         return $next($request);

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentCheckoutRequest;
+use App\Mail\OrderMail;
 use App\Service\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PaymentController extends Controller
@@ -13,7 +16,7 @@ class PaymentController extends Controller
 
     public function paypalCheckOut(Request $request)
     {
-        //dd($request->orderItems[0]);
+        dd($request);
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             $data = [];
@@ -44,21 +47,25 @@ class PaymentController extends Controller
 
 
             //if paymentSucessfull
-            $order = new Order($data['items'],
-                $data['invoice_id'],
-                $request->billingAddress,
-                $request->shippingAddress,
-                $request->totalPrice);
 
+            $order = new Order();
+                $order->order_number = $data['invoice_id'];
+            $order->shipping_address = $request->shippingAddress;
+            $order->sub_urb =$request->sub_urb;
+            $order->state = $request->state;
+            $order->order_status = $request->order_status;
+            $order->postal_code = $request->postal_code;
+            $order->total_price = $request->totalPrice;
+            $order->save();
             //send maile here;///send mail  here
             //Mail section starts here after succesfully order is saved;
+            Mail::to(Auth::user()->email)->send(new OrderMail());
+            Mail::to('ajitsubedi2011@gmail.com') ->send(new OrderMail());
             //
             //
             //
             //
-            //
-            //
-            //Maile Section ends
+            //Mail Section ends
 
             return response()->json([
                 'msg' => 'sucessfully saved Order ',

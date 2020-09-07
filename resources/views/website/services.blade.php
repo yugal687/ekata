@@ -104,19 +104,15 @@
                 </div>
             </main>
             <div class="row mt-2">
+                @foreach($services as $service)
                 <div class="col-md-4 col-sm-6 mt-3">
                     <div class="service-card-content">
                         <header class="service-card-header mb-2">
-                            <h1 class="service-card-title mb-0">Service Title</h1>
-                            <time class="service-card-time">April 2020</time>
+                            <h1 class="service-card-title mb-0">{{$service->title}}</h1>
+                            <time class="service-card-time">{{$service->date}}</time>
                         </header>
                         <div class="service-card-body">
-                            <p>
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                            </p>
+                            <p>{{$service->description}} </p>
                         </div>
 
                         <footer class="service-card-footer">
@@ -127,98 +123,7 @@
 
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 mt-3">
-                    <div class="service-card-content">
-                        <header class="service-card-header mb-2">
-                            <h1 class="service-card-title mb-0">Service Title</h1>
-                            <time class="service-card-time">April 2020</time>
-                        </header>
-                        <div class="service-card-body">
-                            <p>
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                            </p>
-                        </div>
-
-                        <footer class="service-card-footer">
-                            <a class="text-white" href="#" >Read more﻿
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </footer>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mt-3">
-                    <div class="service-card-content">
-                        <header class="service-card-header mb-2">
-                            <h1 class="service-card-title mb-0">Service Title</h1>
-                            <time class="service-card-time">April 2020</time>
-                        </header>
-                        <div class="service-card-body">
-                            <p>
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                            </p>
-                        </div>
-
-                        <footer class="service-card-footer">
-                            <a class="text-white" href="#" >Read more﻿
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </footer>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mt-3">
-                    <div class="service-card-content">
-                        <header class="service-card-header mb-2">
-                            <h1 class="service-card-title mb-0">Service Title</h1>
-                            <time class="service-card-time">April 2020</time>
-                        </header>
-                        <div class="service-card-body">
-                            <p>
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                            </p>
-                        </div>
-
-                        <footer class="service-card-footer">
-                            <a class="text-white" href="#" >Read more﻿
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </footer>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mt-3">
-                    <div class="service-card-content">
-                        <header class="service-card-header mb-2">
-                            <h1 class="service-card-title mb-0">Service Title</h1>
-                            <time class="service-card-time">April 2020</time>
-                        </header>
-                        <div class="service-card-body">
-                            <p>
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                                You can now apply discounts when creating subscriptions by setting the coupon parameter for&nbsp;Checkout.
-                            </p>
-                        </div>
-
-                        <footer class="service-card-footer">
-                            <a class="text-white" href="#" >Read more﻿
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </footer>
-
-                    </div>
-                </div>
+                    @endforeach
             </div>
         </div>
     </div>

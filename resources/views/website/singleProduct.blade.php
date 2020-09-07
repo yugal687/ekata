@@ -133,9 +133,14 @@
                     </div>
                 </div>
 
+                @endforeach
 
                 {{--Vue Component--}}
-                <single-product-component></single-product-component>
+                <div>
+                    <single-product-component :product="{{$singleProduct}}">
+
+                    </single-product-component>
+                </div>
                 {{----}}
             </div>
 

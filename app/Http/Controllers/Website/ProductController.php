@@ -7,6 +7,7 @@ use App\Model\BannerImage;
 use App\Model\Category;
 use App\Model\Product;
 use App\Model\ReviewImage;
+use App\Model\Service;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -75,5 +76,11 @@ class ProductController extends Controller
                 'getCategory' => $getcategory
 
             ]);
+    }
+    public function service(){
+        $Service = Service::all();
+        return view('website.services',[
+           'services' => $Service
+        ]);
     }
 }

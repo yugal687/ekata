@@ -483,27 +483,13 @@
 @yield('scripts')
 
 <script>
-    /*$(window).scroll(function(){
+    $(window).scroll(function () {
         if ($(window).scrollTop() >= 400) {
             $('nav.navbar').addClass('sticky');
         } else {
             $('nav.navbar').removeClass('sticky');
         }
-    });*/
-
-    // Add active class to the current Nav
-    var current_page_URL = location.href;
-    $( "a" ).each(function() {
-        if ($(this).attr("href") !== "#") {
-            var target_URL = $(this).prop("href");
-            if (target_URL == current_page_URL) {
-                $('nav a').parents('li, ul').removeClass('active');
-                $(this).parent('li').addClass('active');
-                return false;
-            }
-        }
     });
-
     /*jQuery time*/
     $(document).ready(function () {
         $("#accordion h3").click(function () {
@@ -565,12 +551,6 @@
         $("#toggle-smsidebar").click(function () {
             $(".smsidebar-menu").toggleClass("rightActive");
         });
-        $(".close-menu").click(function() {
-            $(".smsidebar-menu").addClass("rightActive");
-        });
-        // When the user clicks anywhere outside of the modal, close it
-
-
     });
     /*Number Snipper Button*/
     $(document).on('click', '.number-spinner button', function () {

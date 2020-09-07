@@ -142,7 +142,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto bg-cate-sec">
-                                <img src="images/Homepage/Best_selling.png" alt="">
+                                <img src="" alt="">
                             </div>
 
                             <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
@@ -160,7 +160,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
-                                <img src="images/Homepage/Best_selling.png" alt="">
+                                <img src="" alt="">
                             </div>
 
                             <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
@@ -179,7 +179,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="images/Homepage/Best_selling.png" class="img-fluid"
+                                <img src="" class="img-fluid"
                                      alt="">
 
                             </div>
@@ -199,7 +199,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="images/Homepage/Best_selling.png" alt="">
+                                <img src="" alt="">
                             </div>
 
                             <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
@@ -233,7 +233,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="images/Homepage/Best_selling.png" alt="">
+                                <img src="" alt="">
                             </div>
 
                             <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
@@ -251,7 +251,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium bg-cate-sec p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="images/Homepage/Best_selling.png" alt="">
+                                <img src="" alt="">
                             </div>
 
                             <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
@@ -269,7 +269,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
-                                <img src="images/Homepage/Best_selling.png" alt="">
+                                <img src="" alt="">
                             </div>
 
                             <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
@@ -287,7 +287,7 @@
                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
                             <div
                                 class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front bg-cate-sec mx-auto">
-                                <img src="images/Homepage/Best_selling.png" alt="">
+                                <img src="" alt="">
                             </div>
 
                             <h5 class="best_price font-weight-bold mt-3 text-main-primary">$10.99</h5>
