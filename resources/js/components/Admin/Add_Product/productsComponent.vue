@@ -81,7 +81,7 @@
                 <div class="col-md-4">
                     <el-card :body-style="{ padding: '0px' }">
                         <img style="width: 100%; height: 250px"
-                             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                             :src="editProduct[0].image[0].name"
                              class="image">
                         <div style="padding: 14px;">
                             <h3>{{editProduct[0].product_name}}</h3>
@@ -142,9 +142,9 @@
                                             </el-form-item>
                                         </div>
                                         <div class="col-md-6">
-                                            <el-form-item label="Tags" prop="tags">
+                                            <el-form-item label="Tags" prop="tags" v-if="editProduct[0].tags[0].length">
                                                 <el-input disabled
-                                                          :value="editProduct[0].tags[0].tags"
+                                                          v-model="editProduct[0].tags[0].tags"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
@@ -455,7 +455,7 @@
                         tag.forEach((v, k) => {
                             formData.append(`tag[${k}]`, v);
                         });
-                        formData.append('editedProduct',JSON.stringify(this.editProduct));
+                        formData.append('editedProduct', JSON.stringify(this.editProduct));
                         axios.post('/api/editProduct',formData,{
                           //  editedProduct : this.editProduct,
                         }).then(response=>{

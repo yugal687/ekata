@@ -12,6 +12,25 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function updateUser(Request $request){
+        //dd($request);
+
+        $editeduserDetail = json_decode($request->userDetail);
+        $user = User::findorFail($editeduserDetail->id)->update([
+            'first_name' => $editeduserDetail->first_name,
+            'last_name' => $editeduserDetail->last_name,
+            'address' => $editeduserDetail->address,
+            'contact_number' => $editeduserDetail->contact_number,
+            'sub_urb' => $editeduserDetail->sub_urb,
+            'state' => $editeduserDetail->state,
+            'postal_code' => $editeduserDetail->postal_code,
+            'email' => $editeduserDetail->email,
+        ]);
+        return response()->json([
+            'message' => 'User Profile Updated !!!'
+        ]);
+
+    }
     public function registerUser(Request $request){
         $registerUser = User::create([
             'first_name' => $request->input('first_name'),
@@ -50,18 +69,6 @@ class UserController extends Controller
                 'userDetail' => $userDetail
             ]);
     }
-    public function updateUser(Request $request){
-        $user = Auth::user();
-        //dd($request);
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->address = $request->address;
-        $user->contact_number = $request->contact_number;
-        $user->email = $request->email;
-        $user->gender = $request->gender;
-        $user->update();
-
-    }
     public function recentOrder()
     {
         $lastOrder = OrderDetail::with('order', 'user', 'product')
@@ -92,6 +99,19 @@ class UserController extends Controller
             ]);
         }
         return false;
+    }
+
+    public function fetchUsers(){
+        $Users = User::where('role_id',2)->get();
+        return response()->json([
+           'allUsers' =>$Users
+        ]);
+    }
+    public function deleteUser($id){
+        $deleteUser = User::findorFail($id)->delete();
+        return response()->json([
+           'message' => "User Deleted !!!"
+        ]);
     }
 
 }

@@ -394,7 +394,9 @@
                                     <div class="card-header bg-main-secondary py-3 card-rounded-top">
                                         <h2 class="font-weight-bold text-center mt-2">CLEARENCE</h2>
                                     </div>
+
                                     <div class="card-body bg-product-light rounded-bottom-front card-bdy ">
+
                                         <div id="clearence_carousel"
                                              class="owl-carousel owl-carousel owl-theme px-3  py-2">
                                             @foreach ($discountedProducts as $discountedProduct)
@@ -402,6 +404,7 @@
                                                 <div
                                                     class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
                                                     <div class="row">
+                                                        <a href="{{route('singleproduct',$discountedProduct->id)}}">
 
                                                         <div class="col-12">
                                                             <div
@@ -427,12 +430,16 @@
                                                                 Add to Cart
                                                             </button>
                                                         </div>
-                                                    </div>
+                                                        </a>
 
+                                                    </div>
                                                 </div>
                                             @endforeach
+
                                         </div>
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -461,6 +468,7 @@
                 @foreach($latestProduct as $lastproduct)
 
                 <div class="item">
+                    <a href="{{route('singleproduct',$lastproduct->id)}}">
 
                     <div class="container">
                         <div class="row m-0 p-0 my-4">
@@ -503,7 +511,7 @@
                                         </dt>
                                         <dd class="col-sm-7">
                                             <!-- product price here -->
-                                            <h5 class="font-weight-bold text-main-secondary">{{$lastproduct->price}}</h5>
+                                            <h5 class="font-weight-bold text-main-secondary">${{$lastproduct->price}}</h5>
                                         </dd>
 
                                         <div class="col-sm-12">
@@ -513,12 +521,13 @@
                                             </button>
                                         </div>
                                     </dl>
+
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
+                    </a>
                 </div>
                 @endforeach
 
@@ -530,6 +539,7 @@
                     <div id="new_items" class="owl-carousel owl-theme px-3">
                         @foreach($latestProduct as $lastproduct)
                             <div class="item text-center d-flex justify-content-center align-items-center">
+
                                 <div class="new_items_img">
                                     <div class="row m-4">
                                         <div
@@ -748,6 +758,7 @@
                     </div>
                     @foreach($bestSelling as $best)
                     <div class="col-md-3 d-flex flex-column justify-centent-center align-items-center ">
+                        <a href="{{route('singleproduct',$best->id)}}">
                         <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                             <img src="{{$best->image[0]->name}}" width="150" alt="">
                         </div>
@@ -758,7 +769,7 @@
                                 class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
                             Add to Cart
                         </button>
-
+                        </a>
                     </div>
                         @endforeach
                 </div>
@@ -794,8 +805,8 @@
                                         <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
                                     </div>
                                     <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                        <s>was {{$discountedProduct->price}}</s></h5>
-                                    <h5 class="best_price font-weight-bold text-main-danger">{{$discountedProduct->sale_price}}</h5>
+                                        <s>was ${{$discountedProduct->price}}</s></h5>
+                                    <h5 class="best_price font-weight-bold text-main-danger">${{$discountedProduct->sale_price}}</h5>
                                     <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                     <button type="button"
                                             class="mx-auto btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">

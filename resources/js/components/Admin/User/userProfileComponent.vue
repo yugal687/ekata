@@ -15,7 +15,7 @@
                                  alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center" v-model="userDetail.first_name"></h3>
+                        <h3 class="profile-username text-center">{{userDetail.first_name}} {{userDetail.last_name}}</h3>
 
                         <div class=" mb-3">
                             <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
@@ -43,7 +43,7 @@
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Postal Code</strong>
                             <p class="text-muted">
-                                12345
+                                {{userDetail.postal_code}}
                             </p>
 
                         </div>
@@ -75,21 +75,21 @@
                                         <div class="form-group col-md-6">
                                             <label class="col-sm-12 col-form-label">First Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.first_name"
                                                        placeholder="First Name">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="col-sm-12 col-form-label">Last Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.last_name"
                                                        placeholder="Last Name">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="col-sm-12 col-form-label">Email</label>
                                             <div class="col-sm-12">
-                                                <input type="email" class="form-control"
+                                                <input type="email" class="form-control" v-model="userDetail.email"
                                                        placeholder="Email">
                                             </div>
                                         </div>
@@ -97,41 +97,43 @@
                                             <label class="col-sm-12 col-form-label">Contact Number</label>
                                             <div class="col-sm-12">
                                                 <input type="number" class="form-control"
+                                                       v-model="userDetail.contact_number"
                                                        placeholder="Contact Number">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-7">
                                             <label class="col-sm-12 col-form-label">Address</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.address"
                                                        placeholder="Address">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">
                                             <label
-                                                   class="col-sm-12 col-form-label">Suburb</label>
+                                                class="col-sm-12 col-form-label">Suburb</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.sub_urb"
                                                        placeholder="Suburb">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-7">
                                             <label class="col-sm-12 col-form-label">State</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.state"
                                                        placeholder="State">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">
                                             <label class="col-sm-12 col-form-label">Postal Code</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.postal_code"
                                                        placeholder="Postal Code">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <div class=" col-sm-12">
-                                                <input type="submit" value="Update" class="btn btn-warning">
+                                                <input type="button" value="Update" @click="UpdateProfile"
+                                                       class="btn btn-warning">
                                             </div>
                                         </div>
                                     </div>
@@ -188,19 +190,39 @@
 <script>
     export default {
         name: "userProfileComponent",
-        data(){
-            return{
-                userDetail:[],
+        data() {
+            return {
+                userDetail: [],
 
             }
         },
-        mounted(){
-            axios.get('/api/getUser',{})
-                .then(response=>{
+        mounted() {
+            axios.get('/api/getUser', {})
+                .then(response => {
                     this.userDetail = response.data.userDetail;
                 });
         },
-        methods:{
+        methods: {
+            UpdateProfile() {
+                let formData = new FormData();
+                formData.append('userDetail', JSON.stringify(this.userDetail));
+                axios.post('/api/saveEditProfile', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                }).catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                });
+            }
 
         }
     }

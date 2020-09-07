@@ -105,14 +105,9 @@ Route::get('/billings', function () {
 //User Routes
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::view('user/userdashboard', 'User.userdashboard');
-    Route::get('user/userprofile', [
-        "uses" => 'User\UserController@singleUserDetail',
-        "as" => 'user/userdashboard'
-    ]);
-    Route::post('/updateUser/{id}', [
-        "uses" => 'User\UserController@updateUser',
-        "as" => 'updateUser'
-    ]);
+    Route::view('user/userprofile','User.userprofile');
+
+
     Route::get('/billings', function () {
         //make controller and paste the function
         if (!Auth::user()) {
@@ -120,9 +115,6 @@ Route::group(['middleware' => ['auth', 'user']], function () {
         }
         return view('website/billings');
     });
-
-    //ContactPage
-Route::get('/contact','Website\WebsiteDetailController@showDetails');
 
 //Paypal
     Route::group(['prefix' => 'paypal'], function () {
@@ -138,6 +130,9 @@ Route::get('/contact','Website\WebsiteDetailController@showDetails');
 
 });
 Auth::routes();
+
+//ContactPage
+Route::get('/contact','Website\WebsiteDetailController@showDetails');
 
 //Website Page Url
 Route::get('/', 'Website\ProductController@index');

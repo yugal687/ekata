@@ -77,8 +77,12 @@ Route::delete('/deleteWebsiteDetail/{id}','Website\WebsiteDetailController@delet
 //get Order Detail
 Route::get('/getOrderDetail','Order\OrderController@getOrder');
 
-//Get User
+//User
 Route::get('/getUser','User\UserController@singleUserDetail');
+Route::post('/saveEditProfile','User\UserController@updateUser');
+Route::get('/allUsers','User\UserController@fetchUsers');
+Route::delete('/deleteUser/{id}','User\UserController@deleteUser');
+
 
 //Enquiries
 Route::get('/getEnquiries','Website\EnquiryController@fetchEnquiry');
