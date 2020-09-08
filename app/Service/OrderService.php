@@ -1,12 +1,12 @@
 <?php
 
-
 namespace App\Service;
 
 use App\Model;
+use App\Model\Order;
 use Illuminate\Support\Facades\DB;
 
-class Order
+class OrderService
 {
     private $orderItems = [];
     private $shippingAddress;
@@ -37,7 +37,7 @@ class Order
                 'suburb' => $this->shippingAddress['suburb'],
                 'state' => $this->shippingAddress['state'],
                 'postal_code' => $this->shippingAddress['postal_code'],
-                'total_price' => $this->shippingAddress['total_price'],
+                'total_price' => $this->totalPrice,
             ]);
         } elseif (isset($this->billingAddress['email'])) {
             $order = Order::create([
@@ -46,11 +46,11 @@ class Order
                 'suburb' => $this->billingAddress['suburb'],
                 'state' => $this->billingAddress['state'],
                 'postal_code' => $this->billingAddress['postal_code'],
-                'total_price' => $this->billingAddress['total_price'],
+                'total_price' => $this->totalPrice,
             ]);
         }
         $order->items()->create($this->orderItems);
-        return true;
+        return $order;
     }
 
 }

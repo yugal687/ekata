@@ -7549,10 +7549,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "billingsComponent",
+  props: ['successmessage'],
   data: function data() {
     return {
+      order_number: null,
       discountPrice: 0,
       shippingAddress: {
         first_name: '',
@@ -7573,6 +7597,12 @@ __webpack_require__.r(__webpack_exports__);
         postal_code: '',
         email: '',
         contact_number: ''
+      },
+      stripeCard: {
+        cvv: '',
+        expiry_year: '',
+        expiry_month: '',
+        card_number: ''
       }
     };
   },
@@ -7580,6 +7610,10 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('fetchStoredProduct');
     this.$store.dispatch('totalPrice');
     this.userDetails();
+
+    if (this.successmessage == 'success') {
+      alert();
+    }
   },
   methods: {
     paypalCheckOut: function paypalCheckOut() {
@@ -7588,7 +7622,11 @@ __webpack_require__.r(__webpack_exports__);
         'totalPrice': this.$store.state.totalPrice,
         'shippingAddress': this.shippingAddress,
         'billingAddress': this.billingAddress
-      }).then(function (resp) {});
+      }).then(function (resp) {
+        window.location.href = resp.data.link;
+      }).then(function (resp) {
+        console.log(resp.data);
+      });
     },
     userDetails: function userDetails() {
       var _this = this;
@@ -7606,6 +7644,28 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err.resp.message);
       });
+    },
+    saveOrderItems: function saveOrderItems() {
+      return false;
+    },
+    clearCart: function clearCart() {},
+    //stripeCheckOut
+    payUsingStripe: function payUsingStripe() {
+      var _this2 = this;
+
+      axios.post('api/stripeCheckOut', {
+        'orderItems': JSON.parse(localStorage.getItem('cart')),
+        card: this.stripeCard,
+        'totalPrice': this.$store.state.totalPrice,
+        'shippingAddress': this.shippingAddress,
+        'billingAddress': this.billingAddress
+      }).then(function (resp) {
+        if (resp.data.msg) {
+          _this2.$store.dispatch('removeCartItems');
+
+          _this2.order_number = resp.data.invoice_id;
+        }
+      })["catch"](function (err) {});
     }
   },
   computed: {
@@ -7626,6 +7686,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -111677,7 +111739,179 @@ var render = function() {
                   _vm._v(" "),
                   _vm._m(5),
                   _vm._v(" "),
-                  _vm._m(6),
+                  _c("div", { staticClass: "creditCard", attrs: { id: "" } }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "form-group col-md-12" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.stripeCard.card_number,
+                                  expression: "stripeCard.card_number"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "number",
+                                id: "cardNumber",
+                                autocomplete: "cc-number",
+                                placeholder: "1234 5678 9012 3456"
+                              },
+                              domProps: { value: _vm.stripeCard.card_number },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.stripeCard,
+                                    "card_number",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "form-group col-md-6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.stripeCard.expiry_year,
+                                  expression: "stripeCard.expiry_year"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "expiryDate",
+                                placeholder: "MM/YY"
+                              },
+                              domProps: { value: _vm.stripeCard.expiry_year },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.stripeCard,
+                                    "expiry_year",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-md-6 col-md-4 form-group expiration required"
+                            },
+                            [
+                              _c("label", { staticClass: "control-label" }, [
+                                _vm._v("Expiration Month")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.stripeCard.expiry_month,
+                                    expression: "stripeCard.expiry_month"
+                                  }
+                                ],
+                                staticClass: "form-control card-expiry-month",
+                                attrs: { placeholder: "MM", type: "text" },
+                                domProps: {
+                                  value: _vm.stripeCard.expiry_month
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.stripeCard,
+                                      "expiry_month",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.stripeCard.cvv,
+                                  expression: "stripeCard.cvv"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "number",
+                                id: "cvccvv",
+                                placeholder: "CVC / CVV"
+                              },
+                              domProps: { value: _vm.stripeCard.cvv },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.stripeCard,
+                                    "cvv",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row mt-3" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: {
+                                type: "button",
+                                name: "pay",
+                                value: "Pay Now"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.payUsingStripe()
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                                    Pay Using Stripe\n                                                "
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "paypal" }, [
                     _c("div", { staticClass: "row" }, [
@@ -111700,7 +111934,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                            Check Out with Paypal\n                                        "
+                              "\n                                                Check Out with Paypal\n                                            "
                             )
                           ]
                         )
@@ -111745,7 +111979,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "HELP?\n                                    CONTACT\n                                    US:12345678"
+                        "HELP?\n                                        CONTACT\n                                        US:12345678"
                       )
                     ]
                   ),
@@ -111836,7 +112070,7 @@ var staticRenderFns = [
               "text-center align-items-center justify-content-center",
             staticStyle: { "font-family": "'Times New Roman'" }
           },
-          [_vm._v("\n                    Payment And Shipping")]
+          [_vm._v("\n                        Payment And Shipping")]
         )
       ])
     ])
@@ -111899,7 +112133,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "Check if shipping\n                                        address is different than billing address"
+              "Check if shipping\n                                            address is different than billing address"
             )
           ]
         )
@@ -111929,7 +112163,7 @@ var staticRenderFns = [
             staticClass: "btn btn-primary",
             attrs: { type: "button", id: "creditCard" }
           },
-          [_vm._v("Credit Card\n                                    ")]
+          [_vm._v("Credit Card\n                                        ")]
         ),
         _vm._v(" "),
         _c(
@@ -111947,62 +112181,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "creditCard", attrs: { id: "" } }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-md-12" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  id: "cardNumber",
-                  placeholder: "1234 5678 9012 3456"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "date", id: "expiryDate", placeholder: "MM/YY" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  id: "cvccvv",
-                  placeholder: "CVC / CVV"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-md-12" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "cardHolderName",
-                  placeholder: "Card Holder Name"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row mt-3" }, [
-            _c("input", {
-              staticClass: "pay action-button",
-              attrs: { type: "button", name: "pay", value: "Pay Now" }
-            })
-          ])
-        ])
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group col-md-12" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "cardHolderName",
+            placeholder: "Card Holder Name"
+          }
+        })
       ])
     ])
   },
@@ -112017,7 +112205,7 @@ var staticRenderFns = [
           staticStyle: { "font-size": "22px" }
         }),
         _vm._v(
-          " Congratulations! Your order\n                                was successfully placed"
+          " Congratulations! Your order\n                                    was successfully placed"
         )
       ]),
       _vm._v(" "),
@@ -112031,7 +112219,7 @@ var staticRenderFns = [
           _c("b", [
             _vm._v("Order ID is "),
             _c("span", { staticClass: "text-main-primary" }, [
-              _vm._v(" 123456 ")
+              _vm._v("\n#34343\n                                    ")
             ])
           ]),
           _vm._v(" "),
@@ -112043,14 +112231,18 @@ var staticRenderFns = [
           _c("p", [
             _vm._v("Address------- "),
             _c("br"),
-            _vm._v("\n                                    Suburb Name -----"),
+            _vm._v(
+              "\n                                        Suburb Name -----"
+            ),
             _c("br"),
-            _vm._v("\n                                    State ------"),
-            _c("br"),
-            _vm._v("\n                                    Postal Code ------"),
+            _vm._v("\n                                        State ------"),
             _c("br"),
             _vm._v(
-              "\n                                    Contact Number ------"
+              "\n                                        Postal Code ------"
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                                        Contact Number ------"
             )
           ])
         ]
@@ -112204,7 +112396,35 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(1, true)
+                                _c("div", { staticClass: "row pr-4" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-xs-3 col-xs-offset-3" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "input-group input-group-sm number-spinner"
+                                        },
+                                        [
+                                          _vm._m(1, true),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            staticClass:
+                                              "form-control text-center",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: product.quantity
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _vm._m(2, true)
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "col-2" }, [
@@ -112282,41 +112502,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row pr-4" }, [
-      _c("div", { staticClass: "col-xs-3 col-xs-offset-3" }, [
-        _c(
-          "div",
-          { staticClass: "input-group input-group-sm number-spinner" },
-          [
-            _c("span", { staticClass: "input-group-prepend" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn bg-main-secondary text-white",
-                  attrs: { "data-dir": "dwn" }
-                },
-                [_c("i", { staticClass: "fas fa-minus" })]
-              )
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control text-center",
-              attrs: { type: "text", value: "1" }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn bg-main-secondary text-white",
-                  attrs: { "data-dir": "up" }
-                },
-                [_c("i", { staticClass: "fas fa-plus" })]
-              )
-            ])
-          ]
-        )
-      ])
+    return _c("span", { staticClass: "input-group-prepend" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn bg-main-secondary text-white",
+          attrs: { "data-dir": "dwn" }
+        },
+        [_c("i", { staticClass: "fas fa-minus" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn bg-main-secondary text-white",
+          attrs: { "data-dir": "up" }
+        },
+        [_c("i", { staticClass: "fas fa-plus" })]
+      )
     ])
   }
 ]
@@ -128257,8 +128466,8 @@ var store = {
     product: [],
     cart: [],
     cartCount: 0,
-    storedLocalStorageProduct: [],
-    totalPrice: 0
+    totalPrice: 0,
+    storedLocalStorageProduct: []
   },
   mutations: {
     setProduct: function setProduct(state, product) {
@@ -128315,6 +128524,19 @@ var store = {
     },
     fetchStoredProduct: function fetchStoredProduct(state) {
       state.storedLocalStorageProduct = JSON.parse(localStorage.getItem('cart'));
+    },
+    removeLocalStorageAndStateCartItems: function removeLocalStorageAndStateCartItems(state) {
+      localStorage.removeItem('cart');
+      state.cartCount = 0;
+      state.totalPrice = 0;
+    },
+    removeCartItems: function removeCartItems(productId) {
+      var storedCartItems = JSON.parse(localStorage.getItem('cart'));
+      storedCartItems.forEach(function (val, key) {
+        if (val.product_id == productId) {
+          storedCart.splice(key, 1);
+        }
+      });
     }
   },
   actions: {
@@ -128327,6 +128549,10 @@ var store = {
     totalPrice: function totalPrice(_ref) {
       var commit = _ref.commit;
       return commit('totalPrice');
+    },
+    removeCartItems: function removeCartItems(_ref2) {
+      var commit = _ref2.commit;
+      return commit('removeLocalStorageAndStateCartItems');
     }
   },
   getters: {

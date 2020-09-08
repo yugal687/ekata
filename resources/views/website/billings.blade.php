@@ -207,7 +207,8 @@
 @stop
 
 @section('content')
-    <billing-component>
+
+    <billing-component :successmessage="{{$msg ?? 0}}">
 
     </billing-component>
 @stop

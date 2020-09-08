@@ -167,17 +167,32 @@
                                         <div class="col-12">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <input type="number" class="form-control" id="cardNumber"
+                                                    <input type="number" class="form-control"
+                                                           v-model="stripeCard.card_number"
+                                                           id="cardNumber"
+                                                           autocomplete="cc-number"
                                                            placeholder="1234 5678 9012 3456">
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <input type="date" class="form-control" id="expiryDate"
+                                                    <input type="text" class="form-control"
+                                                           v-model="stripeCard.expiry_year"
+
+                                                           id="expiryDate"
                                                            placeholder="MM/YY">
                                                 </div>
+                                                <div class='col-md-6 col-md-4 form-group expiration required'>
+                                                    <label class='control-label'>Expiration Month</label>
+                                                    <input class='form-control card-expiry-month'
+                                                           v-model="stripeCard.expiry_month" placeholder='MM'
+                                                           type='text'>
+                                                </div>
+
                                                 <div class="form-group col-md-6">
-                                                    <input type="number" class="form-control" id="cvccvv"
+                                                    <input type="number"
+                                                           v-model="stripeCard.cvv"
+                                                           class="form-control" id="cvccvv"
                                                            placeholder="CVC / CVV">
                                                 </div>
                                             </div>
@@ -188,8 +203,13 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <input type="button" name="pay" class="pay action-button"
-                                                       value="Pay Now"/>
+                                                <button type="button"
+                                                        name="pay"
+                                                        class="btn btn-success"
+                                                        @click="payUsingStripe()"
+                                                        value="Pay Now">
+                                                    Pay Using Stripe
+                                                </button>
                                             </div>
                                             <!-- <div class="row mt-3">
                                                  <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
@@ -223,7 +243,9 @@
                                                                style="font-size: 22px"></i> Congratulations! Your order
                                     was successfully placed</h4>
                                 <div class="order-items text-left mt-3 ml-5" style="border-bottom: 1px solid #2b2b2b40">
-                                    <b>Order ID is <span class="text-main-primary"> 123456 </span></b> <br/>
+                                    <b>Order ID is <span class="text-main-primary">
+#34343
+                                    </span></b> <br/>
                                     <b>Shipping Address</b><br/>
                                     <p>Address------- <br/>
                                         Suburb Name -----<br/>
@@ -315,8 +337,10 @@
 <script>
     export default {
         name: "billingsComponent",
+        props: ['successmessage'],
         data() {
             return {
+                order_number: null,
                 discountPrice: 0,
                 shippingAddress: {
                     first_name: '',
@@ -338,6 +362,12 @@
                     email: '',
                     contact_number: ''
                 },
+                stripeCard: {
+                    cvv: '',
+                    expiry_year: '',
+                    expiry_month: '',
+                    card_number: '',
+                }
 
             }
         },
@@ -345,6 +375,10 @@
             this.$store.dispatch('fetchStoredProduct');
             this.$store.dispatch('totalPrice');
             this.userDetails();
+
+            if (this.successmessage == 'success') {
+                alert();
+            }
 
         },
         methods: {
@@ -355,7 +389,9 @@
                     'shippingAddress': this.shippingAddress,
                     'billingAddress': this.billingAddress,
                 }).then(resp => {
-
+                    window.location.href = resp.data.link;
+                }).then(resp => {
+                    console.log(resp.data);
                 });
 
             },
@@ -373,6 +409,36 @@
                 }).catch(err => {
                     console.log(err.resp.message)
                 });
+            },
+
+
+            saveOrderItems() {
+                return false;
+            },
+
+            clearCart() {
+
+            },
+
+            //stripeCheckOut
+            payUsingStripe() {
+                axios.post('api/stripeCheckOut', {
+                    'orderItems': JSON.parse(localStorage.getItem('cart')),
+                    card: this.stripeCard,
+                    'totalPrice': this.$store.state.totalPrice,
+                    'shippingAddress': this.shippingAddress,
+                    'billingAddress': this.billingAddress,
+                }).then(resp => {
+                    if (resp.data.msg) {
+                        this.$store.dispatch('removeCartItems');
+                        this.order_number = resp.data.invoice_id;
+                    }
+
+                }).catch(err => {
+
+
+                });
+
             },
         },
 

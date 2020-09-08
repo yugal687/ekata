@@ -80,15 +80,12 @@ Route::group(['middleware' => ['auth', 'user']], function () {
         return view('website/billings');
     });
 
-    Route::group(['prefix' => 'paypal'], function () {
-        Route::get('sucess', function () {
-            dd('success');
-        })->name('payment.success');
-        Route::get('cancel', function () {
-            dd('cancel');
-        })->name('payment.cancel');
+    Route::get('payment-success', 'Website\PaymentController@paymentsuccess')->name('payment.success');
 
-    });
+
+    Route::get('cancel', function () {
+        dd('cancel');
+    })->name('payment.cancel');
 
 
 });

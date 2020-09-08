@@ -43,7 +43,9 @@
                                                             <i class="fas fa-minus"></i>
                                                         </button>
                                                 </span>
-                                                    <input type="text" class="form-control text-center" value="1">
+                                                    <input type="text" class="form-control text-center"
+
+                                                           :value="product.quantity">
                                                     <span class="input-group-append">
                                                     <button class="btn bg-main-secondary text-white" data-dir="up">
                                                         <i class="fas fa-plus"></i>

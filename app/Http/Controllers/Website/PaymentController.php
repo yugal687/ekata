@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PaymentCheckoutRequest;
-use App\Service\Order;
+use App\Service\OrderService;
 use Illuminate\Http\Request;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Srmklive\PayPal\Services\ExpressCheckout;
+use Stripe\Charge;
+use Stripe\Stripe;
+use Stripe\Token;
 
 class PaymentController extends Controller
 {
@@ -19,30 +23,24 @@ class PaymentController extends Controller
             $data = [];
 
             //map items into corresponding paypal api
-            $data['items'] = array_map(function ($orderItems) {
-                return [
-                    'name' => $orderItems['product_name'],
-                    'price' => 1.0,
-                    'qty' => $orderItems['quantity'],
-                    'desc' => $orderItems['quantity'] . ' ' . $orderItems['product_name'],
-                ];
-            }, $request->orderItems);
+            $data['items'] = $this->maporderItems($request->orderItems);
+
 
             $data['invoice_id'] = uniqid();
             $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
             $data['return_url'] = route('payment.success');
             $data['cancel_url'] = route('payment.cancel');
-            $data['total'] = 2.0;
+            $data['total'] = $request->totalPrice;
+            $provider = new ExpressCheckout();
 
-            $provider = new PayPalClient;
+            $res = $provider->setExpressCheckout($data);
 
-            //$provider = new PayPalClient();
-            /*PayPal::setProvider();
-            $response = $provider->setExpressCheckout($data);
-            */
-            //dd($response);
+//            return redirect($res['paypal_link']);
+            return response()->json([
+                'link' => $res['paypal_link']
+            ]);
 
-
+            dd('sadsd');
             //if paymentSucessfull
             $order = new Order($data['items'],
                 $data['invoice_id'],
@@ -52,6 +50,7 @@ class PaymentController extends Controller
 
             //send maile here;///send mail  here
             //Mail section starts here after succesfully order is saved;
+            //
             //
             //
             //
@@ -71,6 +70,62 @@ class PaymentController extends Controller
 
     }
 
+    //payment using stripe
+    public function stripeCheckOut(Request $request)
+    {
+        if ($this->validateState($request->shippingAddress,
+            $request->billingAddress)) {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+            /* create this in interface  later
+            try {
+                 $token = Token::create([
+                     "card" => [
+                         "number" => $request->card['card_number'],
+                         "exp_month" => $request->card['expiry_month'],
+                         "exp_year" => $request->card['expiry_year'],
+                         "cvc" => $request->card['cvv'],
+                     ]
+                 ]);
+                 $charge = Charge::create([
+                     "amount" => floatval($request->totalPrice) * 100,
+                     "currency" => "AUD",
+                     "source" => $token, // obtained with Stripe.js
+                     "description" => 'this is test',
+                     "receipt_email" => Auth::user()->email,
+                 ]);
+             } catch (\Exception $e) {
+                 return response()->json($e->getJsonBody());
+             }*/
+
+            $data['items'] = $this->maporderItems($request->orderItems);
+            $data['invoice_id'] = uniqid();
+            //$order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress,$request->shippingAddress, $request->totalPrice);
+            //send maile here;///send mail  here
+            //Mail section starts here after succesfully order is saved;
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //Maile Section ends
+
+            return response()->json([
+                'msg' => 'sucessfully saved Order ',
+                'invoice_id' => '#' . $data['invoice_id'],
+//un comment it after order is saved,
+//                'address' => $order->suburb,
+//                'suburb' => $order->suburb,
+//                'state' => $order->state,
+//                'postal_code' => $order->postal_code,
+//                'contact_number' => $order->contact_number,
+            ]);
+        }
+
+    }
+
+
     public function validateState($shippingAddress, $billingAddress)
     {
         if (isset($shippingAddress['email'])) {
@@ -84,5 +139,34 @@ class PaymentController extends Controller
         }
         return false;
 
+    }
+
+    public function maporderItems(array $orderItems)
+    {
+        return array_map(function ($orderItems) {
+            return [
+                'name' => $orderItems['product_name'],
+                'price' => $orderItems['price'] / $orderItems['quantity'],
+                'qty' => $orderItems['quantity'],
+                'desc' => $orderItems['quantity'] . ' ' . $orderItems['product_name'],
+            ];
+        }, $orderItems);
+
+    }
+
+
+    public
+    function paymentsuccess(Request $request)
+    {
+        $provider = new ExpressCheckout;
+        $response = $provider->getExpressCheckoutDetails($request->token);
+
+        dd($response);
+        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
+            {
+                Session::flash('msg', "success");
+                return redirect('/billings');
+            }
+        }
     }
 }
