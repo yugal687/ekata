@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <el-form-item label="Service Description" prop="details">
-                                <el-input v-model="serviceForm.details" ref="summernote"
+                                <el-input v-model="summernote" ref="summernote"
                                           id="summernote">
                                 </el-input>
                                 <!--<div  v-model="serviceForm.details"></div>-->
@@ -152,6 +152,7 @@
             return {
                 labelPosition: 'top',
                 monthYear: '',
+                summernote:'',
                 dialogFormVisible: false,
                 serviceForm: {
                     title: '',
@@ -189,7 +190,7 @@
               this.serviceFormEdit = this.serviceForm.filter(serviceForm=>(serviceForm.id == id));
             },
             saveService(formName) {
-                console.log(this.$refs.summernote);
+                alert(this.summernote.innerHTML);
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let formData = new FormData();

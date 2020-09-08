@@ -5287,6 +5287,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       labelPosition: 'top',
       monthYear: '',
+      summernote: '',
       dialogFormVisible: false,
       serviceForm: {
         title: '',
@@ -5337,7 +5338,7 @@ __webpack_require__.r(__webpack_exports__);
     saveService: function saveService(formName) {
       var _this = this;
 
-      console.log(this.$refs.summernote);
+      alert(this.summernote.innerHTML);
       this.$refs[formName].validate(function (valid) {
         if (valid) {
           var formData = new FormData();
@@ -108026,11 +108027,11 @@ var render = function() {
                           ref: "summernote",
                           attrs: { id: "summernote" },
                           model: {
-                            value: _vm.serviceForm.details,
+                            value: _vm.summernote,
                             callback: function($$v) {
-                              _vm.$set(_vm.serviceForm, "details", $$v)
+                              _vm.summernote = $$v
                             },
-                            expression: "serviceForm.details"
+                            expression: "summernote"
                           }
                         })
                       ],
