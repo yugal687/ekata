@@ -438,7 +438,16 @@
                             type: 'info'
                         });
                         /*alert(response.data.message);*/
-                    });
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
             },
             /*Client Information Tab---*/
             handleClick(tab, event) {

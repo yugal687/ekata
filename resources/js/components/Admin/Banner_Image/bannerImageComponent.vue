@@ -43,7 +43,7 @@
                                 <div class="demo-image__placeholder" style="position: relative;">
                                     <el-image
                                         :src="images.image"
-                                        >
+                                    >
                                     </el-image>
                                 </div>
                                 <div style="position: absolute; padding: 10px; bottom: -3px; right: 5px;">
@@ -83,97 +83,119 @@
 </template>
 
 <script>
-export default {
-    name: "bannerImageComponent",
-    data() {
-        return {
-            getBannerImage:[],
-            dialogImageUrl: '',
-            dialogVisible: false,
-            disabled: false,
-            bannerImageForm: {
-                bannerImage: ''
-            },
-            bannerImageFormRules: {
-
-            },
-        };
-    },
-    mounted(){
-      axios.get('/api/getBannerImage',{})
-          .then(response=>{
-             this.getBannerImage = response.data.getBannerImage;
-          });
-    },
-    methods: {
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
+    export default {
+        name: "bannerImageComponent",
+        data() {
+            return {
+                getBannerImage: [],
+                dialogImageUrl: '',
+                dialogVisible: false,
+                disabled: false,
+                bannerImageForm: {
+                    bannerImage: ''
+                },
+                bannerImageFormRules: {},
+            };
         },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
-        },
-        saveImage(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    let file = this.$refs.upload.uploadFiles;
-                    console.log(file);
-                    let formData = new FormData();
-                    file.forEach((v, k) => {
-                        formData.append(`image[${k}]`, v.raw);
-                    });
-                    axios.post('/api/postBannerImage',formData,{
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-
-                    }).then(response => {
-                        this.$notify({
-                            title: 'Success',
-                            message: response.data.message,
-                            type: 'success'
-                        });
-                    }).catch(error => {
-                        if (error.response.status == 422) {
-                            this.errors = error.response.data.errors;
-                        }
-                    });
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        setActive(id) {
-        axios.patch('/api/activeBanner/'+id).then(response=>{
-            this.$notify({
-                title: 'Success',
-                message: response.data.message,
-                type: 'success'
-            });
-        });
-        },
-        setInActive(id) {
-            axios.patch('/api/inactiveBanner/' + id).then(response => {
-                this.$notify({
-                    title: 'Success',
-                    message: response.data.message,
-                    type: 'success'
+        mounted() {
+            axios.get('/api/getBannerImage', {})
+                .then(response => {
+                    this.getBannerImage = response.data.getBannerImage;
                 });
-            });
         },
-        deleteImage(id) {
-            axios.delete('/api/deleteBanner/'+id)
-                .then(response=>{
+        methods: {
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
+            saveImage(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let file = this.$refs.upload.uploadFiles;
+                        console.log(file);
+                        let formData = new FormData();
+                        file.forEach((v, k) => {
+                            formData.append(`image[${k}]`, v.raw);
+                        });
+                        axios.post('/api/postBannerImage', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                        }).catch(error => {
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
+                            }
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            setActive(id) {
+                axios.patch('/api/activeBanner/' + id).then(response => {
                     this.$notify({
                         title: 'Success',
                         message: response.data.message,
-                        type: 'info'
+                        type: 'success'
                     });
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
                 });
-        },
+            },
+            setInActive(id) {
+                axios.patch('/api/inactiveBanner/' + id)
+                    .then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            },
+            deleteImage(id) {
+                axios.delete('/api/deleteBanner/' + id)
+                    .then(response => {
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+                    });
+            },
+        }
     }
-}
 </script>
 
 <style scoped>

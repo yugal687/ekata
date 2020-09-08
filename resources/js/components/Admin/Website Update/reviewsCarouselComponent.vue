@@ -153,12 +153,22 @@
                 });
             },
             setInActive(id) {
-                axios.patch('/api/inactiveReview/' + id).then(response => {
+                axios.patch('/api/inactiveReview/' + id)
+                    .then(response => {
                     this.$notify({
                         title: 'Success',
                         message: response.data.message,
                         type: 'info'
                     });
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
                 });
             },
             deleteImage(id) {
@@ -169,7 +179,16 @@
                             message: response.data.message,
                             type: 'info'
                         });
-                    });
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
             },
         }
     }

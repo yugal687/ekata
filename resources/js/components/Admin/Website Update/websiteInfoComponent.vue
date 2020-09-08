@@ -172,14 +172,15 @@ name: "websiteInfoComponent",
                             type: 'success'
                         });
                    }).catch(error => {
-                       if (error.response.status == 422) {
-                           this.$notify({
-                               title: 'Error',
-                               message: error.response.data.errors,
-                               type: 'error'
-                           });
-                       }
-                   });
+                        if (error.response) {
+                            this.$notify({
+                                title: 'Error',
+                                message: 'Error Input Data ',
+                                type: 'error'
+                            });
+                            /*this.errors = error.response.data.errors;*/
+                        }
+                    });
                 } else {
                     console.log('error submit!!');
                     return false;

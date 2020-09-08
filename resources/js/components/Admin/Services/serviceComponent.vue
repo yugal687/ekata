@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <el-form-item label="Service Description" prop="details">
-                                <el-input v-model="summernote" ref="summernote"
+                                <el-input ref="summernote"
                                           id="summernote">
                                 </el-input>
                                 <!--<div  v-model="serviceForm.details"></div>-->
@@ -187,10 +187,11 @@
         },
         methods: {
             singleService(id){
-              this.serviceFormEdit = this.serviceForm.filter(serviceForm=>(serviceForm.id == id));
+                this.serviceFormEdit = this.serviceForm.filter(serviceForm=>(serviceForm.id == id));
             },
             saveService(formName) {
-                alert(this.summernote.innerHTML);
+                var overview = this.$refs.summernote.getVal()
+                alert(overview);
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let formData = new FormData();

@@ -186,6 +186,15 @@ export default {
                     message: response.data.message,
                     type: 'success'
                 });
+            }).catch(error => {
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
+                }
             });
         },
         deleteTag(id) {
@@ -196,7 +205,16 @@ export default {
                         message: response.data.message,
                         type: 'info'
                     });
-                });
+                }).catch(error => {
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
+                }
+            });
         },
         submitTag(tagForm) {
             let formData = new FormData();
@@ -213,8 +231,13 @@ export default {
                     type: 'success'
                 });
             }).catch(error => {
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
                 }
             });
         },

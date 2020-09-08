@@ -513,10 +513,10 @@
                             });
                             /*alert(response.data.message);*/
                         }).catch(error => {
-                            if (error.response.status == 422) {
+                            if (error.response) {
                                 this.$notify({
                                     title: 'Error',
-                                    message: error.response.data.message,
+                                    message: 'Error Input Data ',
                                     type: 'error'
                                 });
                                 /*this.errors = error.response.data.errors;*/

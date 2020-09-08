@@ -3761,7 +3761,21 @@ __webpack_require__.r(__webpack_exports__);
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            alert(response.data.message);
+            _this2.$notify({
+              title: 'Success',
+              message: response.data.message,
+              type: 'success'
+            });
+          })["catch"](function (error) {
+            if (error.response) {
+              _this2.$notify({
+                title: 'Error',
+                message: 'Error Input Data ',
+                type: 'error'
+              });
+              /*this.errors = error.response.data.errors;*/
+
+            }
           });
         } else {
           console.log('error submit!!');
@@ -4080,8 +4094,14 @@ __webpack_require__.r(__webpack_exports__);
               type: 'success'
             });
           })["catch"](function (error) {
-            if (error.response.status == 422) {
-              _this2.errors = error.response.data.errors;
+            if (error.response) {
+              _this2.$notify({
+                title: 'Error',
+                message: 'Error Input Data ',
+                type: 'error'
+              });
+              /*this.errors = error.response.data.errors;*/
+
             }
           });
         } else {
@@ -4561,6 +4581,16 @@ __webpack_require__.r(__webpack_exports__);
         });
         /*alert(response.data.message);*/
 
+      })["catch"](function (error) {
+        if (error.response) {
+          _this2.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
 
@@ -4768,8 +4798,14 @@ __webpack_require__.r(__webpack_exports__);
               type: 'success'
             });
           })["catch"](function (error) {
-            if (error.response.status == 422) {
-              _this2.errors = error.response.data.errors;
+            if (error.response) {
+              _this2.$notify({
+                title: 'Error',
+                message: 'Error Input Data ',
+                type: 'error'
+              });
+              /*this.errors = error.response.data.errors;*/
+
             }
           });
         } else {
@@ -4787,6 +4823,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'success'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this3.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
     setInActive: function setInActive(id) {
@@ -4798,6 +4844,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'success'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this4.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
     deleteImage: function deleteImage(id) {
@@ -4917,6 +4973,16 @@ __webpack_require__.r(__webpack_exports__);
         });
         /*alert(response.data.message);*/
 
+      })["catch"](function (error) {
+        if (error.response) {
+          _this2.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     }
   }
@@ -5338,7 +5404,8 @@ __webpack_require__.r(__webpack_exports__);
     saveService: function saveService(formName) {
       var _this = this;
 
-      alert(this.summernote.innerHTML);
+      var overview = this.$refs.summernote.getVal();
+      alert(overview);
       this.$refs[formName].validate(function (valid) {
         if (valid) {
           var formData = new FormData();
@@ -5616,6 +5683,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'success'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this2.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
     deleteBrand: function deleteBrand(id) {
@@ -5627,6 +5704,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'info'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this3.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
     submitBrand: function submitBrand(brandForm) {
@@ -5645,8 +5732,14 @@ __webpack_require__.r(__webpack_exports__);
           type: 'success'
         });
       })["catch"](function (error) {
-        if (error.response.status == 422) {
-          _this4.errors = error.response.data.errors;
+        if (error.response) {
+          _this4.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
         }
       });
     },
@@ -6203,10 +6296,10 @@ __webpack_require__.r(__webpack_exports__);
             /*alert(response.data.message);*/
 
           })["catch"](function (error) {
-            if (error.response.status == 422) {
+            if (error.response) {
               _this5.$notify({
                 title: 'Error',
-                message: error.response.data.message,
+                message: 'Error Input Data ',
                 type: 'error'
               });
               /*this.errors = error.response.data.errors;*/
@@ -6452,6 +6545,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'success'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this2.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
     deleteTag: function deleteTag(id) {
@@ -6463,6 +6566,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'info'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this3.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
     submitTag: function submitTag(tagForm) {
@@ -6481,8 +6594,14 @@ __webpack_require__.r(__webpack_exports__);
           type: 'success'
         });
       })["catch"](function (error) {
-        if (error.response.status == 422) {
-          _this4.errors = error.response.data.errors;
+        if (error.response) {
+          _this4.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
         }
       });
     },
@@ -6832,8 +6951,14 @@ __webpack_require__.r(__webpack_exports__);
           type: 'success'
         });
       })["catch"](function (error) {
-        if (error.response.status == 422) {
-          _this2.errors = error.response.data.errors;
+        if (error.response) {
+          _this2.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
         }
       });
     }
@@ -7223,6 +7348,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'info'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this4.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     },
     deleteImage: function deleteImage(id) {
@@ -7234,6 +7369,16 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'info'
         });
+      })["catch"](function (error) {
+        if (error.response) {
+          _this5.$notify({
+            title: 'Error',
+            message: 'Error Input Data ',
+            type: 'error'
+          });
+          /*this.errors = error.response.data.errors;*/
+
+        }
       });
     }
   }
@@ -7434,12 +7579,14 @@ __webpack_require__.r(__webpack_exports__);
               type: 'success'
             });
           })["catch"](function (error) {
-            if (error.response.status == 422) {
+            if (error.response) {
               _this2.$notify({
                 title: 'Error',
-                message: error.response.data.errors,
+                message: 'Error Input Data ',
                 type: 'error'
               });
+              /*this.errors = error.response.data.errors;*/
+
             }
           });
         } else {
@@ -108087,14 +108234,7 @@ var render = function() {
                       [
                         _c("el-input", {
                           ref: "summernote",
-                          attrs: { id: "summernote" },
-                          model: {
-                            value: _vm.summernote,
-                            callback: function($$v) {
-                              _vm.summernote = $$v
-                            },
-                            expression: "summernote"
-                          }
+                          attrs: { id: "summernote" }
                         })
                       ],
                       1

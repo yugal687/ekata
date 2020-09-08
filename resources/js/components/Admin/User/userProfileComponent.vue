@@ -218,8 +218,13 @@
                         type: 'success'
                     });
                 }).catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
                     }
                 });
             }
