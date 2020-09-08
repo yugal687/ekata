@@ -101,3 +101,5 @@ Route::patch('/saveEditService','Admin\ServiceController@saveEditService');
 //Payment
 Route::post('/paypalCheckOut', 'Website\PaymentController@paypalCheckOut');
 Route::post('/userBillingDetails', 'User\UserController@userBillingDetails');
+
+Route::post('/stripeCheckOut', 'Website\PaymentController@stripeCheckOut');

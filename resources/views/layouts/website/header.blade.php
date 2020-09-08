@@ -230,7 +230,6 @@
 <body>
 <div id="app">
     <header>
-
         <div class="body-inner">
             <div id="top-bar" class="top-bar">
 

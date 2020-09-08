@@ -3,8 +3,8 @@ let store = {
         product: [],
         cart: [],
         cartCount: 0,
-        storedLocalStorageProduct: [],
         totalPrice: 0,
+        storedLocalStorageProduct: [],
     },
 
     mutations: {
@@ -59,6 +59,20 @@ let store = {
         fetchStoredProduct(state) {
             state.storedLocalStorageProduct = JSON.parse(localStorage.getItem('cart'));
         },
+        removeLocalStorageAndStateCartItems(state) {
+            localStorage.removeItem('cart');
+            state.cartCount = 0;
+            state.totalPrice = 0;
+        },
+        removeCartItems(productId){
+            let storedCartItems = JSON.parse(localStorage.getItem('cart'));
+            storedCartItems.forEach((val, key) => {
+                if (val.product_id == productId) {
+                    storedCart.splice(key, 1);
+                }
+            });
+
+        }
     },
 
 
@@ -72,7 +86,11 @@ let store = {
         },
         totalPrice({commit}) {
             return commit('totalPrice');
+        },
+        removeCartItems({commit}) {
+            return commit('removeLocalStorageAndStateCartItems');
         }
+
     },
 
     getters: {
