@@ -51,6 +51,7 @@ Route::get('/singleproduct/{id}', [
     'as' => 'singleproduct']);
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/allAdmins','Admin\DashboardController@fetchAdmin');
     Route::get('admin/dashboard', 'Admin\DashboardController@dashboradData');
     Route::view('user/users', 'admin.user.users');
     Route::view('customer/customers', 'admin.customer.customers');

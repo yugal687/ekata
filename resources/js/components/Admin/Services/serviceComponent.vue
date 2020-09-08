@@ -28,9 +28,7 @@
                                 </div>
                             </div>
                             <el-form-item label="Service Description" prop="details">
-                                <el-input ref="summernote"
-                                          id="summernote">
-                                </el-input>
+                                <vue-editor v-model="serviceForm.details"></vue-editor>
                                 <!--<div  v-model="serviceForm.details"></div>-->
                             </el-form-item>
                             <el-form-item class="mt-4">
@@ -101,21 +99,21 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <el-form :model="serviceFormEdit" :rules="serviceFormEditRules" ref="serviceFormEdit"
+                    <div class="modal-body" v-if="serviceEdit.length >0">
+                        <el-form :model="serviceFormEdit" ref="serviceFormEdit"
                                  :label-position="labelPosition" class="demo-categoryForm">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <el-form-item label="Service Title" prop="title">
-                                        <el-input v-model="serviceFormEdit.title"
+                                    <el-form-item label="Service Title">
+                                        <el-input v-model="serviceEdit[0].title"
                                                   style="width: 100%;">
                                         </el-input>
                                     </el-form-item>
                                 </div>
                                 <div class="col-md-6">
-                                    <el-form-item label="Posted Period" prop="date">
+                                    <el-form-item label="Posted Period">
                                         <el-date-picker
-                                            v-model="serviceFormEdit.date"
+                                            v-model="serviceEdit[0].date"
                                             type="month"
                                             placeholder="Pick a month">
                                         </el-date-picker>
@@ -123,9 +121,7 @@
                                 </div>
                             </div>
                             <el-form-item label="Service Description" prop="details">
-                                <el-input v-model="serviceFormEdit.details"
-                                          id="summernoteEdit">
-                                </el-input>
+                                <vue-editor v-model="serviceEdit[0].details"></vue-editor>
                                 <!--<div  v-model="serviceForm.details"></div>-->
                             </el-form-item>
                             <el-form-item class="mt-4">
@@ -145,34 +141,25 @@
 </template>
 
 <script>
+    import { VueEditor } from "vue2-editor";
     export default {
         name: "serviceComponent",
-
+        components: {
+            VueEditor
+        },
         data() {
             return {
                 labelPosition: 'top',
                 monthYear: '',
-                summernote:'',
                 dialogFormVisible: false,
                 serviceForm: {
                     title: '',
                     date: '',
                     details: '',
                 },
-                serviceFormEdit: {
-                    title: '',
-                    date: '',
-                    details: '',
-                },
+                serviceEdit: [],
+                serviceFormEdit:{},
                 serviceFormRules: {
-                    title: [
-                        {required: true, message: 'Please input title', trigger: 'change'},
-                    ],
-                    date: [
-                        {required: true, message: 'Please select date', trigger: 'change'},
-                    ]
-                },
-                serviceFormEditRules: {
                     title: [
                         {required: true, message: 'Please input title', trigger: 'change'},
                     ],
@@ -187,17 +174,19 @@
         },
         methods: {
             singleService(id){
-                this.serviceFormEdit = this.serviceForm.filter(serviceForm=>(serviceForm.id == id));
+                this.serviceEdit = this.tableData.filter(tableData => tableData.id == id);
+
+                alert(this.serviceEdit[0].title);
+
             },
             saveService(formName) {
-                var overview = this.$refs.summernote.getVal()
-                alert(overview);
+                alert(this.serviceForm.details);
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let formData = new FormData();
                         formData.append('title',this.serviceForm.title);
                         formData.append('date',this.serviceForm.date);
-                        formData.append('details',this.$refs.summernote);
+                        formData.append('details',this.serviceForm.details);
                         axios.post('/api/saveService',formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
@@ -224,7 +213,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         axios.patch('/api/saveEditService', {
-                            editService: this.serviceFormEdit
+                            editService: this.serviceEdit
                         }).then(response => {
                             this.$notify({
                                 title: 'Success',

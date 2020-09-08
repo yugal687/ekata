@@ -22,7 +22,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-7">
-                                            <h2 class="lead"><b>{{ userDetail.userName }}</b></h2>
+                                            <h2 class="lead"><b>{{ userDetail.first_name }}{{userDetail.last_name}}</b></h2>
                                             <!--<p class="text-muted text-sm"><b>Email: </b> {{ userDetail.email }} </p>-->
                                             <ul class="ml-4 mb-0 fa-ul text-muted">
                                                 <li class="small mt-2">
@@ -33,7 +33,7 @@
                                                 </li>
                                                 <li class="small mt-2"><span class="fa-li">
                                             <i class="fas fa-lg fa-phone"></i></span>
-                                                    Phone : {{ userDetail.phone }}
+                                                    Phone : {{ userDetail.contact_number }}
                                                 </li>
                                                 <li class="small mt-2"><span class="fa-li">
                                             <i class="fas fa-lg fa-building"></i></span>
@@ -74,24 +74,15 @@
         data() {
             return {
                 search: '',
-                userDetails: [{
-                    email: 'name1@gmail.com',
-                    userName: 'Name -1',
-                    address: 'Demo Street 123, Demo City 04312, NJ',
-                    phone: '+977-1234567890'
-                }, {
-                    email: 'name2@gmail.com',
-                    userName: 'Name -2',
-                    address: 'Demo Street 123, Demo City 04312, NJ',
-                    phone: '+977-1234567890'
-                }, {
-                    email: 'name3@gmail.com',
-                    userName: 'Name -3',
-                    address: 'Demo Street 123, Demo City 04312, NJ',
-                    phone: '+977-1234567890'
-                }]
+                userDetails: []
             };
-        }
+        },
+        mounted() {
+            axios.get('/allAdmins', {})
+                .then(response => {
+                    this.userDetails = response.data.allAdmins;
+                });
+        },
     }
 </script>
 

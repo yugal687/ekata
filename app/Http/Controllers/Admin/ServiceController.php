@@ -45,11 +45,12 @@ class ServiceController extends Controller
 
     public function saveEditService(Request $request)
     {
-        $saveEdit = Service::findorFail($request->editService[0]['id'])->get();
-        $saveEdit->title = $request->editService[0]['title'];
-        $saveEdit->date = $request->editService[0]['date'];
-        $saveEdit->details = $request->editService[0]['details'];
-        $saveEdit->update();
+        //dd($request);
+        $saveEdit = Service::findorFail($request->editService[0]['id'])->update([
+        'title' => $request->editService[0]['title'],
+        'date' => $request->editService[0]['date'],
+        'details' => $request->editService[0]['details']
+        ]);
         return response()->json([
             'message' => 'Service Updated !!!'
         ]);

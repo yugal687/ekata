@@ -112,7 +112,7 @@
                             <time class="service-card-time">{{$service->date}}</time>
                         </header>
                         <div class="service-card-body">
-                            <p>{{$service->description}} </p>
+                            <p>{!! $service->details !!} </p>
                         </div>
 
                         <footer class="service-card-footer">

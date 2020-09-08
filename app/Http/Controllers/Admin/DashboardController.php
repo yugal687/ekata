@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function dashboradData(){
-        $countUser = User::count();
+        $countUser = User::where('role_id',2)->count();
         //dd($countUser);
+        $countProduct = Product::count();
         $countOrder = OrderDetail::count();
         $latestOrder = OrderDetail::with('order','user','product')
             ->orderBy('id', 'DESC')
@@ -23,7 +24,14 @@ class DashboardController extends Controller
            'countUser' => $countUser,
            'countOrder' => $countOrder,
            'latestOrder' => $latestOrder,
-           'recentProduct' => $recentlyAddedProducts
+           'recentProduct' => $recentlyAddedProducts,
+            'countProduct' => $countProduct
+        ]);
+    }
+    public function fetchAdmin(){
+        $Admins = User::where('role_id',1)->get();
+        return response()->json([
+            'allAdmins' =>$Admins
         ]);
     }
 }
