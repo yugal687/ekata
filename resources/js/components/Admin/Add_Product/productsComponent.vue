@@ -142,11 +142,16 @@
                                             </el-form-item>
                                         </div>
                                         <div class="col-md-6">
-                                            <el-form-item label="Tags" prop="tags" v-if="editProduct[0].tags[0].length">
-                                                <el-input disabled
+                                            <el-form-item label="Tags" prop="tags" >
+                                                <el-input disabled v-if="editProduct[0].tags.length > 0"
                                                           v-model="editProduct[0].tags[0].tags"
                                                           style="width: 100%;">
                                                 </el-input>
+                                                <el-input disabled v-if="editProduct[0].tags.length <= 0"
+                                                          value="no tags"
+                                                          style="width: 100%;">
+                                                </el-input>
+
                                             </el-form-item>
                                         </div>
                                     </div>
@@ -191,7 +196,7 @@
                                                 <el-upload
                                                     class="upload-demo"
                                                     ref="upload"
-                                                    action="https://jsonplaceholder.typicode.com/posts/"
+                                                    action=""
                                                     :auto-upload="false">
                                                     <el-button slot="trigger" size="small" type="primary">select file
                                                     </el-button>
@@ -241,11 +246,10 @@
                                             </el-form-item>
                                         </div>
                                         <div class="col-md-6">
-                                            <el-form-item label="Tags">
-                                                <el-select multiple
+                                            <el-form-item label="Tags" >
+                                                <el-select multiple v-if="editProduct[0].tags.length > 0"
                                                     v-model="inputTags"
-                                                           :value="editProduct[0].tags[0].tags"
-                                                    placeholder="Select Tags">
+                                                    :placeholder="editProduct[0].tags[0].tags">
                                                     <el-option
                                                         v-for="item in tagslist"
                                                         :key="item.id"
@@ -253,6 +257,17 @@
                                                         :value="item.id">
                                                     </el-option>
                                                 </el-select>
+                                                <el-select multiple v-if="editProduct[0].tags.length <= 0"
+                                                           v-model="inputTags"
+                                                           placeholder="select tags">
+                                                    <el-option
+                                                        v-for="item in tagslist"
+                                                        :key="item.id"
+                                                        :label="item.tags"
+                                                        :value="item.id">
+                                                    </el-option>
+                                                </el-select>
+
                                             </el-form-item>
                                         </div>
                                     </div>
@@ -410,7 +425,7 @@
             openEditModal(id) {
                 this.dialogVisible = true;
                  this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
-                 console.log(this.editProduct[0].tags[0].tags)
+                 console.log(this.editProduct[0])
                 $(".productEditWrapper").slideToggle("slow");
                 $(".productDetailsWrapper").slideToggle("slow");
                 $(".detailsProductDetailsBtn").toggle("slow");
@@ -419,6 +434,7 @@
             openDetailsModal(id) {
                 this.dialogVisible = true;
                 this.editProduct = this.getProduct.filter(getProduct => getProduct.id == id);
+                console.log(this.editProduct[0])
                 $(".productEditWrapper").slideToggle("slow");
                 $(".productDetailsWrapper").slideToggle("slow");
                 $(".detailsProductDetailsBtn").toggle("slow");
@@ -459,11 +475,19 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let tag = this.inputTags;
+                        let file = this.$refs.upload.uploadFiles;
                         console.log(tag);
                         let formData = new FormData();
-                        tag.forEach((v, k) => {
-                            formData.append(`tag[${k}]`, v);
-                        });
+                        if (tag.length>0) {
+                            tag.forEach((v, k) => {
+                                formData.append(`tag[${k}]`, v);
+                            });
+                        }
+                        if (file.length>0) {
+                            file.forEach((v, k) => {
+                                formData.append(`image[${k}]`, v.raw);
+                            });
+                        }
                         formData.append('editedProduct', JSON.stringify(this.editProduct));
                         axios.post('/api/editProduct',formData,{
                           //  editedProduct : this.editProduct,

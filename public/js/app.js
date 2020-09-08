@@ -4431,6 +4431,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "productsComponent",
   data: function data() {
@@ -4549,7 +4564,7 @@ __webpack_require__.r(__webpack_exports__);
       this.editProduct = this.getProduct.filter(function (getProduct) {
         return getProduct.id == id;
       });
-      console.log(this.editProduct[0].tags[0].tags);
+      console.log(this.editProduct[0]);
       $(".productEditWrapper").slideToggle("slow");
       $(".productDetailsWrapper").slideToggle("slow");
       $(".detailsProductDetailsBtn").toggle("slow");
@@ -4560,6 +4575,7 @@ __webpack_require__.r(__webpack_exports__);
       this.editProduct = this.getProduct.filter(function (getProduct) {
         return getProduct.id == id;
       });
+      console.log(this.editProduct[0]);
       $(".productEditWrapper").slideToggle("slow");
       $(".productDetailsWrapper").slideToggle("slow");
       $(".detailsProductDetailsBtn").toggle("slow");
@@ -4606,11 +4622,22 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs[formName].validate(function (valid) {
         if (valid) {
           var tag = _this3.inputTags;
+          var file = _this3.$refs.upload.uploadFiles;
           console.log(tag);
           var formData = new FormData();
-          tag.forEach(function (v, k) {
-            formData.append("tag[".concat(k, "]"), v);
-          });
+
+          if (tag.length > 0) {
+            tag.forEach(function (v, k) {
+              formData.append("tag[".concat(k, "]"), v);
+            });
+          }
+
+          if (file.length > 0) {
+            file.forEach(function (v, k) {
+              formData.append("image[".concat(k, "]"), v.raw);
+            });
+          }
+
           formData.append('editedProduct', JSON.stringify(_this3.editProduct));
           axios.post('/api/editProduct', formData, {//  editedProduct : this.editProduct,
           }).then(function (response) {
@@ -106777,17 +106804,18 @@ var render = function() {
                                           "div",
                                           { staticClass: "col-md-6" },
                                           [
-                                            _vm.editProduct[0].tags[0].length
-                                              ? _c(
-                                                  "el-form-item",
-                                                  {
-                                                    attrs: {
-                                                      label: "Tags",
-                                                      prop: "tags"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("el-input", {
+                                            _c(
+                                              "el-form-item",
+                                              {
+                                                attrs: {
+                                                  label: "Tags",
+                                                  prop: "tags"
+                                                }
+                                              },
+                                              [
+                                                _vm.editProduct[0].tags.length >
+                                                0
+                                                  ? _c("el-input", {
                                                       staticStyle: {
                                                         width: "100%"
                                                       },
@@ -106810,10 +106838,23 @@ var render = function() {
                                                           "editProduct[0].tags[0].tags"
                                                       }
                                                     })
-                                                  ],
-                                                  1
-                                                )
-                                              : _vm._e()
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _vm.editProduct[0].tags
+                                                  .length <= 0
+                                                  ? _c("el-input", {
+                                                      staticStyle: {
+                                                        width: "100%"
+                                                      },
+                                                      attrs: {
+                                                        disabled: "",
+                                                        value: "no tags"
+                                                      }
+                                                    })
+                                                  : _vm._e()
+                                              ],
+                                              1
+                                            )
                                           ],
                                           1
                                         )
@@ -106960,8 +107001,7 @@ var render = function() {
                                                     ref: "upload",
                                                     staticClass: "upload-demo",
                                                     attrs: {
-                                                      action:
-                                                        "https://jsonplaceholder.typicode.com/posts/",
+                                                      action: "",
                                                       "auto-upload": false
                                                     }
                                                   },
@@ -107165,37 +107205,88 @@ var render = function() {
                                               "el-form-item",
                                               { attrs: { label: "Tags" } },
                                               [
-                                                _c(
-                                                  "el-select",
-                                                  {
-                                                    attrs: {
-                                                      multiple: "",
-                                                      value:
-                                                        _vm.editProduct[0]
-                                                          .tags[0].tags,
-                                                      placeholder: "Select Tags"
-                                                    },
-                                                    model: {
-                                                      value: _vm.inputTags,
-                                                      callback: function($$v) {
-                                                        _vm.inputTags = $$v
+                                                _vm.editProduct[0].tags.length >
+                                                0
+                                                  ? _c(
+                                                      "el-select",
+                                                      {
+                                                        attrs: {
+                                                          multiple: "",
+                                                          placeholder:
+                                                            _vm.editProduct[0]
+                                                              .tags[0].tags
+                                                        },
+                                                        model: {
+                                                          value: _vm.inputTags,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.inputTags = $$v
+                                                          },
+                                                          expression:
+                                                            "inputTags"
+                                                        }
                                                       },
-                                                      expression: "inputTags"
-                                                    }
-                                                  },
-                                                  _vm._l(_vm.tagslist, function(
-                                                    item
-                                                  ) {
-                                                    return _c("el-option", {
-                                                      key: item.id,
-                                                      attrs: {
-                                                        label: item.tags,
-                                                        value: item.id
-                                                      }
-                                                    })
-                                                  }),
-                                                  1
-                                                )
+                                                      _vm._l(
+                                                        _vm.tagslist,
+                                                        function(item) {
+                                                          return _c(
+                                                            "el-option",
+                                                            {
+                                                              key: item.id,
+                                                              attrs: {
+                                                                label:
+                                                                  item.tags,
+                                                                value: item.id
+                                                              }
+                                                            }
+                                                          )
+                                                        }
+                                                      ),
+                                                      1
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _vm.editProduct[0].tags
+                                                  .length <= 0
+                                                  ? _c(
+                                                      "el-select",
+                                                      {
+                                                        attrs: {
+                                                          multiple: "",
+                                                          placeholder:
+                                                            "select tags"
+                                                        },
+                                                        model: {
+                                                          value: _vm.inputTags,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.inputTags = $$v
+                                                          },
+                                                          expression:
+                                                            "inputTags"
+                                                        }
+                                                      },
+                                                      _vm._l(
+                                                        _vm.tagslist,
+                                                        function(item) {
+                                                          return _c(
+                                                            "el-option",
+                                                            {
+                                                              key: item.id,
+                                                              attrs: {
+                                                                label:
+                                                                  item.tags,
+                                                                value: item.id
+                                                              }
+                                                            }
+                                                          )
+                                                        }
+                                                      ),
+                                                      1
+                                                    )
+                                                  : _vm._e()
                                               ],
                                               1
                                             )
