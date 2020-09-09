@@ -49,13 +49,13 @@
                                 <div style="position: absolute; padding: 10px; bottom: -3px; right: 5px;">
                                     <el-button-group>
                                         <el-button type="success"
-                                                   v-if=""
+                                                   v-if="images.active == 0"
                                                    @click="setActive(images.id)"
                                                    size="mini">
                                             <i class="fas fa-check"></i>
                                         </el-button>
                                         <el-button type="success"
-                                                   v-if=""
+                                                   v-else-if="images.active == 1"
                                                    @click="setInActive(images.id)"
                                                    size="mini">
                                             <i class="fas fa-times"></i>

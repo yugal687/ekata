@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 
 //
-Route::view('/adminregister', 'auth.adminregistration');
+
 /*Route::view('/usersignin', 'admin.usersignin');*/
+Route::post('/registerUser', 'User\UserController@registerUser');
+Route::post('/registerAdmin', 'User\UserController@registerAdmin');
 
 //Logout
 Route::get('/logout', function () {
@@ -51,6 +53,8 @@ Route::get('/singleproduct/{id}', [
     'as' => 'singleproduct']);
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::view('/adminregister', 'auth.adminregistration');
+    Route::view('admin/services/', 'admin.services.service');
     Route::get('/allAdmins','Admin\DashboardController@fetchAdmin');
     Route::get('admin/dashboard', 'Admin\DashboardController@dashboradData');
     Route::view('user/users', 'admin.user.users');
@@ -67,11 +71,11 @@ Route::view('admin/addproduct/index', 'admin.add_product.index');
 Route::view('admin/addproduct/products', 'admin.add_product.products');
 Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
 //Order
-Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
+    Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
 //Banner Image
-Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
+    Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
 //Website Info
-Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
+    Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
 Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
 Route::view('admin/websiteupdate/customersfeedback', 'admin.website_update.customersFeedback');
 Route::view('admin/websiteupdate/reviewscarousel', 'admin.website_update.reviewsCarousel');
@@ -83,7 +87,6 @@ Route::view('admin/services/', 'admin.services.service');
 
 });
 //Services
-Route::view('admin/services/', 'admin.services.service');
 
 
 
@@ -93,15 +96,7 @@ Auth::routes();
 Route::get('/billings', function () {
     return view('website/billings');
 });
-    Route::view('admin/addproduct/index', 'admin.add_product.index');
-    Route::view('admin/addproduct/products', 'admin.add_product.products');
-    Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
-//Order
-    Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
-//Banner Image
-    Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
-//Website Info
-    Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
+
 
 //User Routes
 Route::group(['middleware' => ['auth', 'user']], function () {

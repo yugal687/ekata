@@ -8,6 +8,7 @@ use App\Model\Category;
 use App\Model\Product;
 use App\Model\ReviewImage;
 use App\Model\Service;
+use App\Model\WebsiteDetail;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -21,6 +22,7 @@ class ProductController extends Controller
         $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->latest()->get();
         $bannerImage = BannerImage::where('active', 1)->get();
         $reviewImage = ReviewImage::where('active', 1)->get();
+        $getWebsiteDetail = WebsiteDetail::all();
         $getcategory = Category::where('parent_id','=',NULL)->with('product')->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
 
@@ -32,7 +34,8 @@ class ProductController extends Controller
                 'bannerImage' => $bannerImage,
                 'getCategory' => $getcategory,
                 'bestSelling' =>$bestSelling,
-                'reviewImage' =>$reviewImage
+                'reviewImage' =>$reviewImage,
+                'websiteDetail' =>$getWebsiteDetail
             ]);
     }
     public function showCategory($id){

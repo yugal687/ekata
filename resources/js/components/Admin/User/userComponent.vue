@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row float-right pr-4">
-                        <a class="btn btn-primary mx-2" href="/register">
+                        <a class="btn btn-primary mx-2" href="/adminregister">
                             <i class="fas fa-user-plus"></i> Add User
                         </a>
                         <!--<a class="btn btn-primary mx-2" href="/login">
@@ -50,9 +50,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="text-right">
-                                        <a href="#" class="btn btn-sm btn-primary">
-                                            <i class="fas fa-user"></i> Edit Profile
-                                        </a>
+                                        <button type="submit" @click="onDelete(userDetail.id)" class="btn btn-sm btn-primary">Delete User</button>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +81,28 @@
                     this.userDetails = response.data.allAdmins;
                 });
         },
+        methods:{
+            onDelete(id){
+                axios.delete('/api/deleteUser/'+id)
+                    .then(response => {
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            }
+        }
     }
 </script>
 

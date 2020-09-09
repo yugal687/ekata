@@ -392,20 +392,25 @@
                     </div>
                     <ul class="list-unstyled mt-4">
                         <li class="list">
-                            <a href="tel:0420446000 042000000">0420446000 042000000</a>
+                            <a href="{{$websiteDetail[0]->contact_number}}">{{$websiteDetail[0]->contact_number}}</a>
                         </li>
                         <li class="list">
-                            <a href="mailto:abcdekata@gmail.com">abcdekata@gmail.com</a>
+                            <a href="{{$websiteDetail[0]->optional_contact}}">{{$websiteDetail[0]->optional_contact}}</a>
+                        </li>
+                        <li class="list">
+                            <a href="mailto:abcdekata@gmail.com">{{$websiteDetail[0]->email}}</a>
+                        </li>
+                        <li class="list">
+                            <a href="mailto:abcdekata@gmail.com">{{$websiteDetail[0]->optional_email}}</a>
                         </li>
                         <li class="list">
                             <address>
                                 <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678"
                                    target="_blank">
-                                    1600 Pennsylvania Avenue NW Washington, DC 20500
+                                    {{$websiteDetail[0]->address}}
                                 </a>
                             </address>
                         </li>
-                        <li class="list">VIC 3072</li>
                     </ul>
                 </div>
             </div>

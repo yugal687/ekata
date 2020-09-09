@@ -2,7 +2,7 @@
 
 @section('style')
     <style>
-        #allProductsModal .modal-body, #allOrdersModal .modal-body{
+        #allProductsModal .modal-body, #allOrdersModal .modal-body {
             height: 350px;
             overflow-y: scroll;
             margin: 20px;
@@ -142,7 +142,8 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer text-center">
-                        <a data-toggle="modal" data-target="#allProductsModal" class="btn btn-sm btn-secondary text-white">View All Products</a>
+                        <a data-toggle="modal" data-target="#allProductsModal"
+                           class="btn btn-sm btn-secondary text-white">View All Products</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
@@ -175,18 +176,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($recentOrder as $order)
+                                    @foreach($recentOrder as $order)
 
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">{{$order->order->order_number}}</a></td>
-                                    <td>{{$order->product->product_name}}</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">{{$order->product->price}}</div>
-                                    </td>
-                                </tr>
-                                @endforeach
-
+                                        <tr>
+                                            <td>
+                                                <a href="pages/examples/invoice.html">{{$order->order->order_number}}</a>
+                                            </td>
+                                            <td>{{$order->product->product_name}}</td>
+                                            <td><span class="badge badge-warning">Pending</span></td>
+                                            <td>
+                                                <div class="sparkbar" data-color="#00a65a"
+                                                     data-height="20">{{$order->product->price}}</div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -194,8 +197,10 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="/" class="btn btn-sm btn-info text-white float-left" target="_blank">Place New Order</a>
-                        <a data-toggle="modal" data-target="#allOrdersModal" class="btn btn-sm btn-secondary text-white float-right">View All Orders</a>
+                        <a href="/" class="btn btn-sm btn-info text-white float-left" target="_blank">Place New
+                            Order</a>
+                        <a data-toggle="modal" data-target="#allOrdersModal"
+                           class="btn btn-sm btn-secondary text-white float-right">View All Orders</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
@@ -207,7 +212,8 @@
 
     <!--- All Products Modal ---->
     <!-- Modal -->
-    <div class="modal fade" id="allProductsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="allProductsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -321,7 +327,8 @@
     </div>
     <!--- All Orders Modal ---->
     <!-- Modal -->
-    <div class="modal fade" id="allOrdersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="allOrdersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

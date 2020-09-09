@@ -17,10 +17,10 @@
                     </a>
                     <div class="dropcontent-sm">
                         <ul class="list-group text-center">
-                            <li class="list-group-item"><a href="#">My Account</a></li>
-                            <li class="list-group-item"><a href="#">Logout</a></li>
-                            <li class="list-group-item"><a href="#">Sign In</a></li>
-                            <li class="list-group-item"><a href="#" class="btn btn-info">Register</a></li>
+                            <li class="list-group-item" v-if="userDetail.length > 0"><a href="#">My Account</a></li>
+                            <li class="list-group-item" v-if="userDetail.length > 0"><a href="#">Logout</a></li>
+                            <li class="list-group-item" v-if="userDetail.length <= 0"><a href="#">Sign In</a></li>
+                            <li class="list-group-item" v-if="userDetail.length <= 0"><a href="#" class="btn btn-info">Register</a></li>
                         </ul>
                     </div>
                     <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
@@ -97,8 +97,20 @@
 
 <script>
     export default {
-        name: "headerNavbarComponent"
+        name: "headerNavbarComponent",
+        data(){
+            return {
+                userDetail:[]
+            }
+        },
+        mounted() {
+            axios.get('/api/getUser', {})
+                .then(response => {
+                    this.userDetail = response.data.userDetail;
+                });
+        },
     }
+
 </script>
 
 <style scoped>

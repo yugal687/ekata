@@ -42,20 +42,19 @@
                             <div v-for="images in getReviewImage" :key="images.id" class="col-md-6 col-sm-12 mt-2">
                                 <div class="demo-image__placeholder" style="position: relative;">
                                     <el-image
-                                        :src="images.image"
-                                        :preview-src-list="image">
+                                        :src="images.image">
                                     </el-image>
                                 </div>
                                 <div style="position: absolute; padding: 10px; bottom: -3px; right: 5px;">
                                     <el-button-group>
                                         <el-button type="success"
-                                                   v-if=""
+                                                   v-if="images.active == 0"
                                                    @click="setActive(images.id)"
                                                    size="mini">
                                             <i class="fas fa-check"></i>
                                         </el-button>
                                         <el-button type="warning"
-                                                   v-if=""
+                                                   v-if="images.active == 1"
                                                    @click="setInActive(images.id)"
                                                    size="mini">
                                             <i class="fas fa-times"></i>

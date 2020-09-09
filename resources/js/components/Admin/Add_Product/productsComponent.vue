@@ -37,11 +37,11 @@
                         prop="quantity">
                     </el-table-column>
                     <el-table-column
-                        label="Cost Price"
+                        label="Price"
                         prop="price">
                     </el-table-column>
                     <el-table-column
-                        label="Selling Price"
+                        label="Discounted Price"
                         prop="sale_price"
                     >
                     </el-table-column>
@@ -404,13 +404,9 @@
                 .then(response => {
                     this.getProduct = response.data.getProduct;
                 });
-            axios.get('/api/getCategories', {})
+            axios.get('/api/getAllCategories', {})
                 .then(response => {
-                    this.getCategory = response.data.getCategory;
-                });
-            axios.get('/api/getSubCategories', {})
-                .then(response => {
-                    this.getSubCategory = response.data.getSubCategory;
+                    this.getSubCategory = response.data.getCategory;
                 });
             axios.get('/api/getBrand', {})
                 .then(response => {
@@ -425,7 +421,7 @@
             openEditModal(id) {
                 this.dialogVisible = true;
                  this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
-                 console.log(this.editProduct[0])
+                 console.log(this.editProduct[0]);
                 $(".productEditWrapper").slideToggle("slow");
                 $(".productDetailsWrapper").slideToggle("slow");
                 $(".detailsProductDetailsBtn").toggle("slow");
@@ -434,7 +430,7 @@
             openDetailsModal(id) {
                 this.dialogVisible = true;
                 this.editProduct = this.getProduct.filter(getProduct => getProduct.id == id);
-                console.log(this.editProduct[0])
+                console.log(this.editProduct[0]);
                 $(".productEditWrapper").slideToggle("slow");
                 $(".productDetailsWrapper").slideToggle("slow");
                 $(".detailsProductDetailsBtn").toggle("slow");

@@ -31,6 +31,7 @@ Route::post('/postCategory','Admin\CategoryController@createCategory');
 Route::post('/addsubcategory','Admin\CategoryController@createSubcategory');
 Route::post('/saveEditCategory','Admin\CategoryController@updateCategory');
 Route::get('/getCategories','Admin\CategoryController@getCategory');
+Route::get('/getAllCategories','Admin\CategoryController@getAllCategory');
 Route::get('/getSubCategories','Admin\CategoryController@getSubCategory');
 Route::delete('/deleteCategory/{id}','Admin\CategoryController@deleteCategory');
 

@@ -189,6 +189,7 @@ export default {
                     message: response.data.message,
                     type: 'success'
                 });
+
             }).catch(error => {
                 if (error.response) {
                     this.$notify({
@@ -199,6 +200,7 @@ export default {
                     /*this.errors = error.response.data.errors;*/
                 }
             });
+            this.mounted();
         },
         deleteBrand(id) {
             axios.delete('/api/deleteBrand/' + id)
@@ -208,6 +210,7 @@ export default {
                         message: response.data.message,
                         type: 'info'
                     });
+
                 }).catch(error => {
                 if (error.response) {
                     this.$notify({

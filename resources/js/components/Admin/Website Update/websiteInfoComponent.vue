@@ -12,7 +12,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-12">
                                         <el-form :model="websiteInfoForm" :rules="websiteInfoRules" ref="websiteInfoForm"
-                                                 :label-position="labelPosition" class="">
+                                                 :label-position="labelPosition" v-if="WebsiteDetail.length <=0">
                                             <el-form-item label="Email" prop="email">
                                                 <el-input v-model="websiteInfoForm.email"
                                                           style="width: 100%;">
@@ -55,6 +55,50 @@
                                                 </el-button>
                                             </el-form-item>
                                         </el-form>
+                                        <el-form
+                                                 :label-position="labelPosition" v-if="WebsiteDetail.length >0">
+                                            <el-form-item label="Email" prop="email">
+                                                <el-input v-model="WebsiteDetail[0].email"
+                                                          style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Contact Number" >
+                                                <el-input type="number" v-model="WebsiteDetail[0].contact_number"
+                                                          style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Address">
+                                                <el-input v-model="WebsiteDetail[0].address"
+                                                          style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Email" prop="optionalEmail">
+                                                <el-input v-model="WebsiteDetail[0].optional_email"
+                                                          style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Contact Number">
+                                                <el-input v-model="WebsiteDetail[0].optional_contact"
+                                                          style="width: 100%;">
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item label="Additional Information">
+                                                <el-input
+                                                    type="textarea"
+                                                    v-model="WebsiteDetail[0].additional_information"
+                                                    :autosize="{ minRows: 3, maxRows: 4}"
+                                                    placeholder="Please input additional Information"
+                                                >
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button type="primary"
+                                                           style="width: 80%; margin: 15px 10% 0"
+                                                           @click="EditForm()">Save
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
                                     </div>
                                 </div>
                             </div>
@@ -184,6 +228,25 @@ name: "websiteInfoComponent",
                 } else {
                     console.log('error submit!!');
                     return false;
+                }
+            });
+        },
+        EditForm(){
+            axios.patch('/api/saveEditWebsiteDetail',{WebsiteDetail:this.WebsiteDetail})
+                .then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                }).catch(error => {
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
                 }
             });
         }
