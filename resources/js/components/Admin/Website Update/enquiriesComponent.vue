@@ -73,11 +73,14 @@
             }
         },
         mounted(){
-          axios.get('/api/getEnquiries',{}).then(response=>{
-             this.tableData = response.data.enquiries;
-          });
+         this.fetchEnquiry();
         },
         methods: {
+            fetchEnquiry(){
+                axios.get('/api/getEnquiries',{}).then(response=>{
+                    this.tableData = response.data.enquiries;
+                });
+            },
             handleDelete(id){
                 axios.delete('/api/deleteEnquiry/'+id).then(response=>{
                     this.$notify({
@@ -85,6 +88,7 @@
                         message: response.data.message,
                         type: 'info'
                     });
+                    this.fetchEnquiry();
                 });
             }
         }

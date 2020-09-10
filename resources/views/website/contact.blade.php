@@ -46,7 +46,7 @@
 
 @section('content')
     <div class="container-fluid" >
-        @foreach($orderDetails as $Details)
+        @foreach($websiteDetail as $Details)
         <div class="row py-5 d-flex justify-content-center text-center contact-us">
             <div class="">
                 <h1>Contact Us</h1>

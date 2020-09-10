@@ -168,12 +168,15 @@ export default {
         }
     },
     mounted(){
-        axios.get('/api/getTag',{})
-            .then(response=>{
-                this.tags = response.data.tags;
-            });
+        this.fetchTag();
     },
     methods: {
+        fetchTag(){
+            axios.get('/api/getTag',{})
+                .then(response=>{
+                    this.tags = response.data.tags;
+                });
+        },
         editTag(id) {
             this.editTags = this.tags.filter(tags => tags.id == id);
         },
@@ -186,6 +189,7 @@ export default {
                     message: response.data.message,
                     type: 'success'
                 });
+                this.fetchTag();
             }).catch(error => {
                 if (error.response) {
                     this.$notify({
@@ -205,6 +209,7 @@ export default {
                         message: response.data.message,
                         type: 'info'
                     });
+                    this.fetchTag();
                 }).catch(error => {
                 if (error.response) {
                     this.$notify({
@@ -230,6 +235,7 @@ export default {
                     message: response.data.message,
                     type: 'success'
                 });
+                this.fetchTag();
             }).catch(error => {
                 if (error.response) {
                     this.$notify({

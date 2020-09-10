@@ -70,14 +70,17 @@ export default {
         }
     },
     mounted(){
-      axios.get('/api/allUsers',{}).then(response=>{
-         this.tableData = response.data.allUsers
-      });
+      this.fetchUser();
     },
     methods: {
         /*handleEdit(index, row) {
             console.log(index, row);
         },*/
+        fetchUser(){
+            axios.get('/api/allUsers',{}).then(response=>{
+                this.tableData = response.data.allUsers
+            });
+        },
         handleDelete(id) {
             axios.delete('/api/deleteUser/' + id)
                 .then(response=>{
@@ -86,6 +89,8 @@ export default {
                         message: response.data.message,
                         type: 'info'
                     });
+                    this.fetchUser();
+
                     /*alert(response.data.message);*/
                 }).catch(error => {
                 if (error.response) {

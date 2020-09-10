@@ -422,7 +422,7 @@
                         message: response.data.message,
                         type: 'success'
                     });
-                    /*alert(response.data.message);*/
+                    this.fetchCategory();
                 });
             },
             saveEditSubCategory(){
@@ -434,7 +434,7 @@
                         message: response.data.message,
                         type: 'success'
                     });
-                    /*alert(response.data.message);*/
+                    this.fetchCategory();
                 });
             },
             deleteCategory(id){
@@ -445,7 +445,7 @@
                             message: response.data.message,
                             type: 'info'
                         });
-                        /*alert(response.data.message);*/
+                        this.fetchCategory();
                     });
             },
             submitSubCategory(subcategoryForm){
@@ -465,7 +465,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            /*alert(response.data.message);*/
+                            this.fetchCategory();
                         }).catch(error => {
                             if (error.response.status == 422) {
                                 this.$notify({
@@ -511,7 +511,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            /*alert(response.data.message);*/
+                            this.fetchCategory();
                         }).catch(error => {
                             if (error.response) {
                                 this.$notify({
@@ -528,16 +528,19 @@
                     }
                 });
             },
+            fetchCategory(){
+                axios.get('/api/getCategories',{})
+                    .then(response=>{
+                        this.getCategory = response.data.getCategory;
+                    });
+                axios.get('/api/getSubCategories',{})
+                    .then(response=>{
+                        this.getSubCategory = response.data.getSubCategory;
+                    });
+            }
         },
         mounted() {
-            axios.get('/api/getCategories',{})
-                .then(response=>{
-                    this.getCategory = response.data.getCategory;
-                });
-            axios.get('/api/getSubCategories',{})
-                .then(response=>{
-                    this.getSubCategory = response.data.getSubCategory;
-                });
+            this.fetchCategory();
             $(document).ready(function () {
                 $(".categoryBtn").click(function () {
                     $(".category-div").slideToggle("slow");

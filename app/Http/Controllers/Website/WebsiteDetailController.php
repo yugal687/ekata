@@ -73,7 +73,7 @@ class WebsiteDetailController extends Controller
     {
         $websiteDetails = WebsiteDetail::all();
         return view('website.contact', [
-            'orderDetails' => $websiteDetails
+            'websiteDetail' => $websiteDetails
         ]);
     }
 

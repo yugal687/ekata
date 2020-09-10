@@ -68,11 +68,14 @@
             }
         },
         mounted() {
-            axios.get('/api/fetchFeedback', {}).then(response => {
-                this.tableData = response.data.feedback
-            });
+            this.fetchFeedback();
         },
         methods: {
+            fetchFeedback(){
+                axios.get('/api/fetchFeedback', {}).then(response => {
+                    this.tableData = response.data.feedback
+                });
+            },
             handleDelete(id) {
                 axios.delete('/api/deleteFeedback/' + id).then(response => {
                     this.$notify({
@@ -80,6 +83,8 @@
                         message: response.data.message,
                         type: 'info'
                     });
+                    this.fetchFeedback();
+
                 });
             }
         }

@@ -400,24 +400,27 @@
             }
         },
         mounted() {
-            axios.get('/api/getProduct', {})
-                .then(response => {
-                    this.getProduct = response.data.getProduct;
-                });
-            axios.get('/api/getAllCategories', {})
-                .then(response => {
-                    this.getSubCategory = response.data.getCategory;
-                });
-            axios.get('/api/getBrand', {})
-                .then(response => {
-                    this.getBrand = response.data.getBrand;
-                });
-            axios.get('/api/getTag',{})
-                .then(response=>{
-                    this.tagslist = response.data.tags;
-                });
+           this.fetchProduct();
         },
         methods: {
+            fetchProduct(){
+                axios.get('/api/getProduct', {})
+                    .then(response => {
+                        this.getProduct = response.data.getProduct;
+                    });
+                axios.get('/api/getAllCategories', {})
+                    .then(response => {
+                        this.getSubCategory = response.data.getCategory;
+                    });
+                axios.get('/api/getBrand', {})
+                    .then(response => {
+                        this.getBrand = response.data.getBrand;
+                    });
+                axios.get('/api/getTag',{})
+                    .then(response=>{
+                        this.tagslist = response.data.tags;
+                    });
+            },
             openEditModal(id) {
                 this.dialogVisible = true;
                  this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
@@ -449,6 +452,8 @@
                             message: response.data.message,
                             type: 'info'
                         });
+                        this.fetchProduct();
+
                         /*alert(response.data.message);*/
                     }).catch(error => {
                     if (error.response) {
@@ -493,6 +498,8 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.fetchProduct();
+
                         });
                     } else {
                         console.log('error submit!!');

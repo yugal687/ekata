@@ -98,12 +98,15 @@
             };
         },
         mounted(){
-            axios.get('/api/getReviewImage',{})
-                .then(response=>{
-                    this.getReviewImage = response.data.getReviewImage;
-                });
+            this.fetchReview();
         },
         methods: {
+            fetchReview(){
+                axios.get('/api/getReviewImage',{})
+                    .then(response=>{
+                        this.getReviewImage = response.data.getReviewImage;
+                    });
+            },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
@@ -131,6 +134,8 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.fetchReview();
+
                         }).catch(error => {
                             if (error.response.status == 422) {
                                 this.errors = error.response.data.errors;
@@ -149,6 +154,8 @@
                         message: response.data.message,
                         type: 'success'
                     });
+                    this.fetchReview();
+
                 });
             },
             setInActive(id) {
@@ -159,7 +166,9 @@
                         message: response.data.message,
                         type: 'info'
                     });
-                }).catch(error => {
+                        this.fetchReview();
+
+                    }).catch(error => {
                     if (error.response) {
                         this.$notify({
                             title: 'Error',
@@ -178,6 +187,8 @@
                             message: response.data.message,
                             type: 'info'
                         });
+                        this.fetchReview();
+
                     }).catch(error => {
                     if (error.response) {
                         this.$notify({

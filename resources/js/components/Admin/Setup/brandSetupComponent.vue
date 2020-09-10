@@ -171,12 +171,15 @@ export default {
         }
     },
     mounted(){
-        axios.get('/api/getBrand',{})
-            .then(response=>{
-                this.getBrand = response.data.getBrand;
-            });
+        this.getRequest();
     },
     methods: {
+        getRequest(){
+            axios.get('/api/getBrand',{})
+                .then(response=>{
+                    this.getBrand = response.data.getBrand;
+                });
+        },
         editBrand(id) {
             this.editBrands = this.getBrand.filter(getBrand => getBrand.id == id);
         },
@@ -189,6 +192,7 @@ export default {
                     message: response.data.message,
                     type: 'success'
                 });
+                this.getRequest();
 
             }).catch(error => {
                 if (error.response) {
@@ -200,7 +204,6 @@ export default {
                     /*this.errors = error.response.data.errors;*/
                 }
             });
-            this.mounted();
         },
         deleteBrand(id) {
             axios.delete('/api/deleteBrand/' + id)
@@ -210,6 +213,7 @@ export default {
                         message: response.data.message,
                         type: 'info'
                     });
+                    this.getRequest();
 
                 }).catch(error => {
                 if (error.response) {
@@ -238,6 +242,8 @@ export default {
                     message: response.data.message,
                     type: 'success'
                 });
+                this.getRequest();
+
             }).catch(error => {
                 if (error.response) {
                     this.$notify({

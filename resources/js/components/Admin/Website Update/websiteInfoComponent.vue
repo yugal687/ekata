@@ -11,7 +11,8 @@
                             <div class="text">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-12">
-                                        <el-form :model="websiteInfoForm" :rules="websiteInfoRules" ref="websiteInfoForm"
+                                        <el-form :model="websiteInfoForm" :rules="websiteInfoRules"
+                                                 ref="websiteInfoForm"
                                                  :label-position="labelPosition" v-if="WebsiteDetail.length <=0">
                                             <el-form-item label="Email" prop="email">
                                                 <el-input v-model="websiteInfoForm.email"
@@ -56,13 +57,13 @@
                                             </el-form-item>
                                         </el-form>
                                         <el-form
-                                                 :label-position="labelPosition" v-if="WebsiteDetail.length >0">
+                                            :label-position="labelPosition" v-if="WebsiteDetail.length >0">
                                             <el-form-item label="Email" prop="email">
                                                 <el-input v-model="WebsiteDetail[0].email"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
-                                            <el-form-item label="Contact Number" >
+                                            <el-form-item label="Contact Number">
                                                 <el-input type="number" v-model="WebsiteDetail[0].contact_number"
                                                           style="width: 100%;">
                                                 </el-input>
@@ -158,100 +159,107 @@
 </template>
 
 <script>
-export default {
-name: "websiteInfoComponent",
-    data(){
-        return{
-            labelPosition: 'top',
-            websiteInfoForm: {
-                email: '',
-                contactNumber: '',
-                address: '',
-                optionalEmail: '',
-                optionalContactNumber: '',
-                information: '',
+    export default {
+        name: "websiteInfoComponent",
+        data() {
+            return {
+                labelPosition: 'top',
+                websiteInfoForm: {
+                    email: '',
+                    contactNumber: '',
+                    address: '',
+                    optionalEmail: '',
+                    optionalContactNumber: '',
+                    information: '',
+                },
+                type: [],
+                websiteInfoRules: {
+                    email: [
+                        {required: true, message: 'Please input email address', trigger: 'blur'},
+                        {type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change']}
+                    ],
+                    contactNumber: [
+                        {required: true, message: 'Please input contact number', trigger: 'blur'},
+                    ],
+                    address: [
+                        {required: true, message: 'Please input address', trigger: 'blur'},
+                    ]
+                },
+                WebsiteDetail: [],
+            }
+        },
+        mounted() {
+            this.fetchInfo();
+        },
+        methods: {
+            fetchInfo() {
+                axios.get('/api/getWebsiteDetail',{}).then(response=>{
+                    this.WebsiteDetail = response.data.WebsiteDetail;
+                });
             },
-            type: [],
-            websiteInfoRules: {
-                email: [
-                    {required: true, message: 'Please input email address', trigger: 'blur'},
-                    {type: 'email', message: 'Please input correct email address', trigger:['blur', 'change']}
-                ],
-                contactNumber: [
-                    {required: true, message: 'Please input contact number', trigger: 'blur'},
-                ],
-                address: [
-                    {required: true, message: 'Please input address', trigger: 'blur'},
-                ]
+            submitForm(websiteInfoForm) {
+                this.$refs[websiteInfoForm].validate((valid) => {
+                    if (valid) {
+                        let formData = new FormData();
+                        formData.append('email', this.websiteInfoForm.email);
+                        formData.append('contact_number', this.websiteInfoForm.contactNumber);
+                        formData.append('address', this.websiteInfoForm.address);
+                        formData.append('additional_information', this.websiteInfoForm.information);
+                        formData.append('optional_email', this.websiteInfoForm.optionalEmail);
+                        formData.append('optional_contact', this.websiteInfoForm.optionalContactNumber);
+
+                        axios.post('/api/postWebsiteDetail', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            this.fetchInfo();
+
+                        }).catch(error => {
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
+                            }
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
-            WebsiteDetail:[],
-        }
-    },
-    mounted(){
-    axios.get('/api/getWebsiteDetail',{}).then(response=>{
-       this.WebsiteDetail = response.data.WebsiteDetail;
-    });
-    },
-    methods: {
-        submitForm(websiteInfoForm) {
-            this.$refs[websiteInfoForm].validate((valid) => {
-                if (valid) {
-                    let formData = new FormData();
-                    formData.append('email',this.websiteInfoForm.email);
-                    formData.append('contact_number',this.websiteInfoForm.contactNumber);
-                    formData.append('address',this.websiteInfoForm.address);
-                    formData.append('additional_information',this.websiteInfoForm.information);
-                    formData.append('optional_email',this.websiteInfoForm.optionalEmail);
-                    formData.append('optional_contact',this.websiteInfoForm.optionalContactNumber);
-
-                    axios.post('/api/postWebsiteDetail',formData, {
-                       headers: {
-                           'Content-Type': 'multipart/form-data'
-                       }
-
-                   }).then(response => {
+            EditForm() {
+                axios.patch('/api/saveEditWebsiteDetail', {WebsiteDetail: this.WebsiteDetail})
+                    .then(response => {
                         this.$notify({
                             title: 'Success',
                             message: response.data.message,
                             type: 'success'
                         });
-                   }).catch(error => {
-                        if (error.response) {
-                            this.$notify({
-                                title: 'Error',
-                                message: 'Error Input Data ',
-                                type: 'error'
-                            });
-                            /*this.errors = error.response.data.errors;*/
-                        }
-                    });
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        EditForm(){
-            axios.patch('/api/saveEditWebsiteDetail',{WebsiteDetail:this.WebsiteDetail})
-                .then(response => {
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'success'
-                    });
-                }).catch(error => {
-                if (error.response) {
-                    this.$notify({
-                        title: 'Error',
-                        message: 'Error Input Data ',
-                        type: 'error'
-                    });
-                    /*this.errors = error.response.data.errors;*/
-                }
-            });
+                        this.fetchInfo();
+
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            }
         }
     }
-}
 </script>
 
 <style scoped>

@@ -180,7 +180,16 @@
             }
         },
         methods: {
-
+                fetchDiscountedProduct(){
+                    axios.get('/api/getDiscountedProduct', {})
+                        .then(response => {
+                            this.getDiscountedProduct = response.data.getDiscountedProduct;
+                        });
+                    axios.get('/api/getProduct', {})
+                        .then(response => {
+                            this.getProduct = response.data.getProduct;
+                        });
+                },
             onChange(event) {
                 console.log(this.discountForm.productSelect);
                 this.selectedProduct = this.getProduct.filter(getProduct => getProduct.id == this.discountForm.productSelect);
@@ -202,6 +211,8 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.fetchDiscountedProduct();
+
                         }).catch(error => {
                             if (error.response) {
                                 this.$notify({
@@ -221,8 +232,14 @@
             handleDelete(id) {
                 axios.patch('/api/deleteDiscount/' + id, {})
                     .then(response => {
-                        alert(response.data.message);
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+                        this.fetchDiscountedProduct();
                     });
+
             }
         },
         computed: {
@@ -234,14 +251,7 @@
             }
         },
         mounted() {
-            axios.get('/api/getDiscountedProduct', {})
-                .then(response => {
-                    this.getDiscountedProduct = response.data.getDiscountedProduct;
-                });
-            axios.get('/api/getProduct', {})
-                .then(response => {
-                    this.getProduct = response.data.getProduct;
-                });
+           this.fetchDiscountedProduct();
         }
 
     }

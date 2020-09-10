@@ -176,11 +176,10 @@
             singleService(id){
                 this.serviceEdit = this.tableData.filter(tableData => tableData.id == id);
 
-                alert(this.serviceEdit[0].title);
+
 
             },
             saveService(formName) {
-                alert(this.serviceForm.details);
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let formData = new FormData();
@@ -198,6 +197,8 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.fetchService();
+
                         }).catch(error => {
                             if (error.response.status == 422) {
                                 this.errors = error.response.data.errors;
@@ -220,6 +221,8 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.fetchService();
+
                         });
                     } else {
                         console.log('error submit!!');
@@ -235,15 +238,20 @@
                             message: response.data.message,
                             type: 'info'
                         });
+                        this.fetchService();
+
                     });
             },
+            fetchService(){
+                axios.get('/api/getService', {})
+                    .then(response => {
+                        this.tableData = response.data.service;
+                    });
+            }
         },
 
         mounted() {
-            axios.get('/api/getService', {})
-                .then(response => {
-                    this.tableData = response.data.service;
-                });
+            this.fetchService();
         }
     }
 </script>

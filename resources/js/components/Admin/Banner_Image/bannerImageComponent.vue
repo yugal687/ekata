@@ -98,12 +98,15 @@
             };
         },
         mounted() {
-            axios.get('/api/getBannerImage', {})
-                .then(response => {
-                    this.getBannerImage = response.data.getBannerImage;
-                });
+           this.fetchImage();
         },
         methods: {
+            fetchImage(){
+                axios.get('/api/getBannerImage', {})
+                    .then(response => {
+                        this.getBannerImage = response.data.getBannerImage;
+                    });
+            },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
@@ -131,6 +134,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.fetchImage();
                         }).catch(error => {
                             if (error.response) {
                                 this.$notify({
@@ -154,6 +158,8 @@
                         message: response.data.message,
                         type: 'success'
                     });
+                    this.fetchImage();
+
                 }).catch(error => {
                     if (error.response) {
                         this.$notify({
@@ -173,7 +179,9 @@
                         message: response.data.message,
                         type: 'success'
                     });
-                }).catch(error => {
+                        this.fetchImage();
+
+                    }).catch(error => {
                     if (error.response) {
                         this.$notify({
                             title: 'Error',
@@ -192,6 +200,8 @@
                             message: response.data.message,
                             type: 'info'
                         });
+                        this.fetchImage();
+
                     });
             },
         }

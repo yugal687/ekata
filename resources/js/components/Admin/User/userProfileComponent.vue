@@ -197,12 +197,15 @@
             }
         },
         mounted() {
-            axios.get('/api/getUser', {})
-                .then(response => {
-                    this.userDetail = response.data.userDetail;
-                });
+           this.fetchUser();
         },
         methods: {
+            fetchUser(){
+                axios.get('/api/getUser', {})
+                    .then(response => {
+                        this.userDetail = response.data.userDetail;
+                    });
+            },
             UpdateProfile() {
                 let formData = new FormData();
                 formData.append('userDetail', JSON.stringify(this.userDetail));
@@ -217,6 +220,8 @@
                         message: response.data.message,
                         type: 'success'
                     });
+                    this.fetchUser();
+
                 }).catch(error => {
                     if (error.response) {
                         this.$notify({
