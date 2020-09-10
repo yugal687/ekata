@@ -53,6 +53,15 @@
     </style>
 
 </head>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">

@@ -34,9 +34,8 @@ class UserController extends Controller
     public function registerUser(Request $request){
         //dd($request);
         $validate =$request->validate([
-            'email' => 'email',
-            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:6'
+            'email' => 'email|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
         if ($validate) {
             $registerUser = User::create([
@@ -51,25 +50,34 @@ class UserController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'role_id' => 2
             ]);
+            //dd($registerUser);
         }
         if ($registerUser) {
-            return route('/login');
+            return view('auth.login');
         }
     }
     public function registerAdmin(Request $request){
-        $registerAdmin = User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'address' => $request->input('address'),
-            'contact_number' => $request->input('contact_number'),
-            'sub_urb' => $request->input('sub_urb'),
-            'state' => $request->input('state'),
-            'postal_code' => $request->input('postal_code'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'role_id' =>1
+        $validate =$request->validate([
+            'email' => 'email|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
-        return view('auth.login');
+        if ($validate) {
+            $registerAdmin = User::create([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'address' => $request->input('address'),
+                'contact_number' => $request->input('contact_number'),
+                'sub_urb' => $request->input('sub_urb'),
+                'state' => $request->input('state'),
+                'postal_code' => $request->input('postal_code'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'role_id' => 1
+            ]);
+        }
+        if ($registerAdmin) {
+            return view('auth.login');
+        }
     }
     public function singleUserDetail(){
 
