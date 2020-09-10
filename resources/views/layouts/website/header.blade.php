@@ -392,16 +392,13 @@
                     </div>
                     <ul class="list-unstyled mt-4">
                         <li class="list">
-                            <a href="{{$websiteDetail[0]->contact_number}}">{{$websiteDetail[0]->contact_number}}</a>
+                            <a href="tel:{{$websiteDetail[0]->contact_number}}">{{$websiteDetail[0]->contact_number}}</a>
                         </li>
                         <li class="list">
-                            <a href="{{$websiteDetail[0]->optional_contact}}">{{$websiteDetail[0]->optional_contact}}</a>
+                            <a href="tel:{{$websiteDetail[0]->optional_contact}}">{{$websiteDetail[0]->optional_contact}}</a>
                         </li>
                         <li class="list">
-                            <a href="mailto:abcdekata@gmail.com">{{$websiteDetail[0]->email}}</a>
-                        </li>
-                        <li class="list">
-                            <a href="mailto:abcdekata@gmail.com">{{$websiteDetail[0]->optional_email}}</a>
+                            <a href="mailto:{{$websiteDetail[0]->email}}">{{$websiteDetail[0]->email}}</a>
                         </li>
                         <li class="list">
                             <address>

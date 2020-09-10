@@ -41,49 +41,63 @@ class ProductController extends Controller
     public function showCategory($id){
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $getsingleCategory = Category::where('id',$id)->with('product','parent','children')->get();
+        $getWebsiteDetail = WebsiteDetail::all();
         //dd($getsingleCategory);
         return view('website.category',
             [
                 'getsingleCategory' => $getsingleCategory,
-                'getCategory' => $getcategory
+                'getCategory' => $getcategory,
+                'websiteDetail' =>$getWebsiteDetail
+
+
 
             ]);
     }
     public function showMainCategory($id){
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $getsingleCategory = Category::where('id',$id)->with('product','parent','children')->get();
+        $getWebsiteDetail = WebsiteDetail::all();
         //dd($getsingleCategory);
         return view('website.mainCategory',
             [
                 'getsingleCategory' => $getsingleCategory,
-                'getCategory' => $getcategory
+                'getCategory' => $getcategory,
+                'websiteDetail' =>$getWebsiteDetail
+
 
             ]);
     }
     public function SingleProductPage($id){
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $singleproduct = Product::where('id',$id)->with(array('category', 'brand', 'tags', 'image'))->get();
+        $getWebsiteDetail = WebsiteDetail::all();
         return view('website.singleProduct',
             [
                 'getCategory' => $getcategory,
-                'singleProduct' => $singleproduct
+                'singleProduct' => $singleproduct,
+                'websiteDetail' =>$getWebsiteDetail
+
 
             ]);
     }
     public function showProducts(){
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
+        $getWebsiteDetail = WebsiteDetail::all();
         $getproduct = Product::inRandomOrder()->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
         return view('website.products',
             [
                 'getproduct' => $getproduct,
-                'getCategory' => $getcategory
-
+                'getCategory' => $getcategory,
+                'websiteDetail' =>$getWebsiteDetail
             ]);
     }
     public function service(){
         $Service = Service::all();
+        $getWebsiteDetail = WebsiteDetail::all();
         return view('website.services',[
-           'services' => $Service
+           'services' => $Service,
+            'websiteDetail' =>$getWebsiteDetail
+
         ]);
     }
 }
