@@ -3,6 +3,15 @@
 <link href="{{ asset('css/smsidebarstyle.css')}}" rel="stylesheet"/>
 <!--Website Header Ends-->
 
+@section('style')
+    <style>
+        .categoryBannerImage{
+            height: 450px;
+            width: 100%;
+        }
+    </style>
+@endsection
+
 @section('content')
     @include('layouts.website.smsidebar')
     <div class="container-fluid">
@@ -38,7 +47,6 @@
                         </nav>
                     </div>
                 </div>
-                <main class="p-1 p-sm-3 p-md-4 p-lg-5">
                 <main class="p-5">
                     <div class="row pb-3">
                         <div class="col-12">
@@ -49,7 +57,7 @@
                     <div class="row">
 
                             @foreach($category->product as $product)
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
+                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center text-center">
                             <a href="{{route('singleproduct',$product->id)}}">
                             <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                                 <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" width="150" alt="">
@@ -58,7 +66,7 @@
                             <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
                             <h5 class="best_weight py-0 text-dark">{{$product->brand->brand_name}}</h5>
                             <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
                                 Add to Cart
                             </button>
                             </a>

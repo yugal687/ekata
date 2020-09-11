@@ -54,7 +54,7 @@
                                                    size="mini">
                                             <i class="fas fa-check"></i>
                                         </el-button>
-                                        <el-button type="success"
+                                        <el-button type="warning"
                                                    v-else-if="images.active == 1"
                                                    @click="setInActive(images.id)"
                                                    size="mini">

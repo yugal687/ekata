@@ -136,3 +136,7 @@ Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 //Save User/Admin Register
 Route::post('/registerUser','User\UserController@registeruser');
 Route::post('/registerAdmin','User\UserController@registerAdmin');
+
+
+//Service Details
+Route::view('/servicedetails', 'website.servicedetails');
