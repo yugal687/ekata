@@ -19,12 +19,12 @@
 
 {{--<link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
 <!-- owl carousel  -->
-    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css')}}">
     <!---Tiny Slider--->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
     <!-- Template styles-->
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
     @yield('style')
 
@@ -237,7 +237,8 @@
                     <div class="col-lg-2 col-md-12 m-0 p-0 bg-main-primary rounded-right-top">
                         <div class="container-mine">
                             <div class="text-center">
-                                <h3 class=" text-white font-weight-bold pl-2 mt-4">Logo
+                                <h3 class=" text-white font-weight-bold pl-2 mt-4">
+                                    Logo
                                     Here</h3>
                             </div>
                         </div>
@@ -273,9 +274,7 @@
 
         <!-- Cart Modal -->
         <div>
-            <cart-items-component>
-
-            </cart-items-component>
+            <cart-items-component></cart-items-component>
         </div>
 
 
@@ -284,7 +283,7 @@
 
     @yield('content')
 
-</div>
+
 
 {{--Footer Section--}}
 <footer>
@@ -311,9 +310,9 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
                     <div class="col-4">
-                        <button class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn" type="submit">Call
-                            Us
-                        </button>
+                        <a href="" class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
+                            Call Us
+                        </a>
                     </div>
                 </div>
             </div>
@@ -453,14 +452,12 @@
         </div>
     </div>
 </footer>
-
+</div>
 
 <!-- Javascript Files
     ================================================== -->
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-<!-- jquery cdn -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 {{-- Jquery Ui--}}
 <script
     src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
@@ -469,9 +466,6 @@
 {{--Bootstrap Js--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <!-- Template custom -->
 <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
@@ -484,45 +478,8 @@
 @yield('scripts')
 
 <script>
-    $(window).scroll(function () {
-        if ($(window).scrollTop() >= 400) {
-            $('nav.navbar').addClass('sticky');
-        } else {
-            $('nav.navbar').removeClass('sticky');
-        }
-    });
     /*jQuery time*/
     $(document).ready(function () {
-        $("#accordion h3").click(function () {
-            //slide up all the link lists
-            $("#accordion ul ul").slideUp();
-            $(this).find('i').toggleClass('fa-angle-down fa-angle-up')
-            //slide down the link list below the h3 clicked - only if its closed
-            if (!$(this).next().is(":visible")) {
-                $(this).next().slideDown();
-            }
-        });
-        /*Active List*/
-        $('#accordion ul ul li a').click(function (e) {
-
-            $('#accordion li.activeList').removeClass('activeList');
-
-            var $parent = $(this).parent();
-            $parent.addClass('activeList');
-            e.preventDefault();
-        });
-        /*Active Heading*/
-        $('#accordion li h3').click(function () {
-
-            $('#accordion li.activeHeading').removeClass('activeHeading');
-
-            var $parent = $(this).parent();
-            $parent.addClass('activeHeading');
-            /*e.preventDefault();*/
-        });
-        // When the user clicks anywhere outside of the modal, close it
-
-
         ///Sm SIdebar
         /*Sm-sidebar-scripts*/
         $(".sidebar-dropdown a").click(function () {
@@ -549,26 +506,30 @@
         $(".sidebar-dropdown > a i").click(function (e) {
             e.preventDefault();
         });
+
         $("#toggle-smsidebar").click(function () {
             $(".smsidebar-menu").toggleClass("rightActive");
         });
-    });
-    /*Number Snipper Button*/
-    $(document).on('click', '.number-spinner button', function () {
-        var btn = $(this),
-            oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-            newVal = 0;
 
-        if (btn.attr('data-dir') == 'up') {
-            newVal = parseInt(oldValue) + 1;
-        } else {
-            if (oldValue > 1) {
-                newVal = parseInt(oldValue) - 1;
+
+        /*Number Snipper Button*/
+        $(document).on('click', '.number-spinner button', function () {
+            var btn = $(this),
+                oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+                newVal = 0;
+
+            if (btn.attr('data-dir') == 'up') {
+                newVal = parseInt(oldValue) + 1;
             } else {
-                newVal = 1;
+                if (oldValue > 1) {
+                    newVal = parseInt(oldValue) - 1;
+                } else {
+                    newVal = 1;
+                }
             }
-        }
-        btn.closest('.number-spinner').find('input').val(newVal);
+            btn.closest('.number-spinner').find('input').val(newVal);
+        });
+
     });
 </script>
 <!-- Body inner end -->

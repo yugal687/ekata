@@ -43,7 +43,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active px-2">
+                        <li class="nav-item px-2">
                             <a class="nav-link text-white" href="/">Home <span
                                 class="sr-only">(current)</span></a>
                         </li>

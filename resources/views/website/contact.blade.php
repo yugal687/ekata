@@ -48,10 +48,10 @@
     <div class="container-fluid" >
         @foreach($websiteDetail as $Details)
         <div class="row py-5 d-flex justify-content-center text-center contact-us">
-            <div class="">
+            <div class="col-md-6 col-sm-12">
                 <h1>Contact Us</h1>
                 <p>{{$Details->additional_information}}</p>
-                <a type="button" class="btn bg-main-primary text-white px-3 py-1" href="tel:12345678">Call Us</a>
+                <a type="button" class="btn bg-main-primary text-white px-3 py-1" href="tel:{{ $Details->contact_number}}">Call Us</a>
             </div>
         </div>
         <div class="container card_box">
@@ -65,8 +65,8 @@
                                 </div>
                                 <div class="col-md-9 text-center">
                                     <h4 class="font-weight-bold pb-3">PHONE</h4>
-                                    <h6><a >{{$Details->contact_number}}</a></h6>
-                                    <h6><a >{{$Details->optional_contact}}</a></h6>
+                                    <h6><a href="tel:{{ $Details->contact_number}}">{{ $Details->contact_number}}</a></h6>
+                                    <h6><a href="tel:{{ $Details->optional_contact}}">{{ $Details->optional_contact}}</a></h6>
                                 </div>
                             </div>
                         </div>

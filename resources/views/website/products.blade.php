@@ -44,7 +44,7 @@
                             @foreach($getproduct as $product)
 
                             <div
-                                class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
+                                class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-content-center align-items-center text-center">
                                 <a href="{{route('singleproduct',$product->id)}}">
                                 <div
                                     class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
@@ -53,7 +53,7 @@
                                 <h5 class="best_price pt-3 font-weight-bold text-main-danger">{{$product->price}}</h5>
                                 <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
                                 <button type="button"
-                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
                                     Add to Cart
                                 </button>
                                 </a>

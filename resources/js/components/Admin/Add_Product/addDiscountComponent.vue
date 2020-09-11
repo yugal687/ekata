@@ -12,7 +12,7 @@
                             <div class="col-12">
                                 <el-form :model="discountForm" :rules="discountFormRules" ref="discountForm"
                                          :label-position="labelPosition" class="demo-discountForm">
-                                    <el-form-item label="Select Category" prop="productSelect">
+                                    <el-form-item label="Select Product" prop="productSelect">
                                         <el-select clearable placeholder="Select Product"
                                                    filterable
                                                    v-model="discountForm.productSelect"
@@ -48,6 +48,7 @@
                                     <el-form-item label="Selling Price After Discount" prop="sellingPriceAfterDiscount">
                                         <el-input v-model="discountcalculate"
                                                   class="sellingPriceAfterDiscount"
+                                                  :disabled="true"
                                                   style="width: 100%;">
                                         </el-input>
                                     </el-form-item>

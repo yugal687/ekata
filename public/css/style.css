@@ -203,6 +203,22 @@ a:hover {
     width: 100%;
     height: 82vh;
 }
+@media screen and (min-width: 991px){
+    .banner-area img {
+        width: 100%;
+        height: 82vh;
+    }
+}
+@media screen and (max-width: 991px){
+    .banner-area {
+        width: 100%;
+        height: 70vh;
+    }
+    .banner-area img {
+        width: 100%;
+        height: 70vh;
+    }
+}
 
 /* clearence section */
 .card-rounded-top {
