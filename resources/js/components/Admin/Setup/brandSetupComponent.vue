@@ -22,6 +22,7 @@
                                                 <el-form-item>
                                                     <el-button type="primary"
                                                                style="width: 80%; margin: 15px 10% 0"
+                                                               :disabled="disable"
                                                                @click="submitBrand('brandForm')">Create
                                                     </el-button>
                                                 </el-form-item>
@@ -113,13 +114,14 @@
 
                                         <el-form :model="brandForm" :rules="brandRules"
                                                  :label-position="labelPosition" class="demo-brandForm">
-                                            <el-form-item label="Brand Name" prop="name">
+                                            <el-form-item label="Brand Name">
                                                 <el-input v-model="ebrand.brand_name"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>
                                             <el-form-item>
                                                 <el-button type="primary"
+                                                           :disabled="disable"
                                                            style="width: 80%; margin: 15px 10% 0"
                                                            @click="saveEditBrand">Create
                                                 </el-button>
@@ -148,6 +150,7 @@ export default {
     data() {
         return {
             edit: false,
+            disable:false,
             getBrand: [],
             editBrands: [],
             labelPosition: 'top',
@@ -193,7 +196,7 @@ export default {
                     type: 'success'
                 });
                 this.getRequest();
-
+                this.disable = true;
             }).catch(error => {
                 if (error.response) {
                     this.$notify({
@@ -242,6 +245,7 @@ export default {
                     message: response.data.message,
                     type: 'success'
                 });
+                this.brandForm = [];
                 this.getRequest();
 
             }).catch(error => {

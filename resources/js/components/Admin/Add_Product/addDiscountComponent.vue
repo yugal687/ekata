@@ -47,6 +47,7 @@
                                     </el-form-item>
                                     <el-form-item label="Selling Price After Discount" prop="sellingPriceAfterDiscount">
                                         <el-input v-model="discountcalculate"
+                                                  :disabled ="true"
                                                   class="sellingPriceAfterDiscount"
                                                   style="width: 100%;">
                                         </el-input>
@@ -212,7 +213,7 @@
                                 type: 'success'
                             });
                             this.fetchDiscountedProduct();
-
+this.discountForm=[];
                         }).catch(error => {
                             if (error.response) {
                                 this.$notify({

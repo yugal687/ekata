@@ -134,4 +134,10 @@ class WebsiteDetailController extends Controller
             'message' => 'Review Image Deleted !!!'
         ]);
     }
+    public function aboutUs(){
+        $websiteDetails = WebsiteDetail::all();
+        return view('website.aboutus', [
+            'websiteDetail' => $websiteDetails
+        ]);
+    }
 }

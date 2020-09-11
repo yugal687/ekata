@@ -4,6 +4,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
+
             <div class="col-md-4">
 
                 <!-- Profile Image -->
@@ -141,32 +142,39 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="updatepassowrd">
+                                <div v-if="errors" class="bg-red-500 text-white py-2 px-4 pr-0 rounded font-bold mb-4 shadow-lg">
+                                    <div v-for="(v, k) in errors" :key="k">
+                                        <p v-for="error in v" :key="error" class="text-sm">
+                                            {{ error }}
+                                        </p>
+                                    </div>
+                                </div>
                                 <form class="form-horizontal">
                                     <div class="row d-flex justify-content-center">
                                         <div class="form-group col-md-8">
                                             <label class="col-sm-12 col-form-label">Current Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" v-model="data.currentPassword" class="form-control"
                                                        placeholder="Current Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label class="col-sm-12 col-form-label">New Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" v-model="data.newPassword" class="form-control"
                                                        placeholder="New Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label class="col-sm-12 col-form-label">Confirm Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" v-model="data.confirmPassword" class="form-control"
                                                        placeholder="Confirm Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
                                             <div class=" col-sm-12">
-                                                <button type="submit" class="btn btn-warning">Update</button>
+                                                <input type="button" @click="updatePassword" value="Update" class="btn btn-warning">
                                                 <a href="#" class="ml-2">Forget Password</a>
                                             </div>
                                         </div>
@@ -193,6 +201,12 @@
         data() {
             return {
                 userDetail: [],
+                errors:null,
+                data:[{
+                    currentPassword:'',
+                    newPassword:'',
+                    confirmPassword:''
+                }],
 
             }
         },
@@ -204,6 +218,30 @@
                 axios.get('/api/getUser', {})
                     .then(response => {
                         this.userDetail = response.data.userDetail;
+                    });
+            },
+            updatePassword(){
+                let formData = new FormData();
+                formData.append('currentPassword', this.data.currentPassword);
+                formData.append('newPassword', this.data.newPassword);
+                formData.append('confirmPassword', this.data.confirmPassword);
+
+                axios.post('/api/updatePassword', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.fetchUser();
+                    this.data=[];
+                }).
+                catch(error => {
+                        this.errors = error.data.errors;
                     });
             },
             UpdateProfile() {

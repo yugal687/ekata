@@ -81,6 +81,7 @@ Route::get('/getOrderDetail','Order\OrderController@getOrder');
 //User
 Route::get('/getUser','User\UserController@singleUserDetail');
 Route::post('/saveEditProfile','User\UserController@updateUser');
+Route::post('/updatePassword','User\UserController@updatePassword');
 Route::get('/allUsers','User\UserController@fetchUsers');
 Route::delete('/deleteUser/{id}','User\UserController@deleteUser');
 
