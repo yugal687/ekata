@@ -197,6 +197,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.serviceForm=[];
                             this.fetchService();
 
                         }).catch(error => {

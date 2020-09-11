@@ -390,6 +390,7 @@
                         <h4 class="font-weight-bold">Contact Us</h4>
                     </div>
                     <ul class="list-unstyled mt-4">
+                        @if(count($websiteDetail) > 0)
                         <li class="list">
                             <a href="tel:{{$websiteDetail[0]->contact_number}}">{{$websiteDetail[0]->contact_number}}</a>
                         </li>
@@ -407,6 +408,7 @@
                                 </a>
                             </address>
                         </li>
+                            @endif
                     </ul>
                 </div>
             </div>

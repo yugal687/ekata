@@ -52,6 +52,15 @@
     </style>
 
 </head>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
@@ -174,10 +183,9 @@
                             </div>
                             <span id='message'></span>
                         </div>
-                        <div class="text-center">
-                            <input value="Register" class="btn btn-block bg-main-primary text-white" type="submit">
-
-                        </div>
+                        <button class="btn btn-block bg-main-primary text-white" type="submit">
+                            Register
+                        </button>
                     </form>
 
                     <div class="text-center mt-3">

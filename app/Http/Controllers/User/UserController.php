@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function updateUser(Request $request){
+    public function updateUser(Request $request)
+    {
         //dd($request);
 
         $editeduserDetail = json_decode($request->userDetail);
@@ -31,12 +32,13 @@ class UserController extends Controller
         ]);
 
     }
-    public function registerUser(Request $request){
+
+    public function registerUser(Request $request)
+    {
         //dd($request);
-        $validate =$request->validate([
-            'email' => 'email',
-            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:6'
+        $validate = $request->validate([
+            'email' => 'email|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
         if ($validate) {
             $registerUser = User::create([
@@ -51,34 +53,48 @@ class UserController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'role_id' => 2
             ]);
+            //dd($registerUser);
         }
         if ($registerUser) {
-            return route('/login');
+            return view('auth.login');
         }
     }
-    public function registerAdmin(Request $request){
-        $registerAdmin = User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'address' => $request->input('address'),
-            'contact_number' => $request->input('contact_number'),
-            'sub_urb' => $request->input('sub_urb'),
-            'state' => $request->input('state'),
-            'postal_code' => $request->input('postal_code'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'role_id' =>1
-        ]);
-        return view('auth.login');
-    }
-    public function singleUserDetail(){
 
-            $userDetail = Auth::user();
-            //dd($userDetail);
-            return response()->json([
-                'userDetail' => $userDetail
+    public function registerAdmin(Request $request)
+    {
+        $validate = $request->validate([
+            'email' => 'email|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
+        if ($validate) {
+            $registerAdmin = User::create([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'address' => $request->input('address'),
+                'contact_number' => $request->input('contact_number'),
+                'sub_urb' => $request->input('sub_urb'),
+                'state' => $request->input('state'),
+                'postal_code' => $request->input('postal_code'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'role_id' => 1
             ]);
+        }
+        if ($registerAdmin) {
+            return view('/user/users');
+        }
     }
+
+    public function singleUserDetail()
+    {
+
+        $userDetail = Auth::user();
+        //dd($userDetail);
+        return response()->json([
+            'userDetail' => $userDetail
+        ]);
+    }
+
     public function recentOrder()
     {
         $lastOrder = OrderDetail::with('order', 'user', 'product')
@@ -90,6 +106,7 @@ class UserController extends Controller
             'recentOrder' => $lastOrder
         ]);
     }
+
     public function userBillingDetails()
     {
         if ($user = Auth::user()) {
@@ -111,17 +128,51 @@ class UserController extends Controller
         return false;
     }
 
-    public function fetchUsers(){
-        $Users = User::where('role_id',2)->get();
+    public function fetchUsers()
+    {
+        $Users = User::where('role_id', 2)->get();
         return response()->json([
-           'allUsers' =>$Users
+            'allUsers' => $Users
         ]);
     }
-    public function deleteUser($id){
+
+    public function deleteUser($id)
+    {
         $deleteUser = User::findorFail($id)->delete();
         return response()->json([
-           'message' => "User Deleted !!!"
+            'message' => "User Deleted !!!"
         ]);
+    }
+
+    public function dashboradData()
+    {
+        $latestOrder = OrderDetail::with('order', 'user', 'product')
+            ->orderBy('id', 'DESC')
+            ->get();
+        return view('User.userdashboard', [
+            'latestOrder' => $latestOrder
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $validate = $request->validate([
+            'newPassword' => 'required|min:6',
+            'confirmPassword' => 'required|min:6|same:newPassword'
+        ]);
+        if ($validate) {
+            //dd($request->currentPassword);
+            if (Hash::check($request->currentPassword, Auth::user()->password)) {
+                $users =User::findorFail(Auth::user()->id);
+                $users->password = Hash::make($request->newPassword);
+                $users->update();
+            }
+        }
+        if($users) {
+            return response()->json([
+                'message' => 'Password Updated !!!'
+            ]);
+        }
     }
 
 }

@@ -29,9 +29,7 @@ Route::get('/logout', function () {
     return view('auth.login');
 });
 //About Us
-Route::get('/aboutus', function () {
-    return view('website/aboutus');
-});
+Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
 //Services
 Route::get('/services', 'Website\ProductController@service');
 /*Route::get('/products', function () {
@@ -100,7 +98,7 @@ Route::get('/billings', function () {
 
 //User Routes
 Route::group(['middleware' => ['auth', 'user']], function () {
-    Route::view('user/userdashboard', 'User.userdashboard');
+    Route::get('user/userdashboard', 'User\UserController@dashboradData');
     Route::view('user/userprofile','User.userprofile');
 
 

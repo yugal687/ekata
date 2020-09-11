@@ -149,7 +149,7 @@
                     label: 'Option5'
                 }],
                 files: [],
-                tags:[],
+                tags: [],
                 getCategory: [],
                 getSubCategory: [],
                 getBrand: [],
@@ -208,8 +208,8 @@
                 .then(response => {
                     this.getBrand = response.data.getBrand;
                 });
-            axios.get('/api/getTag',{})
-                .then(response=>{
+            axios.get('/api/getTag', {})
+                .then(response => {
                     this.tags = response.data.tags;
                 });
         },
@@ -247,6 +247,7 @@
                                     message: response.data.message,
                                     type: 'success'
                                 });
+                                this.productForm = [];
                             }).catch(error => {
                                 if (error.response) {
                                     this.$notify({

@@ -176,7 +176,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($recentOrder as $order)
+                                    @foreach($latestOrder as $order)
 
                                         <tr>
                                             <td>

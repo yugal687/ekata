@@ -326,19 +326,15 @@
         name: "setupComponent",
         data() {
             return {
-                fileListHeader: [
-
-                ],
-                fileListThumbnail: [
-
-                ],
+                fileListHeader: [],
+                fileListThumbnail: [],
                 edit: false,
-                editcategory:[],
-                editsubCategory:[],
+                editcategory: [],
+                editsubCategory: [],
                 labelPosition: 'top',
-                getCategory:[],
-                getBrand:[],
-                getSubCategory:[],
+                getCategory: [],
+                getBrand: [],
+                getSubCategory: [],
                 categoryForm: {
                     name: '',
                 },
@@ -365,29 +361,12 @@
                         {required: true, message: 'Please input sub-category name', trigger: 'blur'},
                     ]
                 },
-                /*Table Data's*/
-                categorytableData: [{
-                    sn: 1,
-                    categoryName: 'Tom',
-                }, {
-                    sn: 2,
-                    categoryName: 'Tom Cat',
-                }],
-                /*Table Data's*/
-                subcategorytableData: [{
-                    sn: 1,
-                    categoryName: 'Tom',
-                    subcategoryName: 'Subcat One'
-                }, {
-                    sn: 2,
-                    categoryName: 'Tom Cat',
-                    subcategoryName: 'Subcat Two'
-                }],
+
                 categorySearch: '',
                 subcategorySearch: '',
             };
         },
-        methods:{
+        methods: {
             handleRemoveHeader(file, fileListHeader) {
                 console.log(file, fileListHeader);
             },
@@ -407,16 +386,16 @@
                 this.fileListThumbnail = fileListThumbnail.slice(-1);
             },
             /*---------*/
-            editCategory(id){
-                this.editcategory = this.getCategory.filter(getCategory=> getCategory.id == id);
+            editCategory(id) {
+                this.editcategory = this.getCategory.filter(getCategory => getCategory.id == id);
             },
-            editSubCategory(id){
-                this.editsubCategory = this.getSubCategory.filter(getSubCategory=>getSubCategory.id == id);
+            editSubCategory(id) {
+                this.editsubCategory = this.getSubCategory.filter(getSubCategory => getSubCategory.id == id);
             },
-            saveEditCategory(){
-                axios.post('/api/saveEditCategory',{
-                    editCategory:this.editcategory
-                }).then(response=>{
+            saveEditCategory() {
+                axios.post('/api/saveEditCategory', {
+                    editCategory: this.editcategory
+                }).then(response => {
                     this.$notify({
                         title: 'Success',
                         message: response.data.message,
@@ -425,10 +404,10 @@
                     this.fetchCategory();
                 });
             },
-            saveEditSubCategory(){
-                axios.post('/api/saveEditCategory',{
-                    editCategory:this.editsubCategory
-                }).then(response=>{
+            saveEditSubCategory() {
+                axios.post('/api/saveEditCategory', {
+                    editCategory: this.editsubCategory
+                }).then(response => {
                     this.$notify({
                         title: 'Success',
                         message: response.data.message,
@@ -437,9 +416,9 @@
                     this.fetchCategory();
                 });
             },
-            deleteCategory(id){
-                axios.delete('/api/deleteCategory/'+id)
-                    .then(response=>{
+            deleteCategory(id) {
+                axios.delete('/api/deleteCategory/' + id)
+                    .then(response => {
                         this.$notify({
                             title: 'Success',
                             message: response.data.message,
@@ -448,13 +427,13 @@
                         this.fetchCategory();
                     });
             },
-            submitSubCategory(subcategoryForm){
+            submitSubCategory(subcategoryForm) {
                 this.$refs[subcategoryForm].validate((valid) => {
                     if (valid) {
                         let formdata = new FormData();
-                        formdata.append('category_name',this.subcategoryForm.name);
-                        formdata.append('parent_id',this.subcategoryForm.categorySelect);
-                        axios.post('/api/addsubcategory',formdata,{
+                        formdata.append('category_name', this.subcategoryForm.name);
+                        formdata.append('parent_id', this.subcategoryForm.categorySelect);
+                        axios.post('/api/addsubcategory', formdata, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                             }
@@ -465,6 +444,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.subcategoryForm = [];
                             this.fetchCategory();
                         }).catch(error => {
                             if (error.response.status == 422) {
@@ -511,6 +491,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
+                            this.categoryForm = [];
                             this.fetchCategory();
                         }).catch(error => {
                             if (error.response) {
@@ -528,13 +509,13 @@
                     }
                 });
             },
-            fetchCategory(){
-                axios.get('/api/getCategories',{})
-                    .then(response=>{
+            fetchCategory() {
+                axios.get('/api/getCategories', {})
+                    .then(response => {
                         this.getCategory = response.data.getCategory;
                     });
-                axios.get('/api/getSubCategories',{})
-                    .then(response=>{
+                axios.get('/api/getSubCategories', {})
+                    .then(response => {
                         this.getSubCategory = response.data.getSubCategory;
                     });
             }
