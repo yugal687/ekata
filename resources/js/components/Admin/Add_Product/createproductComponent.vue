@@ -28,7 +28,7 @@
                                                        v-model="productForm.subcategorySelect"
                                                        style="width: 100%">
                                                 <el-option
-                                                    v-for="item in getCategory"
+                                                    v-for="item in getSubCategory"
                                                     :key="item.id"
                                                     :label="item.category_name"
                                                     :value="item.id">

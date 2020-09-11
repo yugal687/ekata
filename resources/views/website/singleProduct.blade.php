@@ -140,6 +140,55 @@
                     <single-product-component :product="{{$singleProduct}}">
 
                     </single-product-component>
+                    <div class="">
+                        <main class="p-5">
+
+                            <section id="special-section">
+                                <div class="container mt-5 pt-2">
+                                    <!-- first row -->
+                                    <!-- second row -->
+                                    <div class="row">
+                                        <div class="container mt-5">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h4 class="text-center font-weight-bold">Recommended for you</h4>
+                                                </div>
+
+                                                <div class="col-md-9">
+                                                    <hr style="border-top: 1px solid">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- col-item-start -->
+                                        @foreach($category[0]->product as $cat)
+                                        <div
+                                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
+                                            <a href="{{route('singleproduct',$cat->id)}}">
+                                            <div
+                                                class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
+                                                <img src="{{$cat->image[0]->name}}" alt="">
+                                            </div>
+
+                                            <h5 class="best_price font-weight-bold mt-3 text-main-primary">{{$cat->price}}</h5>
+                                            <h5 class="best_name py-0 text-dark">{{$cat->product_name}}</h5>
+                                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                            <button type="button"
+                                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                                Add to Cart
+                                            </button>
+                                            </a>
+                                        </div>
+                                        @endforeach
+                                        <!-- col-item-end -->
+                                    </div>
+                                    <!-- second row -->
+                                </div>
+                            </section>
+                            <!-- special section ends here -->
+                        </main>
+                    </div>
                 </div>
                 {{----}}
             </div>

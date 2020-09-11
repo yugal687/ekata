@@ -68,15 +68,18 @@ class ProductController extends Controller
             ]);
     }
     public function SingleProductPage($id){
+        //dd($id);
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $singleproduct = Product::where('id',$id)->with(array('category', 'brand', 'tags', 'image'))->get();
+        //dd($singleproduct[0]->category->id);
+        $category = Category::where('id',$singleproduct[0]->category->id)->with('product','parent','children')->get();
         $getWebsiteDetail = WebsiteDetail::all();
         return view('website.singleProduct',
             [
                 'getCategory' => $getcategory,
                 'singleProduct' => $singleproduct,
-                'websiteDetail' =>$getWebsiteDetail
-
+                'websiteDetail' =>$getWebsiteDetail,
+                'category' =>$category
 
             ]);
     }

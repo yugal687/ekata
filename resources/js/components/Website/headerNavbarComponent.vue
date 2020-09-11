@@ -16,11 +16,15 @@
                         </svg>
                     </a>
                     <div class="dropcontent-sm">
-                        <ul class="list-group text-center">
-                            <li class="list-group-item" v-if="userDetail.length>0"><a href="#">My Account</a></li>
-                            <li class="list-group-item" v-if="userDetail.length>0"><a href="#">Logout</a></li>
-                            <li class="list-group-item" v-if="userDetail"><a href="#">Sign In</a></li>
-                            <li class="list-group-item" v-if="userDetail"><a href="#" class="btn btn-info">Register</a></li>
+                        <ul class="list-group text-center" v-if="userDetail">
+                            <li class="list-group-item"><a href="/user/dashboard">My
+                                Account</a></li>
+                            <li class="list-group-item"><a href="/logout">Logout</a></li>
+                        </ul>
+                        <ul class="list-group text-center" v-else>
+                            <li class="list-group-item"><a href="/login">Sign In</a></li>
+                            <li class="list-group-item"><a href="/register" class="btn btn-info">Register</a>
+                            </li>
                         </ul>
                     </div>
                     <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
@@ -38,7 +42,6 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
 
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -98,9 +101,9 @@
 <script>
     export default {
         name: "headerNavbarComponent",
-        data(){
+        data() {
             return {
-                userDetail:[]
+                userDetail: []
             }
         },
         mounted() {
@@ -122,6 +125,7 @@
         top: 50px;
         z-index: 10002;
     }
+
     .dropcontent-sm {
         visibility: hidden;
         width: 142px;
@@ -130,6 +134,7 @@
         top: 35px;
         z-index: 10002;
     }
+
     .dropcontent a, .dropcontent-sm a {
         color: #2b2b2b;
     }

@@ -43,6 +43,8 @@ Route::post('/addDiscount','Admin\ProductController@addDiscount');
 Route::patch('/deleteDiscount/{id}','Admin\ProductController@deleteDiscount');
 Route::get('/getProduct','Admin\ProductController@getProduct');
 Route::get('/getDiscountedProduct','Admin\ProductController@getDiscountedProduct');
+Route::get('/singleCategoryProduct/{id}','Admin\ProductController@singleCategoryProduct');
+Route::get('/singleCategoryProduct/{id}','Admin\ProductController@singleCategoryProduct');
 Route::delete('/deleteProduct/{id}','Admin\ProductController@deleteProduct');
 
 
@@ -103,5 +105,3 @@ Route::patch('/saveEditService','Admin\ServiceController@saveEditService');
 //Payment
 Route::post('/paypalCheckOut', 'Website\PaymentController@paypalCheckOut');
 Route::post('/userBillingDetails', 'User\UserController@userBillingDetails');
-
-Route::post('/stripeCheckOut', 'Website\PaymentController@stripeCheckOut');
