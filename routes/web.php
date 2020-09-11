@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -91,9 +92,6 @@ Route::view('admin/services/', 'admin.services.service');
 Auth::routes();
 
 
-Route::get('/billings', function () {
-    return view('website/billings');
-});
 
 
 //User Routes
@@ -107,7 +105,7 @@ Route::group(['middleware' => ['auth', 'user']], function () {
         if (!Auth::user()) {
             redirect('/login');
         }
-        return view('website/billings');
+        return App::call('App\Http\Controllers\Website\WebsiteDetailController@billingPage');
     });
 
     Route::get('payment-success', 'Website\PaymentController@paymentsuccess')->name('payment.success');

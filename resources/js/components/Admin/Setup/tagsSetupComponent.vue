@@ -235,7 +235,7 @@
                         message: response.data.message,
                         type: 'success'
                     });
-                    this.tagForm = [];
+                    this.tagForm = {};
                     this.fetchTag();
                 }).catch(error => {
                     if (error.response) {

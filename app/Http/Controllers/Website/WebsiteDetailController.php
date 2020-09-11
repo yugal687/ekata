@@ -140,4 +140,10 @@ class WebsiteDetailController extends Controller
             'websiteDetail' => $websiteDetails
         ]);
     }
+    public function billingPage(){
+        $websiteDetails = WebsiteDetail::all();
+        return view('website.billings', [
+            'websiteDetail' => $websiteDetails
+        ]);
+    }
 }

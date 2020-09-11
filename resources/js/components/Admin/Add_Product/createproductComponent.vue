@@ -247,7 +247,7 @@
                                     message: response.data.message,
                                     type: 'success'
                                 });
-                                this.productForm = [];
+                                this.productForm = {};
                             }).catch(error => {
                                 if (error.response) {
                                     this.$notify({

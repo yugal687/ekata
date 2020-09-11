@@ -213,7 +213,7 @@
                                 type: 'success'
                             });
                             this.fetchDiscountedProduct();
-this.discountForm=[];
+this.discountForm={};
                         }).catch(error => {
                             if (error.response) {
                                 this.$notify({

@@ -444,7 +444,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            this.subcategoryForm = [];
+                            this.subcategoryForm = {};
                             this.fetchCategory();
                         }).catch(error => {
                             if (error.response.status == 422) {
@@ -491,7 +491,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            this.categoryForm = [];
+                            this.categoryForm = {};
                             this.fetchCategory();
                         }).catch(error => {
                             if (error.response) {

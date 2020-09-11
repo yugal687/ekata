@@ -32,7 +32,8 @@
             </div>
             <div class="pt-4">
                 <h6>Price</h6>
-                <h4 class="font-weight-bold text-danger">{{price}}</h4>
+                <h4 class="font-weight-bold text-danger">{{checkedPrice}}</h4>
+
             </div>
             <div class="pt-4">
                 <h6>Quantity</h6>
@@ -115,6 +116,7 @@
                 quantity: 1,
                 price: 0,
                 cartItemCount: 0,
+                checkedPrice: 0,
             }
         },
         methods: {
@@ -125,10 +127,11 @@
                 let cart = {
                     'product_id': this.product[0].id,
                     'quantity': this.quantity,
-                    'price': this.price,
+                    'price': this.checkedPrice,
                     'product_image': this.product[0].image[0].name,
                     'product_name': this.product[0].product_name,
                 };
+
                 let storedCart = JSON.parse(localStorage.getItem('cart'));
                 this.$store.commit('addToCart', cart);
             },
@@ -165,8 +168,13 @@
 
         mounted() {
 // console.log(this.product);
-            this.price = this.product[0].price;
             this.$store.commit('setProduct', this.product);
+            if (this.product[0].sale_price) {
+                return this.checkedPrice = this.product[0].sale_price;
+            } else {
+                return this.checkedPrice = this.product[0].price;
+            }
+
         }
 
     }
