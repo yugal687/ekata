@@ -1,102 +1,12 @@
 $(document).ready(function () {
-    // Add active class to the current Nav
-    var current_page_URL = location.href;
-    $( "a" ).each(function() {
-        if ($(this).attr("href") !== "#") {
-            var target_URL = $(this).prop("href");
-            if (target_URL == current_page_URL) {
-                $('nav a').parents('li, ul').removeClass('active');
-                $(this).parent('li').addClass('active');
-                return false;
-            }
+    /*Location Href*/
+    var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+    $('ul a').each(function() {
+        if (this.href === path) {
+            $(this).addClass('active');
         }
     });
 
-    /*Vertical Sidebar Carousel | Tiny Slider*/
-    var slider = tns({
-        "container": ".smindex-sidebar-carousel",
-        "items": 3,
-        "slideBy": 1,
-        "mouseDrag": true,
-        "swipeAngle": false,
-        "speed": 400,
-        "loop": true,
-        "controls": true,
-        "controlsPosition": "bottom",
-        "controlsText": ["<i class='fas fa-angle-left'></i>", "<i class='fas fa-angle-right'></i>"],
-        "responsive": {
-            "0": {
-                "items": 3
-            },
-            "576": {
-                "items": 4
-            },
-            "768": {
-                "items": 6
-            }
-        },
-    });
-    /*------------------------*/
-    var slider = tns({
-        container: ".sidebar-vertical-carousel",
-        /*"items": 9,*/
-        "axis": "vertical",
-        "swipeAngle": false,
-        "speed": 400,
-        "mouseDrag": true,
-        slideBy: 1,
-        gutter: 12,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayButtonOutput: false,
-        controlsContainer: "#customize-controls",
-        "responsive": {
-            "0": {
-                "items": 5
-            },
-            "992": {
-                "items": 8
-            },
-            "1200":{
-                "items": 9
-            }
-
-        },
-        /*rewind: true*/
-    });
-
-    /*Vertical Sidebar Carousel Ends*/
-
-    /*$("#sidebar_carousel").owlCarousel({
-        dots: false,
-        loop: true,
-        mouseDrag: false,
-        touchDrag: false,
-        pullDrag: false,
-        rewind: true,
-        autoplay: true,
-        margin: 0,
-        nav: true,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 4,
-                nav: true
-            },
-            600: {
-                items: 5,
-            },
-
-            1000: {
-                items: 6,
-            },
-
-            1366: {
-                items: 8,
-            }
-        }
-    });*/
 
     //slider for clearence section
     $('#clearence_carousel').owlCarousel({
@@ -177,8 +87,13 @@ $(document).ready(function () {
 
 
 
-
-
-
+    $("#droptrigger, #droptrigger-sm").click(function(e) {
+        e.preventDefault();
+        $(".dropcontent, .dropcontent-sm").toggleClass("open", 1000);
+    });
+    $('.body-wrapper').click(function (e){
+        e.preventDefault();
+        $('.dropcontent, .dropcontent-sm').removeClass('open', 1000);
+    });
 });
 

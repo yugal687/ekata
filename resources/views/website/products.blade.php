@@ -40,93 +40,27 @@
                     </div>
                 </div>
                 <main class="p-1 p-sm-3 p-md-4 p-lg-5">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"  class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                        <div class="row">
+                            @foreach($getproduct as $product)
+
+                            <div
+                                class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-content-center align-items-center text-center">
+                                <a href="{{route('singleproduct',$product->id)}}">
+                                <div
+                                    class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
+                                    <img src="{{ $product->image[0]->name }}" class="p-2" alt="">
+                                </div>
+                                <h5 class="best_price pt-3 font-weight-bold text-main-danger">{{$product->price}}</h5>
+                                <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
+                                <button type="button"
+                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
                                     Add to Cart
-                            </button>
+                                </button>
+                                </a>
+                            </div>
+                            @endforeach
+
                         </div>
-                        <div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"  class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"  class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div><div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"  class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"  class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div><div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}"  class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div><div class="col-md-3 col-sm-6 mt-5 d-flex flex-column justify-centent-center align-items-center">
-                            <div class="img-div bg-product-medium p-2 rounded-top-front rounded-bottom-front mx-auto">
-                                <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" class="p-2" alt="">
-                            </div>
-                            <h5 class="best_price pt-3 font-weight-bold text-main-danger">$ 160</h5>
-                            <h5 class="best_name py-0 text-dark">Noodles</h5>
-                            <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
                 </main>
             </div>
         </div>

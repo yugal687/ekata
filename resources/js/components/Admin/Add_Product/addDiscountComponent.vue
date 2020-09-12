@@ -12,7 +12,7 @@
                             <div class="col-12">
                                 <el-form :model="discountForm" :rules="discountFormRules" ref="discountForm"
                                          :label-position="labelPosition" class="demo-discountForm">
-                                    <el-form-item label="Select Category" prop="productSelect">
+                                    <el-form-item label="Select Product" prop="productSelect">
                                         <el-select clearable placeholder="Select Product"
                                                    filterable
                                                    v-model="discountForm.productSelect"
@@ -48,6 +48,7 @@
                                     <el-form-item label="Selling Price After Discount" prop="sellingPriceAfterDiscount">
                                         <el-input v-model="discountcalculate"
                                                   class="sellingPriceAfterDiscount"
+                                                  :disabled="true"
                                                   style="width: 100%;">
                                         </el-input>
                                     </el-form-item>
@@ -180,7 +181,16 @@
             }
         },
         methods: {
-
+                fetchDiscountedProduct(){
+                    axios.get('/api/getDiscountedProduct', {})
+                        .then(response => {
+                            this.getDiscountedProduct = response.data.getDiscountedProduct;
+                        });
+                    axios.get('/api/getProduct', {})
+                        .then(response => {
+                            this.getProduct = response.data.getProduct;
+                        });
+                },
             onChange(event) {
                 console.log(this.discountForm.productSelect);
                 this.selectedProduct = this.getProduct.filter(getProduct => getProduct.id == this.discountForm.productSelect);
@@ -197,7 +207,22 @@
                                 'Content-Type': 'multipart/form-data'
                             }
                         }).then(response => {
-                            alert(response.data.message);
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            this.fetchDiscountedProduct();
+this.discountForm={};
+                        }).catch(error => {
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
+                            }
                         });
                     } else {
                         console.log('error submit!!');
@@ -208,8 +233,14 @@
             handleDelete(id) {
                 axios.patch('/api/deleteDiscount/' + id, {})
                     .then(response => {
-                        alert(response.data.message);
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+                        this.fetchDiscountedProduct();
                     });
+
             }
         },
         computed: {
@@ -221,14 +252,7 @@
             }
         },
         mounted() {
-            axios.get('/api/getDiscountedProduct', {})
-                .then(response => {
-                    this.getDiscountedProduct = response.data.getDiscountedProduct;
-                });
-            axios.get('/api/getProduct', {})
-                .then(response => {
-                    this.getProduct = response.data.getProduct;
-                });
+           this.fetchDiscountedProduct();
         }
 
     }

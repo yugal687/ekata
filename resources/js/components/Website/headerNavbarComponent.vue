@@ -16,11 +16,15 @@
                         </svg>
                     </a>
                     <div class="dropcontent-sm">
-                        <ul class="list-group text-center">
-                            <li class="list-group-item"><a href="#">My Account</a></li>
-                            <li class="list-group-item"><a href="#">Logout</a></li>
-                            <li class="list-group-item"><a href="#">Sign In</a></li>
-                            <li class="list-group-item"><a href="#" class="btn btn-info">Register</a></li>
+                        <ul class="list-group text-center" v-if="userDetail">
+                            <li class="list-group-item"><a href="/user/dashboard">My
+                                Account</a></li>
+                            <li class="list-group-item"><a href="/logout">Logout</a></li>
+                        </ul>
+                        <ul class="list-group text-center" v-else>
+                            <li class="list-group-item"><a href="/login">Sign In</a></li>
+                            <li class="list-group-item"><a href="/register" class="btn btn-info">Register</a>
+                            </li>
                         </ul>
                     </div>
                     <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
@@ -42,7 +46,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active px-2">
+                        <li class="nav-item px-2">
                             <a class="nav-link text-white" href="/">Home <span
                                 class="sr-only">(current)</span></a>
                         </li>
@@ -50,7 +54,7 @@
                             <a class="nav-link text-white" href="/aboutus">About Us</a>
                         </li>
                         <li class="nav-item px-2">
-                            <a class="nav-link text-white" href="#">Services</a>
+                            <a class="nav-link text-white" href="/services">Services</a>
                         </li>
                         <li class="nav-item px-2">
                             <a class="nav-link text-white" href="/products">Products</a>
@@ -71,23 +75,25 @@
                             </svg>
                         </a>
                         <div class="dropcontent">
-                            <ul class="list-group text-center">
-                                <li class="list-group-item"><a href="#">My Account</a></li>
-                                <li class="list-group-item"><a href="#">Logout</a></li>
-                                <li class="list-group-item"><a href="#">Sign In</a></li>
-                                <li class="list-group-item"><a href="#" class="btn btn-info">Register</a></li>
+                            <ul class="list-group text-center" v-if="userDetail">
+                                <li class="list-group-item"><a href="/user/dashboard">My
+                                    Account</a></li>
+                                <li class="list-group-item"><a href="/logout">Logout</a></li>
+                            </ul>
+                            <ul class="list-group text-center" v-else>
+                                <li class="list-group-item"><a href="/login">Sign In</a></li>
+                                <li class="list-group-item"><a href="/register" class="btn btn-info">Register</a>
+                                </li>
                             </ul>
                         </div>
-                        <a href="#" class="cart" data-toggle="modal" @click="openModal()" data-target="#cartModal">
+                        <a href="#" class="cart" data-toggle="modal" data-target="#cartModal">
                             <svg width="2em" height="2em" viewBox="0 0 16 16"
                                  class="bi bi-cart4 text-white ml-2" fill="currentColor"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                       d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                             </svg>
-                            <div class="cart-count rounded bg-main-secondary text-white">
-                                {{$store.state.cartCount}}
-                            </div>
+                            <div class="cart-count rounded bg-main-secondary text-white"> 1</div>
                         </a>
                     </div>
                 </div>
@@ -99,16 +105,19 @@
 <script>
     export default {
         name: "headerNavbarComponent",
-        methods: {
-            openModal() {
-                this.$store.dispatch('fetchStoredProduct');
-                this.$store.commit('totalPrice');
+        data() {
+            return {
+                userDetail: []
             }
         },
         mounted() {
-            this.$store.getters.cartItemCount;
+            axios.get('/api/getUser', {})
+                .then(response => {
+                    this.userDetail = response.data.userDetail;
+                });
         },
     }
+
 </script>
 
 <style scoped>

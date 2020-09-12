@@ -12,7 +12,8 @@
                             <div class="row d-flex justify-content-center">
                                 <el-form-item label="" prop="customerReviewImage">
                                     <el-upload
-                                        action="#"
+                                        action=""
+                                        ref="upload"
                                         list-type="picture-card"
                                         v-model="customerReviewsImageForm.customerReviewImage"
                                         :on-preview="handlePictureCardPreview"
@@ -38,24 +39,23 @@
                 <el-card class="box-card">
                     <div class="text item">
                         <div class="row">
-                            <div v-for="images in image" :key="images" class="col-md-6 col-sm-12 mt-2">
+                            <div v-for="images in getReviewImage" :key="images.id" class="col-md-6 col-sm-12 mt-2">
                                 <div class="demo-image__placeholder" style="position: relative;">
                                     <el-image
-                                        :src="images"
-                                        :preview-src-list="image">
+                                        :src="images.image">
                                     </el-image>
                                 </div>
                                 <div style="position: absolute; padding: 10px; bottom: -3px; right: 5px;">
                                     <el-button-group>
                                         <el-button type="success"
-                                                   v-if=""
-                                                   @click="toggle(images.id)"
+                                                   v-if="images.active == 0"
+                                                   @click="setActive(images.id)"
                                                    size="mini">
                                             <i class="fas fa-check"></i>
                                         </el-button>
                                         <el-button type="warning"
-                                                   v-if=""
-                                                   @click="toggle(images.id)"
+                                                   v-if="images.active == 1"
+                                                   @click="setInActive(images.id)"
                                                    size="mini">
                                             <i class="fas fa-times"></i>
                                         </el-button>
@@ -86,15 +86,7 @@
         name: "reviewsCarouselComponent",
         data() {
             return {
-                image: [
-                    'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-                    'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
-                    'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
-                    'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
-                    'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-                    'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
-                    'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
-                ],
+                getReviewImage:[],
                 dialogImageUrl: '',
                 dialogVisible: false,
                 disabled: false,
@@ -105,7 +97,16 @@
                 },
             };
         },
+        mounted(){
+            this.fetchReview();
+        },
         methods: {
+            fetchReview(){
+                axios.get('/api/getReviewImage',{})
+                    .then(response=>{
+                        this.getReviewImage = response.data.getReviewImage;
+                    });
+            },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
@@ -113,19 +114,91 @@
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
             },
-            saveImage(formName) {
-                this.$refs[formName].validate((valid) => {
+            saveImage(customerReviewsImageForm) {
+                this.$refs[customerReviewsImageForm].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        let file = this.$refs.upload.uploadFiles;
+                        console.log(file);
+                        let formData = new FormData();
+                        file.forEach((v, k) => {
+                            formData.append(`image[${k}]`, v.raw);
+                        });
+                        axios.post('/api/postReviewImage',formData,{
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            this.fetchReview();
+
+                        }).catch(error => {
+                            if (error.response.status == 422) {
+                                this.errors = error.response.data.errors;
+                            }
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
             },
-            toggle: function (id) {
+            setActive(id) {
+                axios.patch('/api/activeReview/'+id).then(response=>{
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.fetchReview();
+
+                });
+            },
+            setInActive(id) {
+                axios.patch('/api/inactiveReview/' + id)
+                    .then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'info'
+                    });
+                        this.fetchReview();
+
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
             },
             deleteImage(id) {
+                axios.delete('/api/deleteReview/'+id)
+                    .then(response=>{
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+                        this.fetchReview();
+
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
             },
         }
     }

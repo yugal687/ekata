@@ -30,14 +30,19 @@ class BannerImageController extends Controller
         ]);
     }
     public function setActive($id){
-        $setPassive =BannerImage::where('active', '=','1')->update([
-           'active' => 0
-        ]);
         $setActive = BannerImage::findorFail($id)->update([
            'active' => 1
         ]);
         return response()->json([
            'message' => 'Selected Image Is Active !!'
+        ]);
+    }
+    public function setInActive($id){
+        $setActive = BannerImage::findorFail($id)->update([
+            'active' => 0
+        ]);
+        return response()->json([
+            'message' => 'Selected Image Is InActive !!'
         ]);
     }
     public function getBannerImage(){

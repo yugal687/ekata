@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Category;
 use App\Model\Imagable;
 use App\Model\Product;
 use App\Model\Tag;
@@ -114,12 +115,30 @@ class ProductController extends Controller
             'price' => $editedProduct[0]->price,
             'additional_information' => $editedProduct[0]->additional_information,
         ]);
-        $deletetag =DB::table('products_tags')->where('product_id',$editedProduct[0]->id)->delete();
-        foreach ($request->tag as $tag){
-            $savetags = DB::table('products_tags')->insert([
-                'product_id' => $editedProduct[0]->id,
-                'tag_id' => $tag
-            ]);
+        if ($request->tag > 0) {
+            $deletetag = DB::table('products_tags')->where('product_id', $editedProduct[0]->id)->delete();
+            foreach ($request->tag as $tag) {
+                $savetags = DB::table('products_tags')->insert([
+                    'product_id' => $editedProduct[0]->id,
+                    'tag_id' => $tag
+                ]);
+            }
+        }
+       // dd($request->image);
+        if ($request->image > 0) {
+            foreach ($request->image as $image) {
+
+
+                $baseName = Str::random(20);
+                $originalName = $baseName . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('/uploads'), $originalName);
+
+                $saveimage = Product::where('id', $editedProduct[0]->id)->first();
+                $saveimage->image()->create([
+                    'name' => '/uploads/' . $originalName,
+                ]);
+
+            }
         }
         return response()->json([
            'message' => 'Product Updated !!'

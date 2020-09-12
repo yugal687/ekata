@@ -10,13 +10,22 @@ class EnquiryController extends Controller
 {
     public function saveEnquiry(Request $request){
         $enquiry = Enquiry::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'number' => $request->number,
-            'description' => $request->description
+            'name' => $request->input('firstname'),
+            'email' => $request->input('email'),
+            'number' => $request->input('phone'),
+            'description' => $request->input('description')
         ]);
     }
     public function fetchEnquiry(){
         $Enquiries = Enquiry::all();
+        return response()->json([
+           'enquiries' => $Enquiries
+        ]);
+    }
+    public function deleteEnquiry($id){
+        $deleteEnquiry = Enquiry::findorFail($id)->delete();
+        return response()->json([
+           'message' => 'Enquiry Deleted !!!'
+        ]);
     }
 }

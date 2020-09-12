@@ -22,22 +22,6 @@
                             <div class="col-md-8 col-sm-12">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <el-form-item label="Select Category" prop="categorySelect">
-                                            <el-select clearable placeholder="Select Category"
-                                                       filterable
-                                                       v-model="productForm.categorySelect"
-                                                       style="width: 100%">
-                                                <el-option
-                                                    v-for="item in getCategory"
-                                                    :key="item.id"
-                                                    :label="item.category_name"
-                                                    :value="item.id">
-
-                                                </el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
                                         <el-form-item label="Select Sub-Category" prop="subcategorySelect">
                                             <el-select clearable placeholder="Select Sub-Category"
                                                        filterable
@@ -48,6 +32,7 @@
                                                     :key="item.id"
                                                     :label="item.category_name"
                                                     :value="item.id">
+
                                                 </el-option>
                                             </el-select>
                                         </el-form-item>
@@ -164,7 +149,7 @@
                     label: 'Option5'
                 }],
                 files: [],
-                tags:[],
+                tags: [],
                 getCategory: [],
                 getSubCategory: [],
                 getBrand: [],
@@ -211,7 +196,7 @@
             }
         },
         mounted() {
-            axios.get('/api/getCategories', {})
+            axios.get('/api/getAllCategories', {})
                 .then(response => {
                     this.getCategory = response.data.getCategory;
                 });
@@ -223,8 +208,8 @@
                 .then(response => {
                     this.getBrand = response.data.getBrand;
                 });
-            axios.get('/api/getTag',{})
-                .then(response=>{
+            axios.get('/api/getTag', {})
+                .then(response => {
                     this.tags = response.data.tags;
                 });
         },
@@ -257,10 +242,20 @@
                                 }
 
                             }).then(response => {
-                                alert(response.data.message);
+                                this.$notify({
+                                    title: 'Success',
+                                    message: response.data.message,
+                                    type: 'success'
+                                });
+                                this.productForm = {};
                             }).catch(error => {
-                                if (error.response.status == 422) {
-                                    this.errors = error.response.data.errors;
+                                if (error.response) {
+                                    this.$notify({
+                                        title: 'Error',
+                                        message: 'Error Input Data ',
+                                        type: 'error'
+                                    });
+                                    /*this.errors = error.response.data.errors;*/
                                 }
                             });
                         } else {

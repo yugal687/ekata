@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ekata Convenience Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--JS-->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -92,7 +91,7 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->first_name }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -135,12 +134,12 @@
                             class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Admin</a>
+                        <a href="#" class="d-block">{{ Auth::user()->first_name }}</a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+                <nav class="mt-2 mb-5">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
@@ -284,6 +283,24 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="/admin/services/" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Services </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/websiteupdate/reviewscarousel" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Reviews Carousel </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/websiteupdate/customersfeedback" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Customers Feedback </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="/admin/websiteupdate/enquiries" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p> Customer Enquiries </p>
@@ -316,6 +333,11 @@
     </div>
     <!-- ./wrapper -->
 </div>
+<!--JS-->
+<script src="{{ asset('js/app.js') }}"></script>
+{{--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--}}
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
     /*$.widget.bridge('uibutton', $.ui.button)*/
 </script>

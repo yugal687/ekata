@@ -140,106 +140,148 @@
 </template>
 
 <script>
-export default {
-    name: "tagsSetupComponent",
-    data() {
-        return {
-            labelPosition: 'top',
-            edit: false,
-            tags: [],
-            editTags: [],
-            tagForm: {
-                name: '',
-            },
-            tagRules: {
-                name: [
-                    {required: true, message: 'Please input tag name', trigger: 'blur'},
-                ]
-            },
-            /*Table Datas*/
-            tagTableData: [{
-                sn: 1,
-                tagName: 'Tom'
-            }, {
-                sn: 2,
-                tagName: 'Tom Cat'
-            }],
-            tagSearch: '',
-        }
-    },
-    mounted(){
-        axios.get('/api/getTag',{})
-            .then(response=>{
-                this.tags = response.data.tags;
-            });
-    },
-    methods: {
-        editTag(id) {
-            this.editTags = this.tags.filter(tags => tags.id == id);
+    export default {
+        name: "tagsSetupComponent",
+        data() {
+            return {
+                labelPosition: 'top',
+                edit: false,
+                tags: [],
+                editTags: [],
+                tagForm: {
+                    name: '',
+                },
+                tagRules: {
+                    name: [
+                        {required: true, message: 'Please input tag name', trigger: 'blur'},
+                    ]
+                },
+                /*Table Datas*/
+                tagTableData: [{
+                    sn: 1,
+                    tagName: 'Tom'
+                }, {
+                    sn: 2,
+                    tagName: 'Tom Cat'
+                }],
+                tagSearch: '',
+            }
         },
-        saveEditTag() {
-            axios.post('/api/saveEditTag', {
-                editTag: this.editTags
-            }).then(response => {
-                alert(response.data.message);
-            });
+        mounted() {
+            this.fetchTag();
         },
-        deleteTag(id) {
-            axios.delete('/api/deleteTag/' + id)
-                .then(response => {
-                    alert(response.data.message);
+        methods: {
+            fetchTag() {
+                axios.get('/api/getTag', {})
+                    .then(response => {
+                        this.tags = response.data.tags;
+                    });
+            },
+            editTag(id) {
+                this.editTags = this.tags.filter(tags => tags.id == id);
+            },
+            saveEditTag() {
+                axios.post('/api/saveEditTag', {
+                    editTag: this.editTags
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.fetchTag();
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
                 });
-        },
-        submitTag(tagForm) {
-            let formData = new FormData();
-            formData.append('tags', this.tagForm.name);
-            axios.post('/api/postTags', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            },
+            deleteTag(id) {
+                axios.delete('/api/deleteTag/' + id)
+                    .then(response => {
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+                        this.fetchTag();
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            },
+            submitTag(tagForm) {
+                let formData = new FormData();
+                formData.append('tags', this.tagForm.name);
+                axios.post('/api/postTags', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
 
-            }).then(response => {
-                alert(response.data.message);
-            }).catch(error => {
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
-                }
-            });
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.tagForm = {};
+                    this.fetchTag();
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            },
+
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            }
         },
 
-        handleEdit(index, row) {
-            console.log(index, row);
-        },
-        handleDelete(index, row) {
-            console.log(index, row);
-        }
-    },
-
-}
+    }
 </script>
 
 <style scoped>
-.container-fluid .row {
-    margin-left: 0;
-    margin-right: 0;
-}
+    .container-fluid .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-.box-card-slide {
-    border: 1px solid #EBEEF5;
-    background-color: #FFF;
-    color: #303133;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-}
+    .box-card-slide {
+        border: 1px solid #EBEEF5;
+        background-color: #FFF;
+        color: #303133;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    }
 
-.box-card-slide .box-header {
-    padding: 18px 20px;
-    border-bottom: 1px solid #EBEEF5;
-    box-sizing: border-box;
-}
+    .box-card-slide .box-header {
+        padding: 18px 20px;
+        border-bottom: 1px solid #EBEEF5;
+        box-sizing: border-box;
+    }
 
-.box-card-slide .box-body {
-    padding: 20px;
-}
+    .box-card-slide .box-body {
+        padding: 20px;
+    }
 </style>

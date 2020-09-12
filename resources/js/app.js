@@ -11,9 +11,17 @@ window.Vue = require('vue');
 import Vue from 'vue';
 
 import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/en'
+Vue.use(ElementUI, {locale});
 
-Vue.use(ElementUI);
 
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
@@ -39,7 +47,10 @@ Vue.component('banner-image-component', require('./components/Admin/Banner_Image
 /*Website_Update*/
 Vue.component('website-info-component', require('./components/Admin/Website Update/websiteInfoComponent.vue').default);
 Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
-Vue.component('enquiries-component', require('./components/Admin/Website Update/enquiriesComponent.vue').default);
+Vue.component('reviews-carousel-component', require('./components/Admin/Website Update/reviewsCarouselComponent.vue').default);
+Vue.component('customers-feedback-component', require('./components/Admin/Website Update/customersFeedbackComponent.vue').default);
+/*Services Pages*/
+Vue.component('services-component', require('./components/Admin/Services/serviceComponent.vue').default);
 
 
 /*Website Pages*/

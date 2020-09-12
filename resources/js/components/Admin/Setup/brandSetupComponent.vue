@@ -113,7 +113,7 @@
 
                                         <el-form :model="brandForm" :rules="brandRules"
                                                  :label-position="labelPosition" class="demo-brandForm">
-                                            <el-form-item label="Brand Name" prop="name">
+                                            <el-form-item label="Brand Name">
                                                 <el-input v-model="ebrand.brand_name"
                                                           style="width: 100%;">
                                                 </el-input>
@@ -171,12 +171,15 @@ export default {
         }
     },
     mounted(){
-        axios.get('/api/getBrand',{})
-            .then(response=>{
-                this.getBrand = response.data.getBrand;
-            });
+        this.getRequest();
     },
     methods: {
+        getRequest(){
+            axios.get('/api/getBrand',{})
+                .then(response=>{
+                    this.getBrand = response.data.getBrand;
+                });
+        },
         editBrand(id) {
             this.editBrands = this.getBrand.filter(getBrand => getBrand.id == id);
         },
@@ -184,14 +187,43 @@ export default {
             axios.post('/api/saveEditBrand', {
                 editBrand: this.editBrands
             }).then(response => {
-                alert(response.data.message);
+                this.$notify({
+                    title: 'Success',
+                    message: response.data.message,
+                    type: 'success'
+                });
+                this.getRequest();
+            }).catch(error => {
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
+                }
             });
         },
         deleteBrand(id) {
             axios.delete('/api/deleteBrand/' + id)
                 .then(response => {
-                    alert(response.data.message);
-                });
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'info'
+                    });
+                    this.getRequest();
+
+                }).catch(error => {
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
+                }
+            });
         },
         submitBrand(brandForm) {
             let formdata = new FormData();
@@ -204,10 +236,22 @@ export default {
                 }
 
             }).then(response => {
-                alert(response.data.message);
+                this.$notify({
+                    title: 'Success',
+                    message: response.data.message,
+                    type: 'success'
+                });
+                this.brandForm = {};
+                this.getRequest();
+
             }).catch(error => {
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
                 }
             });
         },

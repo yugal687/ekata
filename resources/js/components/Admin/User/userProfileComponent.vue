@@ -1,6 +1,10 @@
+@extends('layouts.usermaster')
+
+@section('content')
 <template>
     <div class="container-fluid">
         <div class="row">
+
             <div class="col-md-4">
 
                 <!-- Profile Image -->
@@ -12,7 +16,7 @@
                                  alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center" v-model="userDetail.first_name"></h3>
+                        <h3 class="profile-username text-center">{{userDetail.first_name}} {{userDetail.last_name}}</h3>
 
                         <div class=" mb-3">
                             <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
@@ -40,7 +44,7 @@
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Postal Code</strong>
                             <p class="text-muted">
-                                12345
+                                {{userDetail.postal_code}}
                             </p>
 
                         </div>
@@ -72,56 +76,65 @@
                                         <div class="form-group col-md-6">
                                             <label class="col-sm-12 col-form-label">First Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.first_name"
                                                        placeholder="First Name">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="col-sm-12 col-form-label">Last Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.last_name"
                                                        placeholder="Last Name">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="col-sm-12 col-form-label">Email</label>
                                             <div class="col-sm-12">
-                                                <input type="email" class="form-control"
+                                                <input type="email" class="form-control" v-model="userDetail.email"
                                                        placeholder="Email">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-8">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-sm-12 col-form-label">Contact Number</label>
+                                            <div class="col-sm-12">
+                                                <input type="number" class="form-control"
+                                                       v-model="userDetail.contact_number"
+                                                       placeholder="Contact Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-7">
                                             <label class="col-sm-12 col-form-label">Address</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.address"
                                                        placeholder="Address">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-5">
                                             <label
-                                                   class="col-sm-12 col-form-label">City Name</label>
+                                                class="col-sm-12 col-form-label">Suburb</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
-                                                       placeholder="City Name">
+                                                <input type="text" class="form-control" v-model="userDetail.sub_urb"
+                                                       placeholder="Suburb">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-8">
-                                            <label class="col-sm-12 col-form-label">Phone Number</label>
+                                        <div class="form-group col-md-7">
+                                            <label class="col-sm-12 col-form-label">State</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
-                                                       placeholder="Phone Number">
+                                                <input type="text" class="form-control" v-model="userDetail.state"
+                                                       placeholder="State">
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-5">
                                             <label class="col-sm-12 col-form-label">Postal Code</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" v-model="userDetail.postal_code"
                                                        placeholder="Postal Code">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <div class=" col-sm-12">
-                                                <input type="submit" value="Update" class="btn btn-warning">
+                                                <input type="button" value="Update" @click="UpdateProfile"
+                                                       class="btn btn-warning">
                                             </div>
                                         </div>
                                     </div>
@@ -129,32 +142,39 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="updatepassowrd">
+                                <div v-if="errors" class="bg-red-500 text-white py-2 px-4 pr-0 rounded font-bold mb-4 shadow-lg">
+                                    <div v-for="(v, k) in errors" :key="k">
+                                        <p v-for="error in v" :key="error" class="text-sm">
+                                            {{ error }}
+                                        </p>
+                                    </div>
+                                </div>
                                 <form class="form-horizontal">
                                     <div class="row d-flex justify-content-center">
                                         <div class="form-group col-md-8">
-                                            <label  class="col-sm-12 col-form-label">Current Password</label>
+                                            <label class="col-sm-12 col-form-label">Current Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" v-model="data.currentPassword" class="form-control"
                                                        placeholder="Current Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label class="col-sm-12 col-form-label">New Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" v-model="data.newPassword" class="form-control"
                                                        placeholder="New Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label class="col-sm-12 col-form-label">Confirm Password</label>
                                             <div class="col-sm-12">
-                                                <input type="password" class="form-control"
+                                                <input type="password" v-model="data.confirmPassword" class="form-control"
                                                        placeholder="Confirm Password">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-8">
                                             <div class=" col-sm-12">
-                                                <button type="submit" class="btn btn-warning">Update</button>
+                                                <input type="button" @click="updatePassword" value="Update" class="btn btn-warning">
                                                 <a href="#" class="ml-2">Forget Password</a>
                                             </div>
                                         </div>
@@ -178,19 +198,79 @@
 <script>
     export default {
         name: "userProfileComponent",
-        data(){
-            return{
-                userDetail:[],
+        data() {
+            return {
+                userDetail: [],
+                errors:null,
+                data:[{
+                    currentPassword:'',
+                    newPassword:'',
+                    confirmPassword:''
+                }],
 
             }
         },
-        mounted(){
-            axios.get('/api/getUser',{}).then(response=>{
-               this.userDetail = response.data.UserDetail;
-               console.log(response.data.UserDetail);
-            });
+        mounted() {
+           this.fetchUser();
         },
-        methods:{
+        methods: {
+            fetchUser(){
+                axios.get('/api/getUser', {})
+                    .then(response => {
+                        this.userDetail = response.data.userDetail;
+                    });
+            },
+            updatePassword(){
+                let formData = new FormData();
+                formData.append('currentPassword', this.data.currentPassword);
+                formData.append('newPassword', this.data.newPassword);
+                formData.append('confirmPassword', this.data.confirmPassword);
+
+                axios.post('/api/updatePassword', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.fetchUser();
+                    this.data=[];
+                }).
+                catch(error => {
+                        this.errors = error.data.errors;
+                    });
+            },
+            UpdateProfile() {
+                let formData = new FormData();
+                formData.append('userDetail', JSON.stringify(this.userDetail));
+                axios.post('/api/saveEditProfile', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.fetchUser();
+
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            }
 
         }
     }

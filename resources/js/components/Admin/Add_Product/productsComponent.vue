@@ -37,11 +37,11 @@
                         prop="quantity">
                     </el-table-column>
                     <el-table-column
-                        label="Cost Price"
+                        label="Price"
                         prop="price">
                     </el-table-column>
                     <el-table-column
-                        label="Selling Price"
+                        label="Discounted Price"
                         prop="sale_price"
                     >
                     </el-table-column>
@@ -81,7 +81,7 @@
                 <div class="col-md-4">
                     <el-card :body-style="{ padding: '0px' }">
                         <img style="width: 100%; height: 250px"
-                             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                             :src="editProduct[0].image[0].name"
                              class="image">
                         <div style="padding: 14px;">
                             <h3>{{editProduct[0].product_name}}</h3>
@@ -142,11 +142,16 @@
                                             </el-form-item>
                                         </div>
                                         <div class="col-md-6">
-                                            <el-form-item label="Tags" prop="tags">
-                                                <el-input disabled
-                                                          :value="editProduct[0].tags[0].tags"
+                                            <el-form-item label="Tags" prop="tags" >
+                                                <el-input disabled v-if="editProduct[0].tags.length > 0"
+                                                          v-model="editProduct[0].tags[0].tags"
                                                           style="width: 100%;">
                                                 </el-input>
+                                                <el-input disabled v-if="editProduct[0].tags.length <= 0"
+                                                          value="no tags"
+                                                          style="width: 100%;">
+                                                </el-input>
+
                                             </el-form-item>
                                         </div>
                                     </div>
@@ -191,7 +196,7 @@
                                                 <el-upload
                                                     class="upload-demo"
                                                     ref="upload"
-                                                    action="https://jsonplaceholder.typicode.com/posts/"
+                                                    action=""
                                                     :auto-upload="false">
                                                     <el-button slot="trigger" size="small" type="primary">select file
                                                     </el-button>
@@ -241,11 +246,10 @@
                                             </el-form-item>
                                         </div>
                                         <div class="col-md-6">
-                                            <el-form-item label="Tags">
-                                                <el-select multiple
+                                            <el-form-item label="Tags" >
+                                                <el-select multiple v-if="editProduct[0].tags.length > 0"
                                                     v-model="inputTags"
-                                                           :value="editProduct[0].tags[0].tags"
-                                                    placeholder="Select Tags">
+                                                    :placeholder="editProduct[0].tags[0].tags">
                                                     <el-option
                                                         v-for="item in tagslist"
                                                         :key="item.id"
@@ -253,6 +257,17 @@
                                                         :value="item.id">
                                                     </el-option>
                                                 </el-select>
+                                                <el-select multiple v-if="editProduct[0].tags.length <= 0"
+                                                           v-model="inputTags"
+                                                           placeholder="select tags">
+                                                    <el-option
+                                                        v-for="item in tagslist"
+                                                        :key="item.id"
+                                                        :label="item.tags"
+                                                        :value="item.id">
+                                                    </el-option>
+                                                </el-select>
+
                                             </el-form-item>
                                         </div>
                                     </div>
@@ -385,32 +400,31 @@
             }
         },
         mounted() {
-            axios.get('/api/getProduct', {})
-                .then(response => {
-                    this.getProduct = response.data.getProduct;
-                });
-            axios.get('/api/getCategories', {})
-                .then(response => {
-                    this.getCategory = response.data.getCategory;
-                });
-            axios.get('/api/getSubCategories', {})
-                .then(response => {
-                    this.getSubCategory = response.data.getSubCategory;
-                });
-            axios.get('/api/getBrand', {})
-                .then(response => {
-                    this.getBrand = response.data.getBrand;
-                });
-            axios.get('/api/getTag',{})
-                .then(response=>{
-                    this.tagslist = response.data.tags;
-                });
+           this.fetchProduct();
         },
         methods: {
+            fetchProduct(){
+                axios.get('/api/getProduct', {})
+                    .then(response => {
+                        this.getProduct = response.data.getProduct;
+                    });
+                axios.get('/api/getAllCategories', {})
+                    .then(response => {
+                        this.getSubCategory = response.data.getCategory;
+                    });
+                axios.get('/api/getBrand', {})
+                    .then(response => {
+                        this.getBrand = response.data.getBrand;
+                    });
+                axios.get('/api/getTag',{})
+                    .then(response=>{
+                        this.tagslist = response.data.tags;
+                    });
+            },
             openEditModal(id) {
                 this.dialogVisible = true;
                  this.editProduct = this.getProduct.filter(getProduct=>getProduct.id==id);
-                 console.log(this.editProduct[0].tags[0].tags)
+                 console.log(this.editProduct[0]);
                 $(".productEditWrapper").slideToggle("slow");
                 $(".productDetailsWrapper").slideToggle("slow");
                 $(".detailsProductDetailsBtn").toggle("slow");
@@ -419,6 +433,7 @@
             openDetailsModal(id) {
                 this.dialogVisible = true;
                 this.editProduct = this.getProduct.filter(getProduct => getProduct.id == id);
+                console.log(this.editProduct[0]);
                 $(".productEditWrapper").slideToggle("slow");
                 $(".productDetailsWrapper").slideToggle("slow");
                 $(".detailsProductDetailsBtn").toggle("slow");
@@ -431,9 +446,25 @@
             },
             handleDelete(id) {
                 axios.delete('/api/deleteProduct/' + id)
-                    .then(response => {
-                        alert(response.data.message);
-                    });
+                    .then(response=>{
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'info'
+                        });
+                        this.fetchProduct();
+
+                        /*alert(response.data.message);*/
+                    }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
             },
             /*Client Information Tab---*/
             handleClick(tab, event) {
@@ -445,16 +476,30 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let tag = this.inputTags;
+                        let file = this.$refs.upload.uploadFiles;
                         console.log(tag);
                         let formData = new FormData();
-                        tag.forEach((v, k) => {
-                            formData.append(`tag[${k}]`, v);
-                        });
-                        formData.append('editedProduct',JSON.stringify(this.editProduct));
+                        if (tag.length>0) {
+                            tag.forEach((v, k) => {
+                                formData.append(`tag[${k}]`, v);
+                            });
+                        }
+                        if (file.length>0) {
+                            file.forEach((v, k) => {
+                                formData.append(`image[${k}]`, v.raw);
+                            });
+                        }
+                        formData.append('editedProduct', JSON.stringify(this.editProduct));
                         axios.post('/api/editProduct',formData,{
                           //  editedProduct : this.editProduct,
                         }).then(response=>{
-                            alert(response.data.message);
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            this.fetchProduct();
+
                         });
                     } else {
                         console.log('error submit!!');

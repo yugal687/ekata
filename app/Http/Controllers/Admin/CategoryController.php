@@ -43,7 +43,8 @@ class CategoryController extends Controller
             }
         }
         return response()->json([
-           'message' => 'Category added sucessfully'
+           'message' => 'Category added sucessfully',
+            'category' => $savecategory
         ]);
     }
 
@@ -69,8 +70,14 @@ class CategoryController extends Controller
            'getCategory' => $getCategory
         ]);
     }
+    public function getAllCategory(){
+        $getCategory = Category::all();
+        return response()->json([
+            'getCategory' => $getCategory
+        ]);
+    }
     public function getSubCategory(){
-        $getSubCategory = Category::where('parent_id','>',0)->get();
+        $getSubCategory = Category::with('parent')->where('parent_id','>',0)->get();
         return response()->json([
             'getSubCategory' => $getSubCategory
         ]);

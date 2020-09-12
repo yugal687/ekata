@@ -1,16 +1,29 @@
 <!--Website Header-->
 @extends('layouts.website.header')
+<link href="{{ asset('css/smsidebarstyle.css')}}" rel="stylesheet"/>
 <!--Website Header Ends-->
 
+@section('style')
+    <style>
+        .categoryBannerImage{
+            height: 450px;
+            width: 100%;
+        }
+    </style>
+@endsection
 
 @section('content')
+    @include('layouts.website.smsidebar')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" style="background-color: #e9ecef">
+            <div class="col-lg-2 col-md-12" style="background-color: #e9ecef">
                 <div class="row">
                     <div class="col-12 bg-main-secondary">
                         <div class="cate">
-                            <h3 class="text-center text-dark mt-2 font-weight-bold">CATEGORY</h3>
+                            <h3 class="text-center text-dark mt-2 font-weight-bold">
+                                CATEGORY
+                                <span id="toggle-smsidebar" class="float-right mr-2"><i class="fas fa-bars text-white"></i></span>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -21,21 +34,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-lg-10 col-md-12">
+                @foreach($getsingleCategory as $category)
                 <div class="row">
                     <div class="col-12" style="padding: 0;">
                         <nav aria-label="breadcrumb" class="">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Category</a></li>
-                                <li class="breadcrumb-item"><a href="#">Dry Goods</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Rice</li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('category',$category->parent->id)}}">{{$category->parent->category_name}}</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('maincategory',$category->id)}}">{{$category->category_name}}</a></li>
                             </ol>
                         </nav>
                     </div>
                 </div>
                 <main class="p-5">
-                    @foreach($getsingleCategory as $category)
                     <div class="row pb-3">
                         <div class="col-12">
                             <img src="{{ $category->parent->image }}"
@@ -45,7 +57,7 @@
                     <div class="row">
 
                             @foreach($category->product as $product)
-                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center">
+                        <div class="col-md-3 mt-5 d-flex flex-column justify-centent-center align-items-center text-center">
                             <a href="{{route('singleproduct',$product->id)}}">
                             <div class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                                 <img src="{{ asset('images/Product_pngs/Layer 25.png') }}" width="150" alt="">
@@ -54,7 +66,7 @@
                             <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
                             <h5 class="best_weight py-0 text-dark">{{$product->brand->brand_name}}</h5>
                             <button type="button"
-                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
                                 Add to Cart
                             </button>
                             </a>
@@ -68,18 +80,19 @@
                             </button>
                         </div>
                     </div>
-                    @endforeach
 
                 </main>
+                </main>
+                    @endforeach
             </div>
         </div>
     </div>
 @stop
 
 
-@section('footer')
-    <!--Extend Footer-->
-    @extends('layouts.website.footer')
-    <!--Footer Ends-->
 
+@section('scripts')
+    <script>
+
+    </script>
 @stop
