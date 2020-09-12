@@ -7,7 +7,7 @@
                     <div class="sidebar-submenu">
                         <ul>
                             @foreach($category->children as $subCategory)
-                                <li class="active"><a href="{{ route('category',$subCategory->id)}}" class="main-subcat"><span> {{$subCategory->category_name}}</span></a></li>
+                                <li class=""><a href="{{ route('category',$subCategory->id)}}" class="main-subcat"><span> {{$subCategory->category_name}}</span></a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -16,7 +16,6 @@
         </ul>
     </div>
     <!-- sidebar-menu  -->
-
 </div>
 
 {{--<div id="accordion" class="px-3 pt-4 pb-2">

@@ -29,7 +29,7 @@
 .main-sidebar-menu {
     padding: 0 10px;
 }
-.main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown.active a.main-cat  {
+.main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown.active a.main-cat, .main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown:hover a.main-cat  {
     background-color: #CF7500;
     color: #fff;
     border-radius: 10px;
@@ -44,7 +44,7 @@
     padding: 0 10px;
 }
 .main-sidebar-menu .sidebar-menu li.sidebar-dropdown {
-    padding: 5px 0 0;
+    padding: 5px 0 5px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
 }
 .main-sidebar-menu .sidebar-submenu ul li {

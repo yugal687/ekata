@@ -174,39 +174,8 @@ a:hover {
 
 }
 
-#new_arrival_carousel {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
-
-#new_arrival_carousel .item {
-    margin: 0 auto;
-    width: 30vw;
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#new_arrival_section button:hover {
-    cursor: pointer;
-    background-color: #F0A500;
-}
-
-/* general-slider */
-
-/* #general-slider{
-    width: 100%;
-    height: 55vh;
-} */
-
-#general-product-slider .item {
-    height: 45vh;
-}
-
 /* best selling section */
+/*----------------*/
 .best-selling-tag {
     margin-top: -20px;
 }
@@ -246,86 +215,8 @@ a:hover {
     height: auto;
 }
 
-/*Accordion Style*/
-/*list items*/
-#accordion li {
-    list-style-type: none;
-}
-
-#accordion ul ul {
-    display: none;
-}
-
-#accordion li.active ul {
-    display: block;
-}
-
-/*Heading*/
-#accordion ul li h3 {
-    color: #000;
-    font-size: 16px;
-    width: 90%;
-    padding: 5px 0 5px 20px;
-    /*border-top: 1px solid rgba(0, 0, 0, 0.25);*/
-}
-/*
-#accordion ul li h3:nth-child(1) {
-    border-top: none;
-}*/
-#accordion ul li.main-li {
-    padding-top: 10px;
-    border-top: 1px solid rgba(0, 0, 0, 0.25) !important;
-}
-#accordion ul li.main-li:first-child {
-    border-top: none !important;
-}
-#accordion ul li.main-li:last-child {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
-}
-
-#accordion ul li h3:hover {
-    cursor: pointer;
-}
-
-#accordion ul li.activeHeading h3 {
-    background-color: #CF7500;
-    color: #fff;
-    font-size: 16px;
-    width: 100%;
-    padding: 5px 0 5px 20px;
-    border-radius: 10px;
-    /*border-top: 1px solid #CF7500;*/
-}
-#accordion ul li.activeHeading h3 a{
-    color: #fff;
-}
-/*#accordion ul li.activeHeading{
-    border-top: none !important;
-}*/
-
-/*links*/
-#accordion ul li a{
-    color: #000;
-    font-size: 14px;
-    font-weight: normal;
-}
-#accordion ul ul li a {
-    color: #000;
-    text-decoration: none;
-    width: 80%;
-    font-size: 14px;
-    display: block;
-    margin: 0 30px;
-    padding: 5px 10px;
-    border-radius: 10px;
-    /*transition for smooth hover animation*/
-    transition: all 0.15s;
-}
-#accordion ul ul li.activeList a{
-    background-color: #d1cdcc;
-}
-
 /*Special Filters*/
+/*----------------*/
 #special-filters p{
     text-align: center;
     font-size: 18px;
