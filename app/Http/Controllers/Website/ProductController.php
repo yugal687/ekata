@@ -19,7 +19,7 @@ class ProductController extends Controller
             return $query->take(1);
         }))->get();
         $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->limit(4)->latest()->get();
-        $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->latest()->get();
+        $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->limit(10)->latest()->get();
         $bannerImage = BannerImage::where('active', 1)->get();
         $reviewImage = ReviewImage::where('active', 1)->get();
         $getWebsiteDetail = WebsiteDetail::all();
