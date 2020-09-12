@@ -192,7 +192,7 @@
                     </form>
 
                     <div class="text-center mt-3">
-                        <a href="/" class="">Return to Website</a>
+                        <a href="/user/users" class="">Return back</a>
                     </div>
                 </div>
             </div>
