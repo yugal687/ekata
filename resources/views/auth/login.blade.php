@@ -19,6 +19,14 @@
         body.login-page {
             background-image: linear-gradient(to right top, #051937, #41204d, #7a204c, #a33234, #ae5d00);
         }
+
+        .bg-main-primary {
+            background-color: #CF7500;
+            transition: background-color .2s ease-in-out;
+        }
+        .bg-main-primary:hover{
+            background-color: #cf6500;
+        }
     </style>
 
 </head>
@@ -98,7 +106,7 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-block btn-primary">
+                        <button type="submit" class="btn btn-block bg-main-primary text-white">
                             {{ __('Login') }}
                         </button>
 
@@ -110,9 +118,16 @@
                     </div>
                 </div>
             </form>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <a href="/register" type="submit" class="btn btn-block bg-main-primary text-white">
+                        Register User
+                    </a>
+                </div>
 
-            <div class="text-center mt-3">
-                <a href="/admin/dashboard" class="">Return to Dashboard</a>
+                <div class=" col-12 text-center">
+                    <a href="/" class="">Return to Homepage</a>
+                </div>
             </div>
         </div>
 

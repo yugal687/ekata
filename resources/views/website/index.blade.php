@@ -1,338 +1,16 @@
 <!-- website header -->
 @extends('layouts.website.header')
+<link rel="stylesheet" href="{{ asset('css/indexpage.css')}}">
 <!-- website header ends -->
 
 @section('style')
     <style>
-        .ribbon-wrapper {
-            transform: rotate(270deg);
-            left: -2px;
-        }
-
-        .ribbon-wrapper .ribbon {
-            font-size: 16px;
-            font-family: cursive;
-            text-transform: lowercase !important;
-        }
-
-        #clearence_carousel .ribbon-wrapper {
-            margin-left: 15px;
-        }
-
         .card {
             box-shadow: none !important;
         }
 
-        /*Banner Areas*/
-        #banner-image-carousel.owl-theme .owl-nav.disabled + .owl-dots {
-            margin-top: -20px;
-            z-index: 200;
-        }
-
-        #banner-image-carousel.owl-carousel .owl-stage-outer {
-            z-index: -1;
-        }
-
-        /*Clearence Section Css*/
-        #clearence_section .owl-theme {
-            position: relative;
-        }
-
-        #clearence_section .owl-theme .owl-next,
-        #clearence_section .owl-theme .owl-prev {
-            top: 50%;
-            margin-top: -5%;
-            position: absolute;
-        }
-
-        #clearence_section .owl-theme .owl-nav [class*=owl-] {
-            background: transparent;
-        }
-
-        #clearence_section .owl-theme .owl-next {
-            right: -150px;
-        }
-
-        #clearence_section .owl-theme .owl-prev {
-            left: -150px;
-        }
-
-        #clearence_section .owl-carousel.owl-drag .owl-item {
-            padding: 0 50px;
-        }
 
 
-        /*New arrival Items*/
-        #new_arrival_carousel_item .image-container {
-            height: 50vh;
-            width: 100%;
-        }
-
-        #new_arrival_carousel_item .image-container img {
-            width: 100%;
-            height: 100%;
-        }
-
-        #new_items .item {
-            height: 30vh;
-            margin: 0 30px;
-        }
-
-        #new_items .current .item {
-            background: #9D9C9C;
-            color: #fff;
-            border-radius: 20px;
-        }
-
-        #new_items .owl-prev,
-        #new_items .owl-next {
-            top: 50%;
-            margin-top: -5%;
-            position: absolute;
-        }
-
-        #new_items.owl-theme .owl-prev {
-            left: -150px;
-        }
-
-        #new_items.owl-theme .owl-next {
-            right: -150px;
-        }
-
-        #new_items.owl-theme .owl-nav [class*=owl-] {
-            background: transparent;
-        }
-
-        /*Reviews and SignUp*/
-        .signup, .reviews {
-            transform: translateY(-70px);
-        }
-
-
-        /*About Us Section*/
-        .about-us-img {
-            width: 100%;
-            height: 385px;
-        }
-
-        .about-us-img img {
-            width: 100%;
-            height: 385px;
-        }
-
-        .circle-1, .circle-2, .circle-3, .circle-4 {
-            position: absolute;
-            top: 15px;
-            width: 35px;
-            height: 35px;
-            border-radius: 100%;
-            background-color: #fff;
-            border: 2px solid #00000060;
-        }
-
-        .circle-1, .circle-3 {
-            left: 30px;
-        }
-
-        .circle-2, .circle-4 {
-            right: 30px;
-        }
-
-        /*Reviews Ratings*/
-        .reviews-rating {
-            margin: -10px;
-            font-size: 40px;
-            overflow: hidden;
-        }
-
-        .reviews-rating input {
-            opacity: 0;
-            position: absolute;
-        }
-
-        .reviews-rating a,
-        .reviews-rating label {
-            float: right;
-            color: #fff;
-            text-decoration: none;
-            -webkit-transition: color .4s;
-            -moz-transition: color .4s;
-            -o-transition: color .4s;
-            transition: color .4s;
-        }
-
-        .reviews-rating label:hover ~ label,
-        .reviews-rating input:focus ~ label,
-        .reviews-rating label:hover,
-        .reviews-rating a:hover,
-        .reviews-rating a:hover ~ a,
-        .reviews-rating a:focus,
-        .reviews-rating a:focus ~ a {
-            color: #F0A500;
-            cursor: pointer;
-        }
-
-        .reviews-rating {
-            direction: rtl;
-        }
-
-        .reviews-rating a {
-            float: none
-        }
-
-
-        @media screen and (max-width: 991px) {
-            .vertical-sidebar-carousel {
-                display: none;
-            }
-
-            .smindex-sidebar {
-                display: block;
-                background-color: #fff;
-                height: auto;
-            }
-
-            .smindex-sidebar .smindex-sidebar-carousel .categories {
-                box-shadow: 0 3px 8px 0 rgba(0, 18, 87, .14);
-                margin: 10px;
-                padding: 10px 0 5px 0;
-            }
-
-            .smindex-sidebar .tns-outer [aria-controls], .smindex-sidebar .tns-outer [data-action] {
-                background: transparent;
-                border: none;
-                font-size: 2rem;
-                margin: 0 1.5rem;
-                cursor: pointer;
-            }
-
-            .smindex-sidebar .tns-outer [aria-controls]:focus, .smindex-sidebar .tns-outer [data-action]:focus {
-                outline: none;
-            }
-
-        }
-
-        @media screen and (min-width: 992px) {
-            .smindex-sidebar {
-                display: none;
-            }
-
-            .vertical-sidebar-carousel {
-                display: block;
-            }
-        }
-
-        /*Vertical Sidebar Carousel*/
-        .vertical-sidebar-carousel {
-            background-color: #fff;
-            height: auto;
-            /*overflow: hidden;*/
-        }
-
-        .vertical-sidebar-carousel .sidebar-vertical-carousel {
-            cursor: grab;
-        }
-
-        .sidebar-vertical-carousel figure {
-            width: 70px;
-            height: 70px;
-            border-radius: 100%;
-            margin-bottom: 0.3rem;
-            background-color: #b1b1b1;
-        }
-
-        .sidebar-vertical-carousel figure img {
-            width: 40px;
-            height: 40px;
-            margin: 15px;
-        }
-
-        ul.controls li {
-            list-style: none;
-            display: inline-block;
-        }
-
-        .controls {
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            left: 0;
-            background: #F0A500;
-            color: #000;
-            width: 100%;
-            display: block !important;
-            align-items: center;
-        }
-
-        .controls .prev {
-            display: none;
-        }
-
-        .controls .prev, .controls .next {
-            transition: background-color 600ms ease-in-out;
-        }
-
-        .controls .prev:hover, .controls .next:hover {
-            cursor: pointer;
-            /*background-color: #CF7500;*/
-        }
-
-        .controls .prev:focus, .controls .next:focus {
-            outline: none;
-        }
-
-        /*Customer Reviews Slider*/
-        .customer-reviews-slider {
-            height: 330px;
-            overflow: hidden;
-        }
-
-        #customer-reviews-carousel.owl-theme .owl-dots {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, 0%);
-            text-align: center;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        #customer-reviews-carousel.owl-theme .owl-dots .owl-dot span {
-            background: #fff;
-        }
-
-        #customer-reviews-carousel.owl-theme .owl-dots .owl-dot.active span {
-            background: #b1b1b1;
-        }
-
-        #customer-reviews-carousel .owl-item {
-            height: 220px;
-            top: 30px;
-        }
-
-        #customer-reviews-carousel.owl-theme .owl-nav {
-            text-align: center;
-            -webkit-tap-highlight-color: transparent;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        #customer-reviews-carousel.owl-theme .owl-nav [class*=owl-] {
-            color: #FFF;
-            font-size: 14px;
-            margin: 0px 5px;
-            padding: 5px 20px;
-            background: transparent;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 3px;
-            border: 1px solid #fff;
-        }
-
-        img.review-images {
-            border-radius: 15px;
-            width: 100%;
-            height: 190px;
-        }
 
     </style>
 @stop
@@ -349,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row index-sidebar-section">
                     <div class="col-12">
                         {{--Include Sidebar Here--}}
                         @include('layouts.website.indexsidebar')
@@ -385,12 +63,12 @@
 
                                         <div id="clearence_carousel"
                                              class="owl-carousel owl-carousel owl-theme px-3  py-2">
-                                            @foreach ($discountedProducts as $discountedProduct)
+                                                @foreach ($discountedProducts as $discountedProduct)
 
                                                 <div
-                                                    class="item text-center d-flex justify-content-center align-items-center rounded-top-front rounded-bottom-front">
-                                                    <div class="row">
-                                                        <a href="{{route('singleproduct',$discountedProduct->id)}}">
+                                                    class="item text-center rounded-top-front rounded-bottom-front">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                        <a href="{{ route('singleproduct',$discountedProduct->id)}}">
 
                                                             <div class="col-12">
                                                                 <div
@@ -420,7 +98,7 @@
 
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                                @endforeach
 
                                         </div>
 
@@ -457,11 +135,11 @@
                             <div class="container">
                                 <div class="row m-0 p-0 my-4">
 
-                                    <div class="col-md-6 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                        <img src="{{$lastproduct->image[0]->name}}" class="img-fluid p-3"
+                                    <div class="col-md-6 px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
+                                        <img src="{{$lastproduct->image[0]->name}}" class="img-fluid py-3 px-5"
                                              alt="">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mt-md-0 mt-3">
                                         <div class="container h-100 d-flex justify-content-center align-items-center">
                                             <dl class="row">
                                                 <dt class="col-sm-5">
@@ -485,13 +163,13 @@
                                                 <dt class="col-sm-5 font-weight-bold ">
                                                     <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
                                                 </dt>
-                                                <dd class="col-sm-7 ">
+                                                <dd class="col-sm-7" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
                                                     <!-- product description here -->
                                                     <h5 class="font-weight-normal ">{{$lastproduct->additional_information}}</h5>
                                                 </dd>
 
 
-                                                <dt class="col-sm-5 font-weight-bold  ">
+                                                <dt class="col-sm-5 font-weight-bold">
                                                     <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
                                                 </dt>
                                                 <dd class="col-sm-7">
@@ -518,7 +196,7 @@
 
             </div>
         </div>
-        <section id="general-slider" class="bg-product-light mt-5">
+        <section id="general-slider" class="bg-product-light mt-0 mt-md-5">
             <div class="container">
                 <div class="card-body bg-product-light rounded-bottom-front card-bdy">
                     <div id="new_items" class="owl-carousel owl-theme px-3">
@@ -608,7 +286,7 @@
                                     </div>
                                     <div
                                         class="img-div bg-product-medium rounded-top-front rounded-bottom-front mx-auto">
-                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
+                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid my-3" alt="">
                                     </div>
                                     <h5 class="best_price pt-3 font-weight-bold text-main-danger">
                                         <s>was ${{$discountedProduct->price}}</s></h5>
@@ -880,7 +558,7 @@
                 dots: false,
                 loop: true,
                 responsiveRefreshRate: 200,
-                navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+                navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
             }).on('changed.owl.carousel', syncPosition);
 
             newArrivalItems
@@ -912,7 +590,7 @@
                             items: 4,
                         }
                     },
-                    navText: ['<svg width="10%" height="10%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #b6b6b6;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="10%" height="10%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #b6b6b6;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+                    navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
                 }).on('changed.owl.carousel', syncPosition2);
 
             function syncPosition(el) {
@@ -990,9 +668,10 @@
                 },
             });*/
             /*------------------------*/
-            var slider = tns({
+            /*var slider = tns({
                 container: ".sidebar-vertical-carousel",
                 "axis": "vertical",
+                items: 9,
                 "swipeAngle": false,
                 "speed": 400,
                 mouseDrag: true,
@@ -1004,7 +683,7 @@
                 autoplay: true,
                 autoplayButtonOutput: false,
                 controlsContainer: "#customize-controls",
-                "responsive": {
+                /!*"responsive": {
                     "0": {
                         "items": 5
                     },
@@ -1015,11 +694,27 @@
                         "items": 9
                     }
 
-                },
-                /*rewind: true*/
-            });
+                },*!/
+                rewind: true
+            });*/
 
             /*Vertical Sidebar Carousel Ends*/
+
+            var slider = tns({
+                "container": ".catg-slider",
+                gutter: 10,
+                "items": 8,
+                "axis": "vertical",
+                "swipeAngle": false,
+                "speed": 400,
+                mouseDrag: true,
+                slideBy: 1,
+                nav: false,
+                loop: true,
+                autoplay: true,
+                autoplayButtonOutput: false,
+                controlsContainer: "#customize-controls",
+            });
         });
     </script>
 @stop

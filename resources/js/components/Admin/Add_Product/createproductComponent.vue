@@ -67,7 +67,7 @@
                             <div class="col-md-6">
                                 <el-form-item label="Quantity" prop="quantity">
                                     <el-input placeholder="Place quantity"
-                                              v-model="productForm.quantity"
+                                              v-model.number="productForm.quantity"
                                               style="width: 100%;">
                                     </el-input>
                                 </el-form-item>
@@ -75,15 +75,16 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <el-form-item label="Price" prop="sellingPrice">
+                                <el-form-item label="Price" prop="costPrice">
                                     <el-input placeholder="Place price"
-                                              v-model="productForm.costPrice"
+                                              v-model.number="productForm.costPrice"
+                                              type="number"
                                               style="width: 100%">
                                     </el-input>
                                 </el-form-item>
                             </div>
                             <div class="col-md-6">
-                                <el-form-item label="Tags" prop="tags">
+                                <el-form-item label="Tags" prop="tagsSelect">
                                     <el-select
                                         v-model="productForm.tagsSelect"
                                         multiple
@@ -132,22 +133,6 @@
         name: "createproductComponent",
         data() {
             return {
-                options: [{
-                    value: 'Option1',
-                    label: 'Option1'
-                }, {
-                    value: 'Option2',
-                    label: 'Option2'
-                }, {
-                    value: 'Option3',
-                    label: 'Option3'
-                }, {
-                    value: 'Option4',
-                    label: 'Option4'
-                }, {
-                    value: 'Option5',
-                    label: 'Option5'
-                }],
                 files: [],
                 tags: [],
                 getCategory: [],
@@ -184,10 +169,11 @@
                         {required: true, message: 'Please input product name', trigger: 'blur'}
                     ],
                     quantity: [
-                        {required: true, message: 'Please input quantity', trigger: 'blur'}
+                        {required: true, message: 'Please input quantity', trigger: 'blur'},
+                        {type: 'number', message: 'Quantity must be a number', trigger: 'blur'}
                     ],
                     costPrice: [
-                        {required: true, message: 'Please input price', trigger: 'blur'},
+                        {required: true, type: 'number', message: 'Please input valid price', trigger: 'blur'}
                     ],
                     additionalInformation: [
                         {required: true, message: 'Please input additional Information', trigger: 'blur'},

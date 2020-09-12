@@ -51,7 +51,7 @@
                                     <img src="{{ $product->image[0]->name }}" class="p-2" alt="">
                                 </div>
                                 <h5 class="best_price pt-3 font-weight-bold text-main-danger">{{$product->price}}</h5>
-                                <h5 class="best_name py-0 text-dark">{{$product->product_name}}</h5>
+                                <h5 class="best_name py-0 text-dark">{{ $product->product_name}}</h5>
                                 <button type="button"
                                         class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
                                     Add to Cart

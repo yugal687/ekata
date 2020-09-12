@@ -11,7 +11,6 @@ $(document).ready(function () {
     //slider for clearence section
     $('#clearence_carousel').owlCarousel({
         loop: true,
-        margin: 30,
         dots: false,
         responsiveClass: true,
         mouseDrag: true,
@@ -19,7 +18,7 @@ $(document).ready(function () {
         pullDrag: true,
         autoplay: true,
         nav: true,
-        navText: ['<svg width="10%" height="10%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #b6b6b6;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="10%" height="10%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #b6b6b6;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+        navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
         responsive: {
             0: {
                 items: 1,
