@@ -20,7 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
             $table->double('price');
-            $table->integer('quantity');
+            $table->float('quantity');
             $table->float('discount');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

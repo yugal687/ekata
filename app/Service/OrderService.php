@@ -30,27 +30,35 @@ class OrderService
 
     public function saveOrder()
     {
-        if (isset($this->shippingAddress['email'])) {
-            $order = Order::create([
-                'order_number' => $this->invoiceId,
-                'shipping_address' => $this->shippingAddress['address'],
-                'suburb' => $this->shippingAddress['suburb'],
-                'state' => $this->shippingAddress['state'],
-                'postal_code' => $this->shippingAddress['postal_code'],
-                'total_price' => $this->totalPrice,
-            ]);
-        } elseif (isset($this->billingAddress['email'])) {
-            $order = Order::create([
-                'order_number' => $this->invoiceId,
-                'shipping_address' => $this->billingAddress['address'],
-                'suburb' => $this->billingAddress['suburb'],
-                'state' => $this->billingAddress['state'],
-                'postal_code' => $this->billingAddress['postal_code'],
-                'total_price' => $this->totalPrice,
-            ]);
+        DB::beginTransaction();
+        try {
+            if (isset($this->shippingAddress['email'])) {
+                $order = Order::create([
+                    'order_number' => $this->invoiceId,
+                    'shipping_address' => $this->shippingAddress['address'],
+                    'sub_urb' => $this->shippingAddress['suburb'],
+                    'state' => $this->shippingAddress['state'],
+                    'postal_code' => $this->shippingAddress['postal_code'],
+                    'total_price' => $this->totalPrice,
+                ]);
+            } elseif (isset($this->billingAddress['email'])) {
+                $order = Order::create([
+                    'order_number' => $this->invoiceId,
+                    'shipping_address' => $this->billingAddress['address'],
+                    'sub_urb' => $this->billingAddress['suburb'],
+                    'state' => $this->billingAddress['state'],
+                    'postal_code' => $this->billingAddress['postal_code'],
+                    'total_price' => $this->totalPrice,
+                ]);
+            }
+            foreach ($this->orderItems as $orderItem) {
+                $order->items()->create($orderItem);
+            }
+
+            return $order;
+        } catch (\Exception $e) {
+            dd($e);
         }
-        $order->items()->create($this->orderItems);
-        return $order;
     }
 
 }
