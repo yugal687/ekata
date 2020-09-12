@@ -81,7 +81,7 @@ class UserController extends Controller
             ]);
         }
         if ($registerAdmin) {
-            return view('/user/users');
+            return view('Admin.User.users');
         }
     }
 

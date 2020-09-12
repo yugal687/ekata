@@ -25,7 +25,7 @@
                         prop="product_name">
                     </el-table-column>
                     <el-table-column
-                        label="Category"
+                        label="Sub Category"
                         prop="category.category_name">
                     </el-table-column>
                     <el-table-column

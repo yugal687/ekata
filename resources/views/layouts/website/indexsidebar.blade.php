@@ -8,7 +8,7 @@
 
                     @foreach($getCategory as $category)
                         <figure class="mx-auto">
-                            <img src="{{ $category->image }}" class="img-fluid" alt="">
+                            <img src="{{ $category->images[0]->name }}" class="img-fluid" alt="">
                         </figure>
                         <h6 class="mb-3"><a href="{{ route('maincategory',$category->id)}}" class="text-dark">{{$category->category_name}}</a></h6>
                     @endforeach

@@ -290,10 +290,19 @@
                                                 </el-input>
                                             </el-form-item>
                                             <el-form-item label="Category Name" prop="name">
-                                                <el-input v-model="esubcategory.parent_id"
-                                                          style="width: 100%;">
-
-                                                </el-input>
+                                                <el-select clearable placeholder="Select Category"
+                                                           filterable
+                                                           v-model="esubcategory.parent.category_name"
+                                                           style="width: 100%">
+                                                    <el-option
+                                                        v-for="item in getCategory"
+                                                        :key="item.id"
+                                                        data-target=".bd-subcategory-modal-lg"
+                                                        data-toggle="modal"
+                                                        :label="item.category_name"
+                                                        :value="item.id">
+                                                    </el-option>
+                                                </el-select>
                                             </el-form-item>
                                             <el-form-item>
                                                 <el-button type="primary"

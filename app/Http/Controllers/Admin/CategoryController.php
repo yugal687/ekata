@@ -37,7 +37,7 @@ class CategoryController extends Controller
                 $thumbnailCategory->move(public_path('/uploads'), $originalName);
 
                 $saveimage = Category::orderBy('id', 'DESC')->first();
-                $saveimage->image()->create([
+                $saveimage->images()->create([
                     'name' => '/uploads/' . $originalName,
                 ]);
             }

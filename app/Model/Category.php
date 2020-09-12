@@ -13,7 +13,7 @@ class Category extends Model
         'image',
         'parent_id'
     ];
-    public function image(){
+    public function images(){
         return $this->morphMany(Imagable::class,'imagable');
     }
     public function children()

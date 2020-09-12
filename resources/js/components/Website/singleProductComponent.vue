@@ -136,7 +136,7 @@
                 this.$store.commit('addToCart', cart);
             },
             totalPrice() {
-                return this.price = this.quantity * this.product[0].price;
+                return this.checkedPrice = this.quantity * this.checkedPrice;
             },
 
             incrementQuantity() {

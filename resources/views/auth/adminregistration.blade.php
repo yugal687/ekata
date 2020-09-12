@@ -176,7 +176,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" id="confirm_password" placeholder="Retype password">
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Retype password">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>

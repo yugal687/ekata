@@ -18,12 +18,12 @@ class ProductController extends Controller
         $getProduct = Product::with(array('category', 'brand', 'tags', 'image' => function ($query) {
             return $query->take(1);
         }))->get();
-        $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->latest()->get();
+        $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->limit(4)->latest()->get();
         $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->latest()->get();
         $bannerImage = BannerImage::where('active', 1)->get();
         $reviewImage = ReviewImage::where('active', 1)->get();
         $getWebsiteDetail = WebsiteDetail::all();
-        $getcategory = Category::where('parent_id','=',NULL)->with('product')->get();
+        $getcategory = Category::where('parent_id','=',NULL)->with('product','images')->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
 
         return view('website.index',
