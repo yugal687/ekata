@@ -64,7 +64,7 @@ let store = {
             state.cartCount = 0;
             state.totalPrice = 0;
         },
-        removeCartItems(productId){
+        removeCartItems(productId) {
             let storedCartItems = JSON.parse(localStorage.getItem('cart'));
             storedCartItems.forEach((val, key) => {
                 if (val.product_id == productId) {
@@ -89,6 +89,10 @@ let store = {
         },
         removeCartItems({commit}) {
             return commit('removeLocalStorageAndStateCartItems');
+        },
+        removeSelectedCartItem({commit}, productId) {
+            alert(productId);
+
         }
 
     },

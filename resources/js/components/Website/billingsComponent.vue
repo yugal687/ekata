@@ -389,9 +389,11 @@
                     'shippingAddress': this.shippingAddress,
                     'billingAddress': this.billingAddress,
                 }).then(resp => {
-                    window.location.href = resp.data.link;
+
+                    /*    window.location.href = resp.data.link;
+                    */
                 }).then(resp => {
-                    console.log(resp.data);
+                    //  console.log(resp.data);
                 });
 
             },

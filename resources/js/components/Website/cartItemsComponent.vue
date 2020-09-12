@@ -7,7 +7,6 @@
                         <div class="shopping-cart-header">
                             <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">
                             {{$store.state.cartCount}}
-
                         </span>
                             <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -94,11 +93,14 @@
                 cartItemCount: 0,
             }
         },
-
         methods: {
             countCartItem() {
                 this.getLocalStorageItem().length;
             },
+            removeProduct(produtId) {
+                this.$store.dispatch('removeSelectedCartItem', prodcutId);
+            },
+
         },
         computed: {
             cartItemsCount() {
