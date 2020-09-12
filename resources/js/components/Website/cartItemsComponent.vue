@@ -6,8 +6,7 @@
                     <div class="shopping-cart">
                         <div class="shopping-cart-header">
                             <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">
-                            {{$store.state.cartCount}}
-
+                            {{$store.getters.cartItemCount}}
                         </span>
                             <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
