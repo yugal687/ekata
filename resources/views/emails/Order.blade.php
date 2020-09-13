@@ -1,4 +1,4 @@
-@component('mail::message')
+
 
     <!DOCTYPE html>
 <html lang="en">
@@ -161,10 +161,4 @@
 
 </html>
 
-@component('mail::button', ['url' => ''])
-Buy More
-@endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
-@endcomponent

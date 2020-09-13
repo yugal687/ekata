@@ -21,7 +21,7 @@
                                     <el-form-item label="Posted Period" prop="date">
                                         <el-date-picker
                                             v-model="serviceForm.date"
-                                            type="month"
+                                            type="date"
                                             placeholder="Pick a month">
                                         </el-date-picker>
                                     </el-form-item>
@@ -114,7 +114,7 @@
                                     <el-form-item label="Posted Period">
                                         <el-date-picker
                                             v-model="serviceEdit[0].date"
-                                            type="month"
+                                            type="date"
                                             placeholder="Pick a month">
                                         </el-date-picker>
                                     </el-form-item>

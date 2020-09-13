@@ -1,7 +1,9 @@
 <?php
 
+use App\Mail\OrderMail;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -135,3 +137,12 @@ Route::post('/registerAdmin', 'User\UserController@registerAdmin');
 
 //Service Details
 Route::view('/servicedetails', 'website.servicedetails');
+
+
+Route::get('/send-mail', function () {
+
+    Mail::to('ajitsubedi2011@gmail.com') ->send(new OrderMail());
+
+    return 'A message has been sent to Mailtrap!';
+
+});

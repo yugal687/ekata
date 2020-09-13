@@ -9,11 +9,12 @@ use App\Model\Product;
 use App\Model\ReviewImage;
 use App\Model\Service;
 use App\Model\WebsiteDetail;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $getProduct = Product::with(array('category', 'brand', 'tags', 'image' => function ($query) {
             return $query->take(1);
@@ -26,6 +27,11 @@ class ProductController extends Controller
         $getcategory = Category::where('parent_id','=',NULL)->with('product','images')->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
 
+        if($request->ajax()){
+            $products=Product::where('product_name','LIKE','%'.$request->search."%")->get();
+
+            return Response()->json($products);
+        }
         return view('website.index',
             [
                 'getProduct' => $getProduct,
@@ -35,7 +41,7 @@ class ProductController extends Controller
                 'getCategory' => $getcategory,
                 'bestSelling' =>$bestSelling,
                 'reviewImage' =>$reviewImage,
-                'websiteDetail' =>$getWebsiteDetail
+                'websiteDetail' =>$getWebsiteDetail,
             ]);
     }
     public function showCategory($id){

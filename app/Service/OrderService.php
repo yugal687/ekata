@@ -33,6 +33,7 @@ class OrderService
         DB::beginTransaction();
         try {
             if (isset($this->shippingAddress['email'])) {
+                //dd($this->shippingAddress['email']);
                 $order = Order::create([
                     'order_number' => $this->invoiceId,
                     'shipping_address' => $this->shippingAddress['address'],

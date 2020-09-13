@@ -254,7 +254,8 @@
                                                aria-label="Search items..." aria-describedby="basic-addon2">
                                         <div class="input-group-append bg-main-secondary ">
                                             <ul>
-                                                <li></li>
+                                                        <li></li>
+
                                             </ul>
                                             <span
                                                 class="input-group-text bg-main-primary border-0 text-white .rounded-around"
@@ -489,10 +490,10 @@
             $value=$(this).val();
             $.ajax({
                 type : 'get',
-                url : '/search',
+                url : '/',
                 data:{'search':$value},
-                success:function(data){
-                    $('tbody').html(data);
+                success:function(products){
+                    console.log(products);
                 }
             });
         });

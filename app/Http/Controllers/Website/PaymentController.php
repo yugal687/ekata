@@ -72,6 +72,10 @@ class PaymentController extends Controller
     //payment using stripe
     public function stripeCheckOut(Request $request)
     {
+        $data['items'] = $this->maporderItems($request->orderItems);
+        $data['invoice_id'] = uniqid();
+        $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
+
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -143,6 +147,7 @@ class PaymentController extends Controller
     public function maporderItems(array $orderItems)
     {
         return array_map(function ($orderItems) {
+            //dd($orderItems);
             return [
                 'product_id' => $orderItems['product_id'],
                 'price' => $orderItems['price'] / $orderItems['quantity'],
