@@ -1,43 +1,11 @@
 <!--Website Header-->
 @extends('layouts.website.header')
-<link href="{{ asset('css/smsidebarstyle.css')}}" rel="stylesheet"/>
 <!--Website Header Ends-->
+
 @section('style')
-    <style>
-        .overlayImage {
-            position: relative;
-            width: 100%;
-            height: 450px;
-        }
+    <link href="{{ asset('css/smsidebarstyle.css')}}" rel="stylesheet"/>
+    <link href="{{ asset('css/webpages.css')}}" rel="stylesheet"/>
 
-        .overlayImage img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .overlayImage .overlayBackground {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .6);
-        }
-
-        .overlayText {
-            color: #fff;
-            font-size: 70px;
-            font-weight: 800;
-            font-family: SansSerif;
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-        }
-
-    </style>
 @stop
 
 
@@ -61,7 +29,6 @@
                     <div class="col-12">
                         {{--Include Sidebar Here--}}
                         @include('layouts.website.sidebar')
-                        {{--@include('layouts.website.smsidebar')--}}
                     </div>
                 </div>
             </div>
@@ -105,7 +72,7 @@
                                     <div class="row">
                                         @foreach($subCategory->product as $product)
                                             <div
-                                                class="col-md-3 col-sm-6 col-12 mt-5 d-flex flex-column justify-centent-center align-items-center text-center">
+                                                class="col-md-3 col-sm-6 col-12 mt-5 text-center">
                                                 <a href="{{route('singleproduct',$product->id)}}">
 
                                                 <div

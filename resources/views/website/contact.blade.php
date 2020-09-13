@@ -3,44 +3,13 @@
 <!-- website header ends -->
 
 @section('style')
+    <link href="{{ asset('css/webpages.css')}} " rel="stylesheet"/>
     <style>
-        .contact-us {
-            background-color: #e1e1e1;
-            text-align: center;
-        }
-
-        .contact-us h1 {
-            font-family: "Times New Roman";
-            font-size: 3rem;
-            color: #CF7500;
-        }
-
-        .card_box .fa-color {
-            color: #CF7500;
-        }
-
-        .card_box .card {
-            border-color: #CF7500;
-            box-shadow: none;
-            border-radius: 15px;
-        }
-
-        .enq-form {
-            background-color: #CF7500;
-            padding: 30px 0;
-            height: 27rem;
-        }
-
-        .enquiry-section {
-            background-color: #CF7500;
-        }
-
         h6 a, address a{
             text-decoration: none;
             font-size: 15px;
             color: #212529;
         }
-
     </style>
 @stop
 

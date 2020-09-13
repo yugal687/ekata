@@ -32,6 +32,9 @@ Route::get('/logout', function () {
 Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
 //Services
 Route::get('/services', 'Website\ProductController@service');
+Route::get('/servicedetails/{id}',
+    ["uses"=>'Website\ProductController@serviceDetails',
+"as" =>'servicedetails']);
 /*Route::get('/products', function () {
     return view('website/products');
 });*/
@@ -136,7 +139,3 @@ Route::post('/saveFeedback','Website\FeedbackController@saveFeedback');
 //Save User/Admin Register
 Route::post('/registerUser','User\UserController@registeruser');
 Route::post('/registerAdmin','User\UserController@registerAdmin');
-
-
-//Service Details
-Route::view('/servicedetails', 'website.servicedetails');

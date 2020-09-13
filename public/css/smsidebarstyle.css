@@ -147,19 +147,19 @@ li.sidebar-dropdown {
 }
 
 /*Sm-sidebar Css Media Query*/
-@media screen and (max-width: 991px) {
-    #accordion, #special-filters{
+@media screen and (max-width: 992px) {
+    .main-sidebar-menu-wrapper{
         display: none;
     }
-    .sidebar-wrapper{
+    .smsidebar-menu.sidebar-wrapper{
         display: block;
     }
 }
 @media screen and (min-width: 992px) {
-    #accordion, #special-filters{
+    .main-sidebar-menu-wrapper{
         display: block;
     }
-    .sidebar-wrapper, #toggle-smsidebar{
+    .smsidebar-menu.sidebar-wrapper, #toggle-smsidebar{
         display: none !important;
     }
 }

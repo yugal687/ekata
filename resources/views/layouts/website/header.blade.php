@@ -512,6 +512,9 @@
         $("#toggle-smsidebar").click(function () {
             $(".smsidebar-menu").toggleClass("rightActive");
         });
+        $(".smsidebar-menu i.close-menu").click(function () {
+            $(".smsidebar-menu").toggleClass("rightActive");
+        });
 
 
         /*Number Snipper Button*/
