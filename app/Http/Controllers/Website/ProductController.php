@@ -109,4 +109,13 @@ class ProductController extends Controller
 
         ]);
     }
+    public function serviceDetails($id){
+        $Service = Service::where('id',$id)->get();
+        $getWebsiteDetail = WebsiteDetail::all();
+        return view('website.servicedetails',[
+            'services' => $Service,
+            'websiteDetail' =>$getWebsiteDetail
+
+        ]);
+    }
 }

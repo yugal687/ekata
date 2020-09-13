@@ -35,6 +35,9 @@ Route::get('/logout', function () {
 Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
 //Services
 Route::get('/services', 'Website\ProductController@service');
+Route::get('/servicedetails/{id}',
+    ["uses"=>'Website\ProductController@serviceDetails',
+"as" =>'servicedetails']);
 /*Route::get('/products', function () {
     return view('website/products');
 });*/

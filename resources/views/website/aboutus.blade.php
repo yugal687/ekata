@@ -5,38 +5,7 @@
 {{---------------------}}
 
 @section('style')
-    <style>
-        .heading-title {
-            color: #252525;
-            font-size: 34px;
-            font-family: 'Poppins', SansSerif;
-            font-weight: 900;
-        }
-
-        .heading-description-main {
-            font-size: 18px;
-            font-family: "Source Code Pro";
-        }
-
-        .heading-description {
-            font-size: 20px;
-            font-family: "Source Code Pro";
-        }
-        .contact-us {
-            background-color: #e1e1e1;
-            text-align: center;
-        }
-
-        .contact-us h1 {
-            font-family: "Times New Roman";
-            font-size: 3rem;
-            color: #CF7500;
-        }
-
-        .container-sm {
-            max-width: 41.25rem;
-        }
-    </style>
+    <link href="{{ asset('css/webpages.css')}} " rel="stylesheet"/>
 @stop
 
 @section('content')

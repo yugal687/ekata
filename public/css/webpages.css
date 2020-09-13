@@ -1,0 +1,155 @@
+.heading-title {
+    color: #252525;
+    font-size: 34px;
+    font-family: 'Poppins', SansSerif;
+    font-weight: 900;
+}
+
+.heading-description-main {
+    font-size: 18px;
+    font-family: "Source Code Pro";
+}
+
+.heading-description {
+    font-size: 20px;
+    font-family: "Source Code Pro";
+}
+
+.contact-us {
+    background-color: #e1e1e1;
+    text-align: center;
+}
+
+.contact-us h1 {
+    font-family: "Times New Roman";
+    font-size: 3rem;
+    color: #CF7500;
+}
+
+.container-sm {
+    max-width: 41.25rem;
+}
+
+
+/*Main Category Page CSS*/
+/*------------------------*/
+.overlayImage {
+    position: relative;
+    width: 100%;
+    height: 450px;
+}
+
+.overlayImage img {
+    width: 100%;
+    height: 100%;
+}
+
+.overlayImage .overlayBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .6);
+}
+
+.overlayText {
+    color: #fff;
+    font-size: 70px;
+    font-weight: 800;
+    font-family: SansSerif;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+/*------------------------*/
+/*Main Category Page CSS Ends*/
+
+/*Category Page CSS*/
+/*------------------------*/
+.categoryBannerImage{
+    height: 450px;
+    width: 100%;
+}
+/*------------------------*/
+/*Category Page CSS Ends*/
+
+
+/*Contact Us Page CSS*/
+/*------------------------*/
+.card_box .fa-color {
+    color: #CF7500;
+}
+
+.card_box .card {
+    border-color: #CF7500;
+    box-shadow: none;
+    border-radius: 15px;
+}
+
+.enq-form {
+    background-color: #CF7500;
+    padding: 30px 0;
+    height: 27rem;
+}
+
+.enquiry-section {
+    background-color: #CF7500;
+}
+/*------------------------*/
+/*Contact Us Page CSS Ends*/
+
+
+/*Service Pages CSS*/
+.service-card-content {
+    background: #cf7500;
+    border-radius: 10px;
+    position: relative;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    padding: 16px;
+    transform: scale(1);
+    transition: transform 300ms ease-in-out;
+}
+.service-card-content:hover {
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.service-card-title{
+    font-weight: bold;
+    font-size: 20px;
+}
+.service-card-time{
+    font-weight: normal;
+    font-size: 16px;
+    opacity: 0.8;
+}
+.service-card-body{
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    font-family: Calibri;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+.service-card-body p{
+    text-decoration: none !important;
+    color: #000 !important;
+}
+.service-card-footer a{
+    font-size: 16px;
+    font-weight: bold;
+}
+.service-card-footer a i{
+    padding: 0 5px;
+}
+/*Service Pages CSS Ends*/
