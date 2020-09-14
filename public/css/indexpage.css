@@ -13,7 +13,19 @@
 #clearence_carousel .ribbon-wrapper {
     margin-left: 15px;
 }
+/*Clearance | Specials Images*/
+.bg-product-medium-2 {
+    background-color: #d1cdcc;
+}
+.bg-product-medium-2 img {
+    width: 150px;
+    height: 150px;
+}
 
+.bg-product-medium-2 {
+    width: auto;
+    height: auto;
+}
 
 /* banner section */
 @media screen and (min-width: 991px){

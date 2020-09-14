@@ -6,9 +6,6 @@
     <title>AdminLTE 3 | Registration Page</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!--JS-->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -49,7 +46,16 @@
             -moz-transition: All 0.5s ease-in;
             -o-transition: All 0.5s ease-in;
         }
+        .error {
+            color: red;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            font-weight: 400 !important;
+        }
 
+        label.error {
+            transform: translateY(-15px);
+        }
     </style>
 
 </head>
@@ -63,6 +69,7 @@
     </div>
 @endif
 <body class="hold-transition register-page">
+<div id="app">
 <div class="register-box">
     <div class="register-logo">
         <a href="/" class="text-decoration-none" style="font-size: 24px">
@@ -80,7 +87,7 @@
                 <div class="col-md-7" style="padding: 1rem 2rem 1rem 1rem;">
                     <p class="login-box-msg">Register a new admin user</p>
 
-                    <form action="{{url("registerAdmin")}}" method="post">
+                    <form action="{{url("registerAdmin")}}" method="post" id="admin-registration-form">
                         {{csrf_field()}}
                         <div class="form-row">
                             <div class="col-md-6">
@@ -176,7 +183,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" id="confirm_password" placeholder="Retype password">
+                            <input type="password" class="form-control" id="confirm_password" name="password_confirmation" placeholder="Retype password">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -201,6 +208,137 @@
     </div><!-- /.card -->
 </div>
 <!-- /.register-box -->
-
+</div>
 </body>
+<!--JS-->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function () {
+        /*$('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() == $('#confirm_password').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });*/
+        $.validator.addMethod("letters", function (value, element) {
+            return this.optional(element) || value == value.match(/^[a-zA-Z\s]*$/);
+        });
+        $("#admin-registration-form").validate(
+            {
+                errorPlacement: function (error, element) {
+
+                    if (element.parent().hasClass('input-group')) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+
+                },
+                rules:
+                    {
+                        first_name:
+                            {
+                                required: true,
+                                letters: true
+                            },
+                        last_name:
+                            {
+                                required: true,
+                                letters: true
+                            },
+                        address:
+                            {
+                                required: true,
+                            },
+                        sub_urb:
+                            {
+                                required: true,
+                            },
+                        state:
+                            {
+                                required: true,
+                            },
+                        postal_code:
+                            {
+                                required: true,
+                                number: true
+                            },
+                        email:
+                            {
+                                required: true,
+                                email: true
+                            },
+                        contact_number:
+                            {
+                                required: true,
+                                number: true,
+                                minlength: 10
+                            },
+                        password:
+                            {
+                                required: true,
+                                minlength: 5
+                            },
+                        password_confirmation:
+                            {
+                                required: true,
+                                minlength: 5,
+                                equalTo: "#password"
+                            },
+                    },
+                messages:
+                    {
+                        first_name:
+                            {
+                                required: "Please fill your first name",
+                                letters: "Only letters and spaces are allowed"
+                            },
+                        last_name:
+                            {
+                                required: "Please fill your last name",
+                                letters: "Only letters and spaces are allowed"
+                            },
+                        address:
+                            {
+                                required: "Please fill your address",
+                            },
+                        sub_urb:
+                            {
+                                required: "Please fill your suburb name",
+                            },
+                        state:
+                            {
+                                required: "Please fill your state name",
+                            },
+                        postal_code:
+                            {
+                                required: "Please fill your postal code",
+                                number: "Please fill valid number"
+                            },
+                        email:
+                            {
+                                required: "Please enter your email address. This is required to contact you later."
+                            },
+                        contact_number:
+                            {
+                                required: "Please fill your contact number",
+                                minlength: "Contact numbers must be 10 characters long",
+                                number: "Only numbers are allowed in contact number"
+                            },
+                        password:
+                            {
+                                required: "Please fill your password",
+                                minlength: "Password must be at least 5 characters long",
+                            },
+                        password_confirmation:
+                            {
+                                required: "Please fill your password",
+                                minlength: "Password must be at least 5 characters long",
+                                equalTo: "Please enter the same password as above"
+                            },
+                    }
+            });
+    });
+</script>
 </html>

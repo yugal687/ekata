@@ -29,12 +29,12 @@
 .main-sidebar-menu {
     padding: 0 10px;
 }
-.main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown.active a.main-cat, .main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown:hover a.main-cat  {
+.main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown a.active.main-cat, .main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown:hover a.main-cat  {
     background-color: #CF7500;
     color: #fff;
     border-radius: 10px;
 }
-.main-sidebar-menu .sidebar-submenu ul li.active a.main-subcat, .main-sidebar-menu .sidebar-submenu ul li a:hover{
+.main-sidebar-menu .sidebar-submenu ul li a.active.main-subcat, .main-sidebar-menu .sidebar-submenu ul li a:hover{
     background-color: #d1cdcc;
 }
 .main-sidebar-menu .sidebar-menu ul li a {
@@ -143,7 +143,6 @@ li.sidebar-dropdown {
 .smsidebar-menu .sidebar-menu .sidebar-dropdown.active > a i, .main-sidebar-menu .sidebar-menu .sidebar-dropdown.active > a i {
     transform: rotate(90deg);
     right: 0;
-
 }
 
 /*Sm-sidebar Css Media Query*/

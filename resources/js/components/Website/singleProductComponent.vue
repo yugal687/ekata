@@ -3,24 +3,17 @@
         <div class="col-md-8">
             <div id="single-item-carousel">
                 <div id="sync1" class="owl-carousel owl-theme">
-                    <div class="item" v-for="productImage in product[0].image"
-                         :key="productImage.id">
+                    <div class="item" v-for="productImage in product[0].image" :key="productImage.id">
                         <img :src="productImage.name"
                              class="img-fluid" alt="">
                     </div>
-                    <!--<div class="item">
-                        <img src="images/category/basmati_rice/Layer 5.png"
-                             class="img-fluid" alt="">
-                    </div>
-                    <div class="item">
-                        <img
-                            src="images/category/basmati_rice/raw-basmati-rice-500x500.png"
-                            class="img-fluid" alt="">
-                    </div>
-                    -->
-
                 </div>
 
+                <div id="sync2" class="owl-carousel owl-theme">
+                    <div class="item" v-for="productImage in product[0].image" :key="productImage.id">
+                        <img :src="productImage.name" alt="">
+                    </div>
+                </div>
             </div>
         </div>
 
