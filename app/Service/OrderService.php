@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Model;
 use App\Model\Order;
+use App\Model\OrderDetail;
 use Illuminate\Support\Facades\DB;
 
 class OrderService
@@ -51,12 +52,16 @@ class OrderService
                     'total_price' => $this->totalPrice,
                 ]);
             }
+            $result = $order;
             foreach ($this->orderItems as $orderItem) {
                 $order->items()->create($orderItem);
+
             }
 
-            return $order;
+            DB::commit();
+            return $result;
         } catch (\Exception $e) {
+            DB::rollBack();
             dd($e);
         }
     }

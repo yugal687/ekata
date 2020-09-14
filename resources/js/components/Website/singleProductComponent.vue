@@ -338,6 +338,7 @@
                 };
                 let storedCart = JSON.parse(localStorage.getItem('cart'));
                 this.$store.commit('addToCart', cart);
+                alert('sucesfully added to cart');
             },
             totalPrice() {
                 return this.price = this.quantity * this.product[0].price;
