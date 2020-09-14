@@ -68,7 +68,7 @@
 
                                                             <div class="col-12">
                                                                 <div
-                                                                    class="img-div bg-product-medium px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                                    class="img-div bg-product-medium-2 px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
                                                                     <div class="ribbon-wrapper ribbon-lg">
                                                                         <div class="ribbon bg-main-secondary text-dark">
                                                                             clearance
@@ -202,7 +202,7 @@
                                 <div class="new_items_img">
                                     <div class="row m-4">
                                         <div
-                                            class="col-12 bg-product-medium rounded-top-front rounded-bottom-front mt-3">
+                                            class="col-12 bg-product-medium rounded-top-front rounded-bottom-front">
 
                                             <img src="{{$lastproduct->image[0]->name}}"
                                                  class="img-fluid p-2"
@@ -236,11 +236,11 @@
                         </div>
                     </div>
                     @foreach($bestSelling as $best)
-                        <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mt-lg-0 d-flex justify-content-center align-items-center text-center">
+                        <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mt-lg-0 text-center">
                             <a href="{{route('singleproduct',$best->id)}}">
                                 <div
                                     class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
-                                    <img src="{{$best->image[0]->name}}" width="150" alt="">
+                                    <img src="{{$best->image[0]->name}}" class="img-fluid" alt="">
                                 </div>
                                 <h5 class="best_price pt-3 pb-2 font-weight-bold text-white ">${{$best->price}}</h5>
                                 <h5 class="best_name py-0 text-white ">{{$best->product_name}}</h5>
@@ -281,7 +281,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="img-div bg-product-medium rounded-top-front rounded-bottom-front mx-auto">
+                                        class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
                                         <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid my-3" alt="">
                                     </div>
                                     <h5 class="best_price pt-3 font-weight-bold text-main-danger">

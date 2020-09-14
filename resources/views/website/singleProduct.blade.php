@@ -118,37 +118,42 @@
                 </div>
             </div>
 
-            <div class="col-md-10">
+            <div class="col-lg-10 col-md-12">
                 @foreach($singleProduct as $product)
-                <div class="row">
-                    <div class="col-12" style="padding: 0;">
-                        <nav aria-label="breadcrumb" class="">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('maincategory',$product->category->parent->id)}}">{{$product->category->parent->category_name}}</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('category',$product->category->id)}}">{{$product->category->category_name}}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{$product->product_name}}</li>
-                            </ol>
-                        </nav>
+                    <div class="row">
+                        <div class="col-12" style="padding: 0;">
+                            <nav aria-label="breadcrumb" class="">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a
+                                            href="{{route('maincategory',$product->category->parent->id)}}">{{$product->category->parent->category_name}}</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a
+                                            href="{{route('category',$product->category->id)}}">{{$product->category->category_name}}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active"
+                                        aria-current="page">{{$product->product_name}}</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
-                </div>
 
                 @endforeach
 
                 {{--Vue Component--}}
-                <div>
+                <main class="p-1 p-sm-3 p-md-4 p-lg-5">
                     <single-product-component :product="{{$singleProduct}}">
 
                     </single-product-component>
+
                     <div class="">
-                        <main class="p-5">
 
                             <section id="special-section">
-                                <div class="container mt-5 pt-2">
+                                <div class="mt-5 pt-2">
                                     <!-- first row -->
                                     <!-- second row -->
                                     <div class="row">
-                                        <div class="container mt-5">
+                                        <div class="container">
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <h4 class="text-center font-weight-bold">Recommended for you</h4>
@@ -163,33 +168,33 @@
 
                                         <!-- col-item-start -->
                                         @foreach($category[0]->product as $cat)
-                                        <div
-                                             class="col-md-3 mt-5 pt-3 d-flex flex-column justify-centent-center align-items-center">
-                                            <a href="{{route('singleproduct',$cat->id)}}">
                                             <div
-                                                class="img-div bg-product-medium p-2 bg-cate-sec rounded-top-front rounded-bottom-front mx-auto">
-                                                <img src="{{$cat->image[0]->name}}" alt="">
-                                            </div>
+                                                class="col-md-3 col-sm-6 col-12 mt-5 text-center">
+                                                <a href="{{route('singleproduct',$cat->id)}}">
+                                                    <div
+                                                        class="img-div bg-product-medium py-4 px-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                        <img src="{{$cat->image[0]->name}}" class="img-fluid" alt="">
+                                                    </div>
 
-                                            <h5 class="best_price font-weight-bold mt-3 text-main-primary">{{$cat->price}}</h5>
-                                            <h5 class="best_name py-0 text-dark">{{$cat->product_name}}</h5>
-                                            <h5 class="best_weight py-0 text-dark">500 gm</h5>
-                                            <button type="button"
-                                                    class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
-                                                Add to Cart
-                                            </button>
-                                            </a>
-                                        </div>
-                                        @endforeach
-                                        <!-- col-item-end -->
+                                                    <h5 class="best_price font-weight-bold mt-3 text-main-primary">
+                                                        ${{$cat->price}}</h5>
+                                                    <h5 class="best_name py-0 text-dark">{{$cat->product_name}}</h5>
+                                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
+                                                    <button type="button"
+                                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
+                                                        Add to Cart
+                                                    </button>
+                                                </a>
+                                            </div>
+                                    @endforeach
+                                    <!-- col-item-end -->
                                     </div>
                                     <!-- second row -->
                                 </div>
                             </section>
                             <!-- special section ends here -->
-                        </main>
                     </div>
-                </div>
+                </main>
                 {{----}}
             </div>
 

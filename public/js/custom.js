@@ -1,9 +1,21 @@
 $(document).ready(function () {
     /*Location Href*/
     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
-    $('ul a').each(function() {
+    $('ul.navbar-nav a').each(function() {
         if (this.href === path) {
             $(this).addClass('active');
+        }
+    });
+    $('.main-sidebar-menu ul li.sidebar-dropdown a').each(function() {
+        if (this.href === path) {
+            $(this).addClass('active');
+        }
+    });
+    $('.main-sidebar-menu ul li.sidebar-dropdown .sidebar-submenu ul li a').each(function() {
+        if (this.href === path) {
+            $(this).addClass('active');
+            $(this).closest('.sidebar-submenu').slideDown(200);
+            $(this).closest('.sidebar-dropdown').addClass('active');
         }
     });
 
