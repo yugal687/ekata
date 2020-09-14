@@ -1,6 +1,4 @@
-
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -40,28 +38,32 @@
                     <div class="col-auto">
 
 							<span style="display:inline;">
-								4 Sep 2020 18:53:41 AEST
+								{{$orderitem[0]->date}}
 							</span>
 
                         <span style="display:inline;">
 								<br>
-								Transaction ID: <a href="" target="_BLANK">
-									28J7053536088230N&nbsp;</a>
+                            @if($orderitem[0]->order->order_number)
+                                Transaction ID: <a href="" target="_BLANK">
+									{{$orderitem[0]->order->order_number}}&nbsp;</a>
+                            @endif
 							</span>
                     </div>
                 </div>
                 <div class="row py-2">
                     <div class="col-12">
-                        <span style="color:#333333 !important;font-weight:bold;font-size: 14px;font-family: arial,helvetica,sans-serif;">Dear Abishkar Joshi's Test Store,</span>
+                        <span
+                            style="color:#333333 !important;font-weight:bold;font-size: 14px;font-family: arial,helvetica,sans-serif;">Dear {{$orderitem[0]->user->first_name}},</span>
                     </div>
                 </div>
                 <div class="row py-2">
                     <div class="col-12" style="font-size: 14px;font-weight: bold; color: #fe6c6f">
-                        You bought products with total amount of $10.00 AUD from Ekata Convenience Store
+                        You bought products with total amount of {{$orderitem[0]->order->total_price}} AUD from Ekata Convenience Store
                     </div>
                     <div class="col-12">
                         <p>
-                            Thanks for using PayPal. You can now send any items. To view the transaction details, log in to your PayPal account.
+                            Thanks for using PayPal. You can now send any items. To view the transaction details, log in
+                            to your PayPal account.
                         </p>
                     </div>
 
@@ -77,7 +79,7 @@
                             </div>
                             <div class="col-12">
                                 <p>
-                                    Ekata Convenience Store<br />
+                                    Ekata Convenience Store<br/>
                                     ekata@gmail.com
                                 </p>
                             </div>
@@ -90,10 +92,10 @@
                             </div>
                             <div class="col-12">
                                 <p>
-                                    Abishkar Joshi<br />
-                                    1 Cheeseman Ave Brighton East<br />
-                                    Melbourne, Victoria 3001<br />
-                                    Australia<br />
+                                    {{ $orderitem[0]->order->sub_urb}}<br/>
+                                    {{ $orderitem[0]->order->state}}<br/>
+                                    {{ $orderitem[0]->order->shipping_address}}<br/>
+                                    Australia<br/>
                                 </p>
                             </div>
                         </div>
@@ -103,7 +105,6 @@
                     <table class="table table-borderless">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Product</th>
                             <th scope="col">Unit Price</th>
                             <th scope="col">Quantity</th>
@@ -111,44 +112,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Product 1</td>
-                            <td>$10.00</td>
-                            <td>2</td>
-                            <td>$20.$$</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Product 2</td>
-                            <td>$10.00</td>
-                            <td>1</td>
-                            <td>$10.$$</td>
-                        </tr>
-
+                        @foreach($orderitem as $items)
+                            <tr>
+                                <td>{{$items->product->product_name}}</td>
+                                <td>${{$items->price}}</td>
+                                <td>{{$items->quantity}}</td>
+                                <td>${{$items->order->total_price}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                         <tfoot>
-                        <tr>
-                            <th scope="row"></th>
-                            <th colspan="3" class="text-right">Sub Total</th>
-                            <td>$30.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <th colspan="3" class="text-right">Discount</th>
-                            <td>$30.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <th colspan="3" class="text-right">Payment</th>
-                            <td>$30.00</td>
-                        </tr>
-                        </tfoot>
                     </table>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <p>Sincerely,<br />
+                        <p>Sincerely,<br/>
                             Ekata Convenience Store</p>
                     </div>
                 </div>

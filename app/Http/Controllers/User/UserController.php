@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Model\Order;
 use App\Model\OrderDetail;
 use App\Model\Role;
 use App\User;
@@ -146,7 +147,8 @@ class UserController extends Controller
 
     public function dashboradData()
     {
-        $latestOrder = OrderDetail::with('order', 'user', 'product')
+//        $latestOrder = OrderDetail::with('order', 'user', 'product')->orderBy('id', 'DESC')->get();
+        $latestOrder = OrderDetail::with('order', 'user', 'product')->where('user_id',Auth::user()->id)
             ->orderBy('id', 'DESC')
             ->get();
         return view('User.userdashboard', [

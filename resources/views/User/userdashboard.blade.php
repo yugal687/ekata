@@ -23,7 +23,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Total Amounts Paid</span>
-                        <span class="info-box-number">$41,410</span>
+                        <span class="info-box-number">{{$latestOrder[0]->order->total_price * count($latestOrder)}}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -42,7 +42,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Products Bought</span>
-                        <span class="info-box-number">76</span>
+                        <span class="info-box-number">{{count($latestOrder)}}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -57,7 +57,9 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Products On Order</span>
-                        <span class="info-box-number">2</span>
+                        @if($latestOrder[0]->order->order_status == 'pending')
+                        <span class="info-box-number">{{count($latestOrder)}}</span>
+                            @endif
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -95,47 +97,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">630778</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">456,233</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">345,670</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">345,670</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">345,670</div>
-                                    </td>
-                                </tr>
 
+                                @if($latestOrder[0]->order->order_status ='delivered')
+                                    @foreach($latestOrder as $order)
+
+                                    <tr>
+                                        <td>
+                                            <a href="pages/examples/invoice.html">{{$order->order->order_number}}</a>
+                                        </td>
+                                        <td>{{$order->product->product_name}}</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#00a65a"
+                                                 data-height="20">{{$order->product->price}}</div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -176,6 +154,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($latestOrder[0]->order->order_status ="pending")
                                     @foreach($latestOrder as $order)
 
                                         <tr>
@@ -183,13 +162,14 @@
                                                 <a href="pages/examples/invoice.html">{{$order->order->order_number}}</a>
                                             </td>
                                             <td>{{$order->product->product_name}}</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
+                                            <td><span class="badge badge-warning">{{$order->order->order_status}}</span></td>
                                             <td>
                                                 <div class="sparkbar" data-color="#00a65a"
                                                      data-height="20">{{$order->product->price}}</div>
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

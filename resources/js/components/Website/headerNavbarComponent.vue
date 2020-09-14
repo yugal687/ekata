@@ -50,7 +50,7 @@
                             <a class="nav-link text-white" href="/aboutus">About Us</a>
                         </li>
                         <li class="nav-item px-2">
-                            <a class="nav-link text-white" href="#">Services</a>
+                            <a class="nav-link text-white" href="/services">Services</a>
                         </li>
                         <li class="nav-item px-2">
                             <a class="nav-link text-white" href="/products">Products</a>

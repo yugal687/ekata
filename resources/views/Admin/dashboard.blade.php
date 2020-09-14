@@ -83,7 +83,7 @@
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">{{$order->order->order_number}}</a></td>
                                     <td>{{$order->product->product_name}}</td>
-                                    <td><span class="badge badge-success">{{$order->order_status}}</span></td>
+                                    <td><span class="badge badge-success">{{$order->order->order_status}}</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
                                             {{$order->user->first_name}} {{$order->user->last_name}}

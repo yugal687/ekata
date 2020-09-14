@@ -138,10 +138,6 @@ Route::post('/registerUser', 'User\UserController@registeruser');
 Route::post('/registerAdmin', 'User\UserController@registerAdmin');
 
 
-//Service Details
-Route::view('/servicedetails', 'website.servicedetails');
-
-
 Route::get('/send-mail', function () {
 
     Mail::to('ajitsubedi2011@gmail.com') ->send(new OrderMail());

@@ -79,6 +79,10 @@ Route::delete('/deleteWebsiteDetail/{id}','Website\WebsiteDetailController@delet
 
 //get Order Detail
 Route::get('/getOrderDetail','Order\OrderController@getOrder');
+Route::patch('/setDelivered/{id}','Order\OrderController@setDelivered');
+Route::delete('/deleteOrder/{id}','Order\OrderController@deleteOrder');
+
+
 
 //User
 Route::get('/getUser','User\UserController@singleUserDetail');

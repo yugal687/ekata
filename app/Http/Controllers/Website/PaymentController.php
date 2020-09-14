@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderMail;
+use App\Model\OrderDetail;
 use App\Service\OrderService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Stripe\Charge;
@@ -46,7 +49,7 @@ class PaymentController extends Controller
                 $request->shippingAddress,
                 $request->totalPrice);
 
-            dd($order);
+            //dd($order);
             //send maile here;///send mail  here
             //Mail section starts here after succesfully order is saved;
             //
@@ -75,7 +78,12 @@ class PaymentController extends Controller
         $data['items'] = $this->maporderItems($request->orderItems);
         $data['invoice_id'] = uniqid();
         $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
-
+if ($order){
+    $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->get();
+    //dd($orderitem);
+    Mail::to('ajitsubedi2011@gmail.com') ->send(new OrderMail($orderitem));
+}
+        //$order->items()->save();
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -147,7 +155,7 @@ class PaymentController extends Controller
     public function maporderItems(array $orderItems)
     {
         return array_map(function ($orderItems) {
-            //dd($orderItems);
+            //dd($orderItems['price'] / $orderItems['quantity']);
             return [
                 'product_id' => $orderItems['product_id'],
                 'price' => $orderItems['price'] / $orderItems['quantity'],

@@ -32,12 +32,6 @@
                             <h1 class="service-card-title mb-0">{{$service->title}}</h1>
                             <time class="service-card-time">{{$service->date}}</time>
                         </header>
-                        {{--<div class="service-card-body">
-                            <p id="copy-service-body"></p>
-                        </div>
-                        <div class="service-card-body d-none">
-                            <p id="service-body">{{ $service->details }} </p>
-                        </div>--}}
                         <div class="service-card-body">
                             <p>{!! $service->details !!} </p>
                         </div>
@@ -58,14 +52,6 @@
 
 @section('scripts')
     <script>
-        function removeTags(str) {
-            if (str === null || str === "") return false;
-            else str = str.toString();
-            return str.replace(/(<([^>]+)>)/gi, "");
-        }
-        const write2 = document.getElementById("service-body").innerText;
-        const removetags = removeTags(write2);
-        const copies = document.getElementById("copy-service-body");
-        copies.innerText = removetags;
+
     </script>
 @endsection
