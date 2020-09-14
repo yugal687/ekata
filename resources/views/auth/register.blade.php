@@ -289,12 +289,11 @@
                         password:
                             {
                                 required: true,
-                                minlength: 5
+                                minlength: 6
                             },
                         password_confirmation:
                             {
                                 required: true,
-                                minlength: 5,
                                 equalTo: "#password"
                             },
                     },
@@ -340,12 +339,11 @@
                         password:
                             {
                                 required: "Please fill your password",
-                                minlength: "Password must be at least 5 characters long",
+                                minlength: "Password must be at least 6 characters long",
                             },
                         password_confirmation:
                             {
                                 required: "Please fill your password",
-                                minlength: "Password must be at least 5 characters long",
                                 equalTo: "Please enter the same password as above"
                             },
                     }

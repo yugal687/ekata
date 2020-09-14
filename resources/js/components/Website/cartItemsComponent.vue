@@ -19,7 +19,7 @@
                                 v-for="product in $store.state.storedLocalStorageProduct">
                                 <div class="row pb-2 align-items-center">
                                     <div class="col-4" style="overflow: hidden">
-                                        <img :src="product.image"
+                                        <img :src="product.product_image"
                                              class="img-fluid" width="80px" height="100px"
                                              alt=""/>
                                     </div>
@@ -36,20 +36,10 @@
 
                                         <div class="row pr-4">
                                             <div class="col-xs-3 col-xs-offset-3">
-                                                <div class="input-group input-group-sm number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white" data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
+                                                <div class="form-group input-group-sm number-spinner">
                                                     <input type="text" class="form-control text-center"
-
+                                                           disabled
                                                            :value="product.quantity">
-                                                    <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white" data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
                                                 </div>
                                             </div>
                                         </div>

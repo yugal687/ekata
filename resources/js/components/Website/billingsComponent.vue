@@ -277,15 +277,6 @@
                                             <b>: {{$store.state.totalPrice}}</b>
                                         </div>
                                     </div>
-
-                                    <div class="row pt-3">
-                                        <div class="col-md-6">
-                                            <h6><strong>DISCOUNT</strong></h6>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <b>: $0.99</b>
-                                        </div>
-                                    </div>
                                     <hr/>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -309,7 +300,7 @@
                                                                         :src="product.image"
                                                                         src="/images/noodle.jpg">-->
                                                                 <img style="width: 100%; height: auto"
-                                                                     src="/images/noodle.jpg">
+                                                                     :src="product.product_image">
                                                             </div>
 
 
