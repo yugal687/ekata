@@ -2,6 +2,7 @@
 @extends('layouts.website.header')
 <!--Website Header Ends-->
 
+
 @section('style')
     <style>
         .testing-section {
@@ -208,13 +209,17 @@
 
 @section('content')
 
-    <billing-component :successmessage="{{$msg ?? 0}}">
+    <billing-component>
 
     </billing-component>
 @stop
 
 @section('scripts')
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    {{--
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    --}}
+
     <script>
 
         $(function () {
@@ -230,20 +235,20 @@
             });
 
             /*Credit Card and Pay[ppal*/
-            $(".paypal").hide();
+            $(".paypalCard").hide();
             $("#creditCard").click(function () {
                 $(".creditCard").show();
-                $(".paypal").hide();
-                $('#paypal').toggleClass('btn-secondary', 'btn-primary');
+                $(".paypalCard").hide();
+                $('#paypalCard').toggleClass('btn-secondary', 'btn-primary');
                 $('#creditCard').removeClass('btn-secondary');
                 $('#creditCard').addClass('btn-primary');
             });
-            $("#paypal").click(function () {
-                $(".paypal").show();
+            $("#paypalCard").click(function () {
+                $(".paypalCard").show();
                 $(".creditCard").hide();
                 $('#creditCard').toggleClass('btn-secondary', 'btn-primary');
-                $('#paypal').removeClass('btn-secondary');
-                $('#paypal').addClass('btn-primary');
+                $('#paypalCard').removeClass('btn-secondary');
+                $('#paypalCard').addClass('btn-primary');
             });
             $(".next").click(function () {
                 $(".tab-pane").hide();
@@ -267,44 +272,44 @@
             });
 
             // This function displays Smart Payment Buttons on your web page.
-            paypal.Button.render({
-                // Configure environment
-                env: 'sandbox',
-                client: {
-                    sandbox: 'demo_sandbox_client_id',
-                    production: 'demo_production_client_id'
-                },
-                // Customize button (optional)
-                locale: 'en_US',
-                style: {
-                    size: 'medium',
-                    color: 'gold',
-                    shape: 'pill',
-                },
+            /*  paypal.Button.render({
+                  // Configure environment
+                  env: 'sandbox',
+                  client: {
+                      sandbox: 'demo_sandbox_client_id',
+                      production: 'demo_production_client_id'
+                  },
+                  // Customize button (optional)
+                  locale: 'en_US',
+                  style: {
+                      size: 'medium',
+                      color: 'gold',
+                      shape: 'pill',
+                  },
 
-                // Enable Pay Now checkout flow (optional)
-                commit: true,
+                  // Enable Pay Now checkout flow (optional)
+                  commit: true,
 
-                // Set up a payment
-                payment: function (data, actions) {
-                    return actions.payment.create({
-                        transactions: [{
-                            amount: {
-                                total: '0.01',
-                                currency: 'AUD',
-                            }
-                        }]
-                    });
-                },
-                // Execute the payment
-                onAuthorize: function (data, actions) {
-                    return actions.payment.execute().then(function () {
-                        // Show a confirmation message to the buyer
-                        window.alert('Thank you for your purchase!');
-                    });
-                }
-            }, '#paypal-button');
-
+                  // Set up a payment
+                  payment: function (data, actions) {
+                      return actions.payment.create({
+                          transactions: [{
+                              amount: {
+                                  total: '0.01',
+                                  currency: 'AUD',
+                              }
+                          }]
+                      });
+                  },
+                  // Execute the payment
+                  onAuthorize: function (data, actions) {
+                      return actions.payment.execute().then(function () {
+                          // Show a confirmation message to the buyer
+                          window.alert('Thank you for your purchase!');
+                      });
+                  }
+              }, '#paypal-button');
+  */
         });
 
 

@@ -21,38 +21,17 @@ class PaymentController extends Controller
 
     public function paypalCheckOut(Request $request)
     {
-        //dd($request->orderItems[0]);
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             $data = [];
 
             //map items into corresponding paypal api
             $data['items'] = $this->maporderItems($request->orderItems);
+            $data['invoice_id'] = uniqid();
+            $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
 
-            $data['invoice_id'] = hexdec(uniqid());
-            $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
-            $data['return_url'] = route('payment.success');
-            $data['cancel_url'] = route('payment.cancel');
-            $data['total'] = $request->totalPrice;
-//            $provider = new ExpressCheckout();
-            //          $res = $provider->setExpressCheckout($data);
-
-//            return redirect($res['paypal_link']);
-            /*    return response()->json([
-                    'link' => $res['paypal_link']
-                ]);*/
-
-            //if paymentSucessfull
-            $order = new OrderService($data['items'],
-                $data['invoice_id'],
-                $request->billingAddress,
-                $request->shippingAddress,
-                $request->totalPrice);
-
-            //dd($order);
             //send maile here;///send mail  here
             //Mail section starts here after succesfully order is saved;
-            //
             //
             //
             //
@@ -64,6 +43,10 @@ class PaymentController extends Controller
             return response()->json([
                 'msg' => 'sucessfully saved Order ',
                 'invoice_id' => '#' . $data['invoice_id'],
+                'address' => $request->shippingAddress['address'] ?? $request->billingAddress['address'],
+                'suburb' => $request->shippingAddress['suburb'] ?? $request->billingAddress['suburb'],
+                'state' => $request->shippingAddress['state'] ?? $request->billingAddress['state'],
+                'postal_code' => $request->shippingAddress['postal_code'] ?? $request->billingAddress['postal_code'],
             ]);
         }
         return response()->json([
@@ -87,7 +70,7 @@ if ($order){
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             Stripe::setApiKey(env('STRIPE_SECRET'));
-//            create this in interface  later
+//            create this in interface
             try {
                 $token = Token::create([
                     "card" => [
@@ -125,12 +108,10 @@ if ($order){
             return response()->json([
                 'msg' => 'sucessfully saved Order ',
                 'invoice_id' => '#' . $data['invoice_id'],
-//un comment it after order is saved,
-//                'address' => $order->suburb,
-//                'suburb' => $order->suburb,
-//                'state' => $order->state,
-//                'postal_code' => $order->postal_code,
-//                'contact_number' => $order->contact_number,
+                'address' => $request->shippingAddress['address'] ?? $request->billingAddress['address'],
+                'suburb' => $request->shippingAddress['suburb'] ?? $request->billingAddress['suburb'],
+                'state' => $request->shippingAddress['state'] ?? $request->billingAddress['state'],
+                'postal_code' => $request->shippingAddress['postal_code'] ?? $request->billingAddress['postal_code'],
             ]);
         }
 
@@ -155,7 +136,6 @@ if ($order){
     public function maporderItems(array $orderItems)
     {
         return array_map(function ($orderItems) {
-            //dd($orderItems['price'] / $orderItems['quantity']);
             return [
                 'product_id' => $orderItems['product_id'],
                 'price' => $orderItems['price'] / $orderItems['quantity'],

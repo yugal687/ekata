@@ -160,7 +160,7 @@
                                     <div class="col-12 text-left">
                                         <button type="button" class="btn btn-primary" id="creditCard">Credit Card
                                         </button>
-                                        <button type="button" class="btn btn-secondary" id="paypal">Paypal</button>
+                                        <button type="button" class="btn btn-secondary" id="paypalCard">Paypal</button>
                                     </div>
                                 </div>
                                 <div class="creditCard" id="">
@@ -219,15 +219,11 @@
                                     </div>
                                 </div>
 
-                                <div class="paypal">
+                                <div class="paypalCard">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="mt-3" id="paypal-button">
+                                            <div class="col-md-8 mx-auto" ref="paypalButton">
                                             </div>
-
-                                            <button type="button" @click="paypalCheckOut()" class="btn btn-warning">
-                                                Check Out with Paypal
-                                            </button>
 
 
                                         </div>
@@ -245,14 +241,14 @@
                                     was successfully placed</h4>
                                 <div class="order-items text-left mt-3 ml-5" style="border-bottom: 1px solid #2b2b2b40">
                                     <b>Order ID is <span class="text-main-primary">
-#34343
+                                        {{successMessage.order_number}}
                                     </span></b> <br/>
                                     <b>Shipping Address</b><br/>
-                                    <p>Address------- <br/>
-                                        Suburb Name -----<br/>
-                                        State ------<br/>
-                                        Postal Code ------<br/>
-                                        Contact Number ------</p>
+                                    <p>Address-------{{successMessage.address}} <br/>
+                                        Suburb Name ----- {{successMessage.suburb_name}}<br/>
+                                        State ------ {{successMessage.state}}<br/>
+                                        Postal Code ------ {{successMessage.postal_code}}<br/>
+                                    </p>
                                 </div>
 
                             </div>
@@ -359,7 +355,13 @@
                     expiry_year: '',
                     expiry_month: '',
                     card_number: '',
-                }
+                },
+                successMessage: {
+                    order_number: '',
+                    address: '',
+                    suburb_name: '',
+                    postal_code: '',
+                },
 
             }
         },
@@ -368,12 +370,34 @@
             this.$store.dispatch('totalPrice');
             this.userDetails();
 
-            if (this.successmessage == 'success') {
-                alert();
-            }
-
+            const script = document.createElement("script");
+            script.src =
+                "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3";
+            script.addEventListener("load", this.setLoaded);
+            document.body.appendChild(script);
         },
+
         methods: {
+            setLoaded() {
+                let totalPrice = this.$store.state.totalPrice;
+                window.paypal.Buttons({
+                    createOrder: (data, actions) => {
+                        // This function sets up the details of the transaction, including the amount and line item details.
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: totalPrice,
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: async (data, actions) => {
+                        const order = actions.order.capture();
+                        this.paypalCheckOut();
+                    }
+                }).render(this.$refs.paypalButton);
+            },
+
             paypalCheckOut() {
                 axios.post('api/paypalCheckOut', {
                     'orderItems': JSON.parse(localStorage.getItem('cart')),
@@ -381,13 +405,8 @@
                     'shippingAddress': this.shippingAddress,
                     'billingAddress': this.billingAddress,
                 }).then(resp => {
-
-                    /*    window.location.href = resp.data.link;
-                    */
-                }).then(resp => {
-                    //  console.log(resp.data);
+                    this.$store.dispatch('removeCartItems');
                 });
-
             },
             userDetails() {
                 axios.post('api/userBillingDetails').then(resp => {
@@ -405,8 +424,7 @@
                 });
             },
 
-
-            saveOrderItems() {
+            submitOrderItems() {
                 return false;
             },
 
@@ -418,14 +436,22 @@
             payUsingStripe() {
                 axios.post('api/stripeCheckOut', {
                     'orderItems': JSON.parse(localStorage.getItem('cart')),
-                    card: this.stripeCard,
+                    'card': this.stripeCard,
                     'totalPrice': this.$store.state.totalPrice,
                     'shippingAddress': this.shippingAddress,
                     'billingAddress': this.billingAddress,
                 }).then(resp => {
                     if (resp.data.msg) {
                         this.$store.dispatch('removeCartItems');
-                        this.order_number = resp.data.invoice_id;
+                        this.successMessage.order_number = resp.data.invoice_id;
+                        this.successMessage.address = resp.data.address;
+                        this.successMessage.suburb_name = resp.data.suburb;
+                        this.successMessage.postal_code = resp.data.postal_code;
+
+                        $(".tab-pane").hide();
+                        $("#step3").fadeIn(1000);
+                        $('.progressbar-dots').removeClass('active');
+                        $('.progressbar-dots:nth-child(3)').addClass('active');
                     }
 
                 }).catch(err => {
@@ -433,7 +459,8 @@
 
                 });
 
-            },
+            }
+            ,
         },
 
         computed: {

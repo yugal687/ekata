@@ -4,15 +4,16 @@ namespace App\Service;
 
 use App\Model;
 use App\Model\Order;
+use App\Model\OrderDetail;
 use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
-    public $orderItems = [];
+    private $orderItems = [];
     private $shippingAddress;
     private $billingAddress;
-    public $invoiceId;
-    public $totalPrice;
+    private $invoiceId;
+    private $totalPrice;
 
     public function __construct(array $orderItems,
                                 $invoiceId,
@@ -33,13 +34,11 @@ class OrderService
         DB::beginTransaction();
         try {
             if (isset($this->shippingAddress['email'])) {
-                //dd($this->shippingAddress['postal_code']);
                 $order = Order::create([
                     'order_number' => $this->invoiceId,
                     'shipping_address' => $this->shippingAddress['address'],
                     'sub_urb' => $this->shippingAddress['suburb'],
                     'state' => $this->shippingAddress['state'],
-                    'order_status' =>'pending',
                     'postal_code' => $this->shippingAddress['postal_code'],
                     'total_price' => $this->totalPrice,
                 ]);
@@ -49,22 +48,18 @@ class OrderService
                     'shipping_address' => $this->billingAddress['address'],
                     'sub_urb' => $this->billingAddress['suburb'],
                     'state' => $this->billingAddress['state'],
-                    'order_status' =>'pending',
                     'postal_code' => $this->billingAddress['postal_code'],
                     'total_price' => $this->totalPrice,
                 ]);
             }
-            //dd($this->orderItems);
+            $result = $order;
             foreach ($this->orderItems as $orderItem) {
-                //dd($orderItem);
                 $order->items()->create($orderItem);
-                //dd($order);
+
             }
-            //dd($order);
 
             DB::commit();
-           // $order->save();
-            return $order;
+            return $result;
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e);

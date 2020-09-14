@@ -127,6 +127,7 @@
 
                 let storedCart = JSON.parse(localStorage.getItem('cart'));
                 this.$store.commit('addToCart', cart);
+                alert('sucesfully added to cart');
             },
             totalPrice() {
                 return this.checkedPrice = this.quantity * this.checkedPrice;
