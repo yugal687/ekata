@@ -64,14 +64,16 @@ let store = {
             state.cartCount = 0;
             state.totalPrice = 0;
         },
-        removeCartItems(productId) {
-            let storedCartItems = JSON.parse(localStorage.getItem('cart'));
+        removeCartItems(state, {productId}) {
+            let storedCartItems = state.storedLocalStorageProduct;
             storedCartItems.forEach((val, key) => {
                 if (val.product_id == productId) {
-                    storedCart.splice(key, 1);
+                    alert(val.product_id);
+                    storedCartItems.splice(key, 1);
                 }
             });
-
+            localStorage.setItem('cart', JSON.stringify(storedCartItems));
+            this.dispatch('totalPrice');
         }
     },
 
@@ -90,8 +92,8 @@ let store = {
         removeCartItems({commit}) {
             return commit('removeLocalStorageAndStateCartItems');
         },
-        removeSelectedCartItem({commit}, productId) {
-            alert(productId);
+        removeSelectedCartItem({commit}, {productId}) {
+            return commit('removeCartItems', {productId});
 
         }
 
