@@ -109,7 +109,7 @@
             this.$store.getters.cartItemCount;
         },
     }
-</script>
+</script>K
 
 <style scoped>
     .dropcontent {
