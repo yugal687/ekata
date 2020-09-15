@@ -82,14 +82,18 @@
                 });
             },
             handleDelete(id){
-                axios.delete('/api/deleteEnquiry/'+id).then(response=>{
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'info'
-                    });
-                    this.fetchEnquiry();
-                });
+                this.$confirm('Are you sure to delete this item?')
+                    .then(_ => {
+                        axios.delete('/api/deleteEnquiry/' + id).then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'info'
+                            });
+                            this.fetchEnquiry();
+                        });
+                    })
+                .catch(_ => {});
             }
         }
     }

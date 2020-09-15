@@ -121,7 +121,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <a href="/register" type="submit" class="btn btn-block bg-main-primary text-white">
-                        Register User
+                        Register
                     </a>
                 </div>
 

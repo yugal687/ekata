@@ -13,6 +13,7 @@ $(document).ready(function () {
         loop: true,
         autoplay: true,
         autoplayButtonOutput: false,
+        preventScrollOnTouch: 'force',
         controlsContainer: "#customize-controls",
     });
     /*Vertical Sidebar Carousel Ends*/

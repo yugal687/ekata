@@ -59,7 +59,7 @@
 
                                         <div id="clearence_carousel"
                                              class="owl-carousel owl-carousel owl-theme px-3  py-2">
-                                                @foreach ($discountedProducts as $discountedProduct)
+                                            @foreach ($discountedProducts as $discountedProduct)
 
                                                 <div
                                                     class="item text-center rounded-top-front rounded-bottom-front">
@@ -94,7 +94,7 @@
 
                                                     </div>
                                                 </div>
-                                                @endforeach
+                                            @endforeach
 
                                         </div>
 
@@ -128,65 +128,67 @@
                 @foreach($latestProduct as $lastproduct)
 
                     <div class="item">
-                            <div class="container">
-                                <div class="row m-0 p-0 my-4">
+                        <div class="container">
+                            <div class="row m-0 p-0 my-4">
 
-                                    <div class="col-md-6 px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                        <img src="{{$lastproduct->image[0]->name}}" class="img-fluid py-3 px-5"
-                                             alt="">
-                                    </div>
-                                    <div class="col-md-6 mt-md-0 mt-3">
-                                        <div class="container h-100 d-flex justify-content-center align-items-center">
-                                            <dl class="row">
-                                                <dt class="col-sm-5">
-                                                    <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
-                                                </dt>
-                                                <dd class="col-sm-7">
-                                                    <a href="{{ route('singleproduct',$lastproduct->id)}}">
+                                <div
+                                    class="col-md-6 px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
+                                    <img src="{{$lastproduct->image[0]->name}}" class="img-fluid py-3 px-5"
+                                         alt="">
+                                </div>
+                                <div class="col-md-6 mt-md-0 mt-3">
+                                    <div class="container h-100 d-flex justify-content-center align-items-center">
+                                        <dl class="row">
+                                            <dt class="col-sm-5">
+                                                <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                <a href="{{ route('singleproduct',$lastproduct->id)}}">
                                                     <!-- product name here -->
                                                     <h5 class="font-weight-normal">{{$lastproduct->product_name}}</h5>
-                                                    </a>
-                                                </dd>
+                                                </a>
+                                            </dd>
 
-                                                <dt class="col-sm-5 font-weight-bold ">
-                                                    <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                                </dt>
-                                                <dd class="col-sm-7">
-                                                    <!-- product category here -->
-                                                    <h5 class="font-weight-normal">{{$lastproduct->category->category_name}}</h5>
-                                                </dd>
+                                            <dt class="col-sm-5 font-weight-bold ">
+                                                <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                <!-- product category here -->
+                                                <h5 class="font-weight-normal">{{$lastproduct->category->category_name}}</h5>
+                                            </dd>
 
-                                                <dt class="col-sm-5 font-weight-bold ">
-                                                    <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                                </dt>
-                                                <dd class="col-sm-7" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                                                    <!-- product description here -->
-                                                    <h5 class="font-weight-normal ">{{$lastproduct->additional_information}}</h5>
-                                                </dd>
+                                            <dt class="col-sm-5 font-weight-bold ">
+                                                <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
+                                            </dt>
+                                            <dd class="col-sm-7"
+                                                style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                                                <!-- product description here -->
+                                                <h5 class="font-weight-normal ">{{$lastproduct->additional_information}}</h5>
+                                            </dd>
 
 
-                                                <dt class="col-sm-5 font-weight-bold">
-                                                    <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                                </dt>
-                                                <dd class="col-sm-7">
-                                                    <!-- product price here -->
-                                                    <h5 class="font-weight-bold text-main-secondary">
-                                                        ${{$lastproduct->price}}</h5>
-                                                </dd>
+                                            <dt class="col-sm-5 font-weight-bold">
+                                                <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                <!-- product price here -->
+                                                <h5 class="font-weight-bold text-main-secondary">
+                                                    ${{$lastproduct->price}}</h5>
+                                            </dd>
 
-                                                <div class="col-sm-12">
-                                                    <button type="button"
-                                                            class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
-                                                        Add to Cart
-                                                    </button>
-                                                </div>
-                                            </dl>
+                                            <div class="col-sm-12">
+                                                <a href="{{ route('singleproduct',$lastproduct->id) }}" type="button"
+                                                        class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
+                                                    Add to Cart
+                                                </a>
+                                            </div>
+                                        </dl>
 
-                                        </div>
                                     </div>
                                 </div>
-
                             </div>
+
+                        </div>
                     </div>
                 @endforeach
 
@@ -324,7 +326,7 @@
                                     <meta name="csrf-token" content="{{ csrf_token() }}"/>
                                     <div class="col-12 mt-3">
                                         <textarea class="form-control" rows="7" id="review"
-                                                  placeholder="Your Feedback"></textarea>
+                                                  placeholder="Your Feedback" required></textarea>
                                     </div>
                                     <div class="col-12 text-center">
                                         <div class="reviews-rating">
@@ -369,71 +371,21 @@
                     <div class="signup bg-main-secondary rounded-top-front rounded-bottom-front py-4">
                         <div class="circle-3"></div>
                         <div class="circle-4"></div>
-                        <h3 class="font-weight-bold text-center bg-main-secondary mb-3 pb-3 text-white"
-                            style="font-family: 'Times New Roman'">SIGNUP</h3>
-                        <div class="container">
-                            <div class="row m-0 p-0">
-                                <div class="col-md-6 pr-0">
-                                    <input type="text" name="firstName"
-                                           class="form-control rounded-top-front rounded-bottom-front"
-                                           placeholder="First Name">
+                        <h3 class="text-white font-weight-bold text-center">ENQUIRY FORM</h3>
+                        <div class="container px-5">
+                            <form action="{{url("saveEnquiry")}}" method="post">
+                                {{csrf_field()}}
+                                <input class="form-control mt-4" type="text" name="firstname" placeholder="Name" required>
+                                <input class="form-control mt-3" type="email" name="email" placeholder="E-mail" required>
+                                <input class="form-control mt-3" type="number" name="phone" placeholder="Phone No." required>
+                                <textarea class="form-control mt-3" rows="5" name="description"
+                                          placeholder="Description" required></textarea>
+                                <div class="row mt-4">
+                                    <div class="col-12 text-center">
+                                        <button class="btn border-white text-white" type="submit">SEND</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="lastName"
-                                           class="form-control rounded-top-front rounded-bottom-front"
-                                           placeholder="Last Name">
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <input type="email" name="emailAddress"
-                                           class="form-control rounded-top-front rounded-bottom-front"
-                                           placeholder="E-mail address">
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <input type="password" name="password1"
-                                           class="form-control rounded-top-front rounded-bottom-front"
-                                           placeholder="New password">
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <input type="password" name="password2"
-                                           class="form-control rounded-top-front rounded-bottom-front"
-                                           placeholder="Re-enter password">
-                                </div>
-                                <div class="col-md-6 mt-2">
-                                    <label for="" class="text-white">Date of birth</label>
-                                    <input type="date" name="dob"
-                                           class="form-control rounded-top-front rounded-bottom-front" placeholder="">
-                                </div>
-                                <div class="col-md-6 mt-2">
-                                    <label class="text-white">Gender</label>
-                                    <select name="" id="" class="form-control rounded-top-front rounded-bottom-front">
-                                        <option value="" selected disabled>--Select Gender--</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Other</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mt-3 d-flex ">
-                                    <input type="checkbox" class=" mt-1 mr-1">
-                                    <p class="text-small privacy-info">
-                                        <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-                                            architecto <u><a href="#">Privacy</a></u> odio nihil officia nisi veritatis.</small>
-                                    </p>
-                                </div>
-                                <div class="col-md-4 mt-2 d-flex justify-content-center">
-                                    <button type="button"
-                                            class="btn btn-sm bg-main-secondary border rounded text-white px-4">Sign up
-                                    </button>
-                                </div>
-                                <div class="col-md-2 mt-3">
-                                    <h6 class="text-center font-weight-bold ">OR</h6>
-                                </div>
-                                <div class="col-md-6 mt-2 text-center">
-                                    <h6><a href="#" class="text-white" style="text-decoration: underline">Signup with
-                                            google</a></h6>
-                                    <h6><a href="#" class="text-white" style="text-decoration: underline">Signup with
-                                            facebook</a></h6>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -92,10 +92,10 @@
                             <h3 class="text-white font-weight-bold text-center">ENQUIRY FORM</h3>
                             <form action="{{url("saveEnquiry")}}" method="post">
                                 {{csrf_field()}}
-                            <input class="form-control mt-4" type="text" name="firstname" placeholder="Name">
-                            <input class="form-control mt-3" type="email" name="email" placeholder="E-mail">
-                            <input class="form-control mt-3" type="phone" name="phone" placeholder="Phone No.">
-                            <textarea class="form-control mt-3" rows="5" name="description" placeholder="Description"></textarea>
+                            <input class="form-control mt-4" type="text" name="firstname" placeholder="Name" required>
+                            <input class="form-control mt-3" type="email" name="email" placeholder="E-mail" required>
+                            <input class="form-control mt-3" type="number" name="phone" placeholder="Phone No." required>
+                            <textarea class="form-control mt-3" rows="5" name="description" placeholder="Description" required></textarea>
                             <button class="btn border-white text-white mt-4" type="submit">SEND</button>
                             </form>
                         </div>
