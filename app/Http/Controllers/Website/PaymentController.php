@@ -91,6 +91,7 @@ class PaymentController extends Controller
             return response()->json([
                 'msg' => 'sucessfully saved Order ',
                 'invoice_id' => '#' . $data['invoice_id'],
+                'name'=>$request->shippingAddress['first_name'] ?? $request->billingAddress['first_name'],
                 'address' => $request->shippingAddress['address'] ?? $request->billingAddress['address'],
                 'suburb' => $request->shippingAddress['suburb'] ?? $request->billingAddress['suburb'],
                 'state' => $request->shippingAddress['state'] ?? $request->billingAddress['state'],

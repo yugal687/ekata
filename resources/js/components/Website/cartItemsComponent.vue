@@ -45,7 +45,7 @@
                                         </div>
                                     </div>
                                     <div class="col-2">
-                                        <button @click="remove()"
+                                        <button @click="removeProduct(product.product_id)"
                                                 class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -87,8 +87,8 @@
             countCartItem() {
                 this.getLocalStorageItem().length;
             },
-            removeProduct(produtId) {
-                this.$store.dispatch('removeSelectedCartItem', prodcutId);
+            removeProduct(productId) {
+                this.$store.dispatch('removeSelectedCartItem', {productId: productId});
             },
 
         },
