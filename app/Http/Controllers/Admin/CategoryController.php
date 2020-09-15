@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\CategoryBanner;
+use App\Model\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

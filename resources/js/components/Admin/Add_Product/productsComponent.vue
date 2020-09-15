@@ -26,10 +26,12 @@
                     </el-table-column>
                     <el-table-column
                         label="Sub Category"
+                        v-if="category"
                         prop="category.category_name">
                     </el-table-column>
                     <el-table-column
                         label="Brand"
+                        v-if="brand"
                         prop="brand.brand_name">
                     </el-table-column>
                     <el-table-column
