@@ -3,9 +3,9 @@
         @foreach($getCategory as $category)
         <div>
             <figure class="mx-auto">
-                <img src="{{ $category->image }}" class="img-fluid" alt="">
+                <img src="{{ $category->images[0]->name }}" class="img-fluid" alt="">
             </figure>
-            <p class="text-center">
+            <p class="text-center" style="margin-bottom: 0">
                 <a href="{{ route('maincategory',$category->id)}}" class="text-dark">{{$category->category_name}}</a>
             </p>
         </div>
