@@ -68,10 +68,10 @@ let store = {
             let storedCartItems = state.storedLocalStorageProduct;
             storedCartItems.forEach((val, key) => {
                 if (val.product_id == productId) {
-                    alert(val.product_id);
                     storedCartItems.splice(key, 1);
                 }
             });
+            state.cartCount--;
             localStorage.setItem('cart', JSON.stringify(storedCartItems));
             this.dispatch('totalPrice');
         }

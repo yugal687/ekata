@@ -413,7 +413,19 @@
                     'shippingAddress': this.shippingAddress,
                     'billingAddress': this.billingAddress,
                 }).then(resp => {
-                    this.$store.dispatch('removeCartItems');
+                    if (resp.data.msg) {
+                        this.$store.dispatch('removeCartItems');
+                        this.successMessage.order_number = resp.data.invoice_id;
+                        this.successMessage.address = resp.data.address;
+                        this.successMessage.state = resp.data.state;
+                        this.successMessage.suburb_name = resp.data.suburb;
+                        this.successMessage.postal_code = resp.data.postal_code;
+
+                        $(".tab-pane").hide();
+                        $("#step3").fadeIn(1000);
+                        $('.progressbar-dots').removeClass('active');
+                        $('.progressbar-dots:nth-child(3)').addClass('active');
+                    }
                 });
             },
             userDetails() {
