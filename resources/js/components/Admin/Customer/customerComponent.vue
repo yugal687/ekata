@@ -82,26 +82,30 @@ export default {
             });
         },
         handleDelete(id) {
-            axios.delete('/api/deleteUser/' + id)
-                .then(response=>{
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'info'
-                    });
-                    this.fetchUser();
+            this.$confirm('Are you sure to delete this customer?')
+                .then(_ => {
+                    axios.delete('/api/deleteUser/' + id)
+                        .then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'info'
+                            });
+                            this.fetchUser();
 
-                    /*alert(response.data.message);*/
-                }).catch(error => {
-                if (error.response) {
-                    this.$notify({
-                        title: 'Error',
-                        message: 'Error Input Data ',
-                        type: 'error'
+                            /*alert(response.data.message);*/
+                        }).catch(error => {
+                        if (error.response) {
+                            this.$notify({
+                                title: 'Error',
+                                message: 'Error Input Data ',
+                                type: 'error'
+                            });
+                            /*this.errors = error.response.data.errors;*/
+                        }
                     });
-                    /*this.errors = error.response.data.errors;*/
-                }
-            });
+                })
+            .catch(_ => {});
         }
     },
 }

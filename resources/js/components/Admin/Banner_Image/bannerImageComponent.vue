@@ -48,17 +48,17 @@
                                 </div>
                                 <div style="position: absolute; padding: 10px; bottom: -3px; right: 5px;">
                                     <el-button-group>
-                                        <el-button type="success"
+                                        <el-button type="warning"
                                                    v-if="images.active == 0"
                                                    @click="setActive(images.id)"
                                                    size="mini">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                         </el-button>
-                                        <el-button type="warning"
+                                        <el-button type="success"
                                                    v-else-if="images.active == 1"
                                                    @click="setInActive(images.id)"
                                                    size="mini">
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-check"></i>
                                         </el-button>
                                         <el-button type="danger"
                                                    size="mini"
@@ -177,7 +177,7 @@
                     this.$notify({
                         title: 'Success',
                         message: response.data.message,
-                        type: 'success'
+                        type: 'warning'
                     });
                         this.fetchImage();
 
@@ -193,16 +193,20 @@
                 });
             },
             deleteImage(id) {
-                axios.delete('/api/deleteBanner/' + id)
-                    .then(response => {
-                        this.$notify({
-                            title: 'Success',
-                            message: response.data.message,
-                            type: 'info'
-                        });
-                        this.fetchImage();
+                this.$confirm('Are you sure to delete this item?')
+                .then(_ => {
+                    axios.delete('/api/deleteBanner/' + id)
+                        .then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'info'
+                            });
+                            this.fetchImage();
 
-                    });
+                        });
+                })
+                .catch(_ => {})
             },
         }
     }

@@ -150,7 +150,7 @@
         data() {
             return {
                 labelPosition: 'top',
-                monthYear: '',
+                date: '',
                 dialogFormVisible: false,
                 serviceForm: {
                     title: '',
@@ -161,10 +161,10 @@
                 serviceFormEdit:{},
                 serviceFormRules: {
                     title: [
-                        {required: true, message: 'Please input title', trigger: 'change'},
+                        {required: true, message: 'Please input title', trigger: 'blur'},
                     ],
                     date: [
-                        {required: true, message: 'Please select date', trigger: 'change'},
+                        {required: true, message: 'Please select date', trigger: 'blur'},
                     ]
                 },
                 /*Table Data's*/
@@ -175,16 +175,13 @@
         methods: {
             singleService(id){
                 this.serviceEdit = this.tableData.filter(tableData => tableData.id == id);
-
-
-
             },
             saveService(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let formData = new FormData();
                         formData.append('title',this.serviceForm.title);
-                        formData.append('date',this.serviceForm.date);
+                        formData.append('date',this.serviceForm.date.toDateString());
                         formData.append('details',this.serviceForm.details);
                         axios.post('/api/saveService',formData, {
                             headers: {
@@ -232,16 +229,20 @@
                 });
             },
             deleteService(id) {
-                axios.delete('/api/deleteService/' + id)
-                    .then(response => {
-                        this.$notify({
-                            title: 'Success',
-                            message: response.data.message,
-                            type: 'info'
-                        });
-                        this.fetchService();
+                this.$confirm('Are you sure to delete this customer?')
+                    .then(_ => {
+                        axios.delete('/api/deleteService/' + id)
+                            .then(response => {
+                                this.$notify({
+                                    title: 'Success',
+                                    message: response.data.message,
+                                    type: 'info'
+                                });
+                                this.fetchService();
 
-                    });
+                            });
+                    })
+                .catch(_ => {});
             },
             fetchService(){
                 axios.get('/api/getService', {})

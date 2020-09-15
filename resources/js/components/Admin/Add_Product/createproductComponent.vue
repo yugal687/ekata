@@ -157,13 +157,13 @@
                 },
                 productRules: {
                     categorySelect: [
-                        {required: true, message: 'Please select category', trigger: 'change'}
+                        {required: true, message: 'Please select category', trigger: 'blur'}
                     ],
                     subcategorySelect: [
-                        {required: true, message: 'Please select subcategory', trigger: 'change'}
+                        {required: true, message: 'Please select subcategory', trigger: 'blur'}
                     ],
                     brandSelect: [
-                        {required: true, message: 'Please select brand', trigger: 'change'}
+                        {required: true, message: 'Please select brand', trigger: 'blur'}
                     ],
                     productName: [
                         {required: true, message: 'Please input product name', trigger: 'blur'}

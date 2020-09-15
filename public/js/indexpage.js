@@ -195,7 +195,14 @@ $(document).ready(function () {
             /* remind that 'data' is the response of the AjaxController */
             success: function (data) {
                 $(".writeinfo").append(data.msg);
+                alert('Feedback Sent Successfully');
             }
+
+            /*this.$notify({
+                title: 'Success',
+                message: 'This item is successfully added to cart',
+                type: 'success'
+            });*/
         });
     });
     /*Save Feedback Ends*/
