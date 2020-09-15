@@ -146,15 +146,18 @@
             }
         },
         mounted() {
-            axios.get('/api/getOrderDetail', {}).then(response => {
-                this.orderDetailsTableData = response.data.order
-            });
+           this.fetchOrder();
         },
         methods: {
             showDetails(id) {
                 this.dialogTableVisible = true;
                 this.gridData = this.orderDetailsTableData.filter(orderDetailsTableData => (orderDetailsTableData.id == id));
                 console.log(this.gridData);
+            },
+            fetchOrder(){
+                axios.get('/api/getOrderDetail', {}).then(response => {
+                    this.orderDetailsTableData = response.data.order
+                });
             },
             orderDelivered(id) {
                 axios.patch('/api/setDelivered/'+id, {})
@@ -164,7 +167,7 @@
                             message: response.data.message,
                             type: 'success'
                         });
-                        this.productForm = {};
+                        this.fetchOrder();
                     }).catch(error => {
                     if (error.response) {
                         this.$notify({
@@ -184,7 +187,7 @@
                             message: response.data.message,
                             type: 'info'
                         });
-                        this.productForm = {};
+                        this.fetchOrder();
                     }).catch(error => {
                     if (error.response) {
                         this.$notify({

@@ -39,6 +39,28 @@
                 </div>
                 <main class="px-1 px-sm-3 px-md-4 px-lg-5 py-0">
                     <div class="row">
+                        @if(count($products)>0)
+                            @foreach($products as $product)
+
+                                <div
+                                    class="col-md-3 col-sm-6 mt-5 align-items-center text-center">
+                                    <a href="{{route('singleproduct',$product->id)}}">
+                                        <div
+                                            class="img-div bg-product-medium py-4 px-4 rounded-top-front rounded-bottom-front mx-auto">
+                                            <img src="{{ $product->image[0]->name }}" class="img-fluid" alt="">
+                                        </div>
+                                        <h5 class="best_price pt-3 font-weight-bold text-main-danger">
+                                            ${{$product->price}}</h5>
+                                        <h5 class="best_name py-0 text-dark">{{ $product->product_name}}</h5>
+                                        <h5 class="best_weight py-0 text-dark">{{$product->brand->brand_name}}</h5>
+                                        <button type="button"
+                                                class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
+                                            Add to Cart
+                                        </button>
+                                    </a>
+                                </div>
+                            @endforeach
+                           @else
                         @foreach($getproduct as $product)
 
                             <div
@@ -59,6 +81,7 @@
                                 </a>
                             </div>
                         @endforeach
+                        @endif
 
                     </div>
                     <div class="row mt-5">

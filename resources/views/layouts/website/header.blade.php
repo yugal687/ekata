@@ -250,18 +250,16 @@
                             <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
                                 <div class="mx-4">
                                     <div class="input-group border-0 py-2 ">
-                                        <input type="text" class="form-control border-0 " id="search" placeholder="Search items..."
-                                               aria-label="Search items..." aria-describedby="basic-addon2">
-                                        <div class="input-group-append bg-main-secondary ">
-                                            <ul>
-                                                        <li></li>
+                                        <form action="{{url('searchedproducts')}}" method="post">
+                                             @csrf
+                                            <input type="text" class="form-control border-0 " name="search" placeholder="Search items..."
+                                                   aria-label="Search items..." aria-describedby="basic-addon2">
+                                            <div class="input-group-append bg-main-secondary ">
+                                                <input type="submit" value="Search">
+                                            </div>
+                                        </form>
 
-                                            </ul>
-                                            <span
-                                                class="input-group-text bg-main-primary border-0 text-white .rounded-around"
-                                                id="basic-addon2">
-                                                Search</span>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

@@ -11,8 +11,9 @@ class FeedbackController extends Controller
 {
     public function saveFeedback(Request $request)
     {
+       // dd($request);
         $saveFeedback = Feedback::create([
-            'user_id' => Auth::user(),
+            'user_id' => Auth::user()->id,
             'star' => $request->rating,
             'feedback' => $request->feedback
         ]);

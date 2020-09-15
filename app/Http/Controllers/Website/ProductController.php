@@ -27,11 +27,6 @@ class ProductController extends Controller
         $getcategory = Category::where('parent_id','=',NULL)->with('product','images')->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
 
-        if($request->ajax()){
-            $products=Product::where('product_name','LIKE','%'.$request->search."%")->get();
-
-            return Response()->json($products);
-        }
         return view('website.index',
             [
                 'getProduct' => $getProduct,
@@ -89,12 +84,15 @@ class ProductController extends Controller
 
             ]);
     }
-    public function showProducts(){
+    public function showProducts(Request $request){
+        $products=Product::where('product_name','LIKE','%'.$request->search."%")->
+        with(array('category', 'brand', 'tags', 'image'))->get();
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $getWebsiteDetail = WebsiteDetail::all();
         $getproduct = Product::inRandomOrder()->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
         return view('website.products',
             [
+                'products' => $products,
                 'getproduct' => $getproduct,
                 'getCategory' => $getcategory,
                 'websiteDetail' =>$getWebsiteDetail
