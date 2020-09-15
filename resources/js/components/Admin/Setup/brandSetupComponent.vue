@@ -205,25 +205,29 @@ export default {
             });
         },
         deleteBrand(id) {
-            axios.delete('/api/deleteBrand/' + id)
-                .then(response => {
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'info'
-                    });
-                    this.getRequest();
+            this.$confirm('Are you sure to delete this item?')
+                .then(_ => {
+                    axios.delete('/api/deleteBrand/' + id)
+                        .then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'info'
+                            });
+                            this.getRequest();
 
-                }).catch(error => {
-                if (error.response) {
-                    this.$notify({
-                        title: 'Error',
-                        message: 'Error Input Data ',
-                        type: 'error'
+                        }).catch(error => {
+                        if (error.response) {
+                            this.$notify({
+                                title: 'Error',
+                                message: 'Error Input Data ',
+                                type: 'error'
+                            });
+                            /*this.errors = error.response.data.errors;*/
+                        }
                     });
-                    /*this.errors = error.response.data.errors;*/
-                }
-            });
+                })
+            .catch(_ => {});
         },
         submitBrand(brandForm) {
             let formdata = new FormData();

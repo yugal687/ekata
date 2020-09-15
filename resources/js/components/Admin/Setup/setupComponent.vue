@@ -335,6 +335,10 @@
         name: "setupComponent",
         data() {
             return {
+                /*Confitmation Dialog*/
+                confirmDeleteCategory: false,
+                /*-------------*/
+
                 fileListHeader: [],
                 fileListThumbnail: [],
                 edit: false,
@@ -364,7 +368,7 @@
                 },
                 subcategoryRules: {
                     categorySelect: [
-                        {required: true, message: 'Please select category', trigger: 'change'},
+                        {required: true, message: 'Please select category', trigger: 'blur'},
                     ],
                     name: [
                         {required: true, message: 'Please input sub-category name', trigger: 'blur'},
@@ -426,15 +430,19 @@
                 });
             },
             deleteCategory(id) {
-                axios.delete('/api/deleteCategory/' + id)
-                    .then(response => {
-                        this.$notify({
-                            title: 'Success',
-                            message: response.data.message,
-                            type: 'info'
-                        });
-                        this.fetchCategory();
-                    });
+                this.$confirm('Are you sure to delete this item?')
+                    .then(_ => {
+                        axios.delete('/api/deleteCategory/' + id)
+                            .then(response => {
+                                this.$notify({
+                                    title: 'Success',
+                                    message: response.data.message,
+                                    type: 'info'
+                                });
+                                this.fetchCategory();
+                            });
+                    })
+                    .catch(_ => {});
             },
             submitSubCategory(subcategoryForm) {
                 this.$refs[subcategoryForm].validate((valid) => {

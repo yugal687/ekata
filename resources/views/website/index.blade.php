@@ -322,8 +322,11 @@
                                         <h5 class="">Give us your reviews</h5>
                                     </div>
                                     <meta name="csrf-token" content="{{ csrf_token() }}"/>
+                                    <div class="col-12 mt-3">
+                                        <textarea class="form-control" rows="7" id="review"
+                                                  placeholder="Your Feedback"></textarea>
+                                    </div>
                                     <div class="col-12 text-center">
-
                                         <div class="reviews-rating">
                                             <a href="#5" title="Give 5 stars" data-value="5">★</a>
                                             <a href="#4" title="Give 4 stars" data-value="4">★</a>
@@ -331,10 +334,6 @@
                                             <a href="#2" title="Give 2 stars" data-value="2">★</a>
                                             <a href="#1" title="Give 1 star" data-value="1">★</a>
                                         </div>
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <textarea class="form-control" rows="7" id="review"
-                                                  placeholder="Your Feedback"></textarea>
                                     </div>
                                     <div class="col-12 text-center">
                                         <input class="btn border-white text-white mt-3 px-4" type="submit"

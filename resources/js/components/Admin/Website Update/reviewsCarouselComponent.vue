@@ -47,17 +47,17 @@
                                 </div>
                                 <div style="position: absolute; padding: 10px; bottom: -3px; right: 5px;">
                                     <el-button-group>
-                                        <el-button type="success"
+                                        <el-button type="warning"
                                                    v-if="images.active == 0"
                                                    @click="setActive(images.id)"
                                                    size="mini">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                         </el-button>
-                                        <el-button type="warning"
+                                        <el-button type="success"
                                                    v-if="images.active == 1"
                                                    @click="setInActive(images.id)"
                                                    size="mini">
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-check"></i>
                                         </el-button>
                                         <el-button type="danger"
                                                    size="mini"
@@ -180,25 +180,29 @@
                 });
             },
             deleteImage(id) {
-                axios.delete('/api/deleteReview/'+id)
-                    .then(response=>{
-                        this.$notify({
-                            title: 'Success',
-                            message: response.data.message,
-                            type: 'info'
-                        });
-                        this.fetchReview();
+                this.$confirm('Are you sure to delete this item?')
+                    .then(_ => {
+                        axios.delete('/api/deleteReview/' + id)
+                            .then(response => {
+                                this.$notify({
+                                    title: 'Success',
+                                    message: response.data.message,
+                                    type: 'info'
+                                });
+                                this.fetchReview();
 
-                    }).catch(error => {
-                    if (error.response) {
-                        this.$notify({
-                            title: 'Error',
-                            message: 'Error Input Data ',
-                            type: 'error'
+                            }).catch(error => {
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
+                            }
                         });
-                        /*this.errors = error.response.data.errors;*/
-                    }
-                });
+                    })
+                .catch(_ => {});
             },
         }
     }

@@ -369,13 +369,13 @@
                 },
                 productRules: {
                     categorySelect: [
-                        {required: true, message: 'Please select category', trigger: 'change'}
+                        {required: true, message: 'Please select category', trigger: 'blur'}
                     ],
                     subcategorySelect: [
-                        {required: true, message: 'Please select subcategory', trigger: 'change'}
+                        {required: true, message: 'Please select subcategory', trigger: 'blur'}
                     ],
                     brandSelect: [
-                        {required: true, message: 'Please select brand', trigger: 'change'}
+                        {required: true, message: 'Please select brand', trigger: 'blur'}
                     ],
                     productName: [
                         {required: true, message: 'Please input product name', trigger: 'blur'}
@@ -441,36 +441,30 @@
             },
 
             /*Client Details---*/
-            handleEdit(index, row) {
-                console.log(index, row);
-            },
             handleDelete(id) {
-                axios.delete('/api/deleteProduct/' + id)
-                    .then(response=>{
-                        this.$notify({
-                            title: 'Success',
-                            message: response.data.message,
-                            type: 'info'
-                        });
-                        this.fetchProduct();
-
-                        /*alert(response.data.message);*/
-                    }).catch(error => {
-                    if (error.response) {
-                        this.$notify({
-                            title: 'Error',
-                            message: 'Error Input Data ',
-                            type: 'error'
-                        });
-                        /*this.errors = error.response.data.errors;*/
-                    }
-                });
+                this.$confirm('Are you sure to delete this item?')
+                .then(_ => {
+                    axios.delete('/api/deleteProduct/' + id)
+                        .then(response=>{
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'info'
+                            });
+                            this.fetchProduct();
+                        }).catch(error => {
+                        if (error.response) {
+                            this.$notify({
+                                title: 'Error',
+                                message: 'Error Input Data ',
+                                type: 'error'
+                            });
+                        }
+                    });
+                })
+                .catch(_ => {});
             },
             /*Client Information Tab---*/
-            handleClick(tab, event) {
-                console.log(tab, event);
-            },
-
             /*Edit Datas*/
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
