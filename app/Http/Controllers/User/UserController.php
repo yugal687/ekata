@@ -149,7 +149,7 @@ class UserController extends Controller
     {
 //        $latestOrder = OrderDetail::with('order', 'user', 'product')->orderBy('id', 'DESC')->get();
         $latestOrder = OrderDetail::with('order', 'user', 'product')->where('user_id',Auth::user()->id)
-            ->orderBy('id', 'DESC')
+            ->orderBy('created_at', 'desc')
             ->get();
         return view('User.userdashboard', [
             'latestOrder' => $latestOrder

@@ -42,7 +42,12 @@ Route::get('/servicedetails/{id}',
     return view('website/products');
 });*/
 //Product Page Url
-Route::get('/products', 'Website\ProductController@showProducts');
+Route::post('/searchedproducts', [
+    "uses"=>'Website\ProductController@showProducts',
+    "as"=>'searchedproducts']);
+Route::get('/products', [
+    "uses"=>'Website\ProductController@showProducts',
+"as"=>'products']);
 //Sub Category Page Url
 Route::get('/category/{id}', [
     "uses" => 'Website\ProductController@showCategory',

@@ -17,6 +17,7 @@ class ProductController extends Controller
     {
         //dd($request);
         $validate = $request->validate([
+            'image' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
             'product_name' => 'required',

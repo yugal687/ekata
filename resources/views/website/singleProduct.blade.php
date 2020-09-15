@@ -125,9 +125,13 @@
                             <nav aria-label="breadcrumb" class="">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a
+                                    @if($product->category->parent>'0')
+                                    <li class="breadcrumb-item">
+
+                                        <a
                                             href="{{route('maincategory',$product->category->parent->id)}}">{{$product->category->parent->category_name}}</a>
                                     </li>
+                                    @endif
                                     <li class="breadcrumb-item"><a
                                             href="{{route('category',$product->category->id)}}">{{$product->category->category_name}}</a>
                                     </li>
@@ -156,7 +160,7 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <h4 class="text-center font-weight-bold">Recommended for you</h4>
+                                                    <h4 class="text-center font-weight-bold">Releted Products</h4>
                                                 </div>
 
                                                 <div class="col-md-9">

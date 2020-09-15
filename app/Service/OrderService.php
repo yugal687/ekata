@@ -39,6 +39,7 @@ class OrderService
                     'shipping_address' => $this->shippingAddress['address'],
                     'sub_urb' => $this->shippingAddress['suburb'],
                     'state' => $this->shippingAddress['state'],
+                    'order_status' =>'pending',
                     'postal_code' => $this->shippingAddress['postal_code'],
                     'total_price' => $this->totalPrice,
                 ]);
@@ -48,6 +49,7 @@ class OrderService
                     'shipping_address' => $this->billingAddress['address'],
                     'sub_urb' => $this->billingAddress['suburb'],
                     'state' => $this->billingAddress['state'],
+                    'order_status' =>'pending',
                     'postal_code' => $this->billingAddress['postal_code'],
                     'total_price' => $this->totalPrice,
                 ]);

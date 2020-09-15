@@ -62,7 +62,7 @@ $(document).ready(function () {
     /*Dropdown Trigger JS Ends*/
 
     /*JS to hide Div when clicked outside*/
-    /*$(document).mouseup(function (e) {
+    $(document).mouseup(function (e) {
         if ($(e.target).closest('.dropcontent, .dropcontent-sm').length
             === 0) {
             e.preventDefault();
@@ -73,7 +73,7 @@ $(document).ready(function () {
             e.preventDefault();
             $(".smsidebar-menu").addClass("rightActive");
         }
-    });*/
+    });
     /*JS to hide Div when clicked outside Ends*/
 
     /*Number Sniper Button JS*/

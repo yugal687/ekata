@@ -22,13 +22,13 @@
                             <div class="col-md-8 col-sm-12">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <el-form-item label="Select Sub-Category" prop="subcategorySelect">
-                                            <el-select clearable placeholder="Select Sub-Category"
+                                        <el-form-item label="Select Category/Sub-Category" prop="subcategorySelect">
+                                            <el-select clearable placeholder="Select Category/Sub-Category"
                                                        filterable
                                                        v-model="productForm.subcategorySelect"
                                                        style="width: 100%">
                                                 <el-option
-                                                    v-for="item in getSubCategory"
+                                                    v-for="item in getCategory"
                                                     :key="item.id"
                                                     :label="item.category_name"
                                                     :value="item.id">

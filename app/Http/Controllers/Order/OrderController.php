@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
     public function getOrder(){
-        $order = OrderDetail::with('order','user','product')->get();
+        $order = OrderDetail::with('order','user','product')->orderBy('created_at', 'desc')->get();
 
         return response()->json([
            'order' => $order
@@ -30,9 +30,13 @@ class OrderController extends Controller
         ]);
     }
     public function deleteOrder($id){
-        $deleteOrder = OrderDetail::findorFail($id)->delete();
+        $delivered = OrderDetail::where('id',$id)->with('order','user','product')->get();
+        //dd($delivered[0]);
+        $delivered[0]->order->order_status = 'failed';
+        //dd($delivered[0]);
+        $delivered[0]->order->save();
         return response()->json([
-           'message' => 'Order Deleted Sucessfully !!'
+            'message' => 'Order Failed !!!'
         ]);
     }
 }

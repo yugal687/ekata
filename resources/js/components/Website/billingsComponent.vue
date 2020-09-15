@@ -232,8 +232,6 @@
 
                                 <input type="button" name="previous" class="prev action-button-previous mt-5"
                                        value="Previous"/>
-                                <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
-                                <!--<input type="button" name="next" class="next action-button" value="Next"/>-->
                             </div>
                             <div class="tab-pane" id="step3">
                                 <h4 style="font-size: 18px"><i class="fas fa-check-circle text-success"

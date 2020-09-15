@@ -30,15 +30,11 @@ class PaymentController extends Controller
             $data['invoice_id'] = uniqid();
             $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
 
-            //send maile here;///send mail  here
-            //Mail section starts here after succesfully order is saved;
-            //
-            //
-            //
-            //
-            //
-            //
-            //Maile Section ends
+            if ($order){
+                $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->orderBy('created_at', 'desc')->first();
+                //dd($orderitem);
+                Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
+            }
 
             return response()->json([
                 'msg' => 'sucessfully saved Order ',
@@ -58,14 +54,6 @@ class PaymentController extends Controller
     //payment using stripe
     public function stripeCheckOut(Request $request)
     {
-        $data['items'] = $this->maporderItems($request->orderItems);
-        $data['invoice_id'] = uniqid();
-        $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
-if ($order){
-    $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->get();
-    //dd($orderitem);
-    Mail::to('ajitsubedi2011@gmail.com') ->send(new OrderMail($orderitem));
-}
         //$order->items()->save();
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
@@ -94,16 +82,11 @@ if ($order){
             $data['items'] = $this->maporderItems($request->orderItems);
             $data['invoice_id'] = uniqid();
             $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
-            //send maile here;///send mail  here
-            //Mail section starts here after succesfully order is saved;
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //Maile Section ends
+            if ($order){
+                $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->orderBy('created_at', 'desc')->first();
+                //dd($orderitem);
+                Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
+            }
 
             return response()->json([
                 'msg' => 'sucessfully saved Order ',
