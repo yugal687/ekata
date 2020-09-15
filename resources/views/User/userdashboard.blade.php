@@ -23,7 +23,11 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Total Amounts Paid</span>
-                        <span class="info-box-number">{{$latestOrder[0]->order->total_price * count($latestOrder)}}</span>
+                        <span class="info-box-number">@if(count($latestOrder))
+                                {{$latestOrder[0]->order->total_price * count($latestOrder)}}
+                        @else
+                        0
+                        @endif</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -57,9 +61,11 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Products On Order</span>
-                        @if($latestOrder[0]->order->order_status == 'pending')
+                        @if(count($latestOrder)>0)
                         <span class="info-box-number">{{count($latestOrder)}}</span>
-                            @endif
+                            @else
+                            <span class="info-box-number">0</span>
+                        @endif
                     </div>
                     <!-- /.info-box-content -->
                 </div>
