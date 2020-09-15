@@ -58,11 +58,6 @@
                     <template slot-scope="scope">
                         <el-button
                             size="mini"
-                            type="success"
-                            icon="el-icon-info" circle
-                            @click="openDetailsModal(scope.row.id)"></el-button>
-                        <el-button
-                            size="mini"
                             type="primary"
                             icon="el-icon-edit" circle
                             @click="openEditModal(scope.row.id)"></el-button>

@@ -17,8 +17,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 
-{{--<link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
-<!-- owl carousel  -->
+    <!-- owl carousel  -->
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css')}}">
     <!---Tiny Slider--->
@@ -287,40 +286,40 @@
 
 
 
-    {{--Footer Section--}}
-    <footer>
-        <div class="footer-container mt-4">
-            <div class="row d-flex align-items-center px-3">
-                <div class="col-md-6">
-                    <div class="d-flex">
-                        <div class="p-2 my-auto">
-                            <p class="font-weight-bold">FOLLOW US:</p>
-                        </div>
-                        <div class="p-2">
-                            <img src="{{ asset('images/Icons/facebook.png') }}"
-                                 class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
-                            <img src="{{ asset('images/Icons/instagram.png') }}"
-                                 class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
-                            <img src="{{ asset('images/Icons/twitter.png') }}"
-                                 class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
-                        </div>
+{{--Footer Section--}}
+<footer>
+    <div class="footer-container mt-4">
+        <div class="row d-flex align-items-center px-3">
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="p-2 my-auto">
+                        <p class="font-weight-bold">FOLLOW US:</p>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-8">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                        <div class="col-4">
-                            <a href="" class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
-                                Call Us
-                            </a>
-                        </div>
+                    <div class="p-2">
+                        <img src="{{ asset('images/Icons/facebook.png') }}"
+                             class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
+                        <img src="{{ asset('images/Icons/instagram.png') }}"
+                             class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
+                        <img src="{{ asset('images/Icons/twitter.png') }}"
+                             class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
                     </div>
                 </div>
             </div>
-            <hr class="horzline">
+            <div class="col-md-6">
+                <div class="row d-flex align-items-center">
+                    <div class="col-8">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                    <div class="col-4">
+                        <a href="" class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
+                            Call Us
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+        <hr class="horzline">
+    </div>
 
         <div class="footer-container">
             <div class="row" id="details">

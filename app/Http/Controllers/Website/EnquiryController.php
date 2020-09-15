@@ -15,6 +15,7 @@ class EnquiryController extends Controller
             'number' => $request->input('phone'),
             'description' => $request->input('description')
         ]);
+        return redirect()->back();
     }
     public function fetchEnquiry(){
         $Enquiries = Enquiry::all();

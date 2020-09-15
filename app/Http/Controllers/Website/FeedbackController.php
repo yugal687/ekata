@@ -11,15 +11,12 @@ class FeedbackController extends Controller
 {
     public function saveFeedback(Request $request)
     {
-       // dd($request);
         $saveFeedback = Feedback::create([
             'user_id' => Auth::user()->id,
             'star' => $request->rating,
             'feedback' => $request->feedback
         ]);
-        if ($saveFeedback) {
-            return redirect()->to('/');
-        }
+        return redirect()->back();
     }
     public function fetchFeedback(){
         $feedback = Feedback::with('user')->get();
@@ -30,7 +27,7 @@ class FeedbackController extends Controller
     public function deleteFeedback($id){
         $deleteFeedback = Feedback::findorFail($id)->delete();
         return response()->json([
-           'message' => 'FeedBack Delleted !!!!'
+           'message' => 'FeedBack Deleted !!!!'
         ]);
     }
 }

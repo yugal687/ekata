@@ -183,7 +183,6 @@
                                                     <h5 class="best_price font-weight-bold mt-3 text-main-primary">
                                                         ${{$cat->price}}</h5>
                                                     <h5 class="best_name py-0 text-dark">{{$cat->product_name}}</h5>
-                                                    <h5 class="best_weight py-0 text-dark">500 gm</h5>
                                                     <button type="button"
                                                             class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
                                                         Add to Cart

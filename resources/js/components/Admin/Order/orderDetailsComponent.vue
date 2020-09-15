@@ -54,16 +54,22 @@
                             <template slot-scope="scope">
                                 <el-button type="primary"
                                            size="mini"
-                                           @click="showDetails(scope.row.id)">Details
+                                           icon="fas fa-info"
+                                           round
+                                           @click="showDetails(scope.row.id)">
                                 </el-button>
                                 <el-button type="primary"
                                            size="mini"
-                                           @click="orderDelivered(scope.row.id)">Delivered
+                                           icon="fas fa-check"
+                                           round
+                                           @click="orderDelivered(scope.row.id)">
                                 </el-button>
                                 <el-button
                                     size="mini"
                                     type="danger"
-                                    @click="handleDelete(scope.row.id)">Cancel
+                                    icon="fas fa-times"
+                                    round
+                                    @click="handleDelete(scope.row.id)">
                                 </el-button>
                             </template>
                         </el-table-column>

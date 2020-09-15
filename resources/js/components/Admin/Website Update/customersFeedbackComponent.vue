@@ -77,15 +77,19 @@
                 });
             },
             handleDelete(id) {
-                axios.delete('/api/deleteFeedback/' + id).then(response => {
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'info'
-                    });
-                    this.fetchFeedback();
+                this.$confirm('Are you sure to delete this item?')
+                    .then(_ => {
+                        axios.delete('/api/deleteFeedback/' + id).then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'info'
+                            });
+                            this.fetchFeedback();
 
-                });
+                        });
+                    })
+                .catch(_ => {});
             }
         }
     }
