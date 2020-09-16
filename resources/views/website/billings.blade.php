@@ -224,6 +224,100 @@
 
         $(function () {
 
+            /*Validation if Checkbox is checked*/
+            $(".next").click(function () {
+                if ($("#toggleShippingAddress").is(':checked')) {
+                    var fname = $("#firstname").val();
+                    var lname = $("#lastname").val();
+                    var address = $("#address").val();
+                    var suburb = $("#suburb").val();
+                    var postalcode = $("#postal_code").val();
+                    var email = $("#email").val();
+                    var contactnumber = $("#contact_number").val();
+                    var regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
+
+                    $('input').on("keypress", function () {
+                        if (fname.length !== null) {
+                            $("#p1").text("");
+                        }
+                        if (lname.length !== null) {
+                            $("#p2").text("");
+                        }
+                        if (address.length !== null) {
+                            $("#p3").text("");
+                        }
+                        if (suburb.length !== null) {
+                            $("#p4").text("");
+                        }
+                        if (postalcode.length !== null) {
+                            $("#p5").text("");
+                        }
+                        if (email.length !== null) {
+                            $("#p6").text("");
+                        }
+                        if (contactnumber.length !== null) {
+                            $("#p7").text("");
+                        }
+                    });
+                    if (fname.length == "") {
+                        $("#p1").text("Please fill your first name");
+                        $("#firstname").focus();
+                        return false;
+                    }
+                    if (lname.length == "") {
+                        $("#p2").text("Please fill your last name");
+                        $("#lastname").focus();
+                        return false;
+                    }
+                    if (address.length == "") {
+                        $("#p3").text("Please fill your address");
+                        $("#address").focus();
+                        return false;
+                    }
+                    if (suburb.length == "") {
+                        $("#p4").text("Please fill your suburb name");
+                        $("#suburb").focus();
+                        return false;
+                    }
+                    if (postalcode.length == "") {
+                        $("#p5").text("Please fill postal code");
+                        $("#postal_code").focus();
+                        return false;
+                    }
+                    if (email.length == "") {
+                        $("#p6").text("Please fill email address");
+                        $("#postal_code").focus();
+                        return false;
+                    }
+                    if (!regExp.test(email)) {
+                        $("#p6").text("Please fill up your valid email");
+                        $("#email").focus();
+                        return false;
+                    }
+                    if (contactnumber.length == "") {
+                        $("#p7").text("Please fill your contact number");
+                        $("#contact_number").focus();
+                        return false;
+                    }
+                    if (contactnumber.length < 10) {
+                        $("#p7").text("Contact numbers must be at least 10 digits long");
+                        $("#contact_number").focus();
+                        return false;
+                    } else {
+                        $(".tab-pane").hide();
+                        $("#step2").fadeIn(1000);
+                        $('.progressbar-dots').removeClass('active');
+                        $('.progressbar-dots:nth-child(2)').addClass('active');
+                    }
+                } else {
+                    $(".tab-pane").hide();
+                    $("#step2").fadeIn(1000);
+                    $('.progressbar-dots').removeClass('active');
+                    $('.progressbar-dots:nth-child(2)').addClass('active');
+                }
+            });
+
+
             $('.shipping-address-form').hide();
 
             $("#toggleShippingAddress").click(function () {
@@ -250,13 +344,6 @@
                 $('#paypalCard').removeClass('btn-secondary');
                 $('#paypalCard').addClass('btn-primary');
             });
-            $(".next").click(function () {
-                $(".tab-pane").hide();
-                $("#step2").fadeIn(1000);
-                $('.progressbar-dots').removeClass('active');
-                $('.progressbar-dots:nth-child(2)').addClass('active');
-            });
-
             $(".prev").click(function () {
                 $(".tab-pane").hide();
                 $("#step1").fadeIn(1000);
