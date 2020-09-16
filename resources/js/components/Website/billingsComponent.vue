@@ -219,15 +219,12 @@
                                             <div class="row mt-3">
                                                 <button type="button"
                                                         name="pay"
-                                                        class="btn btn-success"
+                                                        class="btn bg-main-primary text-white"
                                                         @click="payUsingStripe()"
                                                         value="Pay Now">
                                                     Pay Using Stripe
                                                 </button>
                                             </div>
-                                            <!-- <div class="row mt-3">
-                                                 <input type="button" name="pay" class="pay action-button" value="Pay Now"/>
-                                             </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -331,6 +328,7 @@
         props: ['successmessage'],
         data() {
             return {
+                NSW:'NSW',
                 order_number: null,
                 discountPrice: 0,
                 shippingAddress: {
@@ -338,7 +336,7 @@
                     last_name: '',
                     address: '',
                     suburb: '',
-                    state: '',
+                    state: this.NSW,
                     postal_code: '',
                     email: '',
                     contact_number: ''
@@ -348,7 +346,7 @@
                     last_name: '',
                     address: '',
                     suburb: '',
-                    state: '',
+                    state: this.NSW,
                     postal_code: '',
                     email: '',
                     contact_number: ''
@@ -418,7 +416,7 @@
                     this.billingAddress.last_name = userBillingAddress.last_name;
                     this.billingAddress.address = userBillingAddress.address;
                     this.billingAddress.suburb = userBillingAddress.suburb;
-                    this.billingAddress.state = userBillingAddress.state;
+                    this.billingAddress.state = this.NSW;
                     this.billingAddress.postal_code = userBillingAddress.postal_code;
                     this.billingAddress.email = userBillingAddress.email;
                     this.billingAddress.contact_number = userBillingAddress.contact_number;

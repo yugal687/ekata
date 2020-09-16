@@ -32,8 +32,8 @@ class PaymentController extends Controller
 
             if ($order){
                 $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->orderBy('created_at', 'desc')->first();
-                //dd($orderitem);
-                Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
+
+                //Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
             }
 
             return response()->json([
@@ -54,7 +54,6 @@ class PaymentController extends Controller
     //payment using stripe
     public function stripeCheckOut(Request $request)
     {
-        //$order->items()->save();
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -84,8 +83,8 @@ class PaymentController extends Controller
             $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
             if ($order){
                 $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->orderBy('created_at', 'desc')->first();
-                //dd($orderitem);
-                Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
+
+                //Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
             }
 
             return response()->json([
