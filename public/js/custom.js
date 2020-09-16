@@ -1,4 +1,17 @@
 $(document).ready(function () {
+    /*Search Items*/
+    $('#search').on('keyup', function () {
+        $value = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: '/',
+            data: {'search': $value},
+            success: function (products) {
+                console.log(products);
+            }
+        });
+    });
+
     /*Location Href*/
     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
     $('ul.navbar-nav a').each(function() {
@@ -22,7 +35,7 @@ $(document).ready(function () {
 
     ///Sm SIdebar
     /*Sm-sidebar-scripts*/
-    /*$(".sidebar-dropdown a").click(function () {
+    $(".sidebar-dropdown a").click(function () {
         $(".sidebar-submenu").slideUp(200);
         if (
             $(this)
@@ -52,7 +65,7 @@ $(document).ready(function () {
     });
     $(".smsidebar-menu i.close-menu").click(function () {
         $(".smsidebar-menu").toggleClass("rightActive");
-    });*/
+    });
     /*SM Sidebar JS Ends*/
     /*Dropdown Trigger JS*/
     $("#droptrigger, #droptrigger-sm").click(function(e) {
@@ -75,25 +88,6 @@ $(document).ready(function () {
         }
     });
     /*JS to hide Div when clicked outside Ends*/
-
-    /*Number Sniper Button JS*/
-    /*$(document).on('click', '.number-spinner button', function () {
-        var btn = $(this),
-            oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-            newVal = 0;
-
-        if (btn.attr('data-dir') == 'up') {
-            newVal = parseInt(oldValue) + 1;
-        } else {
-            if (oldValue > 1) {
-                newVal = parseInt(oldValue) - 1;
-            } else {
-                newVal = 1;
-            }
-        }
-        btn.closest('.number-spinner').find('input').val(newVal);
-    });*/
-    /*Number Sniper Button JS Ends*/
 
 
 });

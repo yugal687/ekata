@@ -3,8 +3,6 @@
 <link href="{{ asset('css/smsidebarstyle.css')}}" rel="stylesheet"/>
 <!-- website header ends -->
 
-
-{{--<link rel="stylesheet" href="{{ asset('css/cate-carousel.css')}} ">--}}
 @section('style')
     <style>
         .single-item-share a {

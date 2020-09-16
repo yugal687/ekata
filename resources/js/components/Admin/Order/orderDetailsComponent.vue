@@ -85,24 +85,27 @@
                     <el-table-column property="price" label="Price"></el-table-column>
                     <el-table-column property="discount" label="Discount"></el-table-column>
                 </el-table>
-                <span slot="footer" class="dialog-footer" :data="gridData">
-                    <div class="row">
+                <span slot="footer" class="dialog-footer">
+                    <div class="row" v-for="data in gridData">
                         <div class="col-md-6">
                             <dl class="row">
                                 <dt class="col-sm-4">
                                     Address
                                 </dt>
-                                <dd class="col-sm-8" property="user.address">
+                                <dd class="col-sm-8" >
+                                    {{data.user.address}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     City
                                 </dt>
-                                <dd class="col-sm-8" property="user.state">
+                                <dd class="col-sm-8">
+                                    {{data.user.state}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Postal Code
                                 </dt>
-                                <dd class="col-sm-8" property="user.postal_code">
+                                <dd class="col-sm-8">
+                                    {{data.user.postal_code}}
                                 </dd>
                             </dl>
                         </div>
@@ -111,17 +114,20 @@
                                 <dt class="col-sm-4">
                                     Optional Address
                                 </dt>
-                                <dd class="col-sm-8" property="order.shipping_address">
+                                <dd class="col-sm-8">
+                                    {{data.order.shipping_address}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Email
                                 </dt>
-                                <dd class="col-sm-8" property="user.email">
+                                <dd class="col-sm-8">
+                                    {{data.user.email}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Contact
                                 </dt>
-                                <dd class="col-sm-8" property="user.contact_number">
+                                <dd class="col-sm-8" >
+                                    {{data.user.contact_number}}
                                 </dd>
                                 </dl>
                         </div>

@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body p-0" style="display: block;">
+                    <div class="card-body p-0" style="max-height: 400px; overflow: hidden; display: block;">
                         <div class="table-responsive">
                             <table class="table m-0">
                                 <thead>
@@ -98,8 +98,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix" style="display: block;">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                        <a href="/admin/order/orderdetails" class="btn btn-sm btn-secondary float-right">View All Orders</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
@@ -120,7 +119,7 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body p-0">
+                    <div class="card-body p-0" style="max-height: 400px; overflow: hidden; display: block;">
                         <ul class="products-list product-list-in-card pl-2 pr-2">
                             @foreach($recentProduct as $product)
                             <li class="item">
@@ -142,7 +141,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer text-center">
-                        <a href="javascript:void(0)" class="uppercase">View All Products</a>
+                        <a href="/admin/addproduct/products" class="uppercase">View All Products</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>

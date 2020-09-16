@@ -223,7 +223,7 @@
 </body>
 <!--JS-->
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 <script>
     $(document).ready(function () {
         /*$('#password, #confirm_password').on('keyup', function () {

@@ -21,206 +21,13 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css')}}">
     <!---Tiny Slider--->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+    <link rel="stylesheet" href="{{ asset('css/tiny-slider.css')}}">
     <!-- Template styles-->
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
     @yield('style')
 
     <style>
-        /****************/
-        .modal.right .modal-dialog {
-            position: fixed;
-            top: 16%;
-            margin: auto;
-            width: 320px;
-            height: 85%;
-        }
-
-        /*.modal.right .modal-content {
-            height: 84%;
-            overflow-y: auto;
-        }*/
-        .modal.right .modal-content {
-            flex-direction: row;
-        }
-
-        .modal.right .modal-body {
-            padding: 15px 15px 80px;
-        }
-
-        /*Right*/
-        .modal.right.fade .modal-dialog {
-            right: 20px;
-        }
-
-        /* ----- MODAL STYLE ----- */
-        .badge {
-            background-color: #CF7500;
-            border-radius: 10px;
-            color: white;
-            display: inline-block;
-            font-size: 12px;
-            line-height: 1;
-            padding: 3px 7px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-
-        .shopping-cart {
-            margin: 0;
-            float: right;
-            background: white;
-            width: 450px;
-            position: relative;
-            border-radius: 3px;
-            padding: 20px;
-        }
-
-        .shopping-cart .shopping-cart-header {
-            border-bottom: 1px solid #e8e8e8;
-            padding-bottom: 15px;
-        }
-
-        .shopping-cart .shopping-cart-header .shopping-cart-total {
-            float: right;
-        }
-
-        .shopping-cart .shopping-cart-items {
-            padding: 20px;
-            max-height: 300px;
-            overflow-y: scroll;
-        }
-
-        .shopping-cart .shopping-cart-items li {
-            list-style: none;
-            border-bottom: 1px solid #00000040;
-        }
-
-        .shopping-cart .shopping-cart-items img {
-            float: left;
-            margin-right: 12px;
-        }
-
-        .shopping-cart .shopping-cart-items .item-name {
-            display: block;
-            padding-top: 10px;
-            font-size: 16px;
-        }
-
-        .shopping-cart .shopping-cart-items .item-price {
-            color: #CF7500;
-            margin-right: 8px;
-        }
-
-        .shopping-cart .shopping-cart-items .item-quantity {
-            color: #abb0be;
-        }
-
-        /*.shopping-cart:after {
-            bottom: 100%;
-            left: 80%;
-            border: solid transparent;
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-            border-bottom-color: white;
-            border-width: 8px;
-            margin-left: -8px;
-        }*/
-
-        .cart-icon {
-            color: #F0A500;
-            font-size: 24px;
-            margin-right: 7px;
-            float: left;
-        }
-
-        .shopping-cart .button {
-            background-color: #cf7500;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            text-decoration: none;
-            display: block;
-            border-radius: 3px;
-            font-size: 16px;
-            text-transform: uppercase;
-            margin: 25px 0 15px 0;
-            cursor: pointer;
-        }
-
-        .main-color-text {
-            color: #CF7500;
-        }
-
-        .clearfix:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /*Navbar*/
-        /*a.navbar-brand{
-            display: none;
-        }*/
-        @media (min-width: 992px) {
-            ul.navbar-nav.mr-auto {
-                margin-bottom: -8px;
-            }
-
-            #topNavbar nav .active {
-                border-bottom: 3px solid #fff !important;
-            }
-
-            .navbar-expand-lg .navbar-nav .nav-link {
-                padding-bottom: 12px;
-            }
-
-            .nav-right.container-mine {
-                margin: 5px 60px;
-            }
-
-            .sm-user-checkout {
-                display: none;
-            }
-        }
-
-        @media (max-width: 991px) {
-            #topNavbar nav .active {
-                border-bottom: 3px solid #fff !important;
-                font-weight: bold;
-                width: 30%
-            }
-
-            .nav-right.container-mine {
-                margin: 25px 60px 5px;
-            }
-
-            .navbar {
-                transition: slide-down 2s ease-in-out;
-            }
-
-            .sticky {
-                position: fixed;
-                top: -5px;
-                width: 100%;
-                z-index: 10002;
-            }
-
-            .sm-user-checkout {
-                top: 10px;
-                position: absolute;
-                right: 140px;
-            }
-
-            .lg-user-checkout {
-                display: none;
-            }
-        }
 
     </style>
 
@@ -467,94 +274,18 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 {{-- Jquery Ui--}}
-<script
-    src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-    crossorigin="anonymous"></script>
+<script src="{{ asset('js/jquery-ui.js') }}"></script>
 {{--Bootstrap Js--}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
 <!-- Template custom -->
 <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 
 <!-- owl carousel js -->
 <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <!--Tiny SLider-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<script src="{{ asset('js/tiny-slider.js') }}"></script>
 
 @yield('scripts')
-
-<script>
-    /*jQuery time*/
-    $(document).ready(function () {
-        $('#search').on('keyup', function () {
-            $value = $(this).val();
-            $.ajax({
-                type: 'get',
-                url: '/',
-                data: {'search': $value},
-                success: function (products) {
-                    console.log(products);
-                }
-            });
-        });
-
-        ///Sm SIdebar
-        /*Sm-sidebar-scripts*/
-        $(".sidebar-dropdown a").click(function () {
-            $(".sidebar-submenu").slideUp(200);
-            if (
-                $(this)
-                    .parent()
-                    .hasClass("active")
-            ) {
-                $(".sidebar-dropdown").removeClass("active");
-                $(this)
-                    .parent()
-                    .removeClass("active");
-            } else {
-                $(".sidebar-dropdown").removeClass("active");
-                $(this)
-                    .next(".sidebar-submenu")
-                    .slideDown(200);
-                $(this)
-                    .parent()
-                    .addClass("active");
-            }
-        });
-        $(".sidebar-dropdown > a i").click(function (e) {
-            e.preventDefault();
-        });
-
-        $("#toggle-smsidebar").click(function () {
-            $(".smsidebar-menu").toggleClass("rightActive");
-        });
-        $(".smsidebar-menu i.close-menu").click(function () {
-            $(".smsidebar-menu").toggleClass("rightActive");
-        });
-
-
-        /*Number Snipper Button*/
-        $(document).on('click', '.number-spinner button', function () {
-            var btn = $(this),
-                oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-                newVal = 0;
-
-            if (btn.attr('data-dir') == 'up') {
-                newVal = parseInt(oldValue) + 1;
-            } else {
-                if (oldValue > 1) {
-                    newVal = parseInt(oldValue) - 1;
-                } else {
-                    newVal = 1;
-                }
-            }
-            btn.closest('.number-spinner').find('input').val(newVal);
-        });
-
-    });
-</script>
 <script type="text/javascript">
     $.ajaxSetup({headers: {'csrftoken': '{{ csrf_token() }}'}});
 </script>

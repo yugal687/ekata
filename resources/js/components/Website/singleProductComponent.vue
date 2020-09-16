@@ -32,26 +32,14 @@
                 <h6>Quantity</h6>
                 <div class="row">
                     <div class="col-8">
-                        <div class="input-group input-group number-spinner">
-				                                <span class="input-group-prepend">
-					                                    <button class="btn bg-main-secondary text-white"
-                                                                @click="decrementQuantity()"
-                                                                data-dir="dwn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                </span>
-                            <input type="number"
-                                   v-model="quantity"
-                                   @keyup="incDecQuantity()"
-                                   class="form-control text-center"
-                            >
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <button @click="decrementQuantity()" class="btn bg-main-secondary text-white font-weight-bold">&nbsp; - &nbsp;</button>
+                            </span>
+                                <input class="form-control"  @keyup="incDecQuantity()" v-model="quantity">
                             <span class="input-group-append">
-                                                    <button class="btn bg-main-secondary text-white"
-                                                            @click="incrementQuantity()"
-                                                            data-dir="up">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-				                                </span>
+                                <button @click="incrementQuantity()" class="btn bg-main-secondary text-white font-weight-bold">&nbsp; + &nbsp;</button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -71,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-5 pl-5">
+            <!--<div class="pt-5 pl-5">
                 <div class="row align-items-center">
                     <h6 class="single-item-share">
                         Share:
@@ -92,7 +80,7 @@
                                         </span>
                     </h6>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </div>
@@ -109,7 +97,7 @@
                 quantity: 1,
                 price: 0,
                 cartItemCount: 0,
-                checkedPrice: 0,
+                checkedPrice: this.checkPrice(),
             }
         },
         methods: {
@@ -124,25 +112,42 @@
                     'product_image': this.product[0].image[0].name,
                     'product_name': this.product[0].product_name,
                 };
+                if (this.quantity < 1) {
+                    this.quantity = 1;
+                    this.checkedPrice = this.checkPrice();
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Sorry! you need to select at least 1',
+                        type: 'error'
+                    });
+                    return false;
+                }
 
                 let storedCart = JSON.parse(localStorage.getItem('cart'));
                 this.$store.commit('addToCart', cart);
                 this.$notify({
                     title: 'Success',
                     message: 'This item is added to cart.',
-                    type: 'Sucess'
+                    type: 'success'
                 });
             },
             totalPrice() {
+                this.checkPrice();
+//                alert(this.quantity);
+
                 return this.checkedPrice = this.quantity * this.checkedPrice;
             },
 
             incrementQuantity() {
+                this.quantity++;
                 if (!this.product[0].quantity > 0) {
-                    alert('sorry! this product is out of stock');
+                    this.$notify({
+                        title: 'Info',
+                        message: 'Sorry! this product is out of stock',
+                        type: 'info'
+                    });
                     return false;
                 }
-                this.quantity++;
                 return this.totalPrice();
 
             },
@@ -150,7 +155,11 @@
                 this.quantity--;
                 if (this.quantity < 1) {
                     this.quantity++;
-                    alert('Sorry! you need to select at least 1');
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Sorry! you need to select at least 1',
+                        type: 'error'
+                    });
                     return false;
                 }
                 this.totalPrice();
@@ -162,16 +171,18 @@
             getLocalStorageItem() {
                 return JSON.parse(localStorage.getItem('cart'));
             },
+            checkPrice() {
+                if (this.product[0].sale_price) {
+                    return this.checkedPrice = this.product[0].sale_price;
+                } else {
+                    return this.checkedPrice = this.product[0].price;
+                }
+            }
         },
 
         mounted() {
-// console.log(this.product);
+            // console.log(this.product);
             this.$store.commit('setProduct', this.product);
-            if (this.product[0].sale_price) {
-                return this.checkedPrice = this.product[0].sale_price;
-            } else {
-                return this.checkedPrice = this.product[0].price;
-            }
 
         }
 
