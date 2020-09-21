@@ -62,7 +62,7 @@ Route::get('/singleproduct/{id}', [
     'as' => 'singleproduct']);
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::view('/adminregister', 'Auth.adminregistration');
+    Route::view('/adminregister', 'auth.adminregistration');
     Route::view('admin/services/', 'Admin.Services.service');
     Route::get('/allAdmins', 'Admin\DashboardController@fetchAdmin');
     Route::get('admin/dashboard', 'Admin\DashboardController@dashboradData');
