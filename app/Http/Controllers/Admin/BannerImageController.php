@@ -19,7 +19,7 @@ class BannerImageController extends Controller
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('/storage/app/public/uploads/banner'), $originalName);
                 $saveBanner = BannerImage::create([
-                    'image' => '/storage/app/public/uploads/banner' . $originalName,
+                    'image' => '/storage/app/public/uploads/banner/' . $originalName,
                     'active' => 0,
 
                 ]);
