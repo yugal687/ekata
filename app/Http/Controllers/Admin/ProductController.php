@@ -132,11 +132,11 @@ class ProductController extends Controller
 
                 $baseName = Str::random(20);
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('/storage/app/public/uploads/products/'), $originalName);
+                $image->move(public_path('/storage/app/public/uploads/products'), $originalName);
 
                 $saveimage = Product::where('id', $editedProduct[0]->id)->first();
                 $saveimage->image()->create([
-                    'name' => '/storage/app/public/uploads/products' . $originalName,
+                    'name' => '/storage/app/public/uploads/products/' . $originalName,
                 ]);
 
             }
