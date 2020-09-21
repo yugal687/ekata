@@ -22,10 +22,10 @@ class CategoryController extends Controller
 
                 $baseName = Str::random(20);
                 $originalName = $baseName . '.' . $bannerCategory->getClientOriginalExtension();
-                $bannerCategory->move(public_path('/uploads'), $originalName);
+                $bannerCategory->move(public_path('/storage/app/public/uploads/category/'), $originalName);
                 $savecategory = Category::create([
                     'category_name' => $request->category_name,
-                    'image' => '/uploads/' . $originalName,
+                    'image' => '/storage/app/public/uploads/category' . $originalName,
                     'parent_id' => $request->parent_id
                 ]);
             }
@@ -39,7 +39,7 @@ class CategoryController extends Controller
 
                 $saveimage = Category::orderBy('id', 'DESC')->first();
                 $saveimage->images()->create([
-                    'name' => '/uploads/' . $originalName,
+                    'name' => '/storage/app/public/uploads' . $originalName,
                 ]);
             }
         }
