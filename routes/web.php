@@ -150,3 +150,8 @@ Route::get('/send-mail', function () {
     return 'A message has been sent to Mailtrap!';
 
 });
+
+
+/*errorPages*/
+Route::view('/accessdenied', 'website.ErrorPages.403accessDeniedError');
+Route::view('/pagenotfound', 'website.ErrorPages.404error');
