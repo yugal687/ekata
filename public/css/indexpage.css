@@ -5,8 +5,9 @@
 }
 
 .ribbon-wrapper .ribbon {
-    font-size: 16px;
-    font-family: cursive;
+    font-size: 22px;
+    font-family: Gabriola;
+    font-weight: bold;
     text-transform: lowercase !important;
 }
 
@@ -69,6 +70,10 @@
     border-top-right-radius: 25px !important;
     border-top-left-radius: 25px !important;
 }
+.card-rounded-top .clearence_heading{
+    font-family: Playfair Display;
+    color: black;
+}
 
 .card-bdy {
     position: relative;
@@ -78,6 +83,8 @@
 /*Clearance Section Owl Carousel css*/
 #clearence_section .owl-theme {
     position: relative;
+
+
 }
 
 #clearence_section .owl-theme .owl-next,
@@ -113,6 +120,10 @@
 #new_arrival_carousel_item .image-container img {
     width: 100%;
     height: 100%;
+
+}
+.general_slider{
+    padding: 0 0;
 }
 
 #new_items .item {

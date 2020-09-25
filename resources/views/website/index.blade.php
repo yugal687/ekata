@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-12 bg-main-secondary">
                         <div class="cate">
-                            <h3 class="text-center text-dark mt-2 font-weight-bold">CATEGORY</h3>
+                            <h3 class="text-center mt-3 mb-3 align-items-center font-weight-bolder" style="font-family: Lato;font-weight: 900; color: #0b0b0b; font-size: 25px">CATEGORY</h3>
                         </div>
                     </div>
                 </div>
@@ -47,12 +47,13 @@
 
                 <!-- clearence section starts here -->
                 <section id="clearence_section">
-                    <div class="row m-0 p-0 mt-4">
+                    <div class="row m-0 ml-3 p-0 mt-4 mr-3">
                         <div class="container">
                             <div class="col-md-12">
+                                <div class="container">
                                 <div class="card border-0 bg-light">
                                     <div class="card-header bg-main-secondary py-3 card-rounded-top">
-                                        <h2 class="font-weight-bold text-center mt-2">CLEARENCE</h2>
+                                        <h2 class="font-weight-bold clearence_heading text-center mt-2">CLEARENCE</h2>
                                     </div>
 
                                     <div class="card-body bg-product-light rounded-bottom-front card-bdy ">
@@ -86,7 +87,7 @@
                                                                 <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                                                 <h5 class="best_weight py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
                                                                 <button type="button"
-                                                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
+                                                                        class="btn bg-main-primary big_button_addtocart border text-white px-5 mt-2 d-block mx-auto">
                                                                     Add to Cart
                                                                 </button>
                                                             </div>
@@ -99,7 +100,7 @@
                                         </div>
 
                                     </div>
-
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -129,56 +130,55 @@
 
                     <div class="item">
                         <div class="container">
-                            <div class="row m-0 p-0 my-4">
-
-                                <div
-                                    class="col-md-6 px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
+                            <div class="row m-0 p-0  text-center my-4">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 image-container text-center bg-product-medium rounded-top-front pl-1 rounded-bottom-front">
                                     <img src="{{$lastproduct->image[0]->name}}" class="img-fluid py-3 px-5"
                                          alt="">
                                 </div>
-                                <div class="col-md-6 mt-md-0 mt-3">
-                                    <div class="container h-100 d-flex justify-content-center align-items-center">
+                                <div class="col-md-5 mt-md-0 mt-3">
+                                    <div class="container h-100 d-flex text-center justify-content-center  ml-5 mt-3">
                                         <dl class="row">
                                             <dt class="col-sm-5">
-                                                <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
+                                                <h5 class="font-weight-bolder">Product Name&nbsp;&nbsp;&nbsp;:</h5>
                                             </dt>
                                             <dd class="col-sm-7">
                                                 <a href="{{ route('singleproduct',$lastproduct->id)}}">
                                                     <!-- product name here -->
-                                                    <h5 class="font-weight-normal">{{$lastproduct->product_name}}</h5>
+                                                    <h5 class="font-weight-normal d-flex float-left">{{$lastproduct->product_name}}</h5>
                                                 </a>
                                             </dd>
 
-                                            <dt class="col-sm-5 font-weight-bold ">
-                                                <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
+                                            <dt class="col-sm-5 font-weight-bolder">
+                                                <h5 class="font-weight-bolder">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
                                             </dt>
                                             <dd class="col-sm-7">
                                                 <!-- product category here -->
-                                                <h5 class="font-weight-normal">{{$lastproduct->category->category_name}}</h5>
+                                                <h5 class="font-weight-normal d-flex float-left">{{$lastproduct->category->category_name}}</h5>
                                             </dd>
 
-                                            <dt class="col-sm-5 font-weight-bold ">
-                                                <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
+                                            <dt class="col-sm-5 font-weight-bolder ">
+                                                <h5 class="font-weight-bolder d-flex float-left">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
                                             </dt>
                                             <dd class="col-sm-7"
                                                 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
                                                 <!-- product description here -->
-                                                <h5 class="font-weight-normal ">{{$lastproduct->additional_information}}</h5>
+                                                <h5 class="font-weight-normal d-flex float-left">{{$lastproduct->additional_information}}</h5>
                                             </dd>
 
 
                                             <dt class="col-sm-5 font-weight-bold">
-                                                <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
+                                                <h5 class="font-weight-bold ">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
                                             </dt>
                                             <dd class="col-sm-7">
                                                 <!-- product price here -->
-                                                <h5 class="font-weight-bold text-main-secondary">
+                                                <h5 class="font-weight-bold text-main-secondary d-flex float-left" style="color: red">
                                                     ${{$lastproduct->price}}</h5>
                                             </dd>
 
                                             <div class="col-sm-12">
                                                 <a href="{{ route('singleproduct',$lastproduct->id) }}" type="button"
-                                                        class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
+                                                        class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white big_button_addtocart">
                                                     Add to Cart
                                                 </a>
                                             </div>
@@ -186,6 +186,7 @@
 
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
@@ -195,11 +196,11 @@
             </div>
         </div>
         <section id="general-slider" class="bg-product-light mt-0 mt-md-5">
-            <div class="container">
+            <div class="container general_slider">
                 <div class="card-body bg-product-light rounded-bottom-front card-bdy">
-                    <div id="new_items" class="owl-carousel owl-theme px-3">
+                    <div id="new_items" class="owl-carousel owl-theme">
                         @foreach($latestProduct as $lastproduct)
-                            <div class="item text-center d-flex justify-content-center align-items-center">
+                            <div class="item  d-flex justify-content-center align-items-center">
 
                                 <div class="new_items_img">
                                     <div class="row m-4">
@@ -233,7 +234,7 @@
                         <img src="{{ asset('images/best_selling.png')}}" width="100%" alt="">
                         <div
                             class="card-body bg-main-secondary border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag">
-                            <h3 class="font-weight-bold pb-0">BEST SELLING</h3>
+                            <h3 class="font-weight-bold pb-0" style="font-family: Playfair Display">BEST SELLING</h3>
                             <h6 class="font-weight-bold pt-0">Best of all time</h6>
                         </div>
                     </div>
@@ -248,7 +249,7 @@
                                 <h5 class="best_name py-0 text-white ">{{$best->product_name}}</h5>
                                 <h5 class="best_weight py-0 text-white ">{{$best->brand->brand_name}}</h5>
                                 <button type="button"
-                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
+                                        class="btn bg-main-primary big_button_addtocart border text-white px-5 mt-2 d-block mx-auto">
                                     Add to Cart
                                 </button>
                             </a>
@@ -292,7 +293,7 @@
                                         ${{$discountedProduct->sale_price}}</h5>
                                     <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                     <button type="button"
-                                            class="mx-auto btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                            class="mx-auto btn bg-main-primary big_button_addtocart border text-white px-5 mt-2 d-block">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -321,7 +322,7 @@
                             <div class="col-md-7">
                                 <div class="row mx-2">
                                     <div class="col-12 text-center">
-                                        <h5 class="">Give us your reviews</h5>
+                                        <h5 class="text-white" style="font-family: Nunito, sans-serif">Give us your reviews</h5>
                                     </div>
                                     <meta name="csrf-token" content="{{ csrf_token() }}"/>
                                     <div class="col-12 mt-3">
@@ -346,7 +347,7 @@
                             <div class="col-md-5">
                                 <div class="row pr-3">
                                     <div class="col-12 text-center">
-                                        <h5 class="">Customer reviews</h5>
+                                        <h5 class="" style="font-family: Nunito, sans-serif">Customer reviews</h5>
                                     </div>
                                     <div class="col-12 mt-3">
                                         <div class="customer-reviews-slider" style="">
@@ -371,7 +372,7 @@
                     <div class="signup bg-main-secondary rounded-top-front rounded-bottom-front py-4">
                         <div class="circle-3"></div>
                         <div class="circle-4"></div>
-                        <h3 class="text-white font-weight-bold text-center">ENQUIRY FORM</h3>
+                        <h3 class="text-white font-weight-bold text-center" style="font-family: Playfair Display">ENQUIRY FORM</h3>
                         <div class="container px-5">
                             <form action="{{url("saveEnquiry")}}" method="post">
                                 {{csrf_field()}}
@@ -381,7 +382,7 @@
                                 <textarea class="form-control mt-3" rows="5" name="description"
                                           placeholder="Description" required></textarea>
                                 <div class="row mt-4">
-                                    <div class="col-12 text-center">
+                                    <div class="col-12 text-center pb-4">
                                         <button class="btn border-white text-white" type="submit">SEND</button>
                                     </div>
                                 </div>
@@ -405,7 +406,7 @@
                     <div class="col-md-6 px-5">
                         <div class="row text-center mt-2">
                             <div class="col-12">
-                                <h3 class="text-white font-weight-bold" style="font-family: 'Times New Roman'">ABOUT
+                                <h3 class="text-white font-weight-bold" style="font-family: 'Times New Roman'; font-size: 30px">ABOUT
                                     US</h3>
                             </div>
                         </div>

@@ -146,6 +146,10 @@ a:hover {
     border-top-left-radius: 20px;
 }
 
+.big_button_addtocart{
+    border-radius: 8px;
+}
+
 /* navigation bar */
 
 .cart {

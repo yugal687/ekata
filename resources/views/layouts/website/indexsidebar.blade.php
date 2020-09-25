@@ -2,7 +2,7 @@
     <div class="catg-slider">
         @foreach($getCategory as $category)
         <div>
-            <figure class="mx-auto">
+            <figure class="mx-auto mt-3">
                 <img src="{{ $category->images[0]->name }}" class="img-fluid" alt="">
             </figure>
             <p class="text-center" style="margin-bottom: 0;">
