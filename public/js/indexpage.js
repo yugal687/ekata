@@ -2,8 +2,8 @@ $(document).ready(function () {
     /*Vertical Sidebar Carousel*/
     var slider = tns({
         "container": ".catg-slider",
-        gutter: 10,
-        "items": 8,
+        gutter: 13,
+        "items": 9,
         "axis": "vertical",
         "swipeAngle": false,
         "speed": 400,
@@ -100,11 +100,11 @@ $(document).ready(function () {
                     items: 1,
                     nav: true
                 },
-                576: {
+                600: {
                     items: 2,
                 },
 
-                992: {
+                993: {
                     items: 3,
                 },
 
@@ -207,6 +207,14 @@ $(document).ready(function () {
         });
     });
     /*Save Feedback Ends*/
+
+
+    var figure = $("div.catg-slider").find('figure');
+    var nextBtn = document.getElementById("next_btn")
+    if(figure.length <= 9){
+        nextBtn.style.cursor = 'not-allowed';
+    }
+
 
     /*Vertical Smsidebar Carousel | Tiny Slider | Disable for now*/
     /*var slider = tns({

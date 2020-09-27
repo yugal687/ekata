@@ -26,12 +26,10 @@
                     </el-table-column>
                     <el-table-column
                         label="Sub Category"
-                        v-if="category"
                         prop="category.category_name">
                     </el-table-column>
                     <el-table-column
                         label="Brand"
-                        v-if="brand"
                         prop="brand.brand_name">
                     </el-table-column>
                     <el-table-column
@@ -47,8 +45,6 @@
                         prop="sale_price"
                     >
                     </el-table-column>
-
-
                 </el-table-column>
                 <el-table-column
                     fixed="right"
@@ -212,7 +208,7 @@
                                                         v-for="item in getSubCategory"
                                                         :key="item.id"
                                                         :label="item.category_name"
-                                                        :value="item.id">
+                                                        :value="item.category_name">
                                                     </el-option>
                                                 </el-select>
                                             </el-form-item>
@@ -227,7 +223,7 @@
                                                         v-for="item in getBrand"
                                                         :key="item.id"
                                                         :label="item.brand_name"
-                                                        :value="item.id">
+                                                        :value="item.brand_name">
                                                     </el-option>
                                                 </el-select>
                                             </el-form-item>
@@ -301,9 +297,9 @@
                                     </div>
                                     <div class="row">
                                         <el-form-item>
-                                            <el-button type="warning"
+                                            <el-button class="btn btn-warning"
                                                        style="width: 100%; margin: 15px 10% 0"
-                                                       @click="submitForm('productForm')"> Edit
+                                                       @click="submitForm('productForm')"> Update
                                             </el-button>
                                         </el-form-item>
                                     </div>

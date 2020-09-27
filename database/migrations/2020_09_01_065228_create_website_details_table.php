@@ -19,8 +19,8 @@ class CreateWebsiteDetailsTable extends Migration
             $table->double('contact_number');
             $table->string('address');
             $table->string('additional_information')->nullable();
-            $table->string('optional_email');
-            $table->double('optional_contact');
+            $table->string('optional_email')->nullable();
+            $table->double('optional_contact')->nullable();
             $table->timestamps();
         });
     }

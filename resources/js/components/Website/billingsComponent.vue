@@ -1,11 +1,11 @@
 <template>
-    <div class="">
+    <div class="container-fluid border-bottom">
         <div class="container testing-section" style="">
             <div class="row mb-2">
                 <div class="col-md-12">
-                    <h1 class="text-center align-items-center justify-content-center"
-                        style="font-family:'Times New Roman'">
-                        Payment And Shipping</h1>
+                    <h1 class="text-center align-items-center justify-content-center heading-font">
+                        Payment And Shipping
+                    </h1>
                 </div>
             </div>
             <div class="row">
@@ -32,25 +32,33 @@
                                             <div class="form-group col-md-6">
                                                 <input type="text" class="form-control"
                                                        v-model="billingAddress.first_name"
-                                                       placeholder="* First Name">
+                                                       placeholder="* First Name"
+                                                       id="first_name_billing">
+                                                <p id="p1_billing"></p>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <input type="text" class="form-control"
                                                        v-model="billingAddress.last_name"
-                                                       placeholder="* Last Name">
+                                                       placeholder="* Last Name"
+                                                       id="last_name_billing">
+                                                <p id="p2_billing"></p>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <input type="text" class="form-control"
                                                        v-model="billingAddress.address"
-                                                       placeholder="* Address">
+                                                       placeholder="* Address"
+                                                       id="address_billing">
+                                                <p id="p3_billing"></p>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <input type="text" class="form-control"
                                                        v-model="billingAddress.suburb"
                                                        name="sub_urb"
-                                                       placeholder="* Suburb">
+                                                       placeholder="* Suburb"
+                                                       id="suburb_billing">
+                                                <p id="p4_billing"></p>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -65,7 +73,9 @@
                                                 <input type="value" class="form-control"
                                                        v-model="billingAddress.postal_code"
                                                        name="postal_code"
-                                                       placeholder="* Postal Code ">
+                                                       placeholder="* Postal Code"
+                                                       id="postal_code_billing">
+                                                <p id="p5_billing"></p>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -73,13 +83,17 @@
                                                 <input type="email" class="form-control"
                                                        v-model="billingAddress.email"
                                                        name="email"
-                                                       placeholder="* E-mail">
+                                                       placeholder="* E-mail"
+                                                       id="email_billing">
+                                                <p id="p6_billing"></p>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <input type="value" class="form-control" placeholder="* Contact Number"
-                                                       name="contact_number">
+                                                <input type="number" class="form-control" placeholder="* Contact Number"
+                                                       name="contact_number"
+                                                       id="contact_number_billing">
+                                                <p id="p7_billing"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +146,8 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
-                                            <input type="text" class="form-control" v-model="NSW" placeholder="NSW" disabled>
+                                            <input type="text" class="form-control" v-model="NSW" placeholder="NSW"
+                                                   disabled>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <input type="number" class="form-control"
@@ -269,9 +284,8 @@
                         <div class="card-body">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-8 col-sm-12">
-                                    <h4 class="pt-5" style="font-family:'Times New Roman'; color: #00000070;">HELP?
-                                        CONTACT
-                                        US:12345678</h4>
+                                    <h4 class="pt-5" style="color: #00000070;">HELP?
+                                        CONTACT US: 12345678</h4>
                                     <hr/>
                                     <div class="row pt-2">
                                         <div class="col-md-4">
@@ -323,146 +337,146 @@
 </template>
 
 <script>
-    export default {
-        name: "billingsComponent",
-        props: ['successmessage'],
-        data() {
-            return {
-                NSW:'NSW',
-                order_number: null,
-                discountPrice: 0,
-                shippingAddress: {
-                    first_name: '',
-                    last_name: '',
-                    address: '',
-                    suburb: '',
-                    state: this.NSW,
-                    postal_code: '',
-                    email: '',
-                    contact_number: ''
-                },
-                billingAddress: {
-                    first_name: '',
-                    last_name: '',
-                    address: '',
-                    suburb: '',
-                    state: this.NSW,
-                    postal_code: '',
-                    email: '',
-                    contact_number: ''
-                },
-                stripeCard: {
-                    cvv: '',
-                    expiry_year: '',
-                    expiry_month: '',
-                    card_number: '',
-                },
-                successMessage: {
-                    order_number: '',
-                    address: '',
-                    suburb_name: '',
-                    postal_code: '',
-                },
-
-            }
-        },
-        mounted() {
-            this.$store.dispatch('fetchStoredProduct');
-            this.$store.dispatch('totalPrice');
-            this.userDetails();
-
-            const script = document.createElement("script");
-            script.src =
-                "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3";
-            script.addEventListener("load", this.setLoaded);
-            document.body.appendChild(script);
-        },
-
-        methods: {
-            setLoaded() {
-                let totalPrice = this.$store.state.totalPrice;
-                window.paypal.Buttons({
-                    createOrder: (data, actions) => {
-                        // This function sets up the details of the transaction, including the amount and line item details.
-                        return actions.order.create({
-                            purchase_units: [{
-                                amount: {
-                                    value: totalPrice,
-                                }
-                            }]
-                        });
-                    },
-                    onApprove: async (data, actions) => {
-                        const order = actions.order.capture();
-                        this.paypalCheckOut();
-                    }
-                }).render(this.$refs.paypalButton);
+export default {
+    name: "billingsComponent",
+    props: ['successmessage'],
+    data() {
+        return {
+            NSW: 'NSW',
+            order_number: null,
+            discountPrice: 0,
+            shippingAddress: {
+                first_name: '',
+                last_name: '',
+                address: '',
+                suburb: '',
+                state: this.NSW,
+                postal_code: '',
+                email: '',
+                contact_number: ''
+            },
+            billingAddress: {
+                first_name: '',
+                last_name: '',
+                address: '',
+                suburb: '',
+                state: this.NSW,
+                postal_code: '',
+                email: '',
+                contact_number: ''
+            },
+            stripeCard: {
+                cvv: '',
+                expiry_year: '',
+                expiry_month: '',
+                card_number: '',
+            },
+            successMessage: {
+                order_number: '',
+                address: '',
+                suburb_name: '',
+                postal_code: '',
             },
 
-            paypalCheckOut() {
-                axios.post('api/paypalCheckOut', {
-                    'orderItems': JSON.parse(localStorage.getItem('cart')),
-                    'totalPrice': this.$store.state.totalPrice,
-                    'shippingAddress': this.shippingAddress,
-                    'billingAddress': this.billingAddress,
-                }).then(resp => {
+        }
+    },
+    mounted() {
+        this.$store.dispatch('fetchStoredProduct');
+        this.$store.dispatch('totalPrice');
+        this.userDetails();
+
+        const script = document.createElement("script");
+        script.src =
+            "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3";
+        script.addEventListener("load", this.setLoaded);
+        document.body.appendChild(script);
+    },
+
+    methods: {
+        setLoaded() {
+            let totalPrice = this.$store.state.totalPrice;
+            window.paypal.Buttons({
+                createOrder: (data, actions) => {
+                    // This function sets up the details of the transaction, including the amount and line item details.
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: totalPrice,
+                            }
+                        }]
+                    });
+                },
+                onApprove: async (data, actions) => {
+                    const order = actions.order.capture();
+                    this.paypalCheckOut();
+                }
+            }).render(this.$refs.paypalButton);
+        },
+
+        paypalCheckOut() {
+            axios.post('api/paypalCheckOut', {
+                'orderItems': JSON.parse(localStorage.getItem('cart')),
+                'totalPrice': this.$store.state.totalPrice,
+                'shippingAddress': this.shippingAddress,
+                'billingAddress': this.billingAddress,
+            }).then(resp => {
+                this.$store.dispatch('removeCartItems');
+            });
+        },
+        userDetails() {
+            axios.post('api/userBillingDetails').then(resp => {
+                let userBillingAddress = resp.data.userBillingDetails;
+                this.billingAddress.first_name = userBillingAddress.first_name;
+                this.billingAddress.last_name = userBillingAddress.last_name;
+                this.billingAddress.address = userBillingAddress.address;
+                this.billingAddress.suburb = userBillingAddress.suburb;
+                this.billingAddress.state = this.NSW;
+                this.billingAddress.postal_code = userBillingAddress.postal_code;
+                this.billingAddress.email = userBillingAddress.email;
+                this.billingAddress.contact_number = userBillingAddress.contact_number;
+            }).catch(err => {
+                console.log(err.resp.message)
+            });
+        },
+
+        submitOrderItems() {
+            return false;
+        },
+
+        clearCart() {
+
+        },
+
+        //stripeCheckOut
+        payUsingStripe() {
+            axios.post('api/stripeCheckOut', {
+                'orderItems': JSON.parse(localStorage.getItem('cart')),
+                'card': this.stripeCard,
+                'totalPrice': this.$store.state.totalPrice,
+                'shippingAddress': this.shippingAddress,
+                'billingAddress': this.billingAddress,
+            }).then(resp => {
+                if (resp.data.msg) {
                     this.$store.dispatch('removeCartItems');
-                });
-            },
-            userDetails() {
-                axios.post('api/userBillingDetails').then(resp => {
-                    let userBillingAddress = resp.data.userBillingDetails;
-                    this.billingAddress.first_name = userBillingAddress.first_name;
-                    this.billingAddress.last_name = userBillingAddress.last_name;
-                    this.billingAddress.address = userBillingAddress.address;
-                    this.billingAddress.suburb = userBillingAddress.suburb;
-                    this.billingAddress.state = this.NSW;
-                    this.billingAddress.postal_code = userBillingAddress.postal_code;
-                    this.billingAddress.email = userBillingAddress.email;
-                    this.billingAddress.contact_number = userBillingAddress.contact_number;
-                }).catch(err => {
-                    console.log(err.resp.message)
-                });
-            },
+                    this.successMessage.order_number = resp.data.invoice_id;
+                    this.successMessage.address = resp.data.address;
+                    this.successMessage.suburb_name = resp.data.suburb;
+                    this.successMessage.postal_code = resp.data.postal_code;
 
-            submitOrderItems() {
-                return false;
-            },
+                    $(".tab-pane").hide();
+                    $("#step3").fadeIn(1000);
+                    $('.progressbar-dots').removeClass('active');
+                    $('.progressbar-dots:nth-child(3)').addClass('active');
+                }
 
-            clearCart() {
-
-            },
-
-            //stripeCheckOut
-            payUsingStripe() {
-                axios.post('api/stripeCheckOut', {
-                    'orderItems': JSON.parse(localStorage.getItem('cart')),
-                    'card': this.stripeCard,
-                    'totalPrice': this.$store.state.totalPrice,
-                    'shippingAddress': this.shippingAddress,
-                    'billingAddress': this.billingAddress,
-                }).then(resp => {
-                    if (resp.data.msg) {
-                        this.$store.dispatch('removeCartItems');
-                        this.successMessage.order_number = resp.data.invoice_id;
-                        this.successMessage.address = resp.data.address;
-                        this.successMessage.suburb_name = resp.data.suburb;
-                        this.successMessage.postal_code = resp.data.postal_code;
-
-                        $(".tab-pane").hide();
-                        $("#step3").fadeIn(1000);
-                        $('.progressbar-dots').removeClass('active');
-                        $('.progressbar-dots:nth-child(3)').addClass('active');
-                    }
-
-                }).catch(err => {
+            }).catch(err => {
 
 
-                });
+            });
 
-            }
-            ,
-        },
+        }
+        ,
+    },
 
     computed: {
         granTotal() {
@@ -475,13 +489,15 @@
 </script>
 
 <style scoped>
-#p1, #p2, #p3, #p4, #p5, #p6, #p7 {
+#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p1_billing, #p2_billing, #p3_billing, #p4_billing, #p5_billing, #p6_billing, #p7_billing {
+    font-family: 'Lato', sans-serif;
     font-size: 12px;
     color: #FF0000;
     margin-bottom: 0;
     float: left;
 }
-.error{
-    color:red;
+
+.error {
+    color: red;
 }
 </style>

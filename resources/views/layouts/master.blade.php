@@ -70,7 +70,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/admin/dashboard" class="nav-link">Home</a>
+                    <a href="/" class="nav-link">Go to Website</a>
                 </li>
             </ul>
 
@@ -165,7 +165,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-tools"></i>
                                 <p>
                                     Setup
@@ -209,7 +209,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fab fa-product-hunt"></i>
                                 <p>
                                     Products
@@ -246,7 +246,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fab fa-weebly"></i>
                                 <p>
                                     Website Update
@@ -302,7 +302,7 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong><i class="fa fa-copyright" aria-hidden="true"></i>
-                    Copyright 2020. All rights reserved. Designed by <a href="#"> Soft tech Multimedia.</a>
+                    Copyright &copy; 2020. All rights reserved. Designed by <a href="#"> Soft tech Multimedia</a>
             </strong>
             <div class="float-right d-none d-sm-inline-block">
                 <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy Policy</a></p>
@@ -314,11 +314,21 @@
 </div>
 <!--JS-->
 <script src="{{ asset('js/app.js') }}"></script>
-{{--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--}}
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
-    /*$.widget.bridge('uibutton', $.ui.button)*/
+    $(function () {
+        /** add active class and stay opened when selected */
+        var url = window.location;
+
+        // for sidebar menu entirely but not cover treeview
+        $('ul.nav-sidebar a').filter(function () {
+            return this.href == url;
+        }).addClass('active');
+
+        // for treeview
+        $('ul.nav-treeview a').filter(function () {
+            return this.href == url;
+        }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+    });
 </script>
 
 @yield('scripts')

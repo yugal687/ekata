@@ -61,10 +61,10 @@ $(document).ready(function () {
     });
 
     $("#toggle-smsidebar").click(function () {
-        $(".smsidebar-menu").toggleClass("rightActive");
+        $(".smsidebar-menu").removeClass("rightActive");
     });
     $(".smsidebar-menu i.close-menu").click(function () {
-        $(".smsidebar-menu").toggleClass("rightActive");
+        $(".smsidebar-menu").addClass("rightActive");
     });
     /*SM Sidebar JS Ends*/
     /*Dropdown Trigger JS*/

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Brand;
 use App\Model\Category;
 use App\Model\Imagable;
 use App\Model\Product;
@@ -106,13 +107,13 @@ class ProductController extends Controller
     }
     public function editProduct(Request $request){
         $editedProduct = json_decode($request->editedProduct);
-        //dd($editedProduct[0]->id);
-        //dd($request->tag);
-        $saveEditProduct =Product::findorFail($editedProduct[0]->id)->update([
+        $findCategory = Category::where('category_name','=',$editedProduct[0]->category->category_name)->get();
+        $findBrand = Brand::where('brand_name','=',$editedProduct[0]->brand->brand_name)->get();
+        $saveEditProduct =Product::where('id',$editedProduct[0]->id)->update([
             'product_name' => $editedProduct[0]->product_name,
             'quantity' => $editedProduct[0]->quantity,
-            'category_id' => $editedProduct[0]->category_id,
-            'brand_id' => $editedProduct[0]->brand_id,
+            'category_id' => $findCategory[0]->id,
+            'brand_id' => $findBrand[0]->id,
             'price' => $editedProduct[0]->price,
             'additional_information' => $editedProduct[0]->additional_information,
         ]);

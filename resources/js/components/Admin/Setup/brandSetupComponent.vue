@@ -111,7 +111,7 @@
                                     </div>
                                     <div v-for="ebrand in editBrands">
 
-                                        <el-form :model="brandForm" :rules="brandRules"
+                                        <el-form :model="brandForm"
                                                  :label-position="labelPosition" class="demo-brandForm">
                                             <el-form-item label="Brand Name">
                                                 <el-input v-model="ebrand.brand_name"
@@ -170,13 +170,13 @@ export default {
             brandSearch: '',
         }
     },
-    mounted(){
+    mounted() {
         this.getRequest();
     },
     methods: {
-        getRequest(){
-            axios.get('/api/getBrand',{})
-                .then(response=>{
+        getRequest() {
+            axios.get('/api/getBrand', {})
+                .then(response => {
                     this.getBrand = response.data.getBrand;
                 });
         },
@@ -227,35 +227,43 @@ export default {
                         }
                     });
                 })
-            .catch(_ => {});
+                .catch(_ => {
+                });
         },
         submitBrand(brandForm) {
-            let formdata = new FormData();
-            formdata.append('brand_name', this.brandForm.name);
+            this.$refs[brandForm].validate((valid) => {
+                if (valid) {
+                    let formdata = new FormData();
+                    formdata.append('brand_name', this.brandForm.name);
 
 
-            axios.post('/api/postbrand', formdata, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                    axios.post('/api/postbrand', formdata, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
 
-            }).then(response => {
-                this.$notify({
-                    title: 'Success',
-                    message: response.data.message,
-                    type: 'success'
-                });
-                this.brandForm = {};
-                this.getRequest();
+                    }).then(response => {
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                        this.brandForm = {};
+                        this.getRequest();
 
-            }).catch(error => {
-                if (error.response) {
-                    this.$notify({
-                        title: 'Error',
-                        message: 'Error Input Data ',
-                        type: 'error'
+                    }).catch(error => {
+                        if (error.response) {
+                            this.$notify({
+                                title: 'Error',
+                                message: 'Error Input Data ',
+                                type: 'error'
+                            });
+                            /*this.errors = error.response.data.errors;*/
+                        }
                     });
-                    /*this.errors = error.response.data.errors;*/
+                } else {
+                    console.log('error submit!!');
+                    return false;
                 }
             });
         },

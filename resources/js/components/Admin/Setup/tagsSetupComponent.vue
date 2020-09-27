@@ -12,8 +12,8 @@
                                 <div class="col-12">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-12">
-                                            <el-form :model="tagForm" :rules="tagRules" ref="brandForm"
-                                                     :label-position="labelPosition" class="demo-brandForm">
+                                            <el-form :model="tagForm" :rules="tagRules" ref="tagForm"
+                                                     :label-position="labelPosition" class="demo-tagForm">
                                                 <el-form-item label="Tag Name" prop="name">
                                                     <el-input v-model="tagForm.name"
                                                               style="width: 100%;">
@@ -22,7 +22,7 @@
                                                 <el-form-item>
                                                     <el-button type="primary"
                                                                style="width: 80%; margin: 15px 10% 0"
-                                                               @click="submitTag">Create
+                                                               @click="submitTag('tagForm')">Create
                                                     </el-button>
                                                 </el-form-item>
                                             </el-form>
@@ -109,9 +109,9 @@
                                         </div>
                                     </div>
                                     <div v-for="etag in editTags">
-                                        <el-form :model="tagForm" :rules="tagRules"
+                                        <el-form :model="etag"
                                                  :label-position="labelPosition" class="demo-tagForm">
-                                            <el-form-item label="Tag Name" prop="name">
+                                            <el-form-item label="Tag Name" prop="tags">
                                                 <el-input v-model="etag.tags"
                                                           style="width: 100%;">
                                                 </el-input>
@@ -140,69 +140,69 @@
 </template>
 
 <script>
-    export default {
-        name: "tagsSetupComponent",
-        data() {
-            return {
-                labelPosition: 'top',
-                edit: false,
-                tags: [],
-                editTags: [],
-                tagForm: {
-                    name: '',
-                },
-                tagRules: {
-                    name: [
-                        {required: true, message: 'Please input tag name', trigger: 'blur'},
-                    ]
-                },
-                /*Table Datas*/
-                tagTableData: [{
-                    sn: 1,
-                    tagName: 'Tom'
-                }, {
-                    sn: 2,
-                    tagName: 'Tom Cat'
-                }],
-                tagSearch: '',
-            }
-        },
-        mounted() {
-            this.fetchTag();
-        },
-        methods: {
-            fetchTag() {
-                axios.get('/api/getTag', {})
-                    .then(response => {
-                        this.tags = response.data.tags;
-                    });
+export default {
+    name: "tagsSetupComponent",
+    data() {
+        return {
+            labelPosition: 'top',
+            edit: false,
+            tags: [],
+            editTags: [],
+            tagForm: {
+                name: '',
             },
-            editTag(id) {
-                this.editTags = this.tags.filter(tags => tags.id == id);
+            tagRules: {
+                name: [
+                    {required: true, message: 'Please input tag name', trigger: 'blur'},
+                ]
             },
-            saveEditTag() {
-                axios.post('/api/saveEditTag', {
-                    editTag: this.editTags
-                }).then(response => {
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'success'
-                    });
-                    this.fetchTag();
-                }).catch(error => {
-                    if (error.response) {
-                        this.$notify({
-                            title: 'Error',
-                            message: 'Error Input Data ',
-                            type: 'error'
-                        });
-                        /*this.errors = error.response.data.errors;*/
-                    }
+            /*Table Datas*/
+            tagTableData: [{
+                sn: 1,
+                tagName: 'Tom'
+            }, {
+                sn: 2,
+                tagName: 'Tom Cat'
+            }],
+            tagSearch: '',
+        }
+    },
+    mounted() {
+        this.fetchTag();
+    },
+    methods: {
+        fetchTag() {
+            axios.get('/api/getTag', {})
+                .then(response => {
+                    this.tags = response.data.tags;
                 });
-            },
-            deleteTag(id) {
-                this.$confirm('Are you sure to delete this item?')
+        },
+        editTag(id) {
+            this.editTags = this.tags.filter(tags => tags.id == id);
+        },
+        saveEditTag() {
+            axios.post('/api/saveEditTag', {
+                editTag: this.editTags
+            }).then(response => {
+                this.$notify({
+                    title: 'Success',
+                    message: response.data.message,
+                    type: 'success'
+                });
+                this.fetchTag();
+            }).catch(error => {
+                if (error.response) {
+                    this.$notify({
+                        title: 'Error',
+                        message: 'Error Input Data ',
+                        type: 'error'
+                    });
+                    /*this.errors = error.response.data.errors;*/
+                }
+            });
+        },
+        deleteTag(id) {
+            this.$confirm('Are you sure to delete this item?')
                 .then(_ => {
                     axios.delete('/api/deleteTag/' + id)
                         .then(response => {
@@ -222,69 +222,77 @@
                         }
                     });
                 })
-                .catch(_ => {});
-            },
-            submitTag(tagForm) {
-                let formData = new FormData();
-                formData.append('tags', this.tagForm.name);
-                axios.post('/api/postTags', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-
-                }).then(response => {
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'success'
-                    });
-                    this.tagForm = {};
-                    this.fetchTag();
-                }).catch(error => {
-                    if (error.response) {
-                        this.$notify({
-                            title: 'Error',
-                            message: 'Error Input Data ',
-                            type: 'error'
-                        });
-                        /*this.errors = error.response.data.errors;*/
-                    }
+                .catch(_ => {
                 });
-            },
+        },
+        submitTag(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    let formData = new FormData();
+                    formData.append('tags', this.tagForm.name);
+                    axios.post('/api/postTags', formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
 
-            handleEdit(index, row) {
-                console.log(index, row);
-            },
-            handleDelete(index, row) {
-                console.log(index, row);
-            }
+                    }).then(response => {
+                        this.$notify({
+                            title: 'Success',
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                        this.tagForm = {};
+                        this.fetchTag();
+                    }).catch(error => {
+                        if (error.response) {
+                            this.$notify({
+                                title: 'Error',
+                                message: 'Error Input Data ',
+                                type: 'error'
+                            });
+                            /*this.errors = error.response.data.errors;*/
+                        }
+                    });
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
         },
 
-    }
+        handleEdit(index, row) {
+            console.log(index, row);
+        },
+        handleDelete(index, row) {
+            console.log(index, row);
+        }
+    },
+
+}
 </script>
 
 <style scoped>
-    .container-fluid .row {
-        margin-left: 0;
-        margin-right: 0;
-    }
+.container-fluid .row {
+    margin-left: 0;
+    margin-right: 0;
+}
 
-    .box-card-slide {
-        border: 1px solid #EBEEF5;
-        background-color: #FFF;
-        color: #303133;
-        border-radius: 4px;
-        overflow: hidden;
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-    }
+.box-card-slide {
+    border: 1px solid #EBEEF5;
+    background-color: #FFF;
+    color: #303133;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+}
 
-    .box-card-slide .box-header {
-        padding: 18px 20px;
-        border-bottom: 1px solid #EBEEF5;
-        box-sizing: border-box;
-    }
+.box-card-slide .box-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #EBEEF5;
+    box-sizing: border-box;
+}
 
-    .box-card-slide .box-body {
-        padding: 20px;
-    }
+.box-card-slide .box-body {
+    padding: 20px;
+}
 </style>

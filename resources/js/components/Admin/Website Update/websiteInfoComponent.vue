@@ -183,6 +183,9 @@
                     ],
                     address: [
                         {required: true, message: 'Please input address', trigger: 'blur'},
+                    ],
+                    optionalEmail: [
+                        {type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change']}
                     ]
                 },
                 WebsiteDetail: [],

@@ -21,11 +21,13 @@
             <div>
                 <h4 class="font-weight-bold">{{product[0].product_name}} </h4>
                 <h6>Category: {{product[0].category.category_name}}</h6>
-                <h6>Avilibility: <span class="text-danger">In Stock</span></h6>
+                <h6>Availability: <span class="text-danger">In Stock</span></h6>
             </div>
             <div class="pt-4">
                 <h6>Price</h6>
-                <h4 class="font-weight-bold text-danger">{{checkedPrice}}</h4>
+                <h3 class="font-weight-bold text-danger">${{checkedPrice}}</h3>
+                <h6>Description</h6>
+                <h6 class="text-justify">{{product[0].additional_information}}</h6>
 
             </div>
             <div class="pt-4">

@@ -89,7 +89,7 @@
                 <div class="col-md-6 text-center">
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-8 text-center">
-                            <h3 class="text-white font-weight-bold text-center">ENQUIRY FORM</h3>
+                            <h3 class="text-white heading-font text-center">ENQUIRY FORM</h3>
                             <form action="{{url("saveEnquiry")}}" method="post">
                                 {{csrf_field()}}
                             <input class="form-control mt-4" type="text" name="firstname" placeholder="Name" required>
@@ -104,7 +104,7 @@
                 <div class="col-md-6 text-center">
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-8 text-center">
-                            <h3 class="text-white font-weight-bold text-center">LOCATION</h3>
+                            <h3 class="text-white heading-font text-center">LOCATION</h3>
                         </div>
                     </div>
                 </div>

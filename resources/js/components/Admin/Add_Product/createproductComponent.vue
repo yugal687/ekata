@@ -6,20 +6,7 @@
                     <el-form :model="productForm" :rules="productRules" ref="productForm"
                              :label-position="labelPosition" class="demo-productForm">
                         <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <el-form-item label="Select Image" prop="imageSelect">
-                                    <el-upload
-                                        action=""
-                                        class="upload-demo"
-                                        ref="upload"
-                                        :auto-upload="false"
-                                        :file-list="files"
-                                        multiple>
-                                        <el-button slot="trigger" size="small" type="primary">select file</el-button>
-                                    </el-upload>
-                                </el-form-item>
-                            </div>
-                            <div class="col-md-8 col-sm-12">
+                            <div class="col-md-12 col-sm-12">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <el-form-item label="Select Category/Sub-Category" prop="subcategorySelect">
@@ -74,7 +61,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <el-form-item label="Price" prop="costPrice">
                                     <el-input placeholder="Place price"
                                               v-model.number="productForm.costPrice"
@@ -83,7 +70,7 @@
                                     </el-input>
                                 </el-form-item>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <el-form-item label="Tags" prop="tagsSelect">
                                     <el-select
                                         v-model="productForm.tagsSelect"
@@ -96,6 +83,19 @@
                                             :value="item.id">
                                         </el-option>
                                     </el-select>
+                                </el-form-item>
+                            </div>
+                            <div class="col-md-4">
+                                <el-form-item label="Select Image" prop="imageSelect">
+                                    <el-upload
+                                        action=""
+                                        class="upload-demo"
+                                        ref="upload"
+                                        :auto-upload="false"
+                                        :file-list="files"
+                                        multiple>
+                                        <el-button slot="trigger" size="small" type="primary">select file</el-button>
+                                    </el-upload>
                                 </el-form-item>
                             </div>
                         </div>

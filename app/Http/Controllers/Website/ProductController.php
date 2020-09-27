@@ -19,7 +19,8 @@ class ProductController extends Controller
         $getProduct = Product::with(array('category', 'brand', 'tags', 'image' => function ($query) {
             return $query->take(1);
         }))->get();
-        $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->limit(4)->latest()->get();
+        $clearanceProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->get();
+        $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->limit(8)->latest()->get();
         $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->limit(10)->latest()->get();
         $bannerImage = BannerImage::where('active', 1)->get();
         $reviewImage = ReviewImage::where('active', 1)->get();
@@ -30,6 +31,7 @@ class ProductController extends Controller
         return view('website.index',
             [
                 'getProduct' => $getProduct,
+                'clearanceProducts' => $clearanceProducts,
                 'discountedProducts' => $discountedProducts,
                 'latestProduct' => $latestProduct,
                 'bannerImage' => $bannerImage,

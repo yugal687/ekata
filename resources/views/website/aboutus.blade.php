@@ -60,19 +60,19 @@
         <div class="missions-section">
             <div class="row text-center py-5 bg-main-primary text-white">
                 <div class="col-md-3 col-ms-6 px-5">
-                    <h3 class="mb-3" style="font-weight: bold">Who We Are</h3>
+                    <h3 class="mb-3 category-font">Who We Are</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A at cum et eveniet nesciunt</p>
                 </div>
                 <div class="col-md-3 col-ms-6 px-5">
-                    <h3  class="mb-3" style="font-weight: bold">Our Missions</h3>
+                    <h3  class="mb-3 category-font">Our Missions</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A at cum et eveniet nesciunt</p>
                 </div>
                 <div class="col-md-3 col-ms-6 px-5">
-                    <h3  class="mb-3" style="font-weight: bold">Our Promises</h3>
+                    <h3  class="mb-3 category-font">Our Promises</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A at cum et eveniet nesciunt</p>
                 </div>
                 <div class="col-md-3 col-ms-6 px-5">
-                    <h3  class="mb-3" style="font-weight: bold">Our Vibe</h3>
+                    <h3  class="mb-3 category-font">Our Vibe</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A at cum et eveniet nesciunt</p>
                 </div>
             </div>
