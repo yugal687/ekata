@@ -16,11 +16,11 @@ class CreateWebsiteDetailsTable extends Migration
         Schema::create('website_details', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->double('contact_number');
+            $table->string('contact_number');
             $table->string('address');
             $table->string('additional_information')->nullable();
-            $table->string('optional_email');
-            $table->double('optional_contact');
+            $table->string('optional_email')->nullable();
+            $table->string('optional_contact')->nullable();
             $table->timestamps();
         });
     }

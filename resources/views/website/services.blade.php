@@ -18,7 +18,7 @@
         <div class="container my-5">
             <main class="row">
                 <div class="col-md-12">
-                    <h1 class="heading-title">Services We Are Focused On</h1>
+                    <h3 class="heading-title">Services We Are Focused On</h3>
                     <p class="heading-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                         architecto autem
                         deserunt,</p>
@@ -29,7 +29,7 @@
                 <div class="col-md-4 col-sm-6 mt-3">
                     <div class="service-card-content">
                         <header class="service-card-header">
-                            <h1 class="service-card-title mb-0">{{$service->title}}</h1>
+                            <h3 class="service-card-title mb-0">{{$service->title}}</h3>
                             <time class="service-card-time">{{$service->date}}</time>
                         </header>
                         <div class="service-card-body">

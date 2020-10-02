@@ -13,6 +13,11 @@
 
     <!-- CSS
     ================================================== -->
+    <!------Fonts---------->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
@@ -44,8 +49,7 @@
                         <div class="container-mine">
                             <div class="text-center">
                                 <h3 class=" text-white font-weight-bold pl-2 mt-4">
-                                    Logo
-                                    Here</h3>
+                                    Logo Here</h3>
                             </div>
                         </div>
                     </div>
@@ -53,9 +57,8 @@
                     <div class="col-lg-10 col-md-12 m-0 p-0 ">
                         <div class="row m-0 p-0">
                             <div class="col-md-6 m-0 p-0"></div>
-                            <div class="col-md-6 bg-main-secondary rounded m-0 p-0">
+                            <div class="col-lg-6 col-md-12 bg-main-secondary rounded m-0 p-0">
                                 <div class="mx-4">
-
                                     <form action="{{url('searchedproducts')}}" method="post">
                                         @csrf
                                         <div class="input-group border-0 py-2 ">
@@ -63,7 +66,9 @@
                                                    placeholder="Search items..."
                                                    aria-label="Search items..." aria-describedby="basic-addon2">
                                             <div class="input-group-append bg-main-secondary ">
-                                                <button type="submit" class="btn bg-main-primary text-white"><i class="fas fa-search"></i>&nbsp; Search</button>
+                                                <button type="submit" class="btn bg-main-primary text-white"><i
+                                                        class="fas fa-search"></i>&nbsp; Search
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -93,40 +98,44 @@
 
 
 
-{{--Footer Section--}}
-<footer>
-    <div class="footer-container mt-4">
-        <div class="row d-flex align-items-center px-3">
-            <div class="col-md-6">
-                <div class="d-flex">
-                    <div class="p-2 my-auto">
-                        <p class="font-weight-bold">FOLLOW US:</p>
+    {{--Footer Section--}}
+    <footer>
+        <div class="footer-container footer-container-top mt-4">
+            <div class="row d-flex align-items-center px-3">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 p-2 text-md-right my-auto">
+                            <p class="font-weight-bold">FOLLOW US:</p>
+                        </div>
+                        <div class="col-sm-12 col-md-9 p-2">
+                            <img src="{{ asset('images/Icons/facebook.png') }}"
+                                 class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px" alt="">
+                            <img src="{{ asset('images/Icons/instagram.png') }}"
+                                 class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px" alt="">
+                            <img src="{{ asset('images/Icons/twitter.png') }}"
+                                 class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px" alt="">
+                        </div>
                     </div>
-                    <div class="p-2">
-                        <img src="{{ asset('images/Icons/facebook.png') }}"
-                             class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
-                        <img src="{{ asset('images/Icons/instagram.png') }}"
-                             class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
-                        <img src="{{ asset('images/Icons/twitter.png') }}"
-                             class="img-fluid footer-icons-small pr-2" style="width: 50px; height: 40px" alt="">
+                </div>
+                <div class="col-md-6">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-lg-9 col-md-8 col-12 text-md-right text-sm-center">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12">
+                            @if(count($websiteDetail) > 0)
+                                <a href="tel:{{$websiteDetail[0]->contact_number}}"
+
+                                   class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
+                                    Call Us
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="row d-flex align-items-center">
-                    <div class="col-8">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    </div>
-                    <div class="col-4">
-                        <a href="" class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
-                            Call Us
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <hr class="horzline">
         </div>
-        <hr class="horzline">
-    </div>
 
         <div class="footer-container">
             <div class="row" id="details">
@@ -162,62 +171,71 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-12 text-center">
+                <div class="col-md-3 col-sm-6 pl-5">
+                    <div class="row">
+                        <div class="col-12">
                             <h4 class="font-weight-bold">Our Services</h4>
                         </div>
-                        <ul class="list-unstyled mt-4">
-                            <li class="list">Nepalese Foods</li>
-                            <li class="list">Indian Foods</li>
-                            <li class="list">Pakistani Foods</li>
-                            <li class="list">Bangladeshi Foods</li>
-                        </ul>
+                        <div class="col-12">
+                            <ul class="list-unstyled mt-4">
+                                <li class="list">Nepalese Foods</li>
+                                <li class="list">Indian Foods</li>
+                                <li class="list">Pakistani Foods</li>
+                                <li class="list">Bangladeshi Foods</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-12 text-center">
+                <div class="col-md-3 col-sm-6 pl-5">
+                    <div class="row">
+                        <div class="col-12">
                             <h4 class="font-weight-bold">Opening Hours</h4>
                         </div>
-                        <ul class="list-unstyled mt-4">
-                            <li class="list">Mon: 9am-6pm</li>
-                            <li class="list">Tue: 9am-6pm</li>
-                            <li class="list">Wed: 9am-6pm</li>
-                            <li class="list">Thus: 9am-6pm</li>
-                            <li class="list">Fri: 9am-6pm</li>
-                            <li class="list" style="color: red">Sat-Sun: closed</li>
-                        </ul>
+                        <div class="col-12">
+                            <ul class="list-unstyled mt-4">
+                                <li class="list">Mon: 9am-6pm</li>
+                                <li class="list">Tue: 9am-6pm</li>
+                                <li class="list">Wed: 9am-6pm</li>
+                                <li class="list">Thus: 9am-6pm</li>
+                                <li class="list">Fri: 9am-6pm</li>
+                                <li class="list" style="color: red">Sat-Sun: closed</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-12 text-center">
+                <div class="col-md-2 col-sm-6 pl-5">
+                    <div class="row">
+                        <div class="col-12">
                             <h4 class="font-weight-bold">Contact Us</h4>
                         </div>
-                        <ul class="list-unstyled mt-4">
-                            @if(count($websiteDetail) > 0)
-                                <li class="list">
-                                    <a href="tel:{{$websiteDetail[0]->contact_number}}">{{$websiteDetail[0]->contact_number}}</a>
-                                </li>
-                                <li class="list">
-                                    <a href="tel:{{$websiteDetail[0]->optional_contact}}">{{$websiteDetail[0]->optional_contact}}</a>
-                                </li>
-                                <li class="list">
-                                    <a href="mailto:{{$websiteDetail[0]->email}}">{{$websiteDetail[0]->email}}</a>
-                                </li>
-                                <li class="list">
-                                    <address>
-                                        <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678"
-                                           target="_blank">
-                                            {{$websiteDetail[0]->address}}
-                                        </a>
-                                    </address>
-                                </li>
-                            @endif
-                        </ul>
+                        <div class="col-12">
+                            <ul class="list-unstyled mt-4">
+                                @if(count($websiteDetail) > 0)
+                                    <li class="list">
+                                        <a href="tel:{{$websiteDetail[0]->contact_number}}">{{$websiteDetail[0]->contact_number}}</a>
+                                    </li>
+                                    <li class="list">
+                                        <a href="tel:{{$websiteDetail[0]->optional_contact}}">{{$websiteDetail[0]->optional_contact}}</a>
+                                    </li>
+                                    <li class="list">
+                                        <a href="mailto:{{$websiteDetail[0]->email}}">{{$websiteDetail[0]->email}}</a>
+                                    </li>
+                                    <li class="list">
+                                        {{--<a href="mailto:{{$websiteDetail[0]->optional_email}}">{{$Details->optional_email}}</a>--}}
+                                    </li>
+                                    <li class="list">
+                                        <address>
+                                            <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678"
+                                               target="_blank">
+                                                {{$websiteDetail[0]->address}}
+                                            </a>
+                                        </address>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -229,7 +247,7 @@
 
         <div class="container">
             <div class="col-md-12">
-                <h2 class="text-center font-weight-bold" style="font-family: 'Times New Roman'">OUR DELIVERY
+                <h2 class="text-center heading-font">OUR DELIVERY
                     SERVICES:</h2>
                 <p class="text-center">
                     3020 Albion | 3020 Sunshine | 3020 Sunshine North | 3020 Sunshine West | 3021 Albanvale | 3021
@@ -255,14 +273,14 @@
 
         <div class="container-fluid">
             <div class="row pt-2" id="copyright-footer">
-                <div class="col-md-9">
-                    <p><i class="fa fa-copyright" aria-hidden="true"></i>
-                        Copyright 2020. All rights reserved. Designed by <a href="#"> Soft tech Multimedia.</a>
+                <div class="left">
+                    <p> &copy; Copyright 2020. All rights reserved. Designed by <a href="#"> Soft-Tech
+                            Multimedia.</a>
                     </p>
                 </div>
-                <div class="col-md-3">
-                    <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy
-                            Policy</a></p>
+                <div class="right">
+                    <p><a href="#"><u>Terms of use</u></a> | <a href="#"><u>Privacy
+                                Policy</u></a></p>
                 </div>
             </div>
         </div>

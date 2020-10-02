@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="col-md-9 text-center">
                                     <h4 class="font-weight-bold pb-3">EMAIL</h4>
-                                    <h6><a href="mailto:melcleaning@gmail.com">{{$Details->email}}</a></h6>
-                                    <h6><a href="mailto:melcleaning@gmail.com">{{$Details->optional_email}}</a></h6>
+                                    <h6><a href="mailto:{{$websiteDetail[0]->email}}">{{$Details->email}}</a></h6>
+                                    <h6><a href="mailto:{{$websiteDetail[0]->optional_email}}">{{$Details->optional_email}}</a></h6>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                 <div class="col-md-6 text-center">
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-8 text-center">
-                            <h3 class="text-white font-weight-bold text-center">ENQUIRY FORM</h3>
+                            <h3 class="text-white heading-font text-center">ENQUIRY FORM</h3>
                             <form action="{{url("saveEnquiry")}}" method="post">
                                 {{csrf_field()}}
                             <input class="form-control mt-4" type="text" name="firstname" placeholder="Name" required>
@@ -104,7 +104,7 @@
                 <div class="col-md-6 text-center">
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-8 text-center">
-                            <h3 class="text-white font-weight-bold text-center">LOCATION</h3>
+                            <h3 class="text-white heading-font text-center">LOCATION</h3>
                         </div>
                     </div>
                 </div>

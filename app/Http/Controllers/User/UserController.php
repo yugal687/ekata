@@ -88,12 +88,14 @@ class UserController extends Controller
 
     public function singleUserDetail()
     {
+        if (Auth::check()) {
+            $userDetail = Auth::user();
+            //dd($userDetail);
+            return response()->json([
+                'userDetail' => $userDetail
+            ]);
+        }
 
-        $userDetail = Auth::user();
-        //dd($userDetail);
-        return response()->json([
-            'userDetail' => $userDetail
-        ]);
     }
 
     public function recentOrder()
@@ -148,7 +150,7 @@ class UserController extends Controller
     public function dashboradData()
     {
 //        $latestOrder = OrderDetail::with('order', 'user', 'product')->orderBy('id', 'DESC')->get();
-        $latestOrder = OrderDetail::with('order', 'user', 'product')->where('user_id',Auth::user()->id)
+        $latestOrder = OrderDetail::with('order', 'user', 'product')->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
         return view('User.userdashboard', [
@@ -165,12 +167,12 @@ class UserController extends Controller
         if ($validate) {
             //dd($request->currentPassword);
             if (Hash::check($request->currentPassword, Auth::user()->password)) {
-                $users =User::findorFail(Auth::user()->id);
+                $users = User::findorFail(Auth::user()->id);
                 $users->password = Hash::make($request->newPassword);
                 $users->update();
             }
         }
-        if($users) {
+        if ($users) {
             return response()->json([
                 'message' => 'Password Updated !!!'
             ]);

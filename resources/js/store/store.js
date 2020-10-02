@@ -101,10 +101,14 @@ let store = {
 
     getters: {
         cartItemCount(state) {
-            return state.cartCount = JSON.parse(localStorage.getItem('cart')).length;
-        },
-    },
+            let item = JSON.parse(localStorage.getItem('cart'));
+            if (!item) {
+                return state.cartCount = 0;
+            }
+            return state.cartCount = item.length;
 
+        }
+    },
 }
 
 export default store;

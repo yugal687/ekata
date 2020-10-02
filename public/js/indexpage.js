@@ -2,8 +2,8 @@ $(document).ready(function () {
     /*Vertical Sidebar Carousel*/
     var slider = tns({
         "container": ".catg-slider",
-        gutter: 10,
-        "items": 8,
+        gutter: 13,
+        "items": 9,
         "axis": "vertical",
         "swipeAngle": false,
         "speed": 400,
@@ -100,11 +100,11 @@ $(document).ready(function () {
                     items: 1,
                     nav: true
                 },
-                576: {
+                600: {
                     items: 2,
                 },
 
-                992: {
+                993: {
                     items: 3,
                 },
 
@@ -179,8 +179,43 @@ $(document).ready(function () {
 
 
     /*Save Feedback*/
-    $("a").click(function () {
-        values = $(this).data('value'); // would be 5
+    $('#stars li').on('mouseover', function () {
+        var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+        // Now highlight all the stars that's not after the current hovered star
+        $(this).parent().children('li.star').each(function (e) {
+            if (e < onStar) {
+                $(this).addClass('hover');
+            } else {
+                $(this).removeClass('hover');
+            }
+        });
+
+    }).on('mouseout', function () {
+        $(this).parent().children('li.star').each(function (e) {
+            $(this).removeClass('hover');
+        });
+    });
+    $('#stars li').on('click', function(){
+        var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+        var stars = $(this).parent().children('li.star');
+        for (i = 0; i < stars.length; i++) {
+            $(stars[i]).removeClass('selected');
+        }
+
+        for (i = 0; i < onStar; i++) {
+            $(stars[i]).addClass('selected');
+        }
+
+        // JUST RESPONSE (Not needed)
+        ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+        var msg = "";
+        if (ratingValue > 1) {
+            msg = "Thanks! You rated this " + ratingValue + " stars.";
+        }
+        else {
+            msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+        }
     });
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
@@ -191,22 +226,32 @@ $(document).ready(function () {
             url: '/saveFeedback',
             type: 'POST',
             /* send the csrf-token and the input to the controller */
-            data: {_token: CSRF_TOKEN, rating: values, feedback: review},
+            data: {_token: CSRF_TOKEN, rating: ratingValue, feedback: review},
             dataType: 'JSON',
             /* remind that 'data' is the response of the AjaxController */
-            success: function (data) {
-                $(".writeinfo").append(data.msg);
-                alert('Feedback Sent Successfully');
-            }
-
-            /*this.$notify({
-                title: 'Success',
-                message: 'This item is successfully added to cart',
-                type: 'success'
-            });*/
+            success:function(response){
+                if(response) {
+                    $('.success-box').fadeIn(200);
+                    $('.success-box div.text-message').html("<span>" + response.success + "</span>");
+                    $("#stars li").removeClass('selected');
+                    $("#review").val(' ');
+                }
+            },
         });
     });
+    $('i.close-feedback').click(function (){
+        var successBox = document.getElementById('success_box');
+        successBox.style.display = 'none';
+    });
     /*Save Feedback Ends*/
+
+
+    var figure = $("div.catg-slider").find('figure');
+    var nextBtn = document.getElementById("next_btn")
+    if(figure.length <= 9){
+        nextBtn.style.cursor = 'not-allowed';
+    }
+
 
     /*Vertical Smsidebar Carousel | Tiny Slider | Disable for now*/
     /*var slider = tns({

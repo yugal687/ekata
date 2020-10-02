@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ekata Convenience Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--JS-->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -71,7 +69,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/userdashboard/userdashboard" class="nav-link">Home</a>
+                    <a href="/" class="nav-link">Go to Website</a>
                 </li>
             </ul>
 
@@ -140,22 +138,13 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="/user/userdashboard" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
-                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/user/userdashboard" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>User Dashboard</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="/user/userprofile" class="nav-link">
@@ -179,18 +168,34 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
+            <strong><i class="fa fa-copyright" aria-hidden="true"></i>
+                Copyright &copy; 2020. All rights reserved. Designed by <a href="#"> Soft tech Multimedia</a>
+            </strong>
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.0.3
+                <p><i class="fa fa-copyright" aria-hidden="true"></i> <a href="#">Terms of use</a> | <a href="#">Privacy Policy</a></p>
             </div>
         </footer>
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 </div>
+<!--JS-->
+<script src="{{ asset('js/app.js') }}"></script>
 <script>
-    /*$.widget.bridge('uibutton', $.ui.button)*/
+    $(function () {
+        /** add active class and stay opened when selected */
+        var url = window.location;
+
+        // for sidebar menu entirely but not cover treeview
+        $('ul.nav-sidebar a').filter(function () {
+            return this.href == url;
+        }).addClass('active');
+
+        // for treeview
+        $('ul.nav-treeview a').filter(function () {
+            return this.href == url;
+        }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+    });
 </script>
 
 @yield('scripts')

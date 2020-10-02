@@ -38,7 +38,7 @@
             margin-bottom: 0;
             width: 100%;
             box-sizing: border-box;
-            font-family: montserrat;
+            font-family: 'Lato', sans-serif;
             color: #2C3E50;
             font-size: 13px;
         }
@@ -57,6 +57,7 @@
 
         /*buttons*/
         #shipping-payment-form .action-button {
+            font-family: 'Lato', sans-serif;
             width: auto;
             background: #CF7500;
             font-weight: bold;
@@ -90,7 +91,8 @@
 
         /*headings*/
         .fs-title {
-            font-size: 18px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.5rem;
             text-transform: uppercase;
             color: #2C3E50;
             margin-bottom: 10px;
@@ -99,8 +101,9 @@
         }
 
         .fs-subtitle {
+            font-family: 'Lato', sans-serif;
             font-weight: normal;
-            font-size: 13px;
+            font-size: 1rem;
             color: #666;
             margin-bottom: 20px;
         }
@@ -140,7 +143,6 @@
         .progressbar-dots {
             display: inline-flex;
             border: #949494 solid 4px;
-            background: #333333;
             height: 20px;
             width: 20px;
             border-radius: 50%;
@@ -152,7 +154,6 @@
             font-size: 20px;
             margin-left: 0px;
             color: #d4d4d4;
-            border: 0px solid rgb(217, 217, 217);
             background: rgb(217, 217, 217);
         }
 
@@ -169,8 +170,8 @@
 
         .progressbar-dots.active {
             color: #fff;
-            border: 5px solid rgb(38, 163, 134);
-            background: #82CCC8;
+            border: 5px solid #ff7500;
+            background: #f0a500;
         }
 
         /*  Tab */
@@ -225,13 +226,55 @@
         $(function () {
 
             /*Validation if Checkbox is checked*/
+
             $(".next").click(function () {
+                /*Billing*/
+                var fname_billing = $("#first_name_billing").val();
+                var lname_billing = $("#last_name_billing").val();
+                var address_billing = $("#address_billing").val();
+                var suburb_billing = $("#suburb_billing").val();
+                var postalCode_billing = $("#postal_code_billing").val();
+                var state_billing = $("#state_billing").val();
+                var email_billing = $("#email_billing").val();
+                var contactNumber_billing = $("#contact_number_billing").val();
+                var regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
+
+
+                $('input').on("keypress", function () {
+                    if (fname_billing.length !== null) {
+                        $("#p1_billing").text("");
+                    }
+                    if (lname_billing.length !== null) {
+                        $("#p2_billing").text("");
+                    }
+                    if (address_billing.length !== null) {
+                        $("#p3_billing").text("");
+                    }
+                    if (suburb_billing.length !== null) {
+                        $("#p4_billing").text("");
+                    }
+                    if (postalCode_billing.length !== null) {
+                        $("#p5_billing").text("");
+                    }
+                    if (email_billing.length !== null) {
+                        $("#p6_billing").text("");
+                    }
+                    if (contactNumber_billing.length !== null) {
+                        $("#p7_billing").text("");
+                    }
+                    if (state_billing.length !== null) {
+                        $("#p8_billing").text("");
+                    }
+                });
+
                 if ($("#toggleShippingAddress").is(':checked')) {
+                    /*Shipping*/
                     var fname = $("#firstname").val();
                     var lname = $("#lastname").val();
                     var address = $("#address").val();
                     var suburb = $("#suburb").val();
                     var postalcode = $("#postal_code").val();
+                    var state = $("#state").val();
                     var email = $("#email").val();
                     var contactnumber = $("#contact_number").val();
                     var regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
@@ -258,34 +301,42 @@
                         if (contactnumber.length !== null) {
                             $("#p7").text("");
                         }
+                        if (state.length !== null) {
+                            $("#p7").text("");
+                        }
                     });
                     if (fname.length == "") {
-                        $("#p1").text("Please fill your first name");
+                        $("#p1").text("Please fill up your first name");
                         $("#firstname").focus();
                         return false;
                     }
                     if (lname.length == "") {
-                        $("#p2").text("Please fill your last name");
+                        $("#p2").text("Please fill up your last name");
                         $("#lastname").focus();
                         return false;
                     }
                     if (address.length == "") {
-                        $("#p3").text("Please fill your address");
+                        $("#p3").text("Please fill up your address");
                         $("#address").focus();
                         return false;
                     }
                     if (suburb.length == "") {
-                        $("#p4").text("Please fill your suburb name");
+                        $("#p4").text("Please fill up your suburb name");
+                        $("#suburb").focus();
+                        return false;
+                    }
+                    if (state.length == "") {
+                        $("#p8").text("Please fill up your state name");
                         $("#suburb").focus();
                         return false;
                     }
                     if (postalcode.length == "") {
-                        $("#p5").text("Please fill postal code");
+                        $("#p5").text("Please fill up your postal code");
                         $("#postal_code").focus();
                         return false;
                     }
                     if (email.length == "") {
-                        $("#p6").text("Please fill email address");
+                        $("#p6").text("Please fill up your email address");
                         $("#postal_code").focus();
                         return false;
                     }
@@ -295,12 +346,12 @@
                         return false;
                     }
                     if (contactnumber.length == "") {
-                        $("#p7").text("Please fill your contact number");
+                        $("#p7").text("Please fill up your contact number");
                         $("#contact_number").focus();
                         return false;
                     }
                     if (contactnumber.length < 10) {
-                        $("#p7").text("Contact numbers must be at least 10 digits long");
+                        $("#p7").text("Contact number must be at least 10 digits long");
                         $("#contact_number").focus();
                         return false;
                     } else {
@@ -309,7 +360,47 @@
                         $('.progressbar-dots').removeClass('active');
                         $('.progressbar-dots:nth-child(2)').addClass('active');
                     }
-                } else {
+                } else if (fname_billing.length == "") {
+                    $("#p1_billing").text("Please fill up your first name");
+                    $("#first_name_billing").focus();
+                    return false;
+                }else if (lname_billing.length == "") {
+                    $("#p2_billing").text("Please fill up your last name");
+                    $("#last_name_billing").focus();
+                    return false;
+                }else if (address_billing.length == "") {
+                    $("#p3_billing").text("Please fill up your address");
+                    $("#address_billing").focus();
+                    return false;
+                } else if (suburb_billing.length == "") {
+                    $("#p4_billing").text("Please fill up your suburb name");
+                    $("#suburb_billing").focus();
+                    return false;
+                }else if (state_billing.length == "") {
+                    $("#p8_billing").text("Please fill up your state name");
+                    $("#suburb_billing").focus();
+                    return false;
+                } else if (postalCode_billing.length == "") {
+                    $("#p5_billing").text("Please fill up your postal code");
+                    $("#postal_code_billing").focus();
+                    return false;
+                } else if (email_billing.length == "") {
+                    $("#p6_billing").text("Please fill up your email address");
+                    $("#email_billing").focus();
+                    return false;
+                } else if (!regExp.test(email_billing)) {
+                    $("#p6_billing").text("Please fill up your valid email");
+                    $("#email_billing").focus();
+                    return false;
+                } else if (contactNumber_billing.length == "") {
+                    $("#p7_billing").text("Please fill up your contact number");
+                    $("#contact_number_billing").focus();
+                    return false;
+                } else if (contactNumber_billing.length < 10) {
+                    $("#p7_billing").text("Contact number must be at least 10 digits long");
+                    $("#contact_number_billing").focus();
+                    return false;
+                }else {
                     $(".tab-pane").hide();
                     $("#step2").fadeIn(1000);
                     $('.progressbar-dots').removeClass('active');
@@ -357,46 +448,6 @@
                 $('.progressbar-dots').removeClass('active');
                 $('.progressbar-dots:nth-child(3)').addClass('active');
             });
-
-            // This function displays Smart Payment Buttons on your web page.
-            /*  paypal.Button.render({
-                  // Configure environment
-                  env: 'sandbox',
-                  client: {
-                      sandbox: 'demo_sandbox_client_id',
-                      production: 'demo_production_client_id'
-                  },
-                  // Customize button (optional)
-                  locale: 'en_US',
-                  style: {
-                      size: 'medium',
-                      color: 'gold',
-                      shape: 'pill',
-                  },
-
-                  // Enable Pay Now checkout flow (optional)
-                  commit: true,
-
-                  // Set up a payment
-                  payment: function (data, actions) {
-                      return actions.payment.create({
-                          transactions: [{
-                              amount: {
-                                  total: '0.01',
-                                  currency: 'AUD',
-                              }
-                          }]
-                      });
-                  },
-                  // Execute the payment
-                  onAuthorize: function (data, actions) {
-                      return actions.payment.execute().then(function () {
-                          // Show a confirmation message to the buyer
-                          window.alert('Thank you for your purchase!');
-                      });
-                  }
-              }, '#paypal-button');
-  */
         });
 
 

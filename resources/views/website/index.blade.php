@@ -12,6 +12,14 @@
 @stop
 
 @section('content')
+    {{--FeedBack Message--}}
+    <div class='success-box' id="success_box">
+        <img alt='tick image' width='32' src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K'/>
+        <div class='text-message'></div>
+        <i class="fas fa-times close-feedback"></i>
+    </div>
+    {{--Feedback Message Ends--}}
+
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
@@ -19,12 +27,12 @@
                 <div class="row">
                     <div class="col-12 bg-main-secondary">
                         <div class="cate">
-                            <h3 class="text-center text-dark mt-2 font-weight-bold">CATEGORY</h3>
+                            <h3 class="text-center text-dark mt-2 category-font">CATEGORY</h3>
                         </div>
                     </div>
                 </div>
                 <div class="row index-sidebar-section">
-                    <div class="col-12">
+                    <div class="col-12 mx-auto" style="max-width: 90%;">
                         {{--Include Sidebar Here--}}
                         @include('layouts.website.indexsidebar')
                     </div>
@@ -47,60 +55,59 @@
 
                 <!-- clearence section starts here -->
                 <section id="clearence_section">
-                    <div class="row m-0 p-0 mt-4">
-                        <div class="container">
-                            <div class="col-md-12">
-                                <div class="card border-0 bg-light">
-                                    <div class="card-header bg-main-secondary py-3 card-rounded-top">
-                                        <h2 class="font-weight-bold text-center mt-2">CLEARENCE</h2>
-                                    </div>
+                    <div class="row m-0 p-0 mt-5 mx-md-5 mx-0">
+                        <div class="col-md-12">
+                            <div class="card border-0">
+                                <div class="card-header bg-main-secondary card-rounded-top">
+                                    <h2 class="text-center heading-font mb-0">CLEARANCE</h2>
+                                </div>
 
-                                    <div class="card-body bg-product-light rounded-bottom-front card-bdy ">
+                                <div class="card-body bg-product-light rounded-bottom-front card-bdy ">
 
-                                        <div id="clearence_carousel"
-                                             class="owl-carousel owl-carousel owl-theme px-3  py-2">
-                                            @foreach ($discountedProducts as $discountedProduct)
+                                    <div id="clearence_carousel"
+                                         class="owl-carousel owl-carousel owl-theme px-3  py-2">
+                                        @foreach ($clearanceProducts as $discountedProduct)
 
-                                                <div
-                                                    class="item text-center rounded-top-front rounded-bottom-front">
-                                                    <div class="row d-flex justify-content-center align-items-center">
-                                                        <a href="{{ route('singleproduct',$discountedProduct->id)}}">
+                                            <div
+                                                class="item text-center rounded-top-front rounded-bottom-front">
+                                                <div class="row d-flex justify-content-center align-items-center">
+                                                    <a href="{{ route('singleproduct',$discountedProduct->id)}}">
 
-                                                            <div class="col-12">
-                                                                <div
-                                                                    class="img-div bg-product-medium-2 px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                                    <div class="ribbon-wrapper ribbon-lg">
-                                                                        <div class="ribbon bg-main-secondary text-dark">
-                                                                            clearance
-                                                                        </div>
+                                                        <div class="col-12">
+                                                            <div
+                                                                class="img-div bg-product-medium-2 px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                                <div class="ribbon-wrapper ribbon-lg">
+                                                                    <div
+                                                                        class="ribbon bg-main-secondary text-dark discount-font">
+                                                                        clearance
                                                                     </div>
-                                                                    <img src="{{$discountedProduct->image[0]->name}}"
-                                                                         width="150" alt="">
                                                                 </div>
+                                                                <img src="{{$discountedProduct->image[0]->name}}"
+                                                                     width="150" alt="">
                                                             </div>
-                                                            <div class="col-12">
-                                                                <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                                                    <s>${{$discountedProduct->price}}</s></h5>
-                                                                <h5 class="best_price font-weight-bold text-main-primary">
-                                                                    ${{$discountedProduct->sale_price}}</h5>
-                                                                <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
-                                                                <h5 class="best_weight py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                                                <button type="button"
-                                                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
-                                                                    Add to Cart
-                                                                </button>
-                                                            </div>
-                                                        </a>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <h5 class="pt-3 font-weight-bold text-main-danger">
+                                                                <s> was {{$discountedProduct->price}}</s></h5>
+                                                            <h5 class="product-price font-weight-bold text-main-danger">
+                                                                ${{$discountedProduct->sale_price}}</h5>
+                                                            <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                                            <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
+                                                            <button type="button"
+                                                                    class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block mx-auto">
+                                                                Add to Cart
+                                                            </button>
+                                                        </div>
+                                                    </a>
 
-                                                    </div>
                                                 </div>
-                                            @endforeach
-
-                                        </div>
+                                            </div>
+                                        @endforeach
 
                                     </div>
 
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -115,94 +122,99 @@
 
     <div class="new_arrival_section1">
         <div class="container-mine">
-            <div class="row m-0 p-0 mt-5">
-                <div class="col-md-12  mb-5">
+            <div class="row m-0 p-0 mt-5 mb-4">
+                <div class="col-md-12">
                     <div class="top-title">
-                        <h3 class="font-weight-bold d-inline bg-main-primary px-3 pb-1 rounded-top-front new-arrival-tag text-white">
+                        <h3 class="d-inline bg-main-primary px-3 rounded-top-front heading-font text-white">
                             NEW ARRIVALS
                         </h3>
                     </div>
                 </div>
             </div>
-            <div id="new_arrival_carousel_item" class="owl-carousel owl-theme m-0 p-0">
-                @foreach($latestProduct as $lastproduct)
+            <div class="container-mine-3">
+                <div id="new_arrival_carousel_item" class="owl-carousel owl-theme m-0 p-0">
+                    @foreach($latestProduct as $lastproduct)
+                        <div class="item">
+                            <div class="">
+                                <div class="row m-0 p-0 my-4">
 
-                    <div class="item">
-                        <div class="container">
-                            <div class="row m-0 p-0 my-4">
-
-                                <div
-                                    class="col-md-6 px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                    <img src="{{$lastproduct->image[0]->name}}" class="img-fluid py-3 px-5"
-                                         alt="">
-                                </div>
-                                <div class="col-md-6 mt-md-0 mt-3">
-                                    <div class="container h-100 d-flex justify-content-center align-items-center">
-                                        <dl class="row">
-                                            <dt class="col-sm-5">
-                                                <h5 class="font-weight-bold">Product Name&nbsp;&nbsp;&nbsp;:</h5>
-                                            </dt>
-                                            <dd class="col-sm-7">
-                                                <a href="{{ route('singleproduct',$lastproduct->id)}}">
-                                                    <!-- product name here -->
-                                                    <h5 class="font-weight-normal">{{$lastproduct->product_name}}</h5>
-                                                </a>
-                                            </dd>
-
-                                            <dt class="col-sm-5 font-weight-bold ">
-                                                <h5 class="font-weight-bold">Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                            </dt>
-                                            <dd class="col-sm-7">
-                                                <!-- product category here -->
-                                                <h5 class="font-weight-normal">{{$lastproduct->category->category_name}}</h5>
-                                            </dd>
-
-                                            <dt class="col-sm-5 font-weight-bold ">
-                                                <h5 class="font-weight-bold">Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                            </dt>
-                                            <dd class="col-sm-7"
-                                                style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                                                <!-- product description here -->
-                                                <h5 class="font-weight-normal ">{{$lastproduct->additional_information}}</h5>
-                                            </dd>
-
-
-                                            <dt class="col-sm-5 font-weight-bold">
-                                                <h5 class="font-weight-bold">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h5>
-                                            </dt>
-                                            <dd class="col-sm-7">
-                                                <!-- product price here -->
-                                                <h5 class="font-weight-bold text-main-secondary">
-                                                    ${{$lastproduct->price}}</h5>
-                                            </dd>
-
-                                            <div class="col-sm-12">
-                                                <a href="{{ route('singleproduct',$lastproduct->id) }}" type="button"
-                                                        class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front rounded-bottom-front">
-                                                    Add to Cart
-                                                </a>
+                                    <div
+                                        class="col-md-6">
+                                        <div
+                                            class="px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
+                                            <img src="{{$lastproduct->image[0]->name}}" class="img-fluid"
+                                                 alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-md-0 mt-3 new-arrival-item-details">
+                                        <div class="">
+                                            <div class="row mb-3 mt-3">
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">Product
+                                                        Name<span>:</span></h5></div>
+                                                <div class="col-lg-7 col-sm-8 col-12">
+                                                    <a href="{{ route('singleproduct',$lastproduct->id)}}">
+                                                        <!-- product name here -->
+                                                        <h5 class="text-dark">{{$lastproduct->product_name}}</h5>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </dl>
+                                            <div class="row mb-3">
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">Category<span>:</span></h5>
+                                                </div>
+                                                <div class="col-lg-7 col-sm-8 col-12">
+                                                    <h5 class="">{{$lastproduct->category->category_name}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">
+                                                        Description<span>:</span></h5></div>
+                                                <div class="col-lg-7 col-sm-8 col-12">
+                                                    <h5 class=""
+                                                        style="text-align: justify">{{$lastproduct->additional_information}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">Price<span>:</span></h5>
+                                                </div>
+                                                <div class="col-lg-7 col-sm-8 col-12">
+                                                    <h5 class="text-main-danger font-weight-bold">
+                                                        $ {{$lastproduct->price}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="{{ route('singleproduct',$lastproduct->id) }}"
+                                                       type="button"
+                                                       class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn">
+                                                        Add to Cart
+                                                    </a>
+                                                </div>
+                                            </div>
 
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
-
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
 
+                </div>
             </div>
         </div>
-        <section id="general-slider" class="bg-product-light mt-0 mt-md-5">
-            <div class="container">
-                <div class="card-body bg-product-light rounded-bottom-front card-bdy">
-                    <div id="new_items" class="owl-carousel owl-theme px-3">
+        <section id="general-slider" class="bg-product-light mt-md-5">
+            <div class="container-mine">
+                <div class="bg-product-light card-bdy px-4">
+                    <div id="new_items" class="owl-carousel owl-theme px-4">
                         @foreach($latestProduct as $lastproduct)
                             <div class="item text-center d-flex justify-content-center align-items-center">
 
                                 <div class="new_items_img">
-                                    <div class="row m-4">
+                                    <div class="row m-3">
                                         <div
                                             class="col-12 bg-product-medium rounded-top-front rounded-bottom-front">
 
@@ -210,8 +222,8 @@
                                                  class="img-fluid p-2"
                                                  alt="">
                                         </div>
-                                        <div class="col-12 mt-3 mb-2">
-                                            <h6>{{$lastproduct->product_name}}</h6>
+                                        <div class="col-12 mt-4 mb-2">
+                                            <h5>{{$lastproduct->product_name}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -227,28 +239,29 @@
     <!-- best selling section starts here -->
     <section id="best-selling-section">
         <div class="best-selling bg-main-primary">
-            <div class="container">
-                <div class="row m-0 p-0 py-5">
-                    <div class="col-lg-3 col-md-6 col-sm-6 py-3">
-                        <img src="{{ asset('images/best_selling.png')}}" width="100%" alt="">
+            <div class="container-mine pb-5">
+                <div class="row m-0 py-2 px-4">
+                    <div class="col-lg-3 col-md-6 col-sm-6 pt-5">
+                        <img src="{{ asset('images/Homepage/Best_selling.png')}}" width="100%" alt="">
                         <div
-                            class="card-body bg-main-secondary border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag">
-                            <h3 class="font-weight-bold pb-0">BEST SELLING</h3>
-                            <h6 class="font-weight-bold pt-0">Best of all time</h6>
+                            class="bg-main-secondary border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag">
+                            <h2 class="heading-font pb-0">BEST SELLING</h2>
+                            <h5 class="pt-0">Best of all time</h5>
                         </div>
                     </div>
                     @foreach($bestSelling as $best)
-                        <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mt-lg-0 text-center">
+                        <div class="col-lg-3 col-md-6 col-sm-6 pt-5 text-center">
                             <a href="{{route('singleproduct',$best->id)}}">
                                 <div
                                     class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                                     <img src="{{$best->image[0]->name}}" class="img-fluid" alt="">
                                 </div>
-                                <h5 class="best_price pt-3 pb-2 font-weight-bold text-white ">${{$best->price}}</h5>
-                                <h5 class="best_name py-0 text-white ">{{$best->product_name}}</h5>
-                                <h5 class="best_weight py-0 text-white ">{{$best->brand->brand_name}}</h5>
+                                <h5 class="product-price pt-3 font-weight-bold text-white ">${{$best->price}}</h5>
+                                <h5 class=" text-white ">{{$best->product_name}}</h5>
+                                <h5 class="brand-name text-white ">{{$best->brand->brand_name}}</h5>
                                 <button type="button"
-                                        class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block mx-auto">
+                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-4 d-block mx-auto"
+                                        style="width: 80%">
                                     Add to Cart
                                 </button>
                             </a>
@@ -266,33 +279,34 @@
             <div class="row m-0 p-0 my-5">
                 <div class="col-md-12 mt-5">
                     <div class="top-title">
-                        <h3 class="font-weight-bold d-inline bg-main-primary px-5 pb-1 rounded-top-front new-arrival-tag text-white">
+                        <h3 class="d-inline bg-main-primary px-5 rounded-top-front heading-font text-white">
                             SPECIALS</h3>
                     </div>
                 </div>
                 <!-- <div class="container"> -->
                 <!-- <div class="special-content"> -->
-                <div class="row align-items-center mt-4">
+                <div class="row align-items-center">
                     @foreach ($discountedProducts as $discountedProduct)
-                        <div class="col-md-3 col-sm-6" style="">
+                        <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
                             <div class="row d-flex justify-content-center text-center">
                                 <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
                                     <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
-                                        <div class="ribbon bg-main-secondary">
+                                        <div class="ribbon bg-main-secondary discount-font">
                                             {{$discountedProduct->discount}}%off
                                         </div>
                                     </div>
                                     <div
                                         class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
-                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid my-3" alt="">
+                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
                                     </div>
-                                    <h5 class="best_price pt-3 font-weight-bold text-main-danger">
-                                        <s>was ${{$discountedProduct->price}}</s></h5>
-                                    <h5 class="best_price font-weight-bold text-main-danger">
+                                    <h5 class="pt-3 font-weight-bold text-main-danger">
+                                        <s>was {{$discountedProduct->price}}</s></h5>
+                                    <h5 class="product-price font-weight-bold text-main-danger">
                                         ${{$discountedProduct->sale_price}}</h5>
-                                    <h5 class="best_name py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                    <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
+                                    <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
                                     <button type="button"
-                                            class="mx-auto btn bg-main-primary rounded-top-front rounded-bottom-front border text-white px-5 mt-2 d-block">
+                                            class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -311,12 +325,11 @@
         <div class="section-bar bg-main-primary mt-5"></div>
         <div class="container-mine">
             <div class="row m-0 p-0 w-100">
-                <div class="col-md-7">
+                <div class="col-md-12 col-lg-7">
                     <div class="reviews bg-main-primary rounded-top-front rounded-bottom-front pt-4 pb-0">
                         <div class="circle-1"></div>
                         <div class="circle-2"></div>
-                        <h3 class="font-weight-bold text-center bg-main-primary mb-3 py-3 text-white"
-                            style="font-family: 'Times New Roman'">REVIEWS</h3>
+                        <h3 class="heading-font text-center bg-main-primary mb-3 py-3 text-white">REVIEWS</h3>
                         <div class="row m-0 p-0 text-white" style="font-family: serif">
                             <div class="col-md-7">
                                 <div class="row mx-2">
@@ -324,21 +337,37 @@
                                         <h5 class="">Give us your reviews</h5>
                                     </div>
                                     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-                                    <div class="col-12 mt-3">
+                                    <!-- Rating Stars Box -->
+
+                                    <div class='col-12 rating-widget text-center mt-2'>
+                                        <!-- Rating Stars Box -->
+                                        <div class='rating-stars text-center'>
+                                            <ul id='stars'>
+                                                <li class='star' title='Poor' data-value='1'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Fair' data-value='2'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Good' data-value='3'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Excellent' data-value='4'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='WOW!!!' data-value='5'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
                                         <textarea class="form-control" rows="7" id="review"
                                                   placeholder="Your Feedback" required></textarea>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <div class="reviews-rating">
-                                            <a href="#5" title="Give 5 stars" data-value="5">★</a>
-                                            <a href="#4" title="Give 4 stars" data-value="4">★</a>
-                                            <a href="#3" title="Give 3 stars" data-value="3">★</a>
-                                            <a href="#2" title="Give 2 stars" data-value="2">★</a>
-                                            <a href="#1" title="Give 1 star" data-value="1">★</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <input class="btn border-white text-white mt-3 px-4" type="submit"
+                                        <input class="btn border-white text-white mt-4 px-4" type="submit"
                                                id="saveFeedback" value="Send">
                                     </div>
                                 </div>
@@ -367,17 +396,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 ">
+                <div class="col-md-12 col-lg-5 ">
                     <div class="signup bg-main-secondary rounded-top-front rounded-bottom-front py-4">
                         <div class="circle-3"></div>
                         <div class="circle-4"></div>
-                        <h3 class="text-white font-weight-bold text-center">ENQUIRY FORM</h3>
+                        <h3 class="heading-font text-white text-center">ENQUIRY FORM</h3>
                         <div class="container px-5">
                             <form action="{{url("saveEnquiry")}}" method="post">
                                 {{csrf_field()}}
-                                <input class="form-control mt-4" type="text" name="firstname" placeholder="Name" required>
-                                <input class="form-control mt-3" type="email" name="email" placeholder="E-mail" required>
-                                <input class="form-control mt-3" type="number" name="phone" placeholder="Phone No." required>
+                                <input class="form-control mt-4" type="text" name="firstname" placeholder="Name"
+                                       required>
+                                <input class="form-control mt-3" type="email" name="email" placeholder="E-mail"
+                                       required>
+                                <input class="form-control mt-3" type="number" name="phone" placeholder="Phone No."
+                                       required>
                                 <textarea class="form-control mt-3" rows="5" name="description"
                                           placeholder="Description" required></textarea>
                                 <div class="row mt-4">
@@ -396,17 +428,16 @@
     <!-- About Us Section -->
     <section id="about-section">
         <div class="container-fluid bg-main-primary">
-            <div class="container py-5">
+            <div class="container-mine-4 py-5">
                 <div class="row py-4">
-                    <div class="col-md-6 px-5 about-us-img">
+                    <div class="col-md-7 about-us-img">
                         <img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" width=""
                              height="" class="img-fluid" alt="">
                     </div>
-                    <div class="col-md-6 px-5">
+                    <div class="col-md-5">
                         <div class="row text-center mt-2">
                             <div class="col-12">
-                                <h3 class="text-white font-weight-bold" style="font-family: 'Times New Roman'">ABOUT
-                                    US</h3>
+                                <h3 class="text-white heading-font">ABOUT US</h3>
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -425,7 +456,7 @@
                         </div>
                         <div class="row mt-3 text-center d-flex justify-content-center">
                             <a type="button" href="/aboutus"
-                               class="btn btn-white border text-white px-5 mt-2 d-block">
+                               class="btn btn-white border text-white px-5 mt-2 d-block rounded-top-front-btn rounded-bottom-front-btn">
                                 Read More
                             </a>
                         </div>
@@ -441,6 +472,5 @@
 @section('scripts')
     <script src="{{ asset('js/indexpage.js') }}"></script>
     <script>
-
     </script>
 @stop

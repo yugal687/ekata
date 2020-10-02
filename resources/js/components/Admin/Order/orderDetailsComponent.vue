@@ -12,10 +12,6 @@
                         max-height="470"
                         style="width: 100%">
                         <el-table-column
-                            type="selection"
-                            width="55">
-                        </el-table-column>
-                        <el-table-column
                             type="index"
                             label="S.N."
                             width="60">
@@ -30,8 +26,12 @@
                         </el-table-column>
 
                         <el-table-column
-                            prop="user.first_name"
+                            prop="order.first_name"
                             label="User Name">
+                        </el-table-column>
+                        <el-table-column
+                            prop="order.registered_user"
+                            label="User Id">
                         </el-table-column>
                         <el-table-column
                             prop="order.total_price"
@@ -58,7 +58,7 @@
                                            round
                                            @click="showDetails(scope.row.id)">
                                 </el-button>
-                                <el-button type="primary"
+                                <el-button type="success"
                                            size="mini"
                                            icon="fas fa-check"
                                            round
@@ -93,19 +93,19 @@
                                     Address
                                 </dt>
                                 <dd class="col-sm-8" >
-                                    {{data.user.address}}
+                                    {{data.order.shipping_address}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     City
                                 </dt>
                                 <dd class="col-sm-8">
-                                    {{data.user.state}}
+                                    {{data.order.state}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Postal Code
                                 </dt>
                                 <dd class="col-sm-8">
-                                    {{data.user.postal_code}}
+                                    {{data.order.postal_code}}
                                 </dd>
                             </dl>
                         </div>
@@ -121,13 +121,13 @@
                                     Email
                                 </dt>
                                 <dd class="col-sm-8">
-                                    {{data.user.email}}
+                                    {{data.order.email}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Contact
                                 </dt>
                                 <dd class="col-sm-8" >
-                                    {{data.user.contact_number}}
+                                    {{data.order.contact_number}}
                                 </dd>
                                 </dl>
                         </div>

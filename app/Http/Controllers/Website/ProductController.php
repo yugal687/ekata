@@ -19,7 +19,8 @@ class ProductController extends Controller
         $getProduct = Product::with(array('category', 'brand', 'tags', 'image' => function ($query) {
             return $query->take(1);
         }))->get();
-        $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->limit(4)->latest()->get();
+        $clearanceProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->get();
+        $discountedProducts = Product::with(array('category', 'brand', 'tags', 'image'))->where('discount', '>', 0)->limit(8)->latest()->get();
         $latestProduct = Product::with(array('category', 'brand', 'tags', 'image'))->limit(10)->latest()->get();
         $bannerImage = BannerImage::where('active', 1)->get();
         $reviewImage = ReviewImage::where('active', 1)->get();
@@ -30,6 +31,7 @@ class ProductController extends Controller
         return view('website.index',
             [
                 'getProduct' => $getProduct,
+                'clearanceProducts' => $clearanceProducts,
                 'discountedProducts' => $discountedProducts,
                 'latestProduct' => $latestProduct,
                 'bannerImage' => $bannerImage,
@@ -41,7 +43,7 @@ class ProductController extends Controller
     }
     public function showCategory($id){
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
-        $getsingleCategory = Category::where('id',$id)->with('product','parent','children')->get();
+        $getsingleCategory = Category::where('id',$id)->with(['product','parent','children'])->get();
         $getWebsiteDetail = WebsiteDetail::all();
         //dd($getsingleCategory);
         return view('website.category',
@@ -73,7 +75,8 @@ class ProductController extends Controller
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $singleproduct = Product::where('id',$id)->with(array('category', 'brand', 'tags', 'image'))->get();
         //dd($singleproduct[0]->category->id);
-        $category = Category::where('id',$singleproduct[0]->category->id)->with('product','parent','children')->get();
+        $category = Category::where('id',$singleproduct[0]->category->id)->with(['product'=> function ($query) use($id) {
+            $query->where('id', '!=', $id);},'parent','children'])->get();
         $getWebsiteDetail = WebsiteDetail::all();
         return view('website.singleProduct',
             [
@@ -86,10 +89,10 @@ class ProductController extends Controller
     }
     public function showProducts(Request $request){
         $products=Product::where('product_name','LIKE','%'.$request->search."%")->
-        with(array('category', 'brand', 'tags', 'image'))->get();
+        with(array('category', 'brand', 'tags', 'image'))->paginate(16);
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $getWebsiteDetail = WebsiteDetail::all();
-        $getproduct = Product::inRandomOrder()->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
+        $getproduct = Product::where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->paginate(5);
         return view('website.products',
             [
                 'products' => $products,
