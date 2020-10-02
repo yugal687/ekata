@@ -18,6 +18,11 @@ class CreateOrdersTable extends Migration
             $table->string('order_number')->unique();
             $table->string('shipping_address')->nullable();
             $table->string('sub_urb')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('registered_user');
+            $table->string('email');
+            $table->string('contact_number');
             $table->string('state')->nullable();
             $table->string('order_status')->nullable();
             $table->string('postal_code')->nullable();

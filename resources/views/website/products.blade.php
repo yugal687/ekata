@@ -44,13 +44,17 @@
 
                                 <div
                                     class="col-md-3 col-sm-6 mt-5 align-items-center text-center">
-                                    <a href="{{route('singleproduct',$product->id)}}">
+                                    <a href="{{route('singleproduct',[$product->id,$product->product_name])}}">
                                         <div
                                             class="img-div bg-product-medium py-4 px-4 rounded-top-front rounded-bottom-front mx-auto">
                                             <img src="{{ $product->image[0]->name }}" class="img-fluid" alt="">
                                         </div>
-                                        <h5 class="product-price pt-3 font-weight-bold text-main-danger">
-                                            ${{$product->price}}</h5>
+                                        @if($product->sale_price)
+                                            <h5 class="product-price pt-3 font-weight-bold text-main-danger">${{$product->sale_price}}</h5>
+
+                                        @else
+                                            <h5 class="product-price pt-3 font-weight-bold text-main-danger">${{$product->price}}</h5>
+                                        @endif
                                         <h5 class="text-dark">{{ $product->product_name}}</h5>
                                         <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
                                         <button type="button"
@@ -84,10 +88,11 @@
                         @endif
 
                     </div>
-                    <div class="row my-5">
-                        <div class="col-12 text-center">
-                            <a href="/products" class="btn btn-large bg-main-primary text-white px-3 py-2">More Items
-                            </a>
+                    <div class="row my-5 d-flex justify-content-center">
+                        <div class="">
+                            {{--<a href="/products" class="btn btn-large bg-main-primary text-white px-3 py-2">More Items
+                            </a>--}}
+                            <div>{{$products->links()}}</div>
                         </div>
                     </div>
                 </main>

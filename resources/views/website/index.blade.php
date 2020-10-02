@@ -12,6 +12,14 @@
 @stop
 
 @section('content')
+    {{--FeedBack Message--}}
+    <div class='success-box' id="success_box">
+        <img alt='tick image' width='32' src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K'/>
+        <div class='text-message'></div>
+        <i class="fas fa-times close-feedback"></i>
+    </div>
+    {{--Feedback Message Ends--}}
+
     <section class="hero-section">
         <div class="row m-0 p-0">
             <!-- sidebar slider section starts here -->
@@ -134,15 +142,16 @@
                                         class="col-md-6">
                                         <div
                                             class="px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
-                                            <img src="{{$lastproduct->image[0]->name}}" class="img-fluid py-3 px-5"
+                                            <img src="{{$lastproduct->image[0]->name}}" class="img-fluid"
                                                  alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mt-md-0 mt-3 new-arrival-item-details">
                                         <div class="">
                                             <div class="row mb-3 mt-3">
-                                                <div class="col-lg-5 col-sm-4 col-12"><h5 class="text-dark font-weight-bold">Product
-                                                        Name<span >:</span></h5></div>
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">Product
+                                                        Name<span>:</span></h5></div>
                                                 <div class="col-lg-7 col-sm-8 col-12">
                                                     <a href="{{ route('singleproduct',$lastproduct->id)}}">
                                                         <!-- product name here -->
@@ -151,21 +160,25 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <div class="col-lg-5 col-sm-4 col-12"><h5 class="text-dark font-weight-bold">Category<span >:</span></h5>
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">Category<span>:</span></h5>
                                                 </div>
                                                 <div class="col-lg-7 col-sm-8 col-12">
                                                     <h5 class="">{{$lastproduct->category->category_name}}</h5>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <div class="col-lg-5 col-sm-4 col-12"><h5 class="text-dark font-weight-bold">
-                                                        Description<span >:</span></h5></div>
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">
+                                                        Description<span>:</span></h5></div>
                                                 <div class="col-lg-7 col-sm-8 col-12">
-                                                    <h5 class="" style="text-align: justify">{{$lastproduct->additional_information}}</h5>
+                                                    <h5 class=""
+                                                        style="text-align: justify">{{$lastproduct->additional_information}}</h5>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <div class="col-lg-5 col-sm-4 col-12"><h5 class="text-dark font-weight-bold">Price<span >:</span></h5>
+                                                <div class="col-lg-5 col-sm-4 col-12"><h5
+                                                        class="text-dark font-weight-bold">Price<span>:</span></h5>
                                                 </div>
                                                 <div class="col-lg-7 col-sm-8 col-12">
                                                     <h5 class="text-main-danger font-weight-bold">
@@ -226,9 +239,9 @@
     <!-- best selling section starts here -->
     <section id="best-selling-section">
         <div class="best-selling bg-main-primary">
-            <div class="container-mine">
-                <div class="row m-0 p-0 py-5 px-4">
-                    <div class="col-lg-3 col-md-6 col-sm-6 py-3">
+            <div class="container-mine pb-5">
+                <div class="row m-0 py-2 px-4">
+                    <div class="col-lg-3 col-md-6 col-sm-6 pt-5">
                         <img src="{{ asset('images/Homepage/Best_selling.png')}}" width="100%" alt="">
                         <div
                             class="bg-main-secondary border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag">
@@ -237,7 +250,7 @@
                         </div>
                     </div>
                     @foreach($bestSelling as $best)
-                        <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mt-lg-0 text-center">
+                        <div class="col-lg-3 col-md-6 col-sm-6 pt-5 text-center">
                             <a href="{{route('singleproduct',$best->id)}}">
                                 <div
                                     class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
@@ -247,7 +260,8 @@
                                 <h5 class=" text-white ">{{$best->product_name}}</h5>
                                 <h5 class="brand-name text-white ">{{$best->brand->brand_name}}</h5>
                                 <button type="button"
-                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-4 d-block mx-auto" style="width: 80%">
+                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-4 d-block mx-auto"
+                                        style="width: 80%">
                                     Add to Cart
                                 </button>
                             </a>
@@ -273,7 +287,7 @@
                 <!-- <div class="special-content"> -->
                 <div class="row align-items-center">
                     @foreach ($discountedProducts as $discountedProduct)
-                        <div class="col-md-3 col-sm-6 mt-5" style="">
+                        <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
                             <div class="row d-flex justify-content-center text-center">
                                 <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
                                     <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
@@ -283,7 +297,7 @@
                                     </div>
                                     <div
                                         class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
-                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid my-3" alt="">
+                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
                                     </div>
                                     <h5 class="pt-3 font-weight-bold text-main-danger">
                                         <s>was {{$discountedProduct->price}}</s></h5>
@@ -323,16 +337,32 @@
                                         <h5 class="">Give us your reviews</h5>
                                     </div>
                                     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-                                    <div class="col-12 text-center">
-                                        <div class="reviews-rating">
-                                            <a href="#5" title="Give 5 stars" data-value="5">★</a>
-                                            <a href="#4" title="Give 4 stars" data-value="4">★</a>
-                                            <a href="#3" title="Give 3 stars" data-value="3">★</a>
-                                            <a href="#2" title="Give 2 stars" data-value="2">★</a>
-                                            <a href="#1" title="Give 1 star" data-value="1">★</a>
+                                    <!-- Rating Stars Box -->
+
+                                    <div class='col-12 rating-widget text-center mt-2'>
+                                        <!-- Rating Stars Box -->
+                                        <div class='rating-stars text-center'>
+                                            <ul id='stars'>
+                                                <li class='star' title='Poor' data-value='1'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Fair' data-value='2'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Good' data-value='3'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Excellent' data-value='4'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='WOW!!!' data-value='5'>
+                                                    <i class='fas fa-star fa-fw'></i>
+                                                </li>
+                                            </ul>
                                         </div>
+
                                     </div>
-                                    <div class="col-12 mt-3">
+                                    <div class="col-12">
                                         <textarea class="form-control" rows="7" id="review"
                                                   placeholder="Your Feedback" required></textarea>
                                     </div>
@@ -442,6 +472,5 @@
 @section('scripts')
     <script src="{{ asset('js/indexpage.js') }}"></script>
     <script>
-
     </script>
 @stop

@@ -15,7 +15,6 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -30,7 +29,6 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -45,7 +43,6 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -76,20 +73,25 @@
                                     <th>Item</th>
                                     <th>Status</th>
                                     <th>User Name</th>
+                                    <th>User Id</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($latestOrder as $order)
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">{{$order->order->order_number}}</a></td>
-                                    <td>{{$order->product->product_name}}</td>
-                                    <td><span class="badge badge-success">{{$order->order->order_status}}</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            {{$order->user->first_name}} {{$order->user->last_name}}
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">{{$order->order->order_number}}</a>
+                                        </td>
+                                        <td>{{$order->product->product_name}}</td>
+                                        <td><span class="badge badge-success">{{$order->order->order_status}}</span>
+                                        </td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
+                                                {{$order->order->first_name }} {{$order->order->last_name}}
+                                            </div>
+                                        </td>
+                                        <td>{{$order->order->registered_user}}</td>
+
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -98,7 +100,8 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix" style="display: block;">
-                        <a href="/admin/order/orderdetails" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                        <a href="/admin/order/orderdetails" class="btn btn-sm btn-secondary float-right">View All
+                            Orders</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
@@ -122,20 +125,21 @@
                     <div class="card-body p-0" style="max-height: 400px; overflow: hidden; display: block;">
                         <ul class="products-list product-list-in-card pl-2 pr-2">
                             @foreach($recentProduct as $product)
-                            <li class="item">
-                                <div class="product-img">
-                                    <img src="{{$product->image[0]->name}}" alt="Product Image" class="img-size-50">
-                                </div>
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">{{$product->product_name}}
-                                        <span class="badge badge-warning float-right">{{$product->price}}</span></a>
-                                    <span class="product-description">
-                       {{$product->additional_information}}
-                      </span>
-                                </div>
-                            </li>
-                            @endforeach
-                            <!-- /.item -->
+                                <li class="item">
+                                    <div class="product-img">
+                                        <img src="{{$product->image[0]->name}}" alt="Product Image" class="img-size-50">
+                                    </div>
+                                    <div class="product-info">
+                                        <p href="#" class="product-title" style="margin-bottom: 0;">{{$product->product_name}}
+                                            <span class="float-right">{{$product->price}}</span>
+                                        </p>
+                                        <span class="product-description">
+                                            {{$product->category->category_name}}
+                                        </span>
+                                    </div>
+                                </li>
+                        @endforeach
+                        <!-- /.item -->
                             <!-- /.item -->
                         </ul>
                     </div>

@@ -16,15 +16,20 @@
                         </svg>
                     </a>
                     <div class="dropcontent-sm">
-                        <ul class="list-group text-center" v-if="userDetail">
-                            <li class="list-group-item"><a href="/user/dashboard">My
+                        <ul class="list-group text-center" v-if="!userDetail">
+                            <li class="list-group-item"><a href="/login">Sign In</a></li>
+                            <li class="list-group-item"><a href="/register">Register</a>
+                            </li>
+                        </ul>
+                        <ul class="list-group text-center" v-else-if="userDetail.role_id === 2">
+                            <li class="list-group-item"><a href="/user/userdashboard">My
                                 Account</a></li>
                             <li class="list-group-item"><a href="/logout">Logout</a></li>
                         </ul>
-                        <ul class="list-group text-center" v-else>
-                            <li class="list-group-item"><a href="/login">Sign In</a></li>
-                            <li class="list-group-item"><a href="/register" class="btn btn-info">Register</a>
-                            </li>
+                        <ul class="list-group text-center" v-else-if="userDetail.role_id === 1">
+                            <li class="list-group-item"><a href="/admin/dashboard">My
+                                Account</a></li>
+                            <li class="list-group-item"><a href="/logout">Logout</a></li>
                         </ul>
                     </div>
                     <a href="#" class="cart" data-toggle="modal" @click="openModal()" data-target="#cartModal">
@@ -34,7 +39,7 @@
                             <path fill-rule="evenodd"
                                   d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                         </svg>
-                        <div class="cart-count rounded bg-main-secondary text-white"> {{$store.state.cartCount}}</div>
+                        <div class="cart-count rounded bg-main-secondary text-white"> {{ $store.state.cartCount }}</div>
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -75,14 +80,19 @@
                             </svg>
                         </a>
                         <div class="dropcontent">
-                            <ul class="list-group text-center" v-if="userDetail">
-                                <li class="list-group-item"><a href="/user/dashboard">My
+                            <ul class="list-group text-center" v-if="userDetail.role_id === 2">
+                                <li class="list-group-item"><a href="/user/userdashboard">My
+                                    Account</a></li>
+                                <li class="list-group-item"><a href="/logout">Logout</a></li>
+                            </ul>
+                            <ul class="list-group text-center" v-else-if="userDetail.role_id === 1">
+                                <li class="list-group-item"><a href="/admin/dashboard">My
                                     Account</a></li>
                                 <li class="list-group-item"><a href="/logout">Logout</a></li>
                             </ul>
                             <ul class="list-group text-center" v-else>
                                 <li class="list-group-item"><a href="/login">Sign In</a></li>
-                                <li class="list-group-item"><a href="/register" class="btn btn-info">Register</a>
+                                <li class="list-group-item"><a href="/register">Register</a>
                                 </li>
                             </ul>
                         </div>
@@ -94,7 +104,7 @@
                                       d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                             </svg>
                             <div class="cart-count rounded bg-main-secondary text-white">
-                                {{$store.state.cartCount}}
+                                {{ $store.state.cartCount }}
                             </div>
                         </a>
                     </div>
@@ -105,54 +115,62 @@
 </template>
 
 <script>
-    export default {
-        name: "headerNavbarComponent",
-        data() {
-            return {
-                userDetail: []
+export default {
+    name: "headerNavbarComponent",
+    data() {
+        return {
+            userDetail: {
+                role_id: 0,
             }
-        },
-        methods: {
-            openModal() {
-                this.$store.dispatch('fetchStoredProduct');
-                this.$store.commit('totalPrice');
-            }
-        },
-        mounted() {
-            this.$store.getters.cartItemCount;
-            axios.get('/api/getUser', {})
-                .then(response => {
-                    this.userDetail = response.data.userDetail;
-                });
-        },
-    }
+        }
+    },
+    methods: {
+        openModal() {
+            this.$store.dispatch('fetchStoredProduct');
+            this.$store.commit('totalPrice');
+        }
+    },
+    mounted() {
+        this.$store.getters.cartItemCount;
+        axios.get('/api/getUser', {})
+            .then(response => {
+                if (response.data.userDetail) {
+                    this.userDetail.role_id = response.data.userDetail.role_id;
+                }
+            });
+    },
+}
 </script>K
 
 <style scoped>
-    .dropcontent {
-        visibility: hidden;
-        width: 142px;
-        position: absolute;
-        right: 50px;
-        top: 50px;
-        z-index: 10002;
-    }
+.dropcontent {
+    visibility: hidden;
+    width: 142px;
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    z-index: 10002;
+}
 
-    .dropcontent-sm {
-        visibility: hidden;
-        width: 142px;
-        position: absolute;
-        right: -10px;
-        top: 35px;
-        z-index: 10002;
-    }
+.dropcontent-sm {
+    visibility: hidden;
+    width: 142px;
+    position: absolute;
+    right: -10px;
+    top: 35px;
+    z-index: 10002;
+}
 
-    .dropcontent a, .dropcontent-sm a {
-        color: #2b2b2b;
-    }
+.dropcontent li:hover, .dropcontent-sm li:hover {
+    background: #dedbdb;
+}
 
-    .open {
-        visibility: visible;
-    }
+.dropcontent a, .dropcontent-sm a {
+    color: #2b2b2b;
+}
+
+.open {
+    visibility: visible;
+}
 
 </style>

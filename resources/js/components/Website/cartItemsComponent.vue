@@ -6,7 +6,7 @@
                     <div class="shopping-cart">
                         <div class="shopping-cart-header">
                             <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">
-                            {{$store.state.cartCount}}
+                            {{ $store.state.cartCount }}
                         </span>
                             <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -25,10 +25,10 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <span class="item-name">{{product.product_name}}</span>
+                                            <span class="item-name">{{ product.product_name }}</span>
                                         </div>
                                         <div class="row pb-1">
-                                            <span class="item-price font-weight-bold">{{product.price}}</span>
+                                            <span class="item-price font-weight-bold">{{ product.price }}</span>
                                         </div>
                                         <!--<div class="row">
                                             <span class="item-quantity">Quantity:</span>
@@ -60,12 +60,13 @@
                         <div class="row">
                             <div class="col-12 text-right">
                                 <span class="lighter-text">Total:</span>
-                                <span class="main-color-text font-weight-bold">{{$store.state.totalPrice}}</span>
+                                <span class="main-color-text font-weight-bold">{{ $store.state.totalPrice }}</span>
                             </div>
                         </div> <!--end shopping-cart-header -->
 
+                        <a href="/billings" class="button" v-if="$store.state.cartCount > 0"
+                        >Checkout</a>
 
-                        <a href="/billings" class="button">Checkout</a>
                     </div> <!--end shopping-cart -->
                 </div> <!--end container -->
             </div><!-- modal-dialog -->
@@ -74,31 +75,31 @@
 </template>
 
 <script>
-    export default {
-        name: "cartItemsComponent",
-        //props: ['cartItemCount'],
-        data() {
-            return {
-                product: [],
-                cartItemCount: 0,
-            }
+export default {
+    name: "cartItemsComponent",
+    //props: ['cartItemCount'],
+    data() {
+        return {
+            product: [],
+            cartItemCount: 0,
+        }
+    },
+    methods: {
+        countCartItem() {
+            this.getLocalStorageItem().length;
         },
-        methods: {
-            countCartItem() {
-                this.getLocalStorageItem().length;
-            },
-            removeProduct(productId) {
-                this.$store.dispatch('removeSelectedCartItem', {productId: productId});
-            },
-
-        },
-        computed: {
-            cartItemsCount() {
-                return this.$store.getters.cartItemCount();
-            },
+        removeProduct(productId) {
+            this.$store.dispatch('removeSelectedCartItem', {productId: productId});
         },
 
-    }
+    },
+    computed: {
+        cartItemsCount() {
+            return this.$store.getters.cartItemCount();
+        },
+    },
+
+}
 </script>
 
 <style scoped>

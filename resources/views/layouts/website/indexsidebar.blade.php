@@ -6,7 +6,7 @@
                 <img src="{{ $category->images[0]->name }}" class="img-fluid" alt="">
             </figure>
             <p class="text-center" style="margin-bottom: 0; font-size: 0.85rem">
-                <a href="{{ route('maincategory',$category->id)}}" class="text-dark">{{$category->category_name}}</a>
+                <a href="{{ route('maincategory',[$category->id,$category->category_name])}}" class="text-dark">{{$category->category_name}}</a>
             </p>
         </div>
         @endforeach

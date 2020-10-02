@@ -38,7 +38,7 @@
                             <span class="input-group-prepend">
                                 <button @click="decrementQuantity()" class="btn bg-main-secondary text-white font-weight-bold">&nbsp; - &nbsp;</button>
                             </span>
-                                <input class="form-control"  @keyup="incDecQuantity()" v-model="quantity">
+                                <input class="form-control text-center"  @keyup="incDecQuantity()" v-model="quantity">
                             <span class="input-group-append">
                                 <button @click="incrementQuantity()" class="btn bg-main-secondary text-white font-weight-bold">&nbsp; + &nbsp;</button>
                             </span>

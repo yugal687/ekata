@@ -68,7 +68,8 @@ class ProductController extends Controller
         ]);
     }
     public function getProduct(){
-        $getProduct = Product::with('category','brand','tags','image')->get();
+        $getProduct = Product::with(['category' => function ($query) {
+            $query->with('parent','children');},'brand','tags','image'])->get();
         return response()->json([
            'getProduct' => $getProduct
         ]);
@@ -106,8 +107,9 @@ class ProductController extends Controller
         ]);
     }
     public function editProduct(Request $request){
+        //dd($request);
         $editedProduct = json_decode($request->editedProduct);
-        $findCategory = Category::where('category_name','=',$editedProduct[0]->category->category_name)->get();
+        $findCategory = Category::where('category_name','=',$request->category_name)->get();
         $findBrand = Brand::where('brand_name','=',$editedProduct[0]->brand->brand_name)->get();
         $saveEditProduct =Product::where('id',$editedProduct[0]->id)->update([
             'product_name' => $editedProduct[0]->product_name,

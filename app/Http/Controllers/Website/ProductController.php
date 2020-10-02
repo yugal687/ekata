@@ -43,7 +43,7 @@ class ProductController extends Controller
     }
     public function showCategory($id){
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
-        $getsingleCategory = Category::where('id',$id)->with('product','parent','children')->get();
+        $getsingleCategory = Category::where('id',$id)->with(['product','parent','children'])->get();
         $getWebsiteDetail = WebsiteDetail::all();
         //dd($getsingleCategory);
         return view('website.category',
@@ -75,7 +75,8 @@ class ProductController extends Controller
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $singleproduct = Product::where('id',$id)->with(array('category', 'brand', 'tags', 'image'))->get();
         //dd($singleproduct[0]->category->id);
-        $category = Category::where('id',$singleproduct[0]->category->id)->with('product','parent','children')->get();
+        $category = Category::where('id',$singleproduct[0]->category->id)->with(['product'=> function ($query) use($id) {
+            $query->where('id', '!=', $id);},'parent','children'])->get();
         $getWebsiteDetail = WebsiteDetail::all();
         return view('website.singleProduct',
             [
@@ -88,10 +89,10 @@ class ProductController extends Controller
     }
     public function showProducts(Request $request){
         $products=Product::where('product_name','LIKE','%'.$request->search."%")->
-        with(array('category', 'brand', 'tags', 'image'))->get();
+        with(array('category', 'brand', 'tags', 'image'))->paginate(16);
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $getWebsiteDetail = WebsiteDetail::all();
-        $getproduct = Product::inRandomOrder()->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
+        $getproduct = Product::where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->paginate(5);
         return view('website.products',
             [
                 'products' => $products,

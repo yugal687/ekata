@@ -72,7 +72,7 @@ class CategoryController extends Controller
         ]);
     }
     public function getAllCategory(){
-        $getCategory = Category::all();
+        $getCategory = Category::with('children')->where('parent_id','=',NULL)->get();
         return response()->json([
             'getCategory' => $getCategory
         ]);

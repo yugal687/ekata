@@ -226,9 +226,6 @@
         $(function () {
 
             /*Validation if Checkbox is checked*/
-            $(".next").click(function () {
-
-            });
 
             $(".next").click(function () {
                 /*Billing*/
@@ -237,6 +234,7 @@
                 var address_billing = $("#address_billing").val();
                 var suburb_billing = $("#suburb_billing").val();
                 var postalCode_billing = $("#postal_code_billing").val();
+                var state_billing = $("#state_billing").val();
                 var email_billing = $("#email_billing").val();
                 var contactNumber_billing = $("#contact_number_billing").val();
                 var regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
@@ -264,6 +262,9 @@
                     if (contactNumber_billing.length !== null) {
                         $("#p7_billing").text("");
                     }
+                    if (state_billing.length !== null) {
+                        $("#p8_billing").text("");
+                    }
                 });
 
                 if ($("#toggleShippingAddress").is(':checked')) {
@@ -273,6 +274,7 @@
                     var address = $("#address").val();
                     var suburb = $("#suburb").val();
                     var postalcode = $("#postal_code").val();
+                    var state = $("#state").val();
                     var email = $("#email").val();
                     var contactnumber = $("#contact_number").val();
                     var regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
@@ -299,6 +301,9 @@
                         if (contactnumber.length !== null) {
                             $("#p7").text("");
                         }
+                        if (state.length !== null) {
+                            $("#p7").text("");
+                        }
                     });
                     if (fname.length == "") {
                         $("#p1").text("Please fill up your first name");
@@ -317,6 +322,11 @@
                     }
                     if (suburb.length == "") {
                         $("#p4").text("Please fill up your suburb name");
+                        $("#suburb").focus();
+                        return false;
+                    }
+                    if (state.length == "") {
+                        $("#p8").text("Please fill up your state name");
                         $("#suburb").focus();
                         return false;
                     }
@@ -364,6 +374,10 @@
                     return false;
                 } else if (suburb_billing.length == "") {
                     $("#p4_billing").text("Please fill up your suburb name");
+                    $("#suburb_billing").focus();
+                    return false;
+                }else if (state_billing.length == "") {
+                    $("#p8_billing").text("Please fill up your state name");
                     $("#suburb_billing").focus();
                     return false;
                 } else if (postalCode_billing.length == "") {
@@ -434,46 +448,6 @@
                 $('.progressbar-dots').removeClass('active');
                 $('.progressbar-dots:nth-child(3)').addClass('active');
             });
-
-            // This function displays Smart Payment Buttons on your web page.
-            /*  paypal.Button.render({
-                  // Configure environment
-                  env: 'sandbox',
-                  client: {
-                      sandbox: 'demo_sandbox_client_id',
-                      production: 'demo_production_client_id'
-                  },
-                  // Customize button (optional)
-                  locale: 'en_US',
-                  style: {
-                      size: 'medium',
-                      color: 'gold',
-                      shape: 'pill',
-                  },
-
-                  // Enable Pay Now checkout flow (optional)
-                  commit: true,
-
-                  // Set up a payment
-                  payment: function (data, actions) {
-                      return actions.payment.create({
-                          transactions: [{
-                              amount: {
-                                  total: '0.01',
-                                  currency: 'AUD',
-                              }
-                          }]
-                      });
-                  },
-                  // Execute the payment
-                  onAuthorize: function (data, actions) {
-                      return actions.payment.execute().then(function () {
-                          // Show a confirmation message to the buyer
-                          window.alert('Thank you for your purchase!');
-                      });
-                  }
-              }, '#paypal-button');
-  */
         });
 
 

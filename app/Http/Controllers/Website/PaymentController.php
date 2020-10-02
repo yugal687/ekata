@@ -11,10 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Srmklive\PayPal\Services\ExpressCheckout;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Stripe\Token;
+
+//use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PaymentController extends Controller
 {
@@ -24,20 +25,17 @@ class PaymentController extends Controller
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
             $data = [];
-
-            //map items into corresponding paypal api
-            $data['items'] = $this->maporderItems($request->orderItems);
             $data['invoice_id'] = uniqid();
+            $data['items'] = $this->maporderItems($request->orderItems);
+            //map items into corresponding paypal api
             $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
-
-            if ($order){
-                $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->orderBy('created_at', 'desc')->first();
-
-                //Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
+            if ($order) {
+                $userDetail = $request->shippingAddress['email'] ?$request->shippingAddress : $request->billingAddress;
+/*                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
+                    ->send(new OrderMail($userDetail, $request->totalPrice));*/
             }
-
             return response()->json([
-                'msg' => 'sucessfully saved Order ',
+                'successMsg' => 'Congratulations! Your order was successfully placed ',
                 'invoice_id' => '#' . $data['invoice_id'],
                 'address' => $request->shippingAddress['address'] ?? $request->billingAddress['address'],
                 'suburb' => $request->shippingAddress['suburb'] ?? $request->billingAddress['suburb'],
@@ -46,7 +44,7 @@ class PaymentController extends Controller
             ]);
         }
         return response()->json([
-            'msg' => 'Something went wrong',
+            'errorMsg' => 'Sorry! Something went wrong',
         ]);
 
     }
@@ -56,8 +54,9 @@ class PaymentController extends Controller
     {
         if ($this->validateState($request->shippingAddress,
             $request->billingAddress)) {
-            Stripe::setApiKey(env('STRIPE_SECRET'));
-//            create this in interface
+          Stripe::setApiKey('sk_test_51H7Y6wHVncKhLZHVflqJXWlKL6tt0dzJXwLgkJVWnE08tz4hBKfFPmQc5eaIA5orw2AjeaBmKKkkvcuv88mFzqjX006ldHoN2Z');
+        //  Stripe::setApiKey(env('STRIPE_SECRET'));
+//            create this in
             try {
                 $token = Token::create([
                     "card" => [
@@ -71,26 +70,25 @@ class PaymentController extends Controller
                     "amount" => floatval($request->totalPrice) * 100,
                     "currency" => "AUD",
                     "source" => $token, // obtained with Stripe.js
-                    "description" => 'this is test',
-                    "receipt_email" => Auth::user()->email,
+                    "description" => 'this is test', //change this to appropriate description
+                    "receipt_email" =>  $request->shippingAddress['email'] ??  $request->billingAddress['email'],
                 ]);
             } catch (\Exception $e) {
-                return response()->json($e->getJsonBody());
+                return response()->json(['error'=> $e->getJsonBody()['error']]);
             }
 
             $data['items'] = $this->maporderItems($request->orderItems);
             $data['invoice_id'] = uniqid();
             $order = new OrderService($data['items'], $data['invoice_id'], $request->billingAddress, $request->shippingAddress, $request->totalPrice);
-            if ($order){
-                $orderitem = OrderDetail::where('user_id',Auth::user()->id)->with('order','user','product')->orderBy('created_at', 'desc')->first();
-
-                //Mail::to(Auth::user()->email) ->send(new OrderMail($orderitem));
+            if ($order) {
+                $userDetail = $request->shippingAddress['email'] ?$request->shippingAddress : $request->billingAddress;
+                /*                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
+                                    ->send(new OrderMail($userDetail, $request->totalPrice));*/
             }
-
             return response()->json([
-                'msg' => 'sucessfully saved Order ',
+                'msg' => 'Successfully saved order ',
                 'invoice_id' => '#' . $data['invoice_id'],
-                'name'=>$request->shippingAddress['first_name'] ?? $request->billingAddress['first_name'],
+                'name' => $request->shippingAddress['first_name'] ?? $request->billingAddress['first_name'],
                 'address' => $request->shippingAddress['address'] ?? $request->billingAddress['address'],
                 'suburb' => $request->shippingAddress['suburb'] ?? $request->billingAddress['suburb'],
                 'state' => $request->shippingAddress['state'] ?? $request->billingAddress['state'],
@@ -124,11 +122,10 @@ class PaymentController extends Controller
                 'price' => $orderItems['price'] / $orderItems['quantity'],
                 'discount' => 0,
                 'quantity' => $orderItems['quantity'],
-                'user_id' => Auth::user()->id,
+                'user_id' => Auth::user()->id ?? null,
                 'date' => Carbon::now()->toDateString(),
             ];
         }, $orderItems);
-
     }
 
 

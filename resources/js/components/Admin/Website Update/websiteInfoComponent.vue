@@ -35,7 +35,7 @@
                                                 </el-input>
                                             </el-form-item>
                                             <el-form-item label="Contact Number" prop="optioanlContactNumber">
-                                                <el-input v-model="websiteInfoForm.optionalContactNumber"
+                                                <el-input type="number" v-model="websiteInfoForm.optionalContactNumber"
                                                           style="width: 100%;">
                                                 </el-input>
                                             </el-form-item>

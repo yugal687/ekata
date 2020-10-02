@@ -15,8 +15,8 @@
         }
 
         #sync1 .item {
-            background: #ebebeb;
-            padding: 5% 30%;
+            /*background: #ebebeb;
+            padding: 5% 30%;*/
             margin: 5px;
             color: #fff;
             border-radius: 3px;
@@ -26,12 +26,12 @@
 
         #sync1 .item img {
             width: 100%;
-            height: 320px;
+            height: 350px;
         }
 
         #sync2 .item {
-            background: #c9c9c9;
-            padding: 5% 25%;
+            /*background: #c9c9c9;
+            padding: 5% 25%;*/
             margin: 5px;
             color: #fff;
             border-radius: 3px;
@@ -41,7 +41,7 @@
 
         #sync2 .item img {
             width: 100%;
-            height: 80px;
+            height: 90px;
         }
 
 

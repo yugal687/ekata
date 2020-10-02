@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Route;
 /*Route::view('/usersignin', 'admin.usersignin');*/
 Route::post('/registerUser', 'User\UserController@registerUser');
 Route::post('/registerAdmin', 'User\UserController@registerAdmin');
-
 //Logout
 Route::get('/logout', function () {
     Auth::logout();
@@ -101,19 +100,19 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 Auth::routes();
 
 
-//User Routes
+Route::get('/billings', function () {
+    //make controller and paste the function
+    /*   if (!Auth::user()) {
+           redirect('/login');
+       }*/
+    return App::call('App\Http\Controllers\Website\WebsiteDetailController@billingPage');
+});
+//ysers
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::get('user/userdashboard', 'User\UserController@dashboradData');
     Route::view('user/userprofile', 'User.userprofile');
 
 
-    Route::get('/billings', function () {
-        //make controller and paste the function
-        if (!Auth::user()) {
-            redirect('/login');
-        }
-        return App::call('App\Http\Controllers\Website\WebsiteDetailController@billingPage');
-    });
 
     Route::get('payment-success', 'Website\PaymentController@paymentsuccess')->name('payment.success');
 

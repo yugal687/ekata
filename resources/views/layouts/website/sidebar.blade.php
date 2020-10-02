@@ -4,12 +4,12 @@
             <ul class="pt-3">
                 @foreach($getCategory as $category)
                     <li class="sidebar-dropdown">
-                        <a href="{{ route('maincategory',$category->id)}}" class="main-cat">{{$category->category_name}}
+                        <a href="{{ route('maincategory',[$category->id,$category->category_name])}}" class="main-cat">{{$category->category_name}}
                             <span><i class="fas fa-angle-right"></i></span></a>
                         <div class="sidebar-submenu">
                             <ul>
                                 @foreach($category->children as $subCategory)
-                                    <li class=""><a href="{{ route('category',$subCategory->id)}}"
+                                    <li class=""><a href="{{ route('category',[$subCategory->id,$subCategory->category_name])}}"
                                                     class="main-subcat"><span> {{$subCategory->category_name}}</span></a>
                                     </li>
                                 @endforeach

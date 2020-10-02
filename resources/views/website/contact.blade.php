@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="col-md-9 text-center">
                                     <h4 class="font-weight-bold pb-3">EMAIL</h4>
-                                    <h6><a href="mailto:melcleaning@gmail.com">{{$Details->email}}</a></h6>
-                                    <h6><a href="mailto:melcleaning@gmail.com">{{$Details->optional_email}}</a></h6>
+                                    <h6><a href="mailto:{{$websiteDetail[0]->email}}">{{$Details->email}}</a></h6>
+                                    <h6><a href="mailto:{{$websiteDetail[0]->optional_email}}">{{$Details->optional_email}}</a></h6>
                                 </div>
                             </div>
                         </div>

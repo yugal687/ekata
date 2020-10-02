@@ -64,10 +64,12 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-8">
                                                 <input type="text" class="form-control"
-                                                       v-model="NSW"
+                                                       v-model="billingAddress.state"
                                                        name="state"
                                                        placeholder="NSW"
+                                                       id="state_billing"
                                                        disabled>
+                                                <p id="p8_billing"></p>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <input type="value" class="form-control"
@@ -92,6 +94,7 @@
                                             <div class="form-group col-md-12">
                                                 <input type="number" class="form-control" placeholder="* Contact Number"
                                                        name="contact_number"
+                                                       v-model="billingAddress.contact_number"
                                                        id="contact_number_billing">
                                                 <p id="p7_billing"></p>
                                             </div>
@@ -146,8 +149,11 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
-                                            <input type="text" class="form-control" v-model="NSW" placeholder="NSW"
+                                            <input type="text" class="form-control"
+                                                   v-model="NSW" placeholder="NSW"
+                                                   id="state"
                                                    disabled>
+                                            <div id="p8"></div>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <input type="number" class="form-control"
@@ -193,6 +199,9 @@
                                 </div>
                                 <div class="creditCard" id="">
                                     <div class="row">
+                                        <div class="col-md-12 stripe-error-msg" v-if="errorMessage.length>0">
+                                            {{ errorMessage }}
+                                        </div>
                                         <div class="col-12">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
@@ -200,22 +209,25 @@
                                                            v-model="stripeCard.card_number"
                                                            id="cardNumber"
                                                            autocomplete="cc-number"
-                                                           placeholder="1234 5678 9012 3456">
+                                                           placeholder="Card Number (1234 5678 9012 3456)">
+                                                    <p id="cardNumberError"></p>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <input type="text" class="form-control"
                                                            v-model="stripeCard.expiry_year"
-
                                                            id="expiryDate"
-                                                           placeholder="MM/YY">
+                                                           placeholder="Expiration Year (YY)">
+                                                    <p id="expiryDateError"></p>
                                                 </div>
                                                 <div class='col-md-6 col-md-4 form-group expiration required'>
-                                                    <label class='control-label'>Expiration Month</label>
                                                     <input class='form-control card-expiry-month'
-                                                           v-model="stripeCard.expiry_month" placeholder='MM'
+                                                           v-model="stripeCard.expiry_month"
+                                                           id="expiryMonth"
+                                                           placeholder='Expiration Month (MM)'
                                                            type='text'>
+                                                    <p id="expiryMonthError"></p>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
@@ -223,12 +235,14 @@
                                                            v-model="stripeCard.cvv"
                                                            class="form-control" id="cvccvv"
                                                            placeholder="CVC / CVV">
+                                                    <p id="cvccvvError"></p>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                     <input type="text" class="form-control" id="cardHolderName"
                                                            placeholder="Card Holder Name">
+                                                    <p id="cardHolderNameError"></p>
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
@@ -250,7 +264,6 @@
                                             <div class="col-md-8 mx-auto" ref="paypalButton">
                                             </div>
 
-
                                         </div>
                                     </div>
                                 </div>
@@ -260,18 +273,29 @@
                             </div>
                             <div class="tab-pane" id="step3">
                                 <h4 style="font-size: 18px"><i class="fas fa-check-circle text-success"
-                                                               style="font-size: 22px"></i> Congratulations! Your order
-                                    was successfully placed</h4>
+                                                               style="font-size: 22px"></i>
+                                </h4>
                                 <div class="order-items text-left mt-3 ml-5" style="border-bottom: 1px solid #2b2b2b40">
                                     <b>Order ID is <span class="text-main-primary">
                                         {{ successMessage.order_number }}
                                     </span></b> <br/>
                                     <b>Shipping Address</b><br/>
-                                    <p>Address-------{{ successMessage.address }} <br/>
-                                        Suburb Name ----- {{ successMessage.suburb_name }}<br/>
-                                        State ------ {{ successMessage.state }}<br/>
-                                        Postal Code ------ {{ successMessage.postal_code }}<br/>
-                                    </p>
+                                    <div class="row">
+                                        <div class="col-6">Address:</div>
+                                        <div class="col-6">{{ successMessage.address }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">Suburb Name:</div>
+                                        <div class="col-6">{{ successMessage.suburb_name }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">State:</div>
+                                        <div class="col-6">{{ successMessage.state }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">Postal Code:</div>
+                                        <div class="col-6">{{ successMessage.postal_code }}</div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -339,7 +363,6 @@
 <script>
 export default {
     name: "billingsComponent",
-    props: ['successmessage'],
     data() {
         return {
             NSW: 'NSW',
@@ -350,7 +373,7 @@ export default {
                 last_name: '',
                 address: '',
                 suburb: '',
-                state: this.NSW,
+                state: "NSW",
                 postal_code: '',
                 email: '',
                 contact_number: ''
@@ -360,7 +383,7 @@ export default {
                 last_name: '',
                 address: '',
                 suburb: '',
-                state: this.NSW,
+                state: "NSW",
                 postal_code: '',
                 email: '',
                 contact_number: ''
@@ -372,11 +395,13 @@ export default {
                 card_number: '',
             },
             successMessage: {
+                message: '',
                 order_number: '',
                 address: '',
                 suburb_name: '',
                 postal_code: '',
             },
+            errorMessage: '',
 
         }
     },
@@ -387,7 +412,7 @@ export default {
 
         const script = document.createElement("script");
         script.src =
-            "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3";
+            "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3&currency=AUD";
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);
     },
@@ -420,7 +445,23 @@ export default {
                 'shippingAddress': this.shippingAddress,
                 'billingAddress': this.billingAddress,
             }).then(resp => {
-                this.$store.dispatch('removeCartItems');
+                if (resp.data.successMsg) {
+                    this.$store.dispatch('removeCartItems');
+                    this.successMessage.message = resp.data.msg;
+                    this.successMessage.order_number = resp.data.invoice_id;
+                    this.successMessage.address = resp.data.address;
+                    this.successMessage.state = resp.data.state;
+                    this.successMessage.suburb_name = resp.data.suburb;
+                    this.successMessage.postal_code = resp.data.postal_code;
+                    $(".tab-pane").hide();
+                    $("#step3").fadeIn(1000);
+                    $('.progressbar-dots').removeClass('active');
+                    $('.progressbar-dots:nth-child(3)').addClass('active');
+                }
+                if (resp.data.errorMsg) {
+                    this.errorMessage = resp.data.errorMsg;
+                }
+
             });
         },
         userDetails() {
@@ -430,12 +471,11 @@ export default {
                 this.billingAddress.last_name = userBillingAddress.last_name;
                 this.billingAddress.address = userBillingAddress.address;
                 this.billingAddress.suburb = userBillingAddress.suburb;
-                this.billingAddress.state = this.NSW;
+                this.billingAddress.state = "NSW";
                 this.billingAddress.postal_code = userBillingAddress.postal_code;
                 this.billingAddress.email = userBillingAddress.email;
                 this.billingAddress.contact_number = userBillingAddress.contact_number;
             }).catch(err => {
-                console.log(err.resp.message)
             });
         },
 
@@ -449,6 +489,57 @@ export default {
 
         //stripeCheckOut
         payUsingStripe() {
+            var cardNumber = $("#cardNumber").val();
+            var expiryDate = $("#expiryDate").val();
+            var expiryMonth = $("#expiryMonth").val();
+            var cvccvv = $("#cvccvv").val();
+            var cardHolderName = $("#cardHolderName").val();
+
+            $('input').on("keypress", function () {
+                if (cardNumber.length !== null) {
+                    $("#cardNumberError").text("");
+                }
+                if (expiryDate.length !== null) {
+                    $("#expiryDateError").text("");
+                }
+                if (expiryMonth.length !== null) {
+                    $("#expiryMonthError").text("");
+                }
+                if (cvccvv.length !== null) {
+                    $("#cvccvvError").text("");
+                }
+                if (cardHolderName.length !== null) {
+                    $("#cardHolderNameError").text("");
+                }
+            });
+
+            if (cardNumber.length == ""){
+                $("#cardNumberError").text("Please fill up your card number");
+                $("#cardNumberError").focus();
+                return false;
+            }
+            if (expiryDate.length == ""){
+                $("#expiryDateError").text("Please fill up your expiry date");
+                $("#expiryDateError").focus();
+                return false;
+            }
+            if (expiryMonth.length == ""){
+                $("#expiryMonthError").text("Please fill up your expiry month");
+                $("#expiryMonthError").focus();
+                return false;
+            }
+            if (cvccvv.length == ""){
+                $("#cvccvvError").text("Please fill up your CVC / CVV number");
+                $("#cvccvvError").focus();
+                return false;
+            }
+            if (cardHolderName.length == ""){
+                $("#cardHolderNameError").text("Please fill up your card holder name");
+                $("#cardHolderNameError").focus();
+                return false;
+            }
+
+            this.errorMessage = '';
             axios.post('api/stripeCheckOut', {
                 'orderItems': JSON.parse(localStorage.getItem('cart')),
                 'card': this.stripeCard,
@@ -456,26 +547,23 @@ export default {
                 'shippingAddress': this.shippingAddress,
                 'billingAddress': this.billingAddress,
             }).then(resp => {
-                if (resp.data.msg) {
+                if (resp.data.error) {
+                    this.errorMessage = resp.data.error.message;
+                    console.log(this.errorMessage);
+                } else if (resp.data.msg) {
                     this.$store.dispatch('removeCartItems');
                     this.successMessage.order_number = resp.data.invoice_id;
                     this.successMessage.address = resp.data.address;
                     this.successMessage.suburb_name = resp.data.suburb;
                     this.successMessage.postal_code = resp.data.postal_code;
-
                     $(".tab-pane").hide();
                     $("#step3").fadeIn(1000);
                     $('.progressbar-dots').removeClass('active');
                     $('.progressbar-dots:nth-child(3)').addClass('active');
                 }
-
             }).catch(err => {
-
-
             });
-
-        }
-        ,
+        },
     },
 
     computed: {
@@ -489,7 +577,7 @@ export default {
 </script>
 
 <style scoped>
-#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p1_billing, #p2_billing, #p3_billing, #p4_billing, #p5_billing, #p6_billing, #p7_billing {
+#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p1_billing, #p2_billing, #p3_billing, #p4_billing, #p5_billing, #p6_billing, #p7_billing, #cardNumberError, #expiryDateError, #expiryMonthError, #cvccvvError, #cardHolderNameError {
     font-family: 'Lato', sans-serif;
     font-size: 12px;
     color: #FF0000;
@@ -499,5 +587,11 @@ export default {
 
 .error {
     color: red;
+}
+.stripe-error-msg{
+    padding: 15px;
+    background-color: #ffbaba;
+    color: red;
+    margin-bottom: 15px;
 }
 </style>

@@ -104,7 +104,7 @@
             <div class="row d-flex align-items-center px-3">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-sm-12 col-md-3 p-2 my-auto">
+                        <div class="col-sm-12 col-md-3 p-2 text-md-right my-auto">
                             <p class="font-weight-bold">FOLLOW US:</p>
                         </div>
                         <div class="col-sm-12 col-md-9 p-2">
@@ -119,14 +119,17 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row d-flex align-items-center">
-                        <div class="col-xl-10 col-lg-9 col-md-8 col-12 text-right text-sm-center">
+                        <div class="col-lg-9 col-md-8 col-12 text-md-right text-sm-center">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-12">
-                            <a href="tel:{{$websiteDetail[0]->contact_number}}"
-                               class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
-                                Call Us
-                            </a>
+                        <div class="col-lg-3 col-md-4 col-12">
+                            @if(count($websiteDetail) > 0)
+                                <a href="tel:{{$websiteDetail[0]->contact_number}}"
+
+                                   class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
+                                    Call Us
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -220,6 +223,9 @@
                                         <a href="mailto:{{$websiteDetail[0]->email}}">{{$websiteDetail[0]->email}}</a>
                                     </li>
                                     <li class="list">
+                                        {{--<a href="mailto:{{$websiteDetail[0]->optional_email}}">{{$Details->optional_email}}</a>--}}
+                                    </li>
+                                    <li class="list">
                                         <address>
                                             <a href="https://www.google.com/maps/place/Softtech+Multimedia+Pvt.+Ltd.+Chitwan/@27.6875094,84.4318738,17z/data=!3m1!4b1!4m5!3m4!1s0x3994fb0a4785686d:0xd7ed579bd57a1450!8m2!3d27.6875094!4d84.4340678"
                                                target="_blank">
@@ -296,8 +302,6 @@
 <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <!--Tiny SLider-->
 <script src="{{ asset('js/tiny-slider.js') }}"></script>
-
-<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
 @yield('scripts')
 <script type="text/javascript">

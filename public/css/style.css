@@ -210,7 +210,7 @@ a:hover {
 }
 
 .bg-product-medium {
-    background-color: #d1cdcc;
+    /*background-color: #d1cdcc;*/
 }
 
 .bg-product-dark {
@@ -308,7 +308,7 @@ a:hover {
 /* new arrival section */
 
 .top-title {
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     width: 100%;
     position: relative;
     border-bottom: 3px solid #CF7500;
@@ -353,13 +353,18 @@ a:hover {
 /*Added Css -------*/
 /*-----------------------*/
 .bg-product-medium img {
-    width: 150px;
-    height: 150px;
+    /*width: 150px;
+    height: 150px;*/
+    border-radius: 16px;
+    width: 100%;
+    height: 200px;
 }
 
 .bg-product-medium {
-    width: 174px;
+    /*width: 174px;*/
+    width: 75%;
     height: auto;
+    padding: 0 !important;
 }
 
 /*Special Filters*/
@@ -598,7 +603,7 @@ a:hover {
     }
 
     #topNavbar nav .active {
-        border-bottom: 3px solid #fff !important;
+        border-bottom: 4px solid #fff !important;
     }
 
     .navbar-expand-lg .navbar-nav .nav-link {
@@ -651,4 +656,22 @@ a:hover {
 /*Owl Carousel Iteration Problem*/
 .owl-carousel {
     touch-action: manipulation;
+}
+
+/*Paginations*/
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #CF7500;
+    border-color: #CF7500;
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
 }

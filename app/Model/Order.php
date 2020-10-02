@@ -10,7 +10,12 @@ class Order extends Model
         'order_number',
         'total_price',
         'shipping_address',
+        'email',
+        'contact_number',
         'sub_urb',
+        'first_name',
+        'last_name',
+        'registered_user',
         'state',
         'order_status',
         'postal_code'
