@@ -30,6 +30,9 @@ Route::get('/logout', function () {
     Auth::logout();
     return view('auth.login');
 });
+Route::post('/searchedproducts',[
+    "uses"=>'Website\ProductController@searchProducts',
+    "as"=>'searchedproducts']);
 //About Us
 Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
 //Services
@@ -41,9 +44,9 @@ Route::get('/servicedetails/{id}',
     return view('website/products');
 });*/
 //Product Page Url
-Route::post('/searchedproducts', [
+Route::get('/products', [
     "uses"=>'Website\ProductController@showProducts',
-    "as"=>'searchedproducts']);
+    "as"=>'products']);
 Route::get('/products', [
     "uses"=>'Website\ProductController@showProducts',
 "as"=>'products']);

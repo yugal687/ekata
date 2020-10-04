@@ -124,11 +124,11 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                                     @if($product->category->parent>'0')
-                                    <li class="breadcrumb-item">
+                                        <li class="breadcrumb-item">
 
-                                        <a
-                                            href="{{route('maincategory',$product->category->parent->id)}}">{{$product->category->parent->category_name}}</a>
-                                    </li>
+                                            <a
+                                                href="{{route('maincategory',$product->category->parent->id)}}">{{$product->category->parent->category_name}}</a>
+                                        </li>
                                     @endif
                                     <li class="breadcrumb-item"><a
                                             href="{{route('category',$product->category->id)}}">{{$product->category->category_name}}</a>
@@ -150,25 +150,26 @@
 
                     <div class="">
 
-                            <section id="special-section">
-                                <div class="mt-5 pt-2">
-                                    <!-- first row -->
-                                    <!-- second row -->
-                                    <div class="row">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h4 class="text-center font-weight-bold">Releted Products</h4>
-                                                </div>
+                        <section id="special-section">
+                            <div class="mt-5 pt-2">
+                                <!-- first row -->
+                                <!-- second row -->
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h4 class="text-center font-weight-bold">Releted Products</h4>
+                                            </div>
 
-                                                <div class="col-md-9">
-                                                    <hr style="border-top: 1px solid">
-                                                </div>
+                                            <div class="col-md-9">
+                                                <hr style="border-top: 1px solid">
                                             </div>
                                         </div>
+                                    </div>
 
 
-                                        <!-- col-item-start -->
+                                    <!-- col-item-start -->
+                                    @if(count($category[0]->product)>0)
                                         @foreach($category[0]->product as $cat)
                                             <div
                                                 class="col-md-3 col-sm-6 col-12 mt-5 text-center">
@@ -188,13 +189,21 @@
                                                     </button>
                                                 </a>
                                             </div>
-                                    @endforeach
-                                    <!-- col-item-end -->
-                                    </div>
-                                    <!-- second row -->
+                                        @endforeach
+                                    @else
+                                        <div class="row text-center d-flex justify-content-center no-result-section mt-5">
+                                            <div class="col-md-6 col-sm-8">
+                                                <h3>Sorry No Products</h3>
+                                                <p class="text-sm">Sorry! We couldn't find any other related items for this product.</p>
+                                            </div>
+                                        </div>
+                                @endif
+                                <!-- col-item-end -->
                                 </div>
-                            </section>
-                            <!-- special section ends here -->
+                                <!-- second row -->
+                            </div>
+                        </section>
+                        <!-- special section ends here -->
                     </div>
                 </main>
                 {{----}}

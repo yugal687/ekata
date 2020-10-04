@@ -39,32 +39,7 @@
                 </div>
                 <main class="px-1 px-sm-3 px-md-4 px-lg-5 py-0">
                     <div class="row">
-                        @if(count($products)>0)
-                            @foreach($products as $product)
-
-                                <div
-                                    class="col-md-3 col-sm-6 mt-5 align-items-center text-center">
-                                    <a href="{{route('singleproduct',[$product->id,$product->product_name])}}">
-                                        <div
-                                            class="img-div bg-product-medium py-4 px-4 rounded-top-front rounded-bottom-front mx-auto">
-                                            <img src="{{ $product->image[0]->name }}" class="img-fluid" alt="">
-                                        </div>
-                                        @if($product->sale_price)
-                                            <h5 class="product-price pt-3 font-weight-bold text-main-danger">${{$product->sale_price}}</h5>
-
-                                        @else
-                                            <h5 class="product-price pt-3 font-weight-bold text-main-danger">${{$product->price}}</h5>
-                                        @endif
-                                        <h5 class="text-dark">{{ $product->product_name}}</h5>
-                                        <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
-                                        <button type="button"
-                                                class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block mx-auto">
-                                            Add to Cart
-                                        </button>
-                                    </a>
-                                </div>
-                            @endforeach
-                           @else
+                        @if(count($getproduct)>0)
                         @foreach($getproduct as $product)
 
                             <div
@@ -92,7 +67,7 @@
                         <div class="">
                             {{--<a href="/products" class="btn btn-large bg-main-primary text-white px-3 py-2">More Items
                             </a>--}}
-                            <div>{{$products->links()}}</div>
+                            <div>{{$getproduct->links()}}</div>
                         </div>
                     </div>
                 </main>

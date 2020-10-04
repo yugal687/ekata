@@ -63,10 +63,13 @@
                                         @csrf
                                         <div class="input-group border-0 py-2 ">
                                             <input type="text" class="form-control border-0 " name="search"
+                                                   id="search-box"
+                                                   required
                                                    placeholder="Search items..."
                                                    aria-label="Search items..." aria-describedby="basic-addon2">
+                                            <p id="search-error"></p>
                                             <div class="input-group-append bg-main-secondary ">
-                                                <button type="submit" class="btn bg-main-primary text-white"><i
+                                                <button type="submit" class="btn bg-main-primary text-white search-btn"><i
                                                         class="fas fa-search"></i>&nbsp; Search
                                                 </button>
                                             </div>

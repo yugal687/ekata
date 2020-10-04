@@ -451,6 +451,12 @@ a:hover {
         padding-left: 130px;
     }
 }
+@media only screen and (max-width: 576px){
+    #copyright-footer .left {
+        padding: 0 25px;
+        text-align: center;
+    }
+}
 
 .list-unstyled li.list {
     margin-top: 5px;
@@ -467,6 +473,9 @@ a:hover {
 
 /*Styles Implies to header*/
 /****************/
+p#search-error{
+    color: red;
+}
 .modal.right .modal-dialog {
     position: fixed;
     top: 16%;

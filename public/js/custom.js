@@ -1,17 +1,4 @@
 $(document).ready(function () {
-    /*Search Items*/
-    $('#search').on('keyup', function () {
-        $value = $(this).val();
-        $.ajax({
-            type: 'get',
-            url: '/',
-            data: {'search': $value},
-            success: function (products) {
-                console.log(products);
-            }
-        });
-    });
-
     /*Location Href*/
     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
     $('ul.navbar-nav a').each(function() {
@@ -68,9 +55,13 @@ $(document).ready(function () {
     });
     /*SM Sidebar JS Ends*/
     /*Dropdown Trigger JS*/
-    $("#droptrigger, #droptrigger-sm").click(function(e) {
+    $("#droptrigger").click(function(e) {
         e.preventDefault();
-        $(".dropcontent, .dropcontent-sm").toggleClass("open", 1000);
+        $(".dropcontent").toggleClass("open", 1000);
+    });
+    $("#droptrigger-sm").click(function(e) {
+        e.preventDefault();
+        $(".dropcontent-sm").toggleClass("open", 1000);
     });
     /*Dropdown Trigger JS Ends*/
 
@@ -88,7 +79,6 @@ $(document).ready(function () {
         }
     });
     /*JS to hide Div when clicked outside Ends*/
-
 
 });
 

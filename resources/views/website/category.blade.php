@@ -56,36 +56,46 @@
                             </div>
                         </div>
                         <div class="row">
+                            @if(count($category->product)>0)
+                                @foreach($category->product as $product)
+                                    <div class="col-md-3 col-sm-6 col-12 mt-5 text-center">
+                                        <a href="{{route('singleproduct',[$product->id,$product->product_name])}}">
+                                            <div
+                                                class="img-div bg-product-medium py-4 px-4 rounded-top-front rounded-bottom-front mx-auto">
+                                                <img src="{{ $product->image[0]->name}}" class="img-fluid" alt="">
+                                            </div>
+                                            @if($product->sale_price)
+                                                <h5 class="product-price pt-3 font-weight-bold text-main-danger">
+                                                    ${{$product->sale_price}}</h5>
 
-                            @foreach($category->product as $product)
-                                <div class="col-md-3 col-sm-6 col-12 mt-5 text-center">
-                                    <a href="{{route('singleproduct',[$product->id,$product->product_name])}}">
-                                        <div
-                                            class="img-div bg-product-medium py-4 px-4 rounded-top-front rounded-bottom-front mx-auto">
-                                            <img src="{{ $product->image[0]->name}}" class="img-fluid" alt="">
-                                        </div>
-                                        @if($product->sale_price)
-                                            <h5 class="product-price pt-3 font-weight-bold text-main-danger">${{$product->sale_price}}</h5>
+                                            @else
+                                                <h5 class="product-price pt-3 font-weight-bold text-main-danger">
+                                                    ${{$product->price}}</h5>
+                                            @endif
+                                            <h5 class="text-dark">{{$product->product_name}}</h5>
+                                            <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
+                                            <button type="button"
+                                                    class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block mx-auto">
+                                                Add to Cart
+                                            </button>
+                                        </a>
 
-                                        @else
-                                            <h5 class="product-price pt-3 font-weight-bold text-main-danger">${{$product->price}}</h5>
-                                        @endif
-                                        <h5 class="text-dark">{{$product->product_name}}</h5>
-                                        <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
-                                        <button type="button"
-                                                class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block mx-auto">
-                                            Add to Cart
-                                        </button>
-                                    </a>
-
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="row text-center d-flex justify-content-center no-result-section mt-5">
+                                    <div class="col-md-6 col-sm-8">
+                                        <h3>Sorry No Products Available</h3>
+                                        <p class="text-sm">Sorry! Recently there are no products available with in this subcategory.</p>
+                                    </div>
                                 </div>
-                            @endforeach
+                            @endif
                         </div>
                         <div class="row mt-5">
                             <div class="col-12 text-center">
-                               {{-- <a href="{{ route('category',$category->id)}}" class="btn btn-large bg-main-primary text-white px-3 py-2">More Items
-                                </a>--}}
-                             {{--   <div>{{$getsingleCategory[0]->product->links()}}</div>--}}
+                                {{-- <a href="{{ route('category',$category->id)}}" class="btn btn-large bg-main-primary text-white px-3 py-2">More Items
+                                 </a>--}}
+                                {{--   <div>{{$getsingleCategory[0]->product->links()}}</div>--}}
                             </div>
                         </div>
 

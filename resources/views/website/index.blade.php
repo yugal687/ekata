@@ -14,7 +14,8 @@
 @section('content')
     {{--FeedBack Message--}}
     <div class='success-box' id="success_box">
-        <img alt='tick image' width='32' src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K'/>
+        <img alt='tick image' width='32'
+             src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K'/>
         <div class='text-message'></div>
         <i class="fas fa-times close-feedback"></i>
     </div>
@@ -71,14 +72,13 @@
                                             <div
                                                 class="item text-center rounded-top-front rounded-bottom-front">
                                                 <div class="row d-flex justify-content-center align-items-center">
-                                                    <a href="{{ route('singleproduct',$discountedProduct->id)}}">
-
+                                                    <a href="{{ route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name ])}}">
                                                         <div class="col-12">
                                                             <div
                                                                 class="img-div bg-product-medium-2 px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
                                                                 <div class="ribbon-wrapper ribbon-lg">
                                                                     <div
-                                                                        class="ribbon bg-main-secondary text-dark discount-font">
+                                                                        class="ribbon bg-main-secondary text-dark discount-font" style="padding: 0.2rem 0px;">
                                                                         clearance
                                                                     </div>
                                                                 </div>
@@ -187,7 +187,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <a href="{{ route('singleproduct',$lastproduct->id) }}"
+                                                    <a href="{{ route('singleproduct',[$lastproduct->id,$lastproduct->product_name]) }}"
                                                        type="button"
                                                        class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn">
                                                         Add to Cart
@@ -251,7 +251,7 @@
                     </div>
                     @foreach($bestSelling as $best)
                         <div class="col-lg-3 col-md-6 col-sm-6 pt-5 text-center">
-                            <a href="{{route('singleproduct',$best->id)}}">
+                            <a href="{{route('singleproduct',[$best->id,$best->product_name])}}">
                                 <div
                                     class="img-div bg-product-medium p-4 rounded-top-front rounded-bottom-front mx-auto">
                                     <img src="{{$best->image[0]->name}}" class="img-fluid" alt="">
@@ -288,29 +288,31 @@
                 <div class="row align-items-center">
                     @foreach ($discountedProducts as $discountedProduct)
                         <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
-                            <div class="row d-flex justify-content-center text-center">
-                                <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
-                                    <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
-                                        <div class="ribbon bg-main-secondary discount-font">
-                                            {{$discountedProduct->discount}}%off
+                            <a href="{{route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name])}}">
+                                <div class="row d-flex justify-content-center text-center">
+                                    <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
+                                        <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
+                                            <div class="ribbon bg-main-secondary discount-font text-dark" style="padding: 0.2rem 0px;">
+                                                {{$discountedProduct->discount}}%off
+                                            </div>
                                         </div>
+                                        <div
+                                            class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
+                                            <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
+                                        </div>
+                                        <h5 class="pt-3 font-weight-bold text-main-danger">
+                                            <s>was {{$discountedProduct->price}}</s></h5>
+                                        <h5 class="product-price font-weight-bold text-main-danger">
+                                            ${{$discountedProduct->sale_price}}</h5>
+                                        <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
+                                        <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
+                                        <button type="button"
+                                                class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block">
+                                            Add to Cart
+                                        </button>
                                     </div>
-                                    <div
-                                        class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
-                                        <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
-                                    </div>
-                                    <h5 class="pt-3 font-weight-bold text-main-danger">
-                                        <s>was {{$discountedProduct->price}}</s></h5>
-                                    <h5 class="product-price font-weight-bold text-main-danger">
-                                        ${{$discountedProduct->sale_price}}</h5>
-                                    <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
-                                    <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                    <button type="button"
-                                            class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block">
-                                        Add to Cart
-                                    </button>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
