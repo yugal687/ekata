@@ -55,7 +55,7 @@ Vue.component('services-component', require('./components/Admin/Services/service
 
 /*Website Pages*/
 Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);
-Vue.component('cart-items-component', require('./components/Website/cartitemsComponent.vue').default);
+Vue.component('cart-items-component', require('./components/Website/cartItemsComponent.vue').default);
 Vue.component('billing-component', require('./components/Website/billingsComponent.vue').default);
 Vue.component('header-navbar-component', require('./components/Website/headerNavbarComponent.vue').default);
 

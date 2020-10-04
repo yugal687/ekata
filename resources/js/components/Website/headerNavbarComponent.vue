@@ -16,12 +16,7 @@
                         </svg>
                     </a>
                     <div class="dropcontent-sm">
-                        <ul class="list-group text-center" v-if="!userDetail">
-                            <li class="list-group-item"><a href="/login">Sign In</a></li>
-                            <li class="list-group-item"><a href="/register">Register</a>
-                            </li>
-                        </ul>
-                        <ul class="list-group text-center" v-else-if="userDetail.role_id === 2">
+                        <ul class="list-group text-center" v-if="userDetail.role_id === 2">
                             <li class="list-group-item"><a href="/user/userdashboard">My
                                 Account</a></li>
                             <li class="list-group-item"><a href="/logout">Logout</a></li>
@@ -30,6 +25,11 @@
                             <li class="list-group-item"><a href="/admin/dashboard">My
                                 Account</a></li>
                             <li class="list-group-item"><a href="/logout">Logout</a></li>
+                        </ul>
+                        <ul class="list-group text-center" v-else>
+                            <li class="list-group-item"><a href="/login">Sign In</a></li>
+                            <li class="list-group-item"><a href="/register">Register</a>
+                            </li>
                         </ul>
                     </div>
                     <a href="#" class="cart" data-toggle="modal" @click="openModal()" data-target="#cartModal">
@@ -45,7 +45,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <i class="fas fa-bars"></i>
                 </button>
 
 
@@ -151,7 +151,6 @@ export default {
     top: 50px;
     z-index: 10002;
 }
-
 .dropcontent-sm {
     visibility: hidden;
     width: 142px;
@@ -160,17 +159,20 @@ export default {
     top: 35px;
     z-index: 10002;
 }
-
 .dropcontent li:hover, .dropcontent-sm li:hover {
     background: #dedbdb;
 }
-
 .dropcontent a, .dropcontent-sm a {
     color: #2b2b2b;
 }
-
 .open {
     visibility: visible;
 }
-
+.navbar-dark .navbar-toggler {
+    color: rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+.navbar-toggler:active, .navbar-toggler:focus{
+    outline: none;
+}
 </style>

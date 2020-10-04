@@ -16,18 +16,19 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
-                                        <el-form-item label="Select Category" prop="categorySelect">
-                                            <select
+                                        <!--<el-form-item label="* Select Category" prop="categorySelect">-->
+                                        <label><span>*</span> Select Category</label>
+                                        <select
                                                 v-model="productForm.categorySelect"
-                                                @change="selectSubcategories($event)">
-                                                <option value="" disabled selected>Select Category</option>
+                                                @change="selectSubcategories($event)"
+                                                class="select-css">
+                                                <option value="" disabled selected class="placeholder">Select Category</option>
                                                 <option value=""
                                                         v-for="item in getCategory"
                                                         v-bind:value="item.id" v-bind:key="item.id">
                                                     {{ item.category_name }}
                                                 </option>
                                             </select>
-                                        </el-form-item>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
                                         <el-form-item label="Select Subcategory" prop="subcategorySelect">
@@ -310,7 +311,7 @@ select {
     width: 100%;
 }
 
-option {
+.select-css option {
     font-size: 14px;
     padding: 0 20px;
     position: relative;
@@ -322,5 +323,18 @@ option {
     line-height: 34px;
     box-sizing: border-box;
     cursor: pointer;
+}
+label {
+    text-align: right;
+    vertical-align: middle;
+    float: left;
+    font-size: 14px;
+    color: #606266;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+}
+label span{
+    color: rgba(255, 0, 0, 0.6);
 }
 </style>

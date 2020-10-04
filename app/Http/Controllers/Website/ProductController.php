@@ -88,12 +88,23 @@ class ProductController extends Controller
             ]);
     }
     public function showProducts(Request $request){
+        $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
+        $getWebsiteDetail = WebsiteDetail::all();
+        $getproduct = Product::with(array('category', 'brand', 'tags', 'image'))->paginate(16);
+        return view('website.products',
+            [
+                'getproduct' => $getproduct,
+                'getCategory' => $getcategory,
+                'websiteDetail' =>$getWebsiteDetail
+            ]);
+    }
+    public function searchProducts(Request $request){
         $products=Product::where('product_name','LIKE','%'.$request->search."%")->
         with(array('category', 'brand', 'tags', 'image'))->paginate(16);
         $getcategory = Category::where('parent_id','=',NULL)->with('product','parent','children')->get();
         $getWebsiteDetail = WebsiteDetail::all();
         $getproduct = Product::where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->paginate(5);
-        return view('website.products',
+        return view('website.searchedproducts',
             [
                 'products' => $products,
                 'getproduct' => $getproduct,
