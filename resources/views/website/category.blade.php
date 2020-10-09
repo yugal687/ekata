@@ -67,7 +67,6 @@
                                             @if($product->sale_price)
                                                 <h5 class="product-price pt-3 font-weight-bold text-main-danger">
                                                     ${{$product->sale_price}}</h5>
-
                                             @else
                                                 <h5 class="product-price pt-3 font-weight-bold text-main-danger">
                                                     ${{$product->price}}</h5>
@@ -79,7 +78,6 @@
                                                 Add to Cart
                                             </button>
                                         </a>
-
                                     </div>
                                 @endforeach
                             @else

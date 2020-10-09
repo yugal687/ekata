@@ -204,41 +204,39 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-row">
-                                                <div class="form-group col-md-12">
-                                                    <input type="number" class="form-control"
+                                                <div class=" col-md-12">
+                                                    <label>Card Number</label>
+                                                    <input class="form-control"
                                                            v-model="stripeCard.card_number"
                                                            id="cardNumber"
+                                                           v-on:keyup="addSpace"
                                                            autocomplete="cc-number"
-                                                           placeholder="Card Number (1234 5678 9012 3456)">
-                                                    <p id="cardNumberError"></p>
+                                                           maxlength="19"
+                                                           placeholder="1234 1234 1234 1234">
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                                <div class="col-md-8 padding-x-null-exp">
                                                     <input type="text" class="form-control"
-                                                           v-model="stripeCard.expiry_year"
+                                                           v-model="stripeCard.expiry_date"
                                                            id="expiryDate"
-                                                           placeholder="Expiration Year (YY)">
+                                                           v-on:keyup="addHyphen"
+                                                           placeholder="MM / YY"
+                                                           maxlength="7">
+                                                    <p id="cardNumberError"></p>
                                                     <p id="expiryDateError"></p>
                                                 </div>
-                                                <div class='col-md-6 col-md-4 form-group expiration required'>
-                                                    <input class='form-control card-expiry-month'
-                                                           v-model="stripeCard.expiry_month"
-                                                           id="expiryMonth"
-                                                           placeholder='Expiration Month (MM)'
-                                                           type='text'>
-                                                    <p id="expiryMonthError"></p>
-                                                </div>
 
-                                                <div class="form-group col-md-6">
-                                                    <input type="number"
-                                                           v-model="stripeCard.cvv"
+                                                <div class="col-md-4  padding-x-null-cvv">
+                                                    <input v-model="stripeCard.cvv"
                                                            class="form-control" id="cvccvv"
-                                                           placeholder="CVC / CVV">
+                                                           placeholder="CVC / CVV"
+                                                           maxlength="3">
                                                     <p id="cvccvvError"></p>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
+                                            <div class="form-row mt-2">
+                                                <label>Card Holder Name</label>
                                                 <div class="form-group col-md-12">
                                                     <input type="text" class="form-control" id="cardHolderName"
                                                            placeholder="Card Holder Name">
@@ -248,10 +246,10 @@
                                             <div class="row mt-3">
                                                 <button type="button"
                                                         name="pay"
-                                                        class="btn bg-main-primary text-white"
+                                                        class="btn action-button text-white m-auto stripe-payment-btn"
                                                         @click="payUsingStripe()"
                                                         value="Pay Now">
-                                                    Pay Using Stripe
+                                                    Pay Now
                                                 </button>
                                             </div>
                                         </div>
@@ -272,10 +270,8 @@
                                        value="Previous"/>
                             </div>
                             <div class="tab-pane" id="step3">
-                                <h4 style="font-size: 18px"><i class="fas fa-check-circle text-success"
-                                                               style="font-size: 22px"></i>
-                                </h4>
-                                <div class="order-items text-left mt-3 ml-5" style="border-bottom: 1px solid #2b2b2b40">
+                                <h4 style=""><i class="fas fa-check-circle text-success fa-4x"></i></h4>
+                                <div class="order-items text-left mt-3 ml-5">
                                     <b>Order ID is <span class="text-main-primary">
                                         {{ successMessage.order_number }}
                                     </span></b> <br/>
@@ -303,45 +299,40 @@
 
                     </form>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5 billings-info-section">
                     <div class="card">
                         <div class="card-body">
                             <div class="row d-flex justify-content-center">
-                                <div class="col-md-8 col-sm-12">
-                                    <h4 class="pt-5" style="color: #00000070;">HELP?
-                                        CONTACT US: 12345678</h4>
+                                <div class="col-md-10 col-sm-12">
+                                    <h5 class="pt-3 font-weight-bold text-gray">Need Help? Contact Us:
+
+                                    </h5>
                                     <hr/>
                                     <div class="row pt-2">
-                                        <div class="col-md-4">
-                                            <h6><strong>TOTAL</strong></h6>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <b>: {{ $store.state.totalPrice }}</b>
+                                        <div class="col-12">
+                                            <h6><strong>TOTAL : &nbsp;{{ $store.state.totalPrice }}</strong></h6>
                                         </div>
                                     </div>
-                                    <hr/>
 
-                                    <div class="row mt-5 orders">
+                                    <div class="row mt-4 orders">
                                         <div class="col-md-12">
                                             <div>
-                                                <h5><strong><u>Your Order Details</u></strong></h5>
-                                                <ul class="px-3">
+                                                <h5 class="font-weight-bold text-gray">Your Order Details</h5>
+                                                <hr/>
+                                                <ul class="px-2">
                                                     <li class="my-3"
                                                         v-for="product in $store.state.storedLocalStorageProduct">
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                <!--   <img style="width: 100%; height: auto"
-                                                                        :src="product.image"
-                                                                        src="/images/noodle.jpg">-->
                                                                 <img style="width: 100%; height: auto"
                                                                      :src="product.product_image">
                                                             </div>
 
 
                                                             <div class="col-md-8">
-                                                                <h5>{{ product.product_name }}</h5>
-                                                                <h6>Quantity: {{ product.quantity }}</h6>
-                                                                <h6>Price: {{ product.price }}</h6>
+                                                                <h5 class="mb-2 font-weight-bold">{{ product.product_name }}</h5>
+                                                                <h6><span class="font-weight-bold">Quantity: </span>{{ product.quantity }}</h6>
+                                                                <h6 class=""><span class="font-weight-bold">Price: </span>{{ product.price }}</h6>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -389,6 +380,7 @@ export default {
                 contact_number: ''
             },
             stripeCard: {
+                expiry_date: '',
                 cvv: '',
                 expiry_year: '',
                 expiry_month: '',
@@ -412,7 +404,7 @@ export default {
 
         const script = document.createElement("script");
         script.src =
-            "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3&currency=AUD";
+            "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3&currency=AUD&disable-funding=credit,card";
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);
     },
@@ -482,28 +474,31 @@ export default {
         submitOrderItems() {
             return false;
         },
-
-        clearCart() {
-
+        addSpace(event) {
+            let ele = this.stripeCard.card_number;
+            ele = ele.split(' ').join('');
+            let finalVal1 = ele.match(/.{1,4}/g).join(' ');
+            this.stripeCard.card_number = finalVal1;
+        },
+        addHyphen(event) {
+            let ele = this.stripeCard.expiry_date;
+            ele = ele.split(' / ').join('');
+            let finalVal = ele.match(/.{1,2}/gi).join(' / ');
+            this.stripeCard.expiry_date = finalVal;
         },
 
         //stripeCheckOut
         payUsingStripe() {
             var cardNumber = $("#cardNumber").val();
             var expiryDate = $("#expiryDate").val();
-            var expiryMonth = $("#expiryMonth").val();
             var cvccvv = $("#cvccvv").val();
             var cardHolderName = $("#cardHolderName").val();
-
             $('input').on("keypress", function () {
                 if (cardNumber.length !== null) {
                     $("#cardNumberError").text("");
                 }
                 if (expiryDate.length !== null) {
                     $("#expiryDateError").text("");
-                }
-                if (expiryMonth.length !== null) {
-                    $("#expiryMonthError").text("");
                 }
                 if (cvccvv.length !== null) {
                     $("#cvccvvError").text("");
@@ -513,33 +508,34 @@ export default {
                 }
             });
 
-            if (cardNumber.length == ""){
+            if (cardNumber.length == "") {
                 $("#cardNumberError").text("Please fill up your card number");
                 $("#cardNumberError").focus();
                 return false;
             }
-            if (expiryDate.length == ""){
+            if (expiryDate.length == "") {
                 $("#expiryDateError").text("Please fill up your expiry date");
                 $("#expiryDateError").focus();
                 return false;
             }
-            if (expiryMonth.length == ""){
-                $("#expiryMonthError").text("Please fill up your expiry month");
-                $("#expiryMonthError").focus();
-                return false;
-            }
-            if (cvccvv.length == ""){
+            if (cvccvv.length == "") {
                 $("#cvccvvError").text("Please fill up your CVC / CVV number");
                 $("#cvccvvError").focus();
                 return false;
             }
-            if (cardHolderName.length == ""){
+            if (cardHolderName.length == "") {
                 $("#cardHolderNameError").text("Please fill up your card holder name");
                 $("#cardHolderNameError").focus();
                 return false;
             }
-
             this.errorMessage = '';
+            //get expiry year month stored on expiry_year && change the card detail;
+            let expiryYearDate = this.stripeCard.expiry_date.split(' / ')
+            console.log(expiryYearDate);
+            this.stripeCard.card_number = this.stripeCard.card_number.split(' ').join('');
+            console.log(this.stripeCard.card_number);
+            this.stripeCard.expiry_month = expiryYearDate[0];
+            this.stripeCard.expiry_year = expiryYearDate[1];
             axios.post('api/stripeCheckOut', {
                 'orderItems': JSON.parse(localStorage.getItem('cart')),
                 'card': this.stripeCard,
@@ -556,6 +552,7 @@ export default {
                     this.successMessage.address = resp.data.address;
                     this.successMessage.suburb_name = resp.data.suburb;
                     this.successMessage.postal_code = resp.data.postal_code;
+                    this.successMessage.state = resp.data.state;
                     $(".tab-pane").hide();
                     $("#step3").fadeIn(1000);
                     $('.progressbar-dots').removeClass('active');
@@ -563,8 +560,10 @@ export default {
                 }
             }).catch(err => {
             });
-        },
-    },
+        }
+        ,
+    }
+    ,
 
     computed: {
         granTotal() {
@@ -577,6 +576,10 @@ export default {
 </script>
 
 <style scoped>
+hr {
+    margin-top: 0.3rem;
+}
+
 #p1, #p2, #p3, #p4, #p5, #p6, #p7, #p1_billing, #p2_billing, #p3_billing, #p4_billing, #p5_billing, #p6_billing, #p7_billing, #cardNumberError, #expiryDateError, #expiryMonthError, #cvccvvError, #cardHolderNameError {
     font-family: 'Lato', sans-serif;
     font-size: 12px;
@@ -588,10 +591,51 @@ export default {
 .error {
     color: red;
 }
-.stripe-error-msg{
+
+.stripe-error-msg {
     padding: 15px;
     background-color: #ffbaba;
     color: red;
     margin-bottom: 15px;
+}
+
+.creditCard input {
+    border-radius: 5px;
+}
+
+.creditCard label {
+    float: left;
+}
+
+input#cardNumber {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+input#expiryDate {
+    border-bottom-left-radius: 8px;
+}
+
+input#cvccvv {
+    border-bottom-right-radius: 8px;
+}
+
+input#cardHolderName {
+    border-radius: 8px;
+}
+
+.form-row > .padding-x-null-exp {
+    padding-right: 0;
+}
+
+.form-row > .padding-x-null-cvv {
+    padding-left: 0;
+}
+
+.billings-info-section {
+    margin-top: 75px;
+}
+.orders img{
+    border-radius: 4px;
 }
 </style>

@@ -68,6 +68,10 @@
             padding: 10px 20px;
             margin: 10px 5px;
         }
+        .stripe-payment-btn{
+            font-family: 'Lato', sans-serif;
+            font-size: 13px;
+        }
 
         #shipping-payment-form .action-button:hover, #shipping-payment-form .action-button:focus {
             box-shadow: 0 0 0 2px white, 0 0 0 3px #CF7500;
@@ -209,24 +213,15 @@
 @stop
 
 @section('content')
-
     <billing-component>
-
     </billing-component>
 @stop
 
 @section('scripts')
 
-    {{--
-        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-    --}}
-
     <script>
-
         $(function () {
-
             /*Validation if Checkbox is checked*/
-
             $(".next").click(function () {
                 /*Billing*/
                 var fname_billing = $("#first_name_billing").val();

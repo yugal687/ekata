@@ -111,11 +111,11 @@
                             <p class="font-weight-bold">FOLLOW US:</p>
                         </div>
                         <div class="col-sm-12 col-md-9 p-2">
-                            <img src="{{ asset('images/Icons/facebook.png') }}"
+                            <img src="{{ asset('images/Icons/yellow-fb.png') }}"
                                  class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px" alt="">
-                            <img src="{{ asset('images/Icons/instagram.png') }}"
+                            <img src="{{ asset('images/Icons/yellow-instagram.png') }}"
                                  class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px" alt="">
-                            <img src="{{ asset('images/Icons/twitter.png') }}"
+                            <img src="{{ asset('images/Icons/yellow-twitter.png') }}"
                                  class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px" alt="">
                         </div>
                     </div>
@@ -224,9 +224,6 @@
                                     </li>
                                     <li class="list">
                                         <a href="mailto:{{$websiteDetail[0]->email}}">{{$websiteDetail[0]->email}}</a>
-                                    </li>
-                                    <li class="list">
-                                        {{--<a href="mailto:{{$websiteDetail[0]->optional_email}}">{{$Details->optional_email}}</a>--}}
                                     </li>
                                     <li class="list">
                                         <address>
