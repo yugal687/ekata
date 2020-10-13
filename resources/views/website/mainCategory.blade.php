@@ -59,6 +59,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
+                                    @if(count($singleCategory->product)>0)
                                     @foreach($singleCategory->product as $product)
                                         <div
                                             class="col-md-3 col-sm-6 col-12 mt-5 text-center">
@@ -83,8 +84,17 @@
                                             </a>
                                         </div>
                                     @endforeach
+                                        {{--@else
+                                        <div class="row text-center d-flex justify-content-center no-result-section mt-5">
+                                            <div class="col-md-6 col-sm-8">
+                                                <h3>Sorry No Products Available</h3>
+                                                <p class="text-sm">Sorry! Recently there are no products available with in this subcategory.</p>
+                                            </div>
+                                        </div>--}}
+                                        @endif
                                 </div>
                             </div>
+
                             @foreach($singleCategory->children as $subCategory)
                                 <div class="col-md-12 mt-5">
                                     <div class="top-title-catg">
@@ -95,6 +105,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
+                                        @if(count($subCategory->product)>0)
                                         @foreach($subCategory->product as $product)
                                             <div
                                                 class="col-md-3 col-sm-6 col-12 mt-5 text-center">
@@ -119,6 +130,14 @@
                                                 </a>
                                             </div>
                                         @endforeach
+                                            @else
+                                            <div class="row text-center d-flex justify-content-center no-result-section mt-5">
+                                                <div class="col-md-6 col-sm-8">
+                                                    <h3>Sorry No Products Available</h3>
+                                                    <p class="text-sm">Sorry! Recently there are no products available with in this subcategory.</p>
+                                                </div>
+                                            </div>
+                                            @endif
                                     </div>
                                 </div>
                             @endforeach

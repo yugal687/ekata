@@ -304,8 +304,8 @@
                         <div class="card-body">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-10 col-sm-12">
-                                    <h5 class="pt-3 font-weight-bold text-gray">Need Help? Contact Us:
-
+                                    <h5 class="pt-3 font-weight-bold text-gray" v-if="webDetail[0]">Need Help? Contact Us:
+                                        <a :href="`tel:+${ webDetail[0].contact_number }`">{{webDetail[0].contact_number}}</a>
                                     </h5>
                                     <hr/>
                                     <div class="row pt-2">
@@ -358,6 +358,7 @@ export default {
         return {
             NSW: 'NSW',
             order_number: null,
+            webDetail:[],
             discountPrice: 0,
             shippingAddress: {
                 first_name: '',
@@ -407,6 +408,9 @@ export default {
             "https://www.paypal.com/sdk/js?client-id=AUEz_HH72HWnBgf481P4ohkEayRqi7VaCjfeJV89ESgkgDwVgKg2mJKChEoFG6QVaGKReMPd8A5nmRr3&currency=AUD&disable-funding=credit,card";
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);
+        axios.get('/api/getWebsiteDetail').then(response=>{
+           this.webDetail= response.data.WebsiteDetail
+        });
     },
 
     methods: {

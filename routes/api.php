@@ -101,4 +101,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/deleteService/{id}', 'Admin\ServiceController@deleteService');
     Route::patch('/saveEditService', 'Admin\ServiceController@saveEditService');
 
+    /*PaymentCredentials Requests*/
+    Route::post('/paymentCredentials', 'Admin\PaymentCredentialsController@create');
+    Route::get('/paymentCredentials', 'Admin\PaymentCredentialsController@fetch');
+    Route::delete('/paymentCredentials/{id}', 'Admin\PaymentCredentialsController@delete');
+    Route::patch('/paymentCredentials', 'Admin\PaymentCredentialsController@update');
+
+    /*DeliveryAddress Requests*/
+    Route::post('/deliveryAddress', 'Admin\PaymentCredentialsController@create');
+    Route::get('/deliveryAddress', 'Admin\PaymentCredentialsController@fetch');
+    Route::delete('/deliveryAddress/{id}', 'Admin\PaymentCredentialsController@delete');
+    Route::patch('/deliveryAddress', 'Admin\PaymentCredentialsController@update');
 });
+
+//

@@ -17,29 +17,29 @@
                             width="60">
                         </el-table-column>
                         <el-table-column
-                            prop="date"
+                            prop="order_details[0].date"
                             label="Date">
                         </el-table-column>
                         <el-table-column
-                            prop="order.order_number"
+                            prop="order_number"
                             label="Order Number">
                         </el-table-column>
 
                         <el-table-column
-                            prop="order.first_name"
+                            prop="first_name"
                             label="User Name">
                         </el-table-column>
                         <el-table-column
-                            prop="order.registered_user"
+                            prop="registered_user"
                             label="User Id">
                         </el-table-column>
                         <el-table-column
-                            prop="order.total_price"
+                            prop="total_price"
                             label="Total Price">
                         </el-table-column>
                         <el-table-column
                             label="Status"
-                            prop="order.order_status">
+                            prop="order_status">
                         </el-table-column>
                         <el-table-column
                             fixed="right"
@@ -79,33 +79,56 @@
         </main>
         <main>
             <el-dialog title="Buyer Orders" :visible.sync="dialogTableVisible">
-                <el-table :data="gridData">
-                    <el-table-column property="product.product_name" label="Product Name" width="150"></el-table-column>
-                    <el-table-column property="quantity" label="Quantity" width="200"></el-table-column>
-                    <el-table-column property="price" label="Price"></el-table-column>
-                    <el-table-column property="discount" label="Discount"></el-table-column>
-                </el-table>
+               <!-- <el-table  v-for="data in gridData  ">
+                   &lt;!&ndash; <el-table-column property="product.product_name" label="Product Name" width="150"></el-table-column>&ndash;&gt;
+                    <el-table-column label="Quantity" width="200">{{data.order_details[0].quantity}}</el-table-column>
+                    <el-table-column label="Price">{{data.order_details[0].price}}</el-table-column>
+                    <el-table-column label="Discount">{{data.order_details[0].discount}}</el-table-column>
+                </el-table>-->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Discount</th>
+                    </tr>
+                    </thead>
+                    <tbody v-for="data in gridData">
+                    <tr v-for="item in data.order_details">
+                        <th>{{item.product.product_name}}</th>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.discount}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Total Price</td>
+                        <td>{{data.total_price}}</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
                 <span slot="footer" class="dialog-footer">
                     <div class="row" v-for="data in gridData">
                         <div class="col-md-6">
                             <dl class="row">
                                 <dt class="col-sm-4">
-                                    Address
+                                    Shipping Address
                                 </dt>
                                 <dd class="col-sm-8" >
-                                    {{data.order.shipping_address}}
+                                    {{data.shipping_address}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     City
                                 </dt>
                                 <dd class="col-sm-8">
-                                    {{data.order.state}}
+                                    {{data.state}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Postal Code
                                 </dt>
                                 <dd class="col-sm-8">
-                                    {{data.order.postal_code}}
+                                    {{data.postal_code}}
                                 </dd>
                             </dl>
                         </div>
@@ -115,19 +138,19 @@
                                     Optional Address
                                 </dt>
                                 <dd class="col-sm-8">
-                                    {{data.order.shipping_address}}
+                                    {{data.shipping_address}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Email
                                 </dt>
                                 <dd class="col-sm-8">
-                                    {{data.order.email}}
+                                    {{data.email}}
                                 </dd>
                                 <dt class="col-sm-4">
                                     Contact
                                 </dt>
                                 <dd class="col-sm-8" >
-                                    {{data.order.contact_number}}
+                                    {{data.contact_number}}
                                 </dd>
                                 </dl>
                         </div>
@@ -164,11 +187,11 @@
             showDetails(id) {
                 this.dialogTableVisible = true;
                 this.gridData = this.orderDetailsTableData.filter(orderDetailsTableData => (orderDetailsTableData.id == id));
-                console.log(this.gridData);
+                console.log(this.gridData[0]);
             },
             fetchOrder(){
                 axios.get('/api/getOrderDetail', {}).then(response => {
-                    this.orderDetailsTableData = response.data.order
+                    this.orderDetailsTableData = response.data.orderlisted
                 });
             },
             orderDelivered(id) {

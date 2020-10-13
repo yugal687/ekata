@@ -277,16 +277,18 @@
     <section id="special-section">
         <div class="container-mine">
             <div class="row m-0 p-0 my-5">
+                {{dd($categories)}}
+                @foreach($categories as $category)
                 <div class="col-md-12 mt-5">
                     <div class="top-title">
                         <h3 class="d-inline bg-main-primary px-5 rounded-top-front heading-font text-white">
-                            SPECIALS</h3>
+                            {{$category->category_name}}</h3>
                     </div>
                 </div>
                 <!-- <div class="container"> -->
                 <!-- <div class="special-content"> -->
                 <div class="row align-items-center">
-                    @foreach ($discountedProducts as $discountedProduct)
+                    @foreach ($category->product as $discountedProduct)
                         <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
                             <a href="{{route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name])}}">
                                 <div class="row d-flex justify-content-center text-center">
@@ -317,6 +319,7 @@
                     @endforeach
                 </div>
                 <!-- first row -->
+                    @endforeach
             </div>
         </div>
     </section>
