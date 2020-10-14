@@ -321,7 +321,7 @@ export default {
                 message: response.data.message,
                 type: "success",
               });
-              this.$refs.upload.uploadFiles = {};
+              this.$refs.upload.uploadFiles = [];
               this.productForm = {};
               this.productForm.categorySelect = "";
               this.productForm.subcategorySelect = "";

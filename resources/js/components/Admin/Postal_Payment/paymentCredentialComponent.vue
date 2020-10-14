@@ -37,11 +37,11 @@
                   >
                     <el-option
                       v-for="type in payType"
-                      :key="type.id"
+                      :key="type.value"
                       data-target=".bd-paymentCredential-modal-lg"
                       data-toggle="modal"
-                      :label="type.paymentType"
-                      :value="type.id"
+                      :label="type.value"
+                      :value="type.value"
                     >
                     </el-option>
                   </el-select>
@@ -80,15 +80,7 @@
           <el-card class="box-card border-dark" shadow="hover">
             <div class="text item">
               <el-table
-                :data="
-                  payCred.filter(
-                    (data) =>
-                      !payCredSearch ||
-                      data.paymentType
-                        .toLowerCase()
-                        .includes(payCredSearch.toLowerCase())
-                  )
-                "
+                :data="payCred"
                 border
                 max-height="470"
                 style="width: 100%"
@@ -101,19 +93,19 @@
                 >
                 </el-table-column>
                 <el-table-column
-                  prop="paymentType"
+                  prop="payment_type"
                   label-class-name="text-white bg-dark"
                   label="Payment Type"
                 >
                 </el-table-column>
                 <el-table-column
-                  prop="secretKey"
+                  prop="secret_key"
                   label-class-name="text-white bg-dark"
                   label="Secret Key"
                 >
                 </el-table-column>
                 <el-table-column
-                  prop="apiKey"
+                  prop="api_key"
                   label-class-name="text-white bg-dark"
                   label="API Key"
                 >
@@ -166,20 +158,19 @@ export default {
   name: "postalCodeComponents",
   data() {
     return {
+        payType:[{
+            value: "Mastercard",
+        },
+        {
+            value:"Paypal"
+        }],
       labelPosition: "top",
       paymentCredentialForm: {
-        paymentType: "",
+        paymentType:"",
         secretKey: "",
         apiKey: "",
       },
-      payCred: [
-        {
-          paymentType: "PayPal",
-          secretKey: "3u-29rehio;fwbsdakn cmdbdef93h;ioebjkc xbabs",
-          apiKey:
-            "1-02938u4u9hibefdkxas9038rhu4bifhrj vcnxckdofwfei439203quwdjosk",
-        },
-      ],
+      payCred: [],
       payCredSearch: "",
 
       // validation rules
@@ -220,8 +211,8 @@ export default {
 
   methods: {
     fetchPaymentCredential() {
-      axios.get("/api/payCred", {}).then((response) => {
-        this.payCred = response.data.payCred;
+      axios.get("/api/paymentCredentials", {}).then((response) => {
+        this.payCred = response.data.credentials;
       });
     },
 
@@ -229,14 +220,10 @@ export default {
       this.$refs[paymentCredentialForm].validate((valid) => {
         if (valid) {
           let formdata = new FormData();
-          formdata.append(
-            "payment_type",
-            this.paymentCredentialForm.paymentType
-          );
+          formdata.append("payment_type", this.paymentCredentialForm.paymentType);
           formdata.append("secret_key", this.paymentCredentialForm.secretKey);
           formdata.append("api_key", this.paymentCredentialForm.apiKey);
-          axios
-            .post("/api/payCred", formdata, {
+          axios.post("/api/paymentCredentials", formdata, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -249,7 +236,6 @@ export default {
               });
               this.paymentCredentialForm = {};
               this.fetchPaymentCredential();
-              this.clearPaymentCredential();
             })
             .catch((error) => {
               if (error.response.status == 422) {
@@ -266,13 +252,6 @@ export default {
         }
       });
     },
-
-    clearPaymentCredential() {
-      this.paymentCredentialForm.paymentType = "";
-      this.paymentCredentialForm.secretKey = "";
-      this.paymentCredentialForm.apiKey = "";
-    },
-
     editpayCred(id) {
       $(".editpayCredBtn").click(function () {
         $(".payCred-div").slideToggle("slow");
@@ -281,13 +260,14 @@ export default {
     deletepayCred(id) {
       this.$confirm("Are you sure to delete this Items?")
         .then((_) => {
-          axios.delete("/api/payCred/" + id).then((response) => {
+          axios.delete("/api/paymentCredentials/" + id).then((response) => {
             this.$notify({
               title: "Success",
               message: response.data.message,
               type: "info",
             });
-            this.fetchState();
+              this.paymentCredentialForm = {};
+              this.fetchPaymentCredential();
           });
         })
         .catch((_) => {});

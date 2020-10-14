@@ -3,23 +3,56 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\StatePostalCode;
+use App\Model\DeliveryAddress;
+use App\Model\PostalCode;
+use App\Model\State;
 use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
+    public function createState(Request $request)
+    {
+        //dd($request);
+        $validate = $request->validate([
+            'state' => 'required'
+        ]);
+        if ($validate) {
+            State::create([
+                'state' => $request->state
+            ]);
+            return response()->json([
+                'message' => 'Stated added sucessfully !!'
+            ]);
+        }
+    }
+
+    public function createPostal(Request $request)
+    {
+        $validate = $request->validate([
+            'postal_code' => 'required'
+        ]);
+        if ($validate) {
+            PostalCode::create([
+                'postal_code' => $request->postal_code
+            ]);
+            return response()->json([
+                'message' => 'Postal code added sucessfully !!'
+            ]);
+        }
+    }
+
     public function create(Request $request)
     {
         $validate = $request->validate([
             "postal_code_id" => 'required',
             "state_id" => 'required',
-            "delivery_charge" => 'validate'
+            "delivery_charge" => 'required'
         ]);
         if ($validate) {
-            StatePostalCode::create([
-                "postal_code_id"=>$request->postal_code_id,
+            DeliveryAddress::create([
+                "postal_code_id" => $request->postal_code_id,
                 "state_id" => $request->state_id,
-                "delivery_charge" =>$request->delivery_charge
+                "delivery_charge" => $request->delivery_charge
             ]);
             return response()->json([
                 'message' => 'Delivery Details added sucessfully!!'
@@ -27,26 +60,64 @@ class DeliveryController extends Controller
         }
 
     }
-    public function fetch(){
-        $deliveryDetails=StatePostalCode::all();
+
+    public function fetch()
+    {
+        $deliveryDetails = DeliveryAddress::with('state','postCode')->get();
         return response()->json([
-           'delivery' => $deliveryDetails
+            'delivery' => $deliveryDetails
         ]);
     }
-    public function delete($id){
-        $delete = StatePostalCode::where('id',$id)->delete();
+
+    public function fetchState()
+    {
+        $state = State::all();
         return response()->json([
-           'message' => 'Sucessfully Deleted !!'
+            'state' => $state
         ]);
     }
-    public function update(Request $request){
-        StatePostalCode::where('id',$request->id)->update([
-            "postal_code_id"=>$request->postal_code_id,
+
+    public function fetchPostal()
+    {
+        $postal = PostalCode::all();
+        return response()->json([
+            'postal' => $postal
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $delete = DeliveryAddress::where('id', $id)->delete();
+        return response()->json([
+            'message' => 'Sucessfully Deleted !!'
+        ]);
+    }
+
+    public function deleteState($id)
+    {
+        State::where('id', $id)->delete();
+        return response()->json([
+            'message' => 'Sucessfully Deleted !!'
+        ]);
+    }
+
+    public function deletePostal($id)
+    {
+        PostalCode::where('id', $id)->delete();
+        return response()->json([
+            'message' => 'Sucessfully Deleted !!'
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        DeliveryAddress::where('id', $request->id)->update([
+            "postal_code_id" => $request->postal_code_id,
             "state_id" => $request->state_id,
-            "delivery_charge" =>$request->delivery_charge
+            "delivery_charge" => $request->delivery_charge
         ]);
         return response()->json([
-           'message'=>'Delivery Details Updated Sucessfully !!!'
+            'message' => 'Delivery Details Updated Sucessfully !!!'
         ]);
     }
 }
