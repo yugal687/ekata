@@ -71,9 +71,9 @@
                                     <el-card class="box-card border-dark m-0 p-0" shadow="hover">
                                         <div class="text item m-0 p-0">
                                             <el-table :data="state"
-                                                border
-                                                max-height="470"
-                                                style="width: 100%"
+                                                      border
+                                                      max-height="470"
+                                                      style="width: 100%"
                                             >
                                                 <el-table-column
                                                     type="index"
@@ -105,11 +105,11 @@
                                                             type="primary"
                                                             icon="el-icon-edit"
                                                             size="mini"
-                                                            data-target=".bd-example-modal-lg"
+                                                            data-target=".bd-state-modal-lg"
                                                             data-toggle="modal"
                                                             title="Edit"
                                                             class="editStateModal"
-                                                            @click="editState(scope.row.id)"
+                                                            @click="openeditState(scope.row.id)"
                                                             circle
                                                         ></el-button>
                                                         <el-button
@@ -128,6 +128,76 @@
                                 </div>
                             </div>
                         </div>
+                        <!--State Edit Modal Start Here-->
+                        <div
+                            class="modal fade bd-state-modal-lg"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabel"
+                            aria-hidden="true"
+                        >
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-info text-white">
+                                        Edit State Name:
+                                        <button
+                                            type="button"
+                                            class="close text-danger"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                        >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div
+                                                    v-if="editState"
+                                                    class="alert alert-success alert-dismissible fade show"
+                                                    role="alert"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="close"
+                                                        data-dismiss="alert"
+                                                        aria-label="Close"
+                                                    >
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" v-for="state in editedState" :key="state.id">
+                                                <el-form
+                                                    :model="editedState[0]"
+                                                    :rules="stateEditFormRules"
+                                                    ref="stateEditForm"
+                                                    :label-position="labelPosition"
+                                                >
+                                                    <el-form-item label="State Name" prop="state">
+                                                        <el-input
+                                                            v-model="state.state"
+                                                            style="width: 100%"
+                                                        >
+                                                        </el-input>
+                                                    </el-form-item>
+                                                    <el-form-item>
+                                                        <el-button
+                                                            type="primary"
+                                                            style="width: 100%;"
+                                                            class="mt-3"
+                                                            @click="saveEditState('stateEditForm')"
+                                                        >Create
+                                                        </el-button>
+                                                    </el-form-item>
+                                                </el-form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--State Edit Model Ends Here-->
                     </div>
                 </section>
                 <hr/>
@@ -161,7 +231,7 @@
                                         :label-position="labelPosition"
                                         class="demo-postalForm"
                                     >
-                                        <el-form-item label="PostalAddress" prop="stateName">
+                                        <el-form-item label="PostalAddress" prop="postalCode">
                                             <el-input v-model="postalForm.postalCode" style="width: 100%">
                                             </el-input>
                                         </el-form-item>
@@ -242,11 +312,11 @@
                                                             type="primary"
                                                             icon="el-icon-edit"
                                                             size="mini"
-                                                            data-target=".bd-example-modal-lg"
+                                                            data-target=".bd-postalCode-modal-lg"
                                                             data-toggle="modal"
                                                             title="Edit"
                                                             class="editStateModal"
-                                                            @click="editState(scope.row.id)"
+                                                            @click="openeditPostal(scope.row.id)"
                                                             circle
                                                         ></el-button>
                                                         <el-button
@@ -266,6 +336,78 @@
                             </div>
                         </div>
                     </div>
+
+                    <!--Postal Code Edit Modal Start Here-->
+                    <div
+                        class="modal fade bd-postalCode-modal-lg"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="myLargeModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header bg-info text-white">
+                                    Edit Postal Code:
+                                    <button
+                                        type="button"
+                                        class="close text-danger"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div
+                                                v-if="editState"
+                                                class="alert alert-success alert-dismissible fade show"
+                                                role="alert">
+                                                <button
+                                                    type="button"
+                                                    class="close"
+                                                    data-dismiss="alert"
+                                                    aria-label="Close"
+                                                >
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" v-for="item in editedPostal">
+                                            <el-form
+                                                :model="editedPostal[0]"
+                                                ref="postalEditForm"
+                                                :rules="postalEditFormRules"
+                                                :label-position="labelPosition"
+                                                class="demo-postalEditForm"
+                                            >
+                                                <el-form-item label="Postal Code" prop="post_code">
+                                                    <el-input
+                                                        v-model="item.post_code"
+                                                        style="width: 100%"
+                                                    >
+                                                    </el-input>
+                                                </el-form-item>
+                                                <el-form-item>
+                                                    <el-button
+                                                        type="primary"
+                                                        style="width: 100%;"
+                                                        class="mt-3"
+                                                        @click="saveEditPostal('postalEditForm')"
+                                                    >Create
+                                                    </el-button>
+                                                </el-form-item>
+                                            </el-form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Postal Code Edit Model Ends Here-->
+
                 </section>
             </div>
             <!-- postal details input-->
@@ -418,9 +560,9 @@
                                                 icon="el-icon-edit"
                                                 size="mini"
                                                 class="editPostalModal"
-                                                data-target=".bd-postalDetail-modal-lg"
+                                                data-target=".bd-pd-modal-lg"
                                                 data-toggle="modal"
-                                                @click="editPostalDetail(scope.row.id)"
+                                                @click="showeditPostalDetail(scope.row.id)"
                                                 circle
                                             ></el-button>
                                             <el-button
@@ -437,6 +579,120 @@
                         </el-card>
                     </div>
                 </div>
+
+                <!--Postal Detail Edit Modal Start Here-->
+                <div
+                    class="modal fade bd-pd-modal-lg"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="myLargeModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info text-white">
+                                Edit Postal & Delivery Charge:
+                                <button
+                                    type="button"
+                                    class="close text-danger"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div
+                                            v-if="editpostalDetail"
+                                            class="alert alert-success alert-dismissible fade show"
+                                            role="alert"
+                                        >
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="alert"
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" v-for="item in editedDetails">
+                                        <el-form
+                                            :model="editedDetails[0]"
+                                            ref="postalDetailEditForm"
+                                            :rules="postalDetailEditFormRules"
+                                            :label-position="labelPosition"
+                                            class="demo-postalDetailForm"
+                                        >
+                                            <el-form-item label="Select State" prop="state">
+                                                <el-select
+                                                    clearable
+                                                    placeholder="Please select State Name."
+                                                    filterable
+                                                    v-model="item.state.state"
+                                                    style="width: 100%"
+                                                >
+                                                    <el-option
+                                                        v-for="item in state"
+                                                        :key="item.id"
+                                                        data-target=".bd-postalDetail-modal-lg"
+                                                        data-toggle="modal"
+                                                        :label="item.state"
+                                                        :value="item.id"
+                                                    >
+                                                    </el-option>
+                                                </el-select>
+                                            </el-form-item>
+                                            <el-form-item label="Postal Code" prop="postal_code">
+                                                <el-select
+                                                    clearable
+                                                    placeholder="Please select State Name."
+                                                    filterable
+                                                    v-model="item.post_code.postal_code"
+                                                    style="width: 100%"
+                                                >
+                                                    <el-option
+                                                        v-for="item in postal"
+                                                        :key="item.id"
+                                                        data-target=".bd-postalDetail-modal-lg"
+                                                        data-toggle="modal"
+                                                        :label="item.postal_code"
+                                                        :value="item.id"
+                                                    >
+                                                    </el-option>
+                                                </el-select>
+                                            </el-form-item>
+                                            <el-form-item label="Delivery Charge" prop="delivery_charge">
+                                                <el-input
+                                                    v-model="item.delivery_charge"
+                                                    placeholder="Please input delivery charge."
+                                                    style="width: 100%"
+                                                >
+                                                </el-input>
+                                            </el-form-item>
+                                            <el-form-item>
+                                                <el-button
+                                                    type="primary"
+                                                    style="width: 80%; margin: 15px 10% 0"
+                                                    class="mt-3"
+                                                    @click="saveEditPostalDetail('postalDetailEditForm')"
+                                                >Save
+                                                </el-button>
+                                            </el-form-item>
+                                        </el-form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Postal detail Edit Model Ends Here-->
+
+
             </div>
         </div>
     </div>
@@ -459,11 +715,16 @@
                     deliveryCharge: "",
                     selectState: "",
                 },
+                editState: false,
+                editPostal: false,
+                editpostalDetail: false,
+                editedState: [],
+                editedPostal: [],
                 state: [],
                 postal: [],
-                delivery:[],
+                delivery: [],
                 isEditPostalCode: "",
-
+                editedDetails: [],
                 stateSearch: "",
                 postalSearch: "",
 
@@ -477,22 +738,39 @@
                         },
                     ],
                 },
+                stateEditFormRules: {
+                    state: [
+                        {
+                            required: true,
+                            message: "Please input state name",
+                            trigger: "blur",
+                        },
+                    ],
+                },
                 postalRules: {
                     postalCode: [
                         {
                             required: true,
-                            message: "please input postal code",
+                            message: "Please input postal code",
                             trigger: "blur",
                         }
                     ]
                 },
-
+                postalEditFormRules: {
+                    post_code: [
+                        {
+                            required: true,
+                            message: "Please input postal code",
+                            trigger: "blur",
+                        }
+                    ]
+                },
                 postalDetailRules: {
                     postalCode: [
                         {
                             required: true,
                             message: "please input valid Postcode.",
-                            trigger: blur,
+                            trigger: "blur",
                         },
                     ],
 
@@ -505,6 +783,31 @@
                     ],
 
                     selectState: [
+                        {
+                            required: true,
+                            message: "Please select State Name.",
+                            trigger: blur,
+                        },
+                    ],
+                },
+                postalDetailEditFormRules: {
+                    postal_code: [
+                        {
+                            required: true,
+                            message: "please input valid Postcode.",
+                            trigger: "blur",
+                        },
+                    ],
+
+                    delivery_charge: [
+                        {
+                            required: true,
+                            message: "Please input Delivery Charge.",
+                            trigger: blur,
+                        },
+                    ],
+
+                    state: [
                         {
                             required: true,
                             message: "Please select State Name.",
@@ -571,7 +874,9 @@
                     this.delivery = response.data.delivery;
                 });
             },
-
+            openeditState(id) {
+                this.editedState = this.state.filter(state => (state.id == id));
+            },
             submitState(stateForm) {
                 this.$refs[stateForm].validate((valid) => {
                     if (valid) {
@@ -651,11 +956,8 @@
             clearStateForm() {
                 this.stateForm.stateName = "";
             },
-
-            editState() {
-                $(".editStateModal").click(function () {
-                    $(".state-div").slideToggle("slow");
-                });
+            openeditPostal(id) {
+                this.editedPostal = this.postal.filter(postal => (postal.id == id));
             },
             deleteState(id) {
                 this.$confirm("Are you sure to delete this State?")
@@ -699,12 +1001,12 @@
                         let formdata = new FormData();
                         formdata.append("state_id", this.postalDetailForm.selectState);
                         formdata.append("postal_code_id", this.postalDetailForm.postalCode);
-                        formdata.append("delivery_charge",this.postalDetailForm.deliveryCharge);
+                        formdata.append("delivery_charge", this.postalDetailForm.deliveryCharge);
                         axios.post("/api/deliveryAddress", formdata, {
-                                headers: {
-                                    "Content-Type": "multipart/form-data",
-                                },
-                            })
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                            },
+                        })
                             .then((response) => {
                                 this.$notify({
                                     title: "Success",
@@ -733,10 +1035,9 @@
             },
 
             // edit Postal Detail
-            editPostalDetail() {
-                $(".editPostalModal").click(function () {
-                    $(".postalDetail-div").slideToggle("slow");
-                });
+            showeditPostalDetail(id) {
+                this.editedDetails = this.delivery.filter(delivery => (delivery.id == id));
+                console.log(this.editedDetails[0].post_code);
             },
 
             // Delete Postal Detail
@@ -763,7 +1064,28 @@
                 this.postalDetailForm.postalCode = "";
                 this.postalDetailForm.deliveryCharge = "";
             },
-        },
+            saveEditState(stateEditForm) {
+                this.$refs[stateEditForm].validate((valid) => {
+                    if (valid) {
+                        alert('Success');
+                    }
+                });
+            },
+            saveEditPostal(postalEditForm) {
+                this.$refs[postalEditForm].validate((valid) => {
+                    if (valid) {
+                        alert('Success');
+                    }
+                });
+            },
+            saveEditPostalDetail(postalDetailEditForm){
+                this.$refs[postalDetailEditForm].validate((valid) => {
+                    if (valid) {
+                        alert('Success');
+                    }
+                });
+            }
+        }
     };
 </script>
 
