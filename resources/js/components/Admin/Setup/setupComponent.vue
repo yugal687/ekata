@@ -629,8 +629,8 @@ export default {
                 type: "success",
               });
               this.categoryForm = {};
-              this.$refs.uploadHeader.uploadFiles = {};
-              this.$refs.uploadThumbnail.uploadFiles = {};
+              this.$refs.uploadHeader.uploadFiles = [];
+              this.$refs.uploadThumbnail.uploadFiles = [];
               this.fetchCategory();
             })
             .catch((error) => {
