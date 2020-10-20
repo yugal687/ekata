@@ -14,9 +14,12 @@ class OrderController extends Controller
 {
     public function getOrder(){
         $order = OrderDetail::with('order','user','product')->orderBy('created_at', 'desc')->get();
-
+        $orderlisted = Order::with(['orderDetails'=>function($q){
+            $q->with('product')->get();
+        }])->orderBy('created_at', 'desc')->get();
         return response()->json([
-           'order' => $order
+           'order' => $order,
+            'orderlisted' =>$orderlisted
         ]);
     }
     public function setDelivered($id){

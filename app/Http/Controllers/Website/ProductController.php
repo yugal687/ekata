@@ -26,6 +26,11 @@ class ProductController extends Controller
         $reviewImage = ReviewImage::where('active', 1)->get();
         $getWebsiteDetail = WebsiteDetail::all();
         $getcategory = Category::where('parent_id','=',NULL)->with('product','images')->get();
+        $categories = Category::with(['product'=>function($q){
+           return $q->take(1)->get();
+        },'children'=>function(){
+
+        }])->limit(6)->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
 
         return view('website.index',
@@ -39,6 +44,7 @@ class ProductController extends Controller
                 'bestSelling' =>$bestSelling,
                 'reviewImage' =>$reviewImage,
                 'websiteDetail' =>$getWebsiteDetail,
+                'categories' =>$categories
             ]);
     }
     public function showCategory($id){

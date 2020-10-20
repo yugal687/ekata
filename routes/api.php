@@ -101,4 +101,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/deleteService/{id}', 'Admin\ServiceController@deleteService');
     Route::patch('/saveEditService', 'Admin\ServiceController@saveEditService');
 
+    /*PaymentCredentials Requests*/
+    Route::post('/paymentCredentials', 'Admin\PaymentCredentialsController@create');
+    Route::get('/paymentCredentials', 'Admin\PaymentCredentialsController@fetch');
+    Route::delete('/paymentCredentials/{id}', 'Admin\PaymentCredentialsController@delete');
+    Route::patch('/paymentCredentials', 'Admin\PaymentCredentialsController@update');
+
+    /*DeliveryAddress Requests*/
+    Route::post('/deliveryAddress', 'Admin\DeliveryController@create');
+    Route::get('/deliveryAddress', 'Admin\DeliveryController@fetch');
+    Route::delete('/deliveryAddress/{id}', 'Admin\DeliveryController@delete');
+    Route::patch('/deliveryAddress', 'Admin\DeliveryController@update');
+
+    /*State Requests*/
+    Route::post('/state', 'Admin\DeliveryController@createState');
+    Route::get('/state', 'Admin\DeliveryController@fetchState');
+    Route::delete('/state/{id}', 'Admin\DeliveryController@deleteState');
+    Route::patch('/state', 'Admin\DeliveryController@updateState');
+
+    /*PostalCode Requests*/
+    Route::post('/postal', 'Admin\DeliveryController@createPostal');
+    Route::get('/postal', 'Admin\DeliveryController@fetchPostal');
+    Route::delete('/postal/{id}', 'Admin\DeliveryController@deletePostal');
+    Route::patch('/postal', 'Admin\DeliveryController@updatePostal');
 });
+
+//

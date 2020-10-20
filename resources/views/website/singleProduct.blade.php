@@ -158,7 +158,7 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <h4 class="text-center font-weight-bold">Releted Products</h4>
+                                                <h4 class="text-center font-weight-bold">Related Products</h4>
                                             </div>
 
                                             <div class="col-md-9">

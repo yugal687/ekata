@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 //
 
 /*Route::view('/usersignin', 'admin.usersignin');*/
+
 Route::post('/registerUser', 'User\UserController@registerUser');
 Route::post('/registerAdmin', 'User\UserController@registerAdmin');
 //Logout
@@ -30,38 +31,48 @@ Route::get('/logout', function () {
     Auth::logout();
     return view('auth.login');
 });
-Route::post('/searchedproducts',[
-    "uses"=>'Website\ProductController@searchProducts',
-    "as"=>'searchedproducts']);
+Route::post('/searchedproducts', [
+    "uses" => 'Website\ProductController@searchProducts',
+    "as" => 'searchedproducts'
+]);
 //About Us
 Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
 //Services
 Route::get('/services', 'Website\ProductController@service');
-Route::get('/servicedetails/{id}',
-    ["uses"=>'Website\ProductController@serviceDetails',
-"as" =>'servicedetails']);
+Route::get(
+    '/servicedetails/{id}',
+    [
+        "uses" => 'Website\ProductController@serviceDetails',
+        "as" => 'servicedetails'
+    ]
+);
 /*Route::get('/products', function () {
     return view('website/products');
 });*/
 //Product Page Url
 Route::get('/products', [
-    "uses"=>'Website\ProductController@showProducts',
-    "as"=>'products']);
+    "uses" => 'Website\ProductController@showProducts',
+    "as" => 'products'
+]);
 Route::get('/products', [
-    "uses"=>'Website\ProductController@showProducts',
-"as"=>'products']);
+    "uses" => 'Website\ProductController@showProducts',
+    "as" => 'products'
+]);
 //Sub Category Page Url
 Route::get('/category/{id}', [
     "uses" => 'Website\ProductController@showCategory',
-    "as" => 'category']);
+    "as" => 'category'
+]);
 //Category Page Url
 Route::get('/maincategory/{id}', [
     "uses" => 'Website\ProductController@showMainCategory',
-    "as" => 'maincategory']);
+    "as" => 'maincategory'
+]);
 //SingleProduct Page Url
 Route::get('/singleproduct/{id}', [
     'uses' => 'Website\ProductController@SingleProductPage',
-    'as' => 'singleproduct']);
+    'as' => 'singleproduct'
+]);
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('/adminregister', 'auth.adminregistration');
@@ -96,6 +107,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('admin/order/shippingdetails', 'Admin.Order.shippingDetails');
     Route::view('admin/cart/allusercartdetails', 'Admin.Cart.allusercartdetails');
 
+    // Postal Code & Payment Credential
+    Route::view('admin/postalPayment/paymentCredential', 'Admin.Postal_payment.paymentCredential');
+    Route::view('admin/postalPayment/postalCode', 'Admin.Postal_payment.postalCode');
 });
 //Services
 
@@ -123,8 +137,6 @@ Route::group(['middleware' => ['auth', 'user']], function () {
     Route::get('cancel', function () {
         dd('cancel');
     })->name('payment.cancel');
-
-
 });
 Auth::routes();
 
@@ -147,8 +159,7 @@ Route::post('/registerAdmin', 'User\UserController@registerAdmin');
 
 Route::get('/send-mail', function () {
 
-    Mail::to('ajitsubedi2011@gmail.com') ->send(new OrderMail());
+    Mail::to('ajitsubedi2011@gmail.com')->send(new OrderMail());
 
     return 'A message has been sent to Mailtrap!';
-
 });
