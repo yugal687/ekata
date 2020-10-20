@@ -26,11 +26,11 @@ class ProductController extends Controller
         $reviewImage = ReviewImage::where('active', 1)->get();
         $getWebsiteDetail = WebsiteDetail::all();
         $getcategory = Category::where('parent_id','=',NULL)->with('product','images')->get();
-        $categories = Category::with(['product'=>function($q){
-           return $q->take(1)->get();
+        $categories = Category::where('parent_id','=',NULL)->with(['product'=>function($q){
+           return $q->take(4)->get();
         },'children'=>function(){
 
-        }])->limit(6)->get();
+        }])->limit(3)->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
 
         return view('website.index',

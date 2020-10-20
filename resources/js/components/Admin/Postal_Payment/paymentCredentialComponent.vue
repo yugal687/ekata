@@ -382,7 +382,29 @@ export default {
         savepaymentEditCredential(paymentEditCredentialForm) {
             this.$refs[paymentEditCredentialForm].validate((valid) => {
                 if (valid) {
-                    alert('Success');
+                    let formData = new FormData;
+                    formData.append("payment_type", this.editedPayment[0].payment_type);
+                    console.log(this.editedPayment[0].payment_type);
+                    formData.append("secret_key", this.editedPayment[0].secret_key);
+                    formData.append("api_key", this.editedPayment[0].api_key);
+                    formData.append("id", this.editedPayment[0].id);
+                    axios.post("/api/editpaymentCredentials", formData).then((response) => {
+                            this.$notify({
+                                title: "Success",
+                                message: response.data.message,
+                                type: "success",
+                            });
+                            this.paymentCredentialForm = {};
+                            this.fetchPaymentCredential();
+                        }).catch((error) => {
+                            if (error.response.status == 422) {
+                                this.$notify({
+                                    title: "Error",
+                                    message: error.response.data.message,
+                                    type: "error",
+                                });
+                            }
+                        });
                 }
             });
         }

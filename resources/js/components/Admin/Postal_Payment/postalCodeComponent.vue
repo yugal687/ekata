@@ -363,7 +363,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div
-                                                v-if="editState"
+                                                v-if="editPostal"
                                                 class="alert alert-success alert-dismissible fade show"
                                                 role="alert">
                                                 <button
@@ -385,9 +385,9 @@
                                                 class="demo-postalEditForm"
                                             >
                                                 <div class="" v-for="item in editedPostal">
-                                                    <el-form-item label="Postal Code" prop="post_code">
+                                                    <el-form-item label="Postal Code" prop="postal_code">
                                                         <el-input
-                                                            v-model="item.post_code"
+                                                            v-model="item.postal_code"
                                                             style="width: 100%"
                                                         >
                                                         </el-input>
@@ -647,16 +647,16 @@
                                                             data-target=".bd-postalDetail-modal-lg"
                                                             data-toggle="modal"
                                                             :label="item.state"
-                                                            :value="item.id"
+                                                            :value="item.state"
                                                         >
                                                         </el-option>
                                                     </el-select>
                                                 </el-form-item>
-                                                <el-form-item label="Postal Code" prop="postal_code">
+                                                <el-form-item label="Postal Code" prop="post_code">
                                                     <el-select
                                                         placeholder="Please select Postal Code"
                                                         filterable
-                                                        v-model="item.postal_code"
+                                                        v-model="item.post_code.postal_code"
                                                         style="width: 100%"
                                                     >
                                                         <el-option
@@ -665,7 +665,7 @@
                                                             data-target=".bd-postalDetail-modal-lg"
                                                             data-toggle="modal"
                                                             :label="item.postal_code"
-                                                            :value="item.id"
+                                                            :value="item.postal_code"
                                                         >
                                                         </el-option>
                                                     </el-select>
@@ -849,7 +849,7 @@ export default {
     },
 
     methods: {
-        saveEditPostalDetails(formName) {
+        /*saveEditPostalDetails(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     alert('submit!');
@@ -858,7 +858,7 @@ export default {
                     return false;
                 }
             });
-        },
+        },*/
         fetchState() {
             axios.get("/api/state", {}).then((response) => {
                 this.state = response.data.state;
@@ -958,6 +958,7 @@ export default {
         },
         openeditPostal(id) {
             this.editedPostal = this.postal.filter(postal => (postal.id == id));
+            console.log(this.editedPostal);
         },
         deleteState(id) {
             this.$confirm("Are you sure to delete this State?")
@@ -1067,21 +1068,86 @@ export default {
         saveEditState(stateEditForm) {
             this.$refs[stateEditForm].validate((valid) => {
                 if (valid) {
-                    alert('Success');
+                    let formData = new FormData();
+                    formData.append('state',this.editedState[0].state);
+                    formData.append('id',this.editedState[0].id);
+                    axios.post('/api/updateState',formData).then((response) => {
+                        this.$notify({
+                            title: "Success",
+                            message: response.data.message,
+                            type: "success",
+                        });
+                        this.postalDetailForm = {};
+                        this.fetchState();
+                        this.fetchPostal();
+                        this.fetchpostalDetail();
+                    }).catch((error) => {
+                        if (error.response.status == 422) {
+                            this.$notify({
+                                title: "Error",
+                                message: error.response.data.message,
+                                type: "error",
+                            });
+                        }
+                    });
                 }
             });
         },
         saveEditPostal(postalEditForm) {
             this.$refs[postalEditForm].validate((valid) => {
                 if (valid) {
-                    alert('Success');
+                    let formData = new FormData();
+                    formData.append('postal_code',this.editedPostal[0].postal_code);
+                    formData.append('id',this.editedPostal[0].id);
+                    axios.post('/api/updatePostal',formData).then((response) => {
+                        this.$notify({
+                            title: "Success",
+                            message: response.data.message,
+                            type: "success",
+                        });
+                        this.postalDetailForm = {};
+                        this.fetchState();
+                        this.fetchPostal();
+                        this.fetchpostalDetail();
+                    }).catch((error) => {
+                        if (error.response.status == 422) {
+                            this.$notify({
+                                title: "Error",
+                                message: error.response.data.message,
+                                type: "error",
+                            });
+                        }
+                    });
                 }
             });
         },
-        saveEditPostalDetail(postalDetailEditForm) {
+        saveEditPostalDetails(postalDetailEditForm) {
             this.$refs[postalDetailEditForm].validate((valid) => {
                 if (valid) {
-                    alert('Success');
+                    let formData = new FormData();
+                    formData.append("state_id", this.editedDetails[0].state.state);
+                    formData.append("postal_code_id", this.editedDetails[0].post_code.postal_code);
+                    formData.append("delivery_charge", this.editedDetails[0].delivery_charge);
+                    formData.append('id',this.editedDetails[0].id);
+                    axios.post('/api/updateDeliveryAddress',formData).then((response) => {
+                        this.$notify({
+                            title: "Success",
+                            message: response.data.message,
+                            type: "success",
+                        });
+                        this.postalDetailForm = {};
+                        this.fetchState();
+                        this.fetchPostal();
+                        this.fetchpostalDetail();
+                    }).catch((error) => {
+                        if (error.response.status == 422) {
+                            this.$notify({
+                                title: "Error",
+                                message: error.response.data.message,
+                                type: "error",
+                            });
+                        }
+                    });
                 }
             });
         }

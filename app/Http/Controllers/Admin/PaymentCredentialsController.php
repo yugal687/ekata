@@ -40,13 +40,21 @@ class PaymentCredentialsController extends Controller
         ]);
     }
     public function update(Request $request){
-        PaymentCredential::where('id',$request->id)->update([
-            "payment_type" => $request->payment_type,
-            "secret_key" => $request->secret_key,
-            "api_key" => $request->api_key
+        //dd($request);
+        $validate= $request->validate([
+            "payment_type" => 'required',
+            "secret_key" => 'required',
+            "api_key" => 'required',
         ]);
-        return response()->json([
-           'message' => 'Payment Credentials Updated !!!'
-        ]);
+        if ($validate) {
+            PaymentCredential::where('id', $request->id)->update([
+                "payment_type" => $request->payment_type,
+                "secret_key" => $request->secret_key,
+                "api_key" => $request->api_key
+            ]);
+            return response()->json([
+                'message' => 'Payment Credentials Updated !!!'
+            ]);
+        }
     }
 }
