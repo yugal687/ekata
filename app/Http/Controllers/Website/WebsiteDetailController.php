@@ -86,9 +86,9 @@ class WebsiteDetailController extends Controller
             foreach ($request->file('image') as $image) {
                 $baseName = Str::random(20);
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('/uploads'), $originalName);
+                $image->move(public_path('/storage/app/public/uploads/reviews'), $originalName);
                 $saveBanner = ReviewImage::create([
-                    'image' => '/uploads/' . $originalName,
+                    'image' => '/storage/app/public/uploads/reviews/' . $originalName,
                     'active' => 0,
 
                 ]);

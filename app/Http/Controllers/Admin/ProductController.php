@@ -43,11 +43,11 @@ class ProductController extends Controller
 
                 $baseName = Str::random(20);
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('/uploads'), $originalName);
+                $image->move(public_path('/storage/app/public/uploads/products'), $originalName);
 
                 $saveimage = Product::orderBy('id', 'DESC')->first();
                 $saveimage->image()->create([
-                    'name' => '/uploads/' . $originalName,
+                    'name' => '/storage/app/public/uploads/products/' . $originalName,
                     'imagable_id' =>$saveProduct->id
                 ]);
 
@@ -135,11 +135,11 @@ class ProductController extends Controller
 
                 $baseName = Str::random(20);
                 $originalName = $baseName . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('/uploads'), $originalName);
+                $image->move(public_path('/storage/app/public/uploads/products'), $originalName);
 
                 $saveimage = Product::where('id', $editedProduct[0]->id)->first();
                 $saveimage->image()->create([
-                    'name' => '/uploads/' . $originalName,
+                    'name' => '/storage/app/public/uploads/products/' . $originalName,
                 ]);
 
             }

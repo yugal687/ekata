@@ -76,39 +76,40 @@ Route::get('/singleproduct/{id}', [
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('/adminregister', 'auth.adminregistration');
-    Route::view('admin/services/', 'admin.services.service');
+    Route::view('admin/services/', 'Admin.Services.service');
     Route::get('/allAdmins', 'Admin\DashboardController@fetchAdmin');
     Route::get('admin/dashboard', 'Admin\DashboardController@dashboradData');
-    Route::view('user/users', 'admin.user.users');
-    Route::view('customer/customers', 'admin.customer.customers');
+    Route::view('user/users', 'Admin.User.users');
+    Route::view('customer/customers', 'Admin.Customer.customers');
     /*Route::view('admin/users', 'admin.users');*/
     Route::view('admin/userregistration', 'admin.userregistration');
     Route::view('admin/usersignin', 'admin.usersignin');
-    //Setup.....
-    Route::view('admin/setup/index', 'admin.setup.index');
-    Route::view('admin/setup/brands', 'admin.setup.brands');
-    Route::view('admin/setup/tags', 'admin.setup.tags');
-    //Product
-    Route::view('admin/addproduct/index', 'admin.add_product.index');
-    Route::view('admin/addproduct/products', 'admin.add_product.products');
-    Route::view('admin/addproduct/discount', 'admin.add_product.adddiscount');
-    //Order
-    Route::view('admin/order/orderdetails', 'admin.order.orderdetails');
-    //Banner Image
-    Route::view('admin/banner/bannerimage', 'admin.banner_image.bannerimage');
-    //Website Info
-    Route::view('admin/websiteupdate/websiteinfo', 'admin.website_update.websiteInfo');
-    Route::view('admin/websiteupdate/enquiries', 'admin.website_update.enquiries');
-    Route::view('admin/websiteupdate/customersfeedback', 'admin.website_update.customersFeedback');
-    Route::view('admin/websiteupdate/reviewscarousel', 'admin.website_update.reviewsCarousel');
-    //Services
-    Route::view('admin/services/', 'admin.services.service');
-    Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
-    Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
+//Setup.....
+    Route::view('admin/setup/index', 'Admin.Setup.index');
+    Route::view('admin/setup/brands', 'Admin.Setup.brands');
+    Route::view('admin/setup/tags', 'Admin.Setup.tags');
+//Product
+    Route::view('admin/addproduct/index', 'Admin.Add_Product.index');
+    Route::view('admin/addproduct/products', 'Admin.Add_Product.products');
+    Route::view('admin/addproduct/discount', 'Admin.Add_Product.adddiscount');
+//Order
+    Route::view('admin/order/orderdetails', 'Admin.Order.orderdetails');
+//Banner Image
+    Route::view('admin/banner/bannerimage', 'Admin.Banner_Image.bannerimage');
+//Website Info
+    Route::view('admin/websiteupdate/websiteinfo', 'Admin.Website_Update.websiteInfo');
+    Route::view('admin/websiteupdate/enquiries', 'Admin.Website_Update.enquiries');
+    Route::view('admin/websiteupdate/customersfeedback', 'Admin.Website_Update.customersFeedback');
+    Route::view('admin/websiteupdate/reviewscarousel', 'Admin.Website_Update.reviewsCarousel');
+//Services
+    Route::view('admin/services/', 'Admin.Services.service');
+
+    Route::view('admin/order/shippingdetails', 'Admin.Order.shippingDetails');
+    Route::view('admin/cart/allusercartdetails', 'Admin.Cart.allusercartdetails');
 
     // Postal Code & Payment Credential
-    Route::view('admin/postalPayment/paymentCredential', 'admin.postal_payment.paymentCredential');
-    Route::view('admin/postalPayment/postalCode', 'admin.postal_payment.postalCode');
+    Route::view('admin/postalPayment/paymentCredential', 'Admin.Postal_payment.paymentCredential');
+    Route::view('admin/postalPayment/postalCode', 'Admin.Postal_payment.postalCode');
 });
 //Services
 
