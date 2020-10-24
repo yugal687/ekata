@@ -235,7 +235,7 @@
                 var regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
 
 
-                $('input').on("keypress", function () {
+                $('proceed').on("keypress", function () {
                     if (fname_billing.length !== null) {
                         $("#p1_billing").text("");
                     }
@@ -248,7 +248,7 @@
                     if (suburb_billing.length !== null) {
                         $("#p4_billing").text("");
                     }
-                    if (postalCode_billing.length !== null) {
+                    if (postal_code_billing.length !== null) {
                         $("#p5_billing").text("");
                     }
                     if (email_billing.length !== null) {

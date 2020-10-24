@@ -21,10 +21,9 @@ class Order extends Model
         'postal_code'
     ];
 
-
-    public function orderDetails()
+    public function items()
     {
-        return $this->hasMany(OrderDetail::class);
+        return $this->hasMany(OrderDetail::class, 'order_id');
     }
 
 

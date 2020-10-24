@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\PaymentCredential;
+use App\Service\Payment\PaymentCredentialRepo;
 use Illuminate\Http\Request;
 
 class PaymentCredentialsController extends Controller
@@ -27,21 +28,27 @@ class PaymentCredentialsController extends Controller
         }
 
     }
-    public function fetch(){
-        $credentials=PaymentCredential::all();
+
+    public function fetch()
+    {
+        $credentials = PaymentCredential::all();
         return response()->json([
-           'credentials' => $credentials
+            'credentials' => $credentials
         ]);
     }
-    public function delete($id){
-        PaymentCredential::where('id',$id)->delete();
+
+    public function delete($id)
+    {
+        PaymentCredential::where('id', $id)->delete();
         return response()->json([
-           'message' => 'Payment Credential Deleted !!'
+            'message' => 'Payment Credential Deleted !!'
         ]);
     }
-    public function update(Request $request){
+
+    public function update(Request $request)
+    {
         //dd($request);
-        $validate= $request->validate([
+        $validate = $request->validate([
             "payment_type" => 'required',
             "secret_key" => 'required',
             "api_key" => 'required',
@@ -57,4 +64,15 @@ class PaymentCredentialsController extends Controller
             ]);
         }
     }
+
+    public function paypalCredential(PaymentCredentialRepo $paymentCredentialRepo)
+    {
+        $paypalCredential = $paymentCredentialRepo->paypalCredential();
+        return response()->json([
+            'paypalClientId' => $paypalCredential->api_key
+        ]);
+
+
+    }
+
 }
