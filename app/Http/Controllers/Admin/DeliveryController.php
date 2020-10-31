@@ -25,6 +25,7 @@ class DeliveryController extends Controller
             ]);
         }
     }
+
     public function updateState(Request $request)
     {
         //dd($request);
@@ -32,7 +33,7 @@ class DeliveryController extends Controller
             'state' => 'required'
         ]);
         if ($validate) {
-            State::where('id',$request->id)->update([
+            State::where('id', $request->id)->update([
                 'state' => $request->state
             ]);
             return response()->json([
@@ -47,7 +48,7 @@ class DeliveryController extends Controller
             'postal_code' => 'required'
         ]);
         if ($validate) {
-            PostalCode::where('id',$request->id)->update([
+            PostalCode::where('id', $request->id)->update([
                 'postal_code' => $request->postal_code
             ]);
             return response()->json([
@@ -55,6 +56,7 @@ class DeliveryController extends Controller
             ]);
         }
     }
+
     public function createPostal(Request $request)
     {
         $validate = $request->validate([
@@ -92,7 +94,7 @@ class DeliveryController extends Controller
 
     public function fetch()
     {
-        $deliveryDetails = DeliveryAddress::with('state','postCode')->get();
+        $deliveryDetails = DeliveryAddress::with('state', 'postCode')->get();
         return response()->json([
             'delivery' => $deliveryDetails
         ]);
@@ -113,6 +115,43 @@ class DeliveryController extends Controller
             'postal' => $postal
         ]);
     }
+
+    //later needed
+    public function fetchStateWisePostalCode($state)
+    {
+        //keep state NSW 1 at the moment,
+        $postal = State::where('id', $state)->with(['deliveryAddress' => function ($q) {
+            return $q->select('id', 'state_id', 'postal_code_id', 'delivery_charge')->with('postCode')->get();
+        }])->get()->toArray();
+
+//get required details
+        $postalCode = array_map(function ($val) {
+            return
+                [
+                    'postal_code' => $val['post_code']['postal_code'],
+                    'id' => $val['post_code']['id'],
+                    'delivery_charge' => $val['delivery_charge'],
+                ];
+
+        }, $postal[0]['delivery_address']);
+
+        return response()->json([
+            'postal' => $postalCode
+        ]);
+    }
+
+    public function deliveryCharge($state)
+    {
+        $postal = DeliveryAddress::with(['state' => function ($query) {
+            return $query->select('id', 'state')->get();
+        }])->with('postCode:id,postal_code')->where('state_id', $state)
+            ->get()->toArray();
+
+        return response()->json([
+        ]);
+
+    }
+
 
     public function delete($id)
     {
@@ -140,17 +179,17 @@ class DeliveryController extends Controller
 
     public function update(Request $request)
     {
-       // dd($request);
+        // dd($request);
         $validate = $request->validate([
             "postal_code_id" => 'required',
             "state_id" => 'required',
             "delivery_charge" => 'required'
         ]);
         if ($validate) {
-            $postalId=PostalCode::where('postal_code',$request->postal_code_id)->get();
-            $stateId=State::where('state',$request->state_id)->get();
+            $postalId = PostalCode::where('postal_code', $request->postal_code_id)->get();
+            $stateId = State::where('state', $request->state_id)->get();
 //dd($postalId);
-            DeliveryAddress::where('id',$request->id)->update([
+            DeliveryAddress::where('id', $request->id)->update([
                 "postal_code_id" => $postalId[0]->id,
                 "state_id" => $stateId[0]->id,
                 "delivery_charge" => $request->delivery_charge
