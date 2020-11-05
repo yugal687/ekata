@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <div id="topNavbar">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-main-primary">
+            <nav class="navbar navbar-expand-md navbar-dark bg-main-primary">
                 <a class="navbar-brand" href="#">
                 </a>
                 <div class="sm-user-checkout">

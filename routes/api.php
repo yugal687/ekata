@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/getUser', 'User\UserController@singleUserDetail');
 
 
-
 //Payment
 Route::post('/paypalCheckOut', 'Website\PaymentController@paypalCheckOut');
 Route::post('/stripeCheckOut', 'Website\PaymentController@stripeCheckOut');
+Route::post('/cashOnDeliveryCheckOut', 'Website\PaymentController@cashOnDeliveryCheckOut');
 Route::post('/userBillingDetails', 'User\UserController@userBillingDetails');
 
 
@@ -107,6 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/paymentCredentials/{id}', 'Admin\PaymentCredentialsController@delete');
     Route::post('/editpaymentCredentials', 'Admin\PaymentCredentialsController@update');
 
+
     /*DeliveryAddress Requests*/
     Route::post('/deliveryAddress', 'Admin\DeliveryController@create');
     Route::get('/deliveryAddress', 'Admin\DeliveryController@fetch');
@@ -121,9 +122,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     /*PostalCode Requests*/
     Route::post('/postal', 'Admin\DeliveryController@createPostal');
-    Route::get('/postal', 'Admin\DeliveryController@fetchPostal');
     Route::delete('/postal/{id}', 'Admin\DeliveryController@deletePostal');
     Route::post('/updatePostal', 'Admin\DeliveryController@updatePostal');
+    Route::get('/postal', 'Admin\DeliveryController@fetchPostal');
+
+
 });
+
+//fetch postal as it is needed not also on billing section
+
+//currently the state is only 1 i.e NSW, so manually 1 is added
+Route::get('/state/postalCode/{state}', 'Admin\DeliveryController@fetchStateWisePostalCode');
+
+Route::get('/paypalCredential', 'Admin\PaymentCredentialsController@paypalCredential');
 
 //
