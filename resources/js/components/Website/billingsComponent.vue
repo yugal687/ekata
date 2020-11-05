@@ -3,9 +3,7 @@
         <div class="container testing-section" style="">
             <div class="row mb-2">
                 <div class="col-md-12">
-                    <h1
-                        class="text-center align-items-center justify-content-center heading-font"
-                    >
+                    <h1 class="text-center align-items-center justify-content-center heading-font">
                         Payment And Shipping
                     </h1>
                 </div>
@@ -281,7 +279,7 @@
                                     <div class="col-12 text-left">
                                         <button
                                             type="button"
-                                            class="btn btn-primary"
+                                            class="btn btn-primary mr-2"
                                             id="creditCard"
                                         >
                                             Credit Card
@@ -294,7 +292,9 @@
                                         >
                                             Paypal
                                         </button>
-                                        <button type="button" class="btn btn-secondary" id="cod">
+                                        <button type="button"
+                                                class="btn btn-secondary ml-2 mt-2 mt-sm-2 mt-md-0"
+                                                id="cashOnDelivery">
                                             Cash On Delivery
                                         </button>
                                     </div>
@@ -382,13 +382,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cod">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="col-md-8 mx-auto">
-                                                <p>Delivery charge for this "43223" is "20AUD"</p>
-                                            </div>
-                                        </div>
+
+                                <div class="cashOnDelivery">
+                                    <img src="images/cashondelivery.jpg" class="img-fluid cashondelivery-img"/>
+                                    <div class="row mt-5">
+                                        <button
+                                            type="button"
+                                            name="pay"
+                                            class="btn action-button text-white m-auto stripe-payment-btn"
+                                            @click="payUsingCash"
+                                            value="Pay Now"
+                                        >
+                                            Pay Now
+                                        </button>
                                     </div>
                                 </div>
 
@@ -439,23 +445,25 @@
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-10 col-sm-12">
                                     <h5
-                                        class="pt-3 font-weight-bold text-gray"
+                                        class="my-3 font-weight-bold"
                                         v-if="webDetail[0]"
                                     >
                                         Need Help? Contact Us:
-                                        <a :href="`tel:+${webDetail[0].contact_number}`">{{
-                                            webDetail[0].contact_number
+                                        <a class="text-gray-dark" :href="`tel:+${webDetail[0].contact_number}`">{{
+                                                webDetail[0].contact_number
                                             }}</a>
                                     </h5>
                                     <hr/>
                                     <div class="row pt-2">
                                         <div class="col-12">
                                             <h6>
-                                                <strong
-                                                >TOTAL : AUD ${{ totalPrice }} </strong
-                                                >
+                                                <strong>TOTAL : AUD ${{ totalPrice }} </strong>
                                             </h6>
                                         </div>
+                                    </div>
+
+                                    <div class="alert alert-success my-3" role="alert">
+                                        <p>Delivery charge for shipping is: ${{ deliveryCharge }}</p>
                                     </div>
 
                                     <div class="row mt-4 orders">
@@ -511,388 +519,421 @@
 </template>
 
 <script>
-    export default {
-        name: "billingsComponent",
-        data() {
-            return {
-                paypalCredentialDetail: {
-                    disabled: false,
-                },
-                postalCode: [],
-                //what is thi NSW ??
-                NSW: "NSW",
-                order_number: null,
-                webDetail: [],
-                discountPrice: 0,
-                shippingAddress: {
-                    first_name: "",
-                    last_name: "",
-                    address: "",
-                    suburb: "",
-                    state: "NSW",
-                    postal_code: "",
-                    email: "",
-                    contact_number: "",
-                },
-                billingAddress: {
-                    first_name: "",
-                    last_name: "",
-                    address: "",
-                    suburb: "",
-                    state: "NSW",
-                    postal_code: "",
-                    email: "",
-                    contact_number: "",
-                },
-                stripeCard: {
-                    expiry_date: "",
-                    cvv: "",
-                    expiry_year: "",
-                    expiry_month: "",
-                    card_number: "",
-                },
-                successMessage: {
-                    message: "",
-                    order_number: "",
-                    address: "",
-                    suburb_name: "",
-                    postal_code: "",
-                },
-                errorMessage: "",
-                deliveryCharge: 0,
-                nextButtonDueToInvalidPostalCodeButton: false,
-            };
-        },
-        mounted() {
-            this.$store.dispatch("fetchStoredProduct");
-            this.$store.dispatch("totalPrice");
-            this.userDetails();
-            this.postalCodes();
-            //   this.setpaypalCredential();
-            axios.get("/api/getWebsiteDetail").then((response) => {
-                this.webDetail = response.data.WebsiteDetail;
+export default {
+    name: "billingsComponent",
+    data() {
+        return {
+            paypalCredentialDetail: {
+                disabled: false,
+            },
+            postalCode: [],
+            //what is thi NSW ??
+            NSW: "NSW",
+            order_number: null,
+            webDetail: [],
+            discountPrice: 0,
+            shippingAddress: {
+                first_name: "",
+                last_name: "",
+                address: "",
+                suburb: "",
+                state: "NSW",
+                postal_code: "",
+                email: "",
+                contact_number: "",
+            },
+            billingAddress: {
+                first_name: "",
+                last_name: "",
+                address: "",
+                suburb: "",
+                state: "NSW",
+                postal_code: "",
+                email: "",
+                contact_number: "",
+            },
+            stripeCard: {
+                expiry_date: "",
+                cvv: "",
+                expiry_year: "",
+                expiry_month: "",
+                card_number: "",
+            },
+            successMessage: {
+                message: "",
+                order_number: "",
+                address: "",
+                suburb_name: "",
+                postal_code: "",
+            },
+            errorMessage: "",
+            deliveryCharge: 0,
+            nextButtonDueToInvalidPostalCodeButton: false,
+        };
+    },
+    mounted() {
+        this.$store.dispatch("fetchStoredProduct");
+        this.$store.dispatch("totalPrice");
+        this.userDetails();
+        this.postalCodes();
+        //   this.setpaypalCredential();
+        axios.get("/api/getWebsiteDetail").then((response) => {
+            this.webDetail = response.data.WebsiteDetail;
+        });
+    },
+
+    methods: {
+        setpaypalCredential() {
+            axios.get('/api/paypalCredential').then(resp => {
+                if (resp.data.paypalClientId) {
+                    let clientId = resp.data.paypalClientId;
+                    const script = document.createElement("script");
+                    let src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=AUD&disable-funding=credit,card`;
+                    console.log(src);
+                    script.src =
+                        `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=AUD&disable-funding=credit,card`;
+                    script.addEventListener("load", this.setLoaded);
+                    document.body.appendChild(script);
+                    this.paypalCredentialDetail.disabled = true;
+                }
             });
         },
 
-        methods: {
-
-            setpaypalCredential() {
-                axios.get('/api/paypalCredential').then(resp => {
-                    if (resp.data.paypalClientId) {
-                        let clientId = resp.data.paypalClientId;
-                        const script = document.createElement("script");
-                        let src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=AUD&disable-funding=credit,card`;
-                        console.log(src);
-                        script.src =
-                            `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=AUD&disable-funding=credit,card`;
-                        script.addEventListener("load", this.setLoaded);
-                        document.body.appendChild(script);
-                        this.paypalCredentialDetail.disabled = true;
-                    }
-                });
-            },
-
-            setLoaded() {
-                let totalPrice = parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge);
-                window.paypal
-                    .Buttons({
-                        createOrder: (data, actions) => {
-                            // This function sets up the details of the transaction, including the amount and line item details.
-                            return actions.order.create({
-                                purchase_units: [
-                                    {
-                                        amount: {
-                                            value: totalPrice,
-                                        },
+        setLoaded() {
+            let totalPrice = parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge);
+            window.paypal
+                .Buttons({
+                    createOrder: (data, actions) => {
+                        // This function sets up the details of the transaction, including the amount and line item details.
+                        return actions.order.create({
+                            purchase_units: [
+                                {
+                                    amount: {
+                                        value: totalPrice,
                                     },
-                                ],
-                            });
-                        },
-                        onApprove: async (data, actions) => {
-                            const order = actions.order.capture();
-                            this.paypalCheckOut();
-                        },
-                    })
-                    .render(this.$refs.paypalButton);
-            },
-
-            paypalCheckOut() {
-                axios.post("api/paypalCheckOut", {
-                    orderItems: JSON.parse(localStorage.getItem("cart")),
-                    totalPrice: parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge),
-                    shippingAddress: this.shippingAddress,
-                    billingAddress: this.billingAddress,
+                                },
+                            ],
+                        });
+                    },
+                    onApprove: async (data, actions) => {
+                        const order = actions.order.capture();
+                        this.paypalCheckOut();
+                    },
                 })
-                    .then((resp) => {
-                        if (resp.data.successMsg) {
-                            this.$store.dispatch("removeCartItems");
-                            this.successMessage.message = resp.data.msg;
-                            this.successMessage.order_number = resp.data.invoice_id;
-                            this.successMessage.address = resp.data.address;
-                            this.successMessage.state = resp.data.state;
-                            this.successMessage.suburb_name = resp.data.suburb;
-                            this.successMessage.postal_code = resp.data.postal_code;
-                            $(".tab-pane").hide();
-                            $("#step3").fadeIn(1000);
-                            $(".progressbar-dots").removeClass("active");
-                            $(".progressbar-dots:nth-child(3)").addClass("active");
-                            this.deliveryCharge = '';
-                        }
-                        if (resp.data.errorMsg) {
-                            this.errorMessage = resp.data.errorMsg;
-                        }
-                    });
-            },
-            userDetails() {
-                axios.post("api/userBillingDetails")
-                    .then((resp) => {
-                        let userBillingAddress = resp.data.userBillingDetails;
-                        this.billingAddress.first_name = userBillingAddress.first_name;
-                        this.billingAddress.last_name = userBillingAddress.last_name;
-                        this.billingAddress.address = userBillingAddress.address;
-                        this.billingAddress.suburb = userBillingAddress.suburb;
-                        this.billingAddress.state = "NSW";
-                        this.billingAddress.postal_code = userBillingAddress.postal_code;
-                        this.billingAddress.email = userBillingAddress.email;
-                        this.billingAddress.contact_number =
-                            userBillingAddress.contact_number;
-                    })
-                    .catch((err) => {
-                    });
-            },
+                .render(this.$refs.paypalButton);
+        },
 
-            submitOrderItems() {
+        paypalCheckOut() {
+            axios.post("api/paypalCheckOut", {
+                orderItems: JSON.parse(localStorage.getItem("cart")),
+                totalPrice: parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge),
+                shippingAddress: this.shippingAddress,
+                billingAddress: this.billingAddress,
+            })
+                .then((resp) => {
+                    if (resp.data.successMsg) {
+                        this.$store.dispatch("removeCartItems");
+                        this.successMessage.message = resp.data.msg;
+                        this.successMessage.order_number = resp.data.invoice_id;
+                        this.successMessage.address = resp.data.address;
+                        this.successMessage.state = resp.data.state;
+                        this.successMessage.suburb_name = resp.data.suburb;
+                        this.successMessage.postal_code = resp.data.postal_code;
+                        $(".tab-pane").hide();
+                        $("#step3").fadeIn(1000);
+                        $(".progressbar-dots").removeClass("active");
+                        $(".progressbar-dots:nth-child(3)").addClass("active");
+                        this.deliveryCharge = '';
+                    }
+                    if (resp.data.errorMsg) {
+                        this.errorMessage = resp.data.errorMsg;
+                    }
+                });
+        },
+        userDetails() {
+            axios.post("api/userBillingDetails")
+                .then((resp) => {
+                    let userBillingAddress = resp.data.userBillingDetails;
+                    this.billingAddress.first_name = userBillingAddress.first_name;
+                    this.billingAddress.last_name = userBillingAddress.last_name;
+                    this.billingAddress.address = userBillingAddress.address;
+                    this.billingAddress.suburb = userBillingAddress.suburb;
+                    this.billingAddress.state = "NSW";
+                    this.billingAddress.postal_code = userBillingAddress.postal_code;
+                    this.billingAddress.email = userBillingAddress.email;
+                    this.billingAddress.contact_number =
+                        userBillingAddress.contact_number;
+                })
+                .catch((err) => {
+                });
+        },
+
+        submitOrderItems() {
+            return false;
+        },
+        addSpace(event) {
+            let ele = this.stripeCard.card_number;
+            ele = ele.split(" ").join("");
+            let finalVal1 = ele.match(/.{1,4}/g).join(" ");
+            this.stripeCard.card_number = finalVal1;
+        },
+        addHyphen(event) {
+            let ele = this.stripeCard.expiry_date;
+            ele = ele.split(" / ").join("");
+            let finalVal = ele.match(/.{1,2}/gi).join(" / ");
+            this.stripeCard.expiry_date = finalVal;
+        },
+
+        //stripeCheckOut
+        payUsingStripe() {
+            var cardNumber = $("#cardNumber").val();
+            var expiryDate = $("#expiryDate").val();
+            var cvccvv = $("#cvccvv").val();
+            var cardHolderName = $("#cardHolderName").val();
+
+            $("input").on("keypress", function () {
+                if (cardNumber.length !== null) {
+                    $("#cardNumberError").text("");
+                }
+                if (expiryDate.length !== null) {
+                    $("#expiryDateError").text("");
+                }
+                if (cvccvv.length !== null) {
+                    $("#cvccvvError").text("");
+                }
+                if (cardHolderName.length !== null) {
+                    $("#cardHolderNameError").text("");
+                }
+            });
+
+            if (cardNumber.length == "") {
+                $("#cardNumberError").text("Please fill up your card number");
+                $("#cardNumberError").focus();
                 return false;
-            },
-            addSpace(event) {
-                let ele = this.stripeCard.card_number;
-                ele = ele.split(" ").join("");
-                let finalVal1 = ele.match(/.{1,4}/g).join(" ");
-                this.stripeCard.card_number = finalVal1;
-            },
-            addHyphen(event) {
-                let ele = this.stripeCard.expiry_date;
-                ele = ele.split(" / ").join("");
-                let finalVal = ele.match(/.{1,2}/gi).join(" / ");
-                this.stripeCard.expiry_date = finalVal;
-            },
-
-            //stripeCheckOut
-            payUsingStripe() {
-                var cardNumber = $("#cardNumber").val();
-                var expiryDate = $("#expiryDate").val();
-                var cvccvv = $("#cvccvv").val();
-                var cardHolderName = $("#cardHolderName").val();
-
-                $("input").on("keypress", function () {
-                    if (cardNumber.length !== null) {
-                        $("#cardNumberError").text("");
-                    }
-                    if (expiryDate.length !== null) {
-                        $("#expiryDateError").text("");
-                    }
-                    if (cvccvv.length !== null) {
-                        $("#cvccvvError").text("");
-                    }
-                    if (cardHolderName.length !== null) {
-                        $("#cardHolderNameError").text("");
-                    }
-                });
-
-                if (cardNumber.length == "") {
-                    $("#cardNumberError").text("Please fill up your card number");
-                    $("#cardNumberError").focus();
-                    return false;
-                }
-                if (expiryDate.length == "") {
-                    $("#expiryDateError").text("Please fill up your expiry date");
-                    $("#expiryDateError").focus();
-                    return false;
-                }
-                if (cvccvv.length == "") {
-                    $("#cvccvvError").text("Please fill up your CVC / CVV number");
-                    $("#cvccvvError").focus();
-                    return false;
-                }
-                if (cardHolderName.length == "") {
-                    $("#cardHolderNameError").text("Please fill up your card holder name");
-                    $("#cardHolderNameError").focus();
-                    return false;
-                }
-                this.errorMessage = "";
-                //get expiry year month stored on expiry_year && change the card detail;
-                let expiryYearDate = this.stripeCard.expiry_date.split(" / ");
-                this.stripeCard.card_number = this.stripeCard.card_number
-                    .split(" ")
-                    .join("");
-                console.log(this.stripeCard.card_number);
-                this.stripeCard.expiry_month = expiryYearDate[0];
-                this.stripeCard.expiry_year = expiryYearDate[1];
-
-
-                axios.post("api/stripeCheckOut", {
-                    orderItems: JSON.parse(localStorage.getItem("cart")),
-                    card: this.stripeCard,
-                    totalPrice: parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge),
-                    shippingAddress: this.shippingAddress,
-                    billingAddress: this.billingAddress,
-                })
-                    .then((resp) => {
-                        if (resp.data.error) {
-                            this.errorMessage = resp.data.error.message;
-                            console.log(this.errorMessage);
-                        } else if (resp.data.msg) {
-                            this.$store.dispatch("removeCartItems");
-                            this.successMessage.order_number = resp.data.invoice_id;
-                            this.successMessage.address = resp.data.address;
-                            this.successMessage.suburb_name = resp.data.suburb;
-                            this.successMessage.postal_code = resp.data.postal_code;
-                            this.successMessage.state = resp.data.state;
-                            $(".tab-pane").hide();
-                            $("#step3").fadeIn(1000);
-                            $(".progressbar-dots").removeClass("active");
-                            $(".progressbar-dots:nth-child(3)").addClass("active");
-                        }
-                    })
-                    .catch((err) => {
-                    });
-            },
-
-            setPostalCodeId(event, address) {
-                let selectedPostalCode = this.postalCode.filter(code => {
-                    return code.postal_code == event.target.value;
-                });
-                console.log(selectedPostalCode);
-                //show this deliveryCharge field wherever u want
-                if (selectedPostalCode.length > 0) {
-                    event == 0 ? this.billingAddress.postal_code = selectedPostalCode[0].postal_code
-                        : this.shippingAddress.postal_code = selectedPostalCode[0].postal_code;
-                    this.nextButtonDueToInvalidPostalCodeButton = true;
-                    return this.deliveryCharge = selectedPostalCode[0].delivery_charge;
-                }
-                this.deliveryCharge = 0;
-                this.nextButtonDueToInvalidPostalCodeButton = false;
-                alert('sorry, we are not available to this area at the moment. Please select the valid postal code below');
-
-            },
-            postalCodes() {
-                //for time being let the state is only NSW, so lets keep it manually and change later accordingly
-                // later on as state is
-                axios.get('/api/state/postalCode/1').then(resp => {
-                    this.postalCode = resp.data.postal;
-                })
-            },
-
-
-            fetchAllState() {
-                /*not needed at the moment, but if needed, just call this function in mounted then
-                put an on change evernt on State select field and call postalCodes function on it, so that that function
-                will get the state id and get required postal codes and it's delivery charge automatically.
-                */
-
-                /*axios.get('/api/states').then(resp=>{
-                        create a data property name states and loop it in state field above and use on change event with
-                parameter of stateId on funcgtion postalCodes.
-                 });
-                */
-
             }
-        }
-        ,
-        computed: {
-            granTotal() {
-                return this.$store.state.totalPrice;
-            },
-            totalPrice() {
-                return parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge);
-            },
+            if (expiryDate.length == "") {
+                $("#expiryDateError").text("Please fill up your expiry date");
+                $("#expiryDateError").focus();
+                return false;
+            }
+            if (cvccvv.length == "") {
+                $("#cvccvvError").text("Please fill up your CVC / CVV number");
+                $("#cvccvvError").focus();
+                return false;
+            }
+            if (cardHolderName.length == "") {
+                $("#cardHolderNameError").text("Please fill up your card holder name");
+                $("#cardHolderNameError").focus();
+                return false;
+            }
+            this.errorMessage = "";
+            //get expiry year month stored on expiry_year && change the card detail;
+            let expiryYearDate = this.stripeCard.expiry_date.split(" / ");
+            this.stripeCard.card_number = this.stripeCard.card_number
+                .split(" ")
+                .join("");
+            console.log(this.stripeCard.card_number);
+            this.stripeCard.expiry_month = expiryYearDate[0];
+            this.stripeCard.expiry_year = expiryYearDate[1];
+
+
+            axios.post("api/stripeCheckOut", {
+                orderItems: JSON.parse(localStorage.getItem("cart")),
+                card: this.stripeCard,
+                totalPrice: parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge),
+                shippingAddress: this.shippingAddress,
+                billingAddress: this.billingAddress,
+            })
+                .then((resp) => {
+                    if (resp.data.error) {
+                        this.errorMessage = resp.data.error.message;
+                        console.log(this.errorMessage);
+                    } else if (resp.data.msg) {
+                        this.$store.dispatch("removeCartItems");
+                        this.successMessage.order_number = resp.data.invoice_id;
+                        this.successMessage.address = resp.data.address;
+                        this.successMessage.suburb_name = resp.data.suburb;
+                        this.successMessage.postal_code = resp.data.postal_code;
+                        this.successMessage.state = resp.data.state;
+                        $(".tab-pane").hide();
+                        $("#step3").fadeIn(1000);
+                        $(".progressbar-dots").removeClass("active");
+                        $(".progressbar-dots:nth-child(3)").addClass("active");
+                    }
+                })
+                .catch((err) => {
+                });
+        },
+
+        payUsingCash() {
+            axios.post("api/cashOnDeliveryCheckOut", {
+                orderItems: JSON.parse(localStorage.getItem("cart")),
+                card: this.stripeCard,
+                totalPrice: parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge),
+                shippingAddress: this.shippingAddress,
+                billingAddress: this.billingAddress,
+            })
+                .then((resp) => {
+                    if (resp.data.error) {
+                        this.errorMessage = resp.data.error.message;
+                        console.log(this.errorMessage);
+                    } else if (resp.data.msg) {
+                        this.$store.dispatch("removeCartItems");
+                        this.successMessage.order_number = resp.data.invoice_id;
+                        this.successMessage.address = resp.data.address;
+                        this.successMessage.suburb_name = resp.data.suburb;
+                        this.successMessage.postal_code = resp.data.postal_code;
+                        this.successMessage.state = resp.data.state;
+                        $(".tab-pane").hide();
+                        $("#step3").fadeIn(1000);
+                        $(".progressbar-dots").removeClass("active");
+                        $(".progressbar-dots:nth-child(3)").addClass("active");
+                    }
+                })
+                .catch((err) => {
+                });
+
+        },
+
+        setPostalCodeId(event, address) {
+            let selectedPostalCode = this.postalCode.filter(code => {
+                return code.postal_code == event.target.value;
+            });
+            console.log(selectedPostalCode);
+            //show this deliveryCharge field wherever u want
+            if (selectedPostalCode.length > 0) {
+                event == 0 ? this.billingAddress.postal_code = selectedPostalCode[0].postal_code
+                    : this.shippingAddress.postal_code = selectedPostalCode[0].postal_code;
+                this.nextButtonDueToInvalidPostalCodeButton = true;
+                return this.deliveryCharge = selectedPostalCode[0].delivery_charge;
+            }
+            this.deliveryCharge = 0;
+            this.nextButtonDueToInvalidPostalCodeButton = false;
+            alert('sorry, we are not available to this area at the moment. Please select the valid postal code below');
+
+        },
+        postalCodes() {
+            //for time being let the state is only NSW, so lets keep it manually and change later accordingly
+            // later on as state is
+            axios.get('/api/state/postalCode/1').then(resp => {
+                this.postalCode = resp.data.postal;
+            });
+        },
+
+
+        fetchAllState() {
+            /*not needed at the moment, but if needed, just call this function in mounted then
+            put an on change event on State select field and call postalCodes function on it, so that that function
+            will get the state id and get required postal codes and it's delivery charge automatically.
+            */
+
+            /*axios.get('/api/states').then(resp=>{
+                    create a data property name states and loop it in state field above and use on change event with
+            parameter of stateId on function postalCodes.
+             });
+            */
 
         }
-        ,
     }
-    ;
+    ,
+    computed: {
+        granTotal() {
+            return this.$store.state.totalPrice;
+        },
+        totalPrice() {
+            return parseFloat(this.$store.state.totalPrice) + parseFloat(this.deliveryCharge);
+        },
+
+    }
+    ,
+}
+;
 </script>
 
 <style scoped>
-    hr {
-        margin-top: 0.3rem;
-    }
+hr {
+    margin-top: 0.3rem;
+}
 
-    #p1,
-    #p2,
-    #p3,
-    #p4,
-    #p5,
-    #p6,
-    #p7,
-    #p1_billing,
-    #p2_billing,
-    #p3_billing,
-    #p4_billing,
-    #p5_billing,
-    #p6_billing,
-    #p7_billing,
-    #cardNumberError,
-    #expiryDateError,
-    #expiryMonthError,
-    #cvccvvError,
-    #cardHolderNameError {
-        font-family: "Lato", sans-serif;
-        font-size: 12px;
-        color: #ff0000;
-        margin-bottom: 0;
-        float: left;
-    }
+#p1,
+#p2,
+#p3,
+#p4,
+#p5,
+#p6,
+#p7,
+#p1_billing,
+#p2_billing,
+#p3_billing,
+#p4_billing,
+#p5_billing,
+#p6_billing,
+#p7_billing,
+#cardNumberError,
+#expiryDateError,
+#expiryMonthError,
+#cvccvvError,
+#cardHolderNameError {
+    font-family: "Lato", sans-serif;
+    font-size: 12px;
+    color: #ff0000;
+    margin-bottom: 0;
+    float: left;
+}
 
-    .error {
-        color: red;
-    }
+.error {
+    color: red;
+}
 
-    .stripe-error-msg {
-        padding: 15px;
-        background-color: #ffbaba;
-        color: red;
-        margin-bottom: 15px;
-    }
+.stripe-error-msg {
+    padding: 15px;
+    background-color: #ffbaba;
+    color: red;
+    margin-bottom: 15px;
+}
 
-    .creditCard input {
-        border-radius: 5px;
-    }
+.creditCard input {
+    border-radius: 5px;
+}
 
-    .creditCard label {
-        float: left;
-    }
+.creditCard label {
+    float: left;
+}
 
-    input#cardNumber {
-        border-top-right-radius: 8px;
-        border-top-left-radius: 8px;
-    }
+input#cardNumber {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
 
-    input#expiryDate {
-        border-bottom-left-radius: 8px;
-    }
+input#expiryDate {
+    border-bottom-left-radius: 8px;
+}
 
-    input#cvccvv {
-        border-bottom-right-radius: 8px;
-    }
+input#cvccvv {
+    border-bottom-right-radius: 8px;
+}
 
-    input#cardHolderName {
-        border-radius: 8px;
-    }
+input#cardHolderName {
+    border-radius: 8px;
+}
 
-    .form-row > .padding-x-null-exp {
-        padding-right: 0;
-    }
+.form-row > .padding-x-null-exp {
+    padding-right: 0;
+}
 
-    .form-row > .padding-x-null-cvv {
-        padding-left: 0;
-    }
+.form-row > .padding-x-null-cvv {
+    padding-left: 0;
+}
 
-    .billings-info-section {
-        margin-top: 75px;
-    }
+.billings-info-section {
+    margin-top: 75px;
+}
 
-    .orders img {
-        border-radius: 4px;
-    }
+.orders img {
+    border-radius: 4px;
+}
+
+.cashondelivery-img {
+    max-height: 200px;
+}
 </style>

@@ -38,14 +38,14 @@
                     <div class="col-auto">
 
 							<span style="display:inline;">
-								{{$orderitem->date}}
+								{{$userDetail->date}}
 							</span>
 
                         <span style="display:inline;">
 								<br>
-                            @if($orderitem->order->order_number)
+                            @if($userDetail->order->order_number)
                                 Transaction ID: <a href="" target="_BLANK">
-									{{$orderitem->order->order_number}}&nbsp;</a>
+									{{$userDetail->order->order_number}}&nbsp;</a>
                             @endif
 							</span>
                     </div>
@@ -53,7 +53,7 @@
                 <div class="row py-2">
                     <div class="col-12">
                         <span
-                            style="color:#333333 !important;font-weight:bold;font-size: 14px;font-family: arial,helvetica,sans-serif;">Dear {{$orderitem->user->first_name}},</span>
+                            style="color:#333333 !important;font-weight:bold;font-size: 14px;font-family: arial,helvetica,sans-serif;">Dear {{$userDetail->user->first_name}},</span>
                     </div>
                 </div>
                 <div class="row py-2">
@@ -92,9 +92,9 @@
                             </div>
                             <div class="col-12">
                                 <p>
-                                    {{ $orderitem->order->sub_urb}}<br/>
-                                    {{ $orderitem->order->state}}<br/>
-                                    {{ $orderitem->order->shipping_address}}<br/>
+                                    {{ $userDetail->order->sub_urb}}<br/>
+                                    {{ $userDetail->order->state}}<br/>
+                                    {{ $userDetail->order->shipping_address}}<br/>
                                     Australia<br/>
                                 </p>
                             </div>

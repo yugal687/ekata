@@ -11,6 +11,7 @@ Route::get('/getUser', 'User\UserController@singleUserDetail');
 //Payment
 Route::post('/paypalCheckOut', 'Website\PaymentController@paypalCheckOut');
 Route::post('/stripeCheckOut', 'Website\PaymentController@stripeCheckOut');
+Route::post('/cashOnDeliveryCheckOut', 'Website\PaymentController@cashOnDeliveryCheckOut');
 Route::post('/userBillingDetails', 'User\UserController@userBillingDetails');
 
 

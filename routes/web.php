@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 
 //
-
 /*Route::view('/usersignin', 'admin.usersignin');*/
 
 Route::post('/registerUser', 'User\UserController@registerUser');

@@ -87,7 +87,7 @@
                                                         ${{$discountedProduct->sale_price}}</h5>
                                                     <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                                     <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                                    <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block mx-auto">
+                                                    <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto">
                                                         Add to Cart
                                                     </button>
                                                 </div>
@@ -243,7 +243,7 @@
                         <h5 class="product-price pt-3 font-weight-bold text-white ">${{$best->price}}</h5>
                         <h5 class=" text-white ">{{$best->product_name}}</h5>
                         <h5 class="brand-name text-white ">{{$best->brand->brand_name}}</h5>
-                        <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-4 d-block mx-auto" style="width: 80%">
+                        <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-4 d-block mx-auto" style="width: 80%">
                             Add to Cart
                         </button>
                     </a>
@@ -259,6 +259,7 @@
 <section id="special-section">
     <div class="container-mine">
         <div class="row m-0 p-0 my-5">
+            @if(count($categories[0]->product)>0)
             @foreach($categories as $category)
             <div class="col-md-12 mt-5">
                 <div class="top-title">
@@ -288,7 +289,7 @@
                                     ${{$discountedProduct->sale_price}}</h5>
                                 <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
                                 <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                <button type="button" class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block">
+                                <button type="button" class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block">
                                     Add to Cart
                                 </button>
                             </div>
@@ -299,6 +300,7 @@
             </div>
             <!-- first row -->
             @endforeach
+                @endif
         </div>
     </div>
 </section>
