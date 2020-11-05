@@ -54,10 +54,10 @@
                                     >
                                     </el-input>
                                 </el-form-item>
-                                <el-form-item label="API Key" prop="apiKey">
+                                <el-form-item label="API Key/ Client-Id" prop="apiKey">
                                     <el-input
                                         v-model="paymentCredentialForm.apiKey"
-                                        placeholder="Please input API Key."
+                                        placeholder="Please input API Key/Client Id."
                                         style="width: 100%"
                                     >
                                     </el-input>
@@ -240,100 +240,155 @@
 </template>
 
 <script>
-export default {
-    name: "postalCodeComponents",
-    data() {
-        return {
-            payType: [{
-                value: "Mastercard",
-            },
-                {
-                    value: "Paypal"
-                }],
-            labelPosition: "top",
-            paymentCredentialForm: {
-                paymentType: "",
-                secretKey: "",
-                apiKey: "",
-            },
-            payCred: [],
-            payCredSearch: "",
-            editedPayment: [],
-            // validation rules
-            paymentCredencialRules: {
-                paymentType: [
+    export default {
+        name: "postalCodeComponents",
+        data() {
+            return {
+                payType: [{
+                    value: "Mastercard",
+                },
                     {
-                        required: true,
-                        message: "Please Select Payment Type",
-                        trigger: "blur",
-                    },
-                ],
-                secretKey: [
-                    {
-                        required: true,
-                        message: "Please input Secrect Key",
-                        trigger: "blur",
-                    },
-                ],
-                apiKey: [
-                    {required: true, message: "Please input API key", trigger: "blur"},
-                ],
-            },
-            paymentEditCredencialRules: {
-                payment_type: [
-                    {
-                        required: true,
-                        message: "Please Select Payment Type",
-                        trigger: "blur",
-                    },
-                ],
-                secret_key: [
-                    {
-                        required: true,
-                        message: "Please input Secrect Key",
-                        trigger: "blur",
-                    },
-                ],
-                api_key: [
-                    {required: true, message: "Please input API key", trigger: "blur"},
-                ],
-            },
-        };
-    },
+                        value: "Paypal"
+                    }],
+                labelPosition: "top",
+                paymentCredentialForm: {
+                    paymentType: "",
+                    secretKey: "",
+                    apiKey: "",
+                },
+                payCred: [],
+                payCredSearch: "",
+                editedPayment: [],
+                // validation rules
+                paymentCredencialRules: {
+                    paymentType: [
+                        {
+                            required: true,
+                            message: "Please Select Payment Type",
+                            trigger: "blur",
+                        },
+                    ],
+                    secretKey: [
+                        {
+                            required: true,
+                            message: "Please input Secrect Key",
+                            trigger: "blur",
+                        },
+                    ],
+                    apiKey: [
+                        {required: true, message: "Please input API key", trigger: "blur"},
+                    ],
+                },
+                paymentEditCredencialRules: {
+                    payment_type: [
+                        {
+                            required: true,
+                            message: "Please Select Payment Type",
+                            trigger: "blur",
+                        },
+                    ],
+                    secret_key: [
+                        {
+                            required: true,
+                            message: "Please input Secrect Key",
+                            trigger: "blur",
+                        },
+                    ],
+                    api_key: [
+                        {required: true, message: "Please input API key", trigger: "blur"},
+                    ],
+                },
+            };
+        },
 
-    mounted() {
-        this.fetchPaymentCredential();
-        $(document).ready(function () {
-            $(".payCredBtn").click(function () {
-                $(".payCred-div").slideToggle("slow");
-            });
+        mounted() {
+            this.fetchPaymentCredential();
+            $(document).ready(function () {
+                $(".payCredBtn").click(function () {
+                    $(".payCred-div").slideToggle("slow");
+                });
 
-            $(".closePaymentCredencialBtn").click(function () {
-                $(".payCred-div").slideToggle("slow");
-            });
-        });
-    },
-
-    methods: {
-        fetchPaymentCredential() {
-            axios.get("/api/paymentCredentials", {}).then((response) => {
-                this.payCred = response.data.credentials;
+                $(".closePaymentCredencialBtn").click(function () {
+                    $(".payCred-div").slideToggle("slow");
+                });
             });
         },
 
-        submitpaymentCredential(paymentCredentialForm) {
-            this.$refs[paymentCredentialForm].validate((valid) => {
-                if (valid) {
-                    let formdata = new FormData();
-                    formdata.append("payment_type", this.paymentCredentialForm.paymentType);
-                    formdata.append("secret_key", this.paymentCredentialForm.secretKey);
-                    formdata.append("api_key", this.paymentCredentialForm.apiKey);
-                    axios.post("/api/paymentCredentials", formdata, {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
+        methods: {
+            fetchPaymentCredential() {
+                axios.get("/api/paymentCredentials", {}).then((response) => {
+                    this.payCred = response.data.credentials;
+                });
+            },
+
+            submitpaymentCredential(paymentCredentialForm) {
+                this.$refs[paymentCredentialForm].validate((valid) => {
+                    if (valid) {
+                        let formdata = new FormData();
+                        formdata.append("payment_type", this.paymentCredentialForm.paymentType);
+                        formdata.append("secret_key", this.paymentCredentialForm.secretKey);
+                        formdata.append("api_key", this.paymentCredentialForm.apiKey);
+                        axios.post("/api/paymentCredentials", formdata, {
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                            },
+                        })
+                            .then((response) => {
+                                this.$notify({
+                                    title: "Success",
+                                    message: response.data.message,
+                                    type: "success",
+                                });
+                                this.paymentCredentialForm = {};
+                                this.fetchPaymentCredential();
+                            })
+                            .catch((error) => {
+                                if (error.response.status == 422) {
+                                    this.$notify({
+                                        title: "Error",
+                                        message: error.response.data.message,
+                                        type: "error",
+                                    });
+                                }
+                            });
+                    } else {
+                        console.log("error in submit!!");
+                        return false;
+                    }
+                });
+            },
+            editpayCred(id) {
+                $(".editpayCredBtn").click(function () {
+                    $(".payCred-div").slideToggle("slow");
+                });
+                this.editedPayment = this.payCred.filter(payCred => (payCred.id == id));
+            },
+            deletepayCred(id) {
+                this.$confirm("Are you sure to delete this Items?")
+                    .then((_) => {
+                        axios.delete("/api/paymentCredentials/" + id).then((response) => {
+                            this.$notify({
+                                title: "Success",
+                                message: response.data.message,
+                                type: "info",
+                            });
+                            this.paymentCredentialForm = {};
+                            this.fetchPaymentCredential();
+                        });
                     })
-                        .then((response) => {
+                    .catch((_) => {
+                    });
+            },
+            savepaymentEditCredential(paymentEditCredentialForm) {
+                this.$refs[paymentEditCredentialForm].validate((valid) => {
+                    if (valid) {
+                        let formData = new FormData;
+                        formData.append("payment_type", this.editedPayment[0].payment_type);
+                        console.log(this.editedPayment[0].payment_type);
+                        formData.append("secret_key", this.editedPayment[0].secret_key);
+                        formData.append("api_key", this.editedPayment[0].api_key);
+                        formData.append("id", this.editedPayment[0].id);
+                        axios.post("/api/editpaymentCredentials", formData).then((response) => {
                             this.$notify({
                                 title: "Success",
                                 message: response.data.message,
@@ -341,8 +396,7 @@ export default {
                             });
                             this.paymentCredentialForm = {};
                             this.fetchPaymentCredential();
-                        })
-                        .catch((error) => {
+                        }).catch((error) => {
                             if (error.response.status == 422) {
                                 this.$notify({
                                     title: "Error",
@@ -351,71 +405,39 @@ export default {
                                 });
                             }
                         });
-                } else {
-                    console.log("error in submit!!");
-                    return false;
-                }
-            });
-        },
-        editpayCred(id) {
-            $(".editpayCredBtn").click(function () {
-                $(".payCred-div").slideToggle("slow");
-            });
-            this.editedPayment = this.payCred.filter(payCred => (payCred.id == id));
-        },
-        deletepayCred(id) {
-            this.$confirm("Are you sure to delete this Items?")
-                .then((_) => {
-                    axios.delete("/api/paymentCredentials/" + id).then((response) => {
-                        this.$notify({
-                            title: "Success",
-                            message: response.data.message,
-                            type: "info",
-                        });
-                        this.paymentCredentialForm = {};
-                        this.fetchPaymentCredential();
-                    });
-                })
-                .catch((_) => {
+                    }
                 });
+            }
         },
-        savepaymentEditCredential(paymentEditCredentialForm) {
-            this.$refs[paymentEditCredentialForm].validate((valid) => {
-                if (valid) {
-                    alert('Success');
-                }
-            });
-        }
-    },
-};
+    };
 </script>
 <style scoped>
-.container-fluid .row {
-    margin-left: 0;
-    margin-right: 0;
-}
+    .container-fluid .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-.hidden {
-    display: none;
-}
+    .hidden {
+        display: none;
+    }
 
-.box-card-slide {
-    margin-top: 20px;
-    border: 1px solid #ebeef5;
-    background-color: #fff;
-    color: #303133;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
+    .box-card-slide {
+        margin-top: 20px;
+        border: 1px solid #ebeef5;
+        background-color: #fff;
+        color: #303133;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    }
 
-.box-card-slide .box-header {
-    padding: 18px 20px;
-    border-bottom: 1px solid #ebeef5;
-    box-sizing: border-box;
-}
+    .box-card-slide .box-header {
+        padding: 18px 20px;
+        border-bottom: 1px solid #ebeef5;
+        box-sizing: border-box;
+    }
 
-.box-card-slide .box-body {
-    padding: 20px;
-}
+    .box-card-slide .box-body {
+        padding: 20px;
+    }
 </style>

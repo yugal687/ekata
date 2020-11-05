@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Model\BannerImage;
+use App\Model\PostalCode;
 use App\Model\ReviewImage;
 use App\Model\WebsiteDetail;
 use Illuminate\Http\Request;
@@ -99,6 +100,7 @@ class WebsiteDetailController extends Controller
         ]);
     }
 
+    // k save active ho yo??? please comment here
     public function setActive($id)
     {
         $setActive = ReviewImage::findorFail($id)->update([
@@ -134,16 +136,22 @@ class WebsiteDetailController extends Controller
             'message' => 'Review Image Deleted !!!'
         ]);
     }
-    public function aboutUs(){
+
+    public function aboutUs()
+    {
         $websiteDetails = WebsiteDetail::all();
         return view('website.aboutus', [
             'websiteDetail' => $websiteDetails
         ]);
     }
-    public function billingPage(){
+
+    public function billingPage()
+    {
         $websiteDetails = WebsiteDetail::all();
         return view('website.billings', [
             'websiteDetail' => $websiteDetails
         ]);
     }
+
+
 }

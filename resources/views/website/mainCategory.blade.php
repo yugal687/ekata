@@ -78,7 +78,7 @@
                                                 <h5 class="text-dark">{{$product->product_name}}</h5>
                                                 <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
                                                 <button type="button"
-                                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block mx-auto">
+                                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto">
                                                     Add to Cart
                                                 </button>
                                             </a>
@@ -124,7 +124,7 @@
                                                 <h5 class=" text-dark">{{$product->product_name}}</h5>
                                                 <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
                                                 <button type="button"
-                                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white px-5 mt-2 d-block mx-auto">
+                                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto">
                                                     Add to Cart
                                                 </button>
                                                 </a>

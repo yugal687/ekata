@@ -33,7 +33,16 @@
     @yield('style')
 
     <style>
-
+        @media screen and (max-width: 992px) {
+            .logo-img {
+                max-height: 99px;
+            }
+        }
+        @media screen and (min-width: 992px) {
+            .logo-img {
+                max-height: 110px;
+            }
+        }
     </style>
 
 </head>
@@ -45,19 +54,18 @@
             <div id="top-bar" class="top-bar">
 
                 <div class="row m-0 p-0">
-                    <div class="col-lg-2 col-md-12 m-0 p-0 bg-main-primary rounded-right-top">
-                        <div class="container-mine">
-                            <div class="text-center">
-                                <h3 class=" text-white font-weight-bold pl-2 mt-4">
-                                    Logo Here</h3>
-                            </div>
-                        </div>
+                    <div class="col-lg-2 col-md-2 m-0 p-0 bg-main-primary rounded-right-top text-center">
+                        <img src="{{ asset('images/Logo Of Ekata.png') }}" class="img-fluid logo-img" alt=""/>
+                        {{--<div class="text-center">
+                            <h3 class=" text-white font-weight-bold pl-2 mt-4">
+                                Logo Here</h3>
+                        </div>--}}
                     </div>
 
-                    <div class="col-lg-10 col-md-12 m-0 p-0 ">
+                    <div class="col-lg-10 col-md-10 m-0 p-0 ">
                         <div class="row m-0 p-0">
                             <div class="col-md-6 m-0 p-0"></div>
-                            <div class="col-lg-6 col-md-12 bg-main-secondary rounded m-0 p-0">
+                            <div class="col-lg-6 col-md-6 bg-main-secondary rounded m-0 p-0">
                                 <div class="mx-4">
                                     <form action="{{url('searchedproducts')}}" method="post">
                                         @csrf
@@ -69,7 +77,8 @@
                                                    aria-label="Search items..." aria-describedby="basic-addon2">
                                             <p id="search-error"></p>
                                             <div class="input-group-append bg-main-secondary ">
-                                                <button type="submit" class="btn bg-main-primary text-white search-btn"><i
+                                                <button type="submit" class="btn bg-main-primary text-white search-btn">
+                                                    <i
                                                         class="fas fa-search"></i>&nbsp; Search
                                                 </button>
                                             </div>

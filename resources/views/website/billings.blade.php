@@ -248,7 +248,7 @@
                     if (suburb_billing.length !== null) {
                         $("#p4_billing").text("");
                     }
-                    if (postalCode_billing.length !== null) {
+                    if (postal_code_billing.length !== null) {
                         $("#p5_billing").text("");
                     }
                     if (email_billing.length !== null) {
@@ -268,7 +268,7 @@
                     var lname = $("#lastname").val();
                     var address = $("#address").val();
                     var suburb = $("#suburb").val();
-                    var postalcode = $("#postal_code").val();
+                    var postalcode = $("#shipping_postal_code_billing").val();
                     var state = $("#state").val();
                     var email = $("#email").val();
                     var contactnumber = $("#contact_number").val();
@@ -416,19 +416,33 @@
 
             /*Credit Card and Pay[ppal*/
             $(".paypalCard").hide();
+            $(".cashOnDelivery").hide();
             $("#creditCard").click(function () {
                 $(".creditCard").show();
                 $(".paypalCard").hide();
-                $('#paypalCard').toggleClass('btn-secondary', 'btn-primary');
+                $(".cashOnDelivery").hide();
+                $('#paypalCard').addClass('btn-secondary');
+                $('#cashOnDelivery').addClass('btn-secondary');
                 $('#creditCard').removeClass('btn-secondary');
                 $('#creditCard').addClass('btn-primary');
             });
             $("#paypalCard").click(function () {
                 $(".paypalCard").show();
                 $(".creditCard").hide();
-                $('#creditCard').toggleClass('btn-secondary', 'btn-primary');
+                $(".cashOnDelivery").hide();
+                $('#creditCard').addClass('btn-secondary');
+                $('#cashOnDelivery').addClass('btn-secondary');
                 $('#paypalCard').removeClass('btn-secondary');
                 $('#paypalCard').addClass('btn-primary');
+            });
+            $("#cashOnDelivery").click(function () {
+                $(".cashOnDelivery").show();
+                $(".paypalCard").hide();
+                $(".creditCard").hide();
+                $('#creditCard').addClass('btn-secondary');
+                $('#paypalCard').addClass('btn-secondary');
+                $('#cashOnDelivery').removeClass('btn-secondary');
+                $('#cashOnDelivery').addClass('btn-primary');
             });
             $(".prev").click(function () {
                 $(".tab-pane").hide();
