@@ -19,7 +19,6 @@ class CategoryController extends Controller
         if ($validate){
             foreach ($request->file('bannerCategory') as $bannerCategory) {
 
-
                 $baseName = Str::random(20);
                 $originalName = $baseName . '.' . $bannerCategory->getClientOriginalExtension();
                 $bannerCategory->move(public_path('/uploads'), $originalName);
