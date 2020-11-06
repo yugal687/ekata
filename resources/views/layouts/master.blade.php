@@ -44,6 +44,10 @@
         .el-button:focus {
             outline: none;
         }
+        .brand-link {
+            font-size: 1rem;
+            height: 56px;
+        }
     </style>
 
 </head>
@@ -105,8 +109,7 @@
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="#" class="brand-link">
-                    <img src="" alt="Convenience Store" class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <br />
+                    <img src="{{ asset('images/Logo Of Ekata.png') }}" alt="Ekata Convenience Store Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                     <span class="brand-text font-weight-light">Ekata Convenience Store</span>
                 </a>
 

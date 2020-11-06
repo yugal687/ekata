@@ -53,7 +53,10 @@
         /*.el-button{
             margin-top: 20px;
         }*/
-
+        .brand-link {
+            font-size: 1rem;
+            height: 56px;
+        }
     </style>
 
 </head>
@@ -116,10 +119,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="AdminLTE Logo"
+                <img src="{{ asset('images/Logo Of Ekata.png') }}" alt="Ekata Convenience Store Logo"
                      class="brand-image img-circle elevation-3"
                      style="opacity: .8">
-                <br/>
                 <span class="brand-text font-weight-light">Ekata Convenience Store</span>
             </a>
 

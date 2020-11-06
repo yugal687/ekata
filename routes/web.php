@@ -106,8 +106,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
 
     // Postal Code & Payment Credential
-    Route::view('admin/postalPayment/paymentCredential', 'admin.postal_payment.paymentCredential');
-    Route::view('admin/postalPayment/postalCode', 'admin.postal_payment.postalCode');
+    Route::view('admin/postalPayment/paymentCredential', 'Admin.Postal_Payment.paymentCredential');
+    Route::view('admin/postalPayment/postalCode', 'Admin.Postal_Payment.postalCode');
 });
 //Services
 
