@@ -43,9 +43,9 @@
 
                         <span style="display:inline;">
 								<br>
-                            @if($userDetail->order->order_number)
+                            @if($data['invoice_id'])
                                 Transaction ID: <a href="" target="_BLANK">
-									{{$userDetail->order->order_number}}&nbsp;</a>
+									{{$data['invoice_id']}}&nbsp;</a>
                             @endif
 							</span>
                     </div>
@@ -92,9 +92,9 @@
                             </div>
                             <div class="col-12">
                                 <p>
-                                    {{ $userDetail->order->sub_urb}}<br/>
-                                    {{ $userDetail->order->state}}<br/>
-                                    {{ $userDetail->order->shipping_address}}<br/>
+                                    {{ $userDetail->shippingAddress['suburb'] ?? $userDetail->billingAddress['suburb']}}<br/>
+                                    {{ $userDetail->shippingAddress['state'] ?? $userDetail->billingAddress['state']}}<br/>
+                                    {{ $userDetail->shippingAddress['address'] ?? $userDetail->billingAddress['address']}}<br/>
                                     Australia<br/>
                                 </p>
                             </div>

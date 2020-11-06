@@ -13,15 +13,16 @@ class OrderMail extends Mailable
 
     public $userDetail;
     public $totalPrice;
-
+    public $data;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($userDetail, $totalPrice)
+    public function __construct($userDetail, $totalPrice,$data)
     {
         $this->userDetail = $userDetail;
+        $this->data = $data;
         $this->totalPrice = $totalPrice;
     }
 
@@ -35,6 +36,7 @@ class OrderMail extends Mailable
         return $this->from('ajitsubedi2011@gmail.com')->markdown('emails.Order')
             ->with(
                 [
+                    'data' => $this->data,
                     'userDetail' => $this->userDetail,
                     'totalPrice' => $this->totalPrice
                 ]

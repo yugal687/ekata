@@ -43,8 +43,9 @@ class PaymentController extends Controller
                 'Paypal');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
+                dd($data);
                                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice));
+                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));
             }
             return response()->json([
                 'successMsg' => 'Congratulations! Your order was successfully placed ',
@@ -101,8 +102,10 @@ class PaymentController extends Controller
                 'Master Card');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                              Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice));
+                dd($data);
+
+                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
+                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));
             }
             return response()->json([
                 'msg' => 'Successfully saved order ',
@@ -135,8 +138,9 @@ class PaymentController extends Controller
                 'cash on delivery');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice));
+                dd($data);
+                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
+                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));
             }
             return response()->json([
                 'msg' => 'Successfully saved order ',
