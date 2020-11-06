@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Mail\OrderMail;
 use App\Model\OrderDetail;
+use App\Model\Product;
 use App\Service\OrderService;
 use App\Service\Payment\PaymentCredentialRepo;
 use Carbon\Carbon;
@@ -43,9 +44,10 @@ class PaymentController extends Controller
                 'Paypal');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                dd($data);
+                $productName = Product::where('id',$data['items']['product_id'])->get();
+                dd($productName);
                                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));
+                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data,$productName));
             }
             return response()->json([
                 'successMsg' => 'Congratulations! Your order was successfully placed ',
@@ -102,7 +104,7 @@ class PaymentController extends Controller
                 'Master Card');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                dd($data);
+                //dd($userDetail);
 
                 Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
                                     ->send(new OrderMail($userDetail, $request->totalPrice,$data));
@@ -138,7 +140,7 @@ class PaymentController extends Controller
                 'cash on delivery');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                dd($data);
+                dd($data->items);
                 Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
                                     ->send(new OrderMail($userDetail, $request->totalPrice,$data));
             }

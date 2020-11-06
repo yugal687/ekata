@@ -14,16 +14,18 @@ class OrderMail extends Mailable
     public $userDetail;
     public $totalPrice;
     public $data;
+    public $productName;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($userDetail, $totalPrice,$data)
+    public function __construct($userDetail, $totalPrice,$data,$productName)
     {
         $this->userDetail = $userDetail;
         $this->data = $data;
         $this->totalPrice = $totalPrice;
+        $this->productName = $productName;
     }
 
     /**
@@ -38,7 +40,8 @@ class OrderMail extends Mailable
                 [
                     'data' => $this->data,
                     'userDetail' => $this->userDetail,
-                    'totalPrice' => $this->totalPrice
+                    'totalPrice' => $this->totalPrice,
+                    'productName' => $this->productName
                 ]
             );
     }
