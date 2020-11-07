@@ -24,7 +24,9 @@
     font-size: 2.5rem;
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    color: #CF7500;
+    /*color: #CF7500;*/
+    /*color: #94943a;*/
+    color: #343a40;
 }
 
 .container-sm {
@@ -82,23 +84,27 @@
 /*Contact Us Page CSS*/
 /*------------------------*/
 .card_box .fa-color {
-    color: #CF7500;
+    /*color: #CF7500;*/
+    color: #94943a;
 }
 
 .card_box .card {
-    border-color: #CF7500;
+    /*border-color: #CF7500;*/
+    border-color: #94943a;
     box-shadow: none;
     border-radius: 15px;
 }
 
 .enq-form {
-    background-color: #CF7500;
+    /*background-color: #CF7500;*/
+    background-color: #94943a;
     padding: 30px 0;
     height: 27rem;
 }
 
 .enquiry-section {
-    background-color: #CF7500;
+    /*background-color: #CF7500;*/
+    background-color: #94943a;
 }
 /*------------------------*/
 /*Contact Us Page CSS Ends*/
@@ -106,7 +112,8 @@
 
 /*Service Pages CSS*/
 .service-card-content {
-    background: #cf7500;
+    /*background: #cf7500;*/
+    background: #94943a;
     border-radius: 10px;
     position: relative;
     color: #fff;

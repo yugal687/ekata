@@ -192,15 +192,17 @@ a:hover {
 
 .bg-main-secondary {
     /*background-color: #F0A500;*/
-    background-color: #d0d07c;
+    background-color: #d8d98b;
 }
 
 .text-main-primary {
-    color: #CF7500;
+    /*color: #CF7500;*/
+    color: #94943a;
 }
 
 .text-main-secondary {
-    color: #F0A500;
+    /*color: #F0A500;*/
+    color: #d8d98b;
 }
 
 .text-main-danger {
@@ -208,12 +210,11 @@ a:hover {
 }
 
 .bg-product-light {
-    /*background-color: #ece4e4;*/
-    background-color: #d8d88b47;
+    background-color: #ece4e4;
 }
 
 .bg-product-medium {
-    /*background-color: #d1cdcc;*/
+    background-color: #d1cdcc;
 }
 
 .bg-product-dark {
@@ -295,11 +296,9 @@ a:hover {
 }
 
 /* navigation bar */
-
 .cart {
     position: absolute;
 }
-
 .cart-count {
     position: absolute;
     top: -15%;
@@ -309,18 +308,19 @@ a:hover {
 }
 
 /* new arrival section */
-
 .top-title {
     padding-bottom: 8px;
     width: 100%;
     position: relative;
-    border-bottom: 3px solid #CF7500;
+    /*border-bottom: 3px solid #CF7500;*/
+    border-bottom: 3px solid #94943a;
 }
 .top-title-catg {
     padding-bottom: 2px;
     width: 100%;
     position: relative;
-    border-bottom: 3px solid #CF7500;
+    /*border-bottom: 3px solid #CF7500;*/
+    border-bottom: 3px solid #94943a;
 }
 
 /* best selling section */
@@ -335,10 +335,6 @@ a:hover {
     transition: all 0.2s ease-in;
 }
 
-.best-selling button:hover, #about-section .btn:hover {
-    cursor: pointer;
-    background-color: #F0A500;
-}
 .best-selling img{
     height: 220px;
 }
@@ -495,7 +491,6 @@ p#search-error{
         height: 85%;
     }
 }
-
 /*.modal.right .modal-content {
     height: 84%;
     overflow-y: auto;
@@ -515,7 +510,8 @@ p#search-error{
 
 /* ----- MODAL STYLE ----- */
 .badge {
-    background-color: #CF7500;
+    /*background-color: #CF7500;*/
+    background-color: #94943a;
     border-radius: 10px;
     color: white;
     display: inline-block;
@@ -569,7 +565,8 @@ p#search-error{
 }
 
 .shopping-cart .shopping-cart-items .item-price {
-    color: #CF7500;
+    /*color: #CF7500;*/
+    color: #94943a;
     margin-right: 8px;
 }
 
@@ -578,14 +575,16 @@ p#search-error{
 }
 
 .cart-icon {
-    color: #F0A500;
+    /*color: #F0A500;*/
+    color: #d8d98b;
     font-size: 24px;
     margin-right: 7px;
     float: left;
 }
 
 .shopping-cart .button {
-    background-color: #cf7500;
+    /*background-color: #cf7500;*/
+    background-color: #94943a;
     color: white;
     text-align: center;
     padding: 12px;
@@ -599,7 +598,8 @@ p#search-error{
 }
 
 .main-color-text {
-    color: #CF7500;
+    /*color: #CF7500;*/
+    color: #94943a;
 }
 
 .clearfix:after {
@@ -674,8 +674,10 @@ p#search-error{
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background-color: #CF7500;
-    border-color: #CF7500;
+    /*background-color: #CF7500;
+    border-color: #CF7500;*/
+    background-color: #94943a;
+    border-color: #94943a;
 }
 .page-link {
     position: relative;
@@ -686,4 +688,33 @@ p#search-error{
     color: #000;
     background-color: #fff;
     border: 1px solid #dee2e6;
+}
+
+/*Hover Effect*/
+button {
+    transition: all 0.2s ease-in;
+}
+a.btn.bg-main-primary:hover {
+    background-color: #76762c;
+}
+button.btn.bg-main-primary:hover {
+    background-color: #76762c;
+}
+.best-selling button:hover, #about-section .btn:hover {
+    cursor: pointer;
+    /*background-color: #F0A500;*/
+    background-color: #76762c;
+}
+input[type=submit]:hover{
+    cursor: pointer;
+    /*background-color: #F0A500;*/
+    background-color: #76762c;
+}
+button[type=submit]:hover{
+    cursor: pointer;
+    /*background-color: #F0A500;*/
+    background-color: #76762c;
+}
+.shopping-cart .button:hover{
+    background-color: #76762c;
 }

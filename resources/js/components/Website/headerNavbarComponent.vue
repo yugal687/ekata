@@ -19,12 +19,12 @@
                         <ul class="list-group text-center" v-if="userDetail.role_id === 2">
                             <li class="list-group-item"><a href="/user/userdashboard">My
                                 Account</a></li>
-                            <li class="list-group-item"><a href="/logout">Logout</a></li>
+                            <li class="list-group-item"><a href="/">Logout</a></li>
                         </ul>
                         <ul class="list-group text-center" v-else-if="userDetail.role_id === 1">
                             <li class="list-group-item"><a href="/admin/dashboard">My
                                 Account</a></li>
-                            <li class="list-group-item"><a href="/logout">Logout</a></li>
+                            <li class="list-group-item"><a href="/">Logout</a></li>
                         </ul>
                         <ul class="list-group text-center" v-else>
                             <li class="list-group-item"><a href="/login">Sign In</a></li>
@@ -83,12 +83,12 @@
                             <ul class="list-group text-center" v-if="userDetail.role_id === 2">
                                 <li class="list-group-item"><a href="/user/userdashboard">My
                                     Account</a></li>
-                                <li class="list-group-item"><a href="/logout">Logout</a></li>
+                                <li class="list-group-item"><a href="/">Logout</a></li>
                             </ul>
                             <ul class="list-group text-center" v-else-if="userDetail.role_id === 1">
                                 <li class="list-group-item"><a href="/admin/dashboard">My
                                     Account</a></li>
-                                <li class="list-group-item"><a href="/logout">Logout</a></li>
+                                <li class="list-group-item"><a href="/">Logout</a></li>
                             </ul>
                             <ul class="list-group text-center" v-else>
                                 <li class="list-group-item"><a href="/login">Sign In</a></li>

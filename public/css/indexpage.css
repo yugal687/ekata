@@ -305,12 +305,14 @@
 
 /* Hover state of the stars */
 .rating-stars ul > li.star.hover > i.fas {
-    color:#F0A500;
+    /*color:#F0A500;*/
+    color: #d8d98b;
 }
 
 /* Selected state of the stars */
 .rating-stars ul > li.star.selected > i.fas {
-    color:#F0A500;
+    /*color:#F0A500;*/
+    color: #d8d98b;
 }
 
 
@@ -402,7 +404,8 @@ img.review-images {
     margin: 0;
     padding: 0;
     transform: translateY(20px);
-    background: #F0A500;
+    /*background: #F0A500;*/
+    background: #d8d98b;
     color: #000;
     width: 100%;
     display: block !important;

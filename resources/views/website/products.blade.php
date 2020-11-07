@@ -54,7 +54,7 @@
                                     <h5 class="best_name py-0 text-dark">{{ $product->product_name}}</h5>
                                     <h5 class="best_weight py-0 text-dark">{{$product->brand->brand_name}}</h5>
                                     <button type="button"
-                                            class="btn bg-main-primary rounded-top-front rounded-bottom-front border text-white mt-2 d-block mx-auto">
+                                            class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                         Add to Cart
                                     </button>
                                 </a>

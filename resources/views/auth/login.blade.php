@@ -17,16 +17,19 @@
 
     <style>
         body.login-page {
-            background-image: linear-gradient(to right top, #051937, #41204d, #7a204c, #a33234, #ae5d00);
+            background-image: linear-gradient(to right, #828230, #8b8b3b, #949446, #9d9e50, #a6a75b);
+            /*background-image: linear-gradient(to right top, #051937, #41204d, #7a204c, #a33234, #ae5d00);*/
         }
 
         .bg-main-primary {
-            background-color: #CF7500;
+            /*background-color: #CF7500;*/
+            background-color: #94943a;
             transition: background-color .2s ease-in-out;
         }
 
         .bg-main-primary:hover {
-            background-color: #cf6500;
+            /*background-color: #cf6500;*/
+            background-color: #76762c;
         }
     </style>
 

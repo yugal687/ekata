@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=opensans:500);
 body{
-    background: #CF7500;
+    /*background: #CF7500;*/
+    background: #94943a;
     color:#fff;
     font-family: 'Open Sans', sans-serif;
     max-height:700px;
@@ -58,7 +59,8 @@ body{
     z-index: 5;
     font-size: 25px;
     margin:0 auto;
-    color:#F0A500;
+    /*color:#F0A500;*/
+    color:#d8d98b;
     text-decoration: none;
     margin-right: 10px
 }
@@ -86,12 +88,12 @@ hr:after {
     top: -0.75em;
     font-size: 2em;
     padding: 0 0.2em;
-    background: #CF7500;
+    /*background: #CF7500;*/
+    background: #94943a;
 }
 
 .cloud {
     width: 350px; height: 120px;
-
     background: #FFF;
     background: linear-gradient(top, #FFF 100%);
     background: -webkit-linear-gradient(top, #FFF 100%);

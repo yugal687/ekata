@@ -5,6 +5,23 @@
 
 @section('style')
     <style>
+        .btn-main-primary{
+            background-color: #94943a;
+            color: #fff;
+        }
+        .btn-main-primary:hover{
+            background-color: #76762c;
+            color: #fff;
+        }
+        .btn-main-secondary{
+            background-color: #d8d98b;
+            color: #fff;
+        }
+        .btn-main-secondary:hover{
+            background-color: #b6b76c;
+            color: #fff;
+        }
+
         .testing-section {
             margin-top: 50px;
             margin-bottom: 50px;
@@ -47,7 +64,8 @@
             -moz-box-shadow: none !important;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
-            border: 1px solid #CF7500;
+            /*border: 1px solid #CF7500;*/
+            border: 1px solid #94943a;
             outline-width: 0;
             transition: All 0.5s ease-in;
             -webkit-transition: All 0.5s ease-in;
@@ -59,7 +77,8 @@
         #shipping-payment-form .action-button {
             font-family: 'Lato', sans-serif;
             width: auto;
-            background: #CF7500;
+            /*background: #CF7500;*/
+            background: #94943a;
             font-weight: bold;
             color: white;
             border: 0 none;
@@ -74,7 +93,7 @@
         }
 
         #shipping-payment-form .action-button:hover, #shipping-payment-form .action-button:focus {
-            box-shadow: 0 0 0 2px white, 0 0 0 3px #CF7500;
+            box-shadow: 0 0 0 2px #fff, 0 0 0 3px #94943a;
         }
 
         #shipping-payment-form .action-button-previous {
@@ -174,8 +193,10 @@
 
         .progressbar-dots.active {
             color: #fff;
-            border: 5px solid #ff7500;
-            background: #f0a500;
+            /*border: 5px solid #ff7500;*/
+            border: 5px solid #94943a;
+            /*background: #f0a500;*/
+            background: #d8d98b;
         }
 
         /*  Tab */
@@ -421,28 +442,28 @@
                 $(".creditCard").show();
                 $(".paypalCard").hide();
                 $(".cashOnDelivery").hide();
-                $('#paypalCard').addClass('btn-secondary');
-                $('#cashOnDelivery').addClass('btn-secondary');
-                $('#creditCard').removeClass('btn-secondary');
-                $('#creditCard').addClass('btn-primary');
+                $('#paypalCard').addClass('btn-main-secondary');
+                $('#cashOnDelivery').addClass('btn-main-secondary');
+                $('#creditCard').removeClass('btn-main-secondary');
+                $('#creditCard').addClass('btn-main-primary');
             });
             $("#paypalCard").click(function () {
                 $(".paypalCard").show();
                 $(".creditCard").hide();
                 $(".cashOnDelivery").hide();
-                $('#creditCard').addClass('btn-secondary');
-                $('#cashOnDelivery').addClass('btn-secondary');
-                $('#paypalCard').removeClass('btn-secondary');
-                $('#paypalCard').addClass('btn-primary');
+                $('#creditCard').addClass('btn-main-secondary');
+                $('#cashOnDelivery').addClass('btn-main-secondary');
+                $('#paypalCard').removeClass('btn-main-secondary');
+                $('#paypalCard').addClass('btn-main-primary');
             });
             $("#cashOnDelivery").click(function () {
                 $(".cashOnDelivery").show();
                 $(".paypalCard").hide();
                 $(".creditCard").hide();
-                $('#creditCard').addClass('btn-secondary');
-                $('#paypalCard').addClass('btn-secondary');
-                $('#cashOnDelivery').removeClass('btn-secondary');
-                $('#cashOnDelivery').addClass('btn-primary');
+                $('#creditCard').addClass('btn-main-secondary');
+                $('#paypalCard').addClass('btn-main-secondary');
+                $('#cashOnDelivery').removeClass('btn-main-secondary');
+                $('#cashOnDelivery').addClass('btn-main-primary');
             });
             $(".prev").click(function () {
                 $(".tab-pane").hide();

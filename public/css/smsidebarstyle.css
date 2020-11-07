@@ -30,7 +30,8 @@
     padding: 0 10px;
 }
 .main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown a.active.main-cat, .main-sidebar-menu .sidebar-menu ul li.sidebar-dropdown:hover a.main-cat  {
-    background-color: #CF7500;
+    /*background-color: #CF7500;*/
+    background-color: #94943a;
     color: #fff;
     border-radius: 10px;
 }
@@ -85,7 +86,8 @@ li.sidebar-dropdown {
     padding: 2px 10px 2px 10px;
 }
 .smsidebar-menu .sidebar-submenu ul li a i{
-    color: #cf5f02;
+    /*color: #cf5f02;*/
+    color: #94943a;
 }
 
 

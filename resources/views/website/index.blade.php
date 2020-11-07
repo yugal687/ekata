@@ -206,7 +206,7 @@
                             <div class="row m-3">
                                 <div class="col-12 bg-product-medium rounded-top-front rounded-bottom-front">
 
-                                    <img src="{{$lastproduct->image[0]->name}}" class="img-fluid p-2" alt="">
+                                    <img src="{{$lastproduct->image[0]->name}}" class="img-fluid" alt="">
                                 </div>
                                 <div class="col-12 mt-4 mb-2">
                                     <h5>{{$lastproduct->product_name}}</h5>
@@ -289,7 +289,7 @@
                                     ${{$discountedProduct->sale_price}}</h5>
                                 <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
                                 <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                <button type="button" class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block">
+                                <button type="button" class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block w-100">
                                     Add to Cart
                                 </button>
                             </div>
@@ -379,7 +379,7 @@
                 </div>
             </div>
             <div class="col-md-12 col-lg-5 ">
-                <div class="signup bg-main-secondary rounded-top-front rounded-bottom-front py-4">
+                <div class="signup bg-main-primary rounded-top-front rounded-bottom-front py-4">
                     <div class="circle-3"></div>
                     <div class="circle-4"></div>
                     <h3 class="heading-font text-white text-center">ENQUIRY FORM</h3>
@@ -392,7 +392,7 @@
                             <textarea class="form-control mt-3" rows="5" name="description" placeholder="Description" required></textarea>
                             <div class="row mt-4">
                                 <div class="col-12 text-center">
-                                    <button class="btn border-white text-white" type="submit">SEND</button>
+                                    <button class="btn border-white text-white px-3" type="submit">Send</button>
                                 </div>
                             </div>
                         </form>

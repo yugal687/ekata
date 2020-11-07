@@ -1,5 +1,6 @@
 .register{
-    background: -webkit-linear-gradient(left, #CF7500, #F0A500);
+    /*background: -webkit-linear-gradient(left, #CF7500, #F0A500);*/
+    background-image: linear-gradient(to right, #828230, #8b8b3b, #949446, #9d9e50, #a6a75b);
     margin-top: 3%;
     padding: 3%;
 }
@@ -55,7 +56,8 @@
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    background: #F0A500;
+    /*background: #F0A500;*/
+    background: #d8d98b;
     color: #fff;
     font-weight: 600;
     width: 50%;
@@ -64,7 +66,8 @@
 .register .nav-tabs{
     margin-top: 3%;
     border: none;
-    background: #F0A500;
+    /*background: #F0A500;*/
+    background: #d8d98b;
     border-radius: 1.5rem;
     width: 28%;
     float: right;
@@ -82,8 +85,10 @@
 }
 .register .nav-tabs .nav-link.active{
     width: 100px;
-    color: #F0A500;
-    border: 2px solid #CF7500;
+    /*color: #F0A500;*/
+    color: #d8d98b;
+    /*border: 2px solid #CF7500;*/
+    border: 2px solid #94943a;
     border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
 }

@@ -15,11 +15,13 @@
 
     <style>
         body.register-page {
-            background-image: linear-gradient(to right top, #051937, #41204d, #7a204c, #a33234, #ae5d00);
+            background-image: linear-gradient(to right, #828230, #8b8b3b, #949446, #9d9e50, #a6a75b);
+            /*background-image: linear-gradient(to right top, #051937, #41204d, #7a204c, #a33234, #ae5d00);*/
         }
 
         .bg-main-primary {
-            background-color: #CF7500;
+            /*background-color: #CF7500;*/
+            background-color: #94943a;
         }
 
         @media screen and (min-width: 768px) {
@@ -45,6 +47,7 @@
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
             border: 1px solid #CF750090 !important;
+            border: 1px solid #94943a90 !important;
             outline-width: 0;
             transition: All 0.5s ease-in;
             -webkit-transition: All 0.5s ease-in;
@@ -61,6 +64,11 @@
 
         label.error {
             transform: translateY(-15px);
+        }
+        button[type=submit]:hover{
+            cursor: pointer;
+            /*background-color: #F0A500;*/
+            background-color: #76762c;
         }
     </style>
 

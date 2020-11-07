@@ -279,7 +279,7 @@
                                     <div class="col-12 text-left">
                                         <button
                                             type="button"
-                                            class="btn btn-primary mr-2"
+                                            class="btn btn-main-primary mr-2"
                                             id="creditCard"
                                         >
                                             Credit Card
@@ -287,13 +287,13 @@
                                         <button
                                             type="button"
                                             @click="setpaypalCredential"
-                                            class="btn btn-secondary"
+                                            class="btn btn-main-secondary"
                                             id="paypalCard"
                                         >
                                             Paypal
                                         </button>
                                         <button type="button"
-                                                class="btn btn-secondary ml-2 mt-2 mt-sm-2 mt-md-0"
+                                                class="btn btn-main-secondary ml-2 mt-2 mt-sm-2 mt-md-0"
                                                 id="cashOnDelivery">
                                             Cash On Delivery
                                         </button>
