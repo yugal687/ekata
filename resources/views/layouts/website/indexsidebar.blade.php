@@ -1,5 +1,6 @@
 <div class="vertical-index-sidebar mx-3">
     <div class="catg-slider">
+        @if(count($getCategory)>0)
         @foreach($getCategory as $category)
         <div>
             <figure class="mx-auto">
@@ -10,6 +11,7 @@
             </p>
         </div>
         @endforeach
+            @endif
     </div>
     <div class="row controls rounded-bottom-front" id="customize-controls" aria-label="Carousel Navigation"
          tabindex="0">

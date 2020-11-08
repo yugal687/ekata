@@ -44,10 +44,10 @@ class PaymentController extends Controller
                 'Paypal');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                $productName = Product::where('id',$data['items']['product_id'])->get();
+               /* $productName = Product::where('id',$data['items']['product_id'])->get();
                 dd($productName);
                                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data,$productName));
+                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data,$productName));*/
             }
             return response()->json([
                 'successMsg' => 'Congratulations! Your order was successfully placed ',
@@ -105,9 +105,9 @@ class PaymentController extends Controller
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
                 //dd($userDetail);
-
+              /*  $productName = Product::where('id',$data['items']['product_id'])->get();
                 Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));
+                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));*/
             }
             return response()->json([
                 'msg' => 'Successfully saved order ',
@@ -139,10 +139,11 @@ class PaymentController extends Controller
                 $request->totalPrice,
                 'cash on delivery');
             if ($order) {
-                $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                dd($data->items);
-                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));
+                /* $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
+                 dd($data->items);
+                 Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
+                                     ->send(new OrderMail($userDetail, $request->totalPrice,$data));
+             */
             }
             return response()->json([
                 'msg' => 'Successfully saved order ',

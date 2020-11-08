@@ -4,6 +4,7 @@
         <i class="fas fa-times text-danger close-menu" style="font-size: 20px; position: absolute; top: 20px; left: 220px"></i>
         <div class="sidebar-menu pt-5">
             <ul class="pt-3">
+                @if(count($getCategory)>0)
                 @foreach($getCategory as $category)
                 <li class="sidebar-dropdown">
                     <a href="{{route('maincategory',[$category->id,$category->category_name])}}">{{$category->category_name}}<span><i class="fas fa-angle-right"></i></span></a>
@@ -16,6 +17,7 @@
                     </div>
                 </li>
                 @endforeach
+                    @endif
             </ul>
         </div>
     <!-- sidebar-menu  -->

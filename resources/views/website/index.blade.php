@@ -259,6 +259,7 @@
 <section id="special-section">
     <div class="container-mine">
         <div class="row m-0 p-0 my-5">
+            @if(count($categories)>0)
             @if(count($categories[0]->product)>0)
             @foreach($categories as $category)
             <div class="col-md-12 mt-5">
@@ -300,6 +301,7 @@
             </div>
             <!-- first row -->
             @endforeach
+                @endif
                 @endif
         </div>
     </div>

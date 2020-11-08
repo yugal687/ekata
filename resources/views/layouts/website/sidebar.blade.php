@@ -2,6 +2,7 @@
     <div class="main-sidebar-menu">
         <div class="sidebar-menu">
             <ul class="pt-3">
+                @if(count($getCategory)>0)
                 @foreach($getCategory as $category)
                     <li class="sidebar-dropdown">
                         <a href="{{ route('maincategory',[$category->id,$category->category_name])}}" class="main-cat">{{$category->category_name}}
@@ -17,6 +18,7 @@
                         </div>
                     </li>
                 @endforeach
+                    @endif
             </ul>
         </div>
         <!-- sidebar-menu  -->
