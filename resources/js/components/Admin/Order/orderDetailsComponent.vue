@@ -17,7 +17,7 @@
                             width="60">
                         </el-table-column>
                         <el-table-column
-                            prop="order_details[0].date"
+                            prop="created_at"
                             label="Date">
                         </el-table-column>
                         <el-table-column

@@ -87,7 +87,7 @@
                                                         ${{$discountedProduct->sale_price}}</h5>
                                                     <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                                     <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                                    <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto">
+                                                    <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                                         Add to Cart
                                                     </button>
                                                 </div>
