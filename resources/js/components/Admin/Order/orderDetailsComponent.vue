@@ -95,7 +95,7 @@
                     </tr>
                     </thead>
                     <tbody v-for="data in gridData">
-                    <tr v-for="item in data.order_details">
+                    <tr v-for="item in data.items">
                         <th>{{item.product.product_name}}</th>
                         <td>{{item.quantity}}</td>
                         <td>{{item.price}}</td>
@@ -187,11 +187,11 @@
             showDetails(id) {
                 this.dialogTableVisible = true;
                 this.gridData = this.orderDetailsTableData.filter(orderDetailsTableData => (orderDetailsTableData.id == id));
-                console.log(this.gridData[0]);
+                //console.log(this.gridData[0]);
             },
             fetchOrder(){
                 axios.get('/api/getOrderDetail', {}).then(response => {
-                    this.orderDetailsTableData = response.data.orderlisted
+                    this.orderDetailsTableData = response.data.orderlisted;
                 });
             },
             orderDelivered(id) {

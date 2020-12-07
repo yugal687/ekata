@@ -70,26 +70,23 @@
                                 <thead>
                                 <tr>
                                     <th>Order ID</th>
-                                    <th>Item</th>
                                     <th>Status</th>
                                     <th>User Name</th>
                                     <th>User Id</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($latestOrder as $order)
+                                @foreach($orderlisted as $order)
                                     <tr>
-                                        <td><a href="pages/examples/invoice.html">{{$order->order->order_number}}</a>
-                                        </td>
-                                        <td>{{$order->product->product_name}}</td>
-                                        <td><span class="badge badge-success">{{$order->order->order_status}}</span>
+                                        <td>{{$order->order_number}}</td>
+                                        <td><span class="badge badge-success">{{$order->order_status}}</span>
                                         </td>
                                         <td>
                                             <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                {{$order->order->first_name }} {{$order->order->last_name}}
+                                                {{$order->first_name }} {{$order->last_name}}
                                             </div>
                                         </td>
-                                        <td>{{$order->order->registered_user}}</td>
+                                        <td>{{$order->registered_user}}</td>
 
                                     </tr>
                                 @endforeach

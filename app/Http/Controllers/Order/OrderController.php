@@ -23,21 +23,25 @@ class OrderController extends Controller
         ]);
     }
     public function setDelivered($id){
-        $delivered = OrderDetail::where('id',$id)->with('order','user','product')->get();
-        //dd($delivered[0]);
+        $delivered = Order::where('id',$id)->update([
+            'order_status' => 'delivered'
+        ]);
+        /*dd($delivered[0]->order);
         $delivered[0]->order->order_status = 'delivered';
         //dd($delivered[0]);
-        $delivered[0]->order->save();
+        $delivered[0]->order->save();*/
         return response()->json([
            'message' => 'Order Delivered !!!'
         ]);
     }
     public function deleteOrder($id){
-        $delivered = OrderDetail::where('id',$id)->with('order','user','product')->get();
-        //dd($delivered[0]);
+        $delivered = Order::where('id',$id)->update([
+            'order_status' => 'failed'
+        ]);
+       /* //dd($delivered[0]);
         $delivered[0]->order->order_status = 'failed';
         //dd($delivered[0]);
-        $delivered[0]->order->save();
+        $delivered[0]->order->save();*/
         return response()->json([
             'message' => 'Order Failed !!!'
         ]);

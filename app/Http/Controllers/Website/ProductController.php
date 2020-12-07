@@ -32,9 +32,13 @@ class ProductController extends Controller
 
         }])->limit(3)->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
+        $special = Product::with(['category', 'brand', 'tags'=>function($q){
+            return $q->where('tags','Special')->get();
+        },'image'])->get();
 
         return view('website.index',
             [
+                'special'=>$special,
                 'getProduct' => $getProduct,
                 'clearanceProducts' => $clearanceProducts,
                 'discountedProducts' => $discountedProducts,
