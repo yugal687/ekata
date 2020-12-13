@@ -66,8 +66,8 @@
                 <div class="row  mt-5 mx-md-5 mx-0">
                     <div class="col-md-12">
                         <div class="card border-0">
-                            <div class="card-header bg-main-secondary card-rounded-top">
-                                <h2 class="text-center heading-font mb-0">CLEARANCE</h2>
+                            <div class="card-header ">
+                                <h2 class="text-center  heading-font mb-0" style="color:#d47a19">FLASH DEALS</h2>
                             </div>
 
                             <div class="card-body bg-product-light rounded-bottom-front card-bdy ">
@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <a href="{{ route('singleproduct',[$lastproduct->id,$lastproduct->product_name]) }}" type="button" class="btn bg-main-primary btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn">
+                                            <a href="{{ route('singleproduct',[$lastproduct->id,$lastproduct->product_name]) }}" type="button" class="btn bg-main-secondary btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn">
                                                 Add to Cart
                                             </a>
                                         </div>
@@ -237,7 +237,7 @@
             <div class="row m-0 py-2 px-4">
                 <div class="col-lg-3 col-md-6 col-sm-6 pt-5">
                     <img src="{{ asset('images/Homepage/Best_selling.png')}}" width="100%" alt="">
-                    <div class="bg-main-secondary border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag">
+                    <div class=" border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag" style="background-color:#e0df7b">
                         <h2 class="heading-font pb-0">BEST SELLING</h2>
                         <h5 class="pt-0">Best of all time</h5>
                     </div>
@@ -251,7 +251,7 @@
                         <h5 class="product-price pt-3 font-weight-bold text-white ">${{$best->price}}</h5>
                         <h5 class=" text-white ">{{$best->product_name}}</h5>
                         <h5 class="brand-name text-white ">{{$best->brand->brand_name}}</h5>
-                        <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-4 d-block mx-auto" style="width: 80%">
+                        <button type="button" class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-4 d-block mx-auto" style="width: 80%">
                             Add to Cart
                         </button>
                     </a>
@@ -298,7 +298,7 @@
                                     ${{$discountedProduct->sale_price}}</h5>
                                 <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
                                 <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                <button type="button" class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block w-100">
+                                <button type="button" class="mx-auto btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block w-100">
                                     Add to Cart
                                 </button>
                             </div>
@@ -318,7 +318,7 @@
 
 <!-- reviews and signup section starts here -->
 <section id="reviews-signup-section mt-5">
-    <div class="section-bar bg-main-primary mt-5"></div>
+    <div class="section-bar bg-main-secondary mt-5"></div>
     <div class="container-mine">
         <div class="row m-0 p-0 w-100">
             <div class="col-md-12 col-lg-7">
@@ -362,7 +362,7 @@
                                     <textarea class="form-control" rows="7" id="review" placeholder="Your Feedback" required></textarea>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <input class="btn border-white text-white mt-4 px-4" type="submit" id="saveFeedback" value="Send">
+                                    <input class="btn border-white bg-main-secondary text-white mt-4 px-4" type="submit" id="saveFeedback" value="Send">
                                 </div>
                             </div>
                         </div>
@@ -402,7 +402,7 @@
                             <textarea class="form-control mt-3" rows="5" name="description" placeholder="Description" required></textarea>
                             <div class="row mt-4">
                                 <div class="col-12 text-center">
-                                    <button class="btn border-white text-white px-3" type="submit">Send</button>
+                                    <button class="btn border-white bg-main-secondary text-white px-3" type="submit">Send</button>
                                 </div>
                             </div>
                         </form>
@@ -415,7 +415,7 @@
 <!-- reviews and signup section ends here -->
 <!-- About Us Section -->
 <section id="about-section">
-    <div class="container-fluid bg-main-primary">
+    <div class="container-fluid bg-main-secondary">
         <div class="container-mine-4 py-5">
             <div class="row py-4">
                 <div class="col-md-7 about-us-img">
@@ -466,7 +466,10 @@
    itemsDesktop : [1000,5], //5 items between 1000px and 901px
    itemsDesktopSmall : [900,3], // betweem 900px and 601px
    itemsTablet: [600,2], //2 items between 600 and 0;
-   itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+   itemsMobile : false, // itemsMobile disabled - inherit from itemsTablet option
+   navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+   
+    
  });
 
 });

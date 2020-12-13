@@ -35,7 +35,4 @@
   <div class="item"><h1>11</h1></div>
   <div class="item"><h1>12</h1></div>
 
-  <div class="owl-controls">
-            <div class="custom-nav owl-nav"></div>
-        </div>
 </div>

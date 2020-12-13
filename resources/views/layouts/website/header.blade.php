@@ -140,7 +140,7 @@
                             @if(count($websiteDetail) > 0)
                                 <a href="tel:{{$websiteDetail[0]->contact_number}}"
 
-                                   class="btn btn-sm bg-main-primary py-1 px-4 text-white" id="callBtn">
+                                   class="btn btn-sm bg-main-secondary py-1 px-4 text-white" id="callBtn">
                                     Call Us
                                 </a>
                             @endif
