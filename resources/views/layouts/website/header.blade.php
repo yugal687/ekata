@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css')}}">
     <!---Tiny Slider--->
-    <link rel="stylesheet" href="{{ asset('css/tiny-slider.css')}}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/tiny-slider.css')}}"> -->
     <!-- Template styles-->
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
@@ -49,34 +49,35 @@
 
 <body>
 <div id="app">
+<div class="container-fluid">
     <header>
         <div class="body-inner">
             <div id="top-bar" class="top-bar">
 
-                <div class="row m-0 p-0">
-                    <div class="col-lg-2 col-md-2 m-0 p-0 bg-main-primary rounded-right-top text-center">
+                <div class="row align-items-center ">
+                    <div class="col-lg-2 col-md-2  rounded-right-top text-center">
                         <img src="{{ asset('images/Logo Of Ekata.png') }}" class="img-fluid logo-img" alt=""/>
                         {{--<div class="text-center">
-                            <h3 class=" text-white font-weight-bold pl-2 mt-4">
+                            <h3 class=" text-white font-weight-bold  mt-4">
                                 Logo Here</h3>
                         </div>--}}
                     </div>
 
-                    <div class="col-lg-10 col-md-10 m-0 p-0 ">
-                        <div class="row m-0 p-0">
-                            <div class="col-md-6 m-0 p-0"></div>
-                            <div class="col-lg-6 col-md-6 bg-main-secondary rounded m-0 p-0">
+                    <div class="col-lg-10 col-md-10 ">
+                        <div class="row ">
+                            <div class="col-md-6 "></div>
+                            <div class="col-lg-6 col-md-6 rounded ">
                                 <div class="mx-4">
                                     <form action="{{url('searchedproducts')}}" method="post">
                                         @csrf
                                         <div class="input-group border-0 py-2 ">
-                                            <input type="text" class="form-control border-0 " name="search"
+                                            <input type="text" class="form-control border " name="search"
                                                    id="search-box"
                                                    required
                                                    placeholder="Search items..."
                                                    aria-label="Search items..." aria-describedby="basic-addon2">
                                             <p id="search-error"></p>
-                                            <div class="input-group-append bg-main-secondary ">
+                                            <div class="input-group-append  ">
                                                 <button type="submit" class="btn bg-main-primary text-white search-btn">
                                                     <i
                                                         class="fas fa-search"></i>&nbsp; Search
@@ -88,10 +89,11 @@
                             </div>
                         </div>
                         <!-- Bavigation MenuBar Starts Here-->
-                        <header-navbar-component></header-navbar-component>
+                        
                         <!-- Bavigation MenuBar Ends Here-->
                     </div>
                 </div>
+                <header-navbar-component></header-navbar-component>
 
             </div>
             <!--/ Topbar end -->
@@ -294,6 +296,7 @@
             </div>
         </div>
     </footer>
+    </div>
 </div>
 
 <!-- Javascript Files
@@ -310,7 +313,7 @@
 <!-- owl carousel js -->
 <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <!--Tiny SLider-->
-<script src="{{ asset('js/tiny-slider.js') }}"></script>
+<!-- <script src="{{ asset('js/tiny-slider.js') }}"></script> -->
 
 @yield('scripts')
 <script type="text/javascript">

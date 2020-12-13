@@ -718,3 +718,9 @@ button[type=submit]:hover{
 .shopping-cart .button:hover{
     background-color: #76762c;
 }
+
+/* OWL Carousel */
+.owl-carousel {
+    display: block !important;
+}
+

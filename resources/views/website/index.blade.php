@@ -20,10 +20,18 @@
 </div>
 {{--Feedback Message Ends--}}
 
+<section>
+    <div class="row">
+        <div class="col-md-12 py-4">
+            @include('layouts.website.smindexsidebar')
+        </div>
+    </div>
+</section>
+
 <section class="hero-section">
-    <div class="row m-0 p-0">
+    <div class="row ">
         <!-- sidebar slider section starts here -->
-        <div class="col-lg-2 col-md-12 bg-main-primary rounded-bottom-right d-lg-block d-none mb-4">
+        <!-- <div class="col-lg-2 col-md-12 bg-main-primary rounded-bottom-right d-lg-block d-none mb-4">
             <div class="row">
                 <div class="col-12 bg-main-secondary">
                     <div class="cate">
@@ -37,12 +45,12 @@
                     @include('layouts.website.indexsidebar')
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- sidebar slider section ends here -->
 
 
-        <div class="col-lg-10 col-md-12 m-0 p-0 ">
+        <div class="col-lg-12 col-md-12">
             <!-- banner section starts here -->
             <div class="banner-area">
                 <div id="banner-image-carousel" class="owl-carousel owl-theme">
@@ -55,7 +63,7 @@
 
             <!-- clearence section starts here -->
             <section id="clearence_section">
-                <div class="row m-0 p-0 mt-5 mx-md-5 mx-0">
+                <div class="row  mt-5 mx-md-5 mx-0">
                     <div class="col-md-12">
                         <div class="card border-0">
                             <div class="card-header bg-main-secondary card-rounded-top">
@@ -115,7 +123,7 @@
 
 <div class="new_arrival_section1">
     <div class="container-mine">
-        <div class="row m-0 p-0 mt-5 mb-4">
+        <div class="row  mt-5 mb-4">
             <div class="col-md-12">
                 <div class="top-title">
                     <h3 class="d-inline bg-main-primary px-3 rounded-top-front heading-font text-white">
@@ -129,7 +137,7 @@
                 @foreach($latestProduct as $lastproduct)
                 <div class="item">
                     <div class="">
-                        <div class="row m-0 p-0 my-4">
+                        <div class="row  my-4">
 
                             <div class="col-md-6">
                                 <div class="px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
@@ -450,5 +458,17 @@
 @section('scripts')
 <script src="{{ asset('js/indexpage.js') }}"></script>
 <script>
+    $(document).ready(function() {
+ 
+ $("#owl-demo").owlCarousel({
+   navigation : true,
+   items : 9,
+   itemsDesktop : [1000,5], //5 items between 1000px and 901px
+   itemsDesktopSmall : [900,3], // betweem 900px and 601px
+   itemsTablet: [600,2], //2 items between 600 and 0;
+   itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+ });
+
+});
 </script>
 @stop
