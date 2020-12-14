@@ -462,9 +462,8 @@
  
  $("#owl-demo").owlCarousel({
    nav : true,
-   stagePadding: 10,
+   dots: false,
    loop: true,
-   items : 9,
    itemsDesktop : [1000,5], //5 items between 1000px and 901px
    itemsDesktopSmall : [900,3], // betweem 900px and 601px
    itemsTablet: [600,2], //2 items between 600 and 0;
@@ -484,7 +483,7 @@
     },
 
     1024: {
-      items: 7
+      items: 9
     },
 
     1366: {
