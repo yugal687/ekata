@@ -1,26 +1,27 @@
-<!-- <div class="smindex-sidebar">
+<div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <div class="smindex-sidebar-carousel text-center">
+            <div id="owl-demo" class="owl-carousel owl-theme">
                 @foreach( $getCategory as $category)
-                    <div>
-                        <div class="categories">
-                            <figure class="mx-auto">
-                                <img src="{{ $category->images[0]->name }}" class="img-fluid" alt="">
-                            </figure>
-                            <h6>{{ $category -> category_name}}</h6>
-                        </div>
+                <div class="item">
+                    <div class="d-flex justify-content-center">
+                        <figure class="car-head-bg">
+                            <img src="{{ $category->images[0]->name }}" class="head-carousel ml-auto mr-auto img-fluid"
+                                alt="">
+                        </figure>
                     </div>
+                    <h6>{{ $category -> category_name}}</h6>
+                </div>
                 @endforeach
             </div>
 
         </div>
     </div>
-</div> -->
+</div>
 
 
 
-<div id="owl-demo" class="owl-carousel owl-theme">
+<!-- <div id="owl-demo" class="owl-carousel owl-theme">
           
   <div class="item"><h1>1</h1></div>
   <div class="item"><h1>2</h1></div>
@@ -35,4 +36,10 @@
   <div class="item"><h1>11</h1></div>
   <div class="item"><h1>12</h1></div>
 
-</div>
+  <div class="owl-theme">
+        <div class="owl-controls">
+            <div class="custom-nav owl-nav"></div>
+        </div>
+  </div>
+
+</div> -->

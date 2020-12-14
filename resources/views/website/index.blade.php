@@ -70,9 +70,9 @@
                                 <h2 class="text-center  heading-font mb-0" style="color:#d47a19">FLASH DEALS</h2>
                             </div>
 
-                            <div class="card-body bg-product-light rounded-bottom-front card-bdy ">
+                            <div class="card-body  rounded-bottom-front card-bdy ">
 
-                                <div id="clearence_carousel" class="owl-carousel owl-carousel owl-theme px-3  py-2">
+                                <div id="clearence_carousel" class="owl-carousel owl-theme px-3  py-2">
                                     @foreach ($clearanceProducts as $discountedProduct)
 
                                     <div class="item text-center rounded-top-front rounded-bottom-front">
@@ -81,7 +81,7 @@
                                                 <div class="col-12">
                                                     <div class="img-div bg-product-medium-2 px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
                                                         <div class="ribbon-wrapper ribbon-lg">
-                                                            <div class="ribbon bg-main-secondary text-dark discount-font" style="padding: 0.2rem 0px;">
+                                                            <div class="ribbon bg-main-primary text-dark discount-font" style="padding: 0.2rem 0px;">
                                                                 clearance
                                                             </div>
                                                         </div>
@@ -95,7 +95,7 @@
                                                         ${{$discountedProduct->sale_price}}</h5>
                                                     <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                                     <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                                    <button type="button" class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                                    <button type="button" class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                                         Add to Cart
                                                     </button>
                                                 </div>
@@ -237,7 +237,7 @@
             <div class="row m-0 py-2 px-4">
                 <div class="col-lg-3 col-md-6 col-sm-6 pt-5">
                     <img src="{{ asset('images/Homepage/Best_selling.png')}}" width="100%" alt="">
-                    <div class=" border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag" style="background-color:#e0df7b">
+                    <div class=" border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag" style="background-color: #EEE753">
                         <h2 class="heading-font pb-0">BEST SELLING</h2>
                         <h5 class="pt-0">Best of all time</h5>
                     </div>
@@ -461,16 +461,38 @@
     $(document).ready(function() {
  
  $("#owl-demo").owlCarousel({
-   navigation : true,
+   nav : true,
+   stagePadding: 10,
+   loop: true,
    items : 9,
    itemsDesktop : [1000,5], //5 items between 1000px and 901px
    itemsDesktopSmall : [900,3], // betweem 900px and 601px
    itemsTablet: [600,2], //2 items between 600 and 0;
    itemsMobile : false, // itemsMobile disabled - inherit from itemsTablet option
-   navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
-   
-    
+   navText: [
+        '<i class=" text-dark fa fa-chevron-left fa-2x" style="color: #b6b6b6" aria-hidden="true"></i>',
+        '<i class="text-dark fa fa-chevron-right fa-2x" style="color: #b6b6b6" aria-hidden="true"></i>'
+    ],
+    responsiveClass: true,
+    responsive: {
+    0: {
+      items: 2
+    },
+
+    600: {
+      items: 3
+    },
+
+    1024: {
+      items: 7
+    },
+
+    1366: {
+      items: 9
+    }
+  }
  });
+ 
 
 });
 </script>
