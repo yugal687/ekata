@@ -21,7 +21,7 @@
 {{--Feedback Message Ends--}}
 
 <section>
-    <div class="row">
+    <div class="">
         <div class="col-md-12 py-4">
             @include('layouts.website.smindexsidebar')
         </div>

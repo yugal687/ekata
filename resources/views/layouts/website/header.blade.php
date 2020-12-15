@@ -49,7 +49,7 @@
 
 <body>
 <div id="app">
-<div class="container-fluid">
+<div class="">
     <header>
         <div class="body-inner">
             <div id="top-bar" class="top-bar">
