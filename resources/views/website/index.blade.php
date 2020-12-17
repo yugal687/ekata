@@ -8,13 +8,19 @@
     .card {
         box-shadow: none !important;
     }
+
+    section.hero-section {
+    width: 100vw;
+    overflow: hidden;
+}
 </style>
 @stop
 
 @section('content')
 {{--FeedBack Message--}}
 <div class='success-box' id="success_box">
-    <img alt='tick image' width='32' src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K' />
+    <img alt='tick image' width='32'
+        src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K' />
     <div class='text-message'></div>
     <i class="fas fa-times close-feedback"></i>
 </div>
@@ -29,9 +35,10 @@
 </section>
 
 <section class="hero-section">
-    <div class="row ">
-        <!-- sidebar slider section starts here -->
-        <!-- <div class="col-lg-2 col-md-12 bg-main-primary rounded-bottom-right d-lg-block d-none mb-4">
+    <div class="">
+        <div class="row">
+            <!-- sidebar slider section starts here -->
+            <!-- <div class="col-lg-2 col-md-12 bg-main-primary rounded-bottom-right d-lg-block d-none mb-4">
             <div class="row">
                 <div class="col-12 bg-main-secondary">
                     <div class="cate">
@@ -47,79 +54,86 @@
             </div>
         </div> -->
 
-        <!-- sidebar slider section ends here -->
-
-
-        <div class="col-lg-12 col-md-12">
-            <!-- banner section starts here -->
-            <div class="banner-area">
-                <div id="banner-image-carousel" class="owl-carousel owl-theme">
-                    @foreach($bannerImage as $images)
-                    <div class="item"><img src="{{ $images->image }}" alt=""></div>
-                    @endforeach
-                </div>
-            </div>
-            <!-- banner section ends here -->
-
-            <!-- clearence section starts here -->
-            <section id="clearence_section">
-                <div class="row  mt-5 mx-md-5 mx-0">
-                    <div class="col-md-12">
-                        <div class="card border-0">
-                            <div class="card-header ">
-                                <h2 class="text-center  heading-font mb-0" style="color:#d47a19">FLASH DEALS</h2>
-                            </div>
-
-                            <div class="card-body  rounded-bottom-front card-bdy ">
-
-                                <div id="clearence_carousel" class="owl-carousel owl-theme px-3  py-2">
-                                    @foreach ($clearanceProducts as $discountedProduct)
-
-                                    <div class="item text-center rounded-top-front rounded-bottom-front">
-                                        <div class="row d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name ])}}">
-                                                <div class="col-12">
-                                                    <div class="img-div bg-product-medium-2 px-5 py-4 rounded-top-front rounded-bottom-front mx-auto">
-                                                        <div class="ribbon-wrapper ribbon-lg">
-                                                            <div class="ribbon bg-main-primary text-dark discount-font" style="padding: 0.2rem 0px;">
-                                                                clearance
-                                                            </div>
-                                                        </div>
-                                                        <img src="{{$discountedProduct->image[0]->name}}" width="150" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <h5 class="pt-3 font-weight-bold text-main-danger">
-                                                        <s> was {{$discountedProduct->price}}</s></h5>
-                                                    <h5 class="product-price font-weight-bold text-main-danger">
-                                                        ${{$discountedProduct->sale_price}}</h5>
-                                                    <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
-                                                    <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                                    <button type="button" class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
-                                                        Add to Cart
-                                                    </button>
-                                                </div>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                    @endforeach
-
-                                </div>
-
-                            </div>
-
-                        </div>
+            <!-- sidebar slider section ends here -->
+            <div class="col-lg-12 col-md-12">
+                <!-- banner section starts here -->
+                <div class="banner-area">
+                    <div id="banner-image-carousel" class="owl-carousel owl-theme">
+                        @foreach($bannerImage as $images)
+                        <div class="item"><img src="{{ $images->image }}" alt=""></div>
+                        @endforeach
                     </div>
                 </div>
-            </section>
-            <!-- clearence section ends here -->
+                <!-- banner section ends here -->
 
+            </div>
+            <!-- banner section ends here -->
         </div>
-        <!-- banner section ends here -->
     </div>
 </section>
 <!-- hero section ends here -->
+
+
+<!-- clearence section starts here -->
+<section id="clearence_section" class="container">
+    <div class="row  mt-5 mx-0">
+        <div class="col-md-12">
+            <div class="card border-0">
+                <div class="card-header ">
+                    <h2 class="text-center  heading-font mb-0" style="color:#d47a19">FLASH DEALS</h2>
+                </div>
+
+                <div class="card-body  rounded-bottom-front card-bdy ">
+
+                    <div id="clearence_carousel" class="owl-carousel owl-theme">
+                        @foreach ($clearanceProducts as $discountedProduct)
+
+                        <div class="item text-center rounded-top-front rounded-bottom-front">
+                            <div class="row d-flex justify-content-center">
+                            <div class="col-md-12">
+                                <a
+                                    href="{{ route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name ])}}">
+                                    <div class="col-12">
+                                        <div
+                                            class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
+                                            <div class="ribbon-wrapper ribbon-lg">
+                                                <div class="ribbon bg-main-primary text-dark discount-font"
+                                                    style="padding: 0.2rem 0px;">
+                                                    clearance
+                                                </div>
+                                            </div>
+                                            <img src="{{$discountedProduct->image[0]->name}}" width="" alt="">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <h5 class="pt-3 font-weight-bold text-main-danger">
+                                            <s> was {{$discountedProduct->price}}</s></h5>
+                                        <h5 class="product-price font-weight-bold text-main-danger">
+                                            ${{$discountedProduct->sale_price}}</h5>
+                                        <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                        <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
+                                        </h5>
+                                        <button type="button"
+                                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- clearence section ends here -->
 
 <div class="new_arrival_section1">
     <div class="container-mine">
@@ -140,7 +154,8 @@
                         <div class="row  my-4">
 
                             <div class="col-md-6">
-                                <div class="px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
+                                <div
+                                    class="px-5 image-container text-center bg-product-medium rounded-top-front rounded-bottom-front">
                                     <img src="{{$lastproduct->image[0]->name}}" class="img-fluid" alt="">
                                 </div>
                             </div>
@@ -172,7 +187,8 @@
                                                 Description<span>:</span></h5>
                                         </div>
                                         <div class="col-lg-7 col-sm-8 col-12">
-                                            <h5 class="" style="text-align: justify">{{$lastproduct->additional_information}}</h5>
+                                            <h5 class="" style="text-align: justify">
+                                                {{$lastproduct->additional_information}}</h5>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -186,7 +202,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <a href="{{ route('singleproduct',[$lastproduct->id,$lastproduct->product_name]) }}" type="button" class="btn bg-main-secondary btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn">
+                                            <a href="{{ route('singleproduct',[$lastproduct->id,$lastproduct->product_name]) }}"
+                                                type="button"
+                                                class="btn bg-main-secondary btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn">
                                                 Add to Cart
                                             </a>
                                         </div>
@@ -237,7 +255,8 @@
             <div class="row m-0 py-2 px-4">
                 <div class="col-lg-3 col-md-6 col-sm-6 pt-5">
                     <img src="{{ asset('images/Homepage/Best_selling.png')}}" width="100%" alt="">
-                    <div class=" border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag" style="background-color: #EEE753">
+                    <div class=" border-0 rounded-top-front rounded-bottom-front text-center best-selling-tag"
+                        style="background-color: #EEE753">
                         <h2 class="heading-font pb-0">BEST SELLING</h2>
                         <h5 class="pt-0">Best of all time</h5>
                     </div>
@@ -251,7 +270,9 @@
                         <h5 class="product-price pt-3 font-weight-bold text-white ">${{$best->price}}</h5>
                         <h5 class=" text-white ">{{$best->product_name}}</h5>
                         <h5 class="brand-name text-white ">{{$best->brand->brand_name}}</h5>
-                        <button type="button" class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-4 d-block mx-auto" style="width: 80%">
+                        <button type="button"
+                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-4 d-block mx-auto"
+                            style="width: 80%">
                             Add to Cart
                         </button>
                     </a>
@@ -285,7 +306,8 @@
                         <div class="row d-flex justify-content-center text-center">
                             <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
                                 <div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
-                                    <div class="ribbon bg-main-secondary discount-font text-dark" style="padding: 0.2rem 0px;">
+                                    <div class="ribbon bg-main-secondary discount-font text-dark"
+                                        style="padding: 0.2rem 0px;">
                                         {{$discountedProduct->discount}}%off
                                     </div>
                                 </div>
@@ -298,7 +320,8 @@
                                     ${{$discountedProduct->sale_price}}</h5>
                                 <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
                                 <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                <button type="button" class="mx-auto btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block w-100">
+                                <button type="button"
+                                    class="mx-auto btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block w-100">
                                     Add to Cart
                                 </button>
                             </div>
@@ -309,8 +332,8 @@
             </div>
             <!-- first row -->
             @endforeach
-                @endif
-                @endif
+            @endif
+            @endif
         </div>
     </div>
 </section>
@@ -359,10 +382,12 @@
 
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control" rows="7" id="review" placeholder="Your Feedback" required></textarea>
+                                    <textarea class="form-control" rows="7" id="review" placeholder="Your Feedback"
+                                        required></textarea>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <input class="btn border-white bg-main-secondary text-white mt-4 px-4" type="submit" id="saveFeedback" value="Send">
+                                    <input class="btn border-white bg-main-secondary text-white mt-4 px-4" type="submit"
+                                        id="saveFeedback" value="Send">
                                 </div>
                             </div>
                         </div>
@@ -398,11 +423,14 @@
                             {{csrf_field()}}
                             <input class="form-control mt-4" type="text" name="firstname" placeholder="Name" required>
                             <input class="form-control mt-3" type="email" name="email" placeholder="E-mail" required>
-                            <input class="form-control mt-3" type="number" name="phone" placeholder="Phone No." required>
-                            <textarea class="form-control mt-3" rows="5" name="description" placeholder="Description" required></textarea>
+                            <input class="form-control mt-3" type="number" name="phone" placeholder="Phone No."
+                                required>
+                            <textarea class="form-control mt-3" rows="5" name="description" placeholder="Description"
+                                required></textarea>
                             <div class="row mt-4">
                                 <div class="col-12 text-center">
-                                    <button class="btn border-white bg-main-secondary text-white px-3" type="submit">Send</button>
+                                    <button class="btn border-white bg-main-secondary text-white px-3"
+                                        type="submit">Send</button>
                                 </div>
                             </div>
                         </form>
@@ -419,7 +447,8 @@
         <div class="container-mine-4 py-5">
             <div class="row py-4">
                 <div class="col-md-7 about-us-img">
-                    <img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" width="" height="" class="img-fluid" alt="">
+                    <img src="{{ asset('images/Rice_Page/Parliament-Gold-Rice__37939.1566787289.jpg') }}" width=""
+                        height="" class="img-fluid" alt="">
                 </div>
                 <div class="col-md-5">
                     <div class="row text-center mt-2">
@@ -442,7 +471,8 @@
                         </p>
                     </div>
                     <div class="row mt-3 text-center d-flex justify-content-center">
-                        <a type="button" href="/aboutus" class="btn btn-white border text-white px-5 mt-2 d-block rounded-top-front-btn rounded-bottom-front-btn">
+                        <a type="button" href="/aboutus"
+                            class="btn btn-white border text-white px-5 mt-2 d-block rounded-top-front-btn rounded-bottom-front-btn">
                             Read More
                         </a>
                     </div>
@@ -458,41 +488,44 @@
 @section('scripts')
 <script src="{{ asset('js/indexpage.js') }}"></script>
 <script>
-    $(document).ready(function() {
- 
- $("#owl-demo").owlCarousel({
-   nav : true,
-   dots: false,
-   loop: true,
-   itemsDesktop : [1000,5], //5 items between 1000px and 901px
-   itemsDesktopSmall : [900,3], // betweem 900px and 601px
-   itemsTablet: [600,2], //2 items between 600 and 0;
-   itemsMobile : false, // itemsMobile disabled - inherit from itemsTablet option
-   navText: [
-        '<i class=" text-dark fa fa-chevron-left fa-2x" style="color: #b6b6b6" aria-hidden="true"></i>',
-        '<i class="text-dark fa fa-chevron-right fa-2x" style="color: #b6b6b6" aria-hidden="true"></i>'
-    ],
-    responsiveClass: true,
-    responsive: {
-    0: {
-      items: 2
-    },
+    $(document).ready(function () {
 
-    600: {
-      items: 3
-    },
+        $("#owl-demo").owlCarousel({
+            nav: true,
+            dots: false,
+            loop: true,
+            autoplay: true,
+            autoplayTimeout:3000,
+            itemsDesktop: [1000, 5], //5 items between 1000px and 901px
+            itemsDesktopSmall: [900, 3], // betweem 900px and 601px
+            itemsTablet: [600, 2], //2 items between 600 and 0;
+            itemsMobile: false, // itemsMobile disabled - inherit from itemsTablet option
+            navText: [
+                '<i class=" text-dark fa fa-chevron-left fa-2x" style="color: #b6b6b6" aria-hidden="true"></i>',
+                '<i class="text-dark fa fa-chevron-right fa-2x" style="color: #b6b6b6" aria-hidden="true"></i>'
+            ],
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 2
+                },
 
-    1024: {
-      items: 9
-    },
+                600: {
+                    items: 3
+                },
 
-    1366: {
-      items: 9
-    }
-  }
- });
- 
+                1024: {
+                    items: 9
+                },
 
-});
+                1366: {
+                    items: 9
+                }
+            }
+        });
+
+
+    });
+
 </script>
 @stop

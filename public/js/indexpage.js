@@ -29,6 +29,7 @@ $(document).ready(function () {
         pullDrag: true,
         autoplay: true,
         nav: true,
+        navigation : true, // Show next and prev buttons
         navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
         responsive: {
             0: {
@@ -40,11 +41,11 @@ $(document).ready(function () {
             },
 
             1000: {
-                items: 3,
+                items: 4,
             },
 
             1366: {
-                items: 3,
+                items: 4,
             }
         }
     });

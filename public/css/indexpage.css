@@ -49,9 +49,7 @@
     margin-left: 15px;
 }
 /*Clearance | Specials Images*/
-.bg-product-medium-2 {
-    /*background-color: #d1cdcc;*/
-}
+
 .bg-product-medium-2 img {
     /*width: 150px;
     height: 150px;*/
@@ -93,7 +91,7 @@
 
 /*Banner Areas*/
 #banner-image-carousel.owl-theme .owl-nav.disabled + .owl-dots {
-    margin-top: -20px;
+    margin-top: -46px;
     z-index: 200;
 }
 

@@ -777,8 +777,6 @@ button[type=submit]:hover {
     display: block !important;
 }
 
-
-
 .owl-theme .custom-nav {
     position: absolute;
     top: 20%;
@@ -789,34 +787,16 @@ button[type=submit]:hover {
 .owl-theme .owl-nav .owl-prev {
     position: absolute;
     left: -48px;
-    top: 2%;
+    top: 12%;
     background-color: white;
 }
 
 .owl-theme .owl-nav .owl-next {
     position: absolute;
     right: -48px;
-    top: 2%;
+    top: 12%;
     background-color: white;
 }
-
-/* .owl-theme   .custom-nav .owl-prev  {
-                position: absolute;
-                height: 100px;
-                color: inherit;
-                background: none;
-                border: none;
-                z-index: 100;
-            }
-
- .owl-theme  .custom-nav .owl-next {
-                position: absolute;
-                height: 100px;
-                color: inherit;
-                background: none;
-                border: none;
-                z-index: 100;
-            } */
 
 .owl-theme .custom-nav .owl-prev i {
     font-size: 2.5rem;
@@ -830,12 +810,10 @@ button[type=submit]:hover {
 
 .owl-theme .custom-nav .owl-prev {
     left: 0;
-
 }
 
 .owl-theme .custom-nav .owl-next {
     right: 0;
-
 }
 
 /*head carousel*/
@@ -848,7 +826,9 @@ button[type=submit]:hover {
 
 .car-head-bg{
     height: 60px;
-    background-color: grey;
+    background-color:#CCCACA;
     border-radius: 50%;
     width: 60px;
 }
+
+
