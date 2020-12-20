@@ -8,6 +8,7 @@ use App\Model\Category;
 use App\Model\Product;
 use App\Model\ReviewImage;
 use App\Model\Service;
+use App\Model\Tag;
 use App\Model\WebsiteDetail;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -31,6 +32,8 @@ class ProductController extends Controller
         },'children'=>function(){
 
         }])->limit(3)->get();
+        $todaySpecial = Tag::with(array('product'))->where('tags','Today Special')->latest()->get();
+        $weeklySpecial = Tag::with(array('product'))->where('tags','Week Special')->latest()->get();
         $bestSelling = Product::inRandomOrder()->limit(3)->where('discount', '=', NULL)->with(array('category', 'brand', 'tags', 'image'))->get();
         $special = Product::with(['category', 'brand', 'tags'=>function($q){
             return $q->where('tags','Special')->get();
@@ -38,6 +41,8 @@ class ProductController extends Controller
 
         return view('website.index',
             [
+                'weeklyspecial'=>$weeklySpecial,
+                'todayspecial'=>$todaySpecial,
                 'special'=>$special,
                 'getProduct' => $getProduct,
                 'clearanceProducts' => $clearanceProducts,
