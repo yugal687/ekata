@@ -302,10 +302,10 @@
             </div>
             <!-- <div class="container"> -->
             <!-- <div class="special-content"> -->
-            <div class="row align-items-center">
+            <div class="row align-items-center mt-5">
             <div id="todaySpecial" class="owl-carousel owl-theme">
                 @foreach ($category->product as $discountedProduct)
-                <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
+                <div class="col-md-12" style="">
                     <a href="{{route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name])}}">
                         <div class="row d-flex justify-content-center text-center">
                             <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
@@ -338,6 +338,7 @@
                 @endif
                 @endif
                 
+                
             
             @if(count($weeklyspecial)>0)
                 @if(count($weeklyspecial[0]->product)>0)
@@ -351,6 +352,7 @@
                         <!-- <div class="container"> -->
                         <!-- <div class="special-content"> -->
                         <div class="row align-items-center">
+                        <div class="weeklySpecial" class="owl-carousel owl-theme">
                             @foreach ($category->product as $discountedProduct)
                                 <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
                                     <a href="{{route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name])}}">
@@ -378,6 +380,7 @@
                                     </a>
                                 </div>
                             @endforeach
+                            <div>
                         </div>
                         <!-- first row -->
                     @endforeach

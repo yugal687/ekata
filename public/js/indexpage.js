@@ -235,11 +235,10 @@ $(document).ready(function () {
     $('#todaySpecial').owlCarousel({
         loop: true,
         dots: false,
-        responsiveClass: true,
         mouseDrag: true,
         touchDrag: true,
         pullDrag: true,
-        autoplay: true,
+        autoplay: false,
         nav: true,
         navigation : true, 
         navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
@@ -264,6 +263,37 @@ $(document).ready(function () {
     /*todays special */
 
 
+
+    /*weekly special */
+    $('#weeklySpecial').owlCarousel({
+        loop: true,
+        dots: false,
+        mouseDrag: true,
+        touchDrag: true,
+        pullDrag: true,
+        autoplay: false,
+        nav: true,
+        navigation : true, 
+        navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
+        responsive: {
+            0: {
+                items: 1,
+                nav: true
+            },
+            600: {
+                items: 2,
+            },
+
+            1000: {
+                items: 4,
+            },
+
+            1366: {
+                items: 4,
+            }
+        }
+    });
+    /*weekly special ends*/
     
 
 
