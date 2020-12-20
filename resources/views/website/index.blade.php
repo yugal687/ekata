@@ -105,7 +105,7 @@
                                             <img src="{{$discountedProduct->image[0]->name}}" width="" alt="">
                                         </div>
                                     </div>
-
+                                    
                                     <div class="col-12">
                                         <h5 class="pt-3 font-weight-bold text-main-danger">
                                             <s> was {{$discountedProduct->price}}</s></h5>
@@ -287,7 +287,9 @@
 <!-- special section starts here -->
 <section id="special-section">
     <div class="container-mine">
+
         <div class="row m-0 p-0 my-5">
+        
             {{--{{dd($todayspecial)}}--}}
             @if(count($todayspecial)>0)
             @if(count($todayspecial[0]->product)>0)
@@ -301,6 +303,7 @@
             <!-- <div class="container"> -->
             <!-- <div class="special-content"> -->
             <div class="row align-items-center">
+            <div id="todaySpecial" class="owl-carousel owl-theme">
                 @foreach ($category->product as $discountedProduct)
                 <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
                     <a href="{{route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name])}}">
@@ -328,11 +331,14 @@
                     </a>
                 </div>
                 @endforeach
+                </div>
             </div>
             <!-- first row -->
             @endforeach
                 @endif
                 @endif
+                
+            
             @if(count($weeklyspecial)>0)
                 @if(count($weeklyspecial[0]->product)>0)
                     @foreach($weeklyspecial as $category)
