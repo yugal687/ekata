@@ -1,21 +1,6 @@
 $(document).ready(function () {
     /*Vertical Sidebar Carousel*/
-    var slider = tns({
-        "container": ".catg-slider",
-        gutter: 13,
-        "items": 9,
-        "axis": "vertical",
-        "swipeAngle": false,
-        "speed": 400,
-        mouseDrag: true,
-        slideBy: 1,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayButtonOutput: false,
-        preventScrollOnTouch: 'force',
-        controlsContainer: "#customize-controls",
-    });
+    
     /*Vertical Sidebar Carousel Ends*/
 
 
@@ -44,6 +29,7 @@ $(document).ready(function () {
         pullDrag: true,
         autoplay: true,
         nav: true,
+        navigation : true, 
         navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
         responsive: {
             0: {
@@ -55,11 +41,11 @@ $(document).ready(function () {
             },
 
             1000: {
-                items: 3,
+                items: 4,
             },
 
             1366: {
-                items: 3,
+                items: 4,
             }
         }
     });
@@ -246,11 +232,7 @@ $(document).ready(function () {
     /*Save Feedback Ends*/
 
 
-    var figure = $("div.catg-slider").find('figure');
-    var nextBtn = document.getElementById("next_btn")
-    if(figure.length <= 9){
-        nextBtn.style.cursor = 'not-allowed';
-    }
+    
 
 
     /*Vertical Smsidebar Carousel | Tiny Slider | Disable for now*/
