@@ -232,13 +232,14 @@ $(document).ready(function () {
     /*Save Feedback Ends*/
 
     /*todays special*/
-    $('#todaySpecial').owlCarousel({
+    $('#todaySpecials').owlCarousel({
         loop: true,
         dots: false,
+        responsiveClass: true,
         mouseDrag: true,
         touchDrag: true,
         pullDrag: true,
-        autoplay: false,
+        autoplay: true,
         nav: true,
         navigation : true, 
         navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
@@ -265,7 +266,7 @@ $(document).ready(function () {
 
 
     /*weekly special */
-    $('#weeklySpecial').owlCarousel({
+    $('#weeklySpecials').owlCarousel({
         loop: true,
         dots: false,
         mouseDrag: true,

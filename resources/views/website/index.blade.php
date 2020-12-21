@@ -285,110 +285,153 @@
 <!-- best selling section ends here -->
 
 <!-- special section starts here -->
-<section id="special-section">
-    <div class="container-mine">
 
-        <div class="row m-0 p-0 my-5">
-        
-            {{--{{dd($todayspecial)}}--}}
-            @if(count($todayspecial)>0)
+
+
+<!--Todays Special-->
+@if(count($todayspecial)>0)
             @if(count($todayspecial[0]->product)>0)
-            @foreach($todayspecial as $category)
+            
+<section id="clearence_section" class="container">
+    <div class="row  mt-5 mx-0">
+        <div class="col-md-12">
+        @foreach($todayspecial as $category)
+            <div class="card border-0">
             <div class="col-md-12 mt-5">
                 <div class="top-title">
                     <h3 class="d-inline bg-main-primary px-5 rounded-top-front heading-font text-white">
-                        {{$category->tags}}</h3>
+                    {{$category->tags}}</h3>
                 </div>
             </div>
-            <!-- <div class="container"> -->
-            <!-- <div class="special-content"> -->
-            <div class="row align-items-center mt-5">
-            <div id="todaySpecial" class="owl-carousel owl-theme">
-                @foreach ($category->product as $discountedProduct)
-                <div class="col-md-12" style="">
-                    <a href="{{route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name])}}">
-                        <div class="row d-flex justify-content-center text-center">
-                            <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
-                                {{--<div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
-                                    <div class="ribbon bg-main-secondary discount-font text-dark" style="padding: 0.2rem 0px;">
-                                        {{$discountedProduct->discount}}%off
-                                    </div>
-                                </div>--}}
-                                <div class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
-                                    <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
-                                </div>
-                                <h5 class="pt-3 font-weight-bold text-main-danger">
-                                    <s>was {{$discountedProduct->price}}</s></h5>
-                                {{--<h5 class="product-price font-weight-bold text-main-danger">
-                                    ${{$discountedProduct->sale_price}}</h5>--}}
-                                <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
-                                <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                <button type="button" class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block w-100">
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                @endforeach
-                </div>
-            </div>
-            <!-- first row -->
-            @endforeach
-                @endif
-                @endif
-                
-                
-            
-            @if(count($weeklyspecial)>0)
-                @if(count($weeklyspecial[0]->product)>0)
-                    @foreach($weeklyspecial as $category)
-                        <div class="col-md-12 mt-5">
-                            <div class="top-title">
-                                <h3 class="d-inline bg-main-primary px-5 rounded-top-front heading-font text-white">
-                                    {{$category->tags}}</h3>
-                            </div>
-                        </div>
-                        <!-- <div class="container"> -->
-                        <!-- <div class="special-content"> -->
-                        <div class="row align-items-center">
-                        <div class="weeklySpecial" class="owl-carousel owl-theme">
-                            @foreach ($category->product as $discountedProduct)
-                                <div class="col-lg-3 col-md-6 col-sm-6 mt-5 align-self-start" style="">
-                                    <a href="{{route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name])}}">
-                                        <div class="row d-flex justify-content-center text-center">
-                                            <div class="col-8 col-sm-10 col-md-12 col-lg-10 mt-2 mt-md-0">
-                                                {{--<div class="ribbon-wrapper ribbon-lg" style="margin-left: 15px">
-                                                    <div class="ribbon bg-main-secondary discount-font text-dark" style="padding: 0.2rem 0px;">
-                                                        {{$discountedProduct->discount}}%off
-                                                    </div>
-                                                </div>--}}
-                                                <div class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
-                                                    <img src="{{$discountedProduct->image[0]->name}}" class="img-fluid" alt="">
+
+                <div class="card-body  rounded-bottom-front card-bdy ">
+
+                    <div id="todaySpecials" class="owl-carousel ">
+                    @foreach ($category->product as $discountedProduct)
+
+                        <div class="item text-center rounded-top-front rounded-bottom-front">
+                            <div class="row d-flex">
+                              <div class="col-md-12">
+                                <a
+                                    href="{{ route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name ])}}">
+                                    <div class="col-12">
+                                        <div
+                                            class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
+                                            <div class="ribbon-wrapper ribbon-lg">
+                                                <div class="ribbon bg-main-primary text-dark discount-font"
+                                                    style="padding: 0.2rem 0px;">
+                                                    {{$discountedProduct->discount}}%off
                                                 </div>
-                                                <h5 class="pt-3 font-weight-bold text-main-danger">
-                                                    <s>was {{$discountedProduct->price}}</s></h5>
-                                                {{--<h5 class="product-price font-weight-bold text-main-danger">
-                                                    ${{$discountedProduct->sale_price}}</h5>--}}
-                                                <h5 class="text-dark">{{$discountedProduct->product_name}}</h5>
-                                                <h5 class="brand-name text-dark">{{$discountedProduct->brand->brand_name}}</h5>
-                                                <button type="button" class="mx-auto btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block w-100">
-                                                    Add to Cart
-                                                </button>
                                             </div>
+                                            <img src="{{$discountedProduct->image[0]->name}}" width="" alt="">
                                         </div>
-                                    </a>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <h5 class="pt-3 font-weight-bold text-main-danger">
+                                            <s> was {{$discountedProduct->price}}</s></h5>
+                                        <h5 class="product-price font-weight-bold text-main-danger">
+                                            ${{$discountedProduct->sale_price}}</h5>
+                                        <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                        <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
+                                        </h5>
+                                        <button type="button"
+                                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </a>
                                 </div>
-                            @endforeach
-                            <div>
+                            </div>
+                            
                         </div>
-                        <!-- first row -->
-                    @endforeach
-                @endif
-            @endif
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+            </div>
+            @endforeach
         </div>
     </div>
 </section>
+@endif
+@endif
+<!-- Today Special Ends-->
+
+<!--Weekly Special-->
+@if(count($weeklyspecial)>0)
+            @if(count($weeklyspecial[0]->product)>0)
+            
+<section id="clearence_section" class="container">
+    <div class="row  mt-5 mx-0">
+        <div class="col-md-12">
+        @foreach($weeklyspecial as $category)
+            <div class="card border-0">
+            <div class="col-md-12 mt-5">
+                <div class="top-title">
+                    <h3 class="d-inline bg-main-primary px-5 rounded-top-front heading-font text-white">
+                    {{$category->tags}}</h3>
+                </div>
+            </div>
+
+                <div class="card-body  rounded-bottom-front card-bdy ">
+
+                    <div id="weeklySpecials" class="owl-carousel ">
+                    @foreach ($category->product as $discountedProduct)
+
+                        <div class="item text-center rounded-top-front rounded-bottom-front">
+                            <div class="row d-flex">
+                              <div class="col-md-12">
+                                <a
+                                    href="{{ route('singleproduct',[$discountedProduct->id,$discountedProduct->product_name ])}}">
+                                    <div class="col-12">
+                                        <div
+                                            class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
+                                            <div class="ribbon-wrapper ribbon-lg">
+                                                <div class="ribbon bg-main-primary text-dark discount-font"
+                                                    style="padding: 0.2rem 0px;">
+                                                    {{$discountedProduct->discount}}%off
+                                                </div>
+                                            </div>
+                                            <img src="{{$discountedProduct->image[0]->name}}" width="" alt="">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <h5 class="pt-3 font-weight-bold text-main-danger">
+                                            <s> was {{$discountedProduct->price}}</s></h5>
+                                        <h5 class="product-price font-weight-bold text-main-danger">
+                                            ${{$discountedProduct->sale_price}}</h5>
+                                        <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
+                                        <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
+                                        </h5>
+                                        <button type="button"
+                                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+@endif
+<!--weekly special ends-->
+
 <!-- special section ends here -->
 
 <!-- reviews and signup section starts here -->

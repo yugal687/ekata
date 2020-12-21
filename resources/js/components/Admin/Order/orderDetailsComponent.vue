@@ -78,14 +78,14 @@
             </el-card>
         </main>
         <main>
-            <el-dialog title="Buyer Orders" :visible.sync="dialogTableVisible">
+            <el-dialog  title="Buyer Orders" :visible.sync="dialogTableVisible">
                <!-- <el-table  v-for="data in gridData  ">
                    &lt;!&ndash; <el-table-column property="product.product_name" label="Product Name" width="150"></el-table-column>&ndash;&gt;
                     <el-table-column label="Quantity" width="200">{{data.order_details[0].quantity}}</el-table-column>
                     <el-table-column label="Price">{{data.order_details[0].price}}</el-table-column>
                     <el-table-column label="Discount">{{data.order_details[0].discount}}</el-table-column>
                 </el-table>-->
-                <table class="table">
+                <table class="table" id="PrintOrder">
                     <thead>
                     <tr>
                         <th scope="col">Product Name</th>
@@ -156,6 +156,7 @@
                         </div>
                     </div>
                 </span>
+                <button type="button"  @click="printDiv()">print</button>
             </el-dialog>
         </main>
     </div>
@@ -233,10 +234,25 @@
                         /*this.errors = error.response.data.errors;*/
                     }
                 });
-            }
+            },
+            printDiv() { 
+            var tableContents = document.getElementById("PrintOrder").innerHTML; 
+            var a = window.open('', '', 'height=500, width=500'); 
+            a.document.write('<template>'); 
+            a.document.write('<el-dialog >'); 
+            a.document.write(tableContents); 
+            a.document.write('</el-dialog></template>'); 
+            a.document.close(); 
+            a.print(); 
+        } 
+    
         }
+        
     }
+    
 </script>
+
+
 
 <style scoped>
 
