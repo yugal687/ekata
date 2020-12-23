@@ -4,7 +4,7 @@
             <div id="owl-demo" class="owl-carousel owl-theme">
                 @foreach( $getCategory as $category)
                 <div class="item">
-                    <div class="d-flex justify-content-center">
+                   <div class="d-flex justify-content-center">
                         <figure class="car-head-bg">
                             <img src="{{ $category->images[0]->name }}" class="head-carousel ml-auto mr-auto img-fluid"
                                 alt="">
