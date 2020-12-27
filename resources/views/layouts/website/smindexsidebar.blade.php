@@ -4,13 +4,18 @@
             <div id="owl-demo" class="owl-carousel owl-theme">
                 @foreach( $getCategory as $category)
                 <div class="item">
+                <a href="{{ route('maincategory',[$category->id,$category->category_name])}}" class="text-dark">
                    <div class="d-flex justify-content-center">
                         <figure class="car-head-bg">
                             <img src="{{ $category->images[0]->name }}" class="head-carousel ml-auto mr-auto img-fluid"
                                 alt="">
                         </figure>
                     </div>
-                    <h6>{{ $category -> category_name}}</h6>
+                    <h6>
+                    {{ $category -> category_name}}
+                    
+                    </h6>
+                    </a>
                 </div>
                 @endforeach
             </div>
