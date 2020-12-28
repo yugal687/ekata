@@ -98,8 +98,8 @@
         <div class="row ">
             <div class="col-lg-2 col-md-12" style="background-color: #e9ecef">
                 <div class="row">
-                    <div class="col-12 bg-main-secondary">
-                        <div class="cate">
+                    <div class="col-12 bg-main-secondary" style="background-color: #EEE753">
+                        <div class="cate" >
                             <h3 class="text-center text-dark mt-2 font-weight-bold category-font">
                                 CATEGORY
                                 <span id="toggle-smsidebar" class="float-right mr-2"><i

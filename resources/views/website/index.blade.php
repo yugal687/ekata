@@ -115,7 +115,7 @@
                                         <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
                                         </h5>
                                         <button type="button"
-                                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                            class="btn bg-btn rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                             Add to Cart
                                         </button>
                                     </div>
@@ -204,7 +204,7 @@
                                         <div class="col-12">
                                             <a href="{{ route('singleproduct',[$lastproduct->id,$lastproduct->product_name]) }}"
                                                 type="button"
-                                                class="btn bg-main-secondary btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn">
+                                                class="btn bg-btn btn-lg btn-block font-weight-bold text-white rounded-top-front-btn rounded-bottom-front-btn" >
                                                 Add to Cart
                                             </a>
                                         </div>
@@ -271,7 +271,7 @@
                         <h5 class=" text-white ">{{$best->product_name}}</h5>
                         <h5 class="brand-name text-white ">{{$best->brand->brand_name}}</h5>
                         <button type="button"
-                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-4 d-block mx-auto"
+                            class="btn bg-btn rounded-top-front-btn rounded-bottom-front-btn border text-white mt-4 d-block mx-auto"
                             style="width: 80%">
                             Add to Cart
                         </button>
@@ -336,7 +336,7 @@
                                         <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
                                         </h5>
                                         <button type="button"
-                                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                            class="btn bg-btn rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                             Add to Cart
                                         </button>
                                     </div>
@@ -408,7 +408,7 @@
                                         <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
                                         </h5>
                                         <button type="button"
-                                            class="btn bg-main-secondary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                            class="btn bg-btn rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                             Add to Cart
                                         </button>
                                     </div>
@@ -481,7 +481,7 @@
                                         required></textarea>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <input class="btn border-white bg-main-secondary text-white mt-4 px-4" type="submit"
+                                    <input class="btn border-white bg-btn text-white mt-4 px-4" type="submit"
                                         id="saveFeedback" value="Send">
                                 </div>
                             </div>
@@ -524,7 +524,7 @@
                                 required></textarea>
                             <div class="row mt-4">
                                 <div class="col-12 text-center">
-                                    <button class="btn border-white bg-main-secondary text-white px-3"
+                                    <button class="btn border-white bg-btn text-white px-3"
                                         type="submit">Send</button>
                                 </div>
                             </div>
