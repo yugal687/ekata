@@ -832,3 +832,6 @@ button[type=submit]:hover {
 }
 
 
+#clearence_carousel .owl-nav.disabled{
+    display: block !important;
+}

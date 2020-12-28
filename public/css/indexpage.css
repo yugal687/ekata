@@ -473,3 +473,17 @@ img.review-images {
         display: block;
     }
 }
+
+
+/* Todays Specials */
+#todaySpecials .owl-prev, #weeklySpecials .owl-prev {
+    left: 0;
+}
+#todaySpecials .owl-next, #weeklySpecials .owl-next {
+    right: 0;
+}
+#todaySpecials .owl-next, #todaySpecials .owl-prev, #weeklySpecials .owl-next, #weeklySpecials .owl-prev  {
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+}

@@ -406,7 +406,7 @@
                                 />
                             </div>
                             <div class="tab-pane" id="step3">
-                                
+                                <h3>Your product will be delivered to the Door.</h3>
                                 <h4 style="">
                                     <i class="fas fa-check-circle text-success fa-4x"></i>
                                 </h4>

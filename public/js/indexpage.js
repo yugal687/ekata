@@ -28,8 +28,7 @@ $(document).ready(function () {
         touchDrag: true,
         pullDrag: true,
         autoplay: true,
-        nav: true,
-        navigation : true, 
+        nav: true, 
         navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
         responsive: {
             0: {
@@ -274,7 +273,6 @@ $(document).ready(function () {
         pullDrag: true,
         autoplay: false,
         nav: true,
-        navigation : true, 
         navText: ['<i class="fas fa-chevron-left fa-4x" style="color: #b6b6b6"></i>', '<i class="fas fa-chevron-right fa-4x"  style="color: #b6b6b6"></i>'],
         responsive: {
             0: {
@@ -294,6 +292,7 @@ $(document).ready(function () {
             }
         }
     });
+    $('#weeklySpecials .owl-nav').removeClass('disabled');
     /*weekly special ends*/
     
 
