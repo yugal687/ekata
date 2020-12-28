@@ -98,7 +98,7 @@
                                             class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
                                             <div class="ribbon-wrapper ribbon-lg">
                                                 <div class="ribbon bg-main-primary text-dark discount-font"
-                                                    style="padding: 0.2rem 0px;">
+                                                    style="padding: 0.2rem 0px;background-color: #EEE753">
                                                     clearance
                                                 </div>
                                             </div>
@@ -318,8 +318,8 @@
                                         <div
                                             class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
                                             <div class="ribbon-wrapper ribbon-lg">
-                                                <div class="ribbon bg-main-primary text-dark discount-font"
-                                                    style="padding: 0.2rem 0px;">
+                                                <div class="ribbon  text-dark discount-font"
+                                                    style="padding: 0.2rem 0px; background-color: #EEE753">
                                                     {{$discountedProduct->discount}}%off
                                                 </div>
                                             </div>
@@ -391,7 +391,7 @@
                                             class="img-div bg-product-medium-2 rounded-top-front rounded-bottom-front mx-auto">
                                             <div class="ribbon-wrapper ribbon-lg">
                                                 <div class="ribbon bg-main-primary text-dark discount-font"
-                                                    style="padding: 0.2rem 0px;">
+                                                    style="padding: 0.2rem 0px; background-color: #EEE753">
                                                     {{$discountedProduct->discount}}%off
                                                 </div>
                                             </div>

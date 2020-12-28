@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-2 col-md-12" style="background-color: #e9ecef">
                 <div class="row">
-                    <div class="col-12 bg-main-secondary">
+                    <div class="col-12 " style="background-color: #EEE753">
                         <div class="cate">
                             <h3 class="text-center text-dark mt-2 category-font">
                                 CATEGORY

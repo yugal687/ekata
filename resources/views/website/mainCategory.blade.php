@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-2 col-md-12" style="background-color: #e9ecef">
                 <div class="row">
-                    <div class="col-12 bg-main-secondary">
+                    <div class="col-12 " style="background-color: #EEE753">
                         <div class="cate">
                             <h3 class="text-center text-dark mt-2 category-font">
                                 CATEGORY
@@ -78,7 +78,7 @@
                                                 <h5 class="text-dark">{{$product->product_name}}</h5>
                                                 <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
                                                 <button type="button"
-                                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                                        class="btn bg-btn rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                                     Add to Cart
                                                 </button>
                                             </a>
@@ -124,7 +124,7 @@
                                                 <h5 class=" text-dark">{{$product->product_name}}</h5>
                                                 <h5 class="brand-name text-dark">{{$product->brand->brand_name}}</h5>
                                                 <button type="button"
-                                                        class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
+                                                        class="btn bg-btn rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto w-100">
                                                     Add to Cart
                                                 </button>
                                                 </a>

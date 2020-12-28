@@ -98,7 +98,7 @@
         <div class="row ">
             <div class="col-lg-2 col-md-12" style="background-color: #e9ecef">
                 <div class="row">
-                    <div class="col-12 bg-main-secondary" style="background-color: #EEE753">
+                    <div class="col-12 " style="background-color: #EEE753">
                         <div class="cate" >
                             <h3 class="text-center text-dark mt-2 font-weight-bold category-font">
                                 CATEGORY
@@ -184,7 +184,7 @@
                                                     <h5 class=" text-dark">{{$cat->product_name}}</h5>
                                                     <h5 class="brand-name text-dark">{{$cat->brand->brand_name}}</h5>
                                                     <button type="button"
-                                                            class="btn bg-main-primary rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto">
+                                                            class="btn bg-btn rounded-top-front-btn rounded-bottom-front-btn border text-white mt-2 d-block mx-auto">
                                                         Add to Cart
                                                     </button>
                                                 </a>
