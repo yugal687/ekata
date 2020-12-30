@@ -43,8 +43,9 @@ let store = {
         totalPrice(state) {
             let product = this.commit('fetchStoredProduct');
             if (state.storedLocalStorageProduct) {
+                console.log(state.storedLocalStorageProduct);
                  let totalPrice = state.storedLocalStorageProduct.reduce((acc, val) => {
-                    return acc + val.price;
+                    return acc + parseFloat(val.price);
                 }, 0);
                 
             return state.totalPrice = totalPrice.toFixed(2);

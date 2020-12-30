@@ -137,7 +137,7 @@
                 this.checkPrice();
 //                alert(this.quantity);
 
-                return this.checkedPrice = this.quantity * this.checkedPrice;
+                return this.checkedPrice = (this.quantity * this.checkedPrice).toFixed(2);
             },
 
             incrementQuantity() {
