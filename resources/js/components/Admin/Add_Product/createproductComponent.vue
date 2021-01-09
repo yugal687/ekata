@@ -118,21 +118,7 @@
                 </el-form-item>
               </div>
               <div class="col-md-4">
-                <el-form-item label="Tags" prop="tagsSelect">
-                  <el-select
-                    v-model="tagsSelect"
-                    multiple
-                    placeholder="Select Tags"
-                  >
-                    <el-option
-                      v-for="item in tags"
-                      :key="item.id"
-                      :label="item.tags"
-                      :value="item.id"
-                    >
-                    </el-option>
-                  </el-select>
-                </el-form-item>
+               
               </div>
               <div class="col-md-4">
                 <el-form-item label="Select Image" prop="imageSelect">
@@ -282,14 +268,11 @@ export default {
       }
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let tag = this.tagsSelect;
-          console.log(tag);
+         // console.log(tag);
           let file = this.$refs.upload.uploadFiles;
           console.log(file);
           let formData = new FormData();
-          tag.forEach((v, k) => {
-            formData.append(`tag[${k}]`, v);
-          });
+          
           file.forEach((v, k) => {
             formData.append(`image[${k}]`, v.raw);
           });

@@ -80,6 +80,15 @@ class ProductController extends Controller
             'discount' => $request->discount,
             'sale_price' => $request->sale_price
         ]);
+        if ($request->tag >0) {
+            // dd($request->tag);
+            foreach ($request->tag as $tag) {
+                $savetags = DB::table('products_tags')->insert([
+                    'product_id' => $request->id,
+                    'tag_id' => $tag
+                ]);
+            }
+        }
         return response()->json([
            'message' => 'Discount added on Product!!!'
         ]);

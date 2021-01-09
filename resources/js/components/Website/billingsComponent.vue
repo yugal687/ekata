@@ -282,7 +282,7 @@
                                             class="btn btn-main-primary mr-2"
                                             id="creditCard"
                                         >
-                                            Credit Card
+                                            Card Payment
                                         </button>
                                         <button
                                             type="button"
@@ -393,7 +393,7 @@
                                             @click="payUsingCash"
                                             value="Pay Now"
                                         >
-                                            Pay Now
+                                            Confirm Order
                                         </button>
                                     </div>
                                 </div>

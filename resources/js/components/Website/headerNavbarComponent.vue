@@ -54,15 +54,14 @@
                         <li class="nav-item px-2">
                             <a class="nav-link text-dark" href="/">Home <span
                                 class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item px-2">
-                            <a class="nav-link text-dark" href="/aboutus">About Us</a>
+                        </li><li class="nav-item px-2">
+                            <a class="nav-link text-dark" href="/products">All Products</a>
                         </li>
                         <li class="nav-item px-2">
                             <a class="nav-link text-dark" href="/services">Services</a>
                         </li>
                         <li class="nav-item px-2">
-                            <a class="nav-link text-dark" href="/products">Products</a>
+                            <a class="nav-link text-dark" href="/aboutus">About Us</a>
                         </li>
                         <li class="nav-item px-2">
                             <a class="nav-link text-dark" href="/contact">Contact Us</a>

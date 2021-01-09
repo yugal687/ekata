@@ -165,13 +165,13 @@
                                     <p class="font-weight-bold">FOLLOW US:</p>
                                 </div>
                                 <div class="col-sm-12 col-md-9 p-2">
-                                    <img src="{{ asset('images/Icons/yellow-fb.png') }}"
+                                    <img src="{{ asset('images/Icons/green-facebook.png') }}"
                                         class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px"
                                         alt="">
-                                    <img src="{{ asset('images/Icons/yellow-instagram.png') }}"
+                                    <img src="{{ asset('images/Icons/green-insta.png') }}"
                                         class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px"
                                         alt="">
-                                    <img src="{{ asset('images/Icons/yellow-twitter.png') }}"
+                                    <img src="{{ asset('images/Icons/green-twitter.png') }}"
                                         class="img-fluid footer-icons-small pr-2" style="width: 45px; height: 35px"
                                         alt="">
                                 </div>

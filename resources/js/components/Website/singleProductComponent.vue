@@ -55,7 +55,7 @@
                                 class="btn btn-large
                                          bg-main-primary
                                          border
-                                          text-white px-5 mt-2 d-block">
+                                          text-white px-5 mt-2 d-block" style="background-color:  #94943a">
                             Add to Cart
                         </button>
                     </div>

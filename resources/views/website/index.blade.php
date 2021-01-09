@@ -80,7 +80,16 @@
         <div class="col-md-12">
             <div class="card border-0">
                 <div class="card-header ">
-                    <h2 class="text-center  heading-font mb-0" style="color:#d47a19">FLASH DEALS</h2>
+                    <!-- <h2 class="text-center  heading-font mb-0" style="color:#d47a19">FLASH DEALS</h2> -->
+                    <div class="row  mt-5 mb-4">
+            <div class="col-md-12">
+                <div class="top-title">
+                    <h3 class="d-inline bg-main-primary px-3 rounded-top-front heading-font text-white">
+                        Flash Deals
+                    </h3>
+                </div>
+            </div>
+        </div>
                 </div>
 
                 <div class="card-body  rounded-bottom-front card-bdy ">
@@ -376,11 +385,11 @@
                 </div>
             </div>
 
+
                 <div class="card-body  rounded-bottom-front card-bdy ">
 
                     <div id="weeklySpecials" class="owl-carousel ">
                     @foreach ($category->product as $discountedProduct)
-
                         <div class="item text-center rounded-top-front rounded-bottom-front">
                             <div class="row d-flex">
                               <div class="col-md-12">
