@@ -64,6 +64,9 @@
                             <a class="nav-link text-dark" href="/aboutus">About Us</a>
                         </li>
                         <li class="nav-item px-2">
+                            <a class="nav-link text-dark" href="/events">Events</a>
+                        </li>
+                        <li class="nav-item px-2">
                             <a class="nav-link text-dark" href="/contact">Contact Us</a>
                         </li>
                     </ul>

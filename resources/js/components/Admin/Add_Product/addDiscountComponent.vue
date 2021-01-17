@@ -50,21 +50,7 @@
                       </el-option>
                     </el-select>
                   </el-form-item>
-                   <el-form-item label="Tags" prop="tagsSelect">
-                  <el-select
-                    v-model="tagsSelect"
-                    multiple
-                    placeholder="Select Tags"
-                  >
-                    <el-option
-                      v-for="item in tags"
-                      :key="item.id"
-                      :label="item.tags"
-                      :value="item.id"
-                    >
-                    </el-option>
-                  </el-select>
-                </el-form-item>
+                   
                   <el-form-item
                     label="Discount Percentage"
                     prop="discountPercentage"
@@ -252,12 +238,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let tag = this.tagsSelect;
-
           let formData = new FormData();
-          tag.forEach((v, k) => {
-            formData.append(`tag[${k}]`, v);
-          });
           formData.append("discount", this.discountForm.discountPercentage);
           formData.append("sale_price", this.discountcalculate);
           formData.append("id", this.discountForm.productSelect);

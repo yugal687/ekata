@@ -36,6 +36,9 @@ Route::post('/searchedproducts', [
 ]);
 //About Us
 Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
+
+//events
+Route::view('/events', 'website.events');
 //Services
 Route::get('/services', 'Website\ProductController@service');
 Route::get(
@@ -104,6 +107,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::view('admin/services/', 'admin.services.service');
     Route::view('admin/order/shippingdetails', 'admin.order.shippingDetails');
     Route::view('admin/cart/allusercartdetails', 'admin.cart.allusercartdetails');
+
+    //events
+    Route::view('admin/events/', 'admin.website_update.eventUpdate');
 
     // Postal Code & Payment Credential
     Route::view('admin/postalPayment/paymentCredential', 'Admin.Postal_Payment.paymentCredential');

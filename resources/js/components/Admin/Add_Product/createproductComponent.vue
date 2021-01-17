@@ -138,7 +138,24 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12">
+              <div class="col-6">
+                <el-form-item label="Tags" prop="tagsSelect">
+                  <el-select
+                    v-model="tagsSelect"
+                    multiple
+                    placeholder="Select Tags"
+                  >
+                    <el-option
+                      v-for="item in tags"
+                      :key="item.id"
+                      :label="item.tags"
+                      :value="item.id"
+                    >
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+              </div>
+              <div class="col-6">
                 <el-form-item
                   label="Additional Information"
                   prop="additionalInformation"
@@ -271,8 +288,12 @@ export default {
          // console.log(tag);
           let file = this.$refs.upload.uploadFiles;
           console.log(file);
+let tag = this.tagsSelect;
+
           let formData = new FormData();
-          
+          tag.forEach((v, k) => {
+            formData.append(`tag[${k}]`, v);
+          });          
           file.forEach((v, k) => {
             formData.append(`image[${k}]`, v.raw);
           });

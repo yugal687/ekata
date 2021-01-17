@@ -157,7 +157,7 @@
                         </div>
                     </div>
                 </span>
-                 <button type="button"  @click="printDiv()">print</button>
+                 
             </el-dialog>
             
         </main>
@@ -168,8 +168,7 @@
 
 <script>
 
-import VueHtmlToPaper from 'vue-html-to-paper';
-      Vue.use(VueHtmlToPaper);
+
 
       
     export default {
@@ -244,18 +243,7 @@ import VueHtmlToPaper from 'vue-html-to-paper';
                     }
                 });
             },
-            printDiv() { 
-            // var tableContents = document.getElementById("PrintOrder").$innerHTML; 
-            // var a = window.open('', '', 'height=500, width=500'); 
-            // a.document.write('<template>'); 
-            // a.document.write('<el-dialog >'); 
-            // a.document.write(tableContents); 
-            // a.document.write('</el-dialog></template>'); 
-            // a.document.close(); 
-            // a.print(); 
-        // } 
-        this.$htmlToPaper('PrintOrder');
-        }
+            
     
         }
         

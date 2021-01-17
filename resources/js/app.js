@@ -52,6 +52,9 @@ Vue.component('customers-feedback-component', require('./components/Admin/Websit
 /*Services Pages*/
 Vue.component('services-component', require('./components/Admin/Services/serviceComponent.vue').default);
 
+/*events*/
+Vue.component('events-component', require('./components/Admin/Website Update/eventUpdate.vue').default); 
+
 
 /*Website Pages*/
 Vue.component('single-product-component', require('./components/Website/singleProductComponent.vue').default);

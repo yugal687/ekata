@@ -262,6 +262,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="/admin/events/" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Events </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="/admin/websiteupdate/reviewscarousel" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p> Reviews Carousel </p>
