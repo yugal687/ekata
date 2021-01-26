@@ -34,6 +34,7 @@ Vue.component('customer-component', require('./components/Admin/Customer/custome
 /*Setup*/
 Vue.component('category-subcategory-setup-component', require('./components/Admin/Setup/setupComponent.vue').default);
 Vue.component('brands-setup-component', require('./components/Admin/Setup/brandSetupComponent.vue').default);
+Vue.component('vendor-setup-component', require('./components/Admin/Setup/vendorSetupComponent.vue').default);
 Vue.component('tags-setup-component', require('./components/Admin/Setup/tagsSetupComponent.vue').default);
 /*Products*/
 Vue.component('add-product-component', require('./components/Admin/Add_Product/createproductComponent.vue').default);

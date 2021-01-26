@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     //Setup.....
     Route::view('admin/setup/index', 'admin.setup.index');
     Route::view('admin/setup/brands', 'admin.setup.brands');
+    Route::view('admin/setup/vendor', 'admin.setup.vendorSetup');
     Route::view('admin/setup/tags', 'admin.setup.tags');
     //Product
     Route::view('admin/addproduct/index', 'admin.add_product.index');

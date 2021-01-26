@@ -1,10 +1,4 @@
-@extends('layouts.website.header')
 
-@section('style')
-    <link href="{{ asset('css/webpages.css')}} " rel="stylesheet"/>
-@endsection
-
-@section('content')
     <div class="container-fluid pb-4 border-bottom">
         <div class="row py-5 d-flex justify-content-center text-center contact-us">
             <div class="container container-sm">
@@ -26,10 +20,4 @@
             </main>
         </div>
     </div>
-@stop
 
-@section('scripts')
-    <script>
-
-    </script>
-@endsection

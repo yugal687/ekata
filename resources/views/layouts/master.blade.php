@@ -192,6 +192,12 @@
                                             <p> Payment Credential </p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="/admin/setup/vendor" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Vendor Setup </p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">

@@ -171,6 +171,27 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-md-6">
+                <el-form-item label="Select Vendor" prop="vendorSelect">
+                      <el-select
+                        clearable
+                        placeholder="Select Vendor"
+                        filterable
+                        v-model="productForm.brandSelect"
+                        style="width: 100%"
+                      >
+                        <el-option
+                          v-for="item in getVendor"
+                          :key="item.id"
+                          :label="item.vendor_name"
+                          :value="item.id"
+                        >
+                        </el-option>
+                      </el-select>
+                    </el-form-item>
+              </div>
+            </div>
+            <div class="row">
               <el-form-item>
                 <el-button
                   type="primary"
@@ -215,6 +236,7 @@ export default {
         quantity: "",
         costPrice: "",
         additionalInformation: "",
+        vendorSelect: '',
         type: [],
       },
       productRules: {
