@@ -84,7 +84,7 @@
                                            @click="dialogFormVisible = true">
                                 </el-button>-->
                                 <button type="button" class="btn btn-warning" data-toggle="modal"
-                                    data-target="#serviceEditModal" @click="singleService(scope.row.id)"><i
+                                    data-target="#eventEditModal" @click="singleService(scope.row.id)"><i
                                         class="fas fa-edit"></i> </button>
                                 <el-button size="mini" type="danger" icon="fas fa-trash"
                                     @click="deleteService(scope.row.id)">
@@ -99,6 +99,81 @@
 
         <!--Services Edit Dialog-->
         <!-- Modal -->
+        <div id="eventEditModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" v-if="">
+                        <el-form :model="eventFormEdit" ref="eventFormEdit"
+                                 :label-position="labelPosition" class="demo-categoryForm">
+                            <div class="row">
+                            <div class="col-md-6">
+                                <el-form-item label="Upload Thumbnail Image" prop="thumbnailImageE">
+                                    <el-upload class="upload-demo" action="" ref="uploadThumbnail"
+                                        :on-preview="handlePreviewThumbnail" :on-remove="handleRemoveThumbnail"
+                                        :on-change="handleChangeThumbnail" :auto-upload="false"
+                                        :file-list="fileListThumbnail">
+                                        <el-button size="" type="primary">Click to upload</el-button>
+                                    </el-upload>
+                                </el-form-item>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="block">
+                                    <el-form-item label="Event Date" prop="eventDateE">
+
+                                    <el-date-picker v-model="eventFormEdit.eventDateE" type="daterange" align="right"
+                                        start-placeholder="Start Date" end-placeholder="End Date"
+                                        default-value="2010-10-01">
+                                    </el-date-picker>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <el-form-item label="Event Name" prop="eventNameE">
+                                    <el-input placeholder="Place Event name" v-model="eventFormEdit.eventNameE"
+                                        style="width: 100%">
+                                    </el-input>
+                                </el-form-item>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <el-form-item label="Event Description" prop="descE">
+                                    <vue-editor v-model="eventFormEdit.descE"></vue-editor>
+                                    
+                                </el-form-item>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                <el-form-item class="mt-4">
+                                <el-button type="primary"
+                                           @click="saveEvent('eventFormEdit')">Save
+                                </el-button>
+                            </el-form-item>
+                            </div>
+                            </div>
+                        </div>
+                            
+
+                            <el-form-item class="mt-4">
+                                <el-button type="warning"
+                                           @click="updateEvent('eventFormEdit')">Update
+                                </el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
 
@@ -127,6 +202,13 @@
                     imageSelect: "",
                     desc: '',
                     eventDate: '',
+                },
+
+                eventFormEdit: {
+                    eventNameE: '',
+                    imageSelectE: "",
+                    descE: '',
+                    eventDateE: '',
                 },
                 eventRules: {
                     eventName: [
