@@ -11,6 +11,7 @@ class Event extends Model
       'image',
       'description',
       'start_date',
-      'end_date'
+      'end_date',
+        'status'
     ];
 }

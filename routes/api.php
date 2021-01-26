@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -125,6 +126,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/postal/{id}', 'Admin\DeliveryController@deletePostal');
     Route::post('/updatePostal', 'Admin\DeliveryController@updatePostal');
     Route::get('/postal', 'Admin\DeliveryController@fetchPostal');
+
+    //Event Routes
+    Route::post('/event',[EventController::class,'create']);
+    Route::get('/event',[EventController::class,'fetch']);
+    Route::post('/update-event',[EventController::class,'update']);
+    Route::post('/event/{id}',[EventController::class,'delete']);
+    Route::post('/event-status/{$id}',[EventController::class,'changeStatus']);
 
 
 });
