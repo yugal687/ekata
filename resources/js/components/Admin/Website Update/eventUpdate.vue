@@ -15,7 +15,7 @@
                                         :on-preview="handlePreviewThumbnail" :on-remove="handleRemoveThumbnail"
                                         :on-change="handleChangeThumbnail" :auto-upload="false"
                                         :file-list="fileListThumbnail">
-                                        <el-button size="" type="primary">Click to upload</el-button>
+                                        <el-button size="" type="primary">Click to upload Image</el-button>
                                     </el-upload>
                                 </el-form-item>
                             </div>
