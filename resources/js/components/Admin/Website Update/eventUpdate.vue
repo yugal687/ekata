@@ -7,14 +7,14 @@
                         <h2>Add Events</h2>
                     </div>
                     <el-form :model="eventForm" :rules="eventRules" ref="eventForm" :label-position="labelPosition"
-                        class="demo-productForm">
+                             class="demo-productForm">
                         <div class="row">
                             <div class="col-md-6">
                                 <el-form-item label="Upload Thumbnail Image" prop="thumbnailImage">
-                                    <el-upload class="upload-demo" action="" ref="uploadThumbnail"
-                                        :on-preview="handlePreviewThumbnail" :on-remove="handleRemoveThumbnail"
-                                        :on-change="handleChangeThumbnail" :auto-upload="false"
-                                        :file-list="fileListThumbnail">
+                                    <el-upload class="upload-demo" action="" ref="upload"
+                                               :on-preview="handlePreviewThumbnail" :on-remove="handleRemoveThumbnail"
+                                               :on-change="handleChangeThumbnail" :auto-upload="false"
+                                               :file-list="fileListThumbnail">
                                         <el-button size="" type="primary">Click to upload Image</el-button>
                                     </el-upload>
                                 </el-form-item>
@@ -23,10 +23,10 @@
                                 <div class="block">
                                     <el-form-item label="Event Date" prop="eventDate">
 
-                                    <el-date-picker v-model="eventForm.eventDate" type="daterange" align="right"
-                                        start-placeholder="Start Date" end-placeholder="End Date"
-                                        default-value="2010-10-01">
-                                    </el-date-picker>
+                                        <el-date-picker v-model="eventForm.eventDate" type="daterange" align="right"
+                                                        start-placeholder="Start Date" end-placeholder="End Date"
+                                                        default-value="2010-10-01">
+                                        </el-date-picker>
                                     </el-form-item>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                             <div class="col-md-8">
                                 <el-form-item label="Event Name" prop="eventName">
                                     <el-input placeholder="Place Event name" v-model="eventForm.eventName"
-                                        style="width: 100%">
+                                              style="width: 100%">
                                     </el-input>
                                 </el-form-item>
                             </div>
@@ -49,19 +49,17 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                <el-form-item class="mt-4">
-                                <el-button type="primary"
-                                           @click="saveEvent('eventForm')">Save
-                                </el-button>
-                            </el-form-item>
-                            </div>
+                                    <el-form-item class="mt-4">
+                                        <el-button type="primary"
+                                                   @click="saveEvent('eventForm')">Save
+                                        </el-button>
+                                    </el-form-item>
+                                </div>
                             </div>
                         </div>
                     </el-form>
                 </el-card>
             </div>
-
-
 
 
             <!--Table-->
@@ -75,7 +73,7 @@
                         </el-table-column>
                         <el-table-column fixed="right" width="140" align="right">
                             <template slot="header" slot-scope="scope">
-                                <el-input v-model="search" size="mini" placeholder="Type to search" />
+                                <el-input v-model="search" size="mini" placeholder="Type to search"/>
                             </template>
                             <template slot-scope="scope">
                                 <!--<el-button type="primary"
@@ -84,10 +82,10 @@
                                            @click="dialogFormVisible = true">
                                 </el-button>-->
                                 <button type="button" class="btn btn-warning" data-toggle="modal"
-                                    data-target="#serviceEditModal" @click="singleService(scope.row.id)"><i
-                                        class="fas fa-edit"></i> </button>
+                                        data-target="#serviceEditModal" @click="singleService(scope.row.id)"><i
+                                    class="fas fa-edit"></i></button>
                                 <el-button size="mini" type="danger" icon="fas fa-trash"
-                                    @click="deleteService(scope.row.id)">
+                                           @click="deleteService(scope.row.id)">
                                 </el-button>
                             </template>
                         </el-table-column>
@@ -101,7 +99,6 @@
         <!-- Modal -->
 
 
-
     </div>
 </template>
 
@@ -109,6 +106,7 @@
     import {
         VueEditor
     } from "vue2-editor";
+
     export default {
         name: "eventUpdate",
         components: {
@@ -156,19 +154,38 @@
             /*form*/
             saveEvent(formName) {
                 this.$refs[formName].validate((valid) => {
+                    console.log(this.$refs.upload.uploadFiles);
+
                     if (valid) {
-                        then(response => {
+                        let file = this.$refs.upload.uploadFiles;
+                        let formData = new FormData();
+                        file.forEach((v, k) => {
+                            formData.append(`image[${k}]`, v.raw);
+                        });
+                        formData.append('title', this.eventForm.eventName);
+                        formData.append('description', this.eventForm.desc);
+                        formData.append('event_date', this.eventForm.eventDate);
+
+                        axios.post('/api/event', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
                             this.$notify({
                                 title: 'Success',
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            this.eventForm={};
-                            this.fetchEvent();
 
                         }).catch(error => {
-                            if (error.response.status == 422) {
-                                this.errors = error.response.data.errors;
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
                             }
                         });
                     } else {
@@ -177,9 +194,8 @@
                     }
                 });
             },
-
-
         },
+
 
         mounted() {
 
