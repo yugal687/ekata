@@ -3,12 +3,12 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-10 col-sm-12">
                 <el-card class="box-card">
-                    <div slot="header" class="">    
+                    <div slot="header" class="">
                         <h2><u>Vendor Setup</u></h2>
                     </div>
                     <el-form :model="vendorForm" :rules="vendorRules" ref="vendorForm" :label-position="labelPosition"
                         class="demo-productForm">
-                        
+
                         <div class="row">
                             <div class="col-md-8">
                                 <el-form-item label="Vendor Name" prop="vendorName">
@@ -45,7 +45,7 @@
                                 </el-form-item>
                             </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-6">
                                 <el-form-item class="mt-4">
@@ -54,7 +54,7 @@
                                 </el-button>
                             </el-form-item>
                             </div>
-                            
+
                         </div>
                     </el-form>
                 </el-card>
@@ -64,19 +64,19 @@
 
 
             <!--Table-->
-            
+
             <div class="col-md-10 col-sm-12  mt-5 mt-md-5">
                 <h3 class="text-center"><u>Table Details</u></h3>
                 <el-card class="box-card">
                     <el-table :data="tableData.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase())
                     || data.date.includes(search))" border max-height="470" style="width: 100%">
-                        <el-table-column prop="vendorName" label="Vendor Name">
+                        <el-table-column prop="vendor_name" label="Vendor Name">
                         </el-table-column>
-                        <el-table-column prop="vendorEmail" label="Vendor Email">
+                        <el-table-column prop="email" label="Vendor Email">
                         </el-table-column>
-                        <el-table-column prop="vendorAddress" label="Vendor Address">
+                        <el-table-column prop="address" label="Vendor Address">
                         </el-table-column>
-                        <el-table-column prop="vendorContact" label="Vendor Contact">
+                        <el-table-column prop="contact" label="Vendor Contact">
                         </el-table-column>
                         <el-table-column fixed="right" width="140" align="right">
                             <template slot="header" slot-scope="scope">
@@ -152,7 +152,7 @@
                                 </el-form-item>
                             </div>
                             </div>
-                            
+
                             <el-form-item class="mt-4">
                                 <el-button type="warning"
                                            @click="updateVendor('vendorFormEdit')">Update
@@ -172,14 +172,14 @@
 </template>
 
 <script>
-    
+
     export default {
         name: "vendorSetupComponent",
-        
+
         data() {
             return {
                 labelPosition: 'top',
-                
+
                 /*Table Data's*/
                 tableData: [],
                 search: '',
@@ -214,6 +214,36 @@
             }
         },
         methods: {
+            fetchData() {
+                axios.get('/api/vendor', {})
+                    .then(response => {
+                        this.tableData = response.data.vendors;
+                    });
+            },
+            deleteVendor(id){
+                this.$confirm('Are you sure to delete this item?')
+                    .then(_ => {
+                        axios.delete('/api/vendor/' + id)
+                            .then(response => {
+                                this.$notify({
+                                    title: 'Success',
+                                    message: response.data.message,
+                                    type: 'info'
+                                });
+                                this.fetchData();
+                            }).catch(error => {
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                            }
+                        });
+                    })
+                    .catch(_ => {
+                    });
+            },
             /*file list */
             handleRemoveThumbnail(file, fileListThumbnail) {
                 console.log(file, fileListThumbnail);
@@ -228,19 +258,37 @@
             /*form*/
             saveVendor(formName) {
                 this.$refs[formName].validate((valid) => {
+                    //console.log(this.$refs.upload.uploadFiles);
+
                     if (valid) {
-                        then(response => {
+                        let formData = new FormData();
+
+                        formData.append('vendor_name', this.vendorForm.vendorName);
+                        formData.append('email', this.vendorForm.vendorEmail);
+                        formData.append('address', this.vendorForm.vendorAddress);
+                        formData.append('contact', this.vendorForm.vendorContact);
+
+
+                        axios.post('/api/vendor', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
                             this.$notify({
                                 title: 'Success',
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            this.vendorForm={};
-                            this.fetchEvent();
-
+                            this.fetchData();
                         }).catch(error => {
-                            if (error.response.status == 422) {
-                                this.errors = error.response.data.errors;
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
                             }
                         });
                     } else {
@@ -254,7 +302,7 @@
         },
 
         mounted() {
-
+this.fetchData();
         }
     }
 

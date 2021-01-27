@@ -36,6 +36,7 @@ class ProductController extends Controller
                 'sale_price' => $request->sale_price,
                 'additional_information' => $request->additional_information,
                 'quantity' => $request->quantity,
+                'vendor_id'=>$request->vendor_id
             ]);
 
             foreach ($request->file('image') as $image) {

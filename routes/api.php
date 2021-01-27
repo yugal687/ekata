@@ -139,7 +139,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/vendor',[VendorController::class,'create']);
     Route::get('/vendor',[VendorController::class,'fetch']);
     Route::post('/update-vendor',[VendorController::class,'update']);
-    Route::delete('/vendor',[VendorController::class,'delete']);
+    Route::delete('/vendor/{id}',[VendorController::class,'delete']);
 
 });
 

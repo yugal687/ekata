@@ -7,24 +7,30 @@
 @section('content')
 <div class="container-fluid mt-5">
     <div class="row">
-@foreach($events as $event)
-        <div class="col-md-6">
-            <div class="event-image">
-                <img src="{{$event->image}}" class="img-fluid" alt="">
-            </div>
-
+        @foreach($events as $event)
+        <div class="col-12">
+            <ul class="list-unstyled">
+                <li class="media row mb-4">
+                    <img src="{{$event->image}}" class="img-fluid mr-3 col-sm-12 col-md-4" alt="">
+                    <div class="media-body col-sm-12 col-md-8 mt-2 mt-md-0">
+                        <h4 class="mt-0 mb-1 font-weight-bold">{{$event->title}}</h4>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-start text-md font-weight-bold">
+                                <div>
+                                    {{$event->event_date}}
+                                </div>
+                            </div>
+                        </div>
+                        <p>{{$event->description}}</p>
+                        <a href="#" class="text-md">
+                            Read more &rarr;
+                        </a>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="col-md-6">
-            <div class="event-detail">
-                <h1 class="text-center">{{$event->title}}</h1>
-                <p class="text-bold mt-4">Event Time Duration:{{$event->event_date}}</p>
+        @endforeach
 
-                <p class="mt-2">
-                   {{$event->description}}
-                </p>
-            </div>
-        </div>
-    @endforeach
     </div>
 
 </div>

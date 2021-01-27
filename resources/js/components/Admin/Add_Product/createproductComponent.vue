@@ -118,7 +118,7 @@
                 </el-form-item>
               </div>
               <div class="col-md-4">
-               
+
               </div>
               <div class="col-md-4">
                 <el-form-item label="Select Image" prop="imageSelect">
@@ -177,11 +177,11 @@
                         clearable
                         placeholder="Select Vendor"
                         filterable
-                        v-model="productForm.brandSelect"
+                        v-model="productForm.vendorSelect"
                         style="width: 100%"
                       >
                         <el-option
-                          v-for="item in getVendor"
+                          v-for="item in vendor"
                           :key="item.id"
                           :label="item.vendor_name"
                           :value="item.id"
@@ -214,6 +214,7 @@ export default {
   name: "createproductComponent",
   data() {
     return {
+        vendor:[],
       errors: [],
       files: [],
       tags: [],
@@ -277,6 +278,10 @@ export default {
     };
   },
   mounted() {
+      axios.get('/api/vendor', {})
+          .then(response => {
+              this.vendor = response.data.vendors;
+          });
     axios.get("/api/getAllCategories", {}).then((response) => {
       this.getCategory = response.data.getCategory;
     });
@@ -315,7 +320,7 @@ let tag = this.tagsSelect;
           let formData = new FormData();
           tag.forEach((v, k) => {
             formData.append(`tag[${k}]`, v);
-          });          
+          });
           file.forEach((v, k) => {
             formData.append(`image[${k}]`, v.raw);
           });
@@ -324,9 +329,8 @@ let tag = this.tagsSelect;
           } else {
             formData.append("category_id", this.productForm.categorySelect);
           }
-          console.log(this.productForm.subcategorySelect);
-          console.log(this.productForm.categorySelect);
           formData.append("brand_id", this.productForm.brandSelect);
+          formdata.append("vendor_id",this.productForm.vendorSelect)
           formData.append("product_name", this.productForm.productName);
           formData.append("price", this.productForm.costPrice);
           formData.append(
