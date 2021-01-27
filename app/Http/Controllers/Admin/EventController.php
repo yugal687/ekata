@@ -28,7 +28,8 @@ class EventController extends Controller
             'image' => $request->image,
             'description' => $request->description,
             'start_date' => $request->start_date,
-            'end_date' => $request->end_date
+            'end_date' => $request->end_date,
+            'status'=>0
         ]);
         return response()->json([
             'message' => 'Event created successfully'
@@ -63,7 +64,7 @@ class EventController extends Controller
 
     public function changeStatus($id)
     {
-        $event = Event::where('id', $id)->get();a
+        $event = Event::where('id', $id)->get();
         Event::where('id', $id)->update([
             'status' => $event->status == 0 ? 1 : 0
         ]);
