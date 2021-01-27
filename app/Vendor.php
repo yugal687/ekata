@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Product;
 use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
@@ -12,4 +13,7 @@ class Vendor extends Model
       'contact',
       'address'
     ];
+    public function product(){
+        return $this->hasMany(Product::class);
+    }
 }

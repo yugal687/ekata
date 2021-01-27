@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Vendor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,8 @@ class Product extends Model
         'sale_price',
         'additional_information',
         'quantity',
-        'discount'
+        'discount',
+        'vendor_id'
     ];
     public function image(){
         return $this->morphMany(Imagable::class,'imagable');
@@ -31,5 +33,8 @@ class Product extends Model
     }
     public function tags(){
         return $this->belongsToMany(Tag::class,'products_tags','product_id','tag_id');
+    }
+    public function vendor(){
+        return $this->belongsTo(Vendor::class,'vendor_id');
     }
 }
