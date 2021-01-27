@@ -83,8 +83,9 @@ class CategoryController extends Controller
         ]);
     }
     public function deleteCategory($id){
-     $deleteCategory = Category::where('id',$id)->update([
-         'category_name' => 'Un-categorized'
+     $deleteCategory = Category::where('id',$id)->delete();
+     $products=Product::where('category_id',$id)->update([
+        'category_id'=>1
      ]);
      return response()->json([
         'message' => 'Category Deleted !!!'
