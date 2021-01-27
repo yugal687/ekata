@@ -6,11 +6,13 @@ use App\Event;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
     public function save(Request $request)
     {
+       // dd($request->all());
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'image' => 'required',
@@ -29,16 +31,17 @@ class EventController extends Controller
             $originalName = $baseName . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/uploads'), $originalName);
 
-            
+
             Event::create([
                 'title' => $request->title,
                 'image' => '/uploads/' . $originalName,
                 'description' => $request->description,
+                'status'=>0,
                 'event_date' => $request->event_date,
             ]);
 
         }
-        
+
         return response()->json([
             'message' => 'Event created successfully'
         ]);
@@ -72,7 +75,7 @@ class EventController extends Controller
 
     public function changeStatus($id)
     {
-        $event = Event::where('id', $id)->get();a
+        $event = Event::where('id', $id)->get();
         Event::where('id', $id)->update([
             'status' => $event->status == 0 ? 1 : 0
         ]);

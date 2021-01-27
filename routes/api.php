@@ -129,7 +129,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/postal', 'Admin\DeliveryController@fetchPostal');
 
     //Event Routes
-    Route::post('/event',[EventController::class,'create']);
+    Route::post('/event',[EventController::class,'save']);
     Route::get('/event',[EventController::class,'fetch']);
     Route::post('/update-event',[EventController::class,'update']);
     Route::delete('/event/{id}',[EventController::class,'delete']);
@@ -141,7 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/update-vendor',[VendorController::class,'update']);
     Route::delete('/vendor',[VendorController::class,'delete']);
 
-});   
+});
 
 //fetch postal as it is needed not also on billing section
 

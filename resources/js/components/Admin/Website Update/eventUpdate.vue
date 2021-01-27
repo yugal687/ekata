@@ -69,7 +69,7 @@
                     || data.date.includes(search))" border max-height="470" style="width: 100%">
                         <el-table-column prop="title" label="Title">
                         </el-table-column>
-                        <el-table-column prop="date" label="Posted Time">
+                        <el-table-column prop="event_date" label="Event Date">
                         </el-table-column>
                         <el-table-column fixed="right" width="140" align="right">
                             <template slot="header" slot-scope="scope">
@@ -140,6 +140,12 @@
             }
         },
         methods: {
+            fetchData() {
+                axios.get('/api/event', {})
+                    .then(response => {
+                        this.tableData = response.data.events;
+                    });
+            },
             /*file list */
             handleRemoveThumbnail(file, fileListThumbnail) {
                 console.log(file, fileListThumbnail);
@@ -149,6 +155,30 @@
             },
             handleChangeThumbnail(file, fileListThumbnail) {
                 this.fileListThumbnail = fileListThumbnail.slice(-1);
+            },
+            deleteService(id){
+                this.$confirm('Are you sure to delete this item?')
+                    .then(_ => {
+                        axios.delete('/api/event/' + id)
+                            .then(response => {
+                                this.$notify({
+                                    title: 'Success',
+                                    message: response.data.message,
+                                    type: 'info'
+                                });
+                                this.fetchData();
+                            }).catch(error => {
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                            }
+                        });
+                    })
+                    .catch(_ => {
+                    });
             },
 
             /*form*/
@@ -177,7 +207,7 @@
                                 message: response.data.message,
                                 type: 'success'
                             });
-
+                            this.fetchData();
                         }).catch(error => {
                             if (error.response) {
                                 this.$notify({
@@ -198,7 +228,7 @@
 
 
         mounted() {
-
+this.fetchData();
         }
     }
 
