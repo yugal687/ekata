@@ -44,6 +44,7 @@ class VendorController extends Controller
         ]);
     }
     public function update(Request $request){
+        //dd($request->all());
         Vendor::where('id',$request->id)->update([
             'vendor_name'=>$request->vendor_name,
             'email'=>$request->email,

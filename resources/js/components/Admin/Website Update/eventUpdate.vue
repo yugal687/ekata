@@ -82,7 +82,7 @@
                                            @click="dialogFormVisible = true">
                                 </el-button>-->
                                 <button type="button" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#serviceEditModal" @click="singleService(scope.row.id)"><i
+                                        data-target="#serviceEditModal" @click="editEvent(scope.row.id)"><i
                                     class="fas fa-edit"></i></button>
                                 <el-button size="mini" type="danger" icon="fas fa-trash"
                                            @click="deleteService(scope.row.id)">
@@ -118,6 +118,7 @@
                 fileListThumbnail: [],
                 /*Table Data's*/
                 tableData: [],
+                editEvents:[],
                 search: '',
 
                 eventForm: {
@@ -145,6 +146,30 @@
                     .then(response => {
                         this.tableData = response.data.events;
                     });
+            },
+            editEvent(id) {
+                this.editEvents = this.tableData.filter(tableData => tableData.id == id);
+            },
+            saveEditEvent() {
+                axios.post('/api/update-event', {
+                    editedEvent: this.editEvents
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.getRequest();
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
             },
             /*file list */
             handleRemoveThumbnail(file, fileListThumbnail) {

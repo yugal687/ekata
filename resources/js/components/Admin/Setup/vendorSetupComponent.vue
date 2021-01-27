@@ -7,60 +7,58 @@
                         <h2><u>Vendor Setup</u></h2>
                     </div>
                     <el-form :model="vendorForm" :rules="vendorRules" ref="vendorForm" :label-position="labelPosition"
-                        class="demo-productForm">
+                             class="demo-productForm">
 
                         <div class="row">
                             <div class="col-md-8">
                                 <el-form-item label="Vendor Name" prop="vendorName">
                                     <el-input placeholder="Place Vendor Name" v-model="vendorForm.vendorName"
-                                        style="width: 100%">
+                                              style="width: 100%">
                                     </el-input>
                                 </el-form-item>
                             </div>
                         </div>
-                          <div class="row">
+                        <div class="row">
                             <div class="col-md-8">
                                 <el-form-item label="Vendor Email" prop="vendorEmail">
                                     <el-input placeholder="Place Vendor Email" v-model="vendorForm.vendorEmail"
-                                        style="width: 100%">
+                                              style="width: 100%">
                                     </el-input>
                                 </el-form-item>
                             </div>
-                          </div>
-                            <div class="row">
+                        </div>
+                        <div class="row">
                             <div class="col-md-8">
                                 <el-form-item label="Vendor Address" prop="vendorAddress">
                                     <el-input placeholder="Place Vendor Address" v-model="vendorForm.vendorAddress"
-                                        style="width: 100%">
+                                              style="width: 100%">
                                     </el-input>
                                 </el-form-item>
                             </div>
-                            </div>
-                            <div class="row">
+                        </div>
+                        <div class="row">
                             <div class="col-md-8">
                                 <el-form-item label="Vendor Contact" prop="vendorContact">
                                     <el-input placeholder="Place Vendor Contact" v-model="vendorForm.vendorContact"
-                                        style="width: 100%">
+                                              style="width: 100%">
                                     </el-input>
                                 </el-form-item>
                             </div>
-                            </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <el-form-item class="mt-4">
-                                <el-button type="primary"
-                                           @click="saveVendor('vendorForm')">Save
-                                </el-button>
-                            </el-form-item>
+                                    <el-button type="primary"
+                                               @click="saveVendor('vendorForm')">Save
+                                    </el-button>
+                                </el-form-item>
                             </div>
 
                         </div>
                     </el-form>
                 </el-card>
             </div>
-
-
 
 
             <!--Table-->
@@ -80,7 +78,7 @@
                         </el-table-column>
                         <el-table-column fixed="right" width="140" align="right">
                             <template slot="header" slot-scope="scope">
-                                <el-input v-model="search" size="mini" placeholder="Type to search" />
+                                <el-input v-model="search" size="mini" placeholder="Type to search"/>
                             </template>
                             <template slot-scope="scope">
                                 <!--<el-button type="primary"
@@ -89,10 +87,10 @@
                                            @click="dialogFormVisible = true">
                                 </el-button>-->
                                 <button type="button" class="btn btn-warning" data-toggle="modal"
-                                    data-target="#VendorEditModal" @click="singleVendor(scope.row.id)"><i
-                                        class="fas fa-edit"></i> </button>
+                                        data-target="#VendorEditModal" @click="editVendor(scope.row.id)"><i
+                                    class="fas fa-edit"></i></button>
                                 <el-button size="mini" type="danger" icon="fas fa-trash"
-                                    @click="deleteVendor(scope.row.id)">
+                                           @click="deleteVendor(scope.row.id)">
                                 </el-button>
                             </template>
                         </el-table-column>
@@ -113,49 +111,49 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" v-if="">
-                        <el-form :model="vendorFormEdit" ref="vendorFormEdit"
+                    <div class="modal-body" v-for="vendor in vendorFormEdit">
+                        <el-form :model="vendorFormEdit[0]" ref="vendorFormEdit"
                                  :label-position="labelPosition" class="demo-categoryForm">
                             <div class="row">
-                            <div class="col-md-8">
-                                <el-form-item label="Vendor Name" prop="vendorNameE">
-                                    <el-input placeholder="Place Vendor Name" v-model="vendorFormEdit.vendorNameE"
-                                        style="width: 100%">
-                                    </el-input>
-                                </el-form-item>
-                            </div>
-                        </div>
-                          <div class="row">
-                            <div class="col-md-8">
-                                <el-form-item label="Vendor Email" prop="vendorEmailE">
-                                    <el-input placeholder="Place Vendor Email" v-model="vendorFormEdit.vendorEmailE"
-                                        style="width: 100%">
-                                    </el-input>
-                                </el-form-item>
-                            </div>
-                          </div>
-                            <div class="row">
-                            <div class="col-md-8">
-                                <el-form-item label="Vendor Address" prop="vendorAddressE">
-                                    <el-input placeholder="Place Vendor Address" v-model="vendorFormEdit.vendorAddressE"
-                                        style="width: 100%">
-                                    </el-input>
-                                </el-form-item>
-                            </div>
+                                <div class="col-md-8">
+                                    <el-form-item label="Vendor Name" prop="vendor_name">
+                                        <el-input placeholder="Place Vendor Name" v-model="vendor.vendor_name"
+                                                  style="width: 100%">
+                                        </el-input>
+                                    </el-form-item>
+                                </div>
                             </div>
                             <div class="row">
-                            <div class="col-md-8">
-                                <el-form-item label="Vendor Contact" prop="vendorContactE">
-                                    <el-input placeholder="Place Vendor Contact" v-model="vendorFormEdit.vendorContactE"
-                                        style="width: 100%">
-                                    </el-input>
-                                </el-form-item>
+                                <div class="col-md-8">
+                                    <el-form-item label="Vendor Email" prop="email">
+                                        <el-input placeholder="Place Vendor Email" v-model="vendor.email"
+                                                  style="width: 100%">
+                                        </el-input>
+                                    </el-form-item>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <el-form-item label="Vendor Address" prop="address">
+                                        <el-input placeholder="Place Vendor Address" v-model="vendor.address"
+                                                  style="width: 100%">
+                                        </el-input>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <el-form-item label="Vendor Contact" prop="contact">
+                                        <el-input placeholder="Place Vendor Contact" v-model="vendor.contact"
+                                                  style="width: 100%">
+                                        </el-input>
+                                    </el-form-item>
+                                </div>
                             </div>
 
                             <el-form-item class="mt-4">
                                 <el-button type="warning"
-                                           @click="updateVendor('vendorFormEdit')">Update
+                                           @click="saveEditVendor('vendorFormEdit')">Update
                                 </el-button>
                             </el-form-item>
                         </el-form>
@@ -165,7 +163,6 @@
             </div>
         </div>
         <!-- Modal -->
-
 
 
     </div>
@@ -191,10 +188,10 @@
                     vendorContact: '',
                 },
                 vendorFormEdit: {
-                    vendorNameE: '',
-                    vendorEmailE: '',
-                    vendorAddressE: '',
-                    vendorContactE: '',
+                    vendor_name: '',
+                    email: '',
+                    address: '',
+                    contact: '',
                 },
                 vendorRules: {
                     vendorName: [
@@ -202,7 +199,7 @@
                     ],
                     vendorEmail: [
                         {required: true, message: 'Please input Vendor email', trigger: 'blur'},
-                       { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change']},
+                        {type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change']},
                     ],
                     vendorAddress: [
                         {required: true, message: 'Please input Vendor Address', trigger: 'blur'},
@@ -220,7 +217,44 @@
                         this.tableData = response.data.vendors;
                     });
             },
-            deleteVendor(id){
+            editVendor(id) {
+                this.vendorFormEdit = this.tableData.filter(tableData => tableData.id == id);
+                console.log(this.vendorFormEdit);
+
+            },
+            saveEditVendor() {
+                let formData = new FormData();
+                console.log(this.vendorFormEdit[0]);
+                formData.append('vendor_name', this.vendorFormEdit[0].vendor_name);
+                formData.append('id', this.vendorFormEdit[0].id);
+                formData.append('email', this.vendorFormEdit[0].email);
+                formData.append('address', this.vendorFormEdit[0].address);
+                formData.append('contact', this.vendorFormEdit[0].contact);
+
+                axios.post('/api/update-vendor',formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+
+                }).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.fetchData();
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            },
+            deleteVendor(id) {
                 this.$confirm('Are you sure to delete this item?')
                     .then(_ => {
                         axios.delete('/api/vendor/' + id)
@@ -302,7 +336,7 @@
         },
 
         mounted() {
-this.fetchData();
+            this.fetchData();
         }
     }
 

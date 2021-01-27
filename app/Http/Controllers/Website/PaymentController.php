@@ -44,7 +44,7 @@ class PaymentController extends Controller
                 'Paypal');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-               /* $productName = Product::where('id',$data['items']['product_id'])->get();
+               /* $productName = Product::where('id',$data['items']['product_id'])->with(['vendor:email'])->get();
                 dd($productName);
                                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
                                     ->send(new OrderMail($userDetail, $request->totalPrice,$data,$productName));*/
