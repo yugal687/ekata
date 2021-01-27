@@ -38,7 +38,7 @@ Route::post('/searchedproducts', [
 Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
 
 //events
-Route::view('/events', 'website.events');
+Route::get('/events', 'Website\EventController@allEvents');
 //Services
 Route::get('/services', 'Website\ProductController@service');
 Route::get(

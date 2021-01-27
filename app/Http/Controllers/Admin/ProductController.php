@@ -69,7 +69,7 @@ class ProductController extends Controller
     }
     public function getProduct(){
         $getProduct = Product::with(['category' => function ($query) {
-            $query->with('parent','children');},'brand','tags','image'])->get();
+            $query->with('parent','children');},'brand','tags','image','vendor'])->get();
         return response()->json([
            'getProduct' => $getProduct
         ]);
