@@ -11,12 +11,13 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function createCategory(Request $request){
+    public function createCategory(Request $request)
+    {
         //dd($request);
         $validate = $request->validate([
-           'category_name' =>'required'
+            'category_name' => 'required'
         ]);
-        if ($validate){
+        if ($validate) {
             foreach ($request->file('bannerCategory') as $bannerCategory) {
 
                 $baseName = Str::random(20);
@@ -43,64 +44,74 @@ class CategoryController extends Controller
             }
         }
         return response()->json([
-           'message' => 'Category added sucessfully',
+            'message' => 'Category added sucessfully',
             'category' => $savecategory
         ]);
     }
 
-    public function createSubcategory(Request $request){
+    public function createSubcategory(Request $request)
+    {
         $validate = $request->validate([
-            'category_name' =>'required'
+            'category_name' => 'required'
         ]);
-        if ($validate){
+        if ($validate) {
             $addsubcategory = Category::create([
-               'category_name' =>$request->category_name,
+                'category_name' => $request->category_name,
                 'parent_id' => $request->parent_id
 
             ]);
         }
         return response()->json([
-           'message' => 'SubCategory Added Sucessfully !!!'
+            'message' => 'SubCategory Added Sucessfully !!!'
         ]);
     }
 
-    public function getCategory(){
-        $getCategory = Category::where('parent_id',NULL)->get();
-        return response()->json([
-           'getCategory' => $getCategory
-        ]);
-    }
-    public function getAllCategory(){
-        $getCategory = Category::with('children')->where('parent_id','=',NULL)->get();
+    public function getCategory()
+    {
+        $getCategory = Category::where('parent_id', NULL)->get();
         return response()->json([
             'getCategory' => $getCategory
         ]);
     }
-    public function getSubCategory(){
-        $getSubCategory = Category::with('parent')->where('parent_id','>',0)->get();
+
+    public function getAllCategory()
+    {
+        $getCategory = Category::with('children')->where('parent_id', '=', NULL)->get();
+        return response()->json([
+            'getCategory' => $getCategory
+        ]);
+    }
+
+    public function getSubCategory()
+    {
+        $getSubCategory = Category::with('parent')->where('parent_id', '>', 0)->get();
         return response()->json([
             'getSubCategory' => $getSubCategory
         ]);
     }
-    public function deleteCategory($id){
-     $deleteCategory = Category::where('id',$id)->delete();
-     $products=Product::where('category_id',$id)->update([
-        'category_id'=>1
-     ]);
-     return response()->json([
-        'message' => 'Category Deleted !!!'
-     ]);
-    }
-    public function updateCategory(Request $request){
-//dd($request);
-$updatecategory = Category::findOrFail($request->editCategory[0]['id']);
-$updatecategory->category_name = $request->editCategory[0]['category_name'];
-$updatecategory->parent_id = $request->editCategory[0]['parent_id'];
-$updatecategory->save();
 
-return response()->json([
-   'message' => 'Category Updated'
-]);
+    public function deleteCategory($id)
+    {
+        $deleteCategory = Category::where('id', $id)->delete();
+        $products = Product::where('category_id', $id)->update([
+            'category_id' => 1
+        ]);
+        return response()->json([
+            'message' => 'Category Deleted !!!'
+        ]);
+    }
+
+    public function updateCategory(Request $request)
+    {
+//dd($request);
+        $updatecategory = Category::findOrFail($request->editCategory[0]['id']);
+        $updatecategory->category_name = $request->editCategory[0]['category_name'];
+        $updatecategory->parent_id = $request->editCategory[0]['parent_id'];
+        $updatecategory->save();
+
+        return response()->json([
+            'message' => 'Category Updated'
+        ]);
 
     }
 }
