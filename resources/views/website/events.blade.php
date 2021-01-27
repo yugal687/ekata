@@ -1,23 +1,41 @@
+@extends('layouts.website.header')
 
-    <div class="container-fluid pb-4 border-bottom">
-        <div class="row py-5 d-flex justify-content-center text-center contact-us">
-            <div class="container container-sm">
-                <h1 class="">Our events</h1>
-                <p class="heading-description-main mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                    architecto autem
-                    deserunt, dolor doloremque dolores, eveniet facilis fuga ipsam natus nostrum reiciendis saepe sequi
-                    voluptas voluptatibus! Corporis eligendi quibusdam rem?</p>
+@section('style')
+<link href="{{ asset('css/webpages.css')}} " rel="stylesheet" />
+@endsection
+
+@section('content')
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="event-image">
+                <img src="images/Homepage/Banner/Banner.png" class="img-fluid" alt="">
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="event-detail">
+                <h1 class="text-center">Event Title</h1>
+                <p class="text-bold mt-4">Event Time Duration:</p>
+
+                <p class="mt-2">
+                    It is a long established fact that a reader will be distracted by the readable content of a page
+                    when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                    distribution of letters, as opposed to using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                    default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
+                    infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                </p>
             </div>
         </div>
-        <div class="container my-5">
-            <main class="row">
-                <div class="col-md-12">
-                    <h3 class="heading-title">Our Events</h3>
-                    <p class="heading-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                        architecto autem
-                        deserunt,</p>
-                </div>
-            </main>
-        </div>
     </div>
+    
+</div>
 
+@stop
+
+@section('scripts')
+<script>
+</script>
+@endsection

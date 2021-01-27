@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <el-form-item label="Upload Thumbnail Image" prop="thumbnailImage">
-                                    <el-upload class="upload-demo" action="" ref="uploadThumbnail"
+                                    <el-upload class="upload-demo" action="" ref="upload"
                                         :on-preview="handlePreviewThumbnail" :on-remove="handleRemoveThumbnail"
                                         :on-change="handleChangeThumbnail" :auto-upload="false"
                                         :file-list="fileListThumbnail">
@@ -71,7 +71,7 @@
                     || data.date.includes(search))" border max-height="470" style="width: 100%">
                         <el-table-column prop="title" label="Title">
                         </el-table-column>
-                        <el-table-column prop="date" label="Posted Time">
+                        <el-table-column prop="event_date" label="Posted Time">
                         </el-table-column>
                         <el-table-column fixed="right" width="140" align="right">
                             <template slot="header" slot-scope="scope">
@@ -142,6 +142,7 @@
             }
         },
         methods: {
+          
             /*file list */
             handleRemoveThumbnail(file, fileListThumbnail) {
                 console.log(file, fileListThumbnail);
@@ -155,20 +156,39 @@
 
             /*form*/
             saveEvent(formName) {
-                this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate((valid) => {
+                                  console.log( this.$refs.upload.uploadFiles);
+
                     if (valid) {
-                        then(response => {
+                                  let file = this.$refs.upload.uploadFiles;
+                        let formData = new FormData();
+                        file.forEach((v, k) => {
+            formData.append(`image[${k}]`, v.raw);
+          });
+                        formData.append('title', this.eventForm.eventName);
+                        formData.append('description', this.eventForm.desc);
+                        formData.append('event_date', this.eventForm.eventDate);
+
+                        axios.post('/api/event', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+
+                        }).then(response => {
                             this.$notify({
                                 title: 'Success',
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            this.eventForm={};
-                            this.fetchEvent();
 
                         }).catch(error => {
-                            if (error.response.status == 422) {
-                                this.errors = error.response.data.errors;
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
                             }
                         });
                     } else {

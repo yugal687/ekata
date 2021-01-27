@@ -15,21 +15,30 @@ class EventController extends Controller
             'title' => 'required',
             'image' => 'required',
             'description' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required'
+            'event_date' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'error' => $validator->errors()
             ]);
         }
-        Event::create([
-            'title' => $request->title,
-            'image' => $request->image,
-            'description' => $request->description,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
-        ]);
+        foreach ($request->file('image') as $image) {
+
+
+            $baseName = Str::random(20);
+            $originalName = $baseName . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/uploads'), $originalName);
+
+            
+            Event::create([
+                'title' => $request->title,
+                'image' => '/uploads/' . $originalName,
+                'description' => $request->description,
+                'event_date' => $request->event_date,
+            ]);
+
+        }
+        
         return response()->json([
             'message' => 'Event created successfully'
         ]);
