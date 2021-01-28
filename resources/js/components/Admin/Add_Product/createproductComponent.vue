@@ -330,7 +330,7 @@ let tag = this.tagsSelect;
             formData.append("category_id", this.productForm.categorySelect);
           }
           formData.append("brand_id", this.productForm.brandSelect);
-          formdata.append("vendor_id",this.productForm.vendorSelect)
+          formData.append("vendor_id",this.productForm.vendorSelect)
           formData.append("product_name", this.productForm.productName);
           formData.append("price", this.productForm.costPrice);
           formData.append(
