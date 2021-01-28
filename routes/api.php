@@ -133,7 +133,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/event',[EventController::class,'fetch']);
     Route::post('/update-event',[EventController::class,'update']);
     Route::delete('/event/{id}',[EventController::class,'delete']);
-    Route::post('/event-status/{$id}',[EventController::class,'changeStatus']);
+    Route::post('/event-status',[EventController::class,'changeStatus']);
 
     //Vendor Routes
     Route::post('/vendor',[VendorController::class,'create']);

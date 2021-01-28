@@ -76,11 +76,22 @@
                                 <el-input v-model="search" size="mini" placeholder="Type to search"/>
                             </template>
                             <template slot-scope="scope">
-                                <!--<el-button type="primary"
-                                           size="mini"
-                                           icon="fas fa-edit"
-                                           @click="dialogFormVisible = true">
-                                </el-button>-->
+                                <el-button
+                                    type="warning"
+                                    v-if="scope.row.status==0"
+                                    @click="setStatus(scope.row.id)"
+                                    size="mini"
+                                >
+                                    <i class="fas fa-times"></i>
+                                </el-button>
+                                <el-button
+                                    type="success"
+                                    v-else
+                                    @click="setStatus(scope.row.id)"
+                                    size="mini"
+                                >
+                                    <i class="fas fa-check"></i>
+                                </el-button>
                                 <button type="button" class="btn btn-warning" data-toggle="modal"
                                         data-target="#serviceEditModal" @click="editEvent(scope.row.id)"><i
                                     class="fas fa-edit"></i></button>
@@ -118,7 +129,7 @@
                 fileListThumbnail: [],
                 /*Table Data's*/
                 tableData: [],
-                editEvents:[],
+                editEvents: [],
                 search: '',
 
                 eventForm: {
@@ -147,6 +158,27 @@
                         this.tableData = response.data.events;
                     });
             },
+            setStatus(id) {
+                let formData=new FormData();
+                formData.append('id',id);
+                axios.post('/api/event-status', formData,{}).then(response => {
+                    this.$notify({
+                        title: 'Success',
+                        message: response.data.message,
+                        type: 'success'
+                    });
+                    this.getRequest();
+                }).catch(error => {
+                    if (error.response) {
+                        this.$notify({
+                            title: 'Error',
+                            message: 'Error Input Data ',
+                            type: 'error'
+                        });
+                        /*this.errors = error.response.data.errors;*/
+                    }
+                });
+            },
             editEvent(id) {
                 this.editEvents = this.tableData.filter(tableData => tableData.id == id);
             },
@@ -159,7 +191,7 @@
                         message: response.data.message,
                         type: 'success'
                     });
-                    this.getRequest();
+                    this.fetchData();
                 }).catch(error => {
                     if (error.response) {
                         this.$notify({
@@ -181,7 +213,7 @@
             handleChangeThumbnail(file, fileListThumbnail) {
                 this.fileListThumbnail = fileListThumbnail.slice(-1);
             },
-            deleteService(id){
+            deleteService(id) {
                 this.$confirm('Are you sure to delete this item?')
                     .then(_ => {
                         axios.delete('/api/event/' + id)
@@ -253,7 +285,7 @@
 
 
         mounted() {
-this.fetchData();
+            this.fetchData();
         }
     }
 

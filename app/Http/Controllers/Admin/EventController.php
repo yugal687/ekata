@@ -73,14 +73,14 @@ class EventController extends Controller
         ]);
     }
 
-    public function changeStatus($id)
+    public function changeStatus(Request $request)
     {
-        $event = Event::where('id', $id)->get();
-        Event::where('id', $id)->update([
-            'status' => $event->status == 0 ? 1 : 0
+        $event = Event::where('id', $request->id)->get();
+        Event::where('id', $request->id)->update([
+            'status' => $event[0]->status == 0 ? 1 : 0
         ]);
         return response()->json([
-            'message' => 'Event set as active !!'
+            'message' => 'Event status changed !!'
         ]);
     }
 }

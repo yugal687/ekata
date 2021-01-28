@@ -2,22 +2,27 @@
     <div class="row">
         <div class="col-12 text-center">
             <div id="owl-demo" class="owl-carousel owl-theme">
+                @if(count($getCategory)>0)
                 @foreach( $getCategory as $category)
                 <div class="item">
                 <a href="{{ route('maincategory',[$category->id,$category->category_name])}}" class="text-dark">
                    <div class="d-flex justify-content-center">
                         <figure class="car-head-bg">
+                            {{--{{dd($category->images)}}--}}
+                            @if(count($category->images)>0)
                             <img src="{{ $category->images[0]->name }}" class="head-carousel ml-auto mr-auto img-fluid"
                                 alt="">
+                                @endif
                         </figure>
                     </div>
                     <h6>
                     {{ $category -> category_name}}
-                    
+
                     </h6>
                     </a>
                 </div>
                 @endforeach
+                    @endif
             </div>
 
         </div>
@@ -27,7 +32,7 @@
 
 
 <!-- <div id="owl-demo" class="owl-carousel owl-theme">
-          
+
   <div class="item"><h1>1</h1></div>
   <div class="item"><h1>2</h1></div>
   <div class="item"><h1>3</h1></div>
