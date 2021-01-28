@@ -71,32 +71,8 @@
                         </el-table-column>
                         <el-table-column prop="event_date" label="Event Date">
                         </el-table-column>
-                        <el-table-column prop="event_date" label="Event Date">
-                            <el-button-group>
-                    <el-button
-                      type="warning"
-                      v-if=" == 0"
-                      @click="setActive(events.id)"
-                      size="mini"
-                    >
-                      <i class="fas fa-times"></i>
-                    </el-button>
-                    <el-button
-                      type="success"
-                      v-else-if=" == 1"
-                      @click="setInActive(events.id)"
-                      size="mini"
-                    >
-                      <i class="fas fa-check"></i>
-                    </el-button>
-                    <el-button
-                      type="danger"
-                      size="mini"
-                      @click="deleteImage(events.id)"
-                    >
-                      <i class="fas fa-trash"></i>
-                    </el-button>
-                  </el-button-group>
+                        <el-table-column prop="" label="Event Date">
+                            
                         </el-table-column>
                         <el-table-column fixed="right" width="140" align="right">
                             <template slot="header" slot-scope="scope">
@@ -108,6 +84,23 @@
                                            icon="fas fa-edit"
                                            @click="dialogFormVisible = true">
                                 </el-button>-->
+                                <el-button-group>
+                    <el-button
+                      type="warning"
+                      v-if=" status== 0"
+                      @click="setActive(scope.row.id)"
+                      size="mini"
+                    >
+                      <i class="fas fa-times"></i>
+                    </el-button>
+                    <el-button
+                      type="success"
+                      v-else-if=" status== 1"
+                      @click="setInActive(scope.row.id)"
+                      size="mini"
+                    >
+                    </el-button>
+                  </el-button-group>
                                 <button type="button" class="btn btn-warning" data-toggle="modal"
                                         data-target="#serviceEditModal" @click="editEvent(scope.row.id)"><i
                                     class="fas fa-edit"></i></button>
