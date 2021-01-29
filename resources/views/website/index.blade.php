@@ -79,7 +79,7 @@
     <div class="row  mt-5 mx-0">
         <div class="col-md-12">
             <div class="card border-0">
-                <div class="card-header ">
+                <div class="">
                     <!-- <h2 class="text-center  heading-font mb-0" style="color:#d47a19">FLASH DEALS</h2> -->
                     <div class="row  mt-5 mb-4">
             <div class="col-md-12">
@@ -114,7 +114,7 @@
                                             <img src="{{$discountedProduct->image[0]->name}}" width="" alt="">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-12">
                                         <h5 class="pt-3 font-weight-bold text-main-danger">
                                             <s> was {{$discountedProduct->price}}</s></h5>
@@ -300,7 +300,7 @@
 <!--Todays Special-->
 @if(count($todayspecial)>0)
             @if(count($todayspecial[0]->product)>0)
-            
+
 <section id="clearence_section" class="container">
     <div class="row  mt-5 mx-0">
         <div class="col-md-12">
@@ -335,12 +335,10 @@
                                             <img src="{{$discountedProduct->image[0]->name}}" width="" alt="">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-12">
-                                        <h5 class="pt-3 font-weight-bold text-main-danger">
-                                            <s> was {{$discountedProduct->price}}</s></h5>
-                                        <h5 class="product-price font-weight-bold text-main-danger">
-                                            ${{$discountedProduct->sale_price}}</h5>
+                                        <h5 class="pt-3 product-price font-weight-bold text-main-danger">
+                                            ${{$discountedProduct->price}}</h5>
                                         <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                         <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
                                         </h5>
@@ -352,7 +350,7 @@
                                 </a>
                                 </div>
                             </div>
-                            
+
                         </div>
                         @endforeach
 
@@ -372,7 +370,7 @@
 <!--Weekly Special-->
 @if(count($weeklyspecial)>0)
             @if(count($weeklyspecial[0]->product)>0)
-            
+
 <section id="clearence_section" class="container">
     <div class="row  mt-5 mx-0">
         <div class="col-md-12">
@@ -407,12 +405,10 @@
                                             <img src="{{$discountedProduct->image[0]->name}}" width="" alt="">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-12">
-                                        <h5 class="pt-3 font-weight-bold text-main-danger">
-                                            <s> was {{$discountedProduct->price}}</s></h5>
-                                        <h5 class="product-price font-weight-bold text-main-danger">
-                                            ${{$discountedProduct->sale_price}}</h5>
+                                        <h5 class="pt-3 product-price font-weight-bold text-main-danger">
+                                            ${{$discountedProduct->price}}</h5>
                                         <h5 class="py-0 text-dark">{{$discountedProduct->product_name}}</h5>
                                         <h5 class="brand-name py-0 text-dark">{{$discountedProduct->brand->brand_name}}
                                         </h5>
@@ -424,7 +420,7 @@
                                 </a>
                                 </div>
                             </div>
-                            
+
                         </div>
                         @endforeach
 

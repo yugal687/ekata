@@ -20,7 +20,6 @@ class ProductController extends Controller
         $validate = $request->validate([
             'image' => 'required',
             'category_id' => 'required',
-            'brand_id' => 'required',
             'product_name' => 'required',
             'price' => 'required',
             'additional_information' => 'required',
