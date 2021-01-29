@@ -21,8 +21,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p>{{$event->description}}</p>
-                        <a href="#" class="text-md">
+                        <p>{!! $event->description !!}</p>
+                        <a href="{{ route('eventdetails',[$event->id,$event->title])}}" class="text-md">
                             Read more &rarr;
                         </a>
                     </div>

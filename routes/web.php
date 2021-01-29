@@ -39,6 +39,12 @@ Route::get('/aboutus', 'Website\WebsiteDetailController@aboutUs');
 
 //events
 Route::get('/events', 'Website\EventController@allEvents');
+
+//Event Details
+Route::get('/eventdetails/{id}', [
+    "uses"=>'Website\EventController@eventDetail',
+    "as"=>'eventdetails']);
+
 //Services
 Route::get('/services', 'Website\ProductController@service');
 Route::get(

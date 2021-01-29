@@ -72,7 +72,14 @@
                                            icon="fas fa-edit"
                                            @click="dialogFormVisible = true">
                                 </el-button>-->
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#serviceEditModal" @click="singleService(scope.row.id)"><i class="fas fa-edit"></i> </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-warning"
+                                    data-toggle="modal"
+                                    data-target="#serviceEditModal"
+                                    @click="singleService(scope.row.id)">
+                                        <i class="fas fa-edit"></i>
+                                </button>
                                 <el-button
                                     size="mini"
                                     type="danger"

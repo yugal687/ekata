@@ -57,8 +57,30 @@ class EventController extends Controller
 
     public function update(Request $request)
     {
-        Event::where('id', $request->id)->update([
+        if($request->file('image')) {
+            foreach ($request->file('image') as $image) {
 
+
+                $baseName = Str::random(20);
+                $originalName = $baseName . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('/uploads'), $originalName);
+
+
+                Event::where('id', $request->id)->update([
+                    'title' => $request->title,
+                    'image' => '/uploads/' . $originalName,
+                    'description' => $request->description,
+                    'status' => 0,
+                    'event_date' => $request->event_date,
+                ]);
+
+            }
+        }
+        Event::where('id', $request->id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => 0,
+            'event_date' => $request->event_date,
         ]);
         return response()->json([
             'message' => 'Event Updated Sucessfully !!'

@@ -11,13 +11,23 @@ use App\Model\WebsiteDetail;
 
 class EventController extends Controller
 {
-    public function allEvents(){
-        $events=Event::where('status','1')->get();
+    public function allEvents()
+    {
+        $events = Event::where('status', '1')->get();
         $getWebsiteDetail = WebsiteDetail::all();
-return view('website.events',[
-    'websiteDetail' =>$getWebsiteDetail,
-    'events'=>$events
+        return view('website.events', [
+            'websiteDetail' => $getWebsiteDetail,
+            'events' => $events
 
-]);
+        ]);
+    }
+    public function eventDetail($id){
+        $events=Event::where('id',$id)->get();
+        $getWebsiteDetail = WebsiteDetail::all();
+        return view('website.eventdetails',[
+            'websiteDetail' =>$getWebsiteDetail,
+            'events'=>$events
+
+        ]);
     }
 }

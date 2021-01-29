@@ -63,7 +63,7 @@
 
 
             <!--Table-->
-            <div class="col-md-5 col-sm-12 mt-4 mt-md-0">
+            <div class="col-md-10 col-sm-12 mt-4 mt-md-4">
                 <el-card class="box-card">
                     <el-table :data="tableData.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase())
                     || data.date.includes(search))" border max-height="470" style="width: 100%">
@@ -71,11 +71,22 @@
                         </el-table-column>
                         <el-table-column prop="event_date" label="Event Date">
                         </el-table-column>
-                        <el-table-column fixed="right" width="140" align="right">
+                        <el-table-column fixed="right" width="180" align="right">
                             <template slot="header" slot-scope="scope">
                                 <el-input v-model="search" size="mini" placeholder="Type to search"/>
                             </template>
                             <template slot-scope="scope">
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-warning mr-2"
+                                    data-toggle="modal"
+                                    data-target="#serviceEditModal"
+                                    @click="singleEvent(scope.row.id)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <el-button size="mini" type="danger" icon="fas fa-trash"
+                                           @click="deleteService(scope.row.id)">
+                                </el-button>
                                 <el-button
                                     type="warning"
                                     v-if="scope.row.status==0"
@@ -92,12 +103,6 @@
                                 >
                                     <i class="fas fa-check"></i>
                                 </el-button>
-                                <button type="button" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#serviceEditModal" @click="editEvent(scope.row.id)"><i
-                                    class="fas fa-edit"></i></button>
-                                <el-button size="mini" type="danger" icon="fas fa-trash"
-                                           @click="deleteService(scope.row.id)">
-                                </el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -106,8 +111,64 @@
         </div>
 
 
+
         <!--Services Edit Dialog-->
         <!-- Modal -->
+        <div id="serviceEditModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" v-if="eventEdit.length >0">
+                        <el-form :model="eventFormEdit" ref="eventFormEdit"
+                                 :label-position="labelPosition" class="demo-categoryForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <el-form-item label="Upload Thumbnail Image" prop="thumbnailImage">
+                                        <el-upload class="upload-demo" action="" ref="editedupload"
+                                                   :on-preview="handlePreviewThumbnail" :on-remove="handleRemoveThumbnail"
+                                                   :on-change="handleChangeThumbnail" :auto-upload="false"
+                                                   :file-list="fileListThumbnail">
+                                            <el-button size="" type="primary">Click to upload Image</el-button>
+                                        </el-upload>
+                                    </el-form-item>
+                                </div>
+                                <div class="col-md-6">
+                                    <el-form-item label="Event Date" prop="eventDate">
+
+                                        <el-date-picker v-model="eventEdit[0].event_date" type="daterange" align="right"
+                                                        start-placeholder="Start Date" end-placeholder="End Date"
+                                                        default-value="2010-10-01">
+                                        </el-date-picker>
+                                    </el-form-item>
+                                </div>
+                                <div class="col-md-12">
+                                    <el-form-item label="Event Name" prop="eventName">
+                                        <el-input placeholder="Place Event name" v-model="eventEdit[0].title"
+                                                  style="width: 100%">
+                                        </el-input>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                            <el-form-item label="Service Description" prop="details">
+                                <vue-editor v-model="eventEdit[0].description"></vue-editor>
+                            </el-form-item>
+                            <el-form-item class="mt-4">
+                                <el-button type="warning"
+                                           @click="updateEvent('eventFormEdit')">Update
+                                </el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
     </div>
@@ -129,7 +190,6 @@
                 fileListThumbnail: [],
                 /*Table Data's*/
                 tableData: [],
-                editEvents: [],
                 search: '',
 
                 eventForm: {
@@ -138,6 +198,8 @@
                     desc: '',
                     eventDate: '',
                 },
+                eventEdit: [],
+                eventFormEdit:{},
                 eventRules: {
                     eventName: [
                         {required: true, message: 'Please input Event name', trigger: 'blur'},
@@ -152,6 +214,9 @@
             }
         },
         methods: {
+            singleEvent(id){
+                this.eventEdit = this.tableData.filter(tableData => tableData.id == id);
+            },
             fetchData() {
                 axios.get('/api/event', {})
                     .then(response => {
@@ -162,30 +227,6 @@
                 let formData=new FormData();
                 formData.append('id',id);
                 axios.post('/api/event-status', formData,{}).then(response => {
-                    this.$notify({
-                        title: 'Success',
-                        message: response.data.message,
-                        type: 'success'
-                    });
-                    this.getRequest();
-                }).catch(error => {
-                    if (error.response) {
-                        this.$notify({
-                            title: 'Error',
-                            message: 'Error Input Data ',
-                            type: 'error'
-                        });
-                        /*this.errors = error.response.data.errors;*/
-                    }
-                });
-            },
-            editEvent(id) {
-                this.editEvents = this.tableData.filter(tableData => tableData.id == id);
-            },
-            saveEditEvent() {
-                axios.post('/api/update-event', {
-                    editedEvent: this.editEvents
-                }).then(response => {
                     this.$notify({
                         title: 'Success',
                         message: response.data.message,
@@ -258,6 +299,47 @@
                                 'Content-Type': 'multipart/form-data'
                             }
 
+                        }).then(response => {
+                            this.$notify({
+                                title: 'Success',
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            this.fetchData();
+                        }).catch(error => {
+                            if (error.response) {
+                                this.$notify({
+                                    title: 'Error',
+                                    message: 'Error Input Data ',
+                                    type: 'error'
+                                });
+                                /*this.errors = error.response.data.errors;*/
+                            }
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+
+            updateEvent(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let file = this.$refs.editedupload.uploadFiles;
+
+                        let formData = new FormData();
+                        file.forEach((v, k) => {
+                            formData.append(`image[${k}]`, v.raw);
+                        });
+                        formData.append('id',this.eventEdit[0].id);
+                        formData.append('title',this.eventEdit[0].title);
+                        formData.append('event_date',this.eventEdit[0].event_date);
+                        formData.append('description',this.eventEdit[0].description);
+                        axios.post('/api/update-event', formData,{
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
                         }).then(response => {
                             this.$notify({
                                 title: 'Success',
