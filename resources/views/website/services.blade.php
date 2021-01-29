@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<!-- <div class="container-fluid pb-4 border-bottom">
+ <div class="container-fluid pb-4 border-bottom">
         <div class="row py-5 d-flex justify-content-center text-center contact-us">
             <div class="container container-sm">
                 <h1 class="">Our Services</h1>
@@ -37,7 +37,7 @@
                         </div>
 
                         <footer class="service-card-footer">
-                            <a class="text-white" href="{{route('servicedetails',$service->id)}}" >Read more﻿
+                            <a class="text-white" href="{{route('servicedetails',[$service->id,$service->title])}}" >Read more﻿
                                 <i class="fas fa-angle-right"></i>
                             </a>
                         </footer>
@@ -47,9 +47,9 @@
                     @endforeach
             </div>
         </div>
-    </div> -->
+    </div>
 
-<div class="container-fluid mt-5">
+{{--<div class="container-fluid mt-5">
     <div class="row">
         <div class="col-md-6">
         <div class="event-image">
@@ -68,7 +68,7 @@
         </div>
         </div>
     </div>
-</div>
+</div>--}}
 @stop
 
 @section('scripts')

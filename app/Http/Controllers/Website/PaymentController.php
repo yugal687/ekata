@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OrderMail;
+use App\Mail\VendorMail;
 use App\Model\OrderDetail;
 use App\Model\Product;
 use App\Service\OrderService;
@@ -44,10 +45,11 @@ class PaymentController extends Controller
                 'Paypal');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-               /* $productName = Product::where('id',$data['items']['product_id'])->with(['vendor:email'])->get();
-                dd($productName);
-                               Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data,$productName));*/
+                $productName = Product::where('id', $data['items']['product_id'])->with(['vendor:email'])->get();
+                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
+                    ->send(new OrderMail($userDetail, $request->totalPrice, $data, $productName));
+                Mail::to($productName[0]->vendor[0]->email)
+                    ->send(new VendorMail($userDetail, $request->totalPrice, $data, $productName));
             }
             return response()->json([
                 'successMsg' => 'Congratulations! Your order was successfully placed ',
@@ -104,10 +106,11 @@ class PaymentController extends Controller
                 'Master Card');
             if ($order) {
                 $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                //dd($userDetail);
-              /*  $productName = Product::where('id',$data['items']['product_id'])->get();
+                $productName = Product::where('id', $data['items']['product_id'])->with(['vendor:email'])->get();
                 Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                    ->send(new OrderMail($userDetail, $request->totalPrice,$data));*/
+                    ->send(new OrderMail($userDetail, $request->totalPrice, $data, $productName));
+                Mail::to($productName[0]->vendor[0]->email)
+                    ->send(new VendorMail($userDetail, $request->totalPrice, $data, $productName));
             }
             return response()->json([
                 'msg' => 'Successfully saved order ',
@@ -122,9 +125,9 @@ class PaymentController extends Controller
 
     }
 
-/*public  function  ordeasasd($data, $paymentType, $shipingAddress, $billingAddress){
+    /*public  function  ordeasasd($data, $paymentType, $shipingAddress, $billingAddress){
 
-}*/
+    }*/
 
     public function cashOnDeliveryCheckOut(Request $request)
     {
@@ -139,11 +142,12 @@ class PaymentController extends Controller
                 $request->totalPrice,
                 'cash on delivery');
             if ($order) {
-                /* $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
-                 dd($data->items);
-                 Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
-                                     ->send(new OrderMail($userDetail, $request->totalPrice,$data));
-             */
+                $userDetail = $request->shippingAddress['email'] ? $request->shippingAddress : $request->billingAddress;
+                $productName = Product::where('id', $data['items']['product_id'])->with(['vendor:email'])->get();
+                Mail::to($request->shippingAddress['email'] ?? $request->billingAddress['email'])
+                    ->send(new OrderMail($userDetail, $request->totalPrice, $data, $productName));
+                Mail::to($productName[0]->vendor[0]->email)
+                    ->send(new VendorMail($userDetail, $request->totalPrice, $data, $productName));
             }
             return response()->json([
                 'msg' => 'Successfully saved order ',

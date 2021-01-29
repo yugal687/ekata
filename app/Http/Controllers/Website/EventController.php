@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Model\Product;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Model\WebsiteDetail;
